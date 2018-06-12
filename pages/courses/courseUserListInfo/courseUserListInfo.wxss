@@ -1,0 +1,313 @@
+@import '../../../utils/iconFont.wxss';
+@import '../../../utils/iconFontO.wxss';
+
+.listInfoWrap{
+    width:750rpx;
+    min-height:1207rpx;
+    background:#DDE4EE;
+}
+.listInfoUser{
+    width:750rpx;
+    height:260rpx;
+    background:#fff;
+    border-bottom:1rpx solid #efefef;
+}
+.listInfoUserTop{
+    width:680rpx;
+    height:150rpx;
+    margin:0 auto;
+}
+.listInfoUserLeft{
+    width:400rpx;
+    height:150rpx;
+    float:left;
+}
+.firstName{
+    width:100rpx;
+    line-height:100rpx;
+    background:#FF7F5C;
+    font-size:40rpx;
+    text-align:center;
+    border-radius:50%;
+    float:left;
+    margin-top:25rpx;
+}
+.userName{
+    font-size:40rpx;
+    line-height:40rpx;
+    float:left;
+    margin-left:20rpx;
+    margin-top:55rpx;
+}
+.iconStyle{
+    display:block;
+    font-size:50rpx;
+    width:50rpx;
+    height:50rpx;
+    float:left;
+    margin-top:50rpx;
+    margin-left:20rpx;
+    color:#7b7b7b;
+}
+.iconStyled{
+    display:block;
+    font-size:50rpx;
+    width:50rpx;
+    height:50rpx;
+    float:left;
+    margin-top:50rpx;
+    margin-left:20rpx;
+    color:#FAC935;
+}
+
+.listInfoUserRight{
+    width:200rpx;
+    height:150rpx;
+    float:right;
+}
+.listInfoUserRight>view:nth-child(1){
+    font-size:30rpx;
+    color:#7b7b7b;
+    margin-top:20rpx;
+    width:100%;
+    text-align:center;
+}
+.listInfoUserRight>view:nth-child(2){
+    width:70rpx;
+    height:70rpx;
+    margin:5rpx auto;
+    border-radius:50%;
+    overflow:hidden;
+    background:#FD4551;
+}
+.listInfoUserRight>view:nth-child(2) image{
+    width:70rpx;
+    height:70rpx;
+}
+.iconStyle1{
+    display:block;
+    font-size:60rpx;
+    width:70rpx;
+    line-height:70rpx;
+    border-radius:50%;
+    background:#FD4551;
+    color:#FE8F96;
+    text-align:center;
+    float:right;
+    margin-right:15rpx;
+    margin-top:10rpx;
+}
+.listInfoBtn{
+    width:230rpx;
+    line-height:70rpx;
+    text-align:center;
+    border:2rpx solid red;
+    border-radius:40rpx;
+    font-size:30rpx;
+    float:left;
+    margin-left:90rpx;
+    margin-top:10rpx;
+}
+.listInfoOptions{
+    width:750rpx;
+    height:90rpx;
+    background:#fff;
+}
+.listInfoOptions view{
+    line-height:84rpx;
+    float:left;
+    font-size:30rpx;
+    margin-left:175rpx;
+    border-bottom:6rpx solid #fff;
+}
+.listInfoConnect,.listInfoBase{
+    width:750rpx;
+    height:850rpx;
+    background:transparent;
+    overflow-y:scroll;
+    position:relative;
+}
+.connectChild{
+    width:710rpx;
+    min-height:100rpx;
+    background:#fff;
+    margin:20rpx auto 0rpx;
+    border-radius:20rpx;
+}
+.connectChildTop{
+    width:710rpx;
+    height:70rpx;
+    border-radius:20rpx 20rpx 0rpx 0rpx;
+    background:#F6F6F6;
+}
+.connectChildTop view{
+    font-size:24rpx;
+    color:#7b7b7b;
+    width:300rpx;
+    line-height:30rpx;
+    float:left;
+    margin-top:20rpx;
+    margin-left:20rpx;
+}
+.connectChildTop view:nth-child(2){
+    float:right;
+    margin-top:20rpx;
+    margin-right:20rpx;
+    text-align:right;
+}
+.connectChildBottom{
+    padding-top:20rpx;
+    padding-bottom:20rpx;
+    width:710rpx;
+    min-height:30rpx;
+    font-size:30rpx;
+    border-radius:0rpx 0rpx 20rpx 20rpx;
+} 
+.connectChildBottom text{
+    display:block;
+    margin-left:20rpx;
+}
+/*基本信息  */
+.listInfoBaseOne{
+    width:750rpx;
+    height:242rpx;
+    background:#fff;
+    margin-top:20rpx;
+}
+.oneContent{
+    width:700rpx;
+    height:80rpx;
+    margin:0 auto;
+    border-bottom:1rpx solid #efefef;
+}
+.oneContent view{
+    line-height:80rpx;
+    width:200rpx;
+    font-size:30rpx;
+    color:#7b7b7b;
+    float:left;
+}
+.oneContent input{
+    float:right;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    width:400rpx;
+    margin-top:10rpx;
+    text-align:right;
+    color:#000;
+}
+.oneContent text{
+    display:block;
+    float:right;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    width:400rpx;
+    margin-top:10rpx;
+    text-align:right;
+    color:#000;
+}
+.listInfoBaseTwo{
+    width:750rpx;
+    height:162rpx;
+    background:#fff;
+    margin-top:20rpx;
+}
+.listInfoBase button{
+    width:670rpx;
+    line-height:80rpx;
+    background:#439BFF;
+    color:#fff;
+    border-radius:30rpx;
+    margin-top:30rpx;
+}
+
+/* 选项 */
+.selectOptions{
+    width:750rpx;
+    height:1207rpx;
+    background:rgba(0,0,0,0.3);
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
+}
+.selectOptionsChild{
+    width:750rpx;
+    min-height:340rpx;
+    background:#fff;
+    position:absolute;
+    bottom:7rpx;
+    left:0rpx;
+}
+.OptionsChildContent,.cancel{
+    width:100%;
+    line-height:80rpx;
+    height:80rpx;
+    font-size:30rpx;
+    text-align:center;
+    border-bottom:1rpx solid #efefef;
+}
+.empty{
+    width:100%;
+    height:20rpx;
+    background:#f2f2f2;
+}
+
+
+/*添加问题*/
+
+.addConnect{
+    width:80rpx;
+    line-height:80rpx;
+    background:#57A0F6;
+    color:#fff;
+    position:fixed;
+    bottom:50rpx;
+    left:50%;
+    margin-left:-40rpx;
+    font-size:60rpx;
+    text-align:center;
+    border-radius:50%;
+}
+
+.connectInput{
+    width:750rpx;
+    height:540rpx;
+    background:#fff;
+    position:fixed;
+    top:370rpx;
+    left:0rpx;
+    box-shadow: 2px 1px 2px 2px rgba(0,0,0,0.5);
+}
+.connectInputTop{
+    width:690rpx;
+    height:360rpx;
+    border:1rpx solid #efefef;
+    margin:30rpx auto;
+}
+.connectInputTop textarea{
+    width:650rpx;
+    height:320rpx;
+    margin:20rpx 20rpx;
+    font-size:30rpx;
+}
+.connectInput button{
+    width:500rpx;
+    line-height:90rpx;
+    background:#439BFF;
+    color:#fff; 
+}
+.textWrap{
+    width:70rpx;
+    height:70rpx;
+    margin:5rpx auto;
+    border-radius:50%;
+    overflow:hidden;
+    background:#FD4551;
+}
+.textWrap image{
+    width:70rpx;
+    height:70rpx;
+}

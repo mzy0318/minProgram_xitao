@@ -1,0 +1,10 @@
+<view class='contactUsTop'>
+</view>
+<view class='contackUsMiddle'>
+  <text>{{pageInfo.app_name}}</text>
+  <text bindtap='map' class="iconfont icon-map- iconSize">{{pageInfo.app_name}}</text>
+  <text bindtap='tellPhone' class="iconfont icon-phone-r iconSize">{{pageInfo.telephone}}</text>
+  <text class="iconfont icon-map"></text>
+</view>
+<view class='contackUsBottom'>{{pageInfo.other_info}}</view>
+<button bindtap='tellPhone' class='contactUsBtn'>我要咨询</button>

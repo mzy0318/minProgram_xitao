@@ -1,0 +1,249 @@
+/* pages/courseInfo/courseInfo.wxss */
+@import '../../../utils/iconFont.wxss';
+
+.courseInfoWrap {
+    width: 750rpx;
+    height: 1207rpx;
+    background: #f0efed;
+}
+
+.courseInfoTop {
+    width: 750rpx;
+    height: 400rpx;
+    background: #fff;
+}
+
+.courseInfoTopImg {
+    width: 750rpx;
+    height: 330rpx;
+}
+
+.courseInfoTopImg image {
+    width: 750rpx;
+    height: 330rpx;
+}
+
+.courseInfoTop text {
+    display: block;
+    line-height: 70rpx;
+    width: 100%;
+    text-indent: 20rpx;
+}
+
+.courseInfoPay {
+    width: 750rpx;
+    height: 100rpx;
+    background: #fff;
+    margin-top: 20rpx;
+}
+
+.courseInfoPay button {
+    float: right;
+    width: 200rpx;
+    line-height: 75rpx;
+    background: #c20;
+    color: #fff;
+    margin-top: 12.5rpx;
+    margin-right: 20rpx;
+    font-size: 30rpx;
+}
+
+.courseInfoPayMany {
+    float: left;
+    color: #c72403;
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+}
+
+.courseInfoPayMany text:nth-child(1), .courseInfoPayMany text:nth-child(3) {
+    font-size: 26rpx;
+}
+
+.courseInfoPay>text {
+    display: block;
+    float: left;
+}
+
+.courseInfoPayDel {
+    font-size: 26rpx;
+    color: #717171;
+    text-decoration: line-through;
+    margin-top: 30rpx;
+    margin-left: 10rpx;
+}
+
+.courseInfoToIndex {
+    width: 750rpx;
+    line-height: 90rpx;
+    background: #fff;
+    margin-top: 20rpx;
+    text-indent: 20rpx;
+    font-size: 30rpx;
+    border-bottom: 0.5px solid rgba(192, 192, 192, 0.5);
+}
+
+.courseInfoInfo {
+    width: 750rpx;
+    height: 70rpx;
+    background: #fff;
+}
+
+.courseInfoInfo .courseInfoInfoLeft {
+    float: left;
+    color: #717171;
+    margin-left: 20rpx;
+}
+
+.courseInfoInfo .courseInfoInfoLeft text {
+    line-height: 70rpx;
+    font-size: 26rpx;
+}
+
+.courseInfoInfo .courseInfoInfoRight {
+    float: right;
+    color: #717171;
+    margin-right: 20rpx;
+}
+
+.courseInfoInfo .courseInfoInfoRight text {
+    font-size: 60rpx;
+    line-height: 70rpx;
+    border-left: 0.5px solid rgba(192, 192, 192, 0.5);
+}
+
+.courseInfoBottom {
+    width: 750rpx;
+    height: 90rpx;
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+}
+
+.courseInfoBottom {
+    font-size: 30rpx;
+    background: #fff;
+}
+
+.courseInfoBottom view {
+    float: left;
+}
+
+.courseInfoBottom .courseInfoBottomListen {
+    float: right;
+    line-height: 70rpx;
+    width: 400rpx;
+    color: #fff;
+    background: #ff9e05;
+    font-size: 26rpx;
+    margin-right: 20rpx;
+    margin-top: 10rpx;
+}
+
+.courseInfoBottomPhone {
+    margin-left: 20rpx;
+}
+
+.courseInfoBottomShare {
+    background: #fff;
+    border: none;
+    font-size: 30rpx;
+    width: 150rpx;
+    margin-left: 35rpx;
+    float: left;
+}
+
+button[class='courseInfoBottomShare']::after {
+    border: none;
+}
+
+.courseInfoBottomPhone text, .courseInfoBottomShare text {
+    display: block;
+    float: left;
+    line-height: 90rpx;
+    color: #2e97cd;
+}
+
+.iconFontSize {
+    font-size: 50rpx;
+    color: #2e97cd;
+}
+
+.courseInfoShareWrap {
+    width: 750rpx;
+    height: 1207rpx;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+}
+
+.courseInfoShare {
+    width: 750rpx;
+    height: 455rpx;
+    background: #fff;
+    position: absolute;
+    bottom: 0rpx;
+    left: 0rpx;
+}
+.courseInfoShareTop{
+    width:750rpx;
+    height:141rpx;
+}
+
+.courseInfoShareTop view:nth-child(1){
+    font-size:34rpx;
+    font-weight:bold;
+    width:710rpx;
+    line-height:80rpx;
+    margin:0 auto;
+    border-bottom:1rpx solid #efefef;
+}
+
+.courseInfoShareTop view:nth-child(2){
+    width:710rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    margin:0 auto;
+    color:#7b7b7b;
+}
+
+.courseInfoShareTop view:nth-child(2) text{
+    color:#f00;
+}
+
+.courseInfoShareMiddle{
+    width:750rpx;
+    line-height:60rpx;
+    background:#EBEBEB;
+    text-indent:20rpx;
+    font-size:28rpx;
+    color:#C2C2C2;
+}
+
+.courseInfoShareBottom{
+    width:750rpx;
+    height:250rpx;
+    
+}
+
+.courseInfoShareBottom>view{
+    width:710rpx;
+    height:80rpx;
+    margin:0 auto;
+    border-bottom:1rpx solid #efefef;
+}
+.courseInfoShareBottom>view>input{
+    height:80rpx;
+    width:690rpx;
+    margin-left:10rpx;
+    font-size:30rpx;
+}
+
+.courseInfoShareBottom button{
+    width:710rpx;
+    line-height:80rpx;
+    background:#FF9E05;
+    color:#fff;
+    margin-top:5rpx;
+}

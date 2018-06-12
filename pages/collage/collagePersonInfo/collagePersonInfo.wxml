@@ -1,0 +1,91 @@
+<view class='personInfoWrap'>
+    <view class='collageInfoBanner'>
+        <image src='{{pageData.banner_image_url}}' mode='scaleToFill' />
+    </view>
+    <view class='collageInfoOne'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>{{pageData.title}}</view>
+        </view>
+        <view class='oneImage'>
+            <view class='empty'></view>
+            <view class='oneImageContent'>
+                <image src='{{pageData.cover.url}}' mode='scaleToFill' />
+            </view>
+        </view>
+        <view class='oneRule'>
+            <view class='oneRuleChild'>
+                <view class='oneRuleChildBottom'>
+                    <view class='oneRuleChildBottomLeft'>凑齐10人即可享受</view>
+                    <view class='oneRuleChildBottomRight'>
+                        <text>￥3999元</text>￥10元</view>
+                </view>
+            </view>
+        </view>
+        <view class='oneButton'>
+            <button bindtap='toCollageJoin'>我要参团</button>
+        </view>
+    </view>
+    <view class='myTeam'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>我的团员</view>
+        </view>
+        <view class='divBoxChildWrap'>
+            <view class='divBoxChild'>
+                <view class='divBoxChildLeft'>
+                    <image mode='' />
+                </view>
+                <view class='divBoxChildMiddle'>小刘</view>
+                <view class='divBoxChildRight'>2018-05-12 23:10:00</view>
+            </view>
+        </view>
+        <button open-type='share'>推荐好友</button>
+    </view>
+    <view class='collageInfoSix'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>分享活动</view>
+        </view>
+        <view class='collageInfoSixContent'>
+            <image mode='scaleToFill' />
+        </view>
+        <button>分享到朋友圈</button>
+    </view>
+    <view class='headerReward'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>团长奖励</view>
+        </view>
+        <view class='headerRewardContent'>{{pageData.leader_reward}}</view>
+    </view>
+    <view class='collageInfoTwo'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>机构介绍</view>
+        </view>
+        <text decode='true'>活动时间:&nbsp;&nbsp;{{pageData.start_time}}至{{pageData.end_time}}</text>
+        <text decode='true'>机构名称:&nbsp;&nbsp;{{pageData.app_name}}</text>
+        <text decode='true'>联系电话:&nbsp;&nbsp;{{pageData.telephone}}</text>
+        <view class='collageInfoTwoBtn'>
+            <button bindtap='toIndex'>了解机构</button>
+        </view>
+        <view class='empty'></view>
+    </view>
+    <view class='collageInfoThree'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>活动介绍</view>
+        </view>
+        <view class='oneImage'>
+            <view class='empty'></view>
+            <view class='threeImageText'>{{pageData.description}}</view>
+            <view class='oneImageContent' wx:for='{{pageData.act_image}}'>
+                <image src='{{item.url}}' mode='scaleToFill' />
+            </view>
+            <view class='empty'></view>
+        </view>
+    </view>
+    <view class='collageInfoFour'>
+        <view class='oneTitle'>
+            <view class='oneTitleChild'>活动规则</view>
+        </view>
+        <view class='fourContent'>
+            好,你帅你先说
+        </view>
+    </view>
+</view>

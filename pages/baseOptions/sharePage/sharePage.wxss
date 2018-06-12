@@ -1,0 +1,120 @@
+@import '../../../utils/iconFont.wxss';
+
+.sharePageWrap{
+    width:750rpx;
+    height:1200rpx;
+    overflow: hidden;
+
+}
+.sharePageInfo{
+    width:500rpx;
+    height:890rpx;
+    background:#fff;
+    box-shadow:0.5px 0.5px 5px 2px rgba(0,0,0,0.2),-0.5px -0.5px 20px 2px rgba(0,0,0,0.1);
+    margin:20rpx auto 0rpx;
+    overflow:hidden;
+}
+.sharePageTitle{
+    width:500rpx;
+    line-height:60rpx;
+    font-size:50rpx;
+    text-align:center;
+    color:#ABABAB;
+    margin-top:60rpx;
+}
+.sharePagePic{
+    width:100rpx;
+    height:100rpx;
+    background:lightblue;
+    border-radius:50%;
+    margin:70rpx auto 10rpx;
+    overflow:hidden;
+}
+.sharePagePic image{
+    width:100rpx;
+    height:100rpx;
+}
+.sharePageNickName{
+    width:100%;
+    font-size:24rpx;
+    color:#a6a6a6;
+    text-align:center;
+}
+.sharePageAppName{
+    width:100%;
+    font-size:30rpx;
+    text-align:center;
+    margin-top:70rpx;
+}
+.sharePageAct{
+    width:100%;
+    font-size:24rpx;
+    text-align:center;
+    margin-top:50rpx;
+    color:#a5a5a5;
+}
+
+.sharePageIntroduce{
+    width:480rpx;
+    text-align:center;
+    font-size:26rpx;
+    margin:40rpx auto 0rpx;
+}
+.sharePageImage{
+    width:140rpx;
+    height:140rpx;
+    border:1rpx solid #efefef;
+    margin:40rpx auto 0rpx;
+    overflow:hidden;
+}
+.sharePageImage image{
+    width:140rpx;
+    height:140rpx;
+}
+
+.sharePageAction{
+    width:750rpx;
+    line-height:40rpx;
+    font-size:26rpx;
+    text-align:center;
+    color:#C42505;
+    margin-top:20rpx;
+}
+.sharePageIcon{
+    width:500rpx;
+    height:155rpx;
+    margin:20rpx auto 0rpx;
+}
+.sharePageIcon view{
+    width:125rpx;
+    height:125rpx;
+    float:left;
+}
+.sharePageIcon>view>view{
+    width:125rpx;
+    line-height:30rpx;
+    font-size:22rpx;
+    text-align:center;
+}
+.iconStyle1,.iconStyle2,.iconStyle3,.iconStyle4{
+    display:block;
+    width:90rpx;
+    line-height:90rpx;
+    font-size:70rpx;
+    border-radius:50%;
+    background:#5CB946;
+    text-align:center;
+    margin:0 auto 8rpx;
+    color:#fff;
+}
+.iconStyle2{
+    background:#6ECB00;
+}
+.iconStyle3{
+    background:#F2F2F2;
+    color:#000;
+}
+.iconStyle4{
+    background:#F2F2F2;
+    color:#000;
+}

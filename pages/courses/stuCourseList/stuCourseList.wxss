@@ -1,0 +1,54 @@
+@import '../../../utils/iconFont.wxss';
+
+.courseList{
+    width:750rpx;
+    height:180rpx;
+    margin-top:30rpx;
+    border-top:1rpx solid #efefef;
+    border-bottom:1rpx solid #efefef;
+}
+.courseListLeft{
+    width:300rpx;
+    height:140rpx;
+    background:lightgreen;
+    float:left;
+    margin:20rpx 0rpx 20rpx 20rpx;
+}
+.courseListLeft image{
+    width:300rpx;
+    height:140rpx;
+}
+.courseListRight{
+    width:390rpx;
+    height:140rpx;
+    float:right;
+    margin:20rpx 20rpx 0rpx 0rpx;
+}
+.courseListRightTop{
+    width:390rpx;
+    line-height:40rpx;
+    font-size:30rpx;
+    font-weight:bold;
+}
+.courseListRightBottom{
+    width:390rpx;
+    height:70rpx;
+    margin-top:20rpx;
+}
+.courseListRightBottom>text:nth-child(1){
+    display:block;
+    font-size:22rpx;
+    color:#7b7b7b;
+    float:left;
+    margin-left:20rpx;
+    margin-top:30rpx;
+}
+.courseListRightBottom>text:nth-child(2){
+    width:50rpx;
+    line-height:50rpx;
+    text-align:center;
+    float:right;
+    color:#389CD0;
+    margin-right:20rpx;
+    font-size:50rpx;
+}

@@ -1,0 +1,44 @@
+@import '../../utils/iconFontO.wxss';
+.morePageWrap{
+    width:727rpx;
+    background:#fff;
+    border-top:1rpx solid #efefef;
+    border-left:1rpx solid #efefef;
+    margin:0 auto;
+}
+.morePageWrap .morePageWrapChild{
+    float:left;
+    width:240rpx;
+    height:240rpx;
+    border-right:1rpx solid #efefef;
+    border-bottom:1rpx solid #efefef;
+}
+.iconfontStyle{
+    font-size:70rpx;
+    text-align:center;
+    color:#fff;
+    margin-left:17rpx;
+    margin-top:15rpx;
+    padding:0rpx;
+}
+.morePageWrapTop{
+    width:100rpx;
+    line-height:95rpx;
+    border-radius:100%;
+    background:#1055CC;
+    margin:35rpx auto 0rpx;
+}
+
+.morePageWrapBottom{
+    width:240rpx;
+    line-height:35rpx;
+    font-size:30rpx;
+    text-align:center;
+    margin-top:30rpx;
+}
+
+.iconfontSize{
+    display:block;
+    font-size:55rpx;
+    margin:0 auto;
+}

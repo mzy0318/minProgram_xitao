@@ -1,0 +1,41 @@
+<view class='managWarp' style='display:{{isContent}}'>
+    <view class='managWarpTop'></view>
+    <view class='mangeScool' >
+        <text class='mangeScoolTitle'>学校管理</text>
+        <view class='mangeScoolOptions' >
+            <view class='mangeScoolOptionsWrap' wx:for='{{pageManagData}}' bindtap='toEditPage' data-url='{{item.url}}'>
+                <text class='{{item.iconfont}}' style='color:{{item.color}};'></text>
+                <view class='mangeScoolOptionsWrapBottom'>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='mangeStuMarkt'>
+        <text class='mangeStuMarktTitle'>招生营销</text>
+        <view class='mangeStuMarktOptions'>
+            <view class='optionsWrap' wx:for='{{pageStuData}}' data-pageType='{{item.pageType}}' bindtap='toManageActive' data-requireurl='{{item.url}}'>
+                <view class='optionsTop' style='background:{{item.background}}'>
+                    <text class='{{item.iconfont}}'></text>
+                </view>
+                <view class='optionsBottom'>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='managVersion'>
+        <text>智慧招生小程序</text>
+        <text>v4.5.3</text>
+    </view>
+</view>
+<!--登陆部分-->
+<view  class='loginPage' style='display:{{islogin}}'>
+    <view class='empty'></view>
+    <view class='loginWrapTitle'>
+        智慧招生小程序
+    </view>
+    <view class='loginWrapPhone'>
+        <input type='number' maxlength='11' placeholder='请输入手机号' bindblur='getPhone' />
+    </view>
+    <view class='loginWrapPwd'>
+        <input type='text' password='true' placeholder='请输入登录密码' bindblur='getPwd' />
+    </view>
+    <button class='loginWrapBtn' bindtap='login'>立即登录</button>
+</view>

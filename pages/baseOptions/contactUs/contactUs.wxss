@@ -1,0 +1,48 @@
+@import '../../../utils/iconFont.wxss';
+
+.contactUsBtn{
+  width:270rpx;
+  background-color:#58ADE4;
+  line-height:80rpx;
+  color:#fff;
+  margin-top:60rpx;
+  font-size:30rpx;
+}
+.contactUsTop{
+  width:750rpx;
+  height:430rpx;
+  background-color:#58ADE4;
+}
+.contackUsMiddle{
+  width:710rpx;
+  height:360rpx;
+  margin:0 auto;
+  box-shadow: 2px 2px 2px 2px rgba(192,192,192,0.3),-2px -2px 2px 2px rgba(192,192,192,0.3);
+  position:absolute;
+  top:260rpx;
+  left:20rpx; 
+  background:#fff;
+}
+.contackUsBottom{
+  width:710rpx;
+  line-height:80rpx;
+  box-shadow: 2px 2px 2px 2px rgba(192,192,192,0.3),-2px -2px 2px 2px rgba(192,192,192,0.3);
+  color:#717171;
+  text-indent:5px;
+  margin-top:240rpx;
+  margin-left:20rpx;
+  font-size:30rpx;
+}
+
+.contackUsMiddle text:nth-child(1){
+  font-weight:bold;
+  margin-top:70rpx;
+  display:block;
+  text-indent:5px;
+}
+.contackUsMiddle text:nth-child(2),.contackUsMiddle text:nth-child(3){
+  margin-top:40rpx;
+  display:block;
+  font-size:32rpx;
+  color:#717171;
+}

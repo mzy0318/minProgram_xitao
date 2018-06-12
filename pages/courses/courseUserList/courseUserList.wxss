@@ -1,0 +1,117 @@
+.userListWrap{
+    width:750rpx;
+    min-height:1207rpx;
+}
+.userListContent{
+    width:750rpx;
+    height:120rpx;
+    border:1rpx solid #efefef;
+}
+.contentLeft{
+    width:200rpx;
+    height:120rpx;
+    float:left;
+    margin-left:40rpx;
+}
+.contentLeft text{
+    display:block;
+    width:70rpx;
+    height:70rpx;
+    background:red;
+    float:left;
+    border-radius:50%;
+    margin-top:25rpx;
+}
+.nickName{
+    float:left;
+    line-height:60rpx;
+    font-size:30rpx;
+    margin-left:20rpx;
+    margin-top:30rpx;
+}
+.contentRight{
+    width:300rpx;
+    height:120rpx;
+    float:right;
+    margin-right:40rpx;
+}
+.contentRight view{
+    width:110rpx;
+    line-height:40rpx;
+    font-size:22rpx;
+    color:#fff;
+    background:#FFC928;
+    text-align:center;
+    margin-top:30rpx;
+    border-radius:10px;
+    margin-left:180rpx;
+}
+.contentRight text{
+    display:block;
+    font-size:20rpx;
+    color:#7b7b7b;
+    margin-left:100rpx;
+    margin-top:5rpx;
+}
+
+.addUser{
+    width:80rpx;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:center;
+    background:#439BFF;
+    color:#fff;
+    border-radius:50%;
+    font-size:60rpx;
+    position:fixed;
+    bottom:50rpx;
+    left:50%;
+    margin-left:-40rpx;
+    z-index:1000;
+}
+/* 添加用户表单 */
+.userInfo{
+    width:750rpx;
+    height:1207rpx;
+    background:#DDE4EE;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    z-index:100;
+}
+.userInfoContent{
+    width:690rpx;
+    height:90rpx;
+    background:#fff;
+    margin:30rpx auto 0rpx;
+}
+.userInfoContentLeft{
+    width:180rpx;
+    line-height:90rpx;
+    font-size:30rpx;
+    background:#FBFBFB;
+    text-align:center;
+    border-left:1rpx solid #efefef;
+    color:#666666;
+    float:left;
+}
+.userInfoContentRight{
+    width:509rpx;
+    height:90rpx;
+    float:right;
+}
+.userInfoContentRight input{
+    font-size:30rpx;
+    width:490rpx;
+    height:60rpx;
+    margin-left:19rpx;
+    margin-top:15rpx;
+}
+.userInfo button{
+    width:500rpx;
+    line-height:90rpx;
+    background:#439BFF;
+    color:#fff;
+    font-size:30rpx;
+    margin-top:40rpx;
+}

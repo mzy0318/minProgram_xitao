@@ -1,0 +1,16 @@
+<!--pages/teachers/teachers.wxml-->
+<view class='teacherWrap'>
+  <swiper indicator-dots='{{true}}' circular='{{true}}'>
+    <swiper-item wx:for='{{teacherData}}'>
+      <view class='teaContent'>
+        <view class='teaContentImg'>
+          <image src='{{item.avatar_url.url}}' mode='scaleToFill'/>
+        </view>
+        <text class='teaContentTitle'>{{item.name}}</text>
+        <view class='teaContentText'>
+          <text>{{item.personal_intro}}</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>

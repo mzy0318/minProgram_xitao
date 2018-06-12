@@ -1,0 +1,53 @@
+<view class='courseInfoWrap'>
+    <view class='courseInfoTop'>
+        <view class='courseInfoTopImg'>
+            <image src='{{lessonInfo.cover.url}}'></image>
+        </view>
+        <text>{{lessonInfo.name}}</text>
+    </view>
+    <view class='courseInfoPay'>
+        <view class='courseInfoPayMany'>
+            <text>￥</text>
+            <text>{{lessonInfo.now_price}}</text>
+            <text>{{lessonInfo.price_unit}}</text>
+        </view>
+        <text class='courseInfoPayDel'>￥{{lessonInfo.original_price}}</text>
+        <button bindtap='toOrderInfo' data-price='{{lessonInfo.now_price}}'>立即购买</button>
+    </view>
+    <view class='courseInfoToIndex' bindtap='toIndex'>
+        智慧招生小程序>
+    </view>
+    <view class='courseInfoInfo'>
+        <view class='courseInfoInfoLeft' bindtap='map'>
+            <text class="iconfont icon-map-">郑州市紫金山路裕鸿国际D座2011室</text>
+        </view>
+        <view class='courseInfoInfoRight'>
+            <text bindtap='tellPhone' class="iconfont icon-phone-r"></text>
+        </view>
+    </view>
+    <view class='courseInfoBottom'>
+        <view class='courseInfoBottomPhone' bindtap='tellPhone'>
+            <text class="iconfont icon-phone-r iconFontSize"></text>
+            <text>电话</text>
+        </view>
+        <button class='courseInfoBottomShare' hover-class='none' open-type='share'>
+            <text class='iconfont icon-share'></text>
+            <text>分享</text>
+        </button>
+        <button bindtap='handleShow' class='courseInfoBottomListen'>预约试听</button>
+    </view>
+    <view class='courseInfoShareWrap' hidden='{{isShow}}' >
+        <view class='courseInfoShare'>
+            <view class='courseInfoShareTop'>
+                <view>预约礼包,预约即可领取</view>
+                <view><text>*</text>若您喜欢本校课程,可直接下单购买</view>
+            </view>
+            <view class='courseInfoShareMiddle'>请留下您的联系方式,以便尽快联系您</view>
+            <view class='courseInfoShareBottom'>
+                <view><input type='number' placeholder='手机号' maxlength='11' /></view>
+                <view><input type='text' placeholder='联系人' /></view>
+                <button data-is='true' bindtap='handleHidden'>预约试听</button>
+            </view>
+        </view>
+    </view>
+</view>

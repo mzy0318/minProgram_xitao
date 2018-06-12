@@ -1,0 +1,318 @@
+.collageEditWrap{
+    width:750rpx;
+    min-height:1207rpx;
+    background:#DDDDDD;
+    margin-bottom:100rpx;
+}
+/*第一部分  */
+.collageEditOne{
+    width:750rpx;
+    height:520rpx;
+}
+.editOneTitle{
+    width:750rpx;
+    line-height:80rpx;
+    font-size:32rpx;
+    font-weight:bold;
+    text-align:center;
+}
+.editOneImg{
+    width:750rpx;
+    height:400rpx;
+    background:lightblue;
+}
+.editOneImg image{
+    width:750rpx;
+    height:400rpx;
+}
+.editOneAction{
+    width:750rpx;
+    line-height:40rpx;
+    font-size:28rpx;
+    color:#7b7b7b;
+    background:#fff;
+}
+
+/*第二部分*/
+.collageEditTwo{
+    width:750rpx;
+    min-height:340rpx;
+}
+.editTwoImg{
+    height:320rpx;
+    width:750rpx;
+    background:lightgreen;
+}
+/*第三部分*/
+.collageEditThree{
+    width:750rpx;
+    min-height:565rpx;
+}
+.editOntInputO,.editOntInputTh,.editOntInputT,.editThreeInputFour{
+    width:750rpx;
+    height:80rpx;
+    background:#fff;
+}
+.editOntInputT picker{
+    background:#F2F2F2;
+    width:260rpx;
+    font-size:30rpx;
+    line-height:60rpx;
+    float:left;
+    margin-left:30rpx;
+    margin-top:10rpx;
+    border-radius:5px;
+    text-align:center;
+}
+.editOntInputO>view:nth-child(1),.editOntInputTh>view:nth-child(1),.editOntInputT>view:nth-child(1),.editThreeInputFour>view:nth-child(1){
+    width:140rpx;
+    line-height:80rpx;
+    text-indent:20rpx;
+    font-size:30rpx;
+    color:#9D9D9D;
+    float:left;
+}
+.editOntInputO>input:nth-child(2){
+    width:550rpx;
+    height:60rpx;
+    background:#F2F2F2;
+    float:right;
+    margin-right:30rpx;
+    margin-top:10rpx;
+    text-align:center;
+    font-size:30rpx;
+    border-radius:5px;
+}
+.editOntInputTh>input:nth-child(3){
+    width:510rpx;
+    height:60rpx;
+    background:#F2F2F2;
+    float:right;
+    margin-right:10rpx;
+    margin-top:10rpx;
+    text-align:center;
+    font-size:30rpx;
+    border-radius:5px;
+}
+.editOntInputTh>view:nth-child(2){
+    float:right;
+    width:30rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#9D9D9D;
+    margin-right:30rpx;
+}
+.editThreeInputFour switch{
+    margin-left:20rpx;
+    margin-top:6rpx;
+}
+.editThreeInputFour>view:nth-child(3){
+    width:460rpx;
+    line-height:80rpx;
+    text-indent:20rpx;
+    font-size:30rpx;
+    color:#9D9D9D;
+    float:right;
+}
+
+/*第四部分*/
+.collageEditFour{
+    width:750rpx;
+    min-height:520rpx;
+}
+.editFourContent{
+    width:750rpx;
+    height:80rpx;
+    background:#fff;
+}
+.editFourContent>text:nth-child(1){
+    display:block;
+    float:left;
+    width:150rpx;
+    line-height:80rpx;
+    text-indent:20rpx;
+    font-size:30rpx;
+    color:#9D9D9D;
+}
+.editFourContent>input:nth-child(2),.editFourContent>input:nth-child(4){
+    float:left;
+    width:235rpx;
+    height:60rpx;
+    background:#F2F2F2;
+    margin-top:10rpx;
+    margin-left:10rpx;
+    text-align:center;
+    font-size:30rpx;
+    border-radius:5px;
+}
+.editFourContent>view:nth-child(3),.editFourContent>view:nth-child(5){
+    width:30rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#9D9D9D;
+    margin-left:10rpx;
+    float:left;
+}
+.editFourAction{
+    width:100%;
+    line-height:40rpx;
+    font-size:22rpx;
+    text-indent:20rpx;
+    color:#7b7b7b;
+    background:#fff;
+}
+/* 第五部分 */
+.collageEditFive{
+    width:750rpx;
+    min-height:320rpx;
+}
+.editFiveContent{
+    width:750rpx;
+    line-height:80rpx;
+    font-size:28rpx;
+    text-indent:100rpx;
+    background:#fff;
+}
+.editFiveAdd{
+    width:750rpx;
+    line-height:80rpx;
+    font-size:28rpx;
+    text-align:center;
+    color:#2D9DD7;
+    background:#F8F8F8;
+}
+/* 第六部分 */
+.collageEditSix{
+    width:750rpx;
+    min-height:470rpx;
+}
+.editSixContent{
+    width:750rpx;
+    height:360rpx;
+    background:#fff;
+    overflow:hidden;
+}
+.editSixContent textarea{
+    display:block;
+    width:700rpx;
+    height:320rpx;
+    background:#F2F2F2;
+    margin:20rpx auto;
+    border-radius:5px;
+    font-size:30rpx;
+    color:#7b7b7b;
+}
+.editSixAction{
+    width:750rpx;
+    height:30rpx;
+    line-height:22rpx;
+    font-size:22rpx;
+    color:#7b7b7b;
+    text-indent:20rpx;
+    background:#fff;
+}
+/*第七部分*/
+.collageEditSeven{
+    width:750rpx;
+    min-height:440rpx;
+}
+/*第八部分*/
+.collageEditEight{
+    width:750rpx;
+    min-height:340rpx;
+}
+.editEightContent{
+    width:750rpx;
+    min-height:260rpx;
+    background:#fff;
+}
+.editEightContentChild{
+    width:700rpx;
+    line-height:220rpx;
+    background:#F2F2F2;
+    margin:0rpx auto;
+    border-radius:5px;
+    font-size:120rpx;
+    color:#fff;
+    text-align:center;
+}
+.empty{
+    width:100%;
+    height:20rpx;
+}
+.bottomBtn{
+    line-height:90rpx;
+    position:fixed;
+    bottom:0rpx;
+    left:0rpx;
+    width:750rpx;
+    z-index:100;
+    border-radius:0px;
+    background:#47BAFD;
+    color:#fff;
+    font-size:30rpx;
+}
+
+
+.editEightImg{
+    width:750rpx;
+    min-height:0rpx;
+    background:#fff;
+    overflow: hidden;
+}
+.editEightImgChild{
+    width:700rpx;
+    height:330rpx;
+    background:#fff;
+    margin-top:25rpx;
+    margin-left:25rpx;
+    margin-bottom:25rpx;
+}
+
+.editEightImgChild image{
+    width:700rpx;
+    height:330rpx;
+}
+
+
+.addOptions{
+    width:750rpx;
+    height:1207rpx;
+    background:rgba(0,0,0,0.5);
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
+}
+.addOptionsChild{
+    width:100%;
+    height:150rpx;
+    background:#fff;
+    position:absolute;
+    bottom:0rpx;
+    left:0rpx;
+}
+.addOptionsChildTitle{
+    width:100%;
+    line-height:80rpx;
+    font-size:30rpx;
+    text-indent:20rpx;
+}
+.addOptionsChildButton{
+    width:100%;
+    height:70rpx;
+}
+
+.addOptionsChildButton view{
+    width:20%;
+    line-height:40rpx;
+    font-size:30rpx;
+    background:#F3F3F3;
+    color:#7b7b7b;
+    float:left !important;
+    margin-top:5rpx;
+    margin-left:30rpx;
+    text-align:center;
+    border:1rpx solid #7b7b7b;
+    border-radius:5px;
+}

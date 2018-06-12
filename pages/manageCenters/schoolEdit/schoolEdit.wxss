@@ -1,0 +1,112 @@
+.schoolEdit{
+    width:750rpx;
+    min-height:1207rpx;
+    background:#F2F2F2;
+    padding-bottom:80rpx;   
+}
+/* 学校环境/资质荣誉 */
+.schoolEditOne{
+    width:700rpx;
+    min-height:280rpx;
+    margin:0 auto 25rpx;
+}
+.schoolEditOneTitle{
+    width:700rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    font-weight:bold;
+}
+.schoolEditOneContent{
+    width:700rpx;
+    min-height:200rpx;
+    background:#fff;
+    border-radius:5px;
+}
+.schoolEditOneImage{
+    display:inline-block;
+    width:160rpx;
+    height:160rpx;
+    border:1rpx solid #efefef;
+    margin-top:20rpx;
+    margin-left:10rpx;
+}
+.schoolEditOneImage image{
+    width:160rpx;
+    height:160rpx;
+}
+.schoolEdit button{
+    width:750rpx;
+    line-height:80rpx;
+    background:#47BAFD;
+    color:#fff;
+    font-size:30rpx;
+    position:fixed;
+    left:0rpx;
+    bottom:0rpx;
+    border:0px;
+}
+.schoolEdit button::after{
+    border:0px;
+}
+/* 品牌视频 */
+.empty{
+    width:100%;
+    height:10rpx;
+    background:transparent;
+}
+.schoolEditTwo{
+    width:700rpx;
+    min-height:480rpx;
+    margin:0 auto 25rpx;
+}
+.schoolEditTwoContent{
+    width:700rpx;
+    height:400rpx;
+    background:#fff;
+    border-radius:5px;
+}
+.schoolEditTwoAdd{
+    width:680rpx;
+    line-height:100rpx;
+    border:1rpx solid #efefef;
+    margin-left:10rpx;
+    border-radius:5px;
+    font-size:80rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+.schoolEditTwoVideo{
+    width:680rpx;
+    height:270rpx;
+    margin:10rpx auto 0rpx;
+}
+.schoolEditTwoVideo video{
+    width:680rpx;
+    height:270rpx;
+}
+/*学校介绍*/
+.schoolEditThree{
+    width:700rpx;
+    min-height:420rpx;
+    margin:0 auto 25rpx;
+}
+.schoolEditThreeContent{
+    width:700rpx;
+    height:340rpx;
+    background:#fff;
+    border-radius:5px;
+    overflow:hidden;
+}
+.schoolEditThreeChild{
+    width:660rpx;
+    height:300rpx;
+    border:1rpx solid #efefef;
+    margin:20rpx 20rpx;
+    border-radius:5px;
+}
+.schoolEditThreeChild textarea{
+    width:640rpx;
+    height:280rpx;
+    margin:10rpx 10rpx;
+    font-size:30rpx;
+}

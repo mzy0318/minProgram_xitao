@@ -1,0 +1,11 @@
+<view class='courseClassWrap'>
+  <view class='empty'></view>
+  <view class='courseClassContent'>
+      <view>全部</view>
+      <view wx:for='{{lessonClassData}}' data-id='{{item.id}}' bindtap='toCourseNav' data-name='{{item.name}}'>{{item.name}}</view>
+  </view>
+  <view class='courseClassBtn'>
+    <button bindtap='toClearCourse'>清空</button>
+    <button bindtap='toCourse'>返回</button>
+  </view>
+</view>

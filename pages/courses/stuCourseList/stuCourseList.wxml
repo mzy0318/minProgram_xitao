@@ -1,0 +1,10 @@
+<view class='courseList'>
+    <view class='courseListLeft'><image mode='scaleToFill'></image></view>
+    <view class='courseListRight'>
+        <view class='courseListRightTop'>智慧招生-暑假招生方案</view>
+        <view class='courseListRightBottom'>
+            <text>预约时间:2018-06-08</text>
+            <text class='iconfont icon-phone'></text>
+        </view>
+    </view>
+</view>

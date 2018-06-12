@@ -1,0 +1,133 @@
+<view class='killPriceInfoWrap' style='background-image:url({{backgroundImage}})'>
+    <view class='killPriceBanner'>
+        <image src='{{bannerImage}}' mode='scaleToFill' />
+    </view>
+    <view class='killPriceInfoOne'>
+        <view class='killPriceInfoTop'>
+            <view class='empty'></view>
+            <view class='killPriceInfoTopText'>{{pageData.title}}</view>
+        </view>
+        <view class='killPriceInfoImg'>
+            <image src='{{activeImage}}' mode='scaleToFill' />
+        </view>
+        <view class='killPriceInfoRange'>
+            <view class='rangeWrap'>
+                <view class='rangeChild'></view>
+            </view>
+            <view class='rangePrice'>
+                <view class='rangePriceLeft'>
+                    <view>{{pageData.original_price}}</view>
+                    <view>原价</view>
+                </view>
+                <view class='rangePriceRight'>
+                    <view>{{pageData.now_price}}</view>
+                    <view>最低价</view>
+                </view>
+            </view>
+            <button bindtap='isClose' data-display='block'>报名参与({{pageData.rest}})</button>
+        </view>
+        <view class='killPriceInfoBottom'>
+            <view></view>
+            <view></view>
+        </view>
+    </view>
+    <!--第二部分  -->
+    <view class='killPriceInfoTwo'>
+        <view class='killPriceInfoTwoTop'>
+            <view class='infoTwoTitle'>
+                <view class='empty'></view>
+                <view class='infoTwoTitleText' bindtap='toIndex'>智慧招生小程序></view>
+            </view>
+            <view class='infoTwoInfo'>
+                <view>开始时间:<text>{{startTime}}</text></view>
+                <view>截止时间:<text>{{endTime}}</text></view>
+                <view bindtap='tellPhone' data-phonenum='{{pageData.telephone}}'>咨询热线:<text>{{pageData.telephone}}</text></view>
+                <view>机构地址:<text>{{pageData.address}}</text></view>
+            </view>
+            <view class='infoTwoImg'>
+                <view class='infoTwoImgTitle'>快来参加!!!</view>
+                <view class='infoTwoImgImage'>
+                    <image src='{{pageData.act_image[0].url}}' mode='scaleToFill' />
+                </view>
+                <button bindtap='toIndex'>了解机构></button>
+            </view>
+        </view>
+        <view class='killPriceInfoTwoBottom'>
+            <view></view>
+            <view></view>
+        </view>
+    </view>
+    <view class='killPriceInfoThree'>
+        <view class='infoThreeTitle'>
+            <view bindtap='priceRankOne' class='{{isShow?"borderStyle":""}}'>砍价排行</view>
+            <view bindtap='priceRankTwo' class='{{isHidden?"borderStyle":""}}'>玩法介绍</view>
+        </view>
+        <view class='infoThreeContent'  >
+            <view class='infoThreeContentOne' hidden='{{isHidden}}'>
+                <view class='contentOne'>已有<text>{{killPricePeople.total_joiner}}</text>人报名</view>
+                <view class='contentTwo'>他们总计被砍了<text>{{killPricePeople.total_bargain_times}}</text>次,总计￥<text>{{killPricePeople.total_reduce}}</text>元</view>
+                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople.list}}' data-nickname='{{item.nickname}}' data-actId='{{item.act_id}}' data-joinerId='{{item.joiner_id}}'>
+                    <view><image src='{{item.avatar_url}}' mode='scaleToFill' /></view>
+                    <view><text>{{item.nickname}}</text><text >已被砍掉￥{{item.reduce_price}}元></text></view>
+                </view>
+            </view>
+            <view class='infoThreeContentTwo' hidden='{{isShow}}'>
+                <text>{{pageData.rule}}</text>
+                <button bindtap='isClose' data-display='block'>报名参与>></button>
+            </view>
+        </view>
+    </view>
+    <view class='writeInfoWrap' style='display:{{isClosed}};' >
+        <view class='writeInfo'>
+            <view>填写报名信息</view>
+            <view><input type='text' placeholder='请输入姓名' bindblur='getNickName' /></view>
+            <view><input type='number' maxlength='11' placeholder='请输入联系电话' bindblur='getPhone' /></view>
+            <button bindtap='joinActive'>确认</button>
+            <view class='line'></view>
+            <view class='close'  bindtap='isClose' data-display='none'>x</view>
+        </view>
+    </view>
+    <view class='otherOptionWrap' hidden='{{actionOptions}}'>
+        <view bindtap='isOptions' class='otherOptions'>
+            <text class='{{isOption?iconOpen:iconClose}}'></text>
+        </view>
+        <view class='otherOptionsChild' hidden='{{isOption}}'>
+            <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
+            <!-- <view bindtap='upDataImg' data-type='banner'>更换大图</view> -->
+            <view bindtap='upDataImg' data-type='background'>更换背景</view>
+            <view bindtap='switchModel' data-url='org/music_list' >背景音乐</view>
+            <view bindtap='toEditPage'>编辑</view>
+        </view>
+    </view>
+    <view class='switchBackgroundImage' hidden='{{bottomOption}}'>
+        <view bindtap='cancelImage'>取消</view>
+        <view >确认</view>
+    </view>
+    <view class='switchMusic' hidden='{{isCommon}}'>
+        <view class='switchMusicTitle'>
+            <block wx:for='{{musicClass}}' >
+                <view data-name='{{item.name}}' class='{{musicClassIndex==index?"switchMusicBorder":""}}' bindtap='switchTabs' >{{item.name}}</view>
+            </block>
+        </view>
+        <!--音乐列表  -->
+        <view class='switchMusicContent' hidden='{{isMusicClass}}'  >
+            <view wx:for='{{musicData}}' data-music='{{item.url}}'  data-musicid='{{item.id}}' bindtap='changeMusic'>{{item.name}}</view>
+        </view>
+        <!--模板列表  -->
+        <view class='switchModelContent' hidden='{{isModel}}' scroll-x >
+            <scroll-view class='switchModelContentChild' scroll-x style='width:{{musicData.length*226}}rpx;'>
+                <view class='modelContentChildContent' wx:for='{{musicData}}' data-image='{{item.image}}' data-bimage='{{item.bg}}' bindtap='changeModel'>
+                    <view>{{item.name}}</view>
+                    <view>
+                        <image src='{{item.image}}' mode='scaleToFill' />
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class='switchMusicOptions'>
+            <view bindtap='cancelImage'>取消</view>
+            <view bindtap='comfireSubmit' data-id='{{pageData.id}}'>确认</view>
+            <view hidden='{{isMusicClass}}'>不播放音乐</view>
+        </view>
+    </view>
+</view>

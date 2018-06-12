@@ -1,0 +1,26 @@
+<view class='courseWrap'>
+    <view class='empty'></view>
+    <swiper indicator-dots='true' indicator-active-color='#FFCE0B'>
+        <swiper-item wx:for='{{courseData.hot_lesson}}' bindtap='toCourseInfo'>
+            <view class='courseTop'>
+                <view class='courseTopImg'>
+                    <image src='{{item.cover.url}}' mode='scaleToFill' />
+                    <view class='courseTopSup'>热门课程</view>
+                </view>
+                <text class='courseTopTitle'>智慧招生</text>
+                <text class='courseTopText'>小程序案例</text>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view class='courseSelect' bindtap='toCourseClass'>{{lessonClassName}}></view>
+    <view class='courseInfo' wx:for='{{lessonData?lessonData:courseData.lesson}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}'>
+        <view class='courseInfoImg'>
+            <image src='{{item.cover.url}}' mode='aspectFit'></image>
+        </view>
+        <view class='courseInfoText'>
+            <text>{{item.name}}</text>
+            <text>{{item.title}}</text>
+            <text>1</text>
+        </view>
+    </view>
+</view>

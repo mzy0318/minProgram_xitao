@@ -1,0 +1,11 @@
+<view class='userVideoListWrap'>
+    <view class='empty'></view>
+    <view class='videoListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-actid='{{item.id}}'>
+        <view class='contentLeft'><image src='{{item.banner_image_url}}' mode='scaleToFill'></image></view>
+        <view class='contentRight'>
+            <view>智慧招生-暑假招生方案班</view>
+            <view>{{item.title}}</view>
+            <view>打开贺卡</view>
+        </view>
+    </view>
+</view>

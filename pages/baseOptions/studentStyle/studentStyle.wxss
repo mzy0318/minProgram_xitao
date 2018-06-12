@@ -1,0 +1,8 @@
+/* pages/studentStyle/studentStyle.wxss */
+.wrapView{
+  width:720rpx;
+  margin:20rpx auto -50rpx;
+}
+.wrapView image{
+  width:100%;
+}

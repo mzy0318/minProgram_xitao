@@ -1,0 +1,24 @@
+<view class='stuCenterWrap'>
+    <view class='stuCenterTop'>
+        <view class='stuCenterTopInfo'>
+            <view class='stuCenterTopLeft'>
+                <image src='{{userInfo.avatarUrl}}' mode='scaleToFill' />
+            </view>
+            <view class='stuCenterTopRight'>
+                <view>{{userInfo.nickName}}</view>
+                <view>欢迎您!!!</view>
+            </view>
+        </view>
+    </view>
+    <view class='stuCenterBottom'>
+        <view class='stuCenterBottomTitle'>会员服务</view>
+        <view class='stuCenterBottomContent'>
+            <view class='centerBottomContentWrap' wx:for='{{pageStuData}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage'>
+                <view class='optionsTop' style='background:{{item.background}}'>
+                    <text class='{{item.iconfont}}'></text>
+                </view>
+                <view class='optionsBottom'>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+</view>

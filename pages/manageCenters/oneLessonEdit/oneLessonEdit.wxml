@@ -1,0 +1,102 @@
+<view class='lessonEditWrap'>
+    <form bindsubmit="formSubmit">
+        <view class='empty'></view>
+        <view class='lessonEditOne'>
+            <view class='lessonEditOneTitle'>活动信息</view>
+            <view class='lessonEditContent'>
+                <view class='lessonEditContentInput'>
+                    <view>活动名称:</view>
+                    <view>
+                        <input type='text' name='title' value='{{pageData.title}}'></input>
+                    </view>
+                </view>
+                <view class='lessonEditContentInput'>
+                    <view>开始日期:</view>
+                    <view>
+                        <picker start="2015-09-01" bindchange='getStartTime' mode="date" end="2100-09-01" value='{{startTime}}'>{{startTime}}</picker>
+                    </view>
+                </view>
+                <view class='lessonEditContentInput'>
+                    <view>结束日期:</view>
+                    <view>
+                        <picker start="2015-09-01" bindchange='getEndTime' mode="date" end="2100-09-01" value='{{endTime}}'>{{endTime}}</picker>
+                    </view>
+                </view>
+                <view class='lessonEditContentInput'>
+                    <view>报名热线:</view>
+                    <view>
+                        <input type='number' maxlength='11' name='telephone' value='{{pageData.telephone}}'></input>
+                    </view>
+                </view>
+                <view class='lessonEditContentInput'>
+                    <view>活动地址:</view>
+                    <view>
+                        <input type='text' name='address' value='{{pageData.address}}'></input>
+                    </view>
+                </view>
+                <view class='lessonEditContentInput'>
+                    <view>在线支付:</view>
+                    <switch name='pay_status'></switch>
+                    <text>若退款,请您线下给客户</text>
+                </view>
+                <view class='lessonEditContentInput'>
+                    <view>是否可见:</view>
+                    <switch name='status'></switch>
+                    <text>默认为可见</text>
+                </view>
+            </view>
+        </view>
+        <view class='lessonEditTwo'>
+            <view class='lessonEditOneTitle'>报名信息</view>
+            <view class='lessonEditTwoContent'>
+                <view wx:for='{{joinInfo}}'>{{item}}</view>
+                <view class='addInfo'>+新增报名项</view>
+            </view>
+        </view>
+        <view class='lessonEditThree'>
+            <view class='lessonEditOneTitle'>活动图片</view>
+            <view class='lessonEditThreeContent'>
+                <view bindtap='choosePic'></view>
+                <view wx:for='{{actImage}}'><image src='{{item}}' mode='scaleToFill'></image></view>
+            </view>
+        </view>
+         <view class='lessonEditThree'>
+            <view class='lessonEditOneTitle'>封面图片</view>
+            <view class='lessonEditThreeContent'>
+                <view bindtap='chooseCoverPic'></view>
+                <view ><image src='{{coverImage}}' mode='scaleToFill'></image></view>
+            </view>
+        </view>
+        <view class='lessonEditFour'>
+            <view class='lessonEditOneTitle'>活动信息</view>
+            <view class='lessonEditFourContent'>
+                <view class='lessonEditFourContentChild'>
+                    <textarea bindblur='getDescription' value='{{description}}'></textarea>
+                </view>
+            </view>
+        </view>
+        <view class='lessonEditFive'>
+            <view class='lessonEditOneTitle'>课程信息</view>
+            <view class='lessonEditFiveContent' wx:for='{{pageData.courses}}'>
+                <view class='contentListLeft'>
+                    <image src='{{item.cover.url}}' mode='scaleToFill'></image>
+                </view>
+                <view class='contentListRight'>
+                    <view class='contentListRightTop'>
+                        <text>{{item.course_name}}</text>
+                        <text>删除</text>
+                    </view>
+                    <view class='contentListRightMiddle'>￥{{item.now_price}}={{item.course_number}}节课</view>
+                    <view class='contentListRightBottom'>
+                        <text>￥{{item.original_price}}</text>
+                        <text bindtap='toCourseEdit'  data-courseid='{{item.id}}'>编辑</text>
+                    </view>
+                </view>
+            </view>
+            <view class='lessonEditFiveAdd'>
+                <text class='lessonEditFiveAddChild' decode bindtap='toCourseEdit'>+&nbsp;&nbsp;添加课程</text>
+            </view>
+        </view>
+        <button class='lessonEditBtn' formType="submit">立即发布</button>
+    </form>
+</view>

@@ -1,0 +1,97 @@
+@import '../../utils/iconFontO.wxss';
+.stuCenterWrap{
+    width:750rpx;
+    height:1110rpx;
+    background:#F2F2F2;
+}
+.stuCenterTop{
+    width:750rpx;
+    height:300rpx;
+    background:#FFCF0B;
+}
+.stuCenterTopInfo{
+    width:500rpx;
+    height:120rpx;
+    float:left;
+    margin-left:30rpx;
+    margin-top:90rpx;
+}
+.stuCenterTopLeft{
+    width:120rpx;
+    height:120rpx;
+    border-radius:50%;
+    float:left;
+    overflow: hidden;
+}
+.stuCenterTopLeft image{
+    width:120rpx;
+    height:120rpx;
+}
+.stuCenterTopRight{
+    width:300rpx;
+    height:120rpx;
+    float:right;
+    margin-right:50rpx;
+}
+.stuCenterTopRight view{
+    font-size:28rpx;
+    line-height:40rpx;
+    color:#fff;
+    margin-top:10rpx;
+}
+.stuCenterTopRight view:nth-child(2){
+    font-size:22rpx;
+}
+.stuCenterBottom{
+    width:750rpx;
+    height:790rpx;
+    background:#fff;
+    margin-top:20rpx;
+}
+.stuCenterBottomTitle{
+    width:750rpx;
+    line-height:40rpx;
+    font-size:24rpx;
+    text-indent:20rpx;
+    color:#7b7b7b;
+}
+.stuCenterBottomContent{
+    width:750rpx;
+    height:750rpx;
+}
+.centerBottomContentWrap{
+    float:left;
+    width:183rpx;
+    height:183rpx;
+    border-right:1rpx solid #efefef;
+    border-bottom:1rpx solid #efefef;
+}
+.iconSize{
+    display:block;
+    font-size:80rpx;
+    margin-left:55rpx;
+    margin-top:20rpx;
+    color:#1196DB;
+}
+.centerBottomContentWrap .optionsTop{
+    width:80rpx;
+    height:80rpx;
+    background:#E3465B;
+    border-radius:5px;
+    margin:30rpx auto 0rpx;
+    position:relative;
+}
+.centerBottomContentWrap .optionsTop .iconStyle{
+    display:block !important;
+    top:13.5rpx;
+    left:16.5rpx;
+    position:absolute;
+    color:#fff;
+    font-size:50rpx;
+}
+.centerBottomContentWrap .optionsBottom{
+    font-size:30rpx;
+    text-align:center;
+    width:100%;
+    margin-top:10rpx;
+}

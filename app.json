@@ -1,0 +1,76 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/studentCenter/studentCenter",
+        "pages/morePage/morePage",
+        "pages/goodLesson/lessonListInfo/lessonListInfo",
+        "pages/goodLesson/goodLessonList/goodLessonList",
+        "pages/goodLesson/manLessonList/manLessonList",
+        "pages/manageCenters/manageCenter/manageCenter",
+        "pages/manageCenters/manageActive/manageActive",
+        "pages/manageCenters/manageEdit/manageEdit",
+        "pages/manageCenters/chooseModel/chooseModel",
+        "pages/manageCenters/collageEdit/collageEdit",
+        "pages/manageCenters/lessonCourseEdit/lessonCourseEdit",
+        "pages/manageCenters/schoolEdit/schoolEdit",
+        "pages/manageCenters/oneLessonEdit/oneLessonEdit",
+        "pages/courses/courseInfo/courseInfo",
+        "pages/courses/orderInfo/orderInfo",
+        "pages/courses/courseClass/courseClass",
+        "pages/courses/course/course",
+        "pages/courses/courseUserList/courseUserList",
+        "pages/courses/courseUserListInfo/courseUserListInfo",
+        "pages/courses/stuCourseList/stuCourseList",
+        "pages/baseOptions/teachers/teachers",
+        "pages/baseOptions/schoolInfo/schoolInfo",
+        "pages/baseOptions/opinions/opinions",
+        "pages/baseOptions/studentStyle/studentStyle",
+        "pages/baseOptions/contactUs/contactUs",
+        "pages/baseOptions/sharePage/sharePage",
+        "pages/killPrices/killPrice/killPrice",
+        "pages/killPrices/killPricePerson/killPricePerson",
+        "pages/killPrices/killPriceInfo/killPriceInfo",
+        "pages/killPrices/killPriceListInfo/killPriceListInfo",
+        "pages/killPrices/killPersonList/killPersonList",
+        "pages/killPrices/killPriceList/killPriceList",
+        "pages/collage/collageSignup/collageSignup",
+        "pages/collage/collageList/collageList",
+        "pages/collage/collagePersonInfo/collagePersonInfo",
+        "pages/collage/collageInfo/collageInfo",
+        "pages/collage/collageBuild/collageBuild",
+        "pages/videos/manVideoList/manVideoList",
+        "pages/videos/videoListInfo/videoListInfo",
+        "pages/manageCenters/videoEdit/videoEdit",
+        "pages/videos/userVideoList/userVideoList"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#000",
+        "selectedColor": "#A144AF",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "学校首页",
+                "iconPath": "./icon/home.png",
+                "selectedIconPath": "/icon/homeSele.png"
+            },
+            {
+                "pagePath": "pages/manageCenters/manageCenter/manageCenter",
+                "text": "管理中心",
+                "iconPath": "./icon/manage.png",
+                "selectedIconPath": "/icon/manageSele.png"
+            },
+            {
+                "pagePath": "pages/studentCenter/studentCenter",
+                "text": "学生中心",
+                "iconPath": "./icon/student.png",
+                "selectedIconPath": "/icon/studentSele.png"
+            }
+        ]
+    }
+}

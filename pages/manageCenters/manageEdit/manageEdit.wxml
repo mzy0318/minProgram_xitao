@@ -1,0 +1,83 @@
+<view class='manageEditWrap'>
+    <form bindsubmit="getFormData">
+        <view class='manageEditOne'>
+            <view class='manageEditOneTitle'>主题模板</view>
+            <view class='manageEditOneContent'>
+                <view><image src='{{backgroundImage}}' mode='scaleToFill' /></view>
+                <view>发布后可重新选择模板和音乐</view>
+            </view>
+        </view>
+        <view class='manageEditTwo'>
+            <view class='manageEditTwoTitle'>
+                活动信息
+            </view>
+            <view class='manageEditTwoContent'>
+                <view><text>活动名称:</text><input value='{{editTitle}}' type='text' id='activeName' name='title' /></view>
+                <view><text>开始日期:</text><picker mode='date' value='{{startDate}}' start="2015-09-01" end="2111-01-01" name='start_time' bindchange='getStartTime'><text class='endTime'>{{startDate}}</text></picker></view>
+                <view><text>截止日期:</text><picker mode='date' value='{{endDate}}' start="2015-09-01" end="2111-01-01" name='end_time' bindchange='getEndTime'><text class='startTime'>{{endDate}}</text></picker></view>
+                <view><text>报名热线:</text><input type='number' maxlength='11' name='telephone' /></view>
+                <view><text>联系地址:</text><input type='text' name='address' /></view> 
+            </view>
+        </view>
+        <view class='manageEditThree'>
+            <view class='manageEditOneTitle'>报名信息</view>
+            <view class='manageEditOneContent'>
+                <view wx:for='{{nameInfo}}'><text>{{item}}:</text><input type='text' disabled /></view>
+                <view class='addOption' bindtap='showOptions' data-is='0'>+新增报名项</view>
+            </view>
+        </view>
+        <view class='manageEditFour'>
+            <view class='manageEditOneTitle'>砍价设置</view>
+            <view class='manageEditFourContent'>
+                <view class='viewOne'><text>原价:</text><input type='number' name='now_price' /></view>
+                <view class='viewOne'><text>最低价:</text><input type='number' name='original_price' /></view>
+                <view>
+                    <text>砍价类型:</text>
+                    <text class='{{isShow?"killPricerNumed":"killPricerNum"}}' decode='true'  bindtap='switchTab' data-value='1'>&nbsp;&nbsp;&nbsp;砍价幅度</text>
+                    <text class='{{isHidden?"killPricerNumed":"killPricerNum"}}' decode='true'  bindtap='switchTab' data-value='2'>&nbsp;&nbsp;&nbsp;砍价次数</text>
+                </view>
+                <view class='viewOne'  hidden='{{isHidden}}'><text>砍价幅度:</text><input type='text' name='bargain_paramO' placeholder='如每次最高砍掉50元'/></view>
+                <view class='viewOne'  hidden='{{isShow}}'><text>砍价次数:</text><input type='text' name='bargain_paramT' placeholder='如每次按剩余差价随机'/></view>
+                <view>
+                    <text>砍价限额:</text>
+                    <text class='{{isShowO?"killPricerDued":"killPricerDu"}}' decode='true' bindtap='switchTabO' data-value='1' >只能砍1次</text>
+                    <text class='{{isHiddenO?"killPricerDued":"killPricerDu"}}' decode='true' bindtap='switchTabO' data-value='2' >每天砍1次</text>
+                </view>
+                <view class='viewOne'><text>报名限额:</text><input type='number' name='joiner_limit' placeholder='允许最大人数,不填则不限制' /></view>
+                <view><text>在线支付:</text><switch color='#47BAFD' name='pay_status' /><text>若退款,请您线下给客户,默认:否</text></view>
+                <view><text>是否显示:</text><switch color='#47BAFD' name='status' /><text>活动发布后是否可见,默认:显示</text></view>
+            </view>
+        </view>
+        <view class='manageEditFive'>
+            <view class='manageEditOneTitle'>多图上传</view>
+            <view class='manageEditFiveContent'>
+                <view class='emptyPhoto'></view>
+                <view class='manageEditFivePhoto' bindtap='getImage'>
+                    <text class='iconfont icon-photo'></text>
+                </view>
+                <view class='fiveContentImage' wx:for='{{imageData}}'><image src='{{item}}' mode='scaleToFill' /></view>
+            </view>
+        </view>
+        <view class='manageEditSix'>
+            <view class='manageEditOneTitle'>活动信息</view>
+            <view class='manageEditSixContent'>
+                <view class='manageEditSixWrap'>
+                    <textarea placeholder='活动说明'  bindblur='getRule' />
+                </view>
+            </view>
+            <view class='sixEmpty'></view>
+        </view>
+        <button formType="submit">立即发布</button>
+    </form>
+    <view class='addOptions' hidden='{{isOptions}}' bindtap='showOptions' data-is='1'>
+        <view class='addOptionsChild'>
+            <view class='addOptionsChildTitle'>常用报名项</view>
+            <view class='addOptionsChildButton'>
+                <view bindtap='addNameOptions' data-value='年龄'>年龄</view>
+                <view bindtap='addNameOptions' data-value='住址'>住址</view>
+                <view bindtap='addNameOptions' data-value='备注'>备注</view>
+                <view bindtap='addNameOptions' data-value='其它'>其它</view>
+            </view>
+        </view>
+    </view>
+</view>

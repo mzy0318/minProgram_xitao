@@ -1,0 +1,96 @@
+<view class='listInfoWrap'>
+    <view class='listInfoUser'>
+        <view class='listInfoUserTop'>
+            <view class='listInfoUserLeft'>
+                <view class='firstName'>{{firseName}}</view>
+                <view class='userName'>{{pageData.nickname}}</view>
+                <text bindtap='collection' class='{{isStar?staredStyle:starStyle}}'></text>
+            </view>
+            <view class='listInfoUserRight'>
+                <view>意向度</view>
+                <view data-options='xin' bindtap='changeOption'><image src='{{xinData.name}}' mode='scaleToFill'></image></view>
+            </view>
+        </view>
+        <view class='listInfoBtn' data-options='status' style='color:{{statusData.color}};border-color:{{statusData.color}};' bindtap='changeOption'>{{statusData.name}}</view>
+        <view class='listInfoBtn' style='border-color:#62A2EC;' data-phonenum='{{pageData.phone}}' bindtap='tellPhone'>拨号</view>
+    </view>
+    <view class='listInfoOptions'>
+        <view data-is='0' bindtap='isShowChild' style='border-color:{{isConnect?"#fff":"#4E9BF4"}}'>沟通记录</view>
+        <view data-is='1' bindtap='isShowChild' style='border-color:{{isBase?"#fff":"#4E9BF4"}}'>基本信息</view>
+    </view>
+    <view class='listInfoConnect' hidden='{{isConnect}}'>
+        <view class='connectChild' wx:for='{{connectList}}'>
+            <view class='connectChildTop'>
+                <view>{{item.Date}}</view>
+                <view>{{item.Time}}</view>
+            </view>
+            <view class='connectChildBottom'>
+                <text>{{item.content}}</text>
+            </view>
+        </view>
+        <view class='connectInput' hidden='{{isShowInput}}'>
+            <form bindsubmit='submitTextarea'>
+                <view class='connectInputTop'>
+                    <textarea name='textareaData'></textarea>
+                </view>
+                <button formType='submit'>提交</button>
+            </form>
+        </view>
+        <view class='addConnect' bindtap='showInput'>{{addInfo}}</view>
+    </view>
+    <view class='listInfoBase' hidden='{{isBase}}'>
+        <form bindsubmit="submitUserInfo">
+            <view class='listInfoBaseOne'>
+                <view class='oneContent'>
+                    <view class='oneContentName'>姓名</view>
+                    <input type='text' value='{{pageData.nickname}}' name='nickname'></input>
+                </view>
+                <view class='oneContent'>
+                    <view class='oneContentName'>手机号</view>
+                    <input type='number' maxlength='11' value='{{pageData.phone}}' name='phone'></input>
+                </view>
+                <view class='oneContent'>
+                    <view class='oneContentName'>微信号</view>
+                    <input type='text' value='{{pageData.we_chat}}' name='we_chat'></input>
+                </view>
+            </view>
+            <view class='listInfoBaseTwo'>
+                <view class='oneContent'>
+                    <view class='oneContentName'>性别</view>
+                    <text data-options='sex' bindtap='changeOption'>{{sexData.name}}</text>
+                </view>
+                <view class='oneContent'>
+                    <view class='oneContentName'>住址</view>
+                    <input type='text' value='{{pageData.address}}' name='address'></input>
+                </view>
+            </view>
+            <view class='listInfoBaseTwo'>
+                <view class='oneContent'>
+                    <view class='oneContentName'>来源</view>
+                    <input type='text' value='{{pageData.source}}' name='source'></input>
+                </view>
+                <view class='oneContent'>
+                    <view class='oneContentName'>备注</view>
+                    <input type='text' value='{{pageData.note}}' name='note'></input>
+                </view>
+            </view>
+            <button form-type='submit'>完善信息</button>
+        </form>
+    </view>
+</view>
+<view class='selectOptions' hidden='{{isOptions}}'>
+    <view class='selectOptionsChild'>
+        <view class='OptionsChildContent' wx:for='{{optionsData}}' bindtap='changeValue' data-index='{{index}}' style='color:{{item.color}}'>{{item.name}}</view>
+        <view class='empty'></view>
+        <view class='cancel' bindtap='cancelOption'>取消</view>
+    </view>
+</view>
+<view class='selectOptions' hidden='{{isXinOptions}}'>
+    <view class='selectOptionsChild'>
+        <view class='OptionsChildContent' wx:for='{{optionsData}}' bindtap='changeValue' data-index='{{index}}'>
+            <view class='textWrap'><image src='{{item.name}}' mode='scaleToFill'></image></view>
+        </view>
+        <view class='empty'></view>
+        <view class='cancel' bindtap='cancelXinOption'>取消</view>
+    </view>
+</view>

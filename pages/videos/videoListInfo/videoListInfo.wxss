@@ -1,0 +1,49 @@
+.listInfoBanner{
+    width:750rpx;
+    height:460rpx;
+    background:#0ff;
+}
+.listInfoBanner image{
+    width:750rpx;
+    height:460rpx;
+}
+.listInfoBottom{
+    width:750rpx;
+    height:100rpx;
+    position:fixed;
+    bottom:0rpx;
+    left:0rpx;
+    display:flex;
+    justify-content: space-around;
+    border-top:1rpx solid #efefef;
+    background:rgba(255,255,255,0.7);
+}
+.listInfoBottom button{
+    line-height:100rpx;
+    font-size:30rpx;
+    text-align:center;
+    font-weight:bold;
+    box-sizing: content-box;
+    padding:0rpx 0rpx;
+    width:20%;
+    border-radius:0rpx;
+}
+.listInfoBottom button::after{
+    border:0rpx;
+}
+.listInfoBackground{
+    width:750rpx;
+    height:740rpx;
+    background:lightblue;
+    overflow:hidden;
+}
+.listInfoVideo{
+    width:700rpx;
+    height:350rpx;
+    background:#000;
+    margin:20rpx auto;
+}
+.listInfoVideo video{
+    width:700rpx;
+    height:350rpx;
+}

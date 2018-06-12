@@ -1,0 +1,445 @@
+.collageInfoWrap{
+    width:750rpx;
+    min-height:1207rpx;
+    background:#efefef;
+    padding-bottom:20rpx;
+}
+.collageInfoBanner{
+    width:750rpx;
+    height:500rpx;
+}
+.collageInfoBanner image{
+    width:750rpx;
+    height:500rpx;
+}
+/*第一部分*/
+.collageInfoOne{
+    width:710rpx;
+    min-height:800rpx;
+    background:#fff;
+    margin:0 auto 20rpx;
+    border-radius:5px;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.oneTitle{
+    width:710rpx;
+    height:90rpx;
+    border-radius:5px 5px 0 0;
+    overflow:hidden;
+    border-bottom:1rpx solid #efefef;
+}
+.oneTitleChild{
+    width:670rpx;
+    line-height:35rpx;
+    font-size:32rpx;
+    border-left:2px solid red;
+    text-indent:20rpx;
+    margin-left:20rpx;
+    font-weight:bold;
+    margin-top:30rpx;
+}
+.oneImage{
+    width:710rpx;
+    min-height:350rpx;
+}
+.oneImageContent{
+    width:650rpx;
+    height:310rpx;
+    background:lightgreen;
+    margin:0rpx auto 20rpx;
+}
+.oneImageContent image{
+    width:650rpx;
+    height:310rpx;
+}
+.empty{
+    width:100%;
+    height:20rpx;
+    background:transparent;
+}
+.oneRule{
+    width:710rpx;
+    height:180rpx;
+}
+.oneRuleChild{
+    width:670rpx;
+    height:160rpx;
+    margin:0 auto;
+}
+.oneRuleChildTop{
+    width:670rpx;
+    height:60rpx;
+}
+.oneRuleChildTop view{
+    width:120rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    text-align:center;
+    background:#FF8A7E;
+    border-radius:5px 5px 0px 0px;
+    margin-left:17rpx;
+    color:#E06857;
+    float:left;
+}
+.oneRuleChildTop view:nth-child(1){
+    margin-left:0rpx;
+}
+view.viewTyle{
+    color:#fff;
+    background:#F36A58;
+}
+.oneRuleChildBottom{
+    width:670rpx;
+    height:100rpx;
+    background:#F36A58;
+    border-radius:0px 0px 5px 5px;
+}
+.oneRuleChildBottomLeft{
+    width:300rpx;
+    height:40rpx;
+    float:left;
+    margin-top:30rpx;
+    font-size:26rpx;
+    text-indent:20rpx;
+    color:#fff;
+}
+.oneRuleChildBottomRight{
+    width:300rpx;
+    height:40rpx;
+    float:right;
+    margin-top:30rpx;
+    font-size:30rpx;
+    text-align:right;
+    margin-right:20rpx;
+    color:#fff;
+}
+.oneRuleChildBottomRight text{
+    font-size:24rpx;
+    text-decoration: line-through;
+    color:#78C2F4;
+}
+
+/* .oneInfo{
+    width:710rpx;
+    height:62rpx;
+}
+.oneInfoChild{
+    width:500rpx;
+    line-height:62rpx;
+    margin:0 auto;
+    border:1rpx solid red;
+    border-radius:5px;
+    font-size:28rpx;
+    background:#FBEFF1;
+    text-align:center;
+    font-weight:bold;
+}
+.oneInfoChild>text{
+    color:red;
+} */
+/* .oneRange{
+    width:710rpx;
+    height:110rpx;
+    margin-top:20rpx;
+    overflow: hidden;
+}
+.oneRangeWrap{
+    width:670rpx;
+    height:15rpx;
+    background:#EBEBEB;
+    margin:8rpx auto;
+}
+.oneRangeChild{
+    width:100rpx;
+    height:15rpx;
+    background:red;
+}
+.oneRangeText{
+    width:80rpx;
+    height:70rpx;
+    float:right;
+    margin-right:20rpx;
+}
+.oneRangeText view{
+    font-size:22rpx;
+    color:#7b7b7b;
+    text-align:right;
+} */
+.oneButton{
+    width:710rpx;
+    height:90rpx;
+    margin-top:40rpx;
+}
+.oneButton button{
+    width:240rpx;
+    line-height:80rpx;
+    color:#fff;
+    font-weight:bold;
+    font-size:30rpx;
+    background:#E64240;
+}
+.oneButton button:nth-child(2){
+    background:#CCC;
+}
+/*第二部分*/
+.collageInfoTwo{
+    width:710rpx;
+    min-height:250rpx;
+    border-radius:5px;
+    background:#fff;
+    margin:20rpx auto;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.collageInfoTwo text{
+    display:block;
+    width:710rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    text-indent:20rpx;
+    color:#464646;
+    border-bottom:1rpx solid #efefef;
+}
+.collageInfoTwoBtn{
+    width:710rpx;
+    height:60rpx;
+    margin-top:50rpx;
+}
+.collageInfoTwoBtn button{
+    width:300rpx;
+    line-height:60rpx;
+    background:#E64240;
+    font-size:30rpx;
+    color:#fff;
+}
+/*第三部分*/
+.collageInfoThree{
+    width:710rpx;
+    min-height:550rpx;
+    background:#fff;
+    border-radius:5px;
+    background:#fff;
+    margin:20rpx auto;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.threeImageText{
+    width:710rpx;
+    min-height:30rpx;
+    color:#7b7b7b;
+    font-size:30rpx;
+    text-indent:30rpx;
+}
+/*第四部分*/
+.collageInfoFour{
+    width:710rpx;
+    min-height:300rpx;
+    background:#fff;
+    border-radius:5px;
+    background:#fff;
+    margin:20rpx auto;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.fourContent{
+    width:100%;
+    font-size:30rpx;
+    color:#7b7b7b;
+    line-height:40rpx;
+    text-indent:20rpx;
+    margin-top:10rpx;
+}
+/*第五部分  */
+.collageInfoFive{
+    width:710rpx;
+    min-height:500rpx;
+    background:#fff;
+    border-radius:5px;
+    margin:20rpx auto;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.infoFive{
+    width:670rpx;
+    line-height:40rpx;
+    background:#F2F2F2;
+    font-size:20rpx;
+    margin:20rpx auto 0rpx;
+    text-align:center;
+    border-radius:5px;
+}
+.collageInfoContent{
+    width:670rpx;
+    height:120rpx;
+    margin:20rpx auto 20rpx;
+}
+.collageInfoContentLeft{
+    width:100rpx;
+    height:100rpx;
+    border-radius:50rpx;
+    float:left;
+    margin:10rpx 0rpx 0rpx 20rpx;
+    overflow: hidden;
+    background:lightgreen;
+}
+.collageInfoContentLeft image{
+    width:100rpx;
+    height:100rpx;
+}
+.collageInfoContentRight{
+    width:400rpx;
+    height:120rpx;
+    float:right;
+    margin-right:20rpx;
+}
+.collageInfoContentRightTitle{
+    width:400rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    text-indent:20rpx;
+    color:#848484;
+}
+.collageInfoContentRightTitle text{
+    color:#C33B1E;
+    font-size:32rpx;
+}
+.collageInfoContentRightState{
+    width:400rpx;
+    line-height:60rpx;
+    background:#FF8A7E;
+    border-radius:5px;
+    text-align:center;
+    font-size:28rpx;
+    color:#fff;
+}
+.collageInfoContent button{
+    float:right;
+    min-width:100rpx;
+    line-height:60rpx;
+    background:#E64240;
+    font-size:22rpx;
+    color:#fff;
+    margin-top:30rpx;
+}
+button.btnStyle{
+    background:#efefef;
+    color:#7b7b7b;
+}
+.collageInfoBtn{
+    width:710rpx;
+    height:60rpx;
+    margin-top:50rpx;
+}
+.collageInfoBtn>button{
+    width:250rpx;
+    float:left;
+    background:#E64240;
+    line-height:60rpx;
+    font-size:30rpx;
+    color:#fff;
+    margin-left:75rpx;
+}
+/*第六部分*/
+.collageInfoSix{
+    width:710rpx;
+    min-height:610rpx;
+    background:#fff;
+    border-radius:5px;
+    margin:20rpx auto;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.collageInfoSixContent{
+    width:350rpx;
+    height:350rpx;
+    background:lightgreen;
+    margin:20rpx auto 0rpx;
+}
+.collageInfoSixConten iamge{
+    width:350rpx;
+    height:350rpx;
+}
+.collageInfoSix button{
+    width:300rpx;
+    line-height:60rpx;
+    background:#E64240;
+    font-size:30rpx;
+    color:#fff;
+    margin-top:50rpx;
+}
+
+/*弹窗部分*/
+.divBoxWrap{
+    width:750rpx;
+    height:1207rpx;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    background:rgba(0,0,0,0.3);
+}
+.divBoxContent{
+    width:550rpx;
+    height:700rpx;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-350rpx;
+    margin-left:-275rpx;
+    background:#fff;
+    overflow-y:scroll;
+}
+.divBoxTitle{
+    width:550rpx;
+    height:90rpx;
+    border-radius:5px 5px 0 0;
+    overflow:hidden;
+    border-bottom:1rpx solid #efefef;
+}
+.divBoxTitleChild{
+    width:510rpx;
+    line-height:35rpx;
+    font-size:32rpx;
+    border-left:2px solid red;
+    text-indent:20rpx;
+    margin-left:20rpx;
+    font-weight:bold;
+    margin-top:30rpx;
+}
+.divBoxChild{
+    width:510rpx;
+    height:100rpx;
+    margin:0 auto 20rpx;
+}
+.divBoxChildLeft{
+    width:80rpx;
+    height:80rpx;
+    background:lightgreen;
+    border-radius:50%;
+    margin:10rpx 0rpx 0rpx 10rpx;
+    float:left;
+    overflow: hidden;
+}
+.divBoxChildLeft image{
+    width:80rpx;
+    height:80rpx;
+}
+.divBoxChildRight{
+    width:300rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    color:#7b7b7b;
+    float:right;
+    margin-right:10rpx;
+    text-align:right;
+    margin-top:20rpx;
+}
+.divBoxChildWrap{
+    width:550rpx;
+    height:600rpx;
+    overflow-y: scroll;
+}
+.divBoxChildMiddle{
+    width:70rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    color:#7b7b7b;
+    text-align:center;
+    float:left;
+    margin-left:20rpx;
+    margin-top:20rpx;
+}

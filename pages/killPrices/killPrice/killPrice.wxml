@@ -1,0 +1,13 @@
+<view class='killPriceWrap' bindtap='toPriceInfo' wx:for='{{pageData}}' data-id='{{item.id}}'>
+    <view class='killPriceImg'>
+        <image src='{{item.banner_image_url}}' mode='scaleToFill' />
+    </view>
+    <view class='killPirceOptions'>
+        <view class='killPirceOptionsTop'>{{item.title}}</view>
+        <view class='killPirceOptionsMiddle'>快来参加!!!</view>
+        <view class='killPirceOptionsBottom'>
+            <view class='killPirceOptionsT'><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+            <button>砍价啦</button>
+        </view>
+    </view>
+</view>

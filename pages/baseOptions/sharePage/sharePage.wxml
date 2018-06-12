@@ -1,0 +1,30 @@
+<view class='sharePageWrap'>
+    <view class='sharePageInfo'>
+        <view class='sharePageTitle'>一元好课</view>
+        <view class='sharePagePic'><image src='{{pageData.avatarUrl}}' mode='scaleToFill'></image></view>
+        <view class='sharePageNickName'>{{pageData.nickName}}</view>
+        <view class='sharePageAppName'>智慧招生小程序</view>
+        <view class='sharePageAct'>您也来一起抢购</view>
+        <view class='sharePageIntroduce'>画博园少儿美术基地,开心放暑假,最低1元抢价值300元暑假班代金券</view>
+        <view class='sharePageImage'><image mode='scaleToFill'></image></view>
+    </view>
+    <view class='sharePageAction'>点击预览大图,长按大图保存图片,分享朋友圈</view>
+    <view class='sharePageIcon'>
+        <view>
+            <text class='iconfont icon-wechat iconStyle1'></text>
+            <view>转发给好友</view>
+        </view>
+        <view>
+            <text class='iconfont icon-fenxiangpengyouquanweixinWeChatsha iconStyle2'></text>
+            <view>微信朋友圈</view>
+        </view>
+        <view>
+            <text class='iconfont icon-erweima iconStyle3'></text>
+            <view>获取二维码</view>
+        </view>
+        <view>
+            <text class='iconfont icon-download iconStyle4'></text>
+            <view>保存本地</view>
+        </view>
+    </view>
+</view>

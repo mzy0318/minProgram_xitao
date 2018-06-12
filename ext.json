@@ -1,0 +1,10 @@
+{
+    "extEnable": true,
+    "extAppid": "wx5464437580674446",
+    "ext": {
+        "test": 1,
+        "orgId": 1,
+        "version": "v0.1"
+    },
+    "test": 1
+}

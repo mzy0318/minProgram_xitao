@@ -1,0 +1,54 @@
+/* pages/schoolnfo/schoolInfo.wxss */
+
+.slide-image {
+  width: 750rpx;
+  height: 300rpx;
+}
+
+.containerO {
+  display:block;
+  width: 690rpx;
+  margin: 0rpx auto;
+  font-size: 29rpx;
+  text-indent: 20rpx;
+  color: #2D2D2D;
+}
+
+.containerTwo,.containerTh,.containerFour,.containerFive{
+  display:blcok;
+  width: 690rpx;
+  font-size: 29rpx;
+  margin-top: 40rpx;
+  color: #2D2D2D;
+  margin:40rpx auto 0rpx;
+}
+
+.containerTwo text,.containerTh text,.containerFour text,.containerFive text {
+  width: 100%;
+  display: block;
+  line-height: 40rpx;
+}
+
+.containerTh text:nth-child(1){
+  line-height:100rpx;
+}
+
+.containerTh .schoolInfoTitle{
+  margin-top:30rpx;
+}
+
+.schoolInfoImg{
+  width:690rpx;
+  height:345rpx;
+  margin:20rpx auto 0rpx;
+}
+.schoolInfoImg view{
+  width:50%;
+  height:100%;
+  float:left;
+}
+
+.schoolInfoImg view image{
+  width:100%;
+  height:100%;
+}

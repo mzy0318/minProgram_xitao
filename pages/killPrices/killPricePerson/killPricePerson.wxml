@@ -1,0 +1,87 @@
+<view class='pricePersonWrap' style='background-image:url({{pageData.bg_image_url}})'>
+    <view class='killPriceBanner'>
+        <image src='{{pageData.banner_image_url}}' mode='scaleToFill' />
+    </view>
+    <view class='pricePersonOne'>
+        <view class='pricePersonONeTitle'>
+            <view class='empty0'></view>
+            <view class='pricePersonONeTitleText'>{{pageData.title}}</view>
+        </view>
+        <view class='pricePersonOneRange'>
+            <view class='pricePersonOneShow'>
+                <view class='pricePersonOneShowChild'>现价:￥{{pageData.current_price}}</view>
+            </view> 
+            <view class='rangeWrap'>
+                <view class='rangeChild'></view>
+            </view>
+            <view class='rangePrice'>
+                <view class='rangePriceLeft'>
+                    <view>{{pageData.original_price}}</view>
+                    <view>原价</view>
+                </view>
+                <view class='rangePriceRight'>
+                    <view>{{pageData.now_price}}</view>
+                    <view>最低价</view>
+                </view>
+            </view>
+            <button open-type='share'>邀请朋友帮忙</button>
+            <button bindtap='helpHer'>帮他砍</button>
+        </view>
+        <view class='bottomLine'>
+            <view></view>
+            <view></view>
+        </view>
+    </view>
+    <view class='pricePersonTwo'>
+        <view class='pricePersonONeTitle'>
+            <view class='empty0'></view>
+            <view class='pricePersonONeTitleText'>砍价二维码</view>
+        </view>
+        <view class='pricePersonTwoImg'>
+            <view class='pricePersonTwoImgTop'></view>
+            <view class='pricePersonTwoImgBottom'>点击二维码保存,分享到朋友圈</view>
+            <button bindtap='setUrl'>复制网址发朋友圈</button>
+            <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
+        </view>
+        <view class='bottomLine'>
+            <view></view>
+            <view></view>
+        </view>
+    </view>
+    <view class='pricePersonThree'>
+        <view class='pricePersonONeTitle'>
+            <view class='empty0'></view>
+            <view class='pricePersonONeTitleText'>招生小程序</view>
+        </view>
+        <view class='pricePersonThreeText'>
+            <!-- <view>开始时间:<text>2018-05-25</text></view> -->
+            <view>截止时间:<text>{{endTime}}</text></view>
+            <view bindtap='tellPhone' data-phonenum='{{pageData.telephone}}'>咨询热线:<text>{{pageData.telephone}}</text></view>
+            <view>机构地址:<text>{{pageData.address}}</text></view>
+        </view>
+        <view class='pricePersonThreeImg'>
+            <view class='pricePersonThreeImgTitle'>快来参加!!!</view>
+            <view class='pricePersonThreeImgImage'><image src='{{backgroundImage}}' mode='scaleToFill' /></view>
+            <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
+            <button bindtap='toIndex'>了解机构></button>
+        </view>
+        <view class='bottomLine'>
+            <view></view>
+            <view></view>
+        </view>
+    </view>
+    <view class='pricePersonFour'>
+        <view class='pricePersonONeTitle'>
+            <view class='empty0'></view>
+            <view class='pricePersonONeTitleText'>砍价风云榜</view>
+            <view class='pricePersonONeRight' bindtap='getJoinerList'>[刷新]</view>
+        </view>
+        <view class='pricePersonFourContent'>
+            <view class='contentTwo'>{{joinName}}的好友,帮TA砍掉了￥<text>{{peopleData.total_reduce}}</text>元</view>
+            <view class='contentThree' wx:for='{{peopleData.list}}'>
+                <view><image mode='scaleToFill' src='{{item.avatar_url}}' /></view>
+                <view><text>{{item.nickname}}</text><text>已砍掉￥{{item.reduce}}元</text></view>
+            </view>
+        </view>
+    </view>
+</view>

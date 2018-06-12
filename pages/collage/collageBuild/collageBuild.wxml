@@ -1,0 +1,27 @@
+<view class='signUpWrap' hidden='{{isShow}}'>
+    <view class='signUpName'>
+        <view class='signUpNameTitle'>活动名称:</view>
+        <view class='signUpInfo'>{{pageTitle}}</view>
+    </view>
+     <view class='signUpName'>
+        <view class='signUpNameTitle'>开团规则:</view>
+        <view class='signUpInfo'>{{pageInfo}}</view>
+    </view>
+    <view class='signUpName'>
+        <view class='signUpNameTitle'>联系报名:</view>
+        <view class='signUpNameInput'><input type='text' /></view>
+    </view>
+    <view class='signUpName'>
+        <view class='signUpNameTitle'>联系电话:</view>
+        <view class='signUpNameInput'><input type='number' maxlength='11' /></view>
+    </view>
+    <button bindtap='submitInfo'>我要开团</button>
+    <view class='signUpAction'>*我们不会泄漏您的电话,请您放心!</view>
+</view>
+<view class='signUpSuccess' hidden='{{!isShow}}'>
+    <view class='signUpSuccessIcon'>
+        <text class='iconfont icon-success iconStyle'></text>
+    </view>
+    <view class='signUpSuccessText'>开团成功</view>
+    <button class='signUpSuccessBtn' bindtap='toBackPage'>返回</button>
+</view>

@@ -1,0 +1,32 @@
+<view class='schoolEdit'>
+    <!--学校环境-->
+    <view class='schoolEditOne'>
+        <view class='schoolEditOneTitle'>学校环境</view>
+        <view class='schoolEditOneContent'>
+            <view class='schoolEditOneImage'><image mode=''></image></view>
+        </view>
+    </view>
+    <!--资质荣誉-->
+    <view class='schoolEditOne'>
+        <view class='schoolEditOneTitle'>资质荣誉</view>
+        <view class='schoolEditOneContent'>
+            <view class='schoolEditOneImage'><image mode=''></image></view>
+        </view>
+    </view>
+    <!--品牌视频-->
+    <view class='schoolEditTwo'>
+        <view class='schoolEditOneTitle'>品牌视频</view>
+        <view class='schoolEditTwoContent'>
+            <view class='empty'></view>
+            <view class='schoolEditTwoAdd'>+</view>
+            <view class='schoolEditTwoVideo'><video></video></view>
+        </view>
+    </view>
+    <view class='schoolEditThree'>
+        <view class='schoolEditOneTitle'>学校介绍</view>
+        <view class='schoolEditThreeContent'>
+            <view class='schoolEditThreeChild'><textarea></textarea></view>
+        </view>
+    </view>
+    <button>立即保存</button>
+</view> 

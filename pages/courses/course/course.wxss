@@ -1,0 +1,117 @@
+.courseWrap {
+    width: 750rpx;
+    background: linear-gradient(to bottom, #fff3b9, #d7f5fd);
+    min-height: 1205rpx;
+}
+
+.empty {
+    width: 100%;
+    height: 40rpx;
+    background: transparent;
+}
+
+swiper {
+    background: transparent;
+    width: 650rpx;
+    margin: 0 auto;
+    height: 650rpx;
+}
+
+.courseTopImg {
+    width: 100%;
+    height: 300rpx;
+    background: lightblue;
+    position: relative;
+}
+
+.courseTopImg image {
+    width: 100%;
+    height: 100%;
+}
+
+.courseTopSup {
+    position: absolute;
+    background: #99d5f3;
+    top: 0rpx;
+    right: 50rpx;
+    color: #fff;
+    font-size: 30rpx;
+    padding: 0rpx 10rpx;
+}
+
+.courseTop text {
+    display: block;
+    margin-top: 20rpx;
+}
+
+.courseTopTitle {
+    width: 100%;
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.courseTopText {
+    width: 100%;
+    font-size: 28rpx;
+    color: #717171;
+    text-align: center;
+}
+
+.courseSelect {
+    width: 700rpx;
+    line-height: 100rpx;
+    background: #fef9db;
+    margin: 40rpx auto 0rpx;
+    text-indent: 10rpx;
+    border: 2px solid #fff;
+    font-weight: bold;
+    font-size: 32rpx;
+}
+
+.courseInfo {
+    width: 700rpx;
+    height: 200rpx;
+    margin: 20rpx auto 10rpx;
+    border-radius: 5px;
+    background: linear-gradient(to left, #fff3b9, #d7f5fd);
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3)
+}
+
+.courseInfo view {
+    float: left;
+}
+
+.courseInfo .courseInfoImg {
+    width: 200rpx;
+    height: 160rpx;
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+}
+
+.courseInfoImg image {
+    width: 200rpx;
+    height: 160rpx;
+}
+
+.courseInfo .courseInfoText {
+    width: 350rpx;
+    height: 160rpx;
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+}
+
+.courseInfoText text {
+    display: block;
+    font-size: 30rpx;
+}
+
+.courseInfoText text:nth-child(2) {
+    font-size: 24rpx;
+    color: #717171;
+}
+
+.courseInfoText text:nth-child(3) {
+    font-size: 26rpx;
+    color: #f99;
+    margin-top: 54rpx;
+}

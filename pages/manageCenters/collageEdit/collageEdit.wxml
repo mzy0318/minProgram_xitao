@@ -1,0 +1,155 @@
+<view class='collageEditWrap'>
+    <form bindsubmit="formSubmit">
+        <view class='collageEditOne'>
+            <view class='editOneTitle'>主题模板</view>
+            <view class='editOneImg'>
+                <image src='{{bannerImg}}' mode='scaleToFill' />
+            </view>
+            <view class='editOneAction'>*发布后可重新选择模板</view>
+        </view>
+        <view class='collageEditTwo'>
+            <view class='editOneTitle'>活动封面</view>
+            <view class='editEightContent' hidden='{{isCoverImg}}' bindtap='getCoverImage'>
+                <view class='empty'></view>
+                <view class='editEightContentChild'>+</view>
+            </view>
+            <view class='editEightImg'>
+                <view class='editEightImgChild' wx:for='{{coverImg}}'>
+                    <image src='{{item.path}}' mode='scaleToFill' />
+                </view>
+            </view>
+        </view>
+        <view class='collageEditThree'>
+            <view class='editOneTitle'>基本设置</view>
+            <view class='editOntInputO'>
+                <view>拼团标题</view>
+                <input type='text' name='title' value='{{title}}' placeholder='拼团标题' />
+            </view>
+            <view class='editOntInputO'>
+                <view>联系电话</view>
+                <input type='number' name='telephone' value='{{phoneNum}}' maxlength='11' />
+            </view>
+            <view class='editOntInputT'>
+                <view>拼团时间</view>
+                <picker bindchange='getStartTime' mode='date' start="2015-09-01" end="2099-01-01" value='{{startTime}}' ><view>{{startTime}}</view></picker>
+                <picker bindchange='getEndTime' mode='date' start="2015-09-01" end="2099-01-01" value='{{endTime}}' ><view>{{endTime}}</view></picker>
+            </view>
+            <view class='editOntInputO'>
+                <view>联系地址</view>
+                <input type='text' name='address' value='{{address}}' />
+            </view>
+            <view class='editOntInputTh'>
+                <view>市场价格</view>
+                <view>元</view>
+                <input type='number' name='original_price' value='{{oriPrice}}' />
+            </view>
+            <view class='editOntInputTh'>
+                <view>销售价格</view>
+                <view>元</view>
+                <input type='number' name='now_price' value='{{nowPrice}}' />
+            </view>
+            <!-- <view class='editThreeInputFour'>
+                <view>公共参团</view>
+                <switch checked='true'></switch>
+                <view>活动页面可以点击直接参团</view>
+            </view>
+            <view class='editThreeInputFour'>
+                <view>允许退团</view>
+                <switch></switch>
+                <view>未成团的人员可以退团</view>
+            </view> -->
+            <view class='editThreeInputFour'>
+                <view>在线支付</view>
+                <switch name='pay_status' ></switch>
+                <view>若退款,请您线下退款给客户</view>
+            </view>
+        </view>
+        <view class='collageEditFour'>
+            <view class='editOneTitle'>拼团设置</view>
+            <view class='editFourContent'>
+                <text decode='true'>第一项&nbsp;≥</text>
+                <input type='number' name='person1' value='{{person1}}' />
+                <view>人</view>
+                <input type='number' name='price1' value='{{price1}}' />
+                <view>元</view>
+            </view>
+            <view class='editFourContent'>
+                <text decode='true'>第二项&nbsp;≥</text>
+                <input type='number' name='person2' value='{{person2}}' />
+                <view>人</view>
+                <input type='number' name='price2' value='{{price2}}' />
+                <view>元</view>
+            </view>
+            <view class='editFourContent'>
+                <text decode='true'>第三项&nbsp;≥</text>
+                <input type='number' name='person3' value='{{person3}}' />
+                <view>人</view>
+                <input type='number' name='price3' value='{{price3}}' />
+                <view>元</view>
+            </view>
+            <view class='editFourContent'>
+                <text decode='true'>第四项&nbsp;≥</text>
+                <input type='number' name='person4' value='{{person4}}' />
+                <view>人</view>
+                <input type='number' name='price4' value='{{price4}}' />
+                <view>元</view>
+            </view>
+            <view class='editFourContent'>
+                <text decode='true'>第五项&nbsp;≥</text>
+                <input type='number' name='person5' value='{{person5}}' />
+                <view>人</view>
+                <input type='number' name='price5' value='{{price5}}' />
+                <view>元</view>
+            </view>
+            <view class='editFourAction'>可设置最多5个,满足多少人,价格为多少元</view>
+        </view>
+        <view class='collageEditFive'>
+            <view class='editOneTitle'>报名信息</view>
+            <view class='editFiveContent' wx:for='{{nameInfo}}'>{{item}}</view>
+            <view class='editFiveAdd' bindtap='showOptions' data-is='0'>+新增报名项</view>
+        </view>
+        <view class='collageEditSix'>
+            <view class='editOneTitle'>活动描述</view>
+            <view class='editSixContent'>
+                <textarea cursor='100' bindblur='getDescription' value='{{description}}' />
+            </view>
+            <view class='editSixAction'>如联系电话,地址,机构介绍等</view>
+        </view>
+        <view class='collageEditSeven'>
+            <view class='editOneTitle'>活动规则</view>
+            <view class='editSixContent'>
+                <textarea cursor='100' bindblur='getRule' value='{{rule}}' />
+            </view>
+        </view>
+        <view class='collageEditSeven'>
+            <view class='editOneTitle'>团长奖励</view>
+            <view class='editSixContent'>
+                <textarea cursor='100' bindblur='getLeaderReward' value='{{leaderReward}}' />
+            </view>
+        </view>
+        <view class='collageEditEight'>
+            <view class='editOneTitle'>活动图片</view>
+            <view class='editEightContent' hidden='{{isShow}}'>
+                <view class='empty'></view>
+                <view class='editEightContentChild' bindtap='chooseActImg'>+</view>
+            </view>
+            <view class='editEightImg'>
+                <view class='editEightImgChild' wx:for='{{actImg}}'>
+                    <image src='{{item.path}}' mode='scaleToFill' />
+                </view>
+            </view>
+        </view>
+        <button formType="submit" class='bottomBtn'>确认发布</button>
+    </form>
+    <view class='addOptions' hidden='{{isOption}}' bindtap='showOptions' data-is='1'>
+        <view class='addOptionsChild'>
+            <view class='addOptionsChildTitle'>常用报名项</view>
+            <view class='addOptionsChildButton'>
+                <view bindtap='addNameOptions' data-value='年龄'>年龄</view>
+                <view bindtap='addNameOptions' data-value='住址'>住址</view>
+                <view bindtap='addNameOptions' data-value='备注'>备注</view>
+                <view bindtap='addNameOptions' data-value='其它'>其它</view>
+            </view>
+        </view>
+    </view>
+</view>

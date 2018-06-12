@@ -1,0 +1,70 @@
+@import '../../../utils/iconFont.wxss';
+.signUpWrap,.signUpSuccess{
+    width:750rpx;
+    height:1207rpx;
+    background:#fff;
+    overflow:hidden;
+}
+.signUpName{
+    width:700rpx;
+    height:180rpx;
+    margin:0 auto;
+}
+.signUpNameTitle{
+    width:700rpx;
+    line-height:100rpx;
+    color:#9E9E9E;
+    font-size:32rpx;
+}
+.signUpNameInput{
+    width:700rpx;
+    height:80rpx;
+    background:#EFEFEF;
+    border-radius:5px;
+}
+.signUpNameInput input{
+    width:680rpx;
+    height:80rpx;
+    margin-left:20rpx;
+    font-size:32rpx;
+}
+.btn{
+    width:700rpx;
+    background:#19AD19;
+    color:#fff;
+    margin-top:60rpx;
+}
+.signUpAction{
+    font-size:22rpx;
+    color:#7b7b7b;
+    text-indent:30rpx;
+    margin-top:20rpx;
+}
+.signUpSuccessIcon{
+    width:180rpx;
+    height:180rpx;
+    border-radius:50%;
+    background:#09BA07;
+    margin:20rpx auto 10rpx;
+    position:relative;
+}
+.iconStyle{
+    width:80rpx;
+    height:80rpx;
+    display:block;
+    font-size:80rpx;
+    color:#fff;
+    position:absolute;
+    top:50rpx;
+    left:50rpx;
+}
+.signUpSuccessText{
+    font-size:30rpx;
+    text-align:center;
+}
+.signUpSuccessBtn{
+    width:500rpx;
+    background:#1AAC19;
+    color:#fff;
+    margin-top:60rpx;
+}

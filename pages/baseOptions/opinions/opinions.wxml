@@ -1,0 +1,17 @@
+<!--pages/opinions/opinions.wxml-->
+<view class='opinionWrap'>
+  <!-- <view class='opinionImg'>
+  </view> -->
+  <view class='empty'></view>
+  <view class='opinionTextarea'>
+    <view></view>
+    <textarea placeholder='说点什么吧...' placeholder-class='holderStyle' bindblur='bindTextAreaBlur' ></textarea>
+  </view> 
+  <view class='opinionInput'>
+    <input type='text' placeholder='昵称' placeholder-class='holderStyle' bindblur='getName' />
+  </view>
+  <view class='opinionInput'>
+    <input type='number' placeholder='联系方式' maxlength='11' placeholder-class='holderStyle' bindblur='getPhone' />
+  </view>
+  <button bindtap='subPinions' >发表意见</button>
+</view>

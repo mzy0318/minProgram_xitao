@@ -1,0 +1,10 @@
+<view class='chooseModeWrap'>
+    <view class='chooseModeClass'>
+        <view class='chooseModeTitle' bindtap='switchTheme' data-name='全部'>全部</view>
+        <view class='chooseModeTitle' wx:for='{{pageData.catalog}}' bindtap='switchTheme' data-name='{{item.name}}'>{{item.name}}</view>
+    </view>
+    <view class='chooseModeTheme' wx:for='{{pageTheme}}' data-image='{{item.image}}' data-bg='{{item.bg}}' bindtap='toManageEdit'>
+        <view class='chooseModeThemeImg'><image src='{{item.image}}' mode='scaleToFill' /></view>
+        <view class='chooseModeThemeName'>{{item.name}}</view>
+    </view>
+</view>

@@ -1,0 +1,122 @@
+/* pages/orderInfo/orderInfo.wxss */
+.orderInfoWrap{
+  width:750rpx;
+  height:1207rpx;
+  background:#F0F0F0;
+}
+.orderInfoTitle{
+  width:750rpx;
+  font-size:30rpx;
+  line-height:90rpx;
+  text-indent:20rpx;
+}
+.orderInfoPrice,.orderInfoNum,.orderInfoPay{
+  width:750rpx;
+  height:100rpx;
+  font-size:30rpx;
+  background:#fff;
+}
+.orderInfoNum .orderInfoNumRight{
+    width:570rpx;
+    float:right;
+    height:100rpx;
+}
+
+.orderInfoNumRight .orderInfoNumData{
+    float:right;
+    width:100rpx;
+    line-height:65rpx;
+    border:1rpx solid #000;
+    text-align:center;
+    margin-top:17.5rpx;
+    margin-right:20rpx;
+}
+.orderInfoNumRight .orderInfoNumJian,.orderInfoNumRight .orderInfoNumAdd{
+    width:65rpx;
+    line-height:65rpx;
+    border:1rpx solid #000;
+    float:right;
+    text-align:center;
+    margin-top:17.5rpx;
+    margin-right:20rpx;
+    font-weight:bold;
+}
+
+.orderInfoNumRight view.orderInfoNumJianFalse{
+    width:65rpx;
+    line-height:65rpx;
+    border:1rpx solid #DCDCDC;
+    float:right;
+    text-align:center;
+    margin-top:17.5rpx;
+    margin-right:20rpx;
+    font-weight:bold;
+    color:#DCDCDC;
+}
+
+.orderInfoPay{
+  margin-top:30rpx;
+}
+
+.orderInfoPrice{
+  border-bottom:0.5rpx solid rgba(192,192,192,0.5);
+}
+.orderInfoPrice view:nth-child(1),.orderInfoNum .orderInfoNumLeft,.orderInfoPay view:nth-child(1){
+  float:left;
+  line-height:100rpx;
+  text-indent:20rpx;
+  color:#717171;
+}
+
+.orderInfoPrice view:nth-child(2),.orderInfoPay view:nth-child(2){
+  float:right;
+  line-height:100rpx;
+  text-indent:20rpx;
+  color:#000;
+  margin-right:20rpx;
+}
+
+.orderInfoPay view:nth-child(2){
+  color:#C44126;
+}
+.orderInfoPayPerson{
+  width:750rpx;
+  height:301rpx;
+  background:#fff;
+  margin-top:30rpx;
+}
+
+.orderInfoPayPerson>view{
+  width:730rpx;
+  height:100rpx;
+  border-bottom:0.5rpx solid rgba(192,192,192,0.5);
+  margin-left:20rpx;
+}
+
+.orderInfoPayPersonName view:nth-child(1),.orderInfoPayPersonPhone view:nth-child(1),.orderInfoPayPersonItem view:nth-child(1){
+  line-height:100rpx;
+  font-size:30rpx;
+  width:140rpx;
+  color:#717171;
+  float:left;
+}
+
+.orderInfoPayPersonName view:nth-child(2),.orderInfoPayPersonPhone view:nth-child(2),.orderInfoPayPersonItem view:nth-child(2){
+  width:570rpx;
+  height:100rpx;
+  float:right;
+  margin-right:20rpx;
+}
+
+.orderInfoPayPersonName view:nth-child(2) input,.orderInfoPayPersonPhone view:nth-child(2) input,.orderInfoPayPersonItem view:nth-child(2) input{
+  line-height:80rpx;
+  font-size:30rpx;
+  text-align:right;
+  margin-top:25rpx;
+}
+
+button{
+  width:600rpx;
+  margin-top:80rpx;
+  font-weight:bold;
+}

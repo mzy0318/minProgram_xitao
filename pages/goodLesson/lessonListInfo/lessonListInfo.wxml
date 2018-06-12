@@ -1,0 +1,65 @@
+<view class='listInfoWrap'>
+    <view class='listInfoBanner'>
+        <image  mode='scaleToFill'></image>
+    </view>
+    <view class='listInfoImage'>
+        <view class='empty'></view>
+        <view class='empty'></view>
+        <view class='listInfoImageChild' wx:for='{{pageData.courses}}'>
+            <view class='listInfoImageLeft'>
+                <image  src='{{item.cover.url}}' mode='scaleToFill'></image>
+            </view>
+            <view class='listInfoImageRight'>
+                <view class='listInfoImageRightTop'>{{item.course_name}}</view>
+                <view class='listInfoImageRightMiddle'>{{item.now_price}}元={{item.course_number}}节课</view>
+                <view class='listInfoImageRightBottom'>原价:{{item.original_price}}元</view>
+                <button data-is='0' bindtap='isShow' data-courseid='{{item.id}}'>立即报名</button>
+            </view>
+        </view>
+        <view class='empty'></view>
+    </view>
+    <view class='listInfoData'>
+        <view class='listInfoDataTitle'>
+            <view class='listInfoDataTitleChild'>活动介绍</view>
+        </view>
+        <view class='listInfoDataInfo'>
+            <text decode>活动时间:&nbsp;&nbsp;{{pageData.start_time}}至{{pageData.end_time}}</text>
+            <text decode data-phonenum='{{pageData.telephone}}' bindtap='tellPhone'>咨询热线:&nbsp;&nbsp;{{pageData.telephone}}</text>
+            <text decode>联系地址:&nbsp;&nbsp;{{pageData.address}}</text>
+        </view>
+        <view class='empty'></view>
+        <view class='listInfoDataText'>{{pageData.description}}</view>
+        <view class='empty'></view>
+        <view class='listInfoDataActimg' wx:for='{{pageData.act_image}}'>
+            <view class='listInfoDataActimgChild'>
+                <image src='{{item.url}}' mode='scaleToFill'></image>
+            </view>
+        </view>
+        <view class='empty'></view>
+    </view>
+    <view class='listInfoBottom'>
+        <view class='listInfoBottomTop'>
+            <view data-phonenum='{{pageData.telephone}}' bindtap='tellPhone'>
+                <text class='iconfont icon-dianhuatianchong iconStyle'></text>
+                <text>拨打热线</text>
+            </view>
+            <button class='shareBtn' open-type='share'>
+                <text class='iconfont icon-fenxiangtianchong iconStyle1'></text>
+                <text>分享好友</text>
+            </button>
+        </view>
+        <view class='listInfoBottomMiddle'>智慧招生小程序</view>
+        <view class='listInfoBottomBtn' bindtap='toIndex'>进入学校</view>
+    </view>
+</view>
+<view class='signUpWrap' hidden='{{isSignUp}}'>
+    <form bindsubmit='submitInfo'>
+        <view class='signUpChild'>
+        <view>填写报名信息</view>
+        <view><input placeholder='请输入姓名' type='text' name='nickname' ></input></view>
+        <view><input placeholder='请输入联系电话' type='number' maxlength='11' name='phone' ></input></view>
+        <button formType="submit">确认</button>
+        <view class='signUpChildClose' data-is='1' bindtap='isShow' >X</view>
+    </view>
+    </form>
+</view>

@@ -1,0 +1,129 @@
+@import '../../../utils/iconFontO.wxss';
+.managWarp{
+    width:750rpx;
+    height:1207rpx;
+    background:#F2F2F2;
+}
+.managWarpTop{
+    width:750rpx;
+    height:350rpx;
+    background:#7254E7;
+}
+
+.mangeScool{
+    width:750rpx;
+    height:248rpx;
+    background:#fff;
+    margin-top:10rpx;
+}
+.mangeScoolTitle,.mangeStuMarktTitle{
+    width:750rpx;
+    display:block;
+    font-size:24rpx;
+    line-height:60rpx;
+    color:#717171;
+    text-indent:20rpx;
+}
+.mangeScoolOptions{
+    width:738rpx;
+    height:185rpx;
+    border-left:1rpx solid #efefef;
+    border-top:1rpx solid #efefef;
+}
+.mangeScoolOptions .mangeScoolOptionsWrap,.optionsWrap{
+    float:left;
+    width:183rpx;
+    height:183rpx;
+    border-right:1rpx solid #efefef;
+    border-bottom:1rpx solid #efefef;
+}
+.iconSize{
+    display:block;
+    font-size:80rpx;
+    margin-left:55rpx;
+    margin-top:20rpx;
+    color:#1196DB;
+}
+.mangeScoolOptionsWrapBottom,.optionsBottom{
+    font-size:30rpx;
+    text-align:center;
+    width:100%;
+    margin-top:10rpx;
+}
+
+.mangeStuMarkt{
+    width:750rpx;
+    background:#fff;
+}
+.mangeStuMarktOptions{
+    height:650rpx;
+    width:738rpx;
+    border-left:1rpx solid #efefef;
+    border-top:1rpx solid #efefef;
+    background:#fff;
+}
+.optionsTop{
+    width:80rpx;
+    height:80rpx;
+    background:#E3465B;
+    border-radius:5px;
+    margin:30rpx auto 0rpx;
+    position:relative;
+}
+ .optionsTop .iconStyle{
+    display:block !important;
+    top:13.5rpx;
+    left:16.5rpx;
+    position:absolute;
+    color:#fff;
+    font-size:50rpx;
+}
+
+.managVersion{
+    width:750rpx;
+    height:80rpx;
+    margin-top:-55rpx;
+}
+
+.managVersion text{
+    display:block;
+    font-size:24rpx;
+    text-align:center;
+    color:#efefef;
+}
+
+.loginPage{
+    width:750rpx;
+    height:1207rpx;
+    background:#fff;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+}
+
+.empty{
+    width:750rpx;
+    height:80rpx;
+    background:#fff;
+}
+.loginWrapTitle{
+    width:750rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-weight:bold;
+}
+
+.loginWrapPhone,.loginWrapPwd{
+    width:600rpx;
+    height:60rpx;
+    margin:60rpx auto 40rpx;
+    text-align:center;
+    font-size:30rpx;
+    border-bottom:1rpx solid rgba(192,192,192,0.5);
+}
+
+.loginWrapBtn{
+    width:600rpx;
+    margin:0 auto;
+    line-height:80rpx;
+}

@@ -1,0 +1,27 @@
+<view class='manageActiveWrap'>
+    <view class='empty'></view>
+    <view class='manageActiveShow' wx:for='{{pageData.list}}' data-id='{{item.id}}'>
+        <view class='manageActiveTitle' data-id='{{item.id}}' bindtap='toKillPirce' data-acttag='{{item.act_tag}}'>{{item.title}}></view>
+        <view class='manageActiveContent'>
+            <view class='manageActiveContentImg'>
+                <image src='{{item.banner_image_url}}' mode='scaleToFill' ></image>
+            </view>
+            <view class='manageActiveContentOption'>
+                <view bindtap='toPersonList' data-id='{{item.id}}'>报名:<text>{{item.total_joiner}}</text>人</view>
+                <view>
+                    <button>下载二维码</button>
+                    <button data-id='{{item.id}}' bindtap='toKillPirce'>查看活动</button>
+                </view>
+            </view>
+        </view>
+        <view class='manageActiveOptions'>
+            <text bindtap='delActive' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>删除</text>
+            <text bindtap='tomanageEdit' data-id='{{item.id}}' data->编辑</text>
+            <text>分享朋友圈</text>
+        </view>
+    </view>
+    <view class='manageActiveBottom'>
+        <view class='manageActiveBottomLeft' bindtap='toback'>返回</view>
+        <view class='manageActiveBottomRight' bindtap='toChooseModel'>{{btnText}}</view>
+    </view>
+</view>

@@ -1,0 +1,55 @@
+.collageListWrap{
+    width:750rpx;
+    height:1207rpx;
+    background:#F5F5F5;
+}
+.empty{
+    width:750rpx;
+    height:20rpx;
+    background:transparent;
+}
+.collageListContent{
+    width:710rpx;
+    height:400rpx;
+    background:#fff;
+    margin:0 auto;
+}
+.collageListTop{
+    width:710rpx;
+    height:320rpx;
+    background:lightblue;
+    position:relative;
+}
+.collageListTop image{
+    width:710rpx;
+    height:320rpx;
+}
+.collageListTopDate{
+    width:710rpx;
+    line-height:60rpx;
+    background:rgba(0,0,0,0.3);
+    position:absolute;
+    left:0rpx;
+    bottom:0rpx;
+    font-size:30rpx;
+    text-align:center;
+    color:#efefef;
+}
+.collageListTopState{
+    min-width:160rpx;
+    line-height:50rpx;
+    font-size:30rpx;
+    text-align:center;
+    color:#efefef;
+    background:rgba(0,0,0,0.3);
+    position:absolute;
+    right:0rpx;
+    top:0rpx;
+}
+.collageListBottom{
+    width:100%;
+    line-height:80rpx;
+    font-size:35rpx;
+    text-align:center;
+    font-weight:bold;
+}

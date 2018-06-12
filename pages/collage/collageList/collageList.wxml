@@ -1,0 +1,11 @@
+<view class='collageListWrap'>
+    <view class='empty'></view>
+    <view class='collageListContent' bindtap='toCollageInfo' wx:for='{{pageData}}' data-actid='{{item.id}}'>
+        <view class='collageListTop'>
+            <image src='{{item.banner_image_url}}' mode='scaleToFill' />
+            <view class='collageListTopDate'>从{{item.start_time}}至{{item.start_time}}</view>
+            <view class='collageListTopState'>{{item.time_status}}</view>
+        </view>
+        <view class='collageListBottom'>{{item.title}}</view>
+    </view>
+</view>

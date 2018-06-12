@@ -1,0 +1,44 @@
+<view class='courseEditWrap'>
+    <form bindsubmit="submitData">
+        <view class='courseEditContent'>
+            <view class='lessonEditOne'>
+                <view class='lessonEditOneTitle'>活动信息</view>
+                <view class='lessonEditContent'>
+                    <view class='lessonEditContentInput'>
+                        <view>课程名称:</view>
+                        <view>
+                            <input type='text' value='{{pageData.course_name}}' name='course_name'></input>
+                        </view>
+                    </view>
+                    <view class='lessonEditContentInput'>
+                        <view>课程原价(元):</view>
+                        <view>
+                            <input type='number' name='original_price' value='{{pageData.original_price}}'></input>
+                        </view>
+                    </view>
+                    <view class='lessonEditContentInput'>
+                        <view>活动价格(元):</view>
+                        <view>
+                            <input type='number' name='now_price' value='{{pageData.now_price}}'></input>
+                        </view>
+                    </view>
+                    <view class='lessonEditContentInput'>
+                        <view>课程数量(节):</view>
+                        <view>
+                            <input type='number' maxlength='11' name='course_number' value='{{pageData.course_number}}'></input>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='addActImage'>
+                <view class='lessonEditOneTitle'>活动图片</view>
+                <view class='addActImageContent'>
+                    <view class='empty'></view>
+                    <view class='AddActImage' bindtap='addActimg'><image mode='scaleToFill'></image></view>
+                    <view class='AddActImage' ><image src='{{coverImage}}' mode='scaleToFill'></image></view>
+                </view>
+            </view>
+        </view>
+        <button class='courseEditBottom' formType="submit" >确定提交</button>
+    </form>
+</view>

@@ -1,0 +1,3 @@
+<view wx:for='{{imgData}}' class='wrapView'>
+  <image src='{{item.url}}' mode='aspectFit'></image>
+</view>

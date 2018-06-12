@@ -1,0 +1,21 @@
+<view class='lessonList'>
+    <view class='lessonBanner'>
+        <image mode='scaleToFill' />
+    </view>
+    <view class='contentList' bindtap='toListInfo' data-actid='{{item.act_nice_id}}' wx:for='{{pageData}}'>
+        <view class='contentListLeft'>
+            <image src='{{item.cover.url}}' mode='scaleToFill' ></image>
+        </view>
+        <view class='contentListRight'>
+            <view class='contentListRightTop'>{{item.title}}</view>
+            <view class='contentListRightMiddle'>{{item.course_name}}</view>
+            <view class='contentListRightBottom'>
+                <view>
+                    <text>￥{{item.original_price}}</text>
+                    <text>￥{{item.now_price}}</text>
+                </view>
+                <view>限时抢</view>
+            </view>
+        </view>
+    </view>
+</view>
