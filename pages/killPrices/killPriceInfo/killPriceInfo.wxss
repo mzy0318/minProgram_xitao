@@ -287,7 +287,7 @@
 }
 .infoThreeContentOne{
     width:600rpx;
-    height:450rpx;
+    min-height:450rpx;
     margin:25rpx auto 0rpx;
 }
 .infoThreeContentOne .contentOne,.infoThreeContentOne .contentTwo{

@@ -27,6 +27,7 @@
         "pages/baseOptions/studentStyle/studentStyle",
         "pages/baseOptions/contactUs/contactUs",
         "pages/baseOptions/sharePage/sharePage",
+        "pages/baseOptions/schoolModel/schoolModel",
         "pages/killPrices/killPrice/killPrice",
         "pages/killPrices/killPricePerson/killPricePerson",
         "pages/killPrices/killPriceInfo/killPriceInfo",
@@ -41,7 +42,8 @@
         "pages/videos/manVideoList/manVideoList",
         "pages/videos/videoListInfo/videoListInfo",
         "pages/manageCenters/videoEdit/videoEdit",
-        "pages/videos/userVideoList/userVideoList"
+        "pages/videos/userVideoList/userVideoList",
+        "components/otherOpt/otherOpt"
     ],
     "window": {
         "backgroundTextStyle": "light",

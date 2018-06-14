@@ -1,6 +1,6 @@
-<view class='collageInfoWrap'>
+<view class='collageInfoWrap' style='background-image:url({{backImage}})'>
     <view class='collageInfoBanner'>
-        <image src='{{pageData.banner_image_url}}' mode='scaleToFill' />
+        <image src='{{bannerImage}}' mode='scaleToFill' />
     </view>
     <view class='collageInfoOne'>
         <view class='oneTitle'>
@@ -24,10 +24,6 @@
                 </view>
             </view>
         </view>
-        <!-- <view class='oneButton'>
-            <button bindtap='toBuild' data-title='{{pageData.title}}' data-info='{{priceInfo}}' >我要开团</button>
-             <button bindtap='toSignUp'>已结束</button> 
-        </view> -->
     </view>
     <view class='collageInfoFive'>
         <view class='oneTitle'>
@@ -87,7 +83,7 @@
             <view class='oneTitleChild'>分享活动</view>
         </view>
         <view class='collageInfoSixContent'>
-            <image mode='scaleToFill' />
+            <image mode='scaleToFill' ></image>
         </view>
         <button>分享到朋友圈</button>
     </view>
@@ -108,3 +104,4 @@
         </view>
     </view>
 </view>
+<other-option bindgetImage='getImage' bindgetBackgroundImage='getBackgroundImage' bindgetMusic='getMusic' actid='{{pageData.id}}' acttag='{{actTag}}' banImage='{{pageData.banner_image_url}}' backImage='{{pageData.bg_image_url}}' bgMusicId='{{pageData.music_id}}' bgMusic='{{pageData.music}}'></other-option>

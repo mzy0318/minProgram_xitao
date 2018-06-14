@@ -3,6 +3,7 @@
     min-height:1207rpx;
     background:#efefef;
     padding-bottom:20rpx;
+    background-repeat:repeat;
 }
 .collageInfoBanner{
     width:750rpx;
@@ -53,7 +54,7 @@
     height:310rpx;
 }
 .empty{
-    width:100%;
+    width:710rpx;
     height:20rpx;
     background:transparent;
 }
@@ -119,52 +120,7 @@ view.viewTyle{
     color:#78C2F4;
 }
 
-/* .oneInfo{
-    width:710rpx;
-    height:62rpx;
-}
-.oneInfoChild{
-    width:500rpx;
-    line-height:62rpx;
-    margin:0 auto;
-    border:1rpx solid red;
-    border-radius:5px;
-    font-size:28rpx;
-    background:#FBEFF1;
-    text-align:center;
-    font-weight:bold;
-}
-.oneInfoChild>text{
-    color:red;
-} */
-/* .oneRange{
-    width:710rpx;
-    height:110rpx;
-    margin-top:20rpx;
-    overflow: hidden;
-}
-.oneRangeWrap{
-    width:670rpx;
-    height:15rpx;
-    background:#EBEBEB;
-    margin:8rpx auto;
-}
-.oneRangeChild{
-    width:100rpx;
-    height:15rpx;
-    background:red;
-}
-.oneRangeText{
-    width:80rpx;
-    height:70rpx;
-    float:right;
-    margin-right:20rpx;
-}
-.oneRangeText view{
-    font-size:22rpx;
-    color:#7b7b7b;
-    text-align:right;
-} */
+
 .oneButton{
     width:710rpx;
     height:90rpx;
@@ -350,7 +306,7 @@ button.btnStyle{
     background:lightgreen;
     margin:20rpx auto 0rpx;
 }
-.collageInfoSixConten iamge{
+.collageInfoSixContent image{
     width:350rpx;
     height:350rpx;
 }

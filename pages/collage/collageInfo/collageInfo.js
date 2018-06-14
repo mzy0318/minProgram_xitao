@@ -1,23 +1,28 @@
 // pages/collage/collageInfo/collageInfo.js
-let utils = require('../../../utils/util.js')
+let utils = require('../../../utils/util.js');
+const innerAudioContext = wx.createInnerAudioContext()
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        isDivShow:true,
-        pageData:'',
-        collageData:'',
-        actId:'',
-        joinId:'',
-        collagePrice:'',
-        priceId:0,
-        personNum:0,
-        priceInfo:'',
-        startTime:'',
-        endTime:'',
-        status:'',
+        isDivShow: true,
+        pageData: '',
+        collageData: '',
+        actId: '',
+        actTag: '',
+        joinId: '',
+        collagePrice: '',
+        priceId: 0,
+        personNum: 0,
+        priceInfo: '',
+        startTime: '',
+        endTime: '',
+        status: '',
+        bannerImage: '',
+        backImage: '',
+        bgMusic: '',
     },
 
     /**
@@ -25,29 +30,44 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        this.setData({
+        that.setData({
             actId: options.actId,
+            actTag: options.acttag
         })
         getApp().request({
-            url:'personal_group_act',
-            data:{
+            url: 'personal_group_act',
+            data: {
                 act_id: options.actId,
-                joiner_id:'',
+                joiner_id: '',
             },
-            method:'post',
-            success:res=>{
+            method: 'post',
+            success: res => {
                 wx.setNavigationBarTitle({
                     title: res.data.data.app_name,
                 })
                 that.setData({
-                    pageData:res.data.data,
+                    pageData: res.data.data,
                     collagePrice: res.data.data.act_set[0].price,
                     personNum: res.data.data.act_set[0].person,
                     priceInfo: '凑齐' + res.data.data.act_set[0].person + '人即可享受每人' + res.data.data.act_set[0].price + '元',
                     startTime: utils.formatDate(new Date(res.data.data.start_time)),
                     endTime: utils.formatDate(new Date(res.data.data.end_time)),
-                    status: new Date().valueOf() >= res.data.data.end_time?'已结束':'进行中',
-                    joinId:res.data.data.id
+                    status: new Date().valueOf() >= res.data.data.end_time ? '已结束' : '进行中',
+                    joinId: res.data.data.id,
+                    bannerImage: res.data.data.banner_image_url,
+                    backImage: res.data.data.bg_image_url,
+                    bgMusic: res.data.data.music,
+                });
+                // 背景音乐
+                innerAudioContext.autoplay = true
+                innerAudioContext.src = that.data.bgMusic
+                innerAudioContext.play();
+                innerAudioContext.onPlay(() => {
+                    console.log('开始播放')
+                })
+                innerAudioContext.onError((res) => {
+                    console.log(res.errMsg)
+                    console.log(res.errCode)
                 })
             }
         })
@@ -61,10 +81,20 @@ Page({
             method: 'post',
             success: res => {
                 that.setData({
-                    collageData:res.data.data.list
+                    collageData: res.data.data.list
                 })
             }
-        })
+        });
+        // wx.request({
+        //     url:'https://api.weixin.qq.com/wxa/get_qrcode?access_token=10_v7H1fJ4112ZsD3y9KZaw9mNpvk91L_RRm3_AP1poccNt935uQx6ddai8b9fF3BOjjLfLr9a0FyFvfBsslulOwcoF2eH0vVRHeouPxFCHOOaxx7pmlQuHBzFPPD4JjsN8hOXl2bOhv7Ls_gQ4PNMeAEAFDC&path=page%2Findex%3Faction%3D1',
+        //     method:'GET',
+        //     header:{
+        //         'content-type':'json'
+        //     },
+        //     success:function(res){
+        //         console.log(res)
+        //     }
+        // })
     },
 
     /**
@@ -127,43 +157,43 @@ Page({
             isDivShow: Boolean(Number(e.currentTarget.dataset.is)),
         })
         getApp().request({
-            url:'personal_group_member',
-            data:{
+            url: 'personal_group_member',
+            data: {
                 joiner_id: e.currentTarget.dataset.joinid,
                 act_id: this.data.actId
             },
-            method:'post',
-            success:function(res){
+            method: 'post',
+            success: function (res) {
             }
         })
     },
-    toCollageSign:function(e){
+    toCollageSign: function (e) {
         let info = JSON.stringify(e.currentTarget.dataset.forminfo);
-        if (Boolean(e.currentTarget.dataset.is)){
+        if (Boolean(e.currentTarget.dataset.is)) {
             wx.navigateTo({
                 url: '../collageSignup/collageSignup?actId=' + e.currentTarget.dataset.actid + '&info=' + info,
             })
-        }else{
-            
+        } else {
+
         }
     },
-    toPersonInfo:function(){
+    toPersonInfo: function () {
         wx.navigateTo({
             url: '../collagePersonInfo/collagePersonInfo?actId=' + this.data.actId + '&joinId=' + this.data.joinId,
         })
     },
-    toIndex:function(){
+    toIndex: function () {
         getApp().toIndex()
     },
-    toBuild: function (e){
+    toBuild: function (e) {
         wx.navigateTo({
             url: '../collageBuild/collageBuild?title=' + e.currentTarget.dataset.title + '&info=' + e.currentTarget.dataset.info,
         })
     },
-    cellPhone:function(e){
+    cellPhone: function (e) {
         getApp().tellPhone(e)
     },
-    switchTab:function(e){
+    switchTab: function (e) {
         let index = e.currentTarget.dataset.index
         this.setData({
             priceId: index,
@@ -172,5 +202,23 @@ Page({
             priceInfo: '凑齐' + this.data.pageData.act_set[index].person + '人即可享受每人' + this.data.pageData.act_set[index].price + '元'
         })
 
+    },
+    getImage: function (e) {
+        let that = this
+        that.setData({
+            bannerImage: e.detail.bannerImage,
+            backImage: e.detail.bgImage,
+        })
+    },
+    getMusic: function (e) {
+        let that = this;
+        innerAudioContext.src = e.detail.backgroundMusic
+        innerAudioContext.play()
+    },
+    getBackgroundImage:function(e){
+        let that = this;
+        that.setData({
+            backImage: e.detail.bgImage,
+        })
     }
 })

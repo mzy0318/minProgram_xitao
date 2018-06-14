@@ -1,0 +1,33 @@
+<view class='modelTitle'>
+    <text>学校模板</text>
+    <view></view>
+</view>
+<view class='empty'></view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>
+<view class='modelContent'>
+    <view class='modelImage'><image mode=''></image></view>
+    <view class='modelText'>瑜伽-健康养生</view>
+</view>

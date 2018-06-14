@@ -12,24 +12,30 @@ Page({
             {
                 name:'机构主页',
                 method:'toIndex',
+                width:'20%',
             },{
                 name:'拍摄祝福',
                 method: 'setVideo',
+                width: '20%',
             },{
                 name:'分享朋友圈',
                 method: '',
+                width: '20%',
             },{
                 name:'我要制作',
                 method: 'setVideo',
+                width: '20%',
             }
         ],
         user:[
             {
                 name: '机构主页',
                 method: 'toIndex',
+                width: '33.33%',
             },{
                 name: '分享朋友圈',
                 method: '',
+                width: '33.33%',
             },
         ],
         optionsContent:'',
@@ -39,7 +45,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options',options)
         let that = this;
         if (Number(options.userType)==0){
             that.setData({

@@ -1,33 +1,23 @@
-// pages/collage/collageList.js
-let utils = require( '../../../utils/util.js')
+// pages/baseOptions/schoolMoel/schoolModel.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        pageData:'',
-        startTime:'',
-        endTime:'',
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this
         getApp().request({
-            url:'visitor_personal_group_list',
-            method:'post',
+            url:'theme/list',
+            method:'get',
+            data:{},
             success:function(res){
-                let data = res.data.data.list
-                for (let i = 0; i < data.length;i++){
-                    data[i].start_time = utils.formatTime(new Date(data[i].start_time))
-                    data[i].end_time = utils.formatTime(new Date(data[i].end_time))
-                }
-                that.setData({
-                    pageData:data,
-                })
+                console.log(res)
             }
         })
     },
@@ -79,10 +69,5 @@ Page({
      */
     onShareAppMessage: function () {
 
-    },
-    toCollageInfo:function(e){
-        wx.navigateTo({
-            url: '../collageInfo/collageInfo?actId=' + e.currentTarget.dataset.actid + '&acttag=' + e.currentTarget.dataset.acttag,
-        })
     }
 })

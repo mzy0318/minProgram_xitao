@@ -63,3 +63,4 @@
     </view>
     </form>
 </view>
+<!-- <other-option bindgetImage='getImage' bindgetBackgroundImage='getBackgroundImage' bindgetMusic='getMusic' actid='{{pageData.id}}' acttag='{{actTag}}' banImage='{{pageData.banner_image_url}}' backImage='{{pageData.bg_image_url}}' bgMusicId='{{pageData.music_id}}' bgMusic='{{pageData.music}}'></other-option> -->

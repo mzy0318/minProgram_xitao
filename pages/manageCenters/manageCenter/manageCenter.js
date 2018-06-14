@@ -12,7 +12,7 @@ Page({
                 name:'更换模板',
                 iconfont: 'iconfont icon-genghuanpifu iconSize',
                 color:'#1196DB',
-                url: '../schoolEdit/schoolEdit',
+                url: '../../baseOptions/schoolModel/schoolModel',
             },{
                 name: '打卡作业',
                 iconfont: 'iconfont icon-job-task iconSize',

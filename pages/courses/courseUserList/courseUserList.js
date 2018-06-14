@@ -14,6 +14,16 @@ Page({
         status: ['待跟进', '跟进中', '已预约', '已试听', '已到访', '已失效', '已成交'],
         cancelData: '+',
         isShow: true,
+        xinArr: [
+            {
+                name: "../../../icon/baixin.png",
+            }, {
+                name: "../../../icon/banxin.png",
+            }, {
+                name: "../../../icon/hongxin.png",
+            }
+        ],
+        xinData:'',
     },
 
     /**
@@ -31,8 +41,10 @@ Page({
                     res.data.data[i].status = that.data.status[res.data.data[i].status]
                 }
                 that.setData({
-                    pageData: res.data.data
-                })
+                    pageData: res.data.data,
+                    // xinData: that.data.xinArr[res.data.data.intention],
+                });
+                // console.log('that.data.xinData', that.data.xinData)
             }
         })
     },

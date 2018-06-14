@@ -3,6 +3,6 @@
     <view class='listInfoVideo' bindtap='{{videoUrl.url==""?setVideo:""}}' ><video src='{{videoUrl}}' poster='{{videoImage}}' ></video></view>
 </view>
 <view class='listInfoBottom'>
-    <button wx:for='{{optionsContent}}' bindtap='{{item.method}}' data-actid='{{pageData.id}}'>{{item.name}}</button>
+    <button wx:for='{{optionsContent}}' style='width:100rpx;' bindtap='{{item.method}}' data-actid='{{pageData.id}}'>{{item.name}}</button>
     <button open-type='share'>发给好友</button>
 </view>

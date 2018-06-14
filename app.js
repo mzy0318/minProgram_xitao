@@ -1,4 +1,3 @@
-//app.js
 App({
     onLaunch: function () {
         // 展示本地存储能力
@@ -29,7 +28,6 @@ App({
         //         })
         //     }
         // })
-        this.globalData.host = "http://www.zhihuizhaosheng.com/" + this.getExtConfig().version + "/";
     },
 
     config: null,
@@ -49,11 +47,20 @@ App({
         lessonClassName: '课程筛选',
         lessonClassData: null,
     },
+    dev: false,
+    getHost: () => {
+        var online = "http://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
+        var dev = "http://192.168.1.112:8888/" + getApp().getExtConfig().version + "/";
+        return online;
+    },
+    hasLogin: false,//默认app是未登录状态
     request: param => {
+        var host = getApp().getHost();
+
         var data = param.data || {};
         var success = param.success || function () { };
         var url = param.url || "";
-        url = getApp().globalData.host + url;
+        url = host + url;
         var method = param.method || "GET";
         method = method.toUpperCase();
 
@@ -62,24 +69,85 @@ App({
         if (cookie) {
             header.Cookie = cookie;
         }
-
         if (method == "POST") {
             header["Content-Type"] = "application/x-www-form-urlencoded";
         }
-        console.log('url', url)
-        console.log('data', data)
-        wx.request({
-            url: url,
-            data: data,
-            method: method,
-            header: header,
-            'success': r => {
-                if (r.header["Set-Cookie"]) {
-                    wx.setStorageSync('cookie', r.header["Set-Cookie"]);
+
+        if (param.url == "login") {
+            return
+        }
+
+        var othis = this;
+        console.log("param:", param, "has login:", getApp().hasLogin)
+
+        if (getApp().hasLogin) {
+            //直接执行请求
+            console.log("1 request");
+            wx.request({
+                url: url,
+                data: data,
+                method: method,
+                header: header,
+                'success': r => {
+                    if (r.header["Set-Cookie"]) {
+                        wx.setStorageSync('cookie', r.header["Set-Cookie"]);
+                    }
+
+                    /**
+                     * 放开此初始，同时注释掉110行，可以：
+                     * 1 统一处理错误信息，每个请求都会少些处理错误代码
+                     * 2 避免不优雅的res.data.data写法，对象嵌套过深，容易犯错
+                     */
+                    // if(r.data.code == 0){
+                    //   wx.showModal({
+                    //     title: '错误提示',
+                    //     content: r.data.msg,
+                    //   })
+                    // }else{
+                    //   success(r.data)
+                    // }
+
+                    success(r);
                 }
-                success(r);
-            }
-        });
+            });
+        } else {
+            wx.login({
+                success: res => {
+                    if (res.errMsg != "login:ok") {
+                        wx.showModal({
+                            title: '错误提示',
+                            content: res.errMsg,
+                        })
+                        return
+                    } else {
+                        console.log("code:", res.code);
+                    }
+                    wx.request({
+                        'url': host + "login",
+                        'data': { "code": res.code, "org_id": getApp().getExtConfig().orgId },
+                        'method': "POST",
+                        'header': header,
+                        'success': r => {
+                            if (r.data.code == 0) {
+                                wx.showModal({
+                                    title: '提示',
+                                    content: r.data.msg,
+                                })
+                            } else {
+                                if (r.header["Set-Cookie"]) {
+                                    wx.setStorageSync('cookie', r.header["Set-Cookie"]);
+                                }
+
+                                getApp().hasLogin = true
+
+                                //然后执行请求
+                                getApp().request(param)
+                            }
+                        },
+                    })
+                }
+            })
+        }
     },
     map: function () {
         let latitude = 34.752901;

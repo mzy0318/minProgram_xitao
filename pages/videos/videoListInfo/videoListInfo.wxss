@@ -25,7 +25,6 @@
     font-weight:bold;
     box-sizing: content-box;
     padding:0rpx 0rpx;
-    width:20%;
     border-radius:0rpx;
 }
 .listInfoBottom button::after{

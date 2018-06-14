@@ -87,6 +87,7 @@
             <view class='close'  bindtap='isClose' data-display='none'>x</view>
         </view>
     </view>
+    <!--  -->
     <view class='otherOptionWrap' hidden='{{actionOptions}}'>
         <view bindtap='isOptions' class='otherOptions'>
             <text class='{{isOption?iconOpen:iconClose}}'></text>
@@ -99,6 +100,7 @@
             <view bindtap='toEditPage'>编辑</view>
         </view>
     </view>
+    <!--  -->
     <view class='switchBackgroundImage' hidden='{{bottomOption}}'>
         <view bindtap='cancelImage'>取消</view>
         <view >确认</view>

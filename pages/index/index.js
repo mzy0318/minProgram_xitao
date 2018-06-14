@@ -9,29 +9,15 @@ Page({
         hasUserInfo: false,
         orgId: 0,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        ojbArr:[
-            {
-                name: '学校介绍',
-                url:'../baseOptions/schoolInfo/schoolInfo'
-            },{
-                name: '课程导航',
-                url: '../courses/course/course'
-            },{
-                name: '师资力量',
-                url: '../baseOptions/teachers/teachers'
-            },{
-                name: '学员风采',
-                url: '../baseOptions/studentStyle/studentStyle'
-            },{
-                name: '联系我们',
-                url: '../baseOptions/contactUs/contactUs'
-            },{
-                name: '意见建议',
-                url: '../baseOptions/opinions/opinions'
-            }, {
-                name: '更多',
-                url: '../morePage/morePage'
-            }
+        optionsUrl: [
+            '../baseOptions/schoolInfo/schoolInfo',
+            '../baseOptions/teachers/teachers',
+            '../baseOptions/studentStyle/studentStyle',
+            '../killPrices/killPriceList/killPriceList',
+            '../collage/collageList/collageList',
+            '../baseOptions/opinions/opinions',
+            '../baseOptions/contactUs/contactUs',
+            '../morePage/morePage',
         ],
         pageData:'',
         isGetUser:false,
@@ -49,6 +35,10 @@ Page({
             method: "post",
             data: {},
             success: res => {
+                for (let i = 0; i < res.data.data.home_icon.length;i++){
+                    res.data.data.home_icon[i].url = that.data.optionsUrl[i]
+                }
+                console.log(res.data.data)
                 that.setData({
                     pageData:res.data.data
                 })
@@ -130,6 +120,10 @@ Page({
         that.setData({
             isGetUser:true
         })
-
+    },
+    toContentPage:function(e){
+        wx.navigateTo({
+            url: e.currentTarget.dataset.url,
+        })
     }
 })

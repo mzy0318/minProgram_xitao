@@ -114,7 +114,6 @@ Page({
         })
     },
     delActive:function(e){
-        console.log(e.currentTarget.dataset)
         let pageType = wx.getStorageSync('pageType')
         if (pageType==4){
             getApp().request({
@@ -157,7 +156,7 @@ Page({
         //私人拼团
         } else if (pageType==1){
             wx.navigateTo({
-                url: '../../collage/collageInfo/collageInfo?actId=' + e.currentTarget.dataset.id,
+                url: '../../collage/collageInfo/collageInfo?actId=' + e.currentTarget.dataset.id + '&acttag=' + e.currentTarget.dataset.acttag,
             })
         }
         

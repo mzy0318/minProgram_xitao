@@ -1,0 +1,46 @@
+.modelTitle{
+    width:750rpx;
+    line-height:80rpx;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    font-size:35rpx;
+    font-weight:bold;
+    text-align:center;
+    background:#fff;
+}
+.modelTitle>view{
+    width:80rpx;
+    height:0px;
+    border:1px solid #dbdbdb;
+    margin:0 auto;
+}
+.modelContent{
+    width:290rpx;
+    height:450rpx;
+    float:left;
+    margin-left:50rpx;
+    margin-bottom:40rpx;
+    border-radius:5px;
+}
+.modelImage{
+    width:290rpx;
+    height:380rpx;
+    border-radius:5px 5px 0px 0px;
+    background:#0ff;
+}
+.modelImage image{
+    width:290rpx;
+    height:380rpx;
+}
+.modelText{
+    width:290rpx;
+    line-height:70rpx;
+    font-size:30rpx;
+    text-align:center;
+}
+
+.empty{
+    width:750rpx;
+    height:120rpx;
+}

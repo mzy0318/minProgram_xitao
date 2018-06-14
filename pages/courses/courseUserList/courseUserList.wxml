@@ -1,7 +1,7 @@
 <view class='userListWrap'>
     <view class='userListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-pagedata='{{item}}'>
         <view class='contentLeft'>
-            <text></text>
+            <view class='iconData'><image src='{{xinArr[item.intention].name}}' mode='scaleToFill'></image></view>
             <view class='nickName'>{{item.nickname}}</view>
         </view>
         <view class='contentRight'>

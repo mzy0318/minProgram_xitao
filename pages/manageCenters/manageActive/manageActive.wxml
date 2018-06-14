@@ -10,7 +10,7 @@
                 <view bindtap='toPersonList' data-id='{{item.id}}'>报名:<text>{{item.total_joiner}}</text>人</view>
                 <view>
                     <button>下载二维码</button>
-                    <button data-id='{{item.id}}' bindtap='toKillPirce'>查看活动</button>
+                    <button data-id='{{item.id}}' bindtap='toKillPirce' data-acttag='{{item.act_tag}}'>查看活动</button>
                 </view>
             </view>
         </view>

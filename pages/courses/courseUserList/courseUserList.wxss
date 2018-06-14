@@ -8,19 +8,23 @@
     border:1rpx solid #efefef;
 }
 .contentLeft{
-    width:200rpx;
+    width:350rpx;
     height:120rpx;
     float:left;
     margin-left:40rpx;
 }
-.contentLeft text{
+.iconData{
     display:block;
     width:70rpx;
     height:70rpx;
-    background:red;
+    background:#FD4551;
     float:left;
     border-radius:50%;
     margin-top:25rpx;
+}
+.iconData image{
+    width:70rpx;
+    height:70rpx;
 }
 .nickName{
     float:left;
