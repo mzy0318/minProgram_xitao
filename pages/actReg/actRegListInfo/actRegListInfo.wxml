@@ -1,0 +1,50 @@
+<view class='actRegInfoWrap'>
+    <!-- 封面+标题 -->
+    <view class='actRegInfoTitle'>
+        <view class='actRegInfoTitleImage'><image src='{{pageData.cover_image.url}}' mode='scaleToFill'></image></view>
+        <view class='actRegInfoTitleText'>{{pageData.title}}</view>
+    </view>
+    <!-- 活动时间 -->
+    <view class='actRegInfoTime'>
+        <view class='actRegInfoTimeOne'>
+            <view>发布时间:</view>
+            <view>{{pageData.start_time}}</view>
+        </view>
+        <view class='actRegInfoTimeOne'>
+            <view>活动发起:</view>
+            <view bindtap='toIndexPage'>智慧招生-暑假招生方案班</view>
+        </view>
+    </view>
+    <!-- 活动地址 -->
+    <view class='actRegInfoAdderss'>
+        <view class='actRegInfoTimeOne'>
+            <view>截止日期:</view>
+            <view>{{pageData.end_time}}</view>
+            <view>{{pageData.time_status}}</view>
+        </view>
+        <view class='actRegInfoTimeOne'>
+            <view>活动地点:</view>
+            <view>{{pageData.address}}</view>
+        </view>
+        <view class='actRegInfoTimeOne'>
+            <view>咨询电话:</view>
+            <view bindtap='makePhone' data-phonenum='{{pageData.telephone}}'><text>{{pageData.telephone}}</text></view>
+        </view>
+        <view class='actRegInfoTimeOne'>
+            <view>活动费用:</view>
+            <view><text>{{pageData.now_price}}</text></view>
+        </view>
+    </view>
+    <!-- 活动详情 -->
+    <view class='actRegInfoText'>
+        <view class='empty'></view>
+        <view class='actRegInfoTextTitle'>活动详情</view>
+        <view class='actRegInfoTextContent'>{{pageData.rule}}</view>
+        <view class='actRegInfoTextImage' wx:for='{{pageData.act_image}}'><image src='{{item.url}}' mode='scaleToFill'></image></view>
+        <view class='empty'></view>
+    </view>
+    <view class='bottomOpt'>
+        <button open-type='share'>分享</button>
+        <button bindtap='toSignPage' data-id='{{pageData.id}}'>我要报名</button>
+    </view>
+</view>

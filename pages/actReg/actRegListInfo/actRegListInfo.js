@@ -1,24 +1,29 @@
-// pages/goodLesson/goodLessonList/goodLessonList.js
+// pages/actReg/actRegListInfo/actRegListInfo.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        pageData:'',
+        pageData: '',
+        status: '',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this
         getApp().request({
-            url:'visitor_lesson_one_list',
-            data:{},
-            method:'post',
-            success:res=>{
-                this.setData({
-                    pageData:res.data.data
+            url: 'normal_act',
+            method: 'post',
+            data: {
+                id: options.actId,
+            },
+            success: function (res) {
+                that.setData({
+                    pageData: res.data.data,
+                    status: res.data.data.time_status
                 })
             }
         })
@@ -56,19 +61,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-        getApp().request({
-            url: 'visitor_lesson_one_list',
-            data: {},
-            method: 'post',
-            success: res => {
-                this.setData({
-                    pageData: res.data.data
-                })
-                if(Number(res.data.code)==1){
-                    wx.stopPullDownRefresh()
-                }
-            }
-        })
+
     },
 
     /**
@@ -84,9 +77,23 @@ Page({
     onShareAppMessage: function () {
 
     },
-    toListInfo: function (e) {
-        wx.navigateTo({
-            url: '../lessonListInfo/lessonListInfo?actId=' + e.currentTarget.dataset.actid,
-        })
+    makePhone: function (e) {
+        getApp().tellPhone(e)
+    },
+    toIndexPage: function () {
+        getApp().toIndex()
+    },
+    toSignPage: function (e) {
+        let that = this;
+        if (that.data.status === '活动已结束') {
+            wx.showModal({
+                title: '提示',
+                content: that.data.status,
+            })
+        } else {
+            wx.navigateTo({
+                url: '../actRegSignUp/actRegSignUp?actId=' + e.currentTarget.dataset.id,
+            })
+        }
     }
 })

@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "1元上好课-限时抢"
+    "navigationBarTitleText": "1元上好课-限时抢",
+    "enablePullDownRefresh":true
 }

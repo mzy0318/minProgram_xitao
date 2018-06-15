@@ -14,6 +14,7 @@
         "pages/manageCenters/lessonCourseEdit/lessonCourseEdit",
         "pages/manageCenters/schoolEdit/schoolEdit",
         "pages/manageCenters/oneLessonEdit/oneLessonEdit",
+        "pages/manageCenters/actRegEdit/actRegEdit",
         "pages/courses/courseInfo/courseInfo",
         "pages/courses/orderInfo/orderInfo",
         "pages/courses/courseClass/courseClass",
@@ -43,6 +44,10 @@
         "pages/videos/videoListInfo/videoListInfo",
         "pages/manageCenters/videoEdit/videoEdit",
         "pages/videos/userVideoList/userVideoList",
+        "pages/actReg/actRegListInfo/actRegListInfo",
+        "pages/actReg/actRegUserList/actRegUserList",
+        "pages/actReg/actRegManList/actRegManList",
+        "pages/actReg/actRegSignUp/actRegSignUp",
         "components/otherOpt/otherOpt"
     ],
     "window": {

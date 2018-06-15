@@ -242,6 +242,10 @@ Page({
             wx.navigateTo({
                 url: '../../videos/manVideoList/manVideoList',
             })
+        }else if(pageType=='8'){
+            wx.navigateTo({
+                url: '../../actReg/actRegManList/actRegManList',
+            })
         }
     },
     toEditPage:function(e){

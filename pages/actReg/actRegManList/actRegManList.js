@@ -1,4 +1,4 @@
-// pages/goodLesson/goodLessonList/goodLessonList.js
+// pages/actReg/actRegManList/actRegManList.js
 Page({
 
     /**
@@ -12,15 +12,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         getApp().request({
-            url:'visitor_lesson_one_list',
-            data:{},
+            url:'org/normal_list',
+            data:{
+                page:'1'
+            },
             method:'post',
-            success:res=>{
-                this.setData({
+            success:function(res){
+                that.setData({
                     pageData:res.data.data
                 })
-            }
+            }   
         })
     },
 
@@ -56,19 +59,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-        getApp().request({
-            url: 'visitor_lesson_one_list',
-            data: {},
-            method: 'post',
-            success: res => {
-                this.setData({
-                    pageData: res.data.data
-                })
-                if(Number(res.data.code)==1){
-                    wx.stopPullDownRefresh()
-                }
-            }
-        })
+
     },
 
     /**
@@ -84,9 +75,31 @@ Page({
     onShareAppMessage: function () {
 
     },
-    toListInfo: function (e) {
+    toLessonInfo:function(e){
         wx.navigateTo({
-            url: '../lessonListInfo/lessonListInfo?actId=' + e.currentTarget.dataset.actid,
+            url: '../actRegListInfo/actRegListInfo?actId=' + e.currentTarget.dataset.id,
+        })
+    },
+    toLessonEdit:function(e){
+        wx.navigateTo({
+            url: '../../manageCenters/actRegEdit/actRegEdit?actId=' + e.currentTarget.dataset.id,
+        })
+    },
+    delActive:function(e){
+        getApp().request({
+            url:'org/delete_act',
+            data:{
+                act_id: e.currentTarget.dataset.id,
+                act_tag: e.currentTarget.dataset.acttag
+            },
+            method:'post',
+            success:function(res){
+                if(Number(res.data.code)==1){
+                    wx.navigateTo({
+                        url: '../../actReg/actRegManList/actRegManList',
+                    })
+                }
+            }
         })
     }
 })

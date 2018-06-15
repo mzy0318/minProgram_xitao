@@ -1,0 +1,73 @@
+.actRegWrap{
+    width:750rpx;
+    min-height:1207rpx;
+    background:#f2f2f2;
+}
+.actRegContent{
+    width:720rpx;
+    height:470rpx;
+    background:#fff;
+    border-radius:10rpx;
+    margin:0rpx auto 20rpx;
+}
+.actRegImage{
+    width:720rpx;
+    height:330rpx;
+    border-radius:10rpx 10rpx 0rpx 0rpx;
+    background:lightblue;
+}
+.actRegImage image{
+    width:720rpx;
+    height:330rpx;
+}
+.actRegTitle{
+    width:720rpx;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:center;
+    font-size:35rpx;
+    color:#7b7b7b;
+}
+.actRegLeft{
+    width:360rpx;
+    height:60rpx;
+    float:left;
+}
+.actRegLeftBtn{
+    width:150rpx;
+    height:60rpx;
+    float:left;
+    background:#86D266;
+    color:#fff;
+    font-size:24rpx;
+    line-height:60rpx;
+    text-align:center;
+}
+.actRegLeftNum{
+    width:150rpx;
+    height:60rpx;
+    float:left;
+    font-size:24rpx;
+    line-height:60rpx;
+    text-align:center;
+}
+.actRegLeftNum text{
+    color:red;
+}
+.actRegRight{
+    width:300rpx;
+    height:60rpx;
+    float:right;
+    line-height:60rpx;
+    font-size:24rpx;
+    text-align:right;
+    text-indent:20rpx;
+}
+.actRegRight text{
+    color:red;
+}
+.empty{
+    width:750rpx;
+    height:20rpx;
+    background:transparent;
+}

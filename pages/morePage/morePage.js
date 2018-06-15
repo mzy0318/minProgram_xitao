@@ -29,7 +29,7 @@ Page({
             },{
                 name: '活动报名',
                 iconfont: 'iconfont icon-baoming iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
+                url: '../actReg/actRegUserList/actRegUserList',
                 background: '#1055CC',
                 style:'margin-left:20rpx;margin-top:20rpx; iconfontSize'
             },{

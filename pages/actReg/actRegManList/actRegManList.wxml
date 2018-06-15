@@ -1,0 +1,25 @@
+<view class='manListWrap'>
+    <view class='empty'></view>
+    <view class='manListContent' wx:for='{{pageData}}'>
+        <view class='manListContentTop' bindtap='toLessonInfo' data-id='{{item.id}}' >{{item.title}}</view>
+        <view class='manListContentMiddel'>
+            <view class='ListContentMiddelLeft' bindtap='toLessonInfo' data-id='{{item.id}}'>
+                <image src='{{item.cover.url}}' mode='scaleToFill' ></image>
+            </view>
+            <view class='ListContentMiddelRight'>
+                <view class='contentMiddelRightChild'>查看报名<text>{{item.total_joiner?'('+item.total_joiner+')':''}}</text></view>
+                <view class='contentMiddelRightStatus'>状态:<text class='textstatus' decode>&nbsp;{{item.status}}</text></view>
+                <view class='contentMiddelRightStatus'>结束:<text>{{item.end_time}}</text></view>
+            </view>
+        </view>
+        <view class='manListContentBottom'>
+            <view class='contentBottomChild' bindtap='delActive' data-id='{{item.id}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-lajixiang'></text>删除</view>
+            <view class='contentBottomChild' bindtap='toLessonEdit' data-id='{{item.id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
+            <view class='contentBottomChild'><text class='iconfont icon-share'></text>分享</view>
+        </view>
+    </view>
+    <view class='manListBottom'>
+        <view class='manListBottomLeft' bindtap='taBack'>返回</view>
+        <view class='manListBottomRight' bindtap='toLessonEdit'>发布新活动</view>
+    </view>
+</view>

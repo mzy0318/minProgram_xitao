@@ -51,7 +51,7 @@ App({
     getHost: () => {
         var online = "http://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
         var dev = "http://192.168.1.112:8888/" + getApp().getExtConfig().version + "/";
-        return online;
+        return dev;
     },
     hasLogin: false,//默认app是未登录状态
     request: param => {
@@ -78,11 +78,10 @@ App({
         }
 
         var othis = this;
-        console.log("param:", param, "has login:", getApp().hasLogin)
-
+        console.log('url', url)
+        console.log('data',data)
         if (getApp().hasLogin) {
             //直接执行请求
-            console.log("1 request");
             wx.request({
                 url: url,
                 data: data,

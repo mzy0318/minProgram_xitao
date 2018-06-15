@@ -1,0 +1,12 @@
+<view class='actRegWrap'>
+    <view class='empty'></view>
+    <view class='actRegContent' wx:for='{{pageData}}' bindtap='toInfoPage' data-actid='{{item.id}}'>
+        <view class='actRegImage'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
+        <view class='actRegTitle'>{{item.title}}</view>
+        <view class='actRegLeft'>
+            <view class='actRegLeftBtn'>{{item.status}}</view>
+            <view class='actRegLeftNum'>报名:<text>{{item.total_joiner}}</text>人</view>
+        </view>
+        <view class='actRegRight'>截止:<text decode>{{item.end_time}}&nbsp;&nbsp;</text></view>
+    </view>
+</view>
