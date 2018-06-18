@@ -1,0 +1,103 @@
+<!-- 瑜伽  课外快乐  驾考 -->
+<template name='one'>
+    <view class='indexBackground'>
+        <view class='empty'></view>
+        <!-- 导航 -->
+        <view class='indexOptons'>
+            <view class='indexOptonsChild'>
+                <view class='indexOptionsTop'>
+                    <image mode='scaleToFill'></image>
+                </view>
+                <view class='indexOptionsBottom'></view>
+            </view>
+            <view class='indexOptonsChild' bindtap='nav'>
+                <view class='indexOptionsTop'>
+                    <image mode='scaleToFill'></image>
+                </view>
+                <view class='indexOptionsBottom'>更多</view>
+            </view>
+        </view>
+        <!-- 课程推荐 -->
+        <view class='indexCourses'>
+            <view class='indexCoursesTitle'>课程推荐</view>
+            <view class='indexCoursesContent'>
+                <view class='leftImage'>
+                    <image mode='scaleToFill'></image>
+                </view>
+                <view class='rightText'>
+                    <view class='rightTextTitle'></view>
+                    <view class='rightTextPrice'>
+                        <text decode>￥199&nbsp;</text>
+                        <text decode>￥200</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 幼儿园 -->
+<template name='two'>
+    <view class='twoWrap'>
+        <view class='twoNav'>
+            <view class='twoNavChild'>
+                <view class='twoNavChildTop'><image mode='scaleToFill'></image></view>
+                <view class='twoNavChildBottom'>课程详情</view>
+            </view>
+        </view>
+        <view class='twoTitle'>课程导航</view>
+        <view class='twoSwiper'>
+            <swiper indicator-dots >
+                <swiper-item>
+                    <view class='swiperWrpa'>
+                        <view class='swiperTop'>智慧招生-暑假招生方案</view>
+                        <view class='swiperBottom'></view>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class='twoTitle'>学校环境</view>
+        <view class='twoInfo'>
+            <view class='twoInfoSwiper'>
+                <swiper>
+                    <swiper-item>
+                        <view class='twoInfoImage'><image mode='scaleToFill'></image></view>
+                    </swiper-item>
+                </swiper>
+            </view>
+            <view class='twoInfoContent'>
+                伟大的渺小
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 美术 -->
+<template name='three'>
+    <view class='threeWrap'>
+        <view class='threeChild' wx:for='{{item}}' style='background:{{item.backgroundColor}};width:{{item.width}}'>
+            <view class='threeChildTop'><image mode='scaleToFill'></image></view>
+            <view class='threeChildBottom'>星期一</view>
+        </view>
+    </view>
+</template>
+<!-- 课外活动/初高中 -->
+<template name='four'>
+    <view class='fourWrap'>
+        <view class='twoNav'>
+            <view class='twoNavChild'>
+                <view class='twoNavChildTop'><image mode='scaleToFill'></image></view>
+                <view class='twoNavChildBottom'>课程详情</view>
+            </view>
+        </view>
+        <view class='twoTitle'>热门课程</view>
+        <view class='fourLesson'>
+             <view class='fourLessonContent' >
+                <view class='fourLessonContentTop'><image mode='scaleToFill'></image></view>
+                <view class='fourLessonContentBottom'>招生测试</view>
+             </view>
+        </view>
+    </view>
+</template>
+<!-- 课外活动/初高中 -->
+<template name='five'>
+
+</template>

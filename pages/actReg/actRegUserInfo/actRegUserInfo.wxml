@@ -1,0 +1,36 @@
+<view class='actRegUserWrap' hidden='{{!isShow}}'>
+    <view class='actRegTop'>
+        <view class='actRegTopLeft'>
+            <text class='iconfont icon-ionc--' style='color:#47BAFD;'></text>
+            瞎弄了
+        </view>
+        <view class='actRegTopRight'>
+            2018-06-26 12:59
+        </view>
+    </view>
+    <view class='actRegBottom'>
+        <view class='actRegTopLeft' style='color:#47BAFD;' data-phonenum='13065465464' bindtap='makePhone'>
+            <text class='iconfont icon-phone' ></text>
+            13056465616
+        </view>
+        <view class='actRegTopRight' bindtap='isShowInfo' data-num='0'>
+            <text>...</text>
+        </view>
+    </view>
+</view>
+<view class='actRegUserInfoWrap' hidden='{{isShow}}'>
+    <view class='empty'></view>
+    <view class='userInfoContet'>
+        <view class='userInfoContetLeft'>真实姓名:</view>
+        <view class='userInfoContetRight'>瞎弄了</view>
+    </view>
+    <view class='userInfoContet'>
+        <view class='userInfoContetLeft'>手机号码:</view>
+        <view class='userInfoContetRight' data-phonenum='13065465464' bindtap='makePhone'>13065465464</view>
+    </view>
+    <view class='userInfoContet'>
+        <view class='userInfoContetLeft'>报名时间:</view>
+        <view class='userInfoContetRight'>2018-03-04 20:21</view>
+    </view>
+    <button class='userInfoBtn' bindtap='isShowInfo' data-num='-1'>返回</button>
+</view>

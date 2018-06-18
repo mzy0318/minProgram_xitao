@@ -101,5 +101,10 @@ Page({
                 }
             }
         })
+    },
+    toUserInfo:function(e){
+        wx.navigateTo({
+            url: '../actRegUserInfo/actRegUserInfo?actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.id,
+        })
     }
 })

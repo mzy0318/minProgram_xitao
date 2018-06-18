@@ -1,3 +1,4 @@
+@import '../../templates/indexModel/indexModel.wxss';
 .indexBanner {
     width: 750rpx;
     height: 350rpx;
@@ -13,7 +14,13 @@
     height: 350rpx;
 }
 
-.indexBackground {
+
+
+
+
+
+
+/* .indexBackground {
     width: 750rpx;
     min-height:650rpx;
     background:#F7A784;
@@ -51,7 +58,7 @@
     margin-top:10rpx;
 }
 
-/* 课程导航 */
+
 .indexCourses{
     width:700rpx;
     min-height:300rpx;
@@ -111,7 +118,13 @@
     font-size:22rpx;
     color:#7b7b7b;
     text-decoration:line-through;
-}
+} */
+
+
+
+
+
+
 /*获取用户信息*/
 .getUserInfoWrap{
     width:750rpx;
@@ -120,6 +133,7 @@
     top:0rpx;
     left:0rpx;
     background:rgba(0,0,0,0.3);
+    
 }
 .getUserInfoContent{
     width:700rpx;

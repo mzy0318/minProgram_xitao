@@ -1,0 +1,64 @@
+@import '../../../utils/iconFont.wxss';
+/* @import '../../../utils/iconFontO.wxss'; */
+.actRegUserWrap{
+    width:710rpx;
+    height:140rpx;
+    margin:20rpx auto 0rpx;
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3);
+}
+.actRegTop,.actRegBottom{
+    width:710rpx;
+    height:70rpx;
+}
+.actRegTopLeft,.actRegTopRight{
+    float:left;
+    width:350rpx;
+    line-height:70rpx;
+    font-size:30rpx;
+    text-indent:20rpx;
+}
+.actRegTopRight{
+    text-align:right;
+    color:#7b7b7b;
+}
+.actRegTopRight text{
+    font-size:60rpx;
+    line-height:20rpx;
+}
+/* 用户信息页面 */
+.actRegUserInfoWrap{
+    width:750rpx;
+    height:1207rpx;
+    background:#fff;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+}
+.userInfoContet{
+    width:650rpx;
+    height:80rpx;
+    margin:0 auto 20rpx;
+    border-bottom:1px solid #efefef;
+}
+.empty{
+    width:650rpx;
+    height:20rpx;
+}
+.userInfoContetLeft{
+    line-height:80rpx;
+    font-size:30rpx;
+    float:left;
+}
+.userInfoContetRight{
+    width:300rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    float:left;
+    margin-left:20rpx;
+    color:#7b7b7b;
+}
+.userInfoBtn{
+    width:650rpx;
+    line-height:80rpx;
+    margin-top:50rpx;
+}

@@ -48,6 +48,7 @@
         "pages/actReg/actRegUserList/actRegUserList",
         "pages/actReg/actRegManList/actRegManList",
         "pages/actReg/actRegSignUp/actRegSignUp",
+        "pages/actReg/actRegUserInfo/actRegUserInfo",
         "components/otherOpt/otherOpt"
     ],
     "window": {

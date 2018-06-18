@@ -21,6 +21,33 @@ Page({
         ],
         pageData:'',
         isGetUser:false,
+        paintData: [
+            {
+                backgroundColor: '#FEB33C',
+                width:'250rpx',
+            }, {
+                backgroundColor: '#50D0AD',
+                width: '250rpx',
+            }, {
+                backgroundColor: '#FC407A',
+                width: '250rpx',
+            }, {
+                backgroundColor: '#FF633D',
+                width: '250rpx',
+            }, {
+                backgroundColor: '#3EA6FD',
+                width: '500rpx',
+            }, {
+                backgroundColor: '#C55EF5',
+                width: '250rpx',
+            }, {
+                backgroundColor: '#F8964D',
+                width: '250rpx',
+            }, {
+                backgroundColor: '#7F3CD9',
+                width: '250rpx',
+            }
+        ],
     },
     //事件处理函数
     onLoad: function () {
