@@ -10,7 +10,7 @@ Page({
                 name: '我的订单',
                 iconfont: 'iconfont icon-zuoye iconStyle',
                 background: '#A145AF',
-                url: '../killPrices/killPriceList/killPriceList',
+                url: '../studentManage/orderList/orderList',
                 pageTypeStu:1,
             },{
                 name: '预约试听',
@@ -143,7 +143,7 @@ Page({
     onShareAppMessage: function () {
 
     },
-    toOptionPage:e=>{
+    toOptionPage:function(e){
         wx.setStorageSync('pageTypeStu', e.currentTarget.dataset.pagetypestu)
         wx.navigateTo({
             url: e.currentTarget.dataset.url,

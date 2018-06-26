@@ -14,14 +14,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this
         this.setData({
             formInfo: JSON.parse(options.info),
             actId: options.actId
         })
-        console.log('this.data.formInfo', this.data.formInfo)
-        console.log('this.data.actId', this.data.actId)
     },
-
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -78,14 +76,21 @@ Page({
         })
     },
     submitInfo: function (e) {
+        let that = this;
         let arr = []
-        arr.push(e.detail.value[1])
-        e.detail.value.act_id = this.data.actId
-        e.detail.value.info = arr
-        delete e.detail.value[1]
+        let sendData = {};
+        sendData['nickname'] = e.detail.value.nickname
+        sendData['phone'] = e.detail.value.phone
+        sendData['act_id'] = this.data.actId
+        for (let i = 0; i < that.data.formInfo.length;i++){
+            // arr.push(e.detail.value[i])
+            sendData['info[' + i + ']'] = e.detail.value[i]
+        }
+        console.log('sendData', sendData)
+        sendData['info[]'] = arr;
         getApp().request({
             url:'join_personal_group',
-            data:e.detail.value,
+            data: sendData,
             method:'post',
             success:function(res){
                 if (res.data.code == 0){

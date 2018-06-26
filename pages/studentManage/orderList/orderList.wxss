@@ -1,0 +1,85 @@
+.orderListWrap{
+    width:750rpx;
+    min-height:1207rpx;
+    background:#f2f2f2;
+    padding-bottom:20rpx;
+}
+.orderListContent{
+    width:750rpx;
+    height:350rpx;
+    background:#fff;
+    margin-bottom:20rpx;
+}
+.orderListTop{
+    width:750rpx;
+    height:80rpx;
+    background:#fff;
+}
+.orderListTop view{
+    font-size:30rpx;
+    float:left;
+}
+.orderListTop view:nth-child(1){
+    line-height:80rpx;
+    margin-left:20rpx;
+    color:#41A7D9;
+}
+.orderListTop view:nth-child(2){
+    float:right;
+    color:#7b7b7b;
+    font-size:24rpx;
+    line-height:80rpx;
+    margin-right:20rpx;
+}
+.orderListMiddle{
+    width:750rpx;
+    height:180rpx;
+    background:#F8F8F8;
+}
+.orderListMiddleImage,.orderListMiddleText{
+    width:240rpx;
+    height:120rpx;
+    border-radius:10rpx;
+    float:left;
+    margin-top:30rpx;
+    margin-left:20rpx;
+    overflow:hidden;
+}
+.orderListMiddleImage image{
+    width:240rpx;
+    height:120rpx;
+}
+.orderListMiddleText{
+    width:450rpx !important;
+    line-height:120rpx;
+    font-size:30rpx;
+}
+
+.orderListBottom{
+    width:750rpx;
+    height:90rpx;
+    background:#fff;
+}
+.listBottomLeft,.listBottomRight{
+    width:350rpx;
+    height:90rpx;
+    float:left;
+    font-size:30rpx;
+    line-height:90rpx;
+    margin-left:20rpx;
+}
+.listBottomLeft text{
+    color:#DF6364;
+}
+.listBottomRight{
+    color:#DF6364;
+    margin-left:0rpx !important;
+    margin-right:20rpx;
+    float:right;
+    text-align:right;
+}
+
+.empty{
+    width:750rpx;
+    height:20rpx;
+}

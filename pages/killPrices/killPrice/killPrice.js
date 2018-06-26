@@ -19,7 +19,6 @@ Page({
             },
             method:'post',
             success: res => {
-                console.log(res)
                 this.setData({
                     pageData: res.data.data.list
                 })
@@ -76,7 +75,6 @@ Page({
 
     },
     toPriceInfo:function(e){
-        console.log(e.currentTarget.dataset.id)
         wx.navigateTo({
             url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,
         })

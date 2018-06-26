@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 674077 */
-  src: url('//at.alicdn.com/t/font_674077_axpvywbvigwopqfr.eot');
-  src: url('//at.alicdn.com/t/font_674077_axpvywbvigwopqfr.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_674077_axpvywbvigwopqfr.woff') format('woff'),
-  url('//at.alicdn.com/t/font_674077_axpvywbvigwopqfr.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_674077_axpvywbvigwopqfr.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.eot');
+  src: url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.woff') format('woff'),
+  url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -30,6 +30,10 @@
 .icon-wodedingdan:before { content: "\e655"; }
 
 .icon-wechat1:before { content: "\e646"; }
+
+.icon-gongjiao:before { content: "\e62d"; }
+
+.icon-timer:before { content: "\e626"; }
 
 .icon-shoucang:before { content: "\e62a"; }
 

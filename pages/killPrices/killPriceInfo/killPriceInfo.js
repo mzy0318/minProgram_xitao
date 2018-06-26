@@ -67,7 +67,7 @@ Page({
                     backgroundImage: res.data.data.bg_image_url,
                     backgroundMusic: res.data.data.music,
                     musicId: res.data.data.music_id,
-                    activeImage: res.data.data.act_image[0].url
+                    activeImage: res.data.data.act_image,
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.title,

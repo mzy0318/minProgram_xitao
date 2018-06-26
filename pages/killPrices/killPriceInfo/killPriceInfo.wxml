@@ -2,13 +2,15 @@
     <view class='killPriceBanner'>
         <image src='{{bannerImage}}' mode='scaleToFill' />
     </view>
+    <!-- 第一部分 -->
     <view class='killPriceInfoOne'>
         <view class='killPriceInfoTop'>
             <view class='empty'></view>
             <view class='killPriceInfoTopText'>{{pageData.title}}</view>
         </view>
+        <!-- coverImage -->
         <view class='killPriceInfoImg'>
-            <image src='{{activeImage}}' mode='scaleToFill' />
+            <image src='{{activeImage[0].url}}' mode='scaleToFill' />
         </view>
         <view class='killPriceInfoRange'>
             <view class='rangeWrap'>
@@ -46,12 +48,13 @@
             </view>
             <view class='infoTwoImg'>
                 <view class='infoTwoImgTitle'>快来参加!!!</view>
-                <view class='infoTwoImgImage'>
-                    <image src='{{pageData.act_image[0].url}}' mode='scaleToFill' />
+                <view class='infoTwoImgImage' wx:for='{{activeImage}}'>
+                    <image src='{{item.url}}' mode='scaleToFill' />
                 </view>
                 <button bindtap='toIndex'>了解机构></button>
             </view>
         </view>
+        <view class='empty'></view>
         <view class='killPriceInfoTwoBottom'>
             <view></view>
             <view></view>

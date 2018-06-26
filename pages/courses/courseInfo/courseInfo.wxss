@@ -3,8 +3,9 @@
 
 .courseInfoWrap {
     width: 750rpx;
-    height: 1207rpx;
+    min-height: 1207rpx;
     background: #f0efed;
+    padding-bottom:100rpx;
 }
 
 .courseInfoTop {
@@ -14,8 +15,8 @@
 }
 
 .courseInfoTopImg {
-    width: 750rpx;
-    height: 330rpx;
+     width: 750rpx; 
+     height: 330rpx; 
 }
 
 .courseInfoTopImg image {
@@ -29,6 +30,7 @@
     width: 100%;
     text-indent: 20rpx;
 }
+
 
 .courseInfoPay {
     width: 750rpx;
@@ -72,6 +74,34 @@
     margin-left: 10rpx;
 }
 
+.courseInfoDescirb{
+    width:750rpx;
+    min-height:140rpx;
+    background:#fff;
+    font-size:30rpx;
+    text-indent:20rpx;
+    color:#7b7b7b;
+    margin-top:20rpx;
+}
+.courseInfoDescirbTitle{
+    line-height:40rpx;
+    width:180rpx;
+    color:#fff;
+    background:#FE9900;
+    font-size:28rpx;
+    position:relative;
+}
+.courseInfoDescirbTitle::after{
+    border-bottom: 20rpx solid transparent;  
+    border-top: 20rpx solid transparent;  
+    border-right: 30rpx solid #fff;  
+    content: "";  
+    position: absolute;      
+    width: 0;
+    right:0rpx;
+    top:0rpx;
+}
+
 .courseInfoToIndex {
     width: 750rpx;
     line-height: 90rpx;
@@ -109,6 +139,19 @@
     font-size: 60rpx;
     line-height: 70rpx;
     border-left: 0.5px solid rgba(192, 192, 192, 0.5);
+}
+.courseInfoImage{
+    width:750rpx;
+    height:400rpx;
+    background:#fff;
+}
+.courseInfoImage image{
+    width:750rpx;
+    height:400rpx;
+}
+.empty{
+    width:750rpx;
+    height:20rpx;
 }
 
 .courseInfoBottom {
@@ -246,4 +289,39 @@ button[class='courseInfoBottomShare']::after {
     background:#FF9E05;
     color:#fff;
     margin-top:5rpx;
+}
+
+/* 课程详情 */
+.courseInfoContent{
+    width:750rpx;
+    min-height:115rpx;
+    background:#fff;
+}
+.infoContentTitle{
+    width:750rpx;
+    line-height:80rpx;
+    font-size:35rpx;
+    text-indent:20rpx;
+    border-bottom:1rpx solid #efefef;
+}
+.infoContentText{
+    width:710rpx;
+    min-height:40rpx;
+    text-indent:20rpx;
+    margin:0 auto;
+}
+.infoContentText text{
+    font-size:30rpx;
+    color:#7b7b7b;
+    line-height:40rpx;
+}
+
+
+.infoContentTextTitle{
+    width:100%;
+    height:40rpx;
+    line-height:40rpx;
+    border-left:2px solid #2E97CD;
+    font-size:30rpx;
+    text-indent:20rpx;
 }

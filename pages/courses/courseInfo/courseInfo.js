@@ -5,15 +5,29 @@ Page({
      * 页面的初始数据
      */
     data: {
-        lessonInfo:'',
-        isShow:true,
+        lessonInfo: '',
+        isShow: true,
+        pageData:'',
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.setData({
-            lessonInfo: wx.getStorageSync('lessonInfo')
+        let that = this
+        // this.setData({
+        //     lessonInfo: wx.getStorageSync('lessonInfo')
+        // })
+        getApp().request({
+            url: 'visitor_sale_lesson',
+            data: {
+                id: options.id
+            },
+            method: 'post',
+            success: function (res) {
+                that.setData({
+                    pageData:res.data.data
+                })
+            }
         })
     },
 
@@ -63,27 +77,45 @@ Page({
      * 用户点击右上角分享
      */
     handleShow: function () {
-       this.setData({
-           isShow:false
-       })
-    },
-    handleHidden: function () {
         this.setData({
-            isShow: true
+            isShow: false
+        })
+    },
+    handleHidden: function (e) {
+        let that = this;
+        e.detail.value['lesson_id'] = that.data.pageData.id
+        getApp().request({
+            url:'sale_lesson_appoint',
+            data: e.detail.value,
+            method:'post',
+            success:function(res){
+                if(Number(res.data.code)==1){
+                    wx.showToast({
+                        title: '预约成功',
+                        icon:'none',
+                    })
+                    that.setData({
+                        isShow: true
+                    })
+                }else{
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
         })
     },
     toIndex: function () {
-        wx.navigateTo({
-            url: '../index/index',
-        })
+        getApp().toIndex()
 
     },
-    tellPhone: function () {
-        app.tellPhone()
+    tellPhone: function (e) {
+        getApp().tellPhone(e)
     },
-    map: function () {
-        app.map()
-    },
+    // map: function () {
+    //     app.map()
+    // },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
         }
@@ -91,10 +123,21 @@ Page({
             title: '智慧招生小程序',
             path: '/page/courseInfo/courseInfo'
         }
-    }, 
-    toOrderInfo:function(e){
-        wx.navigateTo({
-            url: '../orderInfo/orderInfo?nowPrice=' + e.currentTarget.dataset.price,
-        })
+    },
+    toOrderInfo: function (e) {
+        let that = this;
+        if (that.data.allow_pay){
+            wx.navigateTo({
+                url: '../orderInfo/orderInfo?actId=' + e.currentTarget.dataset.id + '&actTag=' + e.currentTarget.dataset.acttag,
+            })
+        }else{
+            // wx.showModal({
+            //     title: '提示',
+            //     content: '管理员没有开启支付',
+            // })
+            wx.navigateTo({
+                url: '../orderInfo/orderInfo?actId=' + e.currentTarget.dataset.id + '&actTag=' + e.currentTarget.dataset.acttag,
+            })
+        }   
     },
 })

@@ -1,32 +1,45 @@
 <view class='schoolEdit'>
-    <!--学校环境-->
-    <view class='schoolEditOne'>
-        <view class='schoolEditOneTitle'>学校环境</view>
-        <view class='schoolEditOneContent'>
-            <view class='schoolEditOneImage'><image mode=''></image></view>
+    <form bindsubmit="submitSchoolInfo" >
+        <!--学校环境-->
+        <view class='schoolEditOne'>
+            <view class='schoolEditOneTitle'>学校环境</view>
+            <view class='schoolEditOneContent'>
+                <view class='schoolEditOneImage' bindtap='envPic'></view>
+                <view class='schoolEditOneImage' wx:for='{{envImage}}'>
+                    <image src='{{item}}' mode=''></image>
+                </view>
+            </view>
         </view>
-    </view>
-    <!--资质荣誉-->
-    <view class='schoolEditOne'>
-        <view class='schoolEditOneTitle'>资质荣誉</view>
-        <view class='schoolEditOneContent'>
-            <view class='schoolEditOneImage'><image mode=''></image></view>
+        <!--资质荣誉-->
+        <view class='schoolEditOne'>
+            <view class='schoolEditOneTitle'>资质荣誉</view>
+            <view class='schoolEditOneContent'>
+                <view class='schoolEditOneImage' bindtap='honorPic'></view>
+                <view class='schoolEditOneImage' wx:for='{{honorImage}}'>
+                    <image src='{{item}}' mode=''></image>
+                </view>
+            </view>
         </view>
-    </view>
-    <!--品牌视频-->
-    <view class='schoolEditTwo'>
-        <view class='schoolEditOneTitle'>品牌视频</view>
-        <view class='schoolEditTwoContent'>
-            <view class='empty'></view>
-            <view class='schoolEditTwoAdd'>+</view>
-            <view class='schoolEditTwoVideo'><video></video></view>
+        <!--品牌视频-->
+        <view class='schoolEditTwo'>
+            <view class='schoolEditOneTitle'>品牌视频</view>
+            <view class='schoolEditTwoContent'>
+                <view class='empty'></view>
+                <view class='schoolEditTwoAdd' bindtap='chooseVideo'>+</view>
+                <view class='schoolEditTwoVideo'>
+                    <video src='{{schoolVideo}}'></video>
+                </view>
+            </view>
         </view>
-    </view>
-    <view class='schoolEditThree'>
-        <view class='schoolEditOneTitle'>学校介绍</view>
-        <view class='schoolEditThreeContent'>
-            <view class='schoolEditThreeChild'><textarea></textarea></view>
+        <view class='schoolEditThree'>
+            <view class='schoolEditOneTitle'>学校介绍</view>
+            <view class='schoolEditThreeContent'>
+                <view class='schoolEditThreeChild'>
+                    <textarea name='school_intro'></textarea>
+                </view>
+            </view>
         </view>
-    </view>
-    <button>立即保存</button>
-</view> 
+        <button form-type='submit'>立即保存</button>
+    </form>
+
+</view>

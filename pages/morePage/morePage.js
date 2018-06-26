@@ -90,12 +90,12 @@ Page({
             }, {
                 name: '校区导航',
                 iconfont: 'iconfont icon-xiaoqu iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
+                url: '../baseOptions/schoolList/schoolList',
                 background: '#1055CC',
             }, {
                 name: '打卡作业',
                 iconfont: 'iconfont icon-job-task iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
+                url: '../baseOptions/schoolList/schoolList',
                 background: '#4A86E8',
             },
         ]

@@ -52,7 +52,7 @@
 }
 .collagePersonListTop{
     width:690rpx;
-    height:325rpx;
+    min-height:85rpx;
     background:#fff;
     margin:0 auto;
 }
@@ -66,7 +66,7 @@
 }
 .collagePersonListMiddle{
     width:690rpx;
-    height:485rpx;
+    min-height:85rpx;
     background:#fff;
     margin:40rpx auto;
 }
@@ -80,4 +80,12 @@
     width:400rpx;
     line-height:80rpx;
     margin-top:50rpx;
+}
+.empty{
+    width:750rpx;
+    height:20rpx;
+    background:transparent;
+}
+.price{
+    color:#C41A16;
 }

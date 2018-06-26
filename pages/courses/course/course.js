@@ -89,9 +89,9 @@ Page({
         })
     },
     toCourseInfo:function(e){
-        wx.setStorageSync('lessonInfo', e.currentTarget.dataset.lessoninfo)
+        wx.removeStorageSync('lessonInfo', e.currentTarget.dataset.lessoninfo)
         wx.navigateTo({
-            url: '../courseInfo/courseInfo',
+            url: '../courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
         })
     }
 })

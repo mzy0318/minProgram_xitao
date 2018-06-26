@@ -3,31 +3,8 @@
     <view></view>
 </view>
 <view class='empty'></view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
+<view class='modelContent' wx:for='{{pageData}}' bindtap='toModeInfo' data-modelinfo='{{item}}'>
+    <view class='modelImage'><image src='{{item.cover}}'  mode='scaleToFill'></image></view>
+    <view class='modelText'>{{item.name}}</view>
 </view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
-</view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
-</view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
-</view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
-</view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
-</view>
-<view class='modelContent'>
-    <view class='modelImage'><image mode=''></image></view>
-    <view class='modelText'>瑜伽-健康养生</view>
-</view>
+

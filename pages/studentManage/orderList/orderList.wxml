@@ -1,0 +1,17 @@
+<view class='orderListWrap'>
+    <view class='empty'></view>
+    <view class='orderListContent' wx:for='{{pageData}}'>
+        <view class='orderListTop'>
+            <view>{{item.title}}</view>
+            <view>{{item.create_time}}</view>
+        </view>
+        <view class='orderListMiddle'>
+            <view class='orderListMiddleImage'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
+            <view class='orderListMiddleText'>{{item.title}}</view>
+        </view>
+        <view class='orderListBottom'>
+            <view class='listBottomLeft'>实付款:<text>￥{{item.money}}</text></view>
+            <view class='listBottomRight'>{{item.status}}</view>
+        </view>
+    </view>
+</view>

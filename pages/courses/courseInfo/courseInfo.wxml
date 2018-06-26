@@ -1,32 +1,57 @@
 <view class='courseInfoWrap'>
     <view class='courseInfoTop'>
         <view class='courseInfoTopImg'>
-            <image src='{{lessonInfo.cover.url}}'></image>
+            <image src='{{pageData.cover.url}}'></image>
         </view>
-        <text>{{lessonInfo.name}}</text>
+        <text>{{pageData.title}}</text>
     </view>
     <view class='courseInfoPay'>
         <view class='courseInfoPayMany'>
             <text>￥</text>
-            <text>{{lessonInfo.now_price}}</text>
-            <text>{{lessonInfo.price_unit}}</text>
+            <text>{{pageData.now_price}}</text>
+            <text>{{pageData.price_unit}}</text>
         </view>
-        <text class='courseInfoPayDel'>￥{{lessonInfo.original_price}}</text>
-        <button bindtap='toOrderInfo' data-price='{{lessonInfo.now_price}}'>立即购买</button>
+        <text class='courseInfoPayDel'>￥{{pageData.original_price}}</text>
+        <button bindtap='toOrderInfo' data-price='{{lessonInfo.now_price}}' data-id='{{pageData.id}}' data-acttag='{{pageData.act_tag}}'>立即购买</button>
     </view>
-    <view class='courseInfoToIndex' bindtap='toIndex'>
-        智慧招生小程序>
+    <!-- 课程摘要 -->
+    <view class='courseInfoDescirb'>
+        <view class='courseInfoDescirbTitle'>课程摘要</view>
+        <view class='empty'></view>
+        <text decode>&nbsp;&nbsp;&nbsp;&nbsp;{{pageData.lesson_summary}}</text>
     </view>
+    <view class='courseInfoToIndex' bindtap='toIndex'>{{pageData.app_name}}></view>
     <view class='courseInfoInfo'>
         <view class='courseInfoInfoLeft' bindtap='map'>
-            <text class="iconfont icon-map-">郑州市紫金山路裕鸿国际D座2011室</text>
+            <text class="iconfont icon-map-">{{pageData.address}}</text>
         </view>
         <view class='courseInfoInfoRight'>
-            <text bindtap='tellPhone' class="iconfont icon-phone-r"></text>
+            <text bindtap='tellPhone' data-phonenum='{{pageData.telephone}}' class="iconfont icon-phone-r"></text>
         </view>
     </view>
+    <view class='empty'></view>
+    <view class='courseInfoImage' wx:for='{{pageData.act_image}}'>
+        <image src='{{item.url}}' mode='scaleToFill'></image>
+    </view>
+    <!-- 课程详情 -->
+    <view class='courseInfoContent'>
+        <view class='infoContentTitle'>课程详情</view>
+        <view class='infoContentText'>
+            <view class='infoContentTextTitle'>课程简介</view>
+            <text>{{pageData.lesson_detail}}</text>
+        </view>
+        <view class='infoContentText'>
+            <view class='infoContentTextTitle'>时间安排</view>
+            <text>{{pageData.time_range}}</text>
+        </view>
+        <view class='infoContentText'>
+            <view class='infoContentTextTitle'>学习内容</view>
+            <text>{{pageData.lesson_content}}</text>
+        </view>
+    </view>
+    <!-- 页面最底部按钮 -->
     <view class='courseInfoBottom'>
-        <view class='courseInfoBottomPhone' bindtap='tellPhone'>
+        <view class='courseInfoBottomPhone' bindtap='tellPhone' data-phonenum='{{pageData.telephone}}'>
             <text class="iconfont icon-phone-r iconFontSize"></text>
             <text>电话</text>
         </view>
@@ -36,17 +61,25 @@
         </button>
         <button bindtap='handleShow' class='courseInfoBottomListen'>预约试听</button>
     </view>
-    <view class='courseInfoShareWrap' hidden='{{isShow}}' >
+    <!-- 预约试听部分 -->
+    <view class='courseInfoShareWrap' hidden='{{isShow}}'>
         <view class='courseInfoShare'>
             <view class='courseInfoShareTop'>
                 <view>预约礼包,预约即可领取</view>
-                <view><text>*</text>若您喜欢本校课程,可直接下单购买</view>
+                <view>
+                    <text>*</text>若您喜欢本校课程,可直接下单购买</view>
             </view>
             <view class='courseInfoShareMiddle'>请留下您的联系方式,以便尽快联系您</view>
             <view class='courseInfoShareBottom'>
-                <view><input type='number' placeholder='手机号' maxlength='11' /></view>
-                <view><input type='text' placeholder='联系人' /></view>
-                <button data-is='true' bindtap='handleHidden'>预约试听</button>
+                <form bindsubmit="handleHidden">
+                    <view>
+                        <input type='number' placeholder='手机号' name='phone' maxlength='11' />
+                    </view>
+                    <view>
+                        <input type='text' placeholder='联系人' name='nickname' />
+                    </view>
+                    <button data-is='true' formType="submit">预约试听</button>
+                </form>
             </view>
         </view>
     </view>

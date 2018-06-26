@@ -44,6 +44,7 @@
     left:0rpx;
     bottom:0rpx;
     border:0px;
+    z-index:1000;
 }
 .schoolEdit button::after{
     border:0px;

@@ -1,10 +1,10 @@
-<view class='courseList'>
-    <view class='courseListLeft'><image mode='scaleToFill'></image></view>
+<view class='courseList' wx:for='{{pageData}}'>
+    <view class='courseListLeft' bindtap='toIndex'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
     <view class='courseListRight'>
-        <view class='courseListRightTop'>智慧招生-暑假招生方案</view>
+        <view class='courseListRightTop'>{{item.title}}</view>
         <view class='courseListRightBottom'>
-            <text>预约时间:2018-06-08</text>
-            <text class='iconfont icon-phone'></text>
+            <text>预约时间:{{item.create_time}}</text>
+            <text class='iconfont icon-phone' bindtap='tellPhone' data-phonenum='{{item.phone}}'></text>
         </view>
     </view>
 </view>

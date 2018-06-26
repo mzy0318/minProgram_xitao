@@ -1,4 +1,4 @@
-// pages/actReg/actRegUserInfo/actRegUserInfo.js
+let utils = require('../../../utils/util.js')
 Page({
 
     /**
@@ -6,12 +6,15 @@ Page({
      */
     data: {
         isShow:true,
+        pageData:'',
+        userInfo:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         getApp().request({
             url:'org/normal_joiner_list',
             data:{
@@ -21,7 +24,12 @@ Page({
             },
             method:'post',
             success:function(res){
-                console.log(res)
+                for(let i = 0;i<res.data.data.list.length;i++){
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                }
+                that.setData({
+                    pageData:res.data.data.list,
+                })
             } 
         })
     },
@@ -85,8 +93,10 @@ Page({
             })
         } else if (Number(e.currentTarget.dataset.num) == 0){
             that.setData({
-                isShow: false
+                isShow: false,
+                userInfo: e.currentTarget.dataset.userdata,
             })
+            console.log(that.data.userInfo)
         }
     }
 })

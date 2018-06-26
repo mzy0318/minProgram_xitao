@@ -27,7 +27,7 @@
     width:290rpx;
     height:380rpx;
     border-radius:5px 5px 0px 0px;
-    background:#0ff;
+    background:#fff;
 }
 .modelImage image{
     width:290rpx;

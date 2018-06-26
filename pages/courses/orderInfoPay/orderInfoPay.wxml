@@ -1,0 +1,36 @@
+<view class='orderInfoPayWrap'>
+    <view class='empty'></view>
+    <view class='orderInfoPayNumber'>
+        <view class='payNumberLeft'><text decode>订单编号: {{pageData.order_number}}</text></view>
+        <view class='payNumberRight'>{{pageData.status}}</view>
+    </view>
+    <view class='empty'></view>
+    <view class='infoNumberInfo'>
+        <view class='infoNumberInfoLeft'>▪ 姓名:<text decode>&nbsp;&nbsp;{{pageData.nickname}}</text></view>
+        <view class='infoNumberInfoRight'>▪ 电话:<text decode>&nbsp;&nbsp;{{pageData.phone}}</text></view>
+    </view>
+    <view class='infoPayProduct'>
+        <view class='infoPayProductTop'>
+            <view class='infoPayProductLeft'><text></text>{{pageData.title}}</view>
+            <view class='infoPayProductRight'>{{pageDtat.phone}}</view>
+        </view>
+        <view class='infoPayProductBottom'>
+            <view class='infoPayProductBottomImage'><image src='{{pageData.cover.url}}' mode='scaleToFill'></image></view>
+            <view class='infoPayProductBottomTitle'>{{pageData.title}}</view>
+        </view>
+    </view>
+    <view class='infoPayList'>
+        <view>▪ 类型:<text decode>&nbsp;&nbsp;{{pageData.type}}</text></view>
+        <view>▪ 原价:<text decode>&nbsp;&nbsp;{{pageData.original_price}}.00</text></view>
+        <view>▪ 单价:<text decode>&nbsp;&nbsp;{{pageData.unit_price}}</text></view>
+        <view>▪ 数量:<text decode>&nbsp;&nbsp;{{pageData.amount}}</text></view>
+        <view>▪ 总价:<text decode>&nbsp;&nbsp;￥{{pageData.money}}.00</text></view>
+        <view>▪ 优惠:<text decode>&nbsp;&nbsp;￥{{pageData.discount}}.00</text></view>
+    </view>
+    <view class='payInfo'>
+        <view class='empty'></view>
+        <view>实付款:<text decode>￥{{pageData.money}}.00</text></view>
+        <view>下单时间:{{createTime}}</view>
+    </view>
+    <button bindtap='payMoney'>立即付款</button>
+</view>

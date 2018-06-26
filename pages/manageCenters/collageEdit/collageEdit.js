@@ -177,9 +177,11 @@ Page({
             join_info_require: this.data.nameInfoId,
             join_info_text: this.data.nameInfo,
             cover_image: this.data.cover_image,
-            act_image: this.data.actImg0,
+            // act_image: this.data.actImg0,
         };
-        console.log('sendData', sendData)
+        for (let i = 0; i < this.data.actImg0.length;i++){
+            sendData['act_image[' + i + ']'] = that.data.actImg0[i];
+        }
         getApp().request({
             url:'org/make_personal_group',
             data: sendData,

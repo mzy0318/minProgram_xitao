@@ -22,7 +22,7 @@
             </view>
         </view>
         <view class='oneButton'>
-            <button bindtap='toCollageJoin'>我要参团</button>
+            <button bindtap='toCollageJoin' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' >我要参团</button>
         </view>
     </view>
     <view class='myTeam'>

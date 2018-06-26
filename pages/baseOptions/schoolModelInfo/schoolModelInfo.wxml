@@ -1,0 +1,9 @@
+<view class='infoSwiper'>
+    <swiper indicator-dots circular>
+        <swiper-item>
+            <view class='infoSwiperImage'><image src='{{pageData.cover}}' mode='scaleToFill'></image></view>
+        </swiper-item>
+    </swiper>
+</view> 
+<view class='schoolInfoTitle'>{{pageData.name}}</view>
+<button class='schoolInfoBtn' bindtap='submitSchoolModel'>立即启用</button>

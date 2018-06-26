@@ -1,4 +1,5 @@
 // pages/courses/userCourseList/userCourseList.js
+let utils = require('../../../utils/util.js')
 Page({
 
     /**
@@ -18,9 +19,11 @@ Page({
             data:{},
             method:'post',
             success:function(res){
-                console.log(res)
+                for (let i = 0; i < res.data.data.length; i++) {
+                    res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time))
+                }
                 that.setData({
-                    pageData:res.data.data.list
+                    pageData:res.data.data
                 })
             }
         })
@@ -73,5 +76,11 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    tellPhone:function(e){
+        getApp().tellPhone(e)
+    },
+    toIndex:function(){
+        getApp().toIndex()
     }
 })

@@ -1,7 +1,7 @@
 <view class='killPriceListWrap'>
     <view class='killPriceListContet' wx:for='{{userList}}'>
-        <view class='killPriceListTop' bindtap='toPricePerson'  data-actid='{{item.act_id}}' data-joinerid='{{item.joiner_id}}' data-acttag='{{item.act_tag}}'>
-            <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;【{{item.is_leader}}】{{item.nickname}}</text>
+        <view class='killPriceListTop' bindtap='toPricePerson'  data-actid='{{item.act_id?item.act_id:item.act_nice_id}}' data-joinerid='{{item.joiner_id}}' data-acttag='{{item.act_tag}}'>
+            <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.is_leader}}{{item.nickname}}</text>
             <text>2018-05-26 15:51</text>
         </view>
         <view class='killPriceListBottom'>
@@ -26,6 +26,34 @@
         <view class='childView'>成团价格:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
         <view class='childView'>参团时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
         <view class='childView'>过期时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
+    </view>
+    <button bindtap='hiddenInfo'>返回</button>
+</view>
+<view class='collageListWrap' hidden='{{actReg}}'>
+    <view class='empty'></view>
+    <view class='empty'></view>
+    <view class='collagePersonListTop'>
+        <view class='childView'>活动价格:<text decode  class='price'>&nbsp;&nbsp;{{personInfo.now_price}}</text></view>
+    </view>
+    <view class='collagePersonListMiddle'>
+        <view class='childView'>真实姓名:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <view class='childView'>手机号码:<text decode >&nbsp;&nbsp;{{personInfo.phone}}</text></view>
+        <view class='childView'>报名时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
+    </view>
+    <button bindtap='hiddenInfo'>返回</button>
+</view>
+<view class='collageListWrap' hidden='{{lesson}}'>
+    <view class='empty'></view>
+    <view class='empty'></view>
+    <view class='collagePersonListTop'>
+        <view class='childView'>课程原价:<text decode >&nbsp;&nbsp;{{personInfo.original_price}}元</text></view>
+        <view class='childView'>课程售价:<text decode class='price'>&nbsp;&nbsp;{{personInfo.now_price}}</text>元</view>
+        <view class='childView'>课程数量:<text decode >&nbsp;&nbsp;{{personInfo.course_number}}节课</text></view>
+    </view>
+    <view class='collagePersonListMiddle'>
+        <view class='childView'>真实姓名:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <view class='childView'>手机号码:<text decode >&nbsp;&nbsp;{{personInfo.phone}}</text></view>
+        <view class='childView'>报名时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
     </view>
     <button bindtap='hiddenInfo'>返回</button>
 </view>

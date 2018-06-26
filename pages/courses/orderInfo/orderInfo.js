@@ -7,16 +7,32 @@ Page({
     data: {
         initNum: 1,
         className: 'orderInfoNumJianFalse',
-        nowPrice:'',
+        pageData:'',
+        actId:'',
+        actTag:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options', options)
-        this.setData({
-            nowPrice: options.nowPrice,
+        let that = this;
+        that.setData({
+            actId: options.actId,
+            actTag: options.actTag,
+        })
+        getApp().request({
+            url:'product',
+            data:{
+                act_id: options.actId,
+                act_tag: options.actTag,
+            },
+            method:'post',
+            success:function(res){
+                that.setData({
+                    pageData:res.data.data
+                })
+            }
         })
     },
 
@@ -106,4 +122,21 @@ Page({
             initNum: n,
         })
     },
+    orderSubmit:function(res){
+        let that = this;
+        res.detail.value['act_id'] = that.data.actId
+        res.detail.value['act_tag'] = that.data.actTag
+        res.detail.value['amount'] = that.data.initNum
+        getApp().request({
+            url:'generate_order',
+            method:'post',
+            data: res.detail.value,
+            success:function(res){
+                let payInfo = JSON.stringify(res.data.data)
+                wx.navigateTo({
+                    url: '../orderInfoPay/orderInfoPay?payInfo=' + payInfo,
+                })
+            }
+        })
+    }
 })

@@ -18,7 +18,7 @@ Page({
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
         if (pageTypeStu == 6){
             getApp().request({
-                url: "bargain_list",
+                url: "my_bargain_list",
                 method: "post",
                 data: {},
                 success: res => {
@@ -107,13 +107,12 @@ Page({
     },
     toKillPriceInfo:function(e){
         let personInfo = JSON.stringify(e.currentTarget.dataset)
-        console.log('e.currentTarget.dataset', e.currentTarget.dataset)
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
-        if (pageTypeStu == 6) {
+        if (Number(pageTypeStu) == 6) {
             wx.navigateTo({
                 url: '../killPricePerson/killPricePerson?personInfo=' + personInfo + '&nickName=' + e.currentTarget.dataset.nickname,
             })
-        } else if (pageTypeStu == 3) {
+        } else if (Number(pageTypeStu) == 3) {
             wx.navigateTo({
                 url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joinerid + '&actId=' + e.currentTarget.dataset.id,
             })

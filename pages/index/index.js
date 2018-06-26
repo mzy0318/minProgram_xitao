@@ -10,21 +10,21 @@ Page({
         orgId: 0,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         optionsUrl: [
-            '../baseOptions/schoolInfo/schoolInfo',
-            '../baseOptions/teachers/teachers',
-            '../baseOptions/studentStyle/studentStyle',
-            '../killPrices/killPriceList/killPriceList',
-            '../collage/collageList/collageList',
-            '../baseOptions/opinions/opinions',
-            '../baseOptions/contactUs/contactUs',
-            '../morePage/morePage',
+            '../baseOptions/schoolInfo/schoolInfo',  //学校简介
+            '../courses/course/course',     //课程导航
+            '../baseOptions/schoolList/schoolList',   //校区列表
+            '../killPrices/killPriceList/killPriceList',    //
+            '../baseOptions/teachers/teachers',    //师资力量
+            '../baseOptions/studentStyle/studentStyle',    //学员风采
+            '../baseOptions/opinions/opinions',            //意见建议
+            '../morePage/morePage',    //更多
         ],
-        pageData:'',
-        isGetUser:false,
+        pageData: '',
+        isGetUser: false,
         paintData: [
             {
                 backgroundColor: '#FEB33C',
-                width:'250rpx',
+                width: '250rpx',
             }, {
                 backgroundColor: '#50D0AD',
                 width: '250rpx',
@@ -52,7 +52,7 @@ Page({
     //事件处理函数
     onLoad: function () {
         let that = this;
-        if (wx.getStorageSync('userInfo')!=''){
+        if (wx.getStorageSync('userInfo') != '') {
             that.setData({
                 isGetUser: true,
             })
@@ -62,12 +62,11 @@ Page({
             method: "post",
             data: {},
             success: res => {
-                for (let i = 0; i < res.data.data.home_icon.length;i++){
+                for (let i = 0; i < res.data.data.home_icon.length; i++) {
                     res.data.data.home_icon[i].url = that.data.optionsUrl[i]
                 }
-                console.log(res.data.data)
                 that.setData({
-                    pageData:res.data.data
+                    pageData: res.data.data
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.app_name,
@@ -85,7 +84,7 @@ Page({
                 // console.log("org_id:", getApp().config.orgId,"code:",res.code)
                 getApp().request({
                     url: "login",
-                    method:"post",
+                    method: "post",
                     data: {
                         code: res.code,
                         org_id: getApp().config.orgId,
@@ -136,21 +135,61 @@ Page({
             url: res.target.dataset.url,
         })
     },
-    nav:function(){
-        wx.navigateTo({
-            url: '../morePage/morePage',
-        })
+    nav: function (e) {
+        
+        if (e.currentTarget.dataset.url!=undefined){
+            wx.navigateTo({
+                url: e.currentTarget.dataset.url,
+            })
+        }else{
+            wx.navigateTo({
+                url: '../morePage/morePage',
+            })
+        }
     },
-    getUserInfo:function(e){
+    getUserInfo: function (e) {
         let that = this;
         wx.setStorageSync('userInfo', JSON.stringify(e.detail.userInfo));
         that.setData({
-            isGetUser:true
+            isGetUser: true
         })
     },
-    toContentPage:function(e){
+    toContentPage: function (e) {
         wx.navigateTo({
             url: e.currentTarget.dataset.url,
+        })
+    },
+    onPullDownRefresh: function () {
+        let that = this
+        getApp().request({
+            url: "home",
+            method: "post",
+            data: {},
+            success: res => {
+                for (let i = 0; i < res.data.data.home_icon.length; i++) {
+                    res.data.data.home_icon[i].url = that.data.optionsUrl[i]
+                }
+                that.setData({
+                    pageData: res.data.data
+                })
+                wx.setNavigationBarTitle({
+                    title: res.data.data.app_name,
+                });
+                wx.setNavigationBarColor({
+                    frontColor: res.data.data.navi_font_color,
+                    backgroundColor: res.data.data.navi_background_color,
+                })
+
+                wx.stopPullDownRefresh()
+            }
+        })
+        // setTimeout(pullDown,2000)
+        // function pullDown(){
+        // }
+    },
+    toCourseInfo:function(e){
+        wx.navigateTo({
+            url: '../courses/courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
         })
     }
 })

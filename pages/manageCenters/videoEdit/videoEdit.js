@@ -121,7 +121,6 @@ Page({
         let that = this;
         wx.chooseVideo({
             success: function (res) {
-                console.log(res)
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;

@@ -51,7 +51,7 @@ App({
     getHost: () => {
         var online = "http://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
         var dev = "http://192.168.1.112:8888/" + getApp().getExtConfig().version + "/";
-        return online;
+        return dev;
     },
     hasLogin: false,//默认app是未登录状态
     request: param => {
@@ -148,15 +148,13 @@ App({
             })
         }
     },
-    map: function () {
-        let latitude = 34.752901;
-        let longitude = 113.683063
+    map: function (latitude, longitude, name, address) {
         wx.openLocation({
             latitude: latitude,
             longitude: longitude,
             scale: 28,
-            name: '智慧招生小程序',
-            address: '郑州市紫金山路裕鸿国际D座2011',
+            name: name,
+            address: address,
         })
     },
     tellPhone: function (e) {
@@ -172,4 +170,62 @@ App({
     randomNum: function () {
         return Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
     },
+    showToast:function(msg){
+        wx.showToast({
+            title: msg,
+            icon:'none',
+            mask: true,
+        })
+    },
+    // 上传多个图片
+    upLoaderPics: function (imgPath, actImg){
+        for (let i = 0; i < imgPath.length; i++) {
+            getApp().request({
+                url: "org/policy",
+                method: "post",
+                data: {
+                    "type": "image"
+                },
+                success: function (res) {
+                    let sendData = {
+                        "key": res.data.data.dir + imgPath[i].path,
+                        "OSSAccessKeyId": res.data.data.accessid,
+                        "host": res.data.data.host,
+                        "expire": res.data.data.expire,
+                        "signature": res.data.data.signature,
+                        "policy": res.data.data.policy,
+                        'success_action_status': '200'
+                    }
+                    wx.uploadFile({
+                        url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
+                        name: 'file',
+                        filePath: imgPath[i].path,
+                        formData: sendData,
+                        success: function (res) {
+                            getApp().request({
+                                url: "org/exchange",
+                                data: {
+                                    "key": sendData.key,
+                                    "type": "image",
+                                },
+                                method: "post",
+                                success: function (r) {
+                                    r = r.data
+                                    if (r.code == 0) {
+                                        console.log("上传到服务器出错");
+                                        return
+                                    }
+                                    //得到图片的id和地址
+                                    actImg.push(r.data.imageId)
+                                    that.setData({
+                                        actImg0: actImg,
+                                    })
+                                }
+                            });
+                        }
+                    })
+                }
+            })
+        }
+    }
 })

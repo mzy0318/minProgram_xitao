@@ -5,19 +5,22 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        pageData:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         getApp().request({
-            url:'theme/list',
-            method:'get',
+            url:'org/template_list',
+            method:'post',
             data:{},
             success:function(res){
-                console.log(res)
+                that.setData({
+                    pageData:res.data.data
+                })
             }
         })
     },
@@ -69,5 +72,10 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    toModeInfo:function(e){
+        wx.navigateTo({
+            url: '../schoolModelInfo/schoolModelInfo?modelInfo=' + JSON.stringify(e.currentTarget.dataset.modelinfo),
+        })
     }
 })

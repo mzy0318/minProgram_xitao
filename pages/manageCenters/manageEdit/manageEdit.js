@@ -5,41 +5,45 @@ Page({
      * 页面的初始数据
      */
     data: {
-        isShow:true,
-        isHidden:false,
+        actId:'',
+        isShow: true,
+        isHidden: false,
         isShowO: true,
         isHiddenO: false,
-        getbargainType:'',
-        getBargainLimitType:'',
+        getbargainType: '',
+        getBargainLimitType: '',
         startDate: '2016-09-01',
         endDate: '2016-09-01',
-        rule:'',
-        nameInfo:['姓名','电话'],
-        nameInfoId:[1,1],
-        isOptions:true,
-        imageData:null,
-        editTitle:undefined,
-        backgroundImage:' ',
+        rule: '',
+        nameInfo: ['姓名', '电话'],
+        nameInfoId: [1, 1],
+        isOptions: true,
+        imageData: null,
+        editTitle: undefined,
+        backgroundImage: ' ',
+        actImg0:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        console.log(options)
+    onLoad: function(options) {
         let that = this
-        if (options.id=='undefined'){
+        that.setData({
+            actId: options.id,
+        })
+        if (options.id == 'undefined') {
             this.setData({
                 backgroundImage: options.image
             })
-        }else{
+        } else {
             getApp().request({
                 url: 'org/make_bargain',
                 data: {
                     id: options.id
                 },
                 method: 'get',
-                success: function (res) {
+                success: function(res) {
                     that.setData({
                         editTitle: res.data.data.title,
                         startDate: res.data.data.start_time,
@@ -54,71 +58,73 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
-    switchTab: function (e) {
+    switchTab: function(e) {
         this.setData({
-            isShow:!this.data.isShow,
-            isHidden:!this.data.isHidden,
+            isShow: !this.data.isShow,
+            isHidden: !this.data.isHidden,
             getbargainType: e.currentTarget.dataset.value,
         })
     },
-    switchTabO: function (e) {
+    switchTabO: function(e) {
         this.setData({
             isShowO: !this.data.isShowO,
             isHiddenO: !this.data.isHiddenO,
             getBargainLimitType: e.currentTarget.dataset.value
         })
     },
-    getFormData:function(e){
+    getFormData: function(e) {
+        let that = this;
         let sendData = {
+            id: that.data.actId,
             title: e.detail.value.title,
             original_price: e.detail.value.original_price,
             now_price: e.detail.value.now_price,
-            pay_status: e.detail.value.pay_status?1:0,
+            pay_status: e.detail.value.pay_status ? 1 : 0,
             start_time: this.data.startDate,
             end_time: this.data.endDate,
             joiner_limit: e.detail.value.joiner_limit,
@@ -127,46 +133,48 @@ Page({
             rule: this.data.rule,
             join_info_require: this.data.nameInfoId,
             join_info_text: this.data.nameInfo,
-            act_image: this.data.imageData ? this.data.imageData:[],
-            bargain_type: this.data.getbargainType ? this.data.getbargainType:1,
-            bargain_limit_type: this.data.getBargainLimitTyp ? this.data.getBargainLimitType:1,
+            bargain_type: this.data.getbargainType ? this.data.getbargainType : 1,
+            bargain_limit_type: this.data.getBargainLimitTyp ? this.data.getBargainLimitType : 1,
             bargain_param: e.detail.value.bargain_paramO ? e.detail.value.bargain_paramO : e.detail.value.bargain_paramT,
             banner_image_url: this.data.backgroundImage,
-            status: e.detail.value.joiner_limit?1:0,
+            status: e.detail.value.joiner_limit ? 1 : 0,
+        }
+        for (let i = 0; i < that.data.actImg0.length; i++){
+            sendData['act_image[' + i + ']'] = that.data.actImg0[i];
         }
         getApp().request({
             url: 'org/make_bargain',
             data: sendData,
-            method:'post',
+            method: 'post',
             success: res => {
                 wx.showToast({
                     title: res.data.msg,
-                    icon:'none'
+                    icon: 'none'
                 })
-                if(res.data.code==1){
+                if (res.data.code == 1) {
                     wx.navigateTo({
-                        url: '../manageActive/manageActive',
+                        url: '../manageActive/manageActive?url=org/bargain_list',
                     })
                 }
             }
         })
     },
-    getStartTime:function(e){
+    getStartTime: function(e) {
         this.setData({
             startDate: e.detail.value
         })
     },
-    getEndTime: function (e) {
+    getEndTime: function(e) {
         this.setData({
             endDate: e.detail.value
         })
     },
-    getRule:function(e){
+    getRule: function(e) {
         this.setData({
             rule: e.detail.value
         })
     },
-    addNameOptions:function(e){
+    addNameOptions: function(e) {
         let arr = this.data.nameInfo;
         let arrO = this.data.nameInfoId
         arr.push(e.target.dataset.value);
@@ -176,19 +184,68 @@ Page({
             nameInfoId: arrO
         })
     },
-    showOptions:function(e){
+    showOptions: function(e) {
         this.setData({
-            isOptions:Boolean(Number(e.target.dataset.is))
+            isOptions: Boolean(Number(e.target.dataset.is))
         })
     },
-    getImage:function(e){
+    getImage: function(e) {
         let that = this
         wx.chooseImage({
             success: function(res) {
                 that.setData({
                     imageData: res.tempFilePaths
                 })
-
+                let imgPath = res.tempFiles;
+                let actImg = [];
+                for (let i = 0; i < imgPath.length; i++) {
+                    getApp().request({
+                        url: "org/policy",
+                        method: "post",
+                        data: {
+                            "type": "image"
+                        },
+                        success: function(res) {
+                            let sendData = {
+                                "key": res.data.data.dir + imgPath[i].path,
+                                "OSSAccessKeyId": res.data.data.accessid,
+                                "host": res.data.data.host,
+                                "expire": res.data.data.expire,
+                                "signature": res.data.data.signature,
+                                "policy": res.data.data.policy,
+                                'success_action_status': '200'
+                            }
+                            wx.uploadFile({
+                                url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
+                                name: 'file',
+                                filePath: imgPath[i].path,
+                                formData: sendData,
+                                success: function(res) {
+                                    getApp().request({
+                                        url: "org/exchange",
+                                        data: {
+                                            "key": sendData.key,
+                                            "type": "image",
+                                        },
+                                        method: "post",
+                                        success: function(r) {
+                                            r = r.data
+                                            if (r.code == 0) {
+                                                console.log("上传到服务器出错");
+                                                return
+                                            }
+                                            //得到图片的id和地址
+                                            actImg.push(r.data.imageId)
+                                            that.setData({
+                                                actImg0: actImg,
+                                            })
+                                        }
+                                    });
+                                }
+                            })
+                        }
+                    })
+                }
             },
         })
     },

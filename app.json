@@ -15,13 +15,14 @@
         "pages/manageCenters/schoolEdit/schoolEdit",
         "pages/manageCenters/oneLessonEdit/oneLessonEdit",
         "pages/manageCenters/actRegEdit/actRegEdit",
-        "pages/courses/courseInfo/courseInfo",
         "pages/courses/orderInfo/orderInfo",
         "pages/courses/courseClass/courseClass",
         "pages/courses/course/course",
         "pages/courses/courseUserList/courseUserList",
         "pages/courses/courseUserListInfo/courseUserListInfo",
         "pages/courses/stuCourseList/stuCourseList",
+        "pages/courses/courseInfo/courseInfo",
+        "pages/courses/orderInfoPay/orderInfoPay",
         "pages/baseOptions/teachers/teachers",
         "pages/baseOptions/schoolInfo/schoolInfo",
         "pages/baseOptions/opinions/opinions",
@@ -29,6 +30,8 @@
         "pages/baseOptions/contactUs/contactUs",
         "pages/baseOptions/sharePage/sharePage",
         "pages/baseOptions/schoolModel/schoolModel",
+        "pages/baseOptions/schoolModelInfo/schoolModelInfo",
+        "pages/baseOptions/schoolList/schoolList",
         "pages/killPrices/killPrice/killPrice",
         "pages/killPrices/killPricePerson/killPricePerson",
         "pages/killPrices/killPriceInfo/killPriceInfo",
@@ -49,13 +52,15 @@
         "pages/actReg/actRegManList/actRegManList",
         "pages/actReg/actRegSignUp/actRegSignUp",
         "pages/actReg/actRegUserInfo/actRegUserInfo",
+        "pages/studentManage/orderList/orderList",
         "components/otherOpt/otherOpt"
     ],
     "window": {
-        "backgroundTextStyle": "light",
+        "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black"
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "color": "#000",

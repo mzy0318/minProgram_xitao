@@ -90,9 +90,10 @@ Page({
     onShareAppMessage: function () {
 
     },
-    toCollageJoin: function () {
+    toCollageJoin: function (e) {
+        let formInfo = JSON.stringify(e.currentTarget.dataset.forminfo)
         wx.navigateTo({
-            url: '../collageSignup/collageSignup',
+            url: '../collageSignup/collageSignup?actId=' + e.currentTarget.dataset.actid + '&info=' + formInfo,
         })
     },
     toIndex: function () {

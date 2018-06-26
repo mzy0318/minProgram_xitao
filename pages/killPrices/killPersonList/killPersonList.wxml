@@ -1,7 +1,6 @@
 <view class='personListWrap'>
     <view class='empty'></view>
     <view class='personListInputName'>
-
     </view>
     <view class='personListContent' wx:for='{{userList.list}}'>
         <view class='personListTitle' bindtap='toKillPriceInfo' data-actId='{{item.act_id}}' data-id='{{imte.id}}' data-joinerId='{{item.joiner_id}}' data-nickname='{{item.nickname}}'>{{item.title}}</view>

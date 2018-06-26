@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        pageData:'',
+        pageData: '',
         joinInfo: ['姓名', '电话'],
         joinInfoId: [1, 1],
         endTime: '2018-08-06',
@@ -18,23 +18,23 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
         getApp().request({
-            url:'org/make_normal',
-            data:{
+            url: 'org/make_normal',
+            data: {
                 id: options.actId
             },
-            method:'get',
-            success:function(res){
+            method: 'get',
+            success: function(res) {
                 let actImg = [];
                 let actId = [];
-                for (let i = 0; i < res.data.data.act_image.length;i++){
+                for (let i = 0; i < res.data.data.act_image.length; i++) {
                     actImg.push(res.data.data.act_image[i].url)
                     actId.push(res.data.data.act_image[i].id)
                 }
                 that.setData({
-                    pageData:res.data.data,
+                    pageData: res.data.data,
                     actImage: actImg,
                     actImageID: actId,
                     endTime: res.data.data.end_time,
@@ -50,62 +50,62 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
-    getEndTime: function (e) {
+    getEndTime: function(e) {
         let that = this;
         that.setData({
             endTime: e.detail.value
         })
     },
-    chooseCoverPic: function () {
+    chooseCoverPic: function() {
         let that = this;
         wx.chooseImage({
             count: 1,
-            success: function (res) {
+            success: function(res) {
                 that.setData({
                     coverImage: res.tempFilePaths[0]
                 })
@@ -120,7 +120,7 @@ Page({
                     data: {
                         "type": "image"
                     },
-                    success: function (res) {
+                    success: function(res) {
                         let sendData = {
                             "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + '_' + getApp().randomNum() + imagePath,
                             "OSSAccessKeyId": res.data.data.accessid,
@@ -134,7 +134,7 @@ Page({
                             title: '图片上传中',
                         })
 
-                        setTimeout(function () {
+                        setTimeout(function() {
                             wx.hideLoading()
                         }, 5000)
                         wx.uploadFile({
@@ -142,7 +142,7 @@ Page({
                             name: 'file',
                             filePath: that.data.coverImage,
                             formData: sendData,
-                            success: function (res) {
+                            success: function(res) {
                                 getApp().request({
                                     url: "org/exchange",
                                     data: {
@@ -150,7 +150,7 @@ Page({
                                         "type": "image",
                                     },
                                     method: "post",
-                                    success: function (r) {
+                                    success: function(r) {
                                         r = r.data
                                         if (r.code == 0) {
                                             console.log("上传到服务器出错");
@@ -168,10 +168,10 @@ Page({
             },
         })
     },
-    choosePic: function () {
+    choosePic: function() {
         let that = this
         wx.chooseImage({
-            success: function (res) {
+            success: function(res) {
                 let imageArr = res.tempFilePaths
                 that.setData({
                     actImage: res.tempFilePaths
@@ -189,7 +189,7 @@ Page({
                         data: {
                             "type": "image"
                         },
-                        success: function (res) {
+                        success: function(res) {
                             let sendData = {
                                 "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + '_' + getApp().randomNum() + imageArr[i],
                                 "OSSAccessKeyId": res.data.data.accessid,
@@ -203,7 +203,7 @@ Page({
                                 title: '图片上传中',
                             })
 
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 wx.hideLoading()
                             }, 5000)
                             wx.uploadFile({
@@ -211,7 +211,7 @@ Page({
                                 name: 'file',
                                 filePath: that.data.actImage[i],
                                 formData: sendData,
-                                success: function (res) {
+                                success: function(res) {
                                     getApp().request({
                                         url: "org/exchange",
                                         data: {
@@ -219,7 +219,7 @@ Page({
                                             "type": "image",
                                         },
                                         method: "post",
-                                        success: function (r) {
+                                        success: function(r) {
                                             r = r.data
                                             if (r.code == 0) {
                                                 console.log("上传到服务器出错");
@@ -239,7 +239,7 @@ Page({
             },
         })
     },
-    formSubmit: function (e) {
+    formSubmit: function(e) {
         let that = this;
         let sendData = e.detail.value;
         sendData['id'] = '';
@@ -249,16 +249,19 @@ Page({
         sendData['sort'] = 0;
         sendData['join_info_require'] = that.data.joinInfoId;
         sendData['join_info_text'] = that.data.joinInfo;
-        sendData['act_image'] = that.data.actImageID;
+        // sendData['act_image'] = that.data.actImageID;
         sendData['status'] = sendData.status ? 0 : 1;
         sendData['pay_status'] = sendData.pay_status ? 0 : 1;
+        for (let i = 0; i < that.data.actImageID.length; i++) {
+            sendData['act_image[' + i + ']'] = that.data.actImageID[i];
+        }
         console.log('sendData', sendData);
         getApp().request({
-            url:'org/make_lesson_one',
-            method:'post',
+            url: 'org/make_lesson_one',
+            method: 'post',
             data: sendData,
-            success:function(res){
-                if(Number(res.data.code)==1){
+            success: function(res) {
+                if (Number(res.data.code) == 1) {
                     wx.navigateTo({
                         url: '../../actReg/actRegManList/actRegManList',
                     })

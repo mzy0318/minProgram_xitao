@@ -1,0 +1,33 @@
+.infoSwiper{
+    width:450rpx;
+    height:880rpx;
+    margin:20rpx auto;
+}
+.infoSwiper swiper{
+    width:450rpx;
+    height:880rpx;
+    background:#fff;
+}
+.infoSwiperImage{
+    width:450rpx;
+    height:880rpx;
+}
+.infoSwiperImage image{
+    width:450rpx;
+    height:880rpx;
+}
+.schoolInfoTitle{
+    width:750rpx;
+    line-height:60rpx;
+    font-size:35rpx;
+    text-align:center;
+    margin-top:20rpx;
+}
+.schoolInfoBtn{
+    width:300rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#FFCF0B;
+    font-size:35rpx;
+    margin-top:20rpx;
+}

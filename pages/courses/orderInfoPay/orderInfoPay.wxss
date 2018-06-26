@@ -1,0 +1,163 @@
+.orderInfoPayWrap{
+    width:750rpx;
+    height:1207rpx;
+    background:#f2f2f2;
+}
+.orderInfoPayNumber,.infoNumberInfo{
+    width:750rpx;
+    height:80rpx;
+    background:#fff;
+}
+.payNumberLeft{
+    width:500rpx;
+    height:80rpx;
+    line-height:80rpx;
+    float:left;
+    text-indent:20rpx;
+    font-size:30rpx;
+}
+.payNumberRight{
+    float:right;
+    width:200rpx;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:right;
+    margin-right:20rpx;
+    font-size:30rpx;
+    color:#E75F5F;
+}
+
+.infoNumberInfoLeft,.infoNumberInfoRight{
+    width:350rpx;
+    line-height:80rpx;
+    float:left;
+    font-size:30rpx;
+    text-indent:20rpx;
+}
+.infoNumberInfoRight{
+    float:right;
+    margin-right:20rpx;
+    text-align:left;
+}
+
+.infoPayProduct{
+    width:750rpx;
+    min-height:260rpx;
+    background:#fff;
+    margin-top:20rpx;
+}
+.infoPayProductTop{
+    width:750rpx;
+    height:80rpx;
+    border-bottom:1rpx solid #efefef;
+    position:relative;
+}
+.infoPayProductLeft{
+    width:400rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#46A2D1;
+    text-indent:20rpx;
+}
+.infoPayProductRight{
+    width:280rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    float:right;
+    position:absolute;
+    right:20rpx;
+    top:0rpx;
+    text-align:right;
+}
+.infoPayProductBottom{
+    width:750rpx;
+    height:180rpx;
+}
+.infoPayProductBottomImage{
+    width:240rpx;
+    height:120rpx;
+    border-radius:10rpx;
+    margin-left:20rpx;
+    margin-top:30rpx;
+    overflow:hidden;
+    float:left;
+}
+.infoPayProductBottomImage image{
+    width:240rpx;
+    height:120rpx;
+}
+.infoPayProductBottomTitle{
+    width:450rpx;
+    height:120rpx;
+    line-height:120rpx;
+    font-size:28rpx;
+    float:left;
+    margin-left:20rpx;
+    margin-top:30rpx;
+}
+.infoPayList{
+    width:750rpx;
+    height:360rpx;
+    background:#fff;
+    margin-top:20rpx;   
+}
+.infoPayList view{
+    font-size:30rpx;
+    text-indent:30rpx;
+    line-height:60rpx;
+    width:750rpx;
+}
+.infoPayList view:nth-child(3) text,.infoPayList view:nth-child(5) text{
+    color:#C63416;
+}
+.infoPayList view:nth-child(1) text{
+    color:#4D7396;
+}
+.infoPayList view:nth-child(2) text{
+    color:#7b7b7b;
+    text-decoration:line-through;
+}
+.infoPayList view:nth-child(6) text{
+    color:#189B17;
+}
+.payInfo{
+    width:750rpx;
+    height:140rpx;
+    margin-top:20rpx;
+    background:#fff;
+}
+.payInfo view:nth-child(2){
+    width:710rpx;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:right;
+    margin-right:20rpx;
+    font-size:35rpx;
+}
+.payInfo view:nth-child(2) text{
+    color:#EE5655;
+    font-size:45rpx;
+}
+.payInfo view:nth-child(3){
+    width:710rpx;
+    height:40rpx;
+    line-height:20rpx;
+    text-align:right;
+    margin-right:20rpx;
+    font-size:24rpx;
+    color:#7b7b7b;
+}
+.orderInfoPayWrap>button{
+    width:710rpx;
+    background:#F15352;
+    color:#fff;
+    line-height:70rpx;
+    font-size:30rpx;
+    margin-top:60rpx;
+}
+
+.empty{
+    width:750rpx;
+    height:20rpx;
+    background:transparent;
+}

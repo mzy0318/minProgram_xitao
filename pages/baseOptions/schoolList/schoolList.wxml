@@ -1,0 +1,10 @@
+<view class='schListInfo'>
+    <view class='schListContent' wx:for='{{pageData}}'>
+        <view class='schListInfoImage'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
+        <view class='schListInfoTitle'>{{item.name}}</view>
+        <view class='schListInfoAddress' bindtap='getAddress' data-name='{{item.name}}' data-address='{{item.address}}' data-latitude='{{item.latitude}}' data-longitude='{{item.longitude}}'><text class='iconfont icon-map- iconStyle0'></text><text decode>&nbsp;联系地址:</text><text decode>&nbsp;&nbsp;{{item.address}}</text></view>
+        <view class='schListInfoAddress' bindtap='makePhone' data-phonenum='{{item.telephone}}'><text class='iconfont icon-dianhuatianchong iconStyle' ></text><text decode>&nbsp;联系方式:</text><text decode>&nbsp;&nbsp;{{item.telephone}}</text></view>
+        <view class='schListInfoAddress'><text class='iconfont icon-timer iconStyle'></text><text decode>&nbsp;营业时间:</text><text decode>&nbsp;&nbsp;{{item.open_time}}</text></view>
+        <view class='schListInfoAddress'><text class='iconfont icon-gongjiao iconStyle'></text><text decode>&nbsp;交通路线:</text><text decode>&nbsp;&nbsp;{{item.traffic}}</text></view>
+    </view>
+</view>
