@@ -81,12 +81,21 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        console.log(JSON.parse(options.pageData))
+        let pageData = JSON.parse(options.pageData);
+
+
+        for (let i = 0; i < that.data.status.length;i++){
+            if (pageData.status == that.data.status[i].name){
+                that.setData({
+                    statusData: that.data.status[i],
+                })
+            }
+        }
+
         let firstName = JSON.parse(options.pageData).nickname.split('')[0];
         that.setData({
             sexData: that.data.sexArr[JSON.parse(options.pageData).sex],
             sexId: JSON.parse(options.pageData).sex,
-            statusData: that.data.status[that.data.index],
             pageData: JSON.parse(options.pageData),
             firseName: JSON.parse(options.pageData).nickname.split('')[0],
             userId: JSON.parse(options.pageData).id,
@@ -194,6 +203,17 @@ Page({
             that.setData({
                 statusData: that.data.status[e.currentTarget.dataset.index],
                 isOptions: true,
+            })
+            getApp().request({
+                url:'org/sale_lesson_edit_appoint_status',
+                data:{
+                    appointer_id: that.data.userId,
+                    status: e.currentTarget.dataset.index
+                },
+                method:'post',
+                success:function(res){
+                    console.log(res)
+                }
             })
         } else if (that.data.optionsType == 'sex'){
             that.setData({
@@ -329,7 +349,12 @@ Page({
                         method:'post',
                         data:{},
                         success:function(res){
-                            console.log(res.data.data);
+                            if(Number(res.data.code)==1){
+                                wx.showToast({
+                                    title: '保存成功',
+                                    icon:'success'
+                                })
+                            }
                             for (let i = 0; i < res.data.data.length;i++){
                                 if (res.data.data[i].id == that.data.userId){
                                     that.setData({

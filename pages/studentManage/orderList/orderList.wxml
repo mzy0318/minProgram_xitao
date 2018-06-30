@@ -1,6 +1,6 @@
 <view class='orderListWrap'>
     <view class='empty'></view>
-    <view class='orderListContent' wx:for='{{pageData}}'>
+    <view class='orderListContent' wx:for='{{pageData}}' bindtap='toPayInfo' data-payinfo='{{item}}'>
         <view class='orderListTop'>
             <view>{{item.title}}</view>
             <view>{{item.create_time}}</view>
@@ -15,3 +15,4 @@
         </view>
     </view>
 </view>
+<view class='noData'>您没有参加该活动</view>

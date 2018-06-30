@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "一元好课",
-    "navigationBarBackgroundColor":"#FD9D22"
+    "navigationBarBackgroundColor":"#FD9D22",
+    "navigationBarTextStyle": "white"
 }

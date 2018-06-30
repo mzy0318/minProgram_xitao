@@ -19,8 +19,10 @@ Page({
         startTime:'2018-06-04',
         endTime:'2018-06-05',
         isOption:true,
-        nameInfo: ['姓名', '电话'],
-        nameInfoId: [1, 1],
+        joinInfo: ['姓名', '电话'],
+        joinInfoId: [1, 1],
+        nameInfo:[],
+        nameInfoId: [],
         actId:0,
         title:'',
         phoneNum:'',
@@ -43,12 +45,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this
         this.setData({
             bannerImg: options.image,
         })
-        console.log(options.id)
-        let that = this
-        if(!options.id){
+        if(options.id != 'undefined'){
             getApp().request({
                 url: 'org/make_personal_group',
                 method: 'get',
@@ -56,6 +57,14 @@ Page({
                     id: options.id,
                 },
                 success:function(res){
+                    let joinInfo = [];
+                    let joinInfoId = [];
+                    for (let i = 0; i < res.data.data.join_info.length; i++) {
+                        joinInfo.push(res.data.data.join_info[i].text);
+                        joinInfoId.push(res.data.data.join_info[i].require)
+                    }
+                    joinInfo.splice(0, 2);
+                    joinInfoId.splice(0, 2)
                     that.setData({
                         actId:res.data.data.id,
                         title:res.data.data.title,
@@ -66,21 +75,23 @@ Page({
                         rule: res.data.data.rule,
                         description: res.data.data.description,
                         leaderReward: res.data.data.leader_reward,
-                        person1: res.data.data.act_set[0].person,
-                        price1: res.data.data.act_set[0].price,
-                        person2: res.data.data.act_set[1].person,
-                        price2: res.data.data.act_set[1].price,
-                        person3: res.data.data.act_set[2].person,
-                        price3: res.data.data.act_set[2].price,
-                        person4: res.data.data.act_set[3].person,
-                        price4: res.data.data.act_set[3].price,
-                        person5: res.data.data.act_set[4].person,
-                        price5: res.data.data.act_set[4].price,
+                        person1: res.data.data.act_set[0].person ? res.data.data.act_set[0].person:'',
+                        price1: res.data.data.act_set[0].price ? res.data.data.act_set[0].price : '',
+                        person2: res.data.data.act_set[1].person ? res.data.data.act_set[1].person:'',
+                        price2: res.data.data.act_set[1].price ? res.data.data.act_set[1].price:'',
+                        person3: res.data.data.act_set[2].person ? res.data.data.act_set[2].person:'',
+                        price3: res.data.data.act_set[2].price ? res.data.data.act_set[2].price:'',
+                        person4: res.data.data.act_set[3].person ? res.data.data.act_set[3].person:'',
+                        price4: res.data.data.act_set[3].price ? res.data.data.act_set[3].price:'',
+                        person5: res.data.data.act_set[4].person ? res.data.data.act_set[4].person : '',
+                        price5: res.data.data.act_set[4].price ? res.data.data.act_set[4].price : '',
                         oriPrice: res.data.data.original_price,
                         nowPrice: res.data.data.now_price,
                         bannerImg: res.data.data.banner_image_url,
                         // actImg: res.data.data.act_image,
                         // coverImg: res.data.data.cover_image,
+                        nameInfo: joinInfo,
+                        nameInfoId: joinInfoId
                     })
                 }
             })
@@ -136,6 +147,7 @@ Page({
 
     },
     formSubmit:function(e){
+        let that = this;
         let value = e.detail.value;
         let person = [];
         let price = [];
@@ -161,6 +173,7 @@ Page({
         }
         let sendData = {
             id:this.data.actId,
+            banner_image_url: that.data.bannerImg,
             title: e.detail.value.title,
             telephone: e.detail.value.telephone,
             address: e.detail.value.address,
@@ -172,28 +185,49 @@ Page({
             description: this.data.description,
             start_time: this.data.startTime,
             end_time: this.data.endTime,
-            person: person,
-            price: price,
-            join_info_require: this.data.nameInfoId,
-            join_info_text: this.data.nameInfo,
+            // person: person,
+            // price: price,
+            // join_info_require: this.data.nameInfoId,
+            // join_info_text: this.data.nameInfo,
             cover_image: this.data.cover_image,
             // act_image: this.data.actImg0,
         };
-        for (let i = 0; i < this.data.actImg0.length;i++){
-            sendData['act_image[' + i + ']'] = that.data.actImg0[i];
+        if (person.length != 0 && this.data.actImg0.length != 0 && that.data.nameInfo.length){
+            for (let i = 0; i < person.length; i++) {
+                sendData['person[' + i + ']'] = person[i];
+                sendData['price[' + i + ']'] = price[i];
+            }
+            for (let i = 0; i < this.data.actImg0.length; i++) {
+                sendData['act_image[' + i + ']'] = that.data.actImg0[i];
+            }
+            for (let i = 0; i < that.data.nameInfo.length; i++) {
+                let index = i + 2;
+                sendData['join_info_text[' + index + ']'] = that.data.nameInfo[i];
+                sendData['join_info_require[' + index + ']'] = that.data.nameInfoId[i];
+            }
         }
+
+        // for (let i = 0; i < that.data.joinInfo.length; i++) {
+        //     sendData['join_info_text[' + i + ']'] = that.data.joinInfo[i];
+        //     sendData['join_info_require[' + i + ']'] = that.data.joinInfoId[i];
+        // }
         getApp().request({
             url:'org/make_personal_group',
             data: sendData,
             method:'post',
             success:function(res){
-                wx.showToast({
-                    title: res.data.msg,
-                    icon:'none',
-                })
-                if (res.data.msg==1){
+                if (Number(res.data.code)==1){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
                     wx.navigateTo({
-                        url: '../org/personal_group_list/org/personal_group_list?url=org/personal_group_list',
+                        url: '../manageActive/manageActive?url=org/personal_group_list',
+                    })
+                }else{
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
                     })
                 }
             }
@@ -365,6 +399,29 @@ Page({
     showOptions: function (e) {
         this.setData({
             isOption: Boolean(Number(e.target.dataset.is))
+        })
+    },
+    jianForm: function (e) {
+        let that = this;
+        let nameInfo = that.data.nameInfo
+        let nameInfoId = that.data.nameInfoId
+        nameInfo.splice(e.target.dataset.index, 1)
+        nameInfoId.splice(e.target.dataset.index, 1)
+        that.setData({
+            nameInfo: nameInfo,
+            nameInfoId: nameInfoId,
+        })
+    },
+    isMustEdit: function (e) {
+        let that = this;
+        let nameInfoId = that.data.nameInfoId
+        if (e.detail.value) {
+            nameInfoId[e.target.dataset.index] = 1
+        } else {
+            nameInfoId[e.target.dataset.index] = 0
+        }
+        that.setData({
+            nameInfoId: nameInfoId
         })
     },
 })

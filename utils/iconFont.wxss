@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* project id 674077 */
-  src: url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.eot');
-  src: url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.woff') format('woff'),
-  url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_674077_6xgyacgbtvl.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_674077_ga174m1o1pg.eot');
+  src: url('//at.alicdn.com/t/font_674077_ga174m1o1pg.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_674077_ga174m1o1pg.woff') format('woff'),
+  url('//at.alicdn.com/t/font_674077_ga174m1o1pg.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_674077_ga174m1o1pg.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -57,6 +57,8 @@
 
 .icon-fenxiangpengyouquanweixinWeChatsha:before { content: "\e931"; }
 
+.icon-address:before { content: "\e615"; }
+
 .icon-close:before { content: "\e720"; }
 
 .icon-menu:before { content: "\e72c"; }
@@ -64,4 +66,3 @@
 .icon-starmarkhighligh:before { content: "\e90d"; }
 
 .icon-download:before { content: "\e603"; }
-

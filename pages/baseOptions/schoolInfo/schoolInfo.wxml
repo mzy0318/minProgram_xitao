@@ -1,14 +1,15 @@
 <!--pages/schoolnfo/schoolInfo.wxml-->
 <import src='../template/swiper.wxml' />
 <swiper width="100%" indicator-dots="true" indicator-color="{{indicatorColor}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" indicator-active-color="indicatorActiveColor">
-    <block wx:for="{{getImgData.environment}}">
+    <block wx:for="{{pageData.environment}}">
         <swiper-item>
-            <image src="{{item.url}}" class="slide-image" />
+            <image src="{{item.url}}" class="slide-image" mode='widthFix' />
         </swiper-item>
     </block>
 </swiper>
 <view class='schoolInfoText'>
-    <text class='containerO' decode='true'>
+    {{pageData.school_intro}}
+    <!-- <text class='containerO' decode='true'>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;智慧招生,最火爆的招生的招生小程序。包含砍价、拼团、在线课程、在线作业、在线招生报名、在线课程销售等多项功能，帮助交易培训机构打造自己的官网小程序，功能多样化，有效并且实用。智慧招生隶属于郑州西陶网络科技有限公司，本公司成立于2014年，是集软件开发推广为一体的综合性销售服务公司，目前已与3000多家教育培训班尝试合作，定向研发。专注于招生策划，软件研发，从根本解决招生难题，招生经验丰富，欢迎各大学校合作。
   </text>
     <view class='containerTwo'>
@@ -42,10 +43,16 @@
     </view>
     <view class='containerFive'>
         <text>智慧招生小程序搭建咨询：扫描下方客服微信二维码联系我们</text>
-    </view>
-    <view class='schoolInfoImg'>
+    </view> -->
+    <!-- <view class='schoolInfoImg'>
         <view wx:for='{{imgData}}'>
             <image src='{{item}}' />
         </view>
-    </view>
+    </view> -->
+</view>
+<view class='schoolVideo' hidden='{{isVideo}}'>
+    <video src=''></video>
+</view>
+<view class='honorImage'>
+    <image wx:for='{{pageData.honor}}' src='{{item}}'></image>
 </view>

@@ -26,11 +26,12 @@
             <view class='schoolEditTwoContent'>
                 <view class='empty'></view>
                 <view class='schoolEditTwoAdd' bindtap='chooseVideo'>+</view>
-                <view class='schoolEditTwoVideo'>
+                <view class='schoolEditTwoVideo' hidden='{{isVideo}}'>
                     <video src='{{schoolVideo}}'></video>
                 </view>
             </view>
         </view>
+        <!-- 学校介绍 -->
         <view class='schoolEditThree'>
             <view class='schoolEditOneTitle'>学校介绍</view>
             <view class='schoolEditThreeContent'>
@@ -41,5 +42,4 @@
         </view>
         <button form-type='submit'>立即保存</button>
     </form>
-
 </view>

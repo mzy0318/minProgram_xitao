@@ -31,8 +31,12 @@
             </view>
             <view class='editOntInputT'>
                 <view>拼团时间</view>
-                <picker bindchange='getStartTime' mode='date' start="2015-09-01" end="2099-01-01" value='{{startTime}}' ><view>{{startTime}}</view></picker>
-                <picker bindchange='getEndTime' mode='date' start="2015-09-01" end="2099-01-01" value='{{endTime}}' ><view>{{endTime}}</view></picker>
+                <picker bindchange='getStartTime' mode='date' start="2015-09-01" end="2099-01-01" value='{{startTime}}'>
+                    <view>{{startTime}}</view>
+                </picker>
+                <picker bindchange='getEndTime' mode='date' start="2015-09-01" end="2099-01-01" value='{{endTime}}'>
+                    <view>{{endTime}}</view>
+                </picker>
             </view>
             <view class='editOntInputO'>
                 <view>联系地址</view>
@@ -60,7 +64,7 @@
             </view> -->
             <view class='editThreeInputFour'>
                 <view>在线支付</view>
-                <switch name='pay_status' ></switch>
+                <switch name='pay_status'></switch>
                 <view>若退款,请您线下退款给客户</view>
             </view>
         </view>
@@ -105,7 +109,16 @@
         </view>
         <view class='collageEditFive'>
             <view class='editOneTitle'>报名信息</view>
-            <view class='editFiveContent' wx:for='{{nameInfo}}'>{{item}}</view>
+            <view class='editFiveContent' wx:for='{{joinInfo}}'>
+                <view class='jianFormO'></view>{{item}}
+            </view>
+            <view wx:for='{{nameInfo}}' class='twoContentChild'>
+                <view class='jianForm' data-index='{{index}}' bindtap='jianForm'>
+                    <view class='jianFormChild' data-index='{{index}}'></view>
+                </view>
+                <text>{{item}}</text>
+                <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+            </view>
             <view class='editFiveAdd' bindtap='showOptions' data-is='0'>+新增报名项</view>
         </view>
         <view class='collageEditSix'>

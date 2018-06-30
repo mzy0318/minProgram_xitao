@@ -15,6 +15,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
         if (pageTypeStu == 6){
             getApp().request({
@@ -26,12 +27,19 @@ Page({
                     wx.setNavigationBarTitle({
                         title: '砍价报名列表',
                     })
-                    for (let i = 0; i < data.list.length; i++) {
-                        data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                    if (data.list.length==0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                            icon:'none',
+                        })
+                    } else if (data.list.length != 0){
+                        for (let i = 0; i < data.list.length; i++) {
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                        }
+                        this.setData({
+                            userList: data
+                        })
                     }
-                    this.setData({
-                        userList: data
-                    })
                 }
             })
         }else if(pageTypeStu == 3) {
@@ -41,17 +49,22 @@ Page({
                 data: {},
                 success: res => {
                     let data = res.data.data;
-
-                    for (let i = 0; i < data.list.length; i++) {
-                        data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
-                    }
-
                     wx.setNavigationBarTitle({
                         title: '我的私人拼团',
                     })
-                    this.setData({
-                        userList: data
-                    })
+                    if (data.list.length==0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                            icon:'none',
+                        })
+                    } else if (data.list.length != 0){
+                        for (let i = 0; i < data.list.length; i++) {
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                        }
+                        this.setData({
+                            userList: data
+                        })
+                    }
                 }
             })
         }
@@ -89,7 +102,61 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        let pageTypeStu = wx.getStorageSync('pageTypeStu')
+        if (pageTypeStu == 6) {
+            getApp().request({
+                url: "my_bargain_list",
+                method: "post",
+                data: {},
+                success: res => {
+                    let data = res.data.data;
+                    wx.setNavigationBarTitle({
+                        title: '砍价报名列表',
+                    })
+                    if (data.list.length == 0) {
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                            icon: 'none',
+                        })
+                    } else if (data.list.length != 0) {
+                        for (let i = 0; i < data.list.length; i++) {
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                        }
+                        this.setData({
+                            userList: data
+                        })
+                        wx.stopPullDownRefresh()
+                    }
+                }
+            })
+        } else if (pageTypeStu == 3) {
+            getApp().request({
+                url: "my_personal_group_list",
+                method: "post",
+                data: {},
+                success: res => {
+                    let data = res.data.data;
+                    wx.setNavigationBarTitle({
+                        title: '我的私人拼团',
+                    })
+                    if (data.list.length == 0) {
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                            icon: 'none',
+                        })
+                    } else if (data.list.length != 0) {
+                        for (let i = 0; i < data.list.length; i++) {
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                        }
+                        this.setData({
+                            userList: data
+                        })
+                        wx.stopPullDownRefresh()
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -114,7 +181,7 @@ Page({
             })
         } else if (Number(pageTypeStu) == 3) {
             wx.navigateTo({
-                url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joinerid + '&actId=' + e.currentTarget.dataset.id,
+                url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joinerid + '&actId=' + e.currentTarget.dataset.actid,
             })
         }
     },
@@ -125,9 +192,13 @@ Page({
                 url: '../killPriceListInfo/killPriceListInfo?actId=' + e.currentTarget.dataset.actid,
             })
         } else if (pageTypeStu == 3){
+            let userInfo = this.data.userList.list[e.currentTarget.dataset.index];
+            userInfo.start_time = util.formatTime(new Date(userInfo.start_time));
+            userInfo.end_time = util.formatTime(new Date(userInfo.end_time));
+            userInfo.is_leader = userInfo.is_leader?'团长':'团员';
             this.setData({
                 isPersonInfo:false,
-                personInfo: this.data.userList.list[e.currentTarget.dataset.index]
+                personInfo: userInfo
             })
         }
     },

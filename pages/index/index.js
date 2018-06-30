@@ -8,16 +8,61 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         orgId: 0,
+        modeCode:'one',
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         optionsUrl: [
-            '../baseOptions/schoolInfo/schoolInfo',  //学校简介
-            '../courses/course/course',     //课程导航
-            '../baseOptions/schoolList/schoolList',   //校区列表
-            '../killPrices/killPriceList/killPriceList',    //
-            '../baseOptions/teachers/teachers',    //师资力量
-            '../baseOptions/studentStyle/studentStyle',    //学员风采
-            '../baseOptions/opinions/opinions',            //意见建议
-            '../morePage/morePage',    //更多
+            {
+                tag: 'school_intro',
+                url: '../baseOptions/schoolInfo/schoolInfo',     //学校简介
+            },
+            {
+                tag: 'lesson_navi',
+                url: '../courses/course/course',     //课程导航
+            },
+            {
+                tag: 'campus',
+                url: '../baseOptions/schoolList/schoolList',     //校区列表
+            },
+            {
+                tag: 'teacher',
+                url: '../baseOptions/teachers/teachers',     //师资力量
+            },
+            {
+                tag: 'student',
+                url: '../baseOptions/studentStyle/studentStyle',     //学员风采
+            },
+            {
+                tag: 'enlist',
+                url: '../actReg/actRegUserList/actRegUserList',     //活动报名
+            },
+            {
+                tag: 'contact',
+                url: '../baseOptions/contactUs/contactUs',     //联系我们
+            },
+            {
+                tag: 'feedback',
+                url: '../baseOptions/opinions/opinions',     //意见建议
+            },
+            {
+                tag: 'more',
+                url: '../morePage/morePage',     //更多
+            },
+            {
+                tag: 'bargain',
+                url: '../killPrices/killPrice/killPrice',     //帮我砍价
+            },
+            {
+                tag: 'group',
+                url: '../collage/collageList/collageList',     //拼团
+            },
+            {
+                tag: 'lesson_one',
+                url: '../goodLesson/goodLessonList/goodLessonList',     //一元好课
+            },
+            {
+                tag: 'video_card',
+                url: '../videos/userVideoList/userVideoList',     //视频贺卡
+            },
         ],
         pageData: '',
         isGetUser: false,
@@ -57,13 +102,29 @@ Page({
                 isGetUser: true,
             })
         }
+        // 选择模板
+        // if (Number(wx.getStorageSync('schoolModel')) == 2){
+        //     that.setData({
+        //         modeCode:'six'
+        //     })
+        // } else if (Number(wx.getStorageSync('schoolModel')) == 6){
+        //     that.setData({
+        //         modeCode: 'two'
+        //     })
+        // }
         getApp().request({
             url: "home",
             method: "post",
             data: {},
             success: res => {
                 for (let i = 0; i < res.data.data.home_icon.length; i++) {
-                    res.data.data.home_icon[i].url = that.data.optionsUrl[i]
+                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
+                    res.data.data.home_icon[i].width = that.data.paintData[i].width;
+                    for (let j = 0; j < that.data.optionsUrl.length; j++) {
+                        if (res.data.data.home_icon[i].tag == that.data.optionsUrl[j].tag){
+                            res.data.data.home_icon[i].url = that.data.optionsUrl[j].url
+                        }
+                    }
                 }
                 that.setData({
                     pageData: res.data.data
@@ -130,22 +191,28 @@ Page({
             })
         }
     },
+    onShow:function(){
+        let that = this;
+        // 选择模板
+        // if (Number(wx.getStorageSync('schoolModel')) == 2) {
+        //     that.setData({
+        //         modeCode: 'six'
+        //     })
+        // } else if (Number(wx.getStorageSync('schoolModel')) == 6) {
+        //     that.setData({
+        //         modeCode: 'two'
+        //     })
+        // }
+    },
     redirectPage: function (res) {
         wx.navigateTo({
             url: res.target.dataset.url,
         })
     },
     nav: function (e) {
-        
-        if (e.currentTarget.dataset.url!=undefined){
-            wx.navigateTo({
-                url: e.currentTarget.dataset.url,
-            })
-        }else{
-            wx.navigateTo({
-                url: '../morePage/morePage',
-            })
-        }
+        wx.navigateTo({
+            url: e.currentTarget.dataset.url,
+        })
     },
     getUserInfo: function (e) {
         let that = this;
@@ -167,7 +234,13 @@ Page({
             data: {},
             success: res => {
                 for (let i = 0; i < res.data.data.home_icon.length; i++) {
-                    res.data.data.home_icon[i].url = that.data.optionsUrl[i]
+                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
+                    res.data.data.home_icon[i].width = that.data.paintData[i].width;
+                    for (let j = 0; j < that.data.optionsUrl.length; j++) {
+                        if (res.data.data.home_icon[i].tag == that.data.optionsUrl[j].tag) {
+                            res.data.data.home_icon[i].url = that.data.optionsUrl[j].url
+                        }
+                    }
                 }
                 that.setData({
                     pageData: res.data.data
@@ -187,7 +260,7 @@ Page({
         // function pullDown(){
         // }
     },
-    toCourseInfo:function(e){
+    toCourseInfo: function (e) {
         wx.navigateTo({
             url: '../courses/courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
         })

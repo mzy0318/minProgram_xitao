@@ -46,7 +46,7 @@
 .oneImageContent{
     width:650rpx;
     height:310rpx;
-    background:lightgreen;
+    background:#fff;
     margin:0rpx auto 20rpx;
 }
 .oneImageContent image{

@@ -8,11 +8,15 @@ Page({
         pageData: '',
         joinInfo: ['姓名', '电话'],
         joinInfoId: [1, 1],
+        nameInfo: [],
+        nameInfoId: [],
         endTime: '2018-08-06',
         coverImage: '',
         coverImageID: '',
         actImage: '',
         actImageID: '',
+        actId: '',
+        isForm: true,
     },
 
     /**
@@ -20,31 +24,51 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        getApp().request({
-            url: 'org/make_normal',
-            data: {
-                id: options.actId
-            },
-            method: 'get',
-            success: function(res) {
-                let actImg = [];
-                let actId = [];
-                for (let i = 0; i < res.data.data.act_image.length; i++) {
-                    actImg.push(res.data.data.act_image[i].url)
-                    actId.push(res.data.data.act_image[i].id)
+        if (options.actId == 'undefined') {
+            that.setData({
+                actId: '',
+            })
+        } else {
+            that.setData({
+                actId: options.actId,
+            })
+            getApp().request({
+                url: 'org/make_normal',
+                data: {
+                    id: options.actId
+                },
+                method: 'get',
+                success: function(res) {
+                    let actImg = [];
+                    let actId = [];
+                    let joinInfo = [];
+                    let joinInfoId = [];
+                    for (let i = 0; i < res.data.data.act_image.length; i++) {
+                        actImg.push(res.data.data.act_image[i].url)
+                        actId.push(res.data.data.act_image[i].id)
+                    }
+                    
+                    for (let i = 0; i < res.data.data.join_info.length; i++) {
+                        joinInfo.push(res.data.data.join_info[i].text);
+                        joinInfoId.push(res.data.data.join_info[i].require)
+
+                        // joinInfo.splice(0, 2);
+                        // joinInfoId.splice(0, 2)
+                    }
+                    that.setData({
+                        pageData: res.data.data,
+                        actImage: actImg,
+                        actImageID: actId,
+                        endTime: res.data.data.end_time,
+                        coverImageID: res.data.data.cover_image.id,
+                        coverImage: res.data.data.cover_image.url,
+                        nameInfo: joinInfo,
+                        nameInfoId: joinInfoId
+                    })
                 }
-                that.setData({
-                    pageData: res.data.data,
-                    actImage: actImg,
-                    actImageID: actId,
-                    endTime: res.data.data.end_time,
-                    coverImageID: res.data.data.cover_image.id,
-                    coverImage: res.data.data.cover_image.url,
 
-                })
-            }
-
-        })
+            })
+        }
     },
 
     /**
@@ -242,31 +266,99 @@ Page({
     formSubmit: function(e) {
         let that = this;
         let sendData = e.detail.value;
-        sendData['id'] = '';
+        sendData['id'] = that.data.actId;
         sendData['cover_image'] = that.data.coverImageID;
         sendData['start_time'] = utils.formatDate(new Date());
         sendData['end_time'] = that.data.endTime;
         sendData['sort'] = 0;
-        sendData['join_info_require'] = that.data.joinInfoId;
-        sendData['join_info_text'] = that.data.joinInfo;
+        // sendData['join_info_require'] = that.data.joinInfoId;
+        // sendData['join_info_text'] = that.data.joinInfo;
         // sendData['act_image'] = that.data.actImageID;
         sendData['status'] = sendData.status ? 0 : 1;
         sendData['pay_status'] = sendData.pay_status ? 0 : 1;
         for (let i = 0; i < that.data.actImageID.length; i++) {
             sendData['act_image[' + i + ']'] = that.data.actImageID[i];
         }
-        console.log('sendData', sendData);
+        // for (let i = 0; i < that.data.joinInfoId.length; i++) {
+        //     sendData['join_info_require[' + i + ']'] = that.data.joinInfoId[i];
+        //     sendData['join_info_text[' + i + ']'] = that.data.joinInfo[i];
+        // }
+        for (let i = 0; i < that.data.nameInfo.length; i++) {
+            // let index = i + 2;
+            sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i];
+            sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i];
+        }
+
         getApp().request({
-            url: 'org/make_lesson_one',
+            url: 'org/make_normal',
             method: 'post',
             data: sendData,
             success: function(res) {
                 if (Number(res.data.code) == 1) {
-                    wx.navigateTo({
-                        url: '../../actReg/actRegManList/actRegManList',
+                    // wx.navigateTo({
+                    //     url: '../../actReg/actRegManList/actRegManList',
+                    // })
+                    wx.showToast({
+                        title: '发布成功',
+                    })
+                    wx.navigateBack({})
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
                     })
                 }
             }
         })
-    }
+    },
+    jianForm: function(e) {
+        let that = this;
+        let nameInfo = that.data.nameInfo
+        let nameInfoId = that.data.nameInfoId
+        nameInfo.splice(e.target.dataset.index, 1)
+        nameInfoId.splice(e.target.dataset.index, 1)
+        that.setData({
+            nameInfo: nameInfo,
+            nameInfoId: nameInfoId,
+        })
+    },
+    isMustEdit: function(e) {
+        let that = this;
+        let nameInfoId = that.data.nameInfoId
+        if (e.detail.value) {
+            nameInfoId[e.target.dataset.index] = 1
+        } else {
+            nameInfoId[e.target.dataset.index] = 0
+        }
+        that.setData({
+            nameInfoId: nameInfoId
+        })
+    },
+    addForm: function(e) {
+        let that = this;
+        if (Number(e.currentTarget.dataset.is) == 1) {
+            that.setData({
+                isForm: true
+            })
+        } else if (Number(e.currentTarget.dataset.is) == 0) {
+            that.setData({
+                isForm: false
+            })
+        }
+    },
+    showOptions: function(e) {
+        this.setData({
+            isForm: Boolean(Number(e.target.dataset.is))
+        })
+    },
+    addNameOptions: function(e) {
+        let arr = this.data.nameInfo;
+        let arrO = this.data.nameInfoId
+        arr.push(e.target.dataset.value);
+        arrO.push(0);
+        this.setData({
+            nameInfo: arr,
+            nameInfoId: arrO
+        })
+    },
 })

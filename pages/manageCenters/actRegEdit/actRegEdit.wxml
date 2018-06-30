@@ -66,8 +66,15 @@
         <view class='lessonEditTwo'>
             <view class='lessonEditOneTitle'>报名信息</view>
             <view class='lessonEditTwoContent'>
-                <view wx:for='{{joinInfo}}'>{{item}}</view>
-                <view class='addInfo'>+新增报名项</view>
+                <view wx:for='{{joinInfo}}' class='twoContentChild'><view class='jianFormO'></view> {{item}}</view>
+                <view wx:for='{{nameInfo}}' class='twoContentChild'>
+                    <view class='jianForm' data-index='{{index}}' bindtap='jianForm'>
+                        <view class='jianFormChild' data-index='{{index}}'></view>
+                    </view>
+                    <text>{{item}}</text>
+                    <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+                </view>
+                <view class='addInfo' bindtap='addForm' data-is='0'>+新增报名项</view>
             </view>
         </view>
          <view class='lessonEditThree'>
@@ -116,4 +123,15 @@
         </view> -->
         <button class='lessonEditBtn' formType="submit">立即发布</button>
     </form>
+    <view class='addFormWrap' hidden='{{isForm}}' bindtap='showOptions' data-is='1'>
+        <view class='addFormChild'>
+            <view class='addFormChildTitle'>常用报名项</view>
+            <view class='addFormChildButton'>
+                <view bindtap='addNameOptions' data-value='年龄'>年龄</view>
+                <view bindtap='addNameOptions' data-value='住址'>住址</view>
+                <view bindtap='addNameOptions' data-value='备注'>备注</view>
+                <view bindtap='addNameOptions' data-value='爱好'>其他</view>
+            </view>
+        </view>
+    </view>
 </view>

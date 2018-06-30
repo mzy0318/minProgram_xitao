@@ -5,7 +5,7 @@
             <view class='nickName'>{{item.nickname}}</view>
         </view>
         <view class='contentRight'>
-            <view>{{item.status}}</view>
+            <view style='background:{{item.backgroundColor}}'>{{item.status}}</view>
             <text>{{item.create_time}}</text>
         </view>
     </view>

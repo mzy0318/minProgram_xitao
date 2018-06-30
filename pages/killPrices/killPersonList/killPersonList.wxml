@@ -3,12 +3,12 @@
     <view class='personListInputName'>
     </view>
     <view class='personListContent' wx:for='{{userList.list}}'>
-        <view class='personListTitle' bindtap='toKillPriceInfo' data-actId='{{item.act_id}}' data-id='{{imte.id}}' data-joinerId='{{item.joiner_id}}' data-nickname='{{item.nickname}}'>{{item.title}}</view>
+        <view class='personListTitle' bindtap='toKillPriceInfo' data-actid='{{item.act_id}}' data-joinerId='{{item.joiner_id}}' data-nickname='{{item.nickname}}'>{{item.title}}</view>
         <view class='personListInfo' bindtap='toListInfo' data-index='{{index}}' data-actId='{{item.act_id}}' data-joinerId='{{item.joiner_id}}'>
-            <view>姓名:{{item.nickname}}</view>
-            <view>电话:{{item.phone}}</view>
+            <view>姓名: {{item.nickname}}</view>
+            <view>电话: {{item.phone}}</view>
         </view>
-        <view class='personListDate'>时间:{{item.create_time}}</view>
+        <view class='personListDate'>时间: {{item.create_time}}</view>
     </view>
 </view>
 <view class='collagePersonList' hidden='{{isPersonInfo}}'>
@@ -18,11 +18,11 @@
         <view class='childView'>当前状态:<text decode >&nbsp;&nbsp;{{personInfo.time_status}}</text></view>
         <view class='childView'>真实姓名:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
         <view class='childView'>手机号码:<text decode >&nbsp;&nbsp;{{personInfo.phone}}</text></view>
-        <view class='childView'>学校名称:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
-        <view class='childView'>招生顾问:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <!-- <view class='childView'>学校名称:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <view class='childView'>招生顾问:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view> -->
     </view>
     <view class='collagePersonListMiddle'>
-        <view class='childView'>成员身份:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <view class='childView'>成员身份:<text decode >&nbsp;&nbsp;{{personInfo.is_leader}}</text></view>
         <view class='childView'>满足人数:<text decode >&nbsp;&nbsp;{{personInfo.target_person}}</text></view>
         <view class='childView'>成团价格:<text decode >&nbsp;&nbsp;{{personInfo.price}}</text></view>
     </view>

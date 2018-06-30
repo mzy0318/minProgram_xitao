@@ -45,10 +45,10 @@
     color:#1196DB;
 }
 .mangeScoolOptionsWrapBottom,.optionsBottom{
-    font-size:30rpx;
+    font-size:26rpx;
     text-align:center;
     width:100%;
-    margin-top:10rpx;
+    margin-top:15rpx;
 }
 
 .mangeStuMarkt{
@@ -63,8 +63,8 @@
     background:#fff;
 }
 .optionsTop{
-    width:80rpx;
-    height:80rpx;
+    width:60rpx;
+    height:60rpx;
     background:#E3465B;
     border-radius:5px;
     margin:30rpx auto 0rpx;
@@ -72,11 +72,11 @@
 }
  .optionsTop .iconStyle{
     display:block !important;
-    top:13.5rpx;
-    left:16.5rpx;
+    top:7rpx;
+    left:13rpx;
     position:absolute;
     color:#fff;
-    font-size:50rpx;
+    font-size:40rpx;
 }
 
 .managVersion{

@@ -10,21 +10,32 @@ Page({
         interval: 5000,
         indicatorColor: "rgb(0,0,0,0.3)",
         indicatorActiveColor: "#000000",
-        getImgData:{},
+        pageData:'',
+        isVideo:true,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         getApp().request({
             url: 'school/intro',
             data: {
                 orgid: getApp().config.orgId
             },
             success: res => {
+                if (res.data.data.brand == null){
+                    that.setData({
+                        isVideo:true,
+                    })
+                }else {
+                    that.setData({
+                        isVideo: false,
+                    })
+                }
                 this.setData({
-                    getImgData:res.data.data
+                    pageData:res.data.data
                 })
             }
         })

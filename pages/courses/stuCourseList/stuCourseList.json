@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "预约试听列表",
-    "navigationBarBackgroundColor": "#FFCF0B"
+    "navigationBarBackgroundColor": "#FFCF0B",
+    "navigationBarTextStyle": "white"
 }

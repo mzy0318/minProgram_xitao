@@ -14,7 +14,6 @@
 }
 .infoSwiperImage image{
     width:450rpx;
-    height:880rpx;
 }
 .schoolInfoTitle{
     width:750rpx;

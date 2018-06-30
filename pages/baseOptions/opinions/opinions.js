@@ -5,9 +5,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        textAreaData:'',
-        name:'',
-        phoneNum:undefined,
+        textAreaData: '',
+        name: '',
+        phoneNum: undefined,
     },
 
     /**
@@ -70,17 +70,17 @@ Page({
             textAreaData: e.detail.value,
         })
     },
-    getName:function(e){
+    getName: function (e) {
         this.setData({
             name: e.detail.value,
         })
     },
-    getPhone:function(e){
+    getPhone: function (e) {
         this.setData({
             phoneNum: e.detail.value,
         })
     },
-    subPinions:function(){
+    subPinions: function () {
         getApp().request({
             url: 'school/intro',
             data: {
@@ -88,8 +88,41 @@ Page({
                 nickname: this.data.name,
                 phone: this.data.phoneNum
             },
-            method:'post',
-            success: res => {}
+            method: 'post',
+            success: res => {
+                if (Number(res.data.code) == 1) {
+                    // wx.showModal({
+                    //     title: '提交成功',
+                    //     content: '',
+                    //     showCancel: false,
+                    //     success: function (res) {
+                    //         if (res.confirm) {
+                    //             wx.navigateBack()
+                    //         }
+                    //     }
+                    // })
+                    wx.showLoading({
+                        title: '正在提交',
+                        mask: true,
+                    })
+                    setTimeout(closeLogin, 2000)
+                    function closeLogin() {
+                        wx.hideLoading() 
+                        wx.showToast({
+                            title: '提交成功',
+                            icon:'success',
+                            success:function(){
+                                wx.navigateBack()
+                            }
+                        })
+                    }
+                } if (Number(res.data.code)==0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none'
+                    })
+                }
+            }
         })
     }
 })

@@ -13,10 +13,9 @@
         "pages/manageCenters/collageEdit/collageEdit",
         "pages/manageCenters/lessonCourseEdit/lessonCourseEdit",
         "pages/manageCenters/schoolEdit/schoolEdit",
-        "pages/manageCenters/oneLessonEdit/oneLessonEdit",
         "pages/manageCenters/actRegEdit/actRegEdit",
+        "pages/manageCenters/oneLessonEdit/oneLessonEdit",
         "pages/courses/orderInfo/orderInfo",
-        "pages/courses/courseClass/courseClass",
         "pages/courses/course/course",
         "pages/courses/courseUserList/courseUserList",
         "pages/courses/courseUserListInfo/courseUserListInfo",
@@ -53,6 +52,7 @@
         "pages/actReg/actRegSignUp/actRegSignUp",
         "pages/actReg/actRegUserInfo/actRegUserInfo",
         "pages/studentManage/orderList/orderList",
+        "pages/task/taskUserList/taskUserList",
         "components/otherOpt/otherOpt"
     ],
     "window": {
@@ -63,8 +63,8 @@
         "enablePullDownRefresh": true
     },
     "tabBar": {
-        "color": "#000",
-        "selectedColor": "#A144AF",
+        "color": "#666666",
+        "selectedColor": "#7153e5",
         "list": [
             {
                 "pagePath": "pages/index/index",

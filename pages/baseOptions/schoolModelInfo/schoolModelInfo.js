@@ -76,8 +76,13 @@ Page({
             method: 'post',
             success: function (res) {
                 if(Number(res.data.code)==1){
+                    wx.setStorageSync('schoolModel', that.data.pageData.id)
                     wx.showLoading({
-                        title: '加载中',
+                        title: '正在更新模板',
+                        mask:true,
+                        success:function(){
+                            
+                        }
                     })
 
                     setTimeout(function () {
@@ -91,10 +96,13 @@ Page({
                         })
                     }, 2000)
                 }else{
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
+                    setTimeout(function () {
+                        wx.hideLoading();
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }, 1000)
                 }
             }
         })

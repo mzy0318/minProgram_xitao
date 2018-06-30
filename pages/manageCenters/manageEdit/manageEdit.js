@@ -5,6 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        pageData:'',
         actId:'',
         isShow: true,
         isHidden: false,
@@ -15,10 +16,12 @@ Page({
         startDate: '2016-09-01',
         endDate: '2016-09-01',
         rule: '',
-        nameInfo: ['姓名', '电话'],
-        nameInfoId: [1, 1],
+        joinInfo: ['姓名', '电话'],
+        joinInfoId: [1, 1],
+        nameInfo:[],
+        nameInfoId:[],
         isOptions: true,
-        imageData: null,
+        imageData: '',
         editTitle: undefined,
         backgroundImage: ' ',
         actImg0:'',
@@ -44,11 +47,31 @@ Page({
                 },
                 method: 'get',
                 success: function(res) {
+                    let joinInfo = [];
+                    let joinInfoId = [];
+                    let imageData = [];
+                    let imageDataId = [];
+                    for (let i = 0; i < res.data.data.join_info.length; i++) {
+                        joinInfo.push(res.data.data.join_info[i].text);
+                        joinInfoId.push(res.data.data.join_info[i].require)
+
+                        // joinInfo.splice(0, 2);
+                        // joinInfoId.splice(0, 2)
+                    }
+                    for (let i = 0; i < res.data.data.act_image.length;i++){
+                        imageData.push( res.data.data.act_image[i].url),
+                        imageDataId.push(res.data.data.act_image[i].id)
+                    }
                     that.setData({
+                        pageData:res.data.data,
                         editTitle: res.data.data.title,
                         startDate: res.data.data.start_time,
                         endDate: res.data.data.end_time,
-                        backgroundImage: res.data.data.banner_image_url
+                        backgroundImage: res.data.data.banner_image_url,
+                        nameInfo: joinInfo,
+                        nameInfoId: joinInfoId,
+                        imageData: imageData,
+                        actImg0: imageDataId,
                     })
                 }
             })
@@ -121,6 +144,7 @@ Page({
         let that = this;
         let sendData = {
             id: that.data.actId,
+
             title: e.detail.value.title,
             original_price: e.detail.value.original_price,
             now_price: e.detail.value.now_price,
@@ -131,8 +155,8 @@ Page({
             telephone: e.detail.value.telephone,
             address: e.detail.value.address,
             rule: this.data.rule,
-            join_info_require: this.data.nameInfoId,
-            join_info_text: this.data.nameInfo,
+            // join_info_require: this.data.nameInfoId,
+            // join_info_text: this.data.nameInfo,
             bargain_type: this.data.getbargainType ? this.data.getbargainType : 1,
             bargain_limit_type: this.data.getBargainLimitTyp ? this.data.getBargainLimitType : 1,
             bargain_param: e.detail.value.bargain_paramO ? e.detail.value.bargain_paramO : e.detail.value.bargain_paramT,
@@ -141,6 +165,15 @@ Page({
         }
         for (let i = 0; i < that.data.actImg0.length; i++){
             sendData['act_image[' + i + ']'] = that.data.actImg0[i];
+        }
+        // for (let i = 0; i < that.data.joinInfo.length; i++) {
+        //     sendData['join_info_text[' + i + ']'] = that.data.joinInfo[i];
+        //     sendData['join_info_require[' + i + ']'] = that.data.joinInfoId[i];
+        // }
+        for (let i = 0; i < that.data.nameInfo.length; i++) {
+            // let index = i + 2;
+            sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i];
+            sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i];
         }
         getApp().request({
             url: 'org/make_bargain',
@@ -247,6 +280,29 @@ Page({
                     })
                 }
             },
+        })
+    },
+    jianForm: function (e) {
+        let that = this;
+        let nameInfo = that.data.nameInfo
+        let nameInfoId = that.data.nameInfoId
+        nameInfo.splice(e.target.dataset.index, 1)
+        nameInfoId.splice(e.target.dataset.index, 1)
+        that.setData({
+            nameInfo: nameInfo,
+            nameInfoId: nameInfoId,
+        })
+    },
+    isMustEdit: function (e) {
+        let that = this;
+        let nameInfoId = that.data.nameInfoId
+        if (e.detail.value) {
+            nameInfoId[e.target.dataset.index] = 1
+        } else {
+            nameInfoId[e.target.dataset.index] = 0
+        }
+        that.setData({
+            nameInfoId: nameInfoId
         })
     },
 })

@@ -8,6 +8,9 @@ Page({
         isShow:true,
         pageData:'',
         userInfo:'',
+        pageNum:1,
+        actId:'',
+        actTag:'',
     },
 
     /**
@@ -15,12 +18,16 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        that.setData({
+            actId: options.actId,
+            actTag: options.actTag,
+        })
         getApp().request({
             url:'org/normal_joiner_list',
             data:{
                 act_id: options.actId,
                 act_tag: options.actTag,
-                page:1,
+                page:that.data.pageNum,
             },
             method:'post',
             success:function(res){
@@ -66,14 +73,62 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        getApp().request({
+            url: 'org/normal_joiner_list',
+            data: {
+                act_id: that.data.actId,
+                act_tag: that.data.actTag,
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                for (let i = 0; i < res.data.data.list.length; i++) {
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                }
+                that.setData({
+                    pageData: res.data.data.list,
+                })
+                wx.stopPullDownRefresh()
+            }
+        })
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.pageData);
+        if (that.data.pageData.length >= that.data.pageNum * 10){
+            that.setData({
+                pageNum: that.data.pageNum + 1,
+            })
+            getApp().request({
+                url: 'org/normal_joiner_list',
+                data: {
+                    act_id: that.data.actId,
+                    act_tag: that.data.actTag,
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                    }
+                    pageDataArr.push(...res.data.data.list)
+                    that.setData({
+                        pageData: pageDataArr,
+                    })
+                }
+            })
+        }else{
+            wx.showToast({
+                title: '到底啦',
+                icon: 'none'
+            })
+        }
     },
 
     /**

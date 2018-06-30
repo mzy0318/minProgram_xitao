@@ -7,23 +7,26 @@ Page({
     data: {
         islogin:'block',
         isContent:'none',
+        versionData:'',
         pageManagData:[
             {
                 name:'更换模板',
                 iconfont: 'iconfont icon-genghuanpifu iconSize',
                 color:'#1196DB',
                 url: '../../baseOptions/schoolModel/schoolModel',
-            },{
-                name: '打卡作业',
-                iconfont: 'iconfont icon-job-task iconSize',
-                color: '#870E04',
-                url: '../schoolEdit/schoolEdit',
-            },{
+            },
+            //{
+            //     name: '打卡作业',
+            //     iconfont: 'iconfont icon-job-task iconSize',
+            //     color: '#870E04',
+            //     url: '../schoolEdit/schoolEdit',
+            // }
+            {
                 name: '学校简介',
                 iconfont: 'iconfont icon-xuexiao iconSize',
                 color: '#1196DB',
                 url:'../schoolEdit/schoolEdit',
-            }
+            },
         ],
         pageStuData:[
             {
@@ -38,13 +41,15 @@ Page({
                 background: '#FD9D22',
                 url: 'org/bargain_list',
                 pageType: 2
-            }, {
-                name: '视频点赞',
-                iconfont: 'iconfont icon-aixin iconStyle',
-                background: '#84D23E',
-                url: 'org/bargain_list',
-                pageType: 3
-            }, {
+            },
+            // {
+            //     name: '视频点赞',
+            //     iconfont: 'iconfont icon-aixin iconStyle',
+            //     background: '#84D23E',
+            //     url: 'org/bargain_list',
+            //     pageType: 3
+            // },
+            {
                 name: '帮我砍学费',
                 iconfont: 'iconfont icon-kanjia iconStyle',
                 background: '#00D4BE',
@@ -56,19 +61,22 @@ Page({
                 url: 'org/bargain_list',
                 background: '#02AEA7',
                 pageType:11,
-            },{
-                name: '万人拼团',
-                iconfont: 'iconfont icon-icon1 iconStyle',
-                background: '#DE4037',
-                url: 'org/bargain_list',
-                pageType: 5
-            }, {
-                name: '视频投票',
-                iconfont: 'iconfont icon-zan1 iconStyle',
-                background: '#8990FA',
-                url: 'org/bargain_list',
-                pageType: 6
-            }, {
+            },
+            // {
+            //     name: '万人拼团',
+            //     iconfont: 'iconfont icon-icon1 iconStyle',
+            //     background: '#DE4037',
+            //     url: 'org/bargain_list',
+            //     pageType: 5
+            // }, 
+            // {
+            //     name: '视频投票',
+            //     iconfont: 'iconfont icon-zan1 iconStyle',
+            //     background: '#8990FA',
+            //     url: 'org/bargain_list',
+            //     pageType: 6
+            // }, 
+            {
                 name: '视频贺卡',
                 iconfont: 'iconfont icon-meiguihua iconStyle',
                 background: '#1196DB',
@@ -80,19 +88,21 @@ Page({
                 background: '#FF6766',
                 url: 'org/bargain_list',
                 pageType: 8
-            }, {
-                name: '微视频课堂',
-                iconfont: 'iconfont icon-shipin1 iconStyle',
-                background: '#FE7FC2',
-                url: 'org/bargain_list',
-                pageType: 9
-            }, {
-                name: '视频作业',
-                iconfont: 'iconfont icon-job-task iconStyle',
-                background: '#84D23E',
-                url: 'org/bargain_list',
-                pageType: 10
-            }
+            }, 
+            // {
+            //     name: '微视频课堂',
+            //     iconfont: 'iconfont icon-shipin1 iconStyle',
+            //     background: '#FE7FC2',
+            //     url: 'org/bargain_list',
+            //     pageType: 9
+            // }, 
+            // {
+            //     name: '视频作业',
+            //     iconfont: 'iconfont icon-job-task iconStyle',
+            //     background: '#84D23E',
+            //     url: 'org/bargain_list',
+            //     pageType: 10
+            // }
         ]
     },
 
@@ -100,6 +110,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
 
         // if(wx.getStorageSync('loginCode')==1){
         //     this.setData({
@@ -113,6 +124,10 @@ Page({
         //         islogin: 'block',
         //     })
         // }
+        let version = wx.getExtConfigSync();
+        that.setData({
+            versionData: wx.getExtConfigSync(),
+        })
     },
 
     /**
@@ -187,6 +202,7 @@ Page({
         })
     },
     login: function () {
+        let that = this;
         if (this.data.phoneNum == '') {
             wx.showToast({
                 title: '手机号不能为空',
@@ -207,13 +223,29 @@ Page({
                 method: 'post',
                 success: res => {
                     wx.setStorageSync('loginCode', res.data.code)
-                    if(res.data.code==1){
+                    if(Number(res.data.code)==1){
                         wx.setNavigationBarTitle({
                             title: '管理中心',
                         })
-                        this.setData({
-                            islogin:'none',
-                            isContent:'block'
+                        wx.showLoading({
+                            title:'正在登录',
+                            mask:true,
+                        })
+                        setTimeout(closeLogin,2000)
+                        function closeLogin (){
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: '登录成功',
+                            })
+                            that.setData({
+                                islogin: 'none',
+                                isContent: 'block'
+                            })
+                        }
+                    } else if (Number(res.data.code)==0){
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon:'none'
                         })
                     }
                 }

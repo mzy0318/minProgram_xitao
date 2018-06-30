@@ -63,6 +63,7 @@
     </view>
     <!-- 预约试听部分 -->
     <view class='courseInfoShareWrap' hidden='{{isShow}}'>
+        <view class='closeAlert' data-is='0' bindtap='handleHidden'></view>
         <view class='courseInfoShare'>
             <view class='courseInfoShareTop'>
                 <view>预约礼包,预约即可领取</view>
@@ -71,14 +72,14 @@
             </view>
             <view class='courseInfoShareMiddle'>请留下您的联系方式,以便尽快联系您</view>
             <view class='courseInfoShareBottom'>
-                <form bindsubmit="handleHidden">
+                <form bindsubmit="handleHidden" data-is='1'>
                     <view>
                         <input type='number' placeholder='手机号' name='phone' maxlength='11' />
                     </view>
                     <view>
                         <input type='text' placeholder='联系人' name='nickname' />
                     </view>
-                    <button data-is='true' formType="submit">预约试听</button>
+                    <button data-is='1' formType="submit">预约试听</button>
                 </form>
             </view>
         </view>

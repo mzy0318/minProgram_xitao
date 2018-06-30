@@ -7,11 +7,11 @@
 .indexBanner swiper {
     width: 750rpx;
     height: 350rpx;
+    overflow:hidden;
 }
 
 .indexBanner swiper image {
     width: 750rpx;
-    height: 350rpx;
 }
 
 
@@ -133,8 +133,8 @@
     top:0rpx;
     left:0rpx;
     background:rgba(0,0,0,0.3);
-    
 }
+
 .getUserInfoContent{
     width:700rpx;
     height:300rpx;
@@ -146,10 +146,18 @@
     margin-top:-150rpx;
     border-radius:5px;
 }
+.getUserInfoContent view{
+    margin-top:40rpx;
+    width:100%;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:center;
+    font-size:40rpx;
+}
 .getUserInfoContent button{
     width:300rpx;
     float:left;
     line-height:80rpx;
     margin-left:35rpx;
-    margin-top:200rpx;
+    margin-top:60rpx;
 }

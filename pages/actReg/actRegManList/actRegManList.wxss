@@ -3,7 +3,7 @@
     width:750rpx;
     min-height:1207rpx;
     background:#F2F2F2;
-    padding-bottom:100rpx;
+    padding-bottom:50rpx;
 }
 .manListContent{
     width:710rpx;

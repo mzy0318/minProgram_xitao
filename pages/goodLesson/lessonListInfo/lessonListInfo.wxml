@@ -1,6 +1,6 @@
 <view class='listInfoWrap'>
     <view class='listInfoBanner'>
-        <image  mode='scaleToFill'></image>
+        <image src='../../../icon/lessonInfo.jpg' mode='scaleToFill'></image>
     </view>
     <view class='listInfoImage'>
         <view class='empty'></view>
@@ -23,7 +23,7 @@
             <view class='listInfoDataTitleChild'>活动介绍</view>
         </view>
         <view class='listInfoDataInfo'>
-            <text decode>活动时间:&nbsp;&nbsp;{{pageData.start_time}}至{{pageData.end_time}}</text>
+            <text decode>活动时间:&nbsp;&nbsp;{{pageData.start_time}} 至 {{pageData.end_time}}</text>
             <text decode data-phonenum='{{pageData.telephone}}' bindtap='tellPhone'>咨询热线:&nbsp;&nbsp;{{pageData.telephone}}</text>
             <text decode>联系地址:&nbsp;&nbsp;{{pageData.address}}</text>
         </view>

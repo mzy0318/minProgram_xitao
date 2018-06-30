@@ -316,3 +316,60 @@
     border:1rpx solid #7b7b7b;
     border-radius:5px;
 }
+.twoContentChild{
+    width: 660rpx;
+    line-height: 80rpx;
+    text-indent: 40rpx;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #efefef;
+    margin: 0 auto;
+    background:#fff;
+    padding-left:45rpx;
+    padding-right:45rpx;
+}
+.jianForm {
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    border-radius: 100%;
+    background: #7b7b7b;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    line-height: 30rpx;
+    color: #fff;
+    font-size: 50rpx;
+    text-align: center;
+    font-weight: bold;
+}
+.jianFormChild{
+    width:30rpx;
+    height:8rpx;
+    background:#fff;
+    float:left;
+    margin-top:16rpx;
+    margin-left:5rpx;
+}
+.jianFormO {
+    width: 30rpx;
+    height: 30rpx;
+    float: left;
+    border-radius: 100%;
+    background: transparent;
+    margin-top: 25rpx;
+    margin-left: 20rpx;
+    line-height: 30rpx;
+    color: #fff;
+    font-size:50rpx;
+    text-align: center;
+    font-weight: bold;
+}
+
+.isEdit {
+    float: right;
+    margin-right: 20rpx;
+}
+
+.isEdit checkbox-group {
+    float: left;
+    border-radius: 100%;
+}

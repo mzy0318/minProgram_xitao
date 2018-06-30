@@ -4,7 +4,7 @@
 </view>
 <view class='empty'></view>
 <view class='modelContent' wx:for='{{pageData}}' bindtap='toModeInfo' data-modelinfo='{{item}}'>
-    <view class='modelImage'><image src='{{item.cover}}'  mode='scaleToFill'></image></view>
+    <view class='modelImage'><image src='{{item.cover}}'  mode='widthFix'></image></view>
     <view class='modelText'>{{item.name}}</view>
 </view>
 

@@ -64,7 +64,7 @@ Page({
             success:function(res){
                 that.setData({
                     pageData: res.data.data,
-                    videoUrl: res.data.data.video
+                    videoUrl: res.data.data.video.url
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.title,

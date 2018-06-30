@@ -13,7 +13,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
         getApp().request({
             url: 'order_list',
@@ -21,14 +21,21 @@ Page({
             data: {
                 page: that.data.pageNum,
             },
-            success: function (res) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
-                }
+            success: function(res) {
 
-                that.setData({
-                    pageData: res.data.data
-                })
+                if (res.data.data.length == 0) {
+                    wx.showToast({
+                        title: '您没有参加该活动',
+                        icon:'none'
+                    })
+                } else if (res.data.data.length != 0){
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                }
             }
         })
     },
@@ -36,42 +43,68 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
-
+    onPullDownRefresh: function() {
+        let that = this;
+        that.setData({
+            pageNum: 1
+        })
+        getApp().request({
+            url: 'order_list',
+            method: 'post',
+            data: {
+                page: that.data.pageNum,
+            },
+            success: function(res) {
+                if (res.data.data.length == 0) {
+                    wx.showToast({
+                        title: '您没有参加该活动',
+                        icon: 'none'
+                    })
+                } else if (res.data.data.length != 0) {
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                    wx.stopPullDownRefresh()
+                }
+            }
+        })
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
         let that = this;
         let pageDataArr = [];
         pageDataArr.push(...that.data.pageData)
@@ -85,7 +118,7 @@ Page({
                 data: {
                     page: that.data.pageNum,
                 },
-                success: function (res) {
+                success: function(res) {
                     for (let i = 0; i < res.data.data.length; i++) {
                         res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
                     }
@@ -95,10 +128,10 @@ Page({
                     })
                 }
             })
-        }else{
+        } else {
             wx.showToast({
-                title: '我是有底线的哦',
-                icon:'none'
+                title: '到底啦',
+                icon: 'none'
             })
         }
     },
@@ -106,7 +139,13 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
+    },
+    toPayInfo: function(e) {
+        let payInfo = JSON.stringify(e.currentTarget.dataset.payinfo)
+        wx.navigateTo({
+            url: '../../courses/orderInfoPay/orderInfoPay?payInfo=' + payInfo,
+        })
     }
 })

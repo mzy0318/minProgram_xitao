@@ -47,37 +47,44 @@ Page({
                 iconfont: 'iconfont icon-kanjia iconfontStyle iconfontSize',
                 url: '../killPrices/killPrice/killPrice',
                 background: '#00D4BE',
-            },{
-                name: '视频点赞',
-                iconfont: 'iconfont icon-aixin iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
-                background: '#84D23E',
-            },{
+            },
+            // {
+            //     name: '视频点赞',
+            //     iconfont: 'iconfont icon-aixin iconfontStyle iconfontSize',
+            //     url: '../baseOptions/schoolInfo/schoolInfo',
+            //     background: '#84D23E',
+            // },
+            {
                 name: '1元好课',
                 iconfont: 'iconfont icon-yiyuanchoujiang iconfontStyle iconfontSize',
                 url: '../goodLesson/goodLessonList/goodLessonList',
                 background: '#FD9D22',
-            },{
-                name: '视频投票',
-                iconfont: 'iconfont icon-zan1 iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
-                background: '#8990FA',
-            },{
-                name: '视频课堂',
-                iconfont: 'iconfont icon-z-shipin iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
-                background: '#FE7FC2',
-            },{
-                name: '视频作业',
-                iconfont: 'iconfont icon-shipin1 iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolInfo/schoolInfo',
-                background: '#84D23E',
-            },{
-                name: '万人拼团',
-                iconfont: 'iconfont icon-pintuan iconfontStyle iconfontSize',
-                url: '../collage/collageList/collageList',
-                background: '#DE4037',
-            },{
+            },
+            // {
+            //     name: '视频投票',
+            //     iconfont: 'iconfont icon-zan1 iconfontStyle iconfontSize',
+            //     url: '../baseOptions/schoolInfo/schoolInfo',
+            //     background: '#8990FA',
+            // },
+            // {
+            //     name: '视频课堂',
+            //     iconfont: 'iconfont icon-z-shipin iconfontStyle iconfontSize',
+            //     url: '../baseOptions/schoolInfo/schoolInfo',
+            //     background: '#FE7FC2',
+            // },
+            // {
+            //     name: '视频作业',
+            //     iconfont: 'iconfont icon-shipin1 iconfontStyle iconfontSize',
+            //     url: '../baseOptions/schoolInfo/schoolInfo',
+            //     background: '#84D23E',
+            // },
+            // {
+            //     name: '万人拼团',
+            //     iconfont: 'iconfont icon-pintuan iconfontStyle iconfontSize',
+            //     url: '../collage/collageList/collageList',
+            //     background: '#DE4037',
+            // },
+            {
                 name: '私人拼团',
                 iconfont: 'iconfont icon-icon1 iconfontStyle iconfontSize',
                 url: '../collage/collageList/collageList',
@@ -92,12 +99,13 @@ Page({
                 iconfont: 'iconfont icon-xiaoqu iconfontStyle iconfontSize',
                 url: '../baseOptions/schoolList/schoolList',
                 background: '#1055CC',
-            }, {
-                name: '打卡作业',
-                iconfont: 'iconfont icon-job-task iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolList/schoolList',
-                background: '#4A86E8',
             },
+            // {
+            //     name: '打卡作业',
+            //     iconfont: 'iconfont icon-job-task iconfontStyle iconfontSize',
+            //     url: '../baseOptions/schoolList/schoolList',
+            //     background: '#4A86E8',
+            // },
         ]
     },
 

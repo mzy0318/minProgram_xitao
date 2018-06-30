@@ -13,7 +13,7 @@
         </swiper-item>
     </swiper>
     <view class='courseSelect' bindtap='toCourseClass'>{{lessonClassName}}></view>
-    <view class='courseInfo' wx:for='{{lessonData?lessonData:courseData.lesson}}' data-id='{{item.id}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}' data-id='{{item.id}}'>
+    <view class='courseInfo' wx:for='{{lessonData}}' data-id='{{item.id}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}' data-id='{{item.id}}'>
         <view class='courseInfoImg'>
             <image src='{{item.cover.url}}' mode='aspectFit'></image>
         </view>
@@ -22,5 +22,16 @@
             <text>{{item.title}}</text>
             <text>1</text>
         </view>
+    </view>
+</view>
+<view class='courseClassWrap' hidden='{{isShow}}'>
+    <view class='empty'></view>
+    <view class='courseClassContent'>
+        <!-- <view>全部</view> -->
+        <view wx:for='{{lessonClassData}}' style='color:{{classId==index?"#f00":"#000"}}' data-id='{{item.id}}' bindtap='toCourseNav' data-index='{{index}}' data-name='{{item.name}}'>{{item.name}}</view>
+    </view>
+    <view class='courseClassBtn'>
+        <button bindtap='toClearCourse'>清空</button>
+        <button bindtap='toCourse'>返回</button>
     </view>
 </view>

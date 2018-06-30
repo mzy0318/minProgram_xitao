@@ -11,7 +11,30 @@ Page({
     data: {
         startTime: '',
         pageData: '',
-        status: ['待跟进', '跟进中', '已预约', '已试听', '已到访', '已失效', '已成交'],
+        status: [
+        {
+            name: '待跟进',
+            color: '#FAC935',
+        }, {
+            name: '跟进中',
+            color: '#469AFB',
+        }, {
+            name: '已预约',
+            color: '#58C268',
+        }, {
+            name: '已试听',
+            color: '#B5B6B9',
+        }, {
+            name: '已到访',
+            color: '#EE505B',
+        }, {
+            name: '已失效',
+            color: '#9F85CD',
+        }, {
+            name: '已成交',
+            color: '#37C2D3',
+        }
+        ],
         cancelData: '+',
         isShow: true,
         xinArr: [
@@ -38,7 +61,8 @@ Page({
             success: function (res) {
                 for (let i = 0; i < res.data.data.length; i++) {
                     res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
-                    res.data.data[i].status = that.data.status[res.data.data[i].status]
+                    res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
+                    res.data.data[i].status = that.data.status[res.data.data[i].status].name;
                 }
                 that.setData({
                     pageData: res.data.data,
@@ -60,7 +84,24 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let that = this
+        App.request({
+            url: 'org/sale_lesson_appoint_list',
+            data: {},
+            method: 'post',
+            success: function (res) {
+                for (let i = 0; i < res.data.data.length; i++) {
+                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
+                    res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
+                    res.data.data[i].status = that.data.status[res.data.data[i].status].name;
+                }
+                that.setData({
+                    pageData: res.data.data,
+                    // xinData: that.data.xinArr[res.data.data.intention],
+                });
+                // console.log('that.data.xinData', that.data.xinData)
+            }
+        })
     },
 
     /**
@@ -81,7 +122,25 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this
+        App.request({
+            url: 'org/sale_lesson_appoint_list',
+            data: {},
+            method: 'post',
+            success: function (res) {
+                for (let i = 0; i < res.data.data.length; i++) {
+                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
+                    res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
+                    res.data.data[i].status = that.data.status[res.data.data[i].status].name;
+                }
+                that.setData({
+                    pageData: res.data.data,
+                    // xinData: that.data.xinArr[res.data.data.intention],
+                });
+                wx.stopPullDownRefresh()
+                // console.log('that.data.xinData', that.data.xinData)
+            }
+        })
     },
 
     /**
@@ -110,14 +169,11 @@ Page({
             data: e.detail.value,
             method: 'post',
             success: function (res) {
-                wx.showToast({
-                    title: res.data.msg,
-                    icon:'none',
-                })
-                if (res.data.code == 1) {
-                    that.setData({
-                        isShow: true,
-                        cancelData: '+'
+                
+                if (Number(res.data.code) == 1) {
+                    wx.showToast({
+                        title: '添加成功',
+                        icon: 'none',
                     })
                     App.request({
                         url: 'org/sale_lesson_appoint_list',
@@ -126,11 +182,16 @@ Page({
                         success: function (res) {
                             for (let i = 0; i < res.data.data.length; i++) {
                                 res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
-                                res.data.data[i].status = that.data.status[res.data.data[i].status]
+                                res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color;
+                                res.data.data[i].status = that.data.status[res.data.data[i].status].name;
                             }
-                            that.setData({
-                                pageData: res.data.data
-                            })
+                            if(Number(res.data.code)==1){
+                                that.setData({
+                                    pageData: res.data.data,
+                                    isShow: true,
+                                    cancelData: '+'
+                                })
+                            }
                         }
                     })
                 }

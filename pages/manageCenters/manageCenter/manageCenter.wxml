@@ -22,7 +22,7 @@
     </view>
     <view class='managVersion'>
         <text>智慧招生小程序</text>
-        <text>v4.5.3</text>
+        <text>{{versionData.version}}</text>
     </view>
 </view>
 <!--登陆部分-->

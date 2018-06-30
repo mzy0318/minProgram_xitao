@@ -1,8 +1,17 @@
 /* pages/studentStyle/studentStyle.wxss */
 .wrapView{
   width:720rpx;
-  margin:20rpx auto -50rpx;
+  margin:20rpx auto 20rpx;
 }
 .wrapView image{
   width:100%;
+}
+.studentInfo{
+    width:680rpx;
+    line-height:60rpx;
+    /* background:lightblue; */
+    margin:0 auto;
+    text-align:center;
+    font-size:30rpx;
+    color:#7b7b7b;
 }

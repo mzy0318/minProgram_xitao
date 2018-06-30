@@ -1,8 +1,11 @@
 /* pages/schoolnfo/schoolInfo.wxss */
-
+swiper{
+    width: 750rpx;
+    height: 350rpx;
+    overflow:hidden;
+}
 .slide-image {
   width: 750rpx;
-  height: 300rpx;
 }
 
 .containerO {
@@ -51,4 +54,25 @@
 .schoolInfoImg view image{
   width:100%;
   height:100%;
+}
+
+.honorImage{
+    width:690rpx;
+    min-height:10rpx;
+    margin:60rpx auto 0rpx;
+}
+.honorImage image{
+    width:750rpx;
+    height:auto;
+}
+
+.schoolVideo{
+    width:690rpx;
+    height:350rpx;
+    margin:60rpx auto 0rpx;
+    background:lightblue;
+}
+.schoolVideo video{
+    width:690rpx;
+    height:350rpx;
 }

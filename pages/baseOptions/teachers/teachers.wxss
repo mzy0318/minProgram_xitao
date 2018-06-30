@@ -1,72 +1,76 @@
 /* pages/teachers/teachers.wxss */
-.teacherWrap{
-  width:750rpx;
-  background:lightblue;
-  height:1200rpx;
-  position:relative;
-}
-swiper{
-  display:block;
-  position:absolute;
-  width:690rpx;
-  background:transparent;
-  height:940rpx;
-  left:50%;
-  top:50%;
-  margin-left:-345rpx;
-  margin-top:-350rpx;
-  border-radius:5px;
-}
-.teaContent{
-  width:690rpx;
-  background:#fff;
-  height:780rpx;
-  border-radius:5px;
-  margin:0 auto;
-  position:relative;
-  margin-top:100rpx;
-}
-.teaContentTitle{
-  display:block;
-  position:absolute;
-  text-align:center;
-  margin-top:120rpx;
-  width:100%;
-  font-weight:bold;
-}
-.teaContentText{
-  position:absolute;
-  width:600rpx;
-  height:580rpx;
-  background:#fff;
-  margin-top:200rpx;
-  left:45rpx;
-  overflow-x: scroll;
+
+.teacherWrap {
+    width: 750rpx;
+    background: linear-gradient(to top, #add8e6, #fff);
+    height: 1207rpx;
+    position: relative;
 }
 
-.teaContentText text{
-  display:block;
-  font-size: 32rpx;
-  color: #2D2D2D;
+swiper {
+    display: block;
+    position: absolute;
+    width: 690rpx;
+    background: transparent;
+    height: 940rpx;
+    left: 50%;
+    top: 50%;
+    margin-left: -345rpx;
+    margin-top: -350rpx;
+    border-radius: 5px;
 }
 
-.teaContentTextTitle{
-  margin-top:35rpx;
+.teaContent {
+    width: 690rpx;
+    background: #fff;
+    height: 780rpx;
+    border-radius: 5px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 100rpx;
 }
 
-.teaContentImg{
-  width:200rpx;
-  height:200rpx;
-  border-radius:50%;
-  position:absolute;
-  background:yellow;
-  top:-100rpx;
-  left:250rpx;
-  overflow: hidden;
+.teaContentTitle {
+    display: block;
+    position: absolute;
+    text-align: center;
+    margin-top: 120rpx;
+    width: 100%;
+    font-weight: bold;
+}
+
+.teaContentText {
+    position: absolute;
+    width: 600rpx;
+    height: 580rpx;
+    background: #fff;
+    margin-top: 200rpx;
+    left: 45rpx;
+    overflow-x: scroll;
+}
+
+.teaContentText text {
+    display: block;
+    font-size: 32rpx;
+    color: #2d2d2d;
+}
+
+.teaContentTextTitle {
+    margin-top: 35rpx;
+}
+
+.teaContentImg {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 50%;
+    position: absolute;
+    background: yellow;
+    top: -100rpx;
+    left: 250rpx;
+    overflow: hidden;
 }
 
 .teaContentImg image {
-  height:200rpx;
-  width:300rpx;
-  margin-left:-45rpx;
+    height: 200rpx;
+    width: 200rpx;
 }

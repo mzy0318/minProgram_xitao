@@ -73,10 +73,8 @@ Page({
     onShareAppMessage: function () {
 
     },
-    tellPhone: function () {
-        wx.makePhoneCall({
-            phoneNumber: this.data.pageInfo.telephone,
-        })
+    tellPhone: function (e) {
+        getApp().tellPhone(e)
     },
     map: function () {
         let data = this.data.pageInfo

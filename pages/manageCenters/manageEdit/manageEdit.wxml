@@ -3,7 +3,9 @@
         <view class='manageEditOne'>
             <view class='manageEditOneTitle'>主题模板</view>
             <view class='manageEditOneContent'>
-                <view><image src='{{backgroundImage}}' mode='scaleToFill' /></view>
+                <view>
+                    <image src='{{backgroundImage}}' mode='scaleToFill' />
+                </view>
                 <view>发布后可重新选择模板和音乐</view>
             </view>
         </view>
@@ -12,40 +14,89 @@
                 活动信息
             </view>
             <view class='manageEditTwoContent'>
-                <view><text>活动名称:</text><input value='{{editTitle}}' type='text' id='activeName' name='title' /></view>
-                <view><text>开始日期:</text><picker mode='date' value='{{startDate}}' start="2015-09-01" end="2111-01-01" name='start_time' bindchange='getStartTime'><text class='endTime'>{{startDate}}</text></picker></view>
-                <view><text>截止日期:</text><picker mode='date' value='{{endDate}}' start="2015-09-01" end="2111-01-01" name='end_time' bindchange='getEndTime'><text class='startTime'>{{endDate}}</text></picker></view>
-                <view><text>报名热线:</text><input type='number' maxlength='11' name='telephone' /></view>
-                <view><text>联系地址:</text><input type='text' name='address' /></view> 
+                <view>
+                    <text>活动名称:</text>
+                    <input value='{{editTitle}}' type='text' id='activeName' name='title' />
+                </view>
+                <view>
+                    <text>开始日期:</text>
+                    <picker mode='date' value='{{startDate}}' start="2015-09-01" end="2111-01-01" name='start_time' bindchange='getStartTime'>
+                        <text class='endTime'>{{startDate}}</text>
+                    </picker>
+                </view>
+                <view>
+                    <text>截止日期:</text>
+                    <picker mode='date' value='{{endDate}}' start="2015-09-01" end="2111-01-01" name='end_time' bindchange='getEndTime'>
+                        <text class='startTime'>{{endDate}}</text>
+                    </picker>
+                </view>
+                <view>
+                    <text>报名热线:</text>
+                    <input type='number' maxlength='11' value='{{pageData.telephone}}' name='telephone' />
+                </view>
+                <view>
+                    <text>联系地址:</text>
+                    <input type='text' name='address' value='{{pageData.address}}' />
+                </view>
             </view>
         </view>
         <view class='manageEditThree'>
             <view class='manageEditOneTitle'>报名信息</view>
             <view class='manageEditOneContent'>
-                <view wx:for='{{nameInfo}}'><text>{{item}}:</text><input type='text' disabled /></view>
-                <view class='addOption' bindtap='showOptions' data-is='0'>+新增报名项</view>
+                <view wx:for='{{joinInfo}}' class='twoContentChild'>
+                    <view class='jianFormO'></view> {{item}}</view>
+                <view wx:for='{{nameInfo}}' class='twoContentChild'>
+                    <view class='jianForm' data-index='{{index}}' bindtap='jianForm'>
+                        <view class='jianFormChild' data-index='{{index}}'></view>
+                    </view>{{item}}
+                    <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+                </view>
+                <view class='addInfo' bindtap='showOptions' data-is='0'>+新增报名项</view>
             </view>
         </view>
         <view class='manageEditFour'>
             <view class='manageEditOneTitle'>砍价设置</view>
             <view class='manageEditFourContent'>
-                <view class='viewOne'><text>原价:</text><input type='number' name='now_price' /></view>
-                <view class='viewOne'><text>最低价:</text><input type='number' name='original_price' /></view>
+                <view class='viewOne'>
+                    <text>原价:</text>
+                    <input type='number' name='now_price' value='{{pageData.now_price}}' />
+                </view>
+                <view class='viewOne'>
+                    <text>最低价:</text>
+                    <input type='number' name='original_price' value='{{pageData.original_price}}' />
+                </view>
                 <view>
                     <text>砍价类型:</text>
-                    <text class='{{isShow?"killPricerNumed":"killPricerNum"}}' decode='true'  bindtap='switchTab' data-value='1'>&nbsp;&nbsp;&nbsp;砍价幅度</text>
-                    <text class='{{isHidden?"killPricerNumed":"killPricerNum"}}' decode='true'  bindtap='switchTab' data-value='2'>&nbsp;&nbsp;&nbsp;砍价次数</text>
+                    <text class='{{isShow?"killPricerNumed":"killPricerNum"}}' decode='true' bindtap='switchTab' data-value='1'>&nbsp;&nbsp;&nbsp;砍价幅度</text>
+                    <text class='{{isHidden?"killPricerNumed":"killPricerNum"}}' decode='true' bindtap='switchTab' data-value='2'>&nbsp;&nbsp;&nbsp;砍价次数</text>
                 </view>
-                <view class='viewOne'  hidden='{{isHidden}}'><text>砍价幅度:</text><input type='text' name='bargain_paramO' placeholder='如每次最高砍掉50元'/></view>
-                <view class='viewOne'  hidden='{{isShow}}'><text>砍价次数:</text><input type='text' name='bargain_paramT' placeholder='如每次按剩余差价随机'/></view>
+                <view class='viewOne' hidden='{{isHidden}}'>
+                    <text>砍价幅度:</text>
+                    <input type='text' name='bargain_paramO' value='{{pageData.bargain_param}}' placeholder='如每次最高砍掉50元' />
+                </view>
+                <view class='viewOne' hidden='{{isShow}}'>
+                    <text>砍价次数:</text>
+                    <input type='text' name='bargain_paramT' value='{{pageData.bargain_param}}' placeholder='如每次按剩余差价随机' />
+                </view>
                 <view>
                     <text>砍价限额:</text>
-                    <text class='{{isShowO?"killPricerDued":"killPricerDu"}}' decode='true' bindtap='switchTabO' data-value='1' >只能砍1次</text>
-                    <text class='{{isHiddenO?"killPricerDued":"killPricerDu"}}' decode='true' bindtap='switchTabO' data-value='2' >每天砍1次</text>
+                    <text class='{{isShowO?"killPricerDued":"killPricerDu"}}' decode='true' bindtap='switchTabO' data-value='1'>只能砍1次</text>
+                    <text class='{{isHiddenO?"killPricerDued":"killPricerDu"}}' decode='true' bindtap='switchTabO' data-value='2'>每天砍1次</text>
                 </view>
-                <view class='viewOne'><text>报名限额:</text><input type='number' name='joiner_limit' placeholder='允许最大人数,不填则不限制' /></view>
-                <view><text>在线支付:</text><switch color='#47BAFD' name='pay_status' /><text>若退款,请您线下给客户,默认:否</text></view>
-                <view><text>是否显示:</text><switch color='#47BAFD' name='status' /><text>活动发布后是否可见,默认:显示</text></view>
+                <view class='viewOne'>
+                    <text>报名限额:</text>
+                    <input type='number' name='joiner_limit' value='{{pageData.joiner_limit}}' placeholder='允许最大人数,不填则不限制' />
+                </view>
+                <view>
+                    <text>在线支付:</text>
+                    <switch color='#47BAFD' name='pay_status' />
+                    <text>若退款,请您线下给客户,默认:否</text>
+                </view>
+                <view>
+                    <text>是否显示:</text>
+                    <switch color='#47BAFD' name='status' />
+                    <text>活动发布后是否可见,默认:显示</text>
+                </view>
             </view>
         </view>
         <view class='manageEditFive'>
@@ -55,14 +106,16 @@
                 <view class='manageEditFivePhoto' bindtap='getImage'>
                     <text class='iconfont icon-photo'></text>
                 </view>
-                <view class='fiveContentImage' wx:for='{{imageData}}'><image src='{{item}}' mode='scaleToFill' /></view>
+                <view class='fiveContentImage' wx:for='{{imageData}}'>
+                    <image src='{{item}}' mode='scaleToFill' />
+                </view>
             </view>
         </view>
         <view class='manageEditSix'>
             <view class='manageEditOneTitle'>活动信息</view>
             <view class='manageEditSixContent'>
                 <view class='manageEditSixWrap'>
-                    <textarea placeholder='活动说明'  bindblur='getRule' />
+                    <textarea placeholder='活动说明' value='{{pageData.rule}}' bindblur='getRule' />
                 </view>
             </view>
             <view class='sixEmpty'></view>

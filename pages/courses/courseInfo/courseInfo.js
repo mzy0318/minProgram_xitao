@@ -83,28 +83,34 @@ Page({
     },
     handleHidden: function (e) {
         let that = this;
-        e.detail.value['lesson_id'] = that.data.pageData.id
-        getApp().request({
-            url:'sale_lesson_appoint',
-            data: e.detail.value,
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code)==1){
-                    wx.showToast({
-                        title: '预约成功',
-                        icon:'none',
-                    })
-                    that.setData({
-                        isShow: true
-                    })
-                }else{
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
+        if (Number(e.currentTarget.dataset.is)==1){
+            e.detail.value['lesson_id'] = that.data.pageData.id;
+            getApp().request({
+                url: 'sale_lesson_appoint',
+                data: e.detail.value,
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        wx.showToast({
+                            title: '预约成功',
+                            icon: 'none',
+                        })
+                        that.setData({
+                            isShow: true
+                        })
+                    } else {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
                 }
-            }
-        })
+            })
+        } else if (Number(e.currentTarget.dataset.is) == 0){
+            that.setData({
+                isShow: true
+            })
+        }
     },
     toIndex: function () {
         getApp().toIndex()

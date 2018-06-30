@@ -11,13 +11,37 @@ Page({
         honorImageId: '',
         schoolVideo: '',
         schoolVideoId: '',
+        isVideo: true,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-
+        let that = this;
+        getApp().request({
+            url: 'school/intro',
+            data: {
+                orgid: getApp().config.orgId
+            },
+            success: res => {
+                if (res.data.data.brand == null) {
+                    that.setData({
+                        isVideo: true,
+                    })
+                } else {
+                    that.setData({
+                        isVideo: false,
+                    })
+                }
+                this.setData({
+                    pageData: res.data.data,
+                    envImage: res.data.data.environment,
+                    honorImage: res.data.data.honorImage,
+                    schoolVideo: res.data.data.brand,
+                })
+            }
+        })
     },
 
     /**
@@ -197,6 +221,9 @@ Page({
                 let size = res.size;
                 let duration = res.duration;
                 that.setData({
+                    isVideo: false,
+                })
+                that.setData({
                     schoolVideo: res.tempFilePath
                 })
                 getApp().request({
@@ -291,11 +318,19 @@ Page({
             data: res.detail.value,
             method: 'post',
             success: function(res) {
-                if (Number(res.data.code == 1)) {
-                    getApp().showToast(res.data.msg)
-                    getApp().toIndex()
+                if (Number(res.data.code) == 1) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'success',
+                        success:function(){
+                            getApp().toIndex()
+                        }
+                    })
                 } else {
-                    getApp().showToast(res.data.msg)
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
+                    })
                 }
             }
         })

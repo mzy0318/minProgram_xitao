@@ -7,6 +7,7 @@ Page({
      */
     data: {
         pageData:'',
+        pageNum:1,
     },
 
     /**
@@ -18,7 +19,7 @@ Page({
             url:'org/video_card_list',
             method:'post',
             data:{
-                page:'1',
+                page:that.data.pageNum,
             },
             success:function(res){
                 for (let i = 0; i < res.data.data.list.length; i++) {
@@ -63,14 +64,61 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        that.setData({
+            pageNum: 1,
+        })
+        getApp().request({
+            url: 'org/video_card_list',
+            method: 'post',
+            data: {
+                page: that.data.pageNum,
+            },
+            success: function (res) {
+                for (let i = 0; i < res.data.data.list.length; i++) {
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                }
+                that.setData({
+                    pageData: res.data.data.list
+                })
+                wx.stopPullDownRefresh()
+            }
+        })
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.pageData)
+        if (that.data.pageData.length >= that.data.pageNum * 10){
+            that.setData({
+                pageNum: that.data.pageNum + 1,
+            })
+            getApp().request({
+                url: 'org/video_card_list',
+                method: 'post',
+                data: {
+                    page: that.data.pageNum,
+                },
+                success: function (res) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                    }
+                    pageDataArr.push(...res.data.data.list)
+                    that.setData({
+                        pageData: pageDataArr
+                    })
+                }
+            })
+        }else{
+            wx.showToast({
+                title: '到底啦',
+                icon: 'none'
+            })
+        }
     },
 
     /**
@@ -104,7 +152,7 @@ Page({
             },
             success:function(res){
                 if(res.data.code==1){
-                    wx.wx.navigateTo({
+                    wx.navigateTo({
                         url:'../../videos/manVideoList/manVideoList'
                     })
                 }

@@ -13,6 +13,8 @@ Page({
         actId:'',
         bannerImage:'',
         bgImage:'',
+        isEdit:'',
+        id:'',
     },
 
     /**
@@ -21,6 +23,10 @@ Page({
     onLoad: function (options) {
         let that = this;
         if (Number(options.isEdit)==1) {
+            that.setData({
+                isEdit: options.isEdit,
+                id: options.id,
+            })
             getApp().request({
                 url: 'org/add_video_card',
                 method: 'get',
@@ -36,7 +42,7 @@ Page({
                         videoImage: '',
                         actId: Number(options.id),
                         bannerImage:res.data.data.banner_image_url,
-                        bgImage: res.data.databg_image_url
+                        bgImage: res.data.data.bg_image_url
                     });
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,
@@ -44,6 +50,9 @@ Page({
                 }
             })
         } else if (Number(options.isEdit) == 0){
+            that.setData({
+                isEdit: options.isEdit
+            })
             wx.setNavigationBarTitle({
                 title: JSON.parse(wx.getStorageSync('userInfo')).nickName + '的祝福视频',
             })
@@ -81,14 +90,21 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
+        let that = this;
         wx.showModal({
-            title: '上传视频可以保存当前贺卡',
-            content: '这是一个模态弹窗',
+            title: '上传视频才可以保存贺卡,确定退出?',
+            content: '',
             success: function (res) {
                 if (res.confirm) {
-                    return false
+                    if (Number(that.data.isEdit)==1){
+
+                    } else if (Number(that.data.isEdit) == 0){
+                        wx.navigateBack({})
+                    }
                 } else if (res.cancel) {
-                   return false
+                    wx.navigateTo({
+                        url: '../../manageCenters/videoEdit/videoEdit?isEdit=' + that.data.isEdit + '&image=' + that.data.bannerImage + '&bg=' + that.data.bgImage + '&id=' + that.data.id,
+                    })
                 }
             }
         })
@@ -179,6 +195,7 @@ Page({
                                             data:{
                                                 title:that.data.title,
                                                 video_id: res.data.data.videoId,
+                                                banner_image_url: that.data.bannerImage,
                                             },
                                             method:'post',
                                             success:function(res){

@@ -1,0 +1,16 @@
+<view class='taskUserWrap'>
+    <view class='empty'></view>
+    <view class='taskUserContent'>
+        <view class='taskUserStatus'>进行中</view>
+        <view class='taskUserTitle'>练习舞蹈21天</view>
+        <view class='taskUserNum'>
+            <view>作业数<text> 1 </text>次</view>
+            <view>您已打卡<text> 0 </text>次</view>
+        </view>
+        <view class='taskUserOptions'>
+            <view><text>排行榜</text></view>
+            <view><text>邀请好友</text></view>
+            <view><text>打卡日历</text></view>
+        </view>
+    </view>
+</view> 

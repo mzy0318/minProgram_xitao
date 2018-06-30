@@ -1,10 +1,10 @@
 <view class='manageActiveWrap'>
     <view class='empty'></view>
-    <view class='manageActiveShow' wx:for='{{pageData.list}}' data-id='{{item.id}}'>
+    <view class='manageActiveShow' wx:for='{{pageData}}' data-id='{{item.id}}'>
         <view class='manageActiveTitle' data-id='{{item.id}}' bindtap='toKillPirce' data-acttag='{{item.act_tag}}'>{{item.title}}></view>
         <view class='manageActiveContent'>
             <view class='manageActiveContentImg'>
-                <image src='{{item.banner_image_url}}' mode='scaleToFill' ></image>
+                <image src='{{item.coverImage}}' mode='scaleToFill' ></image>
             </view>
             <view class='manageActiveContentOption'>
                 <view bindtap='toPersonList' data-id='{{item.id}}'>报名:<text>{{item.total_joiner}}</text>人</view>

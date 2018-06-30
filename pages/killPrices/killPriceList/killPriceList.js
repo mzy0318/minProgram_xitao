@@ -12,6 +12,7 @@ Page({
         oriData: '',
         actReg: true,
         lesson: true,
+        pageNum:1,
     },
 
     /**
@@ -32,9 +33,16 @@ Page({
                     id: options.id
                 },
                 success: res => {
-                    that.setData({
-                        userList: res.data.data.list
-                    })
+                    if (res.data.data.list.length == 0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                            icon:'none',
+                        })
+                    } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            userList: res.data.data.list
+                        })
+                    }
                 }
             })
         } else if (Number(pageTypeStu) == 3) {
@@ -50,18 +58,23 @@ Page({
                 },
                 success: res => {
                     let userData = res.data.data.list;
-
-                    for (let i = 0; i < userData.length; i++) {
-                        if (userData[i].is_leader == 1) {
-                            userData[i].is_leader = '【团长】'
-                        } else if (userData[i].is_leader == 0) {
-                            userData[i].is_leader = '【团员】'
+                    if (userData.length==0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                        })
+                    } else if (userData.length != 0){
+                        for (let i = 0; i < userData.length; i++) {
+                            if (userData[i].is_leader == 1) {
+                                userData[i].is_leader = '【团长】'
+                            } else if (userData[i].is_leader == 0) {
+                                userData[i].is_leader = '【团员】'
+                            }
                         }
+                        that.setData({
+                            userList: userData,
+                            oriData: res.data.data.list,
+                        })
                     }
-                    that.setData({
-                        userList: userData,
-                        oriData: res.data.data.list,
-                    })
                 }
             })
         } else if (Number(pageTypeStu) == 4) {
@@ -75,9 +88,15 @@ Page({
                     page: 1
                 },
                 success: function (res) {
-                    that.setData({
-                        userList: res.data.data.list
-                    })
+                    if (res.data.data.list.length==0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                        })
+                    } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            userList: res.data.data.list
+                        })   
+                    }
                 }
             })
         } else if (Number(pageTypeStu) == 10) {
@@ -88,12 +107,18 @@ Page({
                 url: 'my_normal_list',
                 method: 'post',
                 data: {
-                    page: 1
+                    page: that.data.pageNum,
                 },
                 success: function (res) {
-                    that.setData({
-                        userList: res.data.data.list
-                    })
+                    if (res.data.data.list.length==0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                        })
+                    } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            userList: res.data.data.list
+                        })   
+                    }
                 }
             })
         }
@@ -131,14 +156,125 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        let pageTypeStu = wx.getStorageSync('pageTypeStu');
+        that.setData({
+            pageNum: 1
+        })
+        if (Number(pageTypeStu) == 10){
+            wx.setNavigationBarTitle({
+                title: '我的常规活动',
+            })
+            getApp().request({
+                url: 'my_normal_list',
+                method: 'post',
+                data: {
+                    page: that.data.pageNum,
+                },
+                success: function (res) {
+                    if (res.data.data.list.length==0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                        })
+                    } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            userList: res.data.data.list
+                        })
+                        wx.stopPullDownRefresh()
+                    }
+                }
+            })
+        } else if (Number(pageTypeStu) == 4){
+            wx.setNavigationBarTitle({
+                title: '一元好课报名',
+            })
+            getApp().request({
+                url: 'my_lesson_one_list',
+                method: 'post',
+                data: {
+                    page: that.data.pageNum
+                },
+                success: function (res) {
+                    if (res.data.data.list.length == 0){
+                        wx.showToast({
+                            title: '您没有参加该活动',
+                        })
+                    } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            userList: res.data.data.list
+                        })
+                        wx.stopPullDownRefresh()
+                    }
+                }
+            })
+        }
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageTypeStu = wx.getStorageSync('pageTypeStu');
+        if (Number(pageTypeStu) == 10){
+            wx.setNavigationBarTitle({
+                title: '我的常规活动',
+            })
+            let pageDataArr = [];
+            pageDataArr.push(...that.data.userList);
+            if (that.data.userList.length >= that.data.pageNum * 10){
+                that.setData({
+                    pageNum: that.data.pageNum + 1,
+                })
+                getApp().request({
+                    url: 'my_normal_list',
+                    method: 'post',
+                    data: {
+                        page: that.data.pageNum,
+                    },
+                    success: function (res) {
+                        pageDataArr.push(...res.data.data.list)
+                        that.setData({
+                            userList: pageDataArr
+                        })
+                    }
+                })
+            }else{
+                wx.showToast({
+                    title: '到底啦',
+                    icon: 'none'
+                })
+            }
+        } else if (Number(pageTypeStu) == 4){
+            wx.setNavigationBarTitle({
+                title: '一元好课报名',
+            })
+            let pageDataArr = [];
+            pageDataArr.push(...that.data.userList);
+            if (that.data.userList.length >= that.data.pageNum * 10){
+                that.setData({
+                    pageNum: that.data.pageNum + 1,
+                })
+                getApp().request({
+                    url: 'my_lesson_one_list',
+                    method: 'post',
+                    data: {
+                        page: that.data.pageNum,
+                    },
+                    success: function (res) {
+                        pageDataArr.push(...res.data.data.list)
+                        that.setData({
+                            userList: pageDataArr
+                        })
+                    }
+                })
+            }else{
+                wx.showToast({
+                    title: '到底啦',
+                    icon: 'none'
+                })
+            }
+        }
     },
 
     /**
@@ -163,7 +299,7 @@ Page({
             })
         } else if (Number(pageTypeStu) == 4) {
             wx.navigateTo({
-                url: '../../goodLesson/lessonListInfo/lessonListInfo?actId=' + e.currentTarget.dataset.actid,
+                url: '../../goodLesson/lessonListInfo/lessonListInfo?actId=' + e.currentTarget.dataset.id,
             })
         } else if (Number(pageTypeStu) == 10) {
             wx.navigateTo({

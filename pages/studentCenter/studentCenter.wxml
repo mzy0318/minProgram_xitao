@@ -21,4 +21,8 @@
             </view>
         </view>
     </view>
+    <view class='managVersion'>
+        <!-- <text>智慧招生小程序</text> -->
+        <text>{{versionData.version}}</text>
+    </view>
 </view>

@@ -1,6 +1,6 @@
 <view class='killPriceListWrap'>
     <view class='killPriceListContet' wx:for='{{userList}}'>
-        <view class='killPriceListTop' bindtap='toPricePerson'  data-actid='{{item.act_id?item.act_id:item.act_nice_id}}' data-joinerid='{{item.joiner_id}}' data-acttag='{{item.act_tag}}'>
+        <view class='killPriceListTop' bindtap='toPricePerson'  data-id='{{item.act_nice_id}}' data-actid='{{item.act_id}}' data-joinerid='{{item.joiner_id}}' data-acttag='{{item.act_tag}}'>
             <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.is_leader}}{{item.nickname}}</text>
             <text>2018-05-26 15:51</text>
         </view>

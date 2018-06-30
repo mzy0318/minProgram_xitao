@@ -1,7 +1,7 @@
 .listInfoBanner{
     width:750rpx;
     height:460rpx;
-    background:#0ff;
+    background:#fff;
 }
 .listInfoBanner image{
     width:750rpx;
@@ -33,8 +33,8 @@
 .listInfoBackground{
     width:750rpx;
     height:740rpx;
-    background:lightblue;
     overflow:hidden;
+    background-repeat:repeat;
 }
 .listInfoVideo{
     width:700rpx;

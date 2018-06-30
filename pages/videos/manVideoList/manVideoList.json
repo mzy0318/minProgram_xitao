@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "视频贺卡",
-    "navigationBarBackgroundColor": "#8990FA"
+    "navigationBarBackgroundColor": "#8990FA",
+    "navigationBarTextStyle": "white"
 }

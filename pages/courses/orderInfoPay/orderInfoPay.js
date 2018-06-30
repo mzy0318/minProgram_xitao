@@ -15,15 +15,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log('options', options)
         let that = this;
         that.setData({
             pageData: JSON.parse(options.payInfo),
             createTime: utils.formatTime(new Date(JSON.parse(options.payInfo).create_time)),
-            orderNumber:1529751805517161307,
         })
-        console.log(that.data.pageData)
-        console.log(that.data.orderNumber)
     },
 
     /**
@@ -107,5 +103,5 @@ Page({
                 }
             }
         })
-    }
+    },
 })

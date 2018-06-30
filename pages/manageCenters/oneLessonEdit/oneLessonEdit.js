@@ -16,16 +16,19 @@ Page({
         actNiceId: '',
         coverImage: '',
         coverImageId: '',
+        isForm: true,
+        nameInfo: [],
+        nameInfoId: [],
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        let that = this
         this.setData({
             actNiceId: options.actNiceId,
         })
-        let that = this
         if (options.actNiceId != 'undefined') {
             getApp().request({
                 url: 'org/make_lesson_one',
@@ -34,11 +37,19 @@ Page({
                     id: options.actNiceId
                 },
                 success: function(res) {
+                    let joinInfo = [];
+                    let joinInfoId = [];
+                    for (let i = 0; i < res.data.data.join_info.length; i++) {
+                        joinInfo.push(res.data.data.join_info[i].text);
+                        joinInfoId.push(res.data.data.join_info[i].require)
+                    }
+                    joinInfo.splice(0, 2);
+                    joinInfoId.splice(0, 2)
                     that.setData({
                         pageData: res.data.data,
                         startTime: res.data.data.start_time,
                         endTime: res.data.data.end_time,
-                        actImageId: res.data.data.act_image,
+                        actImageId: JSON.parse(res.data.data.act_image),
                         description: res.data.data.description,
                         coverImageId: res.data.data.cover_image
                     })
@@ -119,14 +130,22 @@ Page({
         // sendData['act_image'] = that.data.actImageId
         sendData['status'] = that.data.status ? 1 : 0
         sendData['sort'] = 1;
-        sendData['join_info_text'] = that.data.joinInfo;
-        sendData['join_info_require'] = that.data.joinInfoId;
+        // sendData['join_info_text'] = that.data.joinInfo;
+        // sendData['join_info_require'] = that.data.joinInfoId;
         sendData['cover_image'] = that.data.coverImageId;
 
         for (let i = 0; i < that.data.actImageId.length; i++) {
             sendData['act_image[' + i + ']'] = that.data.actImageId[i];
         }
-
+        // for (let i = 0; i < that.data.joinInfo.length; i++) {
+        //     sendData['join_info_text[' + i + ']'] = that.data.joinInfo[i];
+        //     sendData['join_info_require[' + i + ']'] = that.data.joinInfoId[i];
+        // }
+        for (let i = 0; i < that.data.nameInfo.length; i++) {
+            // let index = i + 2;
+            sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i];
+            sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i];
+        }
         getApp().request({
             url: 'org/make_lesson_one',
             data: sendData,
@@ -304,5 +323,56 @@ Page({
                 })
             },
         })
-    }
+    },
+    // 添加表单选项
+    addForm: function(e) {
+        let that = this;
+        if (Number(e.currentTarget.dataset.is) == 1) {
+            that.setData({
+                isForm: true
+            })
+        } else if (Number(e.currentTarget.dataset.is) == 0) {
+            that.setData({
+                isForm: false
+            })
+        }
+    },
+    addNameOptions: function(e) {
+        let arr = this.data.nameInfo;
+        let arrO = this.data.nameInfoId
+        arr.push(e.target.dataset.value);
+        arrO.push(0);
+        this.setData({
+            nameInfo: arr,
+            nameInfoId: arrO
+        })
+    },
+    jianForm: function(e) {
+        let that = this;
+        let nameInfo = that.data.nameInfo
+        let nameInfoId = that.data.nameInfoId
+        nameInfo.splice(e.target.dataset.index, 1)
+        nameInfoId.splice(e.target.dataset.index, 1)
+        that.setData({
+            nameInfo: nameInfo,
+            nameInfoId: nameInfoId,
+        })
+    },
+    isMustEdit: function(e) {
+        let that = this;
+        let nameInfoId = that.data.nameInfoId
+        if (e.detail.value) {
+            nameInfoId[e.target.dataset.index] = 1
+        } else {
+            nameInfoId[e.target.dataset.index] = 0
+        }
+        that.setData({
+            nameInfoId: nameInfoId
+        })
+    },
+    showOptions: function (e) {
+        this.setData({
+            isForm: Boolean(Number(e.target.dataset.is))
+        })
+    },
 })

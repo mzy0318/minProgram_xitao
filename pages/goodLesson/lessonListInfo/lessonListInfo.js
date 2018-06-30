@@ -1,4 +1,5 @@
 // pages/goodLesson/lessonListInfo/lessonListInfo.js
+let utils = require('../../../utils/util.js')
 Page({
 
     /**
@@ -14,7 +15,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options', options)
         let that = this
         getApp().request({
             url:'lesson_one_act',
@@ -23,6 +23,14 @@ Page({
             },
             method:'post',
             success:function(res){
+                if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
+                    })
+                }
+                res.data.data.start_time = utils.formatDate(new Date(res.data.data.start_time))
+                res.data.data.end_time = utils.formatDate(new Date(res.data.data.end_time))
                 that.setData({
                     pageData:res.data.data
                 })

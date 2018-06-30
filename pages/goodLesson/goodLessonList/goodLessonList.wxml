@@ -1,6 +1,6 @@
 <view class='lessonList'>
     <view class='lessonBanner'>
-        <image mode='scaleToFill' />
+        <image src='../../../icon/oneLesson.png' mode='scaleToFill' />
     </view>
     <view class='contentList' bindtap='toListInfo' data-actid='{{item.act_nice_id}}' wx:for='{{pageData}}'>
         <view class='contentListLeft'>

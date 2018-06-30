@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "拼团列表",
-    "navigationBarBackgroundColor":"#F85E68"
+    "navigationBarBackgroundColor":"#F85E68",
+    "navigationBarTextStyle": "white"
 }

@@ -220,7 +220,13 @@ button[class='courseInfoBottomShare']::after {
     bottom: 0rpx;
     left: 0rpx;
 }
-
+.closeAlert{
+    width:750rpx;
+    height:750rpx;
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+}
 .courseInfoShare {
     width: 750rpx;
     height: 455rpx;

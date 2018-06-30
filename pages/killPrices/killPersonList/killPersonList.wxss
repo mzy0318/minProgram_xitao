@@ -59,7 +59,7 @@
 }
 .collagePersonListTop{
     width:690rpx;
-    height:405rpx;
+    min-height:85rpx;
     background:#fff;
     margin:0 auto;
 }
@@ -73,13 +73,13 @@
 }
 .collagePersonListMiddle{
     width:690rpx;
-    height:245rpx;
+    min-height:85rpx;
     background:#fff;
     margin:40rpx auto;
 }
 .collagePersonListBottom{
     width:690rpx;
-    height:165rpx;
+    min-height:85rpx;
     background:#fff;
     margin:0rpx auto;
 }

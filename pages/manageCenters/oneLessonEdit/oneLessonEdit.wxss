@@ -1,271 +1,411 @@
-.lessonEditWrap{
-    width:750rpx;
-    min-height:1207rpx;
-    background:#F2F2F2;
-    padding-bottom:100rpx;
+.lessonEditWrap {
+    width: 750rpx;
+    min-height: 1207rpx;
+    background: #f2f2f2;
+    padding-bottom: 100rpx;
 }
-.empty{
-    width:100%;
-    height:20rpx;
+
+.empty {
+    width: 100%;
+    height: 20rpx;
 }
+
 /*活动信息*/
-.lessonEditOne{
-    width:700rpx;
-    min-height:565rpx;
-    margin:0 auto 20rpx;
+
+.lessonEditOne {
+    width: 700rpx;
+    min-height: 565rpx;
+    margin: 0 auto 20rpx;
 }
-.lessonEditOneTitle{
-    width:700rpx;
-    line-height:80rpx;
-    font-size:30rpx;
-    font-weight:bold;
-    text-indent:20rpx;
+
+.lessonEditOneTitle {
+    width: 700rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    text-indent: 20rpx;
 }
-.lessonEditContent{
-     width:700rpx;
-     line-height:485rpx;
-     background:#fff;
-     border-radius:5px;
+
+.lessonEditContent {
+    width: 700rpx;
+    line-height: 485rpx;
+    background: #fff;
+    border-radius: 5px;
 }
-.lessonEditContentInput{
-    width:660rpx;
-    height:80rpx;
-    margin:0 auto;
-    border-bottom:1rpx solid #efefef;
+
+.lessonEditContentInput {
+    width: 660rpx;
+    height: 80rpx;
+    margin: 0 auto;
+    border-bottom: 1rpx solid #efefef;
 }
-.lessonEditContentInput view:nth-child(1){
-    width:200rpx;
-    line-height:80rpx;
-    font-size:30rpx;
-    color:#6D6D6D;
-    text-indent:20rpx;
-    float:left;
+
+.lessonEditContentInput view:nth-child(1) {
+    width: 200rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    color: #6d6d6d;
+    text-indent: 20rpx;
+    float: left;
 }
-.lessonEditContentInput>view:nth-child(2){
-    width:460rpx;
-    height:60rpx;
-    font-size:30rpx;
-    color:#6D6D6D;
-    background:#F2F2F2;
-    text-indent:20rpx;
-    float:left;
-    margin-top:10rpx;
-    border-radius:5px;
+
+.lessonEditContentInput>view:nth-child(2) {
+    width: 460rpx;
+    height: 60rpx;
+    font-size: 30rpx;
+    color: #6d6d6d;
+    background: #f2f2f2;
+    text-indent: 20rpx;
+    float: left;
+    margin-top: 10rpx;
+    border-radius: 5px;
 }
-.lessonEditContentInput>view:nth-child(2) input{
-    width:440rpx;
-    height:60rpx;
-    line-height:60rpx;
-    background:#F2F2F2;
-    margin-left:20rpx;
+
+.lessonEditContentInput>view:nth-child(2) input {
+    width: 440rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    background: #f2f2f2;
+    margin-left: 20rpx;
 }
-.lessonEditContentInput>view:nth-child(2) picker{
-    width:440rpx;
-    height:60rpx;
-    line-height:60rpx;
-    background:#F2F2F2;
-    margin-left:20rpx;
+
+.lessonEditContentInput>view:nth-child(2) picker {
+    width: 440rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    background: #f2f2f2;
+    margin-left: 20rpx;
 }
-.lessonEditContentInput switch{
-    float:left;
-    margin-top:-210rpx;
-    height:80rpx !important;
+
+.lessonEditContentInput switch {
+    float: left;
+    margin-top: -210rpx;
+    height: 80rpx !important;
 }
-.lessonEditContentInput text{
-    display:block;
-    float:left;
-    margin-left:120rpx;
-    font-size:30rpx;
-    line-height:80rpx;
-    color:#7b7b7b;
+
+.lessonEditContentInput text {
+    display: block;
+    float: left;
+    margin-left: 120rpx;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    color: #7b7b7b;
 }
-.lessonEditBtn{
-    width:750rpx;
-    line-height:100rpx;
-    background:#47BAFD;
-    color:#fff;
-    border-radius:0px;
-    position:fixed;
-    bottom:0rpx;
-    left:0rpx;
+
+.lessonEditBtn {
+    width: 750rpx;
+    line-height: 100rpx;
+    background: #47bafd;
+    color: #fff;
+    border-radius: 0px;
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+    z-index:1000;
 }
+
 /*报名信息*/
-.lessonEditTwo{
-    width:700rpx;
-    line-height:325rpx;
-    margin:0 auto 20rpx;
+
+.lessonEditTwo {
+    width: 700rpx;
+    line-height: 325rpx;
+    margin: 0 auto 20rpx;
 }
-.lessonEditTwoContent{
-    width:700rpx;
-    line-height:245rpx;
-    background:#fff;
-    border-radius:5px;
+
+.lessonEditTwoContent {
+    width: 700rpx;
+    line-height: 245rpx;
+    background: #fff;
+    border-radius: 5px;
 }
-.lessonEditTwoContent view{
-    width:660rpx;
-    line-height:80rpx;
-    text-indent:40rpx;
-    font-size:30rpx;
-    border-bottom:1rpx solid #efefef;
-    margin:0 auto;
+
+.lessonEditTwoContent .twoContentChild {
+    width: 660rpx;
+    line-height: 80rpx;
+    text-indent: 40rpx;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #efefef;
+    margin: 0 auto;
 }
-.addInfo{
-    text-align:center;
-    color:#39A1D5;
+
+.addInfo {
+    width: 660rpx;
+    line-height: 80rpx;
+    text-indent: 40rpx;
+    font-size: 30rpx;
+    border-bottom: 1rpx solid #efefef;
+    margin: 0 auto;
+    text-align: center;
+    color: #39a1d5;
 }
+
 /*活动图片*/
-.lessonEditThree{
-    width:700rpx;
-    min-height:280rpx;
-    margin:0 auto 20rpx;
+
+.lessonEditThree {
+    width: 700rpx;
+    min-height: 280rpx;
+    margin: 0 auto 20rpx;
 }
-.lessonEditThreeContent{
-    width:700rpx;
-    min-height:200rpx;
-    background:#fff;
-    border-radius:5px;
+
+.lessonEditThreeContent {
+    width: 700rpx;
+    min-height: 200rpx;
+    background: #fff;
+    border-radius: 5px;
 }
-.lessonEditThreeContent view{
-    width:200rpx;
-    height:150rpx;
-    border:1rpx solid #efefef;
-    border-radius:5px;
-    display:inline-block;
-    margin-top:25rpx;
-    margin-left:20rpx;
-    line-height:150rpx;
-    text-align:center;
-    font-size:100rpx;
-    color:#efefef;
-    font-weight:bold;
+
+.lessonEditThreeContent view {
+    width: 200rpx;
+    height: 150rpx;
+    border: 1rpx solid #efefef;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 25rpx;
+    margin-left: 20rpx;
+    line-height: 150rpx;
+    text-align: center;
+    font-size: 100rpx;
+    color: #efefef;
+    font-weight: bold;
 }
-.lessonEditThreeContent view:nth-child(1){
+
+.lessonEditThreeContent view:nth-child(1) {
 }
-.lessonEditThreeContent view image{
-    width:200rpx;
-    height:150rpx;
+
+.lessonEditThreeContent view image {
+    width: 200rpx;
+    height: 150rpx;
 }
+
 /*活动信息 */
-.lessonEditFour{
-    width:700rpx;
-    min-height:510rpx;
-    margin:0 auto 20rpx;
+
+.lessonEditFour {
+    width: 700rpx;
+    min-height: 510rpx;
+    margin: 0 auto 20rpx;
 }
-.lessonEditFourContent{
-    width:700rpx;
-    height:430rpx;
-    background:#fff;
-    border-radius:5px;
+
+.lessonEditFourContent {
+    width: 700rpx;
+    height: 430rpx;
+    background: #fff;
+    border-radius: 5px;
 }
-.lessonEditFourContentChild{
-    width:640rpx;
-    height:390rpx;
-    border-radius:5px;
-    border:1px solid #efefef;
-    float:left;
-    margin-top:20rpx;
-    margin-left:20rpx;
+
+.lessonEditFourContentChild {
+    width: 640rpx;
+    height: 390rpx;
+    border-radius: 5px;
+    border: 1px solid #efefef;
+    float: left;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
 }
-.lessonEditFourContentChild textarea{
-    width:620rpx;
-    height:370rpx;
-    margin-top:10rpx;
-    margin-left:10rpx;
-    font-size:30rpx;
+
+.lessonEditFourContentChild textarea {
+    width: 620rpx;
+    height: 370rpx;
+    margin-top: 10rpx;
+    margin-left: 10rpx;
+    font-size: 30rpx;
 }
+
 /* 课程信息 */
-.lessonEditFive{
-    width:700rpx;
-    min-height:450rpx;
-    margin:0 auto 20rpx;
-}
-.lessonEditFiveContent{
-    width:700rpx;
-    height:200rpx;
-    background:#fff;
-    border-radius:5px;
-    margin-bottom:20rpx;
-}
-.contentListLeft{
-    float:left;
-    width:200rpx;
-    height:150rpx;
-    margin:25rpx 20rpx;
+
+.lessonEditFive {
+    width: 700rpx;
+    min-height: 450rpx;
+    margin: 0 auto 20rpx;
 }
 
-.contentListLeft image{
-    width:200rpx;
-    height:150rpx;
+.lessonEditFiveContent {
+    width: 700rpx;
+    height: 200rpx;
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 20rpx;
 }
-.contentListRight{
-    width:440rpx;
-    height:160rpx;
-    float:left;
-    margin-top:20rpx;
 
+.contentListLeft {
+    float: left;
+    width: 200rpx;
+    height: 150rpx;
+    margin: 25rpx 20rpx;
 }
-.contentListRightTop{
-    width:440rpx;
-    height:60rpx;
+
+.contentListLeft image {
+    width: 200rpx;
+    height: 150rpx;
 }
-.contentListRightTop text{
-    display:block;
-    float:left;
-    font-size:30rpx;
-    font-weight:bold;
+
+.contentListRight {
+    width: 440rpx;
+    height: 160rpx;
+    float: left;
+    margin-top: 20rpx;
 }
-.contentListRightTop text:nth-child(2){
-    float:right;
-    font-weight:100;
+
+.contentListRightTop {
+    width: 440rpx;
+    height: 60rpx;
 }
-.contentListRightMiddle{
-    width:440rpx;
-    height:40rpx;
-    font-size:26rpx;
-    color:#FB9B40;
+
+.contentListRightTop text {
+    display: block;
+    float: left;
+    font-size: 30rpx;
+    font-weight: bold;
 }
-.contentListRightBottom{
-    width:440rpx;
-    height:60rpx;
+
+.contentListRightTop text:nth-child(2) {
+    float: right;
+    font-weight: 100;
 }
-.contentListRightBottom text:nth-child(1){
-    line-height:60rpx;
-    display:block;
-    float:left;
-    font-size:26rpx;
+
+.contentListRightMiddle {
+    width: 440rpx;
+    height: 40rpx;
+    font-size: 26rpx;
+    color: #fb9b40;
+}
+
+.contentListRightBottom {
+    width: 440rpx;
+    height: 60rpx;
+}
+
+.contentListRightBottom text:nth-child(1) {
+    line-height: 60rpx;
+    display: block;
+    float: left;
+    font-size: 26rpx;
     text-decoration: line-through;
-    color:#7b7b7b;
+    color: #7b7b7b;
 }
-.contentListRightBottom text:nth-child(2){
-    width:150rpx;
-    line-height:60rpx;
-    display:block;
-    float:right;
-    font-size:26rpx;
+
+.contentListRightBottom text:nth-child(2) {
+    width: 150rpx;
+    line-height: 60rpx;
+    display: block;
+    float: right;
+    font-size: 26rpx;
     text-decoration: line-through;
-    color:#fff;
-    background:#47BAFD;
-    text-align:center;
-    border-radius:5px;
+    color: #fff;
+    background: #47bafd;
+    text-align: center;
+    border-radius: 5px;
 }
 
-.lessonEditFiveAdd{
-    width:100%;
-    height:80rpx;
-    overflow:hidden;
-    margin-top:40rpx;
+.lessonEditFiveAdd {
+    width: 100%;
+    height: 80rpx;
+    overflow: hidden;
+    margin-top: 40rpx;
 }
-.lessonEditFiveAddChild{
-    display:block;
-    width:250rpx;
-    line-height:70rpx;
+
+.lessonEditFiveAddChild {
+    display: block;
+    width: 250rpx;
+    line-height: 70rpx;
+    background: #fff;
+    text-align: center;
+    margin: 5rpx auto;
+    border: 1rpx solid #76c2ee;
+    color: #76c2ee;
+    font-size: 30rpx;
+    border-radius: 5px;
+}
+
+/* 添加表单选项 */
+
+.addFormWrap {
+    width: 750rpx;
+    height: 1207rpx;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0rpx;
+    left: 0rpx;
+    z-index: 1000;
+}
+
+.addFormChild {
+    width: 100%;
+    height: 150rpx;
+    background: #fff;
+    position: absolute;
+    bottom: 0rpx;
+    left: 0rpx;
+}
+
+.addFormChildTitle {
+    width: 100%;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    text-indent: 20rpx;
+}
+
+.addFormChildButton {
+    width: 100%;
+    height: 70rpx;
+}
+
+.addFormChildButton view {
+    width: 20%;
+    line-height: 40rpx;
+    font-size: 30rpx;
+    background: #f3f3f3;
+    color: #7b7b7b;
+    float: left !important;
+    margin-top: 5rpx;
+    margin-left: 30rpx;
+    text-align: center;
+    border: 1rpx solid #7b7b7b;
+    border-radius: 5px;
+}
+
+.jianForm {
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    border-radius: 100%;
+    background: #7b7b7b;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    line-height: 30rpx;
+    color: #fff;
+    font-size: 50rpx;
+    text-align: center;
+    font-weight: bold;
+}
+.jianFormChild{
+    width:30rpx;
+    height:8rpx;
     background:#fff;
-    text-align:center;
-    margin:5rpx auto;
-    border:1rpx solid #76C2EE;
-    color:#76C2EE;
-    font-size:30rpx;
-    border-radius:5px;
+    float:left;
+    margin-top:16rpx;
+    margin-left:5rpx;
+}
+.jianFormO {
+    width: 30rpx;
+    height: 30rpx;
+    float: left;
+    border-radius: 100%;
+    background: transparent;
+    margin-top: 25rpx;
+    margin-left: 20rpx;
+    line-height: 30rpx;
+    color: #fff;
+    font-size:50rpx;
+    text-align: center;
+    font-weight: bold;
 }
 
+.isEdit {
+    float: right;
+    margin-right: 20rpx;
+}
 
+.isEdit checkbox-group {
+    float: left;
+    border-radius: 100%;
+}

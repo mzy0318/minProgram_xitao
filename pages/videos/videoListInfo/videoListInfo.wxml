@@ -1,8 +1,8 @@
 <view class='listInfoBanner'><image src='{{pageData.banner_image_url}}' mode='scaleToFill'></image></view>
-<view class='listInfoBackground'>
+<view class='listInfoBackground' style='background-image:url({{pageData.bg_image_url}});'>
     <view class='listInfoVideo' bindtap='{{videoUrl.url==""?setVideo:""}}' ><video src='{{videoUrl}}' poster='{{videoImage}}' ></video></view>
 </view>
 <view class='listInfoBottom'>
-    <button wx:for='{{optionsContent}}' style='width:100rpx;' bindtap='{{item.method}}' data-actid='{{pageData.id}}'>{{item.name}}</button>
+    <button wx:for='{{optionsContent}}' style='width:{{item.width}};' bindtap='{{item.method}}' data-actid='{{pageData.id}}'>{{item.name}}</button>
     <button open-type='share'>发给好友</button>
 </view>
