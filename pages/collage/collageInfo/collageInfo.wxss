@@ -1,3 +1,4 @@
+@import '../../../utils/iconFont.wxss';
 .collageInfoWrap{
     width:750rpx;
     min-height:1207rpx;
@@ -8,6 +9,7 @@
 .collageInfoBanner{
     width:750rpx;
     height:500rpx;
+    margin-bottom: 20rpx;
 }
 .collageInfoBanner image{
     width:750rpx;
@@ -20,7 +22,8 @@
     background:#fff;
     margin:0 auto 20rpx;
     border-radius:5px;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    border:1px solid #efefef;
 }
 .oneTitle{
     width:710rpx;
@@ -32,12 +35,13 @@
 .oneTitleChild{
     width:670rpx;
     line-height:35rpx;
-    font-size:32rpx;
-    border-left:2px solid red;
+    font-size:30rpx;
+    border-left:2px solid #913225;
     text-indent:20rpx;
     margin-left:20rpx;
     font-weight:bold;
     margin-top:30rpx;
+    color:#913225;
 }
 .oneImage{
     width:710rpx;
@@ -120,6 +124,15 @@ view.viewTyle{
     color:#78C2F4;
 }
 
+.oneRuleChild button{
+    width:250rpx;
+    background:#E64240;
+    line-height:60rpx;
+    font-size:30rpx;
+    color:#fff;
+    margin-top:50rpx;
+}
+
 
 .oneButton{
     width:710rpx;
@@ -144,15 +157,16 @@ view.viewTyle{
     border-radius:5px;
     background:#fff;
     margin:20rpx auto;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+    border:1rpx solid #efefef;
+    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
 }
 .collageInfoTwo text{
     display:block;
     width:710rpx;
     line-height:80rpx;
-    font-size:30rpx;
-    text-indent:20rpx;
-    color:#464646;
+    font-size:26rpx;
+    text-indent:40rpx;
+    color:#7b7b7b;
     border-bottom:1rpx solid #efefef;
 }
 .collageInfoTwoBtn{
@@ -175,14 +189,17 @@ view.viewTyle{
     border-radius:5px;
     background:#fff;
     margin:20rpx auto;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+    border:1rpx solid #efefef;
+    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
 }
 .threeImageText{
-    width:710rpx;
-    min-height:30rpx;
+    width:650rpx;
+    min-height:40rpx;
+    line-height:40rpx;
     color:#7b7b7b;
-    font-size:30rpx;
-    text-indent:30rpx;
+    font-size:26rpx;
+    margin:0rpx auto 0rpx;
+    /* background:lightblue; */
 }
 /*第四部分*/
 .collageInfoFour{
@@ -192,15 +209,15 @@ view.viewTyle{
     border-radius:5px;
     background:#fff;
     margin:20rpx auto;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    border:1rpx solid #efefef;
 }
 .fourContent{
-    width:100%;
-    font-size:30rpx;
+    width:650rpx;
+    font-size:26rpx;
     color:#7b7b7b;
     line-height:40rpx;
-    text-indent:20rpx;
-    margin-top:10rpx;
+    margin:10rpx auto 0rpx;
 }
 /*第五部分  */
 .collageInfoFive{
@@ -209,7 +226,8 @@ view.viewTyle{
     background:#fff;
     border-radius:5px;
     margin:20rpx auto;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    border:1rpx solid #efefef;
 }
 .infoFive{
     width:670rpx;
@@ -247,13 +265,13 @@ view.viewTyle{
 .collageInfoContentRightTitle{
     width:400rpx;
     line-height:60rpx;
-    font-size:30rpx;
-    text-indent:20rpx;
+    font-size:26rpx;
+    text-indent:10rpx;
     color:#848484;
 }
 .collageInfoContentRightTitle text{
     color:#C33B1E;
-    font-size:32rpx;
+    font-size:26rpx;
 }
 .collageInfoContentRightState{
     width:400rpx;
@@ -281,15 +299,17 @@ button.btnStyle{
     width:710rpx;
     height:60rpx;
     margin-top:50rpx;
+    display:flex;
+    justify-content:space-between;
 }
 .collageInfoBtn>button{
     width:250rpx;
-    float:left;
+    /* float:left;*/
     background:#E64240;
     line-height:60rpx;
     font-size:30rpx;
     color:#fff;
-    margin-left:75rpx;
+    /* margin-left:75rpx; */
 }
 /*第六部分*/
 .collageInfoSix{
@@ -298,12 +318,12 @@ button.btnStyle{
     background:#fff;
     border-radius:5px;
     margin:20rpx auto;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
+    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    border:1rpx solid #efefef;
 }
 .collageInfoSixContent{
     width:350rpx;
     height:350rpx;
-    background:lightgreen;
     margin:20rpx auto 0rpx;
 }
 .collageInfoSixContent image{
@@ -398,4 +418,202 @@ button.btnStyle{
     float:left;
     margin-left:20rpx;
     margin-top:20rpx;
+}
+.noData{
+    width:100%;
+    height:60rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:60rpx;
+    background:transparent;
+}
+
+
+/* 其他功能 */
+.switchBackgroundImage{
+    width:750rpx;
+    height:80rpx;
+    background:#000;
+    position:fixed;
+    bottom:0rpx;
+    left:0rpx;
+}
+
+.switchBackgroundImage view,.switchMusicOptions view{
+    width:140rpx;
+    line-height:50rpx;
+    background:#797866;
+    font-size:24rpx;
+    text-align:center;
+    float:left;
+    margin-left:20rpx;
+    color:#fff;
+    margin-top:15rpx;
+    border-radius:5px;
+}
+
+.switchBackgroundImage view:nth-child(2),.switchMusicOptions view:nth-child(2),.switchMusicOptions view:nth-child(3){
+    background:#964499;
+    float:right;
+    margin-right:20rpx;
+    color:#fff;
+}
+
+.switchMusic{
+    width:750rpx;
+    height:400rpx;
+    position:fixed;
+    bottom:0rpx;
+    left:0rpx;
+    background:#fff;
+}
+.switchMusicTitle{
+    width:750rpx;
+    height:70rpx;
+    display:flex;
+    justify-content: space-around;
+    border-bottom:1rpx solid #efefef;
+}
+
+.switchMusicTitle view{
+    font-size:28rpx;
+    line-height:70rpx;
+    text-align:center;
+}
+.switchMusicBorder{
+    border-bottom:2rpx solid #964499;
+    color:#964499;
+}
+.switchMusicContent{
+    width:750rpx;
+    min-height:250rpx;
+    display:fles;
+    justify-content: space-around;
+}
+.switchMusicContent view{
+    width:30%;
+    height:40rpx;
+    float:left;
+    margin-top:20rpx;
+    margin-left:15rpx;
+    font-size:24rpx;
+    text-align:center;
+}
+.switchMusicOptions{
+    width:750rpx;
+    height:80rpx;
+    background:#000;
+}
+
+.switchModelContent{
+    width:750rpx;
+    height:250rpx;
+    background:#fff;
+    overflow-x: scroll;
+}
+
+.switchModelContentChild{
+    float:left;
+    min-width:750rpx;
+    height:200rpx;
+    margin-top:25rpx;
+    display:flex;
+    justify-content: space-around;
+    flex-direction:row;
+}
+
+.switchModelContentChild .modelContentChildContent{
+    width:200rpx;
+    height:150rpx;
+    margin-left:20rpx;
+    float:left;
+    margin-top:25rpx;
+    border:1rpx solid #fff;
+ }
+ .modelContentChildContent view:nth-child(1){
+     width:200rpx;
+     line-height:35rpx;
+     font-size:26rpx;
+     text-align:center;
+     color:#000;
+ } 
+.modelContentChildContent view:nth-child(2){
+     width:200rpx;
+     height:115rpx;
+     background:#fff;
+ } 
+
+ .modelContentChildContent view:nth-child(2) image{
+     width:200rpx;
+     height:115rpx;
+ }
+ .otherOptionWrap{
+    width:120rpx;
+    height:120rpx;
+    position:fixed;
+    bottom:400rpx;
+    right:50rpx;
+}
+
+.otherOptions{
+    width:100rpx;
+    height:100rpx;
+    margin:10rpx auto;
+    background:rgba(192,192,192,0.5);
+    border-radius:50%;
+    position:relative;
+}
+
+.otherOptionsChild{
+    width:120rpx;
+    height:320rpx;
+    background:transparent;
+    position:absolute;
+    top:-300rpx;
+    right:0rpx;
+}
+.otherOptionsChild view{
+    width:100%;
+    line-height:60rpx;
+    font-size:28rpx;
+    text-align:center;
+     background:rgba(192,192,192,0.8);
+    margin-top:15rpx;
+}
+.iconStyle{
+    width:50rpx;
+    height:50rpx;
+    font-size:50rpx;
+    display:block;
+    color:#7b7b7b;
+    top:25rpx;
+    left:25rpx;
+    position:absolute;  
+}
+/* 音乐控制 */
+.musicControl{
+    width:50rpx;
+    height:50rpx;
+    border-radius:50%;
+    position:fixed;
+    top:50rpx;
+    right:30rpx;
+    background:#964499;
+}
+.fontStyleT{
+    display:block;
+    color:#fff;
+    float:left;
+    margin-top:9rpx;
+    margin-left:8rpx;
+}
+
+@keyframes headRotate{
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+view.viewRotate{
+    animation: headRotate 5s linear;
+    animation-iteration-count:infinite;
 }

@@ -9,15 +9,15 @@
         </view>
         <view class='collageEditTwo'>
             <view class='editOneTitle'>活动封面</view>
-            <view class='editEightContent' hidden='{{isCoverImg}}' bindtap='getCoverImage'>
+            <view class='editEightContent' bindtap='getCoverImage'>
                 <view class='empty'></view>
                 <view class='editEightContentChild'>+</view>
             </view>
-            <view class='editEightImg'>
-                <view class='editEightImgChild' wx:for='{{coverImg}}'>
-                    <image src='{{item.path}}' mode='scaleToFill' />
+             <view class='editEightImg' hidden='{{isCoverImg}}'>
+                <view class='editEightImgChild'>
+                    <image src='{{coverImg}}' mode='widthFix' />
                 </view>
-            </view>
+            </view> 
         </view>
         <view class='collageEditThree'>
             <view class='editOneTitle'>基本设置</view>
@@ -117,7 +117,8 @@
                     <view class='jianFormChild' data-index='{{index}}'></view>
                 </view>
                 <text>{{item}}</text>
-                <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+                <view class='isEdit'>
+                    <switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
             </view>
             <view class='editFiveAdd' bindtap='showOptions' data-is='0'>+新增报名项</view>
         </view>
@@ -142,27 +143,28 @@
         </view>
         <view class='collageEditEight'>
             <view class='editOneTitle'>活动图片</view>
-            <view class='editEightContent' hidden='{{isShow}}'>
+            <view class='editEightContent'>
                 <view class='empty'></view>
                 <view class='editEightContentChild' bindtap='chooseActImg'>+</view>
             </view>
-            <view class='editEightImg'>
+            <view class='editEightImg' hidden='{{isActImg}}'>
                 <view class='editEightImgChild' wx:for='{{actImg}}'>
-                    <image src='{{item.path}}' mode='scaleToFill' />
+                    <image src='{{item}}' mode='widthFix' />
+                    <view class='delImage' bindtap='delImage' data-index='{{index}}'>×</view>
                 </view>
             </view>
         </view>
         <button formType="submit" class='bottomBtn'>确认发布</button>
     </form>
-    <view class='addOptions' hidden='{{isOption}}' bindtap='showOptions' data-is='1'>
-        <view class='addOptionsChild'>
-            <view class='addOptionsChildTitle'>常用报名项</view>
-            <view class='addOptionsChildButton'>
-                <view bindtap='addNameOptions' data-value='年龄'>年龄</view>
-                <view bindtap='addNameOptions' data-value='住址'>住址</view>
-                <view bindtap='addNameOptions' data-value='备注'>备注</view>
-                <view bindtap='addNameOptions' data-value='其它'>其它</view>
-            </view>
+</view>
+<view class='addOptions' hidden='{{isOption}}' bindtap='showOptions' data-is='1'>
+    <view class='addOptionsChild'>
+        <view class='addOptionsChildTitle'>常用报名项</view>
+        <view class='addOptionsChildButton'>
+            <view bindtap='addNameOptions' data-value='年龄'>年龄</view>
+            <view bindtap='addNameOptions' data-value='住址'>住址</view>
+            <view bindtap='addNameOptions' data-value='备注'>备注</view>
+            <view bindtap='addNameOptions' data-value='其它'>其它</view>
         </view>
     </view>
 </view>

@@ -5,17 +5,19 @@ Page({
      * 页面的初始数据
      */
     data: {
-        pageData: null,
+        pageData: '',
+        pageNum: 1,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         getApp().request({
             url: 'org/bargain_list',
             data: {
-                page: '1',
+                page: that.data.pageNum,
             },
             method:'post',
             success: res => {
@@ -58,14 +60,69 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        that.setData({
+            pageNum: 1
+        })
+        getApp().request({
+            url: 'org/bargain_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: res => {
+                if(Number(res.data.code)==1){
+                    that.setData({
+                        pageData: res.data.data.list
+                    })
+                    wx.stopPullDownRefresh()
+                } else if (Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
+            }
+        })
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.pageData);
+        if (that.data.pageData.length >= that.data.pageNum * 10){
+            that.setData({
+                pageNum: that.data.pageNum + 1,
+            })
+            getApp().request({
+                url: 'org/bargain_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: res => {
+                    if (Number(res.data.code) == 1) {
+                        that.setData({
+                            pageData: res.data.data.list
+                        })
+                        wx.stopPullDownRefresh()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }else{
+            wx.showToast({
+                title: '到底啦',
+                icon: 'none'
+            })
+        }
     },
 
     /**

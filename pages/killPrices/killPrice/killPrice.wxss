@@ -19,7 +19,7 @@
     height:210rpx;
     margin-left:20rpx;
     margin-top:20rpx;
-    background:lightgreen;
+    background:#fff;
 }
 .killPriceImg image{
     width:210rpx;

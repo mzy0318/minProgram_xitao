@@ -1,5 +1,10 @@
+let md5 = require('./utils/md5.js')
+let uuid = require('./utils/uuid.js')
+
 App({
-    onLaunch: function () {
+
+    visitorId: '',
+    onLaunch: function (options) {
         // 课程分类
         wx.setStorageSync('classId', 0)
         // 展示本地存储能力
@@ -10,14 +15,27 @@ App({
         // 登录
         wx.login({
             success: res => {
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                this.userCode = res.code;
+                // wx.request({
+                //     url: 'https://www.zhihuizhaosheng.com/' + wx.getExtConfigSync().version + '/login',
+                //     data: {
+                //         code: res.code,
+                //         org_id: wx.getExtConfigSync().orgId,
+                //     },
+                //     method: 'POST',
+                //     success: function (res) {
+                //         console.log('隐藏登录', res)
+                //     }
+                // })
             }
         })
         // 获取用户信息
         wx.getSetting({
             success: res => {
+                // console.log('授权结果',res)
                 wx.getUserInfo({
                     success: res => {
+                        // console.log('用户信息',res)
                         this.globalData.userInfo = res.userInfo
 
                         // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -28,18 +46,29 @@ App({
                     }
                 })
             }
+        }),
+        wx.getUserInfo({
+            success: res => {
+                // console.log('用户信息', res)
+                this.globalData.userInfo = res.userInfo
+
+                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                // 所以此处加入 callback 以防止这种情况
+                if (this.userInfoReadyCallback) {
+                    this.userInfoReadyCallback(res)
+                }
+            }
         })
     },
-
+    
     config: null,
     //获取ext.json文件内容
     getExtConfig: function () {
-
+        
         if (this.config === null) {
 
             this.config = wx.getExtConfigSync();
         }
-
         return this.config;
     },
 
@@ -50,9 +79,10 @@ App({
     },
     dev: false,
     getHost: () => {
-        var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
-        var dev = "http://192.168.1.112:8888/" + getApp().getExtConfig().version + "/";
-        return online;
+        // console.log('getApp().getExtConfig()', getApp().getExtConfig())
+        var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version+"/";
+        var dev = "http://192.168.1.112:8888/"+ getApp().getExtConfig().version+"/";
+        return  online;
     },
     hasLogin: false,//默认app是未登录状态
     request: param => {
@@ -121,6 +151,7 @@ App({
                         return
                     } else {
                         console.log("code:", res.code);
+                        // othis.visitorId = res.code.
                     }
                     wx.request({
                         'url': host + "login",
@@ -134,6 +165,7 @@ App({
                                     content: r.data.msg,
                                 })
                             } else {
+                                wx.setStorageSync('visitorId', r.data.data.visitor_id)
                                 if (r.header["Set-Cookie"]) {
                                     wx.setStorageSync('cookie', r.header["Set-Cookie"]);
                                 }
@@ -158,16 +190,19 @@ App({
             address: address,
         })
     },
+    //拨打电话
     tellPhone: function (e) {
         wx.makePhoneCall({
             phoneNumber: e.currentTarget.dataset.phonenum,
         })
     },
+    //进入首页
     toIndex: function () {
         wx.switchTab({
             url: '/pages/index/index',
         })
     },
+    //随机数
     randomNum: function () {
         return Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
     },
@@ -201,55 +236,12 @@ App({
             }
         })
     },
-    // 上传多个图片
-    upLoaderPics: function (imgPath, actImg){
-        for (let i = 0; i < imgPath.length; i++) {
-            getApp().request({
-                url: "org/policy",
-                method: "post",
-                data: {
-                    "type": "image"
-                },
-                success: function (res) {
-                    let sendData = {
-                        "key": res.data.data.dir + imgPath[i].path,
-                        "OSSAccessKeyId": res.data.data.accessid,
-                        "host": res.data.data.host,
-                        "expire": res.data.data.expire,
-                        "signature": res.data.data.signature,
-                        "policy": res.data.data.policy,
-                        'success_action_status': '200'
-                    }
-                    wx.uploadFile({
-                        url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                        name: 'file',
-                        filePath: imgPath[i].path,
-                        formData: sendData,
-                        success: function (res) {
-                            getApp().request({
-                                url: "org/exchange",
-                                data: {
-                                    "key": sendData.key,
-                                    "type": "image",
-                                },
-                                method: "post",
-                                success: function (r) {
-                                    r = r.data
-                                    if (r.code == 0) {
-                                        console.log("上传到服务器出错");
-                                        return
-                                    }
-                                    //得到图片的id和地址
-                                    actImg.push(r.data.imageId)
-                                    that.setData({
-                                        actImg0: actImg,
-                                    })
-                                }
-                            });
-                        }
-                    })
-                }
-            })
-        }
+    // 获取二维码
+    getEncodeImage:function(url,mzy){
+        return 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
+    },
+    // 生成图片地址
+    imageAddress:function(name){
+        return md5.hexMD5(new Date().getTime() + name + uuid.uuid()) 
     }
 })

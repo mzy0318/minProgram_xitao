@@ -18,7 +18,7 @@
     margin:0 auto;
 }
 .listInfoUserLeft{
-    width:400rpx;
+    width:450rpx;
     height:150rpx;
     float:left;
 }
@@ -33,29 +33,31 @@
     margin-top:25rpx;
 }
 .userName{
-    font-size:40rpx;
+    font-size:35rpx;
     line-height:40rpx;
     float:left;
     margin-left:20rpx;
     margin-top:55rpx;
+    overflow:hidden;
+    background:#fff;
 }
 .iconStyle{
     display:block;
-    font-size:50rpx;
+    font-size:60rpx;
     width:50rpx;
     height:50rpx;
     float:left;
-    margin-top:50rpx;
+    margin-top:45rpx;
     margin-left:20rpx;
     color:#7b7b7b;
 }
 .iconStyled{
     display:block;
-    font-size:50rpx;
+    font-size:60rpx;
     width:50rpx;
     height:50rpx;
     float:left;
-    margin-top:50rpx;
+    margin-top:45rpx;
     margin-left:20rpx;
     color:#FAC935;
 }
@@ -260,16 +262,19 @@
 
 .addConnect{
     width:80rpx;
-    line-height:80rpx;
-    background:#57A0F6;
+    height:80rpx;
+    line-height:75rpx;
+    text-align:center;
+    background:#439BFF;
     color:#fff;
+    border-radius:50%;
+    font-size:60rpx;
     position:fixed;
     bottom:50rpx;
     left:50%;
     margin-left:-40rpx;
-    font-size:60rpx;
-    text-align:center;
-    border-radius:50%;
+    z-index:1000;
+    text-indent:3rpx;
 }
 
 .connectInput{

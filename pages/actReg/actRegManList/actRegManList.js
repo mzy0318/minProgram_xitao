@@ -14,22 +14,28 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this;
-        getApp().request({
-            url: 'org/normal_list',
-            data: {
-                page: that.data.pageNum
-            },
-            method: 'post',
-            success: function (res) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time))
-                }
-                that.setData({
-                    pageData: res.data.data
-                })
-            }
-        })
+        // let that = this;
+        // getApp().request({
+        //     url: 'org/normal_list',
+        //     data: {
+        //         page: that.data.pageNum
+        //     },
+        //     method: 'post',
+        //     success: function (res) {
+        //         if(Number(res.data.code)==1){
+        //             for (let i = 0; i < res.data.data.length; i++) {
+        //                 res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
+        //             }
+        //             that.setData({
+        //                 pageData: res.data.data
+        //             })
+        //         } else if (Number(res.data.code) == 0){
+        //             wx.showToast({
+        //                 title: res.data.msg,
+        //             })
+        //         }
+        //     }
+        // })
     },
 
     /**
@@ -43,7 +49,32 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let that = this;
+        getApp().request({
+            url: 'org/normal_list',
+            data: {
+                page: that.data.pageNum
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
+                    }
+                    res.data.data = utils.map(res.data.data,function(one){
+                      one.cover.url = utils.rect(one.cover.url,200,100)
+                      return one
+                    })
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                    })
+                }
+            }
+        })
     },
 
     /**
@@ -76,7 +107,7 @@ Page({
             method: 'post',
             success: function (res) {
                 for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time))
+                    res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time*1000))
                 }
                 that.setData({
                     pageData: res.data.data
@@ -105,7 +136,7 @@ Page({
                 method: 'post',
                 success: function (res) {
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time))
+                        res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time*1000))
                     }
                     pageDataArr.push(...res.data.data)
                     that.setData({
@@ -125,7 +156,9 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return {
+            path:'/pages/index/index'
+        }
     },
     toLessonInfo: function (e) {
         wx.navigateTo({
@@ -149,6 +182,17 @@ Page({
                 if (Number(res.data.code) == 1) {
                     wx.showToast({
                         title: '删除成功',
+                        icon:'success',
+                        success:function(){
+                            wx.redirectTo({
+                                url: '../actRegManList/actRegManList',
+                            })
+                        }
+                    })
+                } else if (Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none'
                     })
                 }
             }
@@ -157,6 +201,14 @@ Page({
     toUserInfo: function (e) {
         wx.navigateTo({
             url: '../actRegUserInfo/actRegUserInfo?actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.id,
+        })
+    },
+    taBack:function(){
+        wx.navigateBack({})
+    },
+    sharePage:function(e){
+        wx.navigateTo({
+            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/actReg/actRegListInfo/actRegListInfo',
         })
     }
 })

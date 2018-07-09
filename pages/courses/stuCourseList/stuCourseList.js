@@ -7,6 +7,7 @@ Page({
      */
     data: {
         pageData:'',
+        showTitle: true,
     },
 
     /**
@@ -20,13 +21,19 @@ Page({
             method:'post',
             success:function(res){
                 if (res.data.data.length == 0) {
-                    wx.showToast({
-                        title: '您没有参加该活动',
-                        icon: 'none'
+                    // wx.showToast({
+                    //     title: '您没有参加该活动',
+                    //     icon: 'none'
+                    // })
+                    that.setData({
+                        showTitle: false
                     })
                 } else if (res.data.data.length != 0) {
+                    that.setData({
+                        showTitle: true
+                    })
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time))
+                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time*1000))
                     }
                     that.setData({
                         pageData: res.data.data
@@ -75,13 +82,19 @@ Page({
             method: 'post',
             success: function (res) {
                 if (res.data.data.length == 0) {
-                    wx.showToast({
-                        title: '您没有参加该活动',
-                        icon: 'none'
+                    // wx.showToast({
+                    //     title: '您没有参加该活动',
+                    //     icon: 'none'
+                    // })
+                    that.setData({
+                        showTitle: false
                     })
                 } else if (res.data.data.length != 0) {
+                    that.setData({
+                        showTitle: true
+                    })
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time))
+                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time*1000))
                     }
                     that.setData({
                         pageData: res.data.data

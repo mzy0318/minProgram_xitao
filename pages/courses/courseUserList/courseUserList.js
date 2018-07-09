@@ -35,7 +35,7 @@ Page({
             color: '#37C2D3',
         }
         ],
-        cancelData: '+',
+        cancelData: '＋',
         isShow: true,
         xinArr: [
             {
@@ -53,24 +53,24 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this
-        App.request({
-            url: 'org/sale_lesson_appoint_list',
-            data: {},
-            method: 'post',
-            success: function (res) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
-                    res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
-                    res.data.data[i].status = that.data.status[res.data.data[i].status].name;
-                }
-                that.setData({
-                    pageData: res.data.data,
-                    // xinData: that.data.xinArr[res.data.data.intention],
-                });
-                // console.log('that.data.xinData', that.data.xinData)
-            }
-        })
+        // let that = this
+        // App.request({
+        //     url: 'org/sale_lesson_appoint_list',
+        //     data: {},
+        //     method: 'post',
+        //     success: function (res) {
+        //         for (let i = 0; i < res.data.data.length; i++) {
+        //             res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
+        //             res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
+        //             res.data.data[i].status = that.data.status[res.data.data[i].status].name;
+        //         }
+        //         that.setData({
+        //             pageData: res.data.data,
+        //             // xinData: that.data.xinArr[res.data.data.intention],
+        //         });
+        //         // console.log('that.data.xinData', that.data.xinData)
+        //     }
+        // })
     },
 
     /**
@@ -91,7 +91,7 @@ Page({
             method: 'post',
             success: function (res) {
                 for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
+                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
                     res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
                     res.data.data[i].status = that.data.status[res.data.data[i].status].name;
                 }
@@ -129,7 +129,7 @@ Page({
             method: 'post',
             success: function (res) {
                 for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
+                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
                     res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
                     res.data.data[i].status = that.data.status[res.data.data[i].status].name;
                 }
@@ -181,7 +181,7 @@ Page({
                         method: 'post',
                         success: function (res) {
                             for (let i = 0; i < res.data.data.length; i++) {
-                                res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time));
+                                res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
                                 res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color;
                                 res.data.data[i].status = that.data.status[res.data.data[i].status].name;
                             }
@@ -189,7 +189,7 @@ Page({
                                 that.setData({
                                     pageData: res.data.data,
                                     isShow: true,
-                                    cancelData: '+'
+                                    cancelData: '＋'
                                 })
                             }
                         }
@@ -205,11 +205,17 @@ Page({
         })
         if (that.data.isShow) {
             that.setData({
-                cancelData: '+'
+                cancelData: '＋'
+            })
+            wx.setNavigationBarTitle({
+                title: '咨询本',
             })
         } else {
             that.setData({
-                cancelData: 'x'
+                cancelData: '×'
+            })
+            wx.setNavigationBarTitle({
+                title: '快速新增咨询',
             })
         }
     }

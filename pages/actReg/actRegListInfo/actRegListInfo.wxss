@@ -6,19 +6,22 @@
 }
 .actRegInfoTitle{
     width:750rpx;
-    min-height:430rpx;
+    min-height:400rpx;
     background:#fff;
+    
 }
-.actRegInfoTitleImage,.actRegInfoTitleImage image{
+.actRegInfoTitleImage,.actRegInfoTitleImage>image{
     width:750rpx;
     height:350rpx;
+    overflow:hidden;
 }
 .actRegInfoTitleText{
     width:710rpx;
-    min-height:80rpx;
+    /* min-height:40rpx; */
+    line-height:60rpx;
     margin:0 auto;
     font-size:32rpx;
-    padding-bottom:20rpx;
+    /* font-weight:bold; */
 }
 /* 活动时间 */
 .actRegInfoTime{
@@ -57,16 +60,24 @@
     position:absolute;
     right:0rpx;
     top:20rpx;
-    background:#69BF36;
     font-size:26rpx;
     color:#fff;
     text-align:center;
     border-radius:5px;
 }
+.startClass{
+    background:#69BF36;
+}
+.stopClass{
+    background:#ccc !important;
+}
+.waitClass{
+    background:#FFEE2E;
+}
 /* 活动地址 */
 .actRegInfoAdderss{
     width:750rpx;
-    height:405rpx;
+    min-height:405rpx;
     margin:20rpx auto 0rpx;
     background:#fff;  
 }
@@ -98,6 +109,7 @@
     height:400rpx;
     background:lightblue;
     margin:0rpx auto 0rpx;
+    overflow:hidden;
 }
 .actRegInfoTextImage image{
     width:710rpx;
@@ -125,15 +137,39 @@
 .bottomOpt button:nth-child(1)::after{
     border:0rpx;
 }
-.bottomOpt button:nth-child(2){
+.startBtn{
     width:500rpx;
-    float:right;
+    float:right !important;
     background:#4FBB4E;
     color:#fff;
     font-size:30rpx;
     line-height:80rpx;
     margin-top:10rpx;
+    margin-right:20rpx;
 }
+
+.stopbtn{
+    width:500rpx;
+    float:right !important;
+    background:#ccc;
+    color:#fff;
+    font-size:30rpx;
+    line-height:80rpx;
+    margin-top:10rpx;
+    margin-right:20rpx;
+}
+.waitbtn{
+    width:500rpx;
+    float:right !important;
+    background:#FFEE2E;
+    color:#fff;
+    font-size:30rpx;
+    line-height:80rpx;
+    margin-top:10rpx;
+    margin-right:20rpx;
+}
+
+
 .empty{
     width:750rpx;
     height:20rpx;

@@ -64,7 +64,7 @@ Page({
         isBase:true,
         firseName:'',
         connectList:'',
-        addInfo:'+',
+        addInfo:'＋',
         isShowInput:true,
         connectData:'',
         userId:'',
@@ -111,8 +111,8 @@ Page({
             },
             success:function(res){
                 for (let i = 0; i < res.data.data.list.length;i++){
-                    res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time))
-                    res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time))
+                    res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time*1000))
+                    res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time*1000))
                 }
                 that.setData({
                     connectList:res.data.data.list
@@ -262,11 +262,11 @@ Page({
         })
         if (that.data.isShowInput){
             that.setData({
-                addInfo:'+'
+                addInfo:'＋'
             })
         }else{
             that.setData({
-                addInfo: 'x'
+                addInfo: '×'
             })
         }
     },
@@ -288,7 +288,7 @@ Page({
             success:function(res){
                 that.setData({
                     isShowInput: true,
-                    addInfo: '+'
+                    addInfo: '＋'
                 })
                 if(res.data.code==1){
                     getApp().request({
@@ -299,8 +299,8 @@ Page({
                         },
                         success:function(res){
                             for (let i = 0; i < res.data.data.list.length; i++) {
-                                res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time))
-                                res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time))
+                                res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time*1000))
+                                res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time*1000))
                             }
                             that.setData({
                                 connectList: res.data.data.list
@@ -337,24 +337,31 @@ Page({
         let that = this
         res.detail.value['sex'] = that.data.sexId;
         res.detail.value['id'] = that.data.userId;
-        console.log(res.detail.value);
         getApp().request({
             url:'org/sale_lesson_edit_appoint_info',
             data: res.detail.value,
             method:'post',
             success:function(res){
-                if(res.data.code==1){
+
+                if(Number(res.data.code)==1){
+                    wx.showLoading({
+                        title: '正在完善',
+                        mask: true,
+                    })
+                    setTimeout(closeLogin, 2000)
+
+                    function closeLogin() {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: '完善成功',
+                            mask: true,
+                        })
+                    }
                     getApp().request({
                         url:'org/sale_lesson_appoint_list',
                         method:'post',
                         data:{},
                         success:function(res){
-                            if(Number(res.data.code)==1){
-                                wx.showToast({
-                                    title: '保存成功',
-                                    icon:'success'
-                                })
-                            }
                             for (let i = 0; i < res.data.data.length;i++){
                                 if (res.data.data[i].id == that.data.userId){
                                     that.setData({
@@ -363,6 +370,11 @@ Page({
                                 }
                             }
                         }
+                    })
+                } else if (Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
                     })
                 }
             }

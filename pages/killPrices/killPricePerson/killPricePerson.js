@@ -13,39 +13,59 @@ Page({
         endTime: '',
         joinInfo: '',
         joinName:'',
+        actId:'',
+        joinerId:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options)
+        let that = this;
+        console.log('options.scene', options)
+        let pages = getCurrentPages()
+        let url = pages[pages.length - 1].route
+        let mzy = 'actid=' + JSON.parse(options.personInfo).act_id + '&joinerid=' + JSON.parse(options.personInfo).joiner_id;
+        if (options.scene != undefined){
+            let scene = decodeURIComponent(options.scene);
+            console.log('获取到的scene', scene)
+            that.setData({
+                actId: options.query.actid,
+                joinerId: options.query.joinerid,
+            })
+        }else{
+            that.setData({
+                actId: JSON.parse(options.personInfo).act_id,
+                joinerId: JSON.parse(options.personInfo).joiner_id,
+            })
+        }
+        
         this.setData({
             joinInfo: options,
-            joinName: options.nickName
+            encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })
         getApp().request({
             url: 'bargain_act',
             data: {
-                act_id: JSON.parse(options.personInfo).actid,
-                joiner_id: JSON.parse(options.personInfo).joinerid,
+                act_id: that.data.actId,
+                joiner_id: that.data.joinerId,
             },
             method: 'post',
             success: res => {
-                let innerAudioContext = wx.createInnerAudioContext();
-                innerAudioContext.autoplay = true;
-                innerAudioContext.src = res.data.data.music;
-                innerAudioContext.onPlay(() => {
-                    console.log('开始播放')
-                })
-                innerAudioContext.onError((res) => {
-                    console.log(res.errMsg)
-                    console.log(res.errCode)
-                })
-                this.setData({
+                // let innerAudioContext = wx.createInnerAudioContext();
+                // innerAudioContext.autoplay = true;
+                // innerAudioContext.src = res.data.data.music;
+                // innerAudioContext.onPlay(() => {
+                //     console.log('开始播放')
+                // })
+                // innerAudioContext.onError((res) => {
+                //     console.log(res.errMsg)
+                //     console.log(res.errCode)
+                // })
+                that.setData({
                     pageData: res.data.data,
                     backgroundImage: res.data.data.act_image[0].url,
-                    endTime: util.formatTime(new Date(res.data.data.end_time)),
+                    endTime: util.formatTime(new Date(res.data.data.end_time*1000)),
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.title,
@@ -55,8 +75,8 @@ Page({
         getApp().request({
             url: 'bargain_range',
             data: {
-                act_id: JSON.parse(options.personInfo).actid,
-                joiner_id: JSON.parse(options.personInfo).joinerid,
+                act_id: JSON.parse(options.personInfo).act_id,
+                joiner_id: JSON.parse(options.personInfo).joiner_id,
                 page: 1
             },
             method: 'post',
@@ -125,17 +145,17 @@ Page({
         getApp().request({
             url: 'bargain',
             data: {
-                act_id: JSON.parse(this.data.joinInfo.personInfo).actid,
-                joiner_id: JSON.parse(this.data.joinInfo.personInfo).joinerid,
+                act_id: JSON.parse(this.data.joinInfo.personInfo).act_id,
+                joiner_id: JSON.parse(this.data.joinInfo.personInfo).joiner_id,
             },
             method: 'post',
             success: function (res) {
-                if (res.data.data != null) {
+                if (Number(res.data.code)==1) {
                     wx.showToast({
-                        title: '这次帮TA砍了' + res.data.data.reduce,
+                        title: '帮TA砍了' + res.data.data.reduce+'元',
                         icon: 'success'
                     })
-                } else {
+                } else if(Number(res.data.code)==0){
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none'
@@ -146,21 +166,21 @@ Page({
         })
     },
     toBack: function (e) {
-        wx.navigateTo({
-            url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,
-        })
+        // wx.navigateTo({
+        //     url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,
+        // })
+        wx.navigateBack({})
     },
     getJoinerList:function(){
         getApp().request({
             url: 'bargain_range',
             data: {
-                act_id: JSON.parse(this.data.joinInfo.personInfo).actid,
-                joiner_id: JSON.parse(this.data.joinInfo.personInfo).joinerid,
+                act_id: JSON.parse(this.data.joinInfo.personInfo).act_id,
+                joiner_id: JSON.parse(this.data.joinInfo.personInfo).joiner_id,
                 page: 1
             },
             method: 'post',
             success: res => {
-                console.log(res)
                 this.setData({
                     peopleData: res.data.data
                 })
@@ -182,5 +202,19 @@ Page({
                 })
             }
         })
+    },
+    shareFriends: function () {
+        let that = this;
+        wx.showLoading({
+            title: '正在生成中...',
+            mask: true,
+        })
+        setTimeout(function () {
+            wx.hideLoading();
+
+            wx.previewImage({
+                urls: [that.data.encodeID],
+            })
+        }, 1500)
     }
 })

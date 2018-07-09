@@ -14,5 +14,5 @@
             <view class='listBottomRight'>{{item.status}}</view>
         </view>
     </view>
+    <view class='noData' hidden='{{showTitle}}'>无记录</view> 
 </view>
-<view class='noData'>您没有参加该活动</view>

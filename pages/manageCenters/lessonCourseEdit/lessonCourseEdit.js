@@ -10,6 +10,7 @@ Page({
         couveImageId:'',
         actNiceId:'',
         pageData:'',
+        isCover:true,
     },
 
     /**
@@ -18,10 +19,13 @@ Page({
     onLoad: function (options) {
         let that = this
         that.setData({
-            actNiceId: options.actNiceId,
-            courseId: options.courseId? options.courseId:0
+            actNiceId: Number(options.actNiceId),
+            courseId: options.courseId,
         })
-        if (that.data.courseId!='undefined'){
+        if (that.data.courseId != 'undefined'){
+            wx.setNavigationBarTitle({
+                title: '编辑活动课程',
+            })
             getApp().request({
                 url:'org/make_lesson_course',
                 mehtod:'get',
@@ -29,12 +33,21 @@ Page({
                     act_nice_course_id: that.data.courseId
                 },
                 success:function(res){
+                    
                     that.setData({
+                        isCover:false,
                         coverImage: res.data.data.cover.url,
                         pageData:res.data.data,
                         couveImageId: res.data.data.cover.id
                     })
                 }
+            })
+        }else{
+            wx.setNavigationBarTitle({
+                title: '发布活动课程',
+            })
+            that.setData({
+                isCover: true,
             })
         }
     },
@@ -106,6 +119,7 @@ Page({
                 wx.navigateTo({
                     url: '../oneLessonEdit/oneLessonEdit?actNiceId=' + that.data.actNiceId,
                 })
+                // wx.navigateBack({})
             }
         })
     },
@@ -115,9 +129,14 @@ Page({
             count: 1,
             success: function (res) {
                 that.setData({
+                    isCover: false,
                     coverImage: res.tempFilePaths[0]
                 })
                 let imgPath = res.tempFilePaths[0]
+                wx.showLoading({
+                    title: '图片上传中...',
+                    mask:true,
+                })
                 getApp().request({
                     url: "org/policy",
                     method: "post",
@@ -128,7 +147,7 @@ Page({
                         let n = imgPath.lastIndexOf('.');
                         let imgPathO = imgPath.substring(n)
                         let sendData = {
-                            "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + imgPathO,
+                            "key": res.data.data.dir + getApp().imageAddress(imgPath) + imgPathO,
                             "OSSAccessKeyId": res.data.data.accessid,
                             "host": res.data.data.host,
                             "expire": res.data.data.expire,
@@ -142,14 +161,14 @@ Page({
                             filePath: imgPath,
                             formData: sendData,
                             success: function (res) {
-                                wx.showLoading({
-                                    title: '图片上传中',
-                                    mask:true,
-                                })
+                                // wx.showLoading({
+                                //     title: '图片上传中',
+                                //     mask:true,
+                                // })
 
-                                setTimeout(function () {
-                                    wx.hideLoading()
-                                }, 5000)
+                                // setTimeout(function () {
+                                //     wx.hideLoading()
+                                // }, 5000)
                                 getApp().request({
                                     url: "org/exchange",
                                     data: {
@@ -160,13 +179,23 @@ Page({
                                     success: function (r) {
                                         r = r.data
                                         if (r.code == 0) {
-                                            console.log("上传到服务器出错");
-                                            return
+                                            // console.log("上传到服务器出错");
+                                            // return
+                                            wx.showToast({
+                                                title: '上传到服务器出错',
+                                                icon: 'none'
+                                            })
+                                        }else if(Number(r.code)==1){
+                                            //得到图片的id和地
+                                            that.setData({
+                                                couveImageId: r.data.imageId
+                                            })
+                                            wx.hideLoading()
+                                            wx.showToast({
+                                                title: '图片上传成功',
+                                                icon:'success',
+                                            })
                                         }
-                                        //得到图片的id和地
-                                        that.setData({
-                                            couveImageId: r.data.imageId
-                                        })
                                     }
                                 });
                             }
@@ -175,5 +204,5 @@ Page({
                 })
             },
         })
-    }
+    },
 })

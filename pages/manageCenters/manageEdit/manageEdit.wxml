@@ -59,11 +59,11 @@
             <view class='manageEditFourContent'>
                 <view class='viewOne'>
                     <text>原价:</text>
-                    <input type='number' name='now_price' value='{{pageData.now_price}}' />
+                    <input type='number' name='original_price' value='{{pageData.original_price}}' />
                 </view>
                 <view class='viewOne'>
                     <text>最低价:</text>
-                    <input type='number' name='original_price' value='{{pageData.original_price}}' />
+                    <input type='number' name='now_price' value='{{pageData.now_price}}' />
                 </view>
                 <view>
                     <text>砍价类型:</text>
@@ -108,6 +108,7 @@
                 </view>
                 <view class='fiveContentImage' wx:for='{{imageData}}'>
                     <image src='{{item}}' mode='scaleToFill' />
+                    <view class='delImage' bindtap='delImage' data-index='{{index}}'>×</view>
                 </view>
             </view>
         </view>
@@ -115,7 +116,7 @@
             <view class='manageEditOneTitle'>活动信息</view>
             <view class='manageEditSixContent'>
                 <view class='manageEditSixWrap'>
-                    <textarea placeholder='活动说明' value='{{pageData.rule}}' bindblur='getRule' />
+                    <textarea placeholder='活动说明' value='{{pageData.rule}}' name='rule' />
                 </view>
             </view>
             <view class='sixEmpty'></view>

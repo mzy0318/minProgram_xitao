@@ -1,4 +1,5 @@
 // pages/manageCenters/manageEdit/manageEdit.js
+let util = require('../../../utils/util.js')
 Page({
 
     /**
@@ -13,29 +14,36 @@ Page({
         isHiddenO: false,
         getbargainType: '',
         getBargainLimitType: '',
-        startDate: '2016-09-01',
-        endDate: '2016-09-01',
+        startDate: '',
+        endDate: '',
         rule: '',
         joinInfo: ['姓名', '电话'],
         joinInfoId: [1, 1],
         nameInfo:[],
         nameInfoId:[],
         isOptions: true,
-        imageData: '',
+        imageData: '',  //图片数组
+        actImg0: '',   //图片ID数组
         editTitle: undefined,
         backgroundImage: ' ',
-        actImg0:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        console.log('options',options)
         let that = this
         that.setData({
             actId: options.id,
         })
-        if (options.id == 'undefined') {
+        let toDay = new Date().valueOf();
+        let toFuture = new Date().valueOf() + 2592000000
+        that.setData({
+            startDate: util.formatDate(new Date(toDay)),
+            endDate: util.formatDate(new Date(toFuture)),
+        })
+        if (options.id == undefined) {
             this.setData({
                 backgroundImage: options.image
             })
@@ -154,7 +162,7 @@ Page({
             joiner_limit: e.detail.value.joiner_limit,
             telephone: e.detail.value.telephone,
             address: e.detail.value.address,
-            rule: this.data.rule,
+            rule: e.detail.value.rule,
             // join_info_require: this.data.nameInfoId,
             // join_info_text: this.data.nameInfo,
             bargain_type: this.data.getbargainType ? this.data.getbargainType : 1,
@@ -180,13 +188,37 @@ Page({
             data: sendData,
             method: 'post',
             success: res => {
-                wx.showToast({
-                    title: res.data.msg,
-                    icon: 'none'
-                })
-                if (res.data.code == 1) {
-                    wx.navigateTo({
-                        url: '../manageActive/manageActive?url=org/bargain_list',
+                if (Number(res.data.code) == 1) {
+
+                    wx.showLoading({
+                        title: '正在发布',
+                        mask: true,
+                    })
+                    setTimeout(closeLogin, 2000)
+                    
+                    function closeLogin() {
+
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: '发布成功',
+                            icon:'success'
+                        })
+                        if (that.data.actId == undefined) {
+
+                            wx.navigateBack({ delta: 2 });
+
+                        } else {
+
+                            wx.navigateBack({})
+                        }
+                    }
+                    // wx.navigateTo({
+                    //     url: '../manageActive/manageActive?url=org/bargain_list',
+                    // })
+                }else{
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
                     })
                 }
             }
@@ -222,16 +254,31 @@ Page({
             isOptions: Boolean(Number(e.target.dataset.is))
         })
     },
+    // 活动图片上传
     getImage: function(e) {
         let that = this
         wx.chooseImage({
             success: function(res) {
+                let actImage = [];  //图片数组
+                let actImg = [];  //图片数组ID
+                actImg.push(...that.data.actImg0)
+                actImage.push(...that.data.imageData)
+                actImage.push(...res.tempFilePaths)
                 that.setData({
-                    imageData: res.tempFilePaths
+                    imageData: actImage
                 })
-                let imgPath = res.tempFiles;
-                let actImg = [];
+                let imgPath = res.tempFilePaths;  //图片数组
+
+                wx.showLoading({
+                    title: '图片上传中...',
+                    mask: true,
+                })
                 for (let i = 0; i < imgPath.length; i++) {
+
+                    let n = imgPath[i].lastIndexOf('.');
+
+                    let imgPathO = imgPath[i].substring(n);
+
                     getApp().request({
                         url: "org/policy",
                         method: "post",
@@ -240,7 +287,7 @@ Page({
                         },
                         success: function(res) {
                             let sendData = {
-                                "key": res.data.data.dir + imgPath[i].path,
+                                "key": res.data.data.dir + getApp().imageAddress(imgPath[i]) + imgPathO,
                                 "OSSAccessKeyId": res.data.data.accessid,
                                 "host": res.data.data.host,
                                 "expire": res.data.data.expire,
@@ -251,7 +298,7 @@ Page({
                             wx.uploadFile({
                                 url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
                                 name: 'file',
-                                filePath: imgPath[i].path,
+                                filePath: imgPath[i],
                                 formData: sendData,
                                 success: function(res) {
                                     getApp().request({
@@ -264,14 +311,24 @@ Page({
                                         success: function(r) {
                                             r = r.data
                                             if (r.code == 0) {
-                                                console.log("上传到服务器出错");
-                                                return
+                                                // console.log("上传到服务器出错");
+                                                // return
+                                                wx.showToast({
+                                                    title: '上传到服务器出错',
+                                                    icon: 'none'
+                                                })
+                                            }else if(Number(r.code)==1){
+                                                //得到图片的id和地址
+                                                actImg.push(r.data.imageId)
+                                                that.setData({
+                                                    actImg0: actImg,
+                                                })
+                                                wx.hideLoading()
+                                                wx.showToast({
+                                                    title: '图片上传成功',
+                                                    icon:'success',
+                                                })
                                             }
-                                            //得到图片的id和地址
-                                            actImg.push(r.data.imageId)
-                                            that.setData({
-                                                actImg0: actImg,
-                                            })
                                         }
                                     });
                                 }
@@ -305,4 +362,21 @@ Page({
             nameInfoId: nameInfoId
         })
     },
+    // 删除图片
+    delImage: function (e) {
+
+        let that = this;
+        let index = Number(e.currentTarget.dataset.index)
+
+        let actImage = that.data.imageData;
+        let actImageId = that.data.actImg0;
+        
+        actImage.splice(index, 1);
+        actImageId.splice(index, 1);
+
+        that.setData({
+            imageData: actImage,
+            actImg0: actImageId,
+        })
+    }
 })

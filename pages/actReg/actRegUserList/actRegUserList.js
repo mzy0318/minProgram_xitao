@@ -20,7 +20,7 @@ Page({
             method:'post',
             success:function(res){
                 for(let i = 0;i<res.data.data.length;i++){
-                    res.data.data[i].end_time = utils.formatDate(new Date(res.data.data[i].end_time))
+                    res.data.data[i].end_time = utils.formatDateO(new Date(res.data.data[i].end_time*1000))
                 }
                 that.setData({
                     pageData:res.data.data

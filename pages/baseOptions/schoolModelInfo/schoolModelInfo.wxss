@@ -1,16 +1,16 @@
 .infoSwiper{
     width:450rpx;
-    height:880rpx;
+    height:850rpx;
     margin:20rpx auto;
 }
 .infoSwiper swiper{
     width:450rpx;
-    height:880rpx;
+    height:850rpx;
     background:#fff;
 }
 .infoSwiperImage{
     width:450rpx;
-    height:880rpx;
+    height:850rpx;
 }
 .infoSwiperImage image{
     width:450rpx;
@@ -28,5 +28,5 @@
     color:#fff;
     background:#FFCF0B;
     font-size:35rpx;
-    margin-top:20rpx;
+    margin-top:70rpx;
 }

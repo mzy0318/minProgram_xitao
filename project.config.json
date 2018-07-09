@@ -11,9 +11,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
-	"appid": "wx5464437580674446",
-	"projectname": "xitao-wise",
+	"libVersion": "1.9.94",
+	"appid": "wx6c316aa5575b1519",
+	"projectname": "newise",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

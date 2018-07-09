@@ -63,17 +63,18 @@
         <view class='lessonEditThree'>
             <view class='lessonEditOneTitle'>活动图片</view>
             <view class='lessonEditThreeContent'>
-                <view bindtap='choosePic'></view>
-                <view wx:for='{{actImage}}'>
+                <view bindtap='choosePic' class='chooseImage'></view>
+                <view wx:for='{{actImage}}' style='position:relative' class='chooseImage'>
                     <image src='{{item}}' mode='scaleToFill'></image>
+                    <view class='delImage' bindtap='delImage' data-index='{{index}}'>×</view>
                 </view>
             </view>
         </view>
         <view class='lessonEditThree'>
             <view class='lessonEditOneTitle'>封面图片</view>
             <view class='lessonEditThreeContent'>
-                <view bindtap='chooseCoverPic'></view>
-                <view>
+                <view bindtap='chooseCoverPic' class='chooseImage'></view>
+                <view style='display:{{isCover}}' class='jiayou' class='chooseImage'>
                     <image src='{{coverImage}}' mode='scaleToFill'></image>
                 </view>
             </view>
@@ -82,7 +83,7 @@
             <view class='lessonEditOneTitle'>活动信息</view>
             <view class='lessonEditFourContent'>
                 <view class='lessonEditFourContentChild'>
-                    <textarea bindblur='getDescription' value='{{description}}'></textarea>
+                    <textarea  name='description' value='{{description}}'></textarea>
                 </view>
             </view>
         </view>
@@ -95,7 +96,7 @@
                 <view class='contentListRight'>
                     <view class='contentListRightTop'>
                         <text>{{item.course_name}}</text>
-                        <text>删除</text>
+                        <!-- <text>删除</text> -->
                     </view>
                     <view class='contentListRightMiddle'>￥{{item.now_price}}={{item.course_number}}节课</view>
                     <view class='contentListRightBottom'>
@@ -105,10 +106,10 @@
                 </view>
             </view>
             <view class='lessonEditFiveAdd'>
-                <text class='lessonEditFiveAddChild' decode bindtap='toCourseEdit'>+&nbsp;&nbsp;添加课程</text>
+                <button class='lessonEditFiveAddChild' formType="submit" data-id='0' >+ 添加课程</button>
             </view>
         </view>
-        <button class='lessonEditBtn' formType="submit">立即发布</button>
+        <button class='lessonEditBtn' formType="submit"  data-id='1'>立即发布</button>
     </form>
     <view class='addFormWrap' hidden='{{isForm}}' bindtap='showOptions' data-is='1'>
         <view class='addFormChild'>

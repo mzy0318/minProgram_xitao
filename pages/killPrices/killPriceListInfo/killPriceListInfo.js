@@ -23,7 +23,7 @@ Page({
             success: res => {
                 this.setData({
                     personInfo:res.data.data,
-                    startTime: util.formatTime(new Date(res.data.data.create_time))
+                    startTime: util.formatTime(new Date(res.data.data.create_time*1000))
                 })
             }
         })

@@ -6,17 +6,39 @@ Page({
      */
     data: {
         pageData:'',
+        urlAddress:'',
+        urlBigAddress:'',
+        enCodeImage:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(getApp().globalData.userInfo)
         let that = this;
+        let sendData = {};
+        sendData['id'] = Number(options.actId); 
+        sendData['page'] = options.page;
+        sendData['title'] = options.title;
+        sendData['scale'] = 0.3;
+        sendData['org_id'] = String(getApp().getExtConfig().orgId);
+        sendData['visitor_id'] = String(wx.getStorageSync('visitorId'));
+        //二维码地址
+        let mzy = 'actid=' + sendData.id + '&acttag=' + undefined;
         that.setData({
-            pageData: getApp().globalData.userInfo
+            pageData: getApp().globalData.userInfo,
+            urlAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.3&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id,
+            urlBigAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.5&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id,
+            enCodeImage: getApp().getEncodeImage(sendData.page,mzy)
         })
+        // getApp().request({
+        //     url:'placard',
+        //     data:sendData,
+        //     method:'get',
+        //     sucess:function(res){
+        //         console.log(res)
+        //     }        
+        // })
         
     },
 
@@ -66,6 +88,34 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return {
+            path:'/pages/index/index'
+        }
+    },
+    saveImage:function(){
+        let that = this;
+        wx.downloadFile({
+            url: that.data.urlAddress,
+            success:function(res){
+                wx.saveImageToPhotosAlbum({
+                    filePath: res.tempFilePath,
+                    success:function(res){
+                        console.log(res)
+                    }
+                })
+            }
+        })
+    },
+    shareFriends:function(e){
+        let that = this;
+        if (Number(e.currentTarget.dataset.id) == 0){
+            wx.previewImage({
+                urls: [that.data.urlBigAddress],
+            })
+        } else if (Number(e.currentTarget.dataset.id) == 1){
+            wx.previewImage({
+                urls: [that.data.enCodeImage],
+            })
+        }
     }
 })

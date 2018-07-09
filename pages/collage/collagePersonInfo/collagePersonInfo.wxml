@@ -14,29 +14,32 @@
         </view>
         <view class='oneRule'>
             <view class='oneRuleChild'>
+                <view class='oneRuleChildTop'>
+                    <view wx:for='{{pageData.act_set}}' class='{{priceId==index?"viewTyle":" "}}' data-index='{{index}}' bindtap='switchTab'>{{item.person}}人团</view>
+                </view>
                 <view class='oneRuleChildBottom'>
-                    <view class='oneRuleChildBottomLeft'>凑齐10人即可享受</view>
-                    <view class='oneRuleChildBottomRight'>
-                        <text>￥3999元</text>￥10元</view>
+                    <view class='oneRuleChildBottomLeft'>凑齐{{personNum}}人即可享受</view>
+                    <view class='oneRuleChildBottomRight'><text>￥{{pageData.original_price}}元</text>￥{{collagePrice}}元</view>
                 </view>
             </view>
         </view>
-        <view class='oneButton'>
+        <!-- <view class='oneButton'>
             <button bindtap='toCollageJoin' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' >我要参团</button>
-        </view>
+        </view> -->
     </view>
     <view class='myTeam'>
         <view class='oneTitle'>
             <view class='oneTitleChild'>我的团员</view>
         </view>
         <view class='divBoxChildWrap'>
-            <view class='divBoxChild'>
+            <view class='divBoxChild' wx:for='{{personInfo}}'>
                 <view class='divBoxChildLeft'>
-                    <image mode='' />
+                    <image src='{{item.avatar_url}}' mode='scaleToFill' />
                 </view>
-                <view class='divBoxChildMiddle'>小刘</view>
-                <view class='divBoxChildRight'>2018-05-12 23:10:00</view>
+                <view class='divBoxChildMiddle'>{{item.nickname}}</view>
+                <view class='divBoxChildRight'>{{item.create_time}}</view>
             </view>
+            <view class='noData' hidden='{{isData}}'>没有团员</view>
         </view>
         <button open-type='share'>推荐好友</button>
     </view>
@@ -45,9 +48,9 @@
             <view class='oneTitleChild'>分享活动</view>
         </view>
         <view class='collageInfoSixContent'>
-            <image mode='scaleToFill' />
+            <image src='{{encodeID}}' mode='scaleToFill' ></image>
         </view>
-        <button>分享到朋友圈</button>
+        <button bindtap='shareFriends'>分享到朋友圈</button>
     </view>
     <view class='headerReward'>
         <view class='oneTitle'>
@@ -59,7 +62,7 @@
         <view class='oneTitle'>
             <view class='oneTitleChild'>机构介绍</view>
         </view>
-        <text decode='true'>活动时间:&nbsp;&nbsp;{{pageData.start_time}}至{{pageData.end_time}}</text>
+        <text decode='true'>活动时间:&nbsp;&nbsp;{{pageData.start_time}} 至 {{pageData.end_time}}</text>
         <text decode='true'>机构名称:&nbsp;&nbsp;{{pageData.app_name}}</text>
         <text decode='true'>联系电话:&nbsp;&nbsp;{{pageData.telephone}}</text>
         <view class='collageInfoTwoBtn'>
@@ -85,7 +88,7 @@
             <view class='oneTitleChild'>活动规则</view>
         </view>
         <view class='fourContent'>
-            好,你帅你先说
+            {{pageData.rule}}
         </view>
     </view>
 </view>

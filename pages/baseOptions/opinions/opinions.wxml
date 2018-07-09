@@ -1,18 +1,21 @@
 <!--pages/opinions/opinions.wxml-->
 <view class='opinionWrap'>
     <view class='opinionImg'>
-        <image src='../../../icon/opinionsImg.png'></image>
-    </view> 
-  <view class='empty'></view>
-  <view class='opinionTextarea'>
-    <view></view>
-    <textarea placeholder='说点什么吧...' placeholder-class='holderStyle' bindblur='bindTextAreaBlur' ></textarea>
-  </view> 
-  <view class='opinionInput'>
-    <input type='text' placeholder='昵称' placeholder-class='holderStyle' bindblur='getName' />
-  </view>
-  <view class='opinionInput'>
-    <input type='number' placeholder='联系方式' maxlength='11' placeholder-class='holderStyle' bindblur='getPhone' />
-  </view>
-  <button bindtap='subPinions' >发表意见</button>
+        <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/feedback_banner.png'></image>
+    </view>
+    <view class='empty'></view>
+    <form bindsubmit='subPinions'>
+        <view class='opinionTextarea'>
+            <view></view>
+            <textarea placeholder='说点什么吧...' placeholder-class='holderStyle' name='content'></textarea>
+        </view>
+        <view class='opinionInput'>
+            <input type='text' placeholder='昵称' placeholder-class='holderStyle' name='nickname' />
+        </view>
+        <view class='opinionInput'>
+            <input type='number' placeholder='联系方式' maxlength='11' placeholder-class='holderStyle' name='phone' />
+        </view>
+        <button form-type='submit'>发表意见</button>
+    </form>
+
 </view>

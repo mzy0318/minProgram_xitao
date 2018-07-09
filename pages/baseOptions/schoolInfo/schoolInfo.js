@@ -22,7 +22,7 @@ Page({
         getApp().request({
             url: 'school/intro',
             data: {
-                orgid: getApp().config.orgId
+                orgid: getApp().getExtConfig().orgId
             },
             success: res => {
                 if (res.data.data.brand == null){

@@ -13,9 +13,10 @@
 }
 .manListContentTop{
     width:670rpx;
-    line-height:40rpx;
+    line-height:70rpx;
     text-indent:20rpx;
     font-size:30rpx;
+    font-weight:bold;
 }
 .manListContentMiddel{
     width:710rpx;
@@ -28,6 +29,7 @@
     float:left;
     margin-left:20rpx;
     margin-top:20rpx;
+    overflow:hidden;
 }
 .ListContentMiddelLeft image{
     width:400rpx;
@@ -55,7 +57,7 @@
 .contentMiddelRightStatus{
     width:250rpx;
     line-height:40rpx;
-    font-size:22rpx;
+    font-size:21rpx;
     color:#7b7b7b;
 }
 .textstatus{
@@ -75,6 +77,9 @@
     float:left;
     border-right:1rpx solid #7b7b7b;
     color:#CA4535;
+}
+button.contentBottomChild::after{
+    border:0rpx;
 }
 .contentBottomChild:nth-child(2){
     color:#369BCF;

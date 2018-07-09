@@ -201,14 +201,15 @@ Page({
             pwdNum: e.detail.value,
         })
     },
-    login: function () {
+    login: function (e) {
         let that = this;
-        if (this.data.phoneNum == '') {
+        let senddata = e.detail.value
+        if (senddata.phone == '') {
             wx.showToast({
                 title: '手机号不能为空',
                 icon: 'none'
             })
-        } else if (this.data.pwdNum == '') {
+        } else if (senddata.password == '') {
             wx.showToast({
                 title: '密码不能为空',
                 icon: 'none'
@@ -216,10 +217,7 @@ Page({
         } else {
             getApp().request({
                 url: 'login_org',
-                data: {
-                    phone: this.data.phoneNum,
-                    password: this.data.pwdNum
-                },
+                data: senddata,
                 method: 'post',
                 success: res => {
                     wx.setStorageSync('loginCode', res.data.code)

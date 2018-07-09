@@ -14,7 +14,8 @@
     width:720rpx;
     height:330rpx;
     border-radius:10rpx 10rpx 0rpx 0rpx;
-    background:lightblue;
+    background:#fff;
+    overflow:hidden;
 }
 .actRegImage image{
     width:720rpx;

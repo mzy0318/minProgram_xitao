@@ -95,49 +95,20 @@ Page({
         ],
     },
     //事件处理函数
-    onLoad: function () {
+    onLoad: function (options) {
+        wx.showLoading({
+            title: '',
+            mask:true,
+        })
         let that = this;
+        wx.showShareMenu({
+            withShareTicket: true
+        })
         if (wx.getStorageSync('userInfo') != '') {
             that.setData({
                 isGetUser: true,
             })
         }
-        // 选择模板
-        // if (Number(wx.getStorageSync('schoolModel')) == 2){
-        //     that.setData({
-        //         modeCode:'six'
-        //     })
-        // } else if (Number(wx.getStorageSync('schoolModel')) == 6){
-        //     that.setData({
-        //         modeCode: 'two'
-        //     })
-        // }
-        getApp().request({
-            url: "home",
-            method: "post",
-            data: {},
-            success: res => {
-                for (let i = 0; i < res.data.data.home_icon.length; i++) {
-                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
-                    res.data.data.home_icon[i].width = that.data.paintData[i].width;
-                    for (let j = 0; j < that.data.optionsUrl.length; j++) {
-                        if (res.data.data.home_icon[i].tag == that.data.optionsUrl[j].tag){
-                            res.data.data.home_icon[i].url = that.data.optionsUrl[j].url
-                        }
-                    }
-                }
-                that.setData({
-                    pageData: res.data.data
-                })
-                wx.setNavigationBarTitle({
-                    title: res.data.data.app_name,
-                });
-                wx.setNavigationBarColor({
-                    frontColor: res.data.data.navi_font_color,
-                    backgroundColor: res.data.data.navi_background_color,
-                })
-            }
-        })
         wx.login({
             success: res => {
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -148,7 +119,7 @@ Page({
                     method: "post",
                     data: {
                         code: res.code,
-                        org_id: getApp().config.orgId,
+                        org_id: getApp().getExtConfig().orgId,
                     },
                     success: r => {
                         var cookie = wx.getStorageSync('cookie');
@@ -194,15 +165,56 @@ Page({
     onShow:function(){
         let that = this;
         // 选择模板
-        // if (Number(wx.getStorageSync('schoolModel')) == 2) {
-        //     that.setData({
-        //         modeCode: 'six'
-        //     })
-        // } else if (Number(wx.getStorageSync('schoolModel')) == 6) {
-        //     that.setData({
-        //         modeCode: 'two'
-        //     })
-        // }
+        if (Number(wx.getStorageSync('schoolModel')) == 2) {
+            that.setData({
+                modeCode: 'six'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 6) {
+            that.setData({
+                modeCode: 'two'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 22 || Number(wx.getStorageSync('schoolModel')) == 18 || Number(wx.getStorageSync('schoolModel')) == 21) {
+            that.setData({
+                modeCode: 'one'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 3 || Number(wx.getStorageSync('schoolModel')) == 12){
+            that.setData({
+                modeCode: 'four'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 17){
+            that.setData({
+                modeCode: 'five'
+            })
+        }
+
+        getApp().request({
+            url: "home",
+            method: "post",
+            data: {},
+            success: res => {
+
+                for (let i = 0; i < res.data.data.home_icon.length; i++) {
+                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
+                    res.data.data.home_icon[i].width = that.data.paintData[i].width;
+                    for (let j = 0; j < that.data.optionsUrl.length; j++) {
+                        if (res.data.data.home_icon[i].tag == that.data.optionsUrl[j].tag) {
+                            res.data.data.home_icon[i].url = that.data.optionsUrl[j].url
+                        }
+                    }
+                }
+                that.setData({
+                    pageData: res.data.data
+                })
+                wx.setNavigationBarTitle({
+                    title: res.data.data.app_name,
+                });
+                wx.setNavigationBarColor({
+                    frontColor: res.data.data.navi_font_color,
+                    backgroundColor: res.data.data.navi_background_color,
+                })
+                wx.hideLoading()
+            }
+        })
     },
     redirectPage: function (res) {
         wx.navigateTo({

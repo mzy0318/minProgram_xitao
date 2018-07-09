@@ -13,6 +13,7 @@ Page({
         actReg: true,
         lesson: true,
         pageNum:1,
+        showTitle: true,
     },
 
     /**
@@ -34,11 +35,17 @@ Page({
                 },
                 success: res => {
                     if (res.data.data.list.length == 0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
-                            icon:'none',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        //     icon:'none',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         that.setData({
                             userList: res.data.data.list
                         })
@@ -59,10 +66,16 @@ Page({
                 success: res => {
                     let userData = res.data.data.list;
                     if (userData.length==0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (userData.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         for (let i = 0; i < userData.length; i++) {
                             if (userData[i].is_leader == 1) {
                                 userData[i].is_leader = '【团长】'
@@ -89,10 +102,16 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length==0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         that.setData({
                             userList: res.data.data.list
                         })   
@@ -111,10 +130,16 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length==0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         that.setData({
                             userList: res.data.data.list
                         })   
@@ -173,10 +198,16 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length==0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         that.setData({
                             userList: res.data.data.list
                         })
@@ -196,10 +227,16 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length == 0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (res.data.data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         that.setData({
                             userList: res.data.data.list
                         })
@@ -329,13 +366,13 @@ Page({
                 personInfo: this.data.oriData[e.currentTarget.dataset.index]
             })
         } else if (Number(pageTypeStu) == 10) {
-            this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time))
+            this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time*1000))
             this.setData({
                 actReg: false,
                 personInfo: this.data.userList[e.currentTarget.dataset.index]
             })
         } else if (Number(pageTypeStu) == 4) {
-            this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time))
+            this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time*1000))
             that.setData({
                 lesson: false,
                 personInfo: this.data.userList[e.currentTarget.dataset.index]

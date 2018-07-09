@@ -8,16 +8,21 @@ Page({
         isShow: false,
         formInfo:'',
         actId:'',
+        btnID:'',
+        joinerId:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log('options', options)
         let that = this
         this.setData({
             formInfo: JSON.parse(options.info),
-            actId: options.actId
+            actId: options.actId,
+            btnID: Number(options.btnId),
+            joinerId: options.joinerId
         })
     },
     /**
@@ -79,31 +84,87 @@ Page({
         let that = this;
         let arr = []
         let sendData = {};
-        sendData['nickname'] = e.detail.value.nickname
-        sendData['phone'] = e.detail.value.phone
-        sendData['act_id'] = this.data.actId
-        for (let i = 0; i < that.data.formInfo.length;i++){
-            // arr.push(e.detail.value[i])
-            sendData['info[' + i + ']'] = e.detail.value[i]
-        }
-        console.log('sendData', sendData)
-        sendData['info[]'] = arr;
-        getApp().request({
-            url:'join_personal_group',
-            data: sendData,
-            method:'post',
-            success:function(res){
-                if (res.data.code == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none'
-                    })
-                } else if (res.data.code == 1){
-                    wx.navigateBack({
-
-                    })
-                }
+        if (that.data.btnID == 0){
+            sendData['nickname'] = e.detail.value.nickname
+            sendData['phone'] = e.detail.value.phone
+            sendData['act_id'] = this.data.actId
+            for (let i = 0; i < that.data.formInfo.length; i++) {
+                // arr.push(e.detail.value[i])
+                sendData['info[' + i + ']'] = e.detail.value[i]
             }
-        })
+            // sendData['info[]'] = arr;
+            sendData['joiner_id'] ='',
+            getApp().request({
+                url: 'join_personal_group',
+                data: sendData,
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none'
+                        })
+                    } else if (Number(res.data.code) == 1) {
+
+                        wx.showLoading({
+                            title: '正在开团...',
+                            mask: true,
+                        })
+
+                        setTimeout(closeLogin, 2000);
+
+                        function closeLogin() {
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: '开团成功',
+                                success:function(){
+                                    wx.navigateBack({})
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        } else if (that.data.btnID == 1){
+            sendData['nickname'] = e.detail.value.nickname
+            sendData['phone'] = e.detail.value.phone
+            sendData['act_id'] = this.data.actId
+            for (let i = 0; i < that.data.formInfo.length; i++) {
+                // arr.push(e.detail.value[i])
+                sendData['info[' + i + ']'] = e.detail.value[i]
+            }
+            // sendData['info[]'] = arr;
+            sendData['joiner_id'] = that.data.joinerId,
+                getApp().request({
+                    url: 'join_personal_group',
+                    data: sendData,
+                    method: 'post',
+                    success: function (res) {
+                        if (Number(res.data.code) == 0) {
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none'
+                            })
+                        } else if (Number(res.data.code) == 1) {
+
+                            wx.showLoading({
+                                title: '正在参团...',
+                                mask: true,
+                            })
+                            setTimeout(closeLogin, 2000)
+                            function closeLogin() {
+                                wx.hideLoading()
+                                wx.showToast({
+                                    title: '参团成功',
+                                    success:function(){
+                                        wx.navigateBack({})
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
+        }
+        
     }
 })

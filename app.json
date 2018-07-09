@@ -12,15 +12,15 @@
         "pages/manageCenters/chooseModel/chooseModel",
         "pages/manageCenters/collageEdit/collageEdit",
         "pages/manageCenters/lessonCourseEdit/lessonCourseEdit",
-        "pages/manageCenters/schoolEdit/schoolEdit",
         "pages/manageCenters/actRegEdit/actRegEdit",
         "pages/manageCenters/oneLessonEdit/oneLessonEdit",
+        "pages/manageCenters/schoolEdit/schoolEdit",
         "pages/courses/orderInfo/orderInfo",
         "pages/courses/course/course",
+        "pages/courses/courseInfo/courseInfo",
         "pages/courses/courseUserList/courseUserList",
         "pages/courses/courseUserListInfo/courseUserListInfo",
         "pages/courses/stuCourseList/stuCourseList",
-        "pages/courses/courseInfo/courseInfo",
         "pages/courses/orderInfoPay/orderInfoPay",
         "pages/baseOptions/teachers/teachers",
         "pages/baseOptions/schoolInfo/schoolInfo",
@@ -53,7 +53,9 @@
         "pages/actReg/actRegUserInfo/actRegUserInfo",
         "pages/studentManage/orderList/orderList",
         "pages/task/taskUserList/taskUserList",
-        "components/otherOpt/otherOpt"
+        "components/otherOpt/otherOpt",
+        "pages/goodLesson/goodLessonPeople/goodLessonPeople",
+        "pages/videos/videoSharePage/videoSharePage"
     ],
     "window": {
         "backgroundTextStyle": "dark",

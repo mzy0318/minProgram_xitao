@@ -2,6 +2,7 @@
     width: 750rpx;
     background: linear-gradient(to bottom, #fff3b9, #d7f5fd);
     min-height: 1205rpx;
+    padding-bottom: 20rpx;
 }
 
 .empty {

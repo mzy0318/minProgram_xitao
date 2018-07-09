@@ -23,7 +23,7 @@ Page({
             },
             success:function(res){
                 for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
                 }
                 that.setData({
                     pageData:res.data.data.list
@@ -76,7 +76,7 @@ Page({
             },
             success: function (res) {
                 for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
                 }
                 that.setData({
                     pageData: res.data.data.list
@@ -105,7 +105,7 @@ Page({
                 },
                 success: function (res) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
+                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
                     }
                     pageDataArr.push(...res.data.data.list)
                     that.setData({
@@ -152,11 +152,26 @@ Page({
             },
             success:function(res){
                 if(res.data.code==1){
-                    wx.navigateTo({
-                        url:'../../videos/manVideoList/manVideoList'
+                    wx.showToast({
+                        title: '删除成功',
+                        icon:'success',
+                        success:function(){
+                            
+                        }
                     })
+                    // wx.navigateTo({
+                    //     url:'../../videos/manVideoList/manVideoList'
+                    // })
                 }
             }    
+        })
+    },
+    taBack:function(){
+        wx.navigateBack({})
+    },
+    toSharePage: function (e) {
+        wx.navigateTo({
+            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/videos/videoListInfo/videoListInfo',
         })
     }
 })

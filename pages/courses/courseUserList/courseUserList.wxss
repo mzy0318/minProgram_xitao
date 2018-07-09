@@ -61,7 +61,7 @@
 .addUser{
     width:80rpx;
     height:80rpx;
-    line-height:80rpx;
+    line-height:75rpx;
     text-align:center;
     background:#439BFF;
     color:#fff;
@@ -72,6 +72,7 @@
     left:50%;
     margin-left:-40rpx;
     z-index:1000;
+    text-indent:3rpx;
 }
 /* 添加用户表单 */
 .userInfo{

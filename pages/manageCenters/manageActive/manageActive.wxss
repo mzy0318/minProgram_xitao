@@ -96,12 +96,25 @@
 }
 
 .manageActiveOptions text{
+    display:block;
+    float:left;
+    width:33%;
+    font-size:30rpx;
+    line-height:78rpx;
+    text-align:center;
+    color:#46BBFF;
+}
+.manageActiveOptions button{
     display:inline-block;
     width:33%;
     font-size:30rpx;
     line-height:78rpx;
     text-align:center;
     color:#46BBFF;
+    background:#fff;
+}
+.manageActiveOptions button:after{
+    border:0rpx;
 }
 
 .manageActiveOptions text:nth-child(4){
@@ -138,4 +151,14 @@
     text-align:center;
     font-size:30rpx;
     color:#fff;
+}
+
+.noData{
+    width:100%;
+    height:60rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:60rpx;
+    background:transparent;
 }

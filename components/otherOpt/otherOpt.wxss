@@ -139,6 +139,7 @@
     margin-left:20rpx;
     float:left;
     margin-top:25rpx;
+    border:1rpx solid #fff;
  }
  .modelContentChildContent view:nth-child(1){
      width:200rpx;
@@ -150,7 +151,7 @@
 .modelContentChildContent view:nth-child(2){
      width:200rpx;
      height:115rpx;
-     background:red;
+     background:#fff;
  } 
 
  .modelContentChildContent view:nth-child(2) image{

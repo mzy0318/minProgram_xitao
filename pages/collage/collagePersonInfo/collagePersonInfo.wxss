@@ -31,12 +31,13 @@
 .oneTitleChild{
     width:670rpx;
     line-height:35rpx;
-    font-size:32rpx;
-    border-left:2px solid red;
+    font-size:30rpx;
+    border-left:2px solid #913225;
     text-indent:20rpx;
     margin-left:20rpx;
     font-weight:bold;
     margin-top:30rpx;
+    color:#913225;
 }
 .oneImage{
     width:710rpx;
@@ -84,7 +85,7 @@
     width:670rpx;
     height:100rpx;
     background:#F36A58;
-    border-radius:5px;
+    /* border-radius:5px; */
 }
 .oneRuleChildBottomLeft{
     width:300rpx;
@@ -139,10 +140,10 @@
 .collageInfoSixContent{
     width:350rpx;
     height:350rpx;
-    background:lightgreen;
+    background:#fff;
     margin:20rpx auto 0rpx;
 }
-.collageInfoSixConten iamge{
+.collageInfoSixContent image{
     width:350rpx;
     height:350rpx;
 }
@@ -168,9 +169,9 @@
     display:block;
     width:710rpx;
     line-height:80rpx;
-    font-size:30rpx;
-    text-indent:20rpx;
-    color:#464646;
+    font-size:26rpx;
+    text-indent:40rpx;
+    color:#7b7b7b;
     border-bottom:1rpx solid #efefef;
 }
 .collageInfoTwoBtn{
@@ -197,12 +198,14 @@
     box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
 }
 .threeImageText{
-    width:710rpx;
-    min-height:30rpx;
+    width:650rpx;
+    min-height:40rpx;
+    line-height:40rpx;
     color:#7b7b7b;
-    font-size:30rpx;
-    text-indent:30rpx;
-}
+    font-size:26rpx;
+    margin:0rpx auto 0rpx;
+    /* text-indent:30rpx;*/
+} 
 /*活动规则*/
 .collageInfoFour{
     width:710rpx;
@@ -215,7 +218,7 @@
 }
 .fourContent{
     width:100%;
-    font-size:30rpx;
+    font-size:26rpx;
     color:#7b7b7b;
     line-height:40rpx;
     text-indent:20rpx;
@@ -245,7 +248,7 @@
 .divBoxChildLeft{
     width:80rpx;
     height:80rpx;
-    background:lightgreen;
+    background:#fff;
     border-radius:50%;
     margin:10rpx 0rpx 0rpx 10rpx;
     float:left;
@@ -295,9 +298,41 @@
 }
 .headerRewardContent{
     width:100%;
-    font-size:30rpx;
+    font-size:26rpx;
     color:#7b7b7b;
     line-height:40rpx;
     text-indent:20rpx;
     margin-top:10rpx;
+}
+.noData{
+    width:100%;
+    height:60rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:60rpx;
+    background:transparent;
+}
+
+.oneRuleChildTop{
+    width:670rpx;
+    height:60rpx;
+}
+.oneRuleChildTop view{
+    width:120rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    text-align:center;
+    background:#FF8A7E;
+    border-radius:5px 5px 0px 0px;
+    margin-left:17rpx;
+    color:#E06857;
+    float:left;
+}
+.oneRuleChildTop view:nth-child(1){
+    margin-left:0rpx;
+}
+view.viewTyle{
+    color:#fff;
+    background:#F36A58;
 }

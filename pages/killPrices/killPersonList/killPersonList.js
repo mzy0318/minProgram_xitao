@@ -9,6 +9,7 @@ Page({
         userList:'',
         isPersonInfo:true,
         personInfo:'',
+        showTitle: true,
     },
 
     /**
@@ -28,13 +29,19 @@ Page({
                         title: '砍价报名列表',
                     })
                     if (data.list.length==0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
-                            icon:'none',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        //     icon:'none',
+                        // })
+                        that.setData({
+                            showTitle:false
                         })
                     } else if (data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
                         this.setData({
                             userList: data
@@ -53,13 +60,19 @@ Page({
                         title: '我的私人拼团',
                     })
                     if (data.list.length==0){
-                        wx.showToast({
-                            title: '您没有参加该活动',
-                            icon:'none',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        //     icon:'none',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (data.list.length != 0){
+                        that.setData({
+                            showTitle: true
+                        })
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
                         this.setData({
                             userList: data
@@ -115,13 +128,21 @@ Page({
                         title: '砍价报名列表',
                     })
                     if (data.list.length == 0) {
-                        wx.showToast({
-                            title: '您没有参加该活动',
-                            icon: 'none',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        //     icon: 'none',
+                        // })
+                        that.setData({
+                            
+                                showTitle: false
+                            
                         })
                     } else if (data.list.length != 0) {
+                        that.setData({
+                            showTitle: true
+                        })
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
                         this.setData({
                             userList: data
@@ -141,13 +162,19 @@ Page({
                         title: '我的私人拼团',
                     })
                     if (data.list.length == 0) {
-                        wx.showToast({
-                            title: '您没有参加该活动',
-                            icon: 'none',
+                        // wx.showToast({
+                        //     title: '您没有参加该活动',
+                        //     icon: 'none',
+                        // })
+                        that.setData({
+                            showTitle: false
                         })
                     } else if (data.list.length != 0) {
+                        that.setData({
+                            showTitle: true
+                        })
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
                         this.setData({
                             userList: data
@@ -181,7 +208,7 @@ Page({
             })
         } else if (Number(pageTypeStu) == 3) {
             wx.navigateTo({
-                url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joinerid + '&actId=' + e.currentTarget.dataset.actid,
+                url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joiner_id + '&actId=' + e.currentTarget.dataset.act_id,
             })
         }
     },
@@ -193,8 +220,8 @@ Page({
             })
         } else if (pageTypeStu == 3){
             let userInfo = this.data.userList.list[e.currentTarget.dataset.index];
-            userInfo.start_time = util.formatTime(new Date(userInfo.start_time));
-            userInfo.end_time = util.formatTime(new Date(userInfo.end_time));
+            userInfo.start_time = util.formatTime(new Date(userInfo.start_time*1000));
+            userInfo.end_time = util.formatTime(new Date(userInfo.end_time*1000));
             userInfo.is_leader = userInfo.is_leader?'团长':'团员';
             this.setData({
                 isPersonInfo:false,

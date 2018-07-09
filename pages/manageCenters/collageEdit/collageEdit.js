@@ -10,14 +10,15 @@ Page({
         rule:'',
         description:'',
         leaderReward:'',
-        actImg:'',
-        actImg0:null,
+        actImg:'',     //活动图片地址
+        actImg0:'',    //活动图片ID
         isShow:false,
         isActImg:false,
         isCoverImg:false,
-        coverImg:'',
-        startTime:'2018-06-04',
-        endTime:'2018-06-05',
+        coverImg:'',   //封面图片地址
+        coveImgId:'',  //封面图片ID
+        startTime:'',
+        endTime:'',
         isOption:true,
         joinInfo: ['姓名', '电话'],
         joinInfoId: [1, 1],
@@ -39,6 +40,9 @@ Page({
         price5: '',
         oriPrice:'',
         nowPrice:'',
+        isID:'',
+        isCoverImg:true,
+        isActImg:true,
     },
 
     /**
@@ -48,8 +52,16 @@ Page({
         let that = this
         this.setData({
             bannerImg: options.image,
+            isID: options.id,
         })
-        if(options.id != 'undefined'){
+        let toDay = new Date().valueOf();
+        let toFuture = new Date().valueOf() + 2592000000
+        that.setData({
+            startTime: util.formatDate(new Date(toDay)),
+            endTime: util.formatDate(new Date(toFuture)),
+        })
+        console.log('数据类型', typeof options.id)
+        if(options.id != undefined){
             getApp().request({
                 url: 'org/make_personal_group',
                 method: 'get',
@@ -59,12 +71,43 @@ Page({
                 success:function(res){
                     let joinInfo = [];
                     let joinInfoId = [];
+                    let actImage = [];
+                    let actImageId = []
+                    if (res.data.data.cover != null){
+                        that.setData({
+                            isCoverImg:false
+                        })
+                    }else{
+                        that.setData({
+                            isCoverImg: true
+                        })
+                    }
+                    if (res.data.data.act_image.length>0){
+                        for (let i = 0; i < res.data.data.act_image.length;i++){
+                            actImage.push(res.data.data.act_image[i].url);
+                            actImageId.push(res.data.data.act_image[i].id);
+                            that.setData({
+                                isActImg: false
+                            })
+                        }
+                    }else {
+                        that.setData({
+                            isActImg:true
+                        })
+                    }
                     for (let i = 0; i < res.data.data.join_info.length; i++) {
                         joinInfo.push(res.data.data.join_info[i].text);
                         joinInfoId.push(res.data.data.join_info[i].require)
                     }
-                    joinInfo.splice(0, 2);
-                    joinInfoId.splice(0, 2)
+                    // 处理pricel的值为-1
+                    for (let i = 0; i < res.data.data.act_set.length;i++){
+                        if (Number(res.data.data.act_set[i].person) == -1){
+                            res.data.data.act_set[i].person = '';
+                            res.data.data.act_set[i].price = '';
+                        }
+                    }
+                    // joinInfo.splice(0, 2);
+                    // joinInfoId.splice(0, 2)
                     that.setData({
                         actId:res.data.data.id,
                         title:res.data.data.title,
@@ -75,26 +118,29 @@ Page({
                         rule: res.data.data.rule,
                         description: res.data.data.description,
                         leaderReward: res.data.data.leader_reward,
-                        person1: res.data.data.act_set[0].person ? res.data.data.act_set[0].person:'',
-                        price1: res.data.data.act_set[0].price ? res.data.data.act_set[0].price : '',
-                        person2: res.data.data.act_set[1].person ? res.data.data.act_set[1].person:'',
-                        price2: res.data.data.act_set[1].price ? res.data.data.act_set[1].price:'',
-                        person3: res.data.data.act_set[2].person ? res.data.data.act_set[2].person:'',
-                        price3: res.data.data.act_set[2].price ? res.data.data.act_set[2].price:'',
-                        person4: res.data.data.act_set[3].person ? res.data.data.act_set[3].person:'',
-                        price4: res.data.data.act_set[3].price ? res.data.data.act_set[3].price:'',
-                        person5: res.data.data.act_set[4].person ? res.data.data.act_set[4].person : '',
-                        price5: res.data.data.act_set[4].price ? res.data.data.act_set[4].price : '',
+                        person1: res.data.data.act_set[0].person,
+                        price1: res.data.data.act_set[0].price,
+                        person2: res.data.data.act_set[1].person,
+                        price2: res.data.data.act_set[1].price,
+                        person3: res.data.data.act_set[2].person ,
+                        price3: res.data.data.act_set[2].price,
+                        person4: res.data.data.act_set[3].person,
+                        price4: res.data.data.act_set[3].price,
+                        person5: res.data.data.act_set[4].person,
+                        price5: res.data.data.act_set[4].price,
                         oriPrice: res.data.data.original_price,
                         nowPrice: res.data.data.now_price,
                         bannerImg: res.data.data.banner_image_url,
-                        // actImg: res.data.data.act_image,
-                        // coverImg: res.data.data.cover_image,
+                        actImg0: actImageId,
+                        actImg: actImage,
+                        coveImgId: res.data.data.cover_image,
+                        coverImg: res.data.data.cover.url,
                         nameInfo: joinInfo,
                         nameInfoId: joinInfoId
                     })
                 }
             })
+        }else{
         }
     },
 
@@ -189,21 +235,26 @@ Page({
             // price: price,
             // join_info_require: this.data.nameInfoId,
             // join_info_text: this.data.nameInfo,
-            cover_image: this.data.cover_image,
+            cover_image: this.data.coveImgId,
             // act_image: this.data.actImg0,
         };
-        if (person.length != 0 && this.data.actImg0.length != 0 && that.data.nameInfo.length){
+        if (person.length != 0){
             for (let i = 0; i < person.length; i++) {
                 sendData['person[' + i + ']'] = person[i];
                 sendData['price[' + i + ']'] = price[i];
             }
+           
+        }
+        if (this.data.actImg0.length != 0){
             for (let i = 0; i < this.data.actImg0.length; i++) {
                 sendData['act_image[' + i + ']'] = that.data.actImg0[i];
             }
+        }
+        if (that.data.nameInfo.length != 0){
             for (let i = 0; i < that.data.nameInfo.length; i++) {
-                let index = i + 2;
-                sendData['join_info_text[' + index + ']'] = that.data.nameInfo[i];
-                sendData['join_info_require[' + index + ']'] = that.data.nameInfoId[i];
+                // let index = i + 2;
+                sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i];
+                sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i];
             }
         }
 
@@ -217,13 +268,27 @@ Page({
             method:'post',
             success:function(res){
                 if (Number(res.data.code)==1){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
+                    wx.showLoading({
+                        title: '正在发布',
+                        mask: true,
                     })
-                    wx.navigateTo({
-                        url: '../manageActive/manageActive?url=org/personal_group_list',
-                    })
+                    setTimeout(closeLogin, 2000)
+
+                    function closeLogin() {
+
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: '发布成功',
+                            icon: 'success',
+                            success:function(){
+                                if (that.data.isID != undefined) {
+                                    wx.navigateBack({})
+                                } else if (that.data.isID == undefined){
+                                    wx.navigateBack({ delta: 2 })
+                                }
+                            }
+                        })
+                    }
                 }else{
                     wx.showToast({
                         title: res.data.msg,
@@ -249,19 +314,41 @@ Page({
             leaderReward: e.detail.value
         })
     },
+    // 活动图片上传
     chooseActImg:function(){
         let that = this
         wx.chooseImage({
             count:9,
             success:function(res){
+
+                let actImage = [];
+                let actImg = [];  //图片id
+                
+                actImage.push(...that.data.actImg);
+                actImg.push(...that.data.actImg0);
+                actImage.push(...res.tempFilePaths);
+
                 that.setData({
-                    actImg: res.tempFiles,
+                    actImg: actImage,
                     isShow:true
                 })
-                let imgPath = res.tempFiles;
-                let actImg = [];
-                
+
+                let imgPath = res.tempFilePaths;
+
+                that.setData({
+                    isActImg: false
+                })
+
+                wx.showLoading({
+                    title: '图片上传中',
+                    mask: true,
+                })
                 for (let i = 0; i < imgPath.length; i++){
+
+                    let n = imgPath[i].lastIndexOf('.');
+
+                    let imgPathO = imgPath[i].substring(n);
+
                     getApp().request({
                         url: "org/policy",
                         method: "post",
@@ -270,7 +357,7 @@ Page({
                         },
                         success: function (res) {
                             let sendData = {
-                                "key": res.data.data.dir + imgPath[i].path,
+                                "key": res.data.data.dir + getApp().imageAddress(imgPath[i]) + imgPathO,
                                 "OSSAccessKeyId": res.data.data.accessid,
                                 "host": res.data.data.host,
                                 "expire": res.data.data.expire,
@@ -281,7 +368,7 @@ Page({
                             wx.uploadFile({
                                 url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
                                 name: 'file',
-                                filePath: imgPath[i].path,
+                                filePath: imgPath[i],
                                 formData: sendData,
                                 success: function (res) {
                                     getApp().request({
@@ -294,14 +381,24 @@ Page({
                                         success: function (r) {
                                             r = r.data
                                             if (r.code == 0) {
-                                                console.log("上传到服务器出错");
-                                                return
+                                                // console.log("上传到服务器出错");
+                                                // return
+                                                wx.showToast({
+                                                    title: '上传到服务器出错',
+                                                    icon: 'none'
+                                                })
+                                            }else if(Number(r.code)==1){
+                                                //得到图片的id和地址
+                                                actImg.push(r.data.imageId)
+                                                that.setData({
+                                                    actImg0: actImg,
+                                                })
+                                                wx.hideLoading();
+                                                wx.showToast({
+                                                    title: '图片上传成功',
+                                                    icon:'success',
+                                                })
                                             }
-                                            //得到图片的id和地址
-                                            actImg.push(r.data.imageId)
-                                            that.setData({
-                                                actImg0: actImg,
-                                            })
                                         }
                                     });
                                 }
@@ -319,12 +416,15 @@ Page({
             success: function (res) {
 
                 that.setData({
-                    coverImg: res.tempFiles,
+                    coverImg: res.tempFiles[0].path,
                     isCoverImg: true,
+                    isCoverImg: false
                 })
-
                 var imgPath = res.tempFiles[0].path;
-
+                wx.showLoading({
+                    title: '图片上传中',
+                    mask: true,
+                })
                 getApp().request({
                     url: "org/policy",
                     method: "post",
@@ -335,7 +435,7 @@ Page({
                         let n = imgPath.lastIndexOf('.');
                         let imgPathO = imgPath.substring(n)
                         let sendData = {
-                            "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + imgPathO,
+                            "key": res.data.data.dir + getApp().imageAddress(imgPath) + imgPathO,
                             "OSSAccessKeyId": res.data.data.accessid,
                             "host": res.data.data.host,
                             "expire": res.data.data.expire,
@@ -360,13 +460,23 @@ Page({
                                     success: function (r) {
                                         r = r.data
                                         if (r.code == 0) {
-                                            console.log("上传到服务器出错");
-                                            return
+                                            // console.log("上传到服务器出错");
+                                            // return
+                                            wx.showToast({
+                                                title: '上传到服务器出错',
+                                                icon: 'none'
+                                            })
+                                        }else if(Number(r.code)==1){
+                                            //得到图片的id和地址
+                                            that.setData({
+                                                coveImgId: r.data.imageId
+                                            })
+                                            wx.hideLoading()
+                                            wx.showToast({
+                                                title: '图片上传成功',
+                                                icon:"success"
+                                            })
                                         }
-                                        //得到图片的id和地址
-                                        that.setData({
-                                            cover_image: r.data.imageId
-                                        })
                                     }
                                 });
                             }
@@ -424,4 +534,17 @@ Page({
             nameInfoId: nameInfoId
         })
     },
+    // 删除图片
+    delImage:function(e){
+        let that = this;
+        let index = Number(e.currentTarget.dataset.index)
+        let actImage = that.data.actImg;
+        let actImageId = that.data.actImg0;
+        actImage.splice(index, 1);
+        actImageId.splice(index,1);
+        that.setData({
+            actImg: actImage,
+            actImg0: actImageId,
+        })
+    }
 })

@@ -13,7 +13,8 @@
 }
 .manListContentTop{
     width:670rpx;
-    line-height:40rpx;
+    line-height:60rpx;
+    font-size:30rpx;
 }
 .manListContentMiddel{
     width:710rpx;
@@ -26,6 +27,7 @@
     float:left;
     margin-left:20rpx;
     margin-top:20rpx;
+    overflow:hidden;
 }
 .ListContentMiddelLeft image{
     width:400rpx;
@@ -63,6 +65,9 @@
     float:left;
     border-right:1rpx solid #7b7b7b;
     color:#CA4535;
+}
+button.contentBottomChild::after{
+    border:0rpx
 }
 .contentBottomChild:nth-child(2){
     color:#369BCF;

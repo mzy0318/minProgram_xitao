@@ -57,22 +57,33 @@ swiper{
 }
 
 .honorImage{
-    width:690rpx;
-    min-height:10rpx;
-    margin:60rpx auto 0rpx;
+    width:710rpx;
+    min-height:350rpx;
+    margin:20rpx auto 20rpx;
 }
 .honorImage image{
-    width:750rpx;
-    height:auto;
+    width:710rpx;
+    /* height:auto; */
 }
 
 .schoolVideo{
-    width:690rpx;
+    width:710rpx;
     height:350rpx;
-    margin:60rpx auto 0rpx;
+    margin:0rpx auto;
     background:lightblue;
 }
 .schoolVideo video{
-    width:690rpx;
+    width:710rpx;
     height:350rpx;
+}
+
+
+.schoolInfoText{
+    width:710rpx;
+    min-height:60rpx;
+    font-size:30rpx;
+    text-indent:20rpx;
+    line-height:60rpx;
+    color:#373737;
+    margin:10rpx auto 10rpx;
 }

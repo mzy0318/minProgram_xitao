@@ -1,4 +1,4 @@
-<view class='collageInfoWrap' style='background-image:url({{backImage}})'>
+<view class='collageInfoWrap' style='background-image:url({{backgroundImage}})'>
     <view class='collageInfoBanner'>
         <image src='{{bannerImage}}' mode='scaleToFill' />
     </view>
@@ -19,9 +19,9 @@
                 </view>
                 <view class='oneRuleChildBottom'>
                     <view class='oneRuleChildBottomLeft'>凑齐{{personNum}}人即可享受</view>
-                    <view class='oneRuleChildBottomRight'>
-                        <text>￥{{pageData.original_price}}元</text>￥{{collagePrice}}元</view>
+                    <view class='oneRuleChildBottomRight'><text>￥{{pageData.original_price}}元</text>￥{{collagePrice}}元</view>
                 </view>
+                <button data-btnid='0' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' bindtap='toCollageSign' hidden='{{!isButton}}' data-joinerid='undefined'>我要开团</button>
             </view>
         </view>
     </view>
@@ -29,12 +29,12 @@
         <view class='oneTitle'>
             <view class='oneTitleChild'>已开团</view>
         </view>
-        <view class='infoFive'>活动时间:{{startTime}}至{{endTime}}({{status}})</view>
+        <view class='infoFive'>活动时间:{{startTime}} 至 {{endTime}}({{status}})</view>
         <view class='collageInfoContent' wx:for='{{collageData}}'>
             <view class='collageInfoContentLeft'>
                 <image src='{{item.avatar_url}}' mode='scaleToFill' />
             </view>
-            <button bindtap='toCollageSign' data-is='{{item.can_join}}' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' class='{{item.can_join?"":"btnStyle"}}'>{{item.can_join?'参团':'已满'}}</button>
+            <button bindtap='toCollageSign' data-btnid='1' data-is='{{item.can_join}}' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' data-joinerid='{{item.joiner_id}}' class='{{item.can_join?"":"btnStyle"}}'>{{item.can_join?'参团':'已满'}}</button>
             <view class='collageInfoContentRight' data-is='0' bindtap='isDivBox' data-joinid='{{item.joiner_id}}'>
                 <view class='collageInfoContentRightTitle'>
                     <text>{{item.nickname}}</text>邀请你参加,点击参团</view>
@@ -43,7 +43,7 @@
         </view>
         <view class='collageInfoBtn'>
             <button open-type='share'>推荐好友</button>
-            <button bindtap='toPersonInfo'>我的拼团</button>
+            <button bindtap='toPersonInfo' hidden='{{isButton}}'>我的拼团</button>
         </view>
         <view class='empty'></view>
     </view>
@@ -51,7 +51,7 @@
         <view class='oneTitle'>
             <view class='oneTitleChild'>机构介绍</view>
         </view>
-        <text decode='true'>活动时间:&nbsp;&nbsp;{{startTime}}至{{endTime}}</text>
+        <text decode='true'>活动时间:&nbsp;&nbsp;{{startTime}} 至 {{endTime}}</text>
         <text decode='true'>机构名称:&nbsp;&nbsp;{{pageData.app_name}}</text>
         <text decode='true' data-phonenum='{{pageData.telephone}}' bindtap='cellPhone'>联系电话:&nbsp;&nbsp;{{pageData.telephone}}</text>
         <view class='collageInfoTwoBtn'>
@@ -83,9 +83,9 @@
             <view class='oneTitleChild'>分享活动</view>
         </view>
         <view class='collageInfoSixContent'>
-            <image mode='scaleToFill' ></image>
+            <image src='{{encodeID}}' mode='scaleToFill' ></image>
         </view>
-        <button>分享到朋友圈</button>
+        <button bindtap='shareFriends'>分享到朋友圈</button>
     </view>
     <view class='divBoxWrap' data-is='1' bindtap='isDivBox' hidden='{{isDivShow}}'>
         <view class='divBoxContent'>
@@ -93,15 +93,62 @@
                 <view class='divBoxTitleChild'>我的团员</view>
             </view>
             <view class='divBoxChildWrap'>
-                <view class='divBoxChild'>
+                <view class='divBoxChild' wx:for='{{myPerson}}'>
                     <view class='divBoxChildLeft'>
-                        <image mode='' />
+                        <image mode='scaleToFill' src='{{item.avatar_url}}' />
                     </view>
-                    <view class='divBoxChildMiddle'>小刘</view>
-                    <view class='divBoxChildRight'>2018-05-12 23:10:00</view>
+                    <view class='divBoxChildMiddle'>{{item.nickname}}</view>
+                    <view class='divBoxChildRight'>{{item.create_time}}</view>
                 </view>
+                <view class='noData' hidden='{{isData}}'>没有团员</view>
             </view>
         </view>
     </view>
+    <!-- 其他功能按钮 -->
+    <view class='otherOptionWrap' hidden='{{actionOptions}}'>
+        <view bindtap='isOptions' class='otherOptions'>
+            <text class='{{isOption?iconOpen:iconClose}}'></text>
+        </view>
+        <view class='otherOptionsChild' hidden='{{isOption}}'>
+            <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
+            <!-- <view bindtap='upDataImg' data-type='banner'>更换大图</view> -->
+            <view bindtap='upDataImg' data-type='background'>更换背景</view>
+            <view bindtap='switchModel' data-url='org/music_list' >背景音乐</view>
+            <view bindtap='toEditPage' data-id='{{pageData.id}}'>编辑</view>
+        </view>
+    </view>
+    <!-- 其他功能模板 -->
+    <view class='switchBackgroundImage' hidden='{{bottomOption}}'>
+        <view bindtap='cancelImage' data-type='bgImage'>取消</view>
+        <view data-id='{{pageData.id}}' bindtap='comfireSubmit' data-type='bgImage' data-acttag='{{}}'>确认</view>
+    </view>
+    <view class='switchMusic' hidden='{{isCommon}}'>
+        <view class='switchMusicTitle'>
+            <block wx:for='{{musicClass}}' >
+                <view data-name='{{item.name}}' class='{{musicClassIndex==index?"switchMusicBorder":""}}' bindtap='switchTabs' >{{item.name}}</view>
+            </block>
+        </view>
+        <!--音乐列表  -->
+        <view class='switchMusicContent' hidden='{{isMusicClass}}'  >
+            <view wx:for='{{musicData}}' data-music='{{item.url}}' style='color:{{musicNum==index?"#3983FE":"#000"}}' data-index='{{index}}' data-musicid='{{item.id}}' bindtap='changeMusic'>{{item.name}}</view>
+        </view>
+        <!--模板列表  -->
+        <view class='switchModelContent' hidden='{{isModel}}' scroll-x >
+            <scroll-view class='switchModelContentChild' scroll-x style='width:{{musicData.length*226}}rpx;'>
+                <view class='modelContentChildContent' wx:key='{{index}}' wx:for='{{musicData}}' style='border-color:{{index==modelNum?"#3A87FE":"#fff"}}' data-image='{{item.image}}' data-index='{{index}}' data-bimage='{{item.bg}}' bindtap='changeModel'>
+                    <view>{{item.name}}</view>
+                    <view>
+                        <image src='{{item.image}}' mode='scaleToFill' />
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class='switchMusicOptions'>
+            <view bindtap='cancelImage' data-type='Banner'>取消</view>
+            <view bindtap='comfireSubmit' data-id='{{pageData.id}}' data-type='Banner'>确认</view>
+            <view hidden='{{isMusicClass}}' bindtap='stopMusic'>不播放音乐</view>
+        </view>
+    </view>
 </view>
-<other-option bindgetImage='getImage' bindgetBackgroundImage='getBackgroundImage' bindgetMusic='getMusic' actid='{{pageData.id}}' acttag='{{actTag}}' banImage='{{pageData.banner_image_url}}' backImage='{{pageData.bg_image_url}}' bgMusicId='{{pageData.music_id}}' bgMusic='{{pageData.music}}'></other-option>
+<view class='{{animationClass}}' animation='{{animationData}}' hidden='{{showMusic}}' bindtap='stopMusic'><text class='iconfont icon-music fontStyleT'></text></view>
+<!-- <other-option bindgetImage='getImage' bindgetBackgroundImage='getBackgroundImage' bindgetMusic='getMusic' actid='{{pageData.id}}' acttag='{{actTag}}' banImage='{{pageData.banner_image_url}}' backImage='{{pageData.bg_image_url}}' bgMusicId='{{pageData.music_id}}' bgMusic='{{pageData.music}}'></other-option> -->

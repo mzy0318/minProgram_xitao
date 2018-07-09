@@ -7,16 +7,18 @@ Page({
     data: {
         isShow: false,
         actId: '',
+        formInfo:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options', options)
+        console.log('options', options.info)
         let that = this;
         that.setData({
-            actId: options.actId
+            actId: options.actId,
+            formInfo: JSON.parse(options.info)
         })
     },
 
@@ -71,18 +73,35 @@ Page({
     submitInfo: function (e) {
         let that = this;
         e.detail.value['act_id'] = that.data.actId
+        for (let i = 0; i < that.data.formInfo.length;i++){
+            e.detail.value['info[' + i + ']'] = e.detail.value[i]
+            delete e.detail.value[i];
+        }
         getApp().request({
             url: 'join_normal',
             data: e.detail.value,
             method: 'post',
             success: function (res) {
-                wx.showModal({
-                    title: '提示',
-                    content: res.data.msg,
-                })
                 if(Number(res.data.code)==1){
-                    that.setData({
-                        isShow: true
+                    wx.showLoading({
+                        title: '正在报名...',
+                        mask: true,
+                    })
+                    setTimeout(closeLogin, 2000)
+                    function closeLogin() {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: '报名成功',
+                            icon:'success'
+                        })
+                        that.setData({
+                            isShow: true
+                        })
+                    }
+                } else if (Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
                     })
                 }
             }
@@ -90,9 +109,10 @@ Page({
     },
     toBackPage:function(){
         let that = this;
-        wx.navigateTo({
-            url: '../../actReg/actRegListInfo/actRegListInfo?actId=' + that.data.actId,
-        })
+        wx.navigateBack({})
+        // wx.navigateTo({
+        //     url: '../../actReg/actRegListInfo/actRegListInfo?actId=' + that.data.actId,
+        // })
         that.setData({
             isShow: false
         })

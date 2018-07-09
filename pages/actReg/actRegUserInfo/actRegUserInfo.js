@@ -153,5 +153,8 @@ Page({
             })
             console.log(that.data.userInfo)
         }
+    },
+    toAction:function(e){
+
     }
 })

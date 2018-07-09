@@ -10,7 +10,7 @@
     <view class='orderInfoNum'>
         <view class='orderInfoNumLeft'>购买数量:</view>
         <view class="orderInfoNumRight">
-            <view class='orderInfoNumAdd' bindtap='addBtn'>+</view>
+            <view class='{{addClassName}}' bindtap='addBtn'>+</view>
             <view class='orderInfoNumData'>{{initNum}}</view>
             <view class='{{className}}' bindtap='jianBtn'>-</view>
         </view>

@@ -1,14 +1,15 @@
 // pages/manageCenters/schoolEdit/schoolEdit.js
+var utils = require("../../../utils/util.js")
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        envImage: '',
-        honorImage: '',
-        envImageId: '',
-        honorImageId: '',
+        envImage: '',  //环境图片
+        envImageId: '', //环境图片ID
+        honorImage: '',   //荣誉图片
+        honorImageId: '',  //荣誉图片ID
         schoolVideo: '',
         schoolVideoId: '',
         isVideo: true,
@@ -22,7 +23,7 @@ Page({
         getApp().request({
             url: 'school/intro',
             data: {
-                orgid: getApp().config.orgId
+                orgid: getApp().getExtConfig().orgId
             },
             success: res => {
                 if (res.data.data.brand == null) {
@@ -34,11 +35,33 @@ Page({
                         isVideo: false,
                     })
                 }
-                this.setData({
+                let honorImageId = [];
+                let honorImage = [];
+                let envImageId = [];
+                let envImage = [];
+                if (res.data.data.environment.length>0){
+
+                    for (let i = 0; i < res.data.data.environment.length; i++) {
+                        envImageId.push(res.data.data.environment[i].id)
+                        envImage.push(res.data.data.environment[i].url)
+                    }
+                }
+                if (res.data.data.honor.length > 0){
+
+                    for (let i = 0; i < res.data.data.honor.length;i++){
+                        honorImageId.push(res.data.data.honor[i].id)
+                        honorImage.push(res.data.data.honor[i].url)
+                    }
+                    // honorImageId.push(res.data.data.honor[0].id)
+                }
+                that.setData({
                     pageData: res.data.data,
-                    envImage: res.data.data.environment,
-                    honorImage: res.data.data.honorImage,
-                    schoolVideo: res.data.data.brand,
+                    envImage: envImage,
+                    honorImage: honorImage,
+                    schoolVideo: res.data.data.brand.url,
+                    schoolVideoId:res.data.data.brand.id,
+                    honorImageId: honorImageId,
+                    envImageId: envImageId,
                 })
             }
         })
@@ -97,12 +120,25 @@ Page({
         let that = this;
         wx.chooseImage({
             success: function(res) {
-                that.setData({
-                    envImage: res.tempFilePaths,
-                })
-                let imgPath = res.tempFiles;
                 let actImg = [];
+                let actImage = [];
+                actImg.push(...that.data.envImageId);
+                actImage.push(...that.data.envImage);
+                actImage.push(...res.tempFilePaths);
+                that.setData({
+                    envImage: actImage,
+                })
+                let imgPath = res.tempFilePaths;
+                wx.showLoading({
+                    title: '图片上传中...',
+                    mask: true,
+                })
                 for (let i = 0; i < imgPath.length; i++) {
+
+                    let n = imgPath[i].lastIndexOf('.');
+
+                    let imgPathO = imgPath[i].substring(n);
+
                     getApp().request({
                         url: "org/policy",
                         method: "post",
@@ -111,7 +147,7 @@ Page({
                         },
                         success: function(res) {
                             let sendData = {
-                                "key": res.data.data.dir + imgPath[i].path,
+                                "key": res.data.data.dir + getApp().imageAddress(imgPath[i]) + imgPathO,
                                 "OSSAccessKeyId": res.data.data.accessid,
                                 "host": res.data.data.host,
                                 "expire": res.data.data.expire,
@@ -122,7 +158,7 @@ Page({
                             wx.uploadFile({
                                 url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
                                 name: 'file',
-                                filePath: imgPath[i].path,
+                                filePath: imgPath[i],
                                 formData: sendData,
                                 success: function(res) {
                                     getApp().request({
@@ -137,12 +173,18 @@ Page({
                                             if (r.code == 0) {
                                                 console.log("上传到服务器出错");
                                                 return
+                                            } else if (Number(r.code)==1){
+                                                //得到图片的id和地址
+                                                actImg.push(r.data.imageId)
+                                                that.setData({
+                                                    envImageId: actImg,
+                                                })
+                                                wx.hideLoading()
+                                                wx.showToast({
+                                                    title: '图片上传成功',
+                                                    icon:'success',
+                                                }) 
                                             }
-                                            //得到图片的id和地址
-                                            actImg.push(r.data.imageId)
-                                            that.setData({
-                                                envImageId: actImg,
-                                            })
                                         }
                                     });
                                 }
@@ -153,16 +195,30 @@ Page({
             },
         })
     },
+    // 学校荣誉图片上传
     honorPic: function() {
         let that = this;
         wx.chooseImage({
             success: function(res) {
-                that.setData({
-                    honorImage: res.tempFilePaths,
-                })
-                let imgPath = res.tempFiles;
                 let actImg = [];
+                let honorImage = [];
+                actImg.push(...that.data.honorImageId);
+                honorImage.push(...that.data.honorImage)
+                honorImage.push(...res.tempFilePaths)
+                that.setData({
+                    honorImage: honorImage,
+                })
+                wx.showLoading({
+                    title: '图片上传中...',
+                    mask: true,
+                })
+                let imgPath = res.tempFilePaths;
                 for (let i = 0; i < imgPath.length; i++) {
+
+                    let n = imgPath[i].lastIndexOf('.');
+
+                    let imgPathO = imgPath[i].substring(n);
+
                     getApp().request({
                         url: "org/policy",
                         method: "post",
@@ -171,7 +227,7 @@ Page({
                         },
                         success: function(res) {
                             let sendData = {
-                                "key": res.data.data.dir + imgPath[i].path,
+                                "key": res.data.data.dir + getApp().imageAddress(imgPath[i]) + imgPathO,
                                 "OSSAccessKeyId": res.data.data.accessid,
                                 "host": res.data.data.host,
                                 "expire": res.data.data.expire,
@@ -182,7 +238,7 @@ Page({
                             wx.uploadFile({
                                 url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
                                 name: 'file',
-                                filePath: imgPath[i].path,
+                                filePath: imgPath[i],
                                 formData: sendData,
                                 success: function(res) {
                                     getApp().request({
@@ -195,14 +251,19 @@ Page({
                                         success: function(r) {
                                             r = r.data
                                             if (r.code == 0) {
-                                                console.log("上传到服务器出错");
-                                                return
+                                                console.log("上传到服务器出错")
+                                            } else if (Number(r.code == 1)){
+                                                //得到图片的id和地址
+                                                actImg.push(r.data.imageId)
+                                                that.setData({
+                                                    honorImageId: actImg,
+                                                })
+                                                wx.hideLoading()
+                                                wx.showToast({
+                                                    title: '图片上传成功',
+                                                    icon:'success',
+                                                })
                                             }
-                                            //得到图片的id和地址
-                                            actImg.push(r.data.imageId)
-                                            that.setData({
-                                                honorImageId: actImg,
-                                            })
                                         }
                                     });
                                 }
@@ -213,6 +274,7 @@ Page({
             },
         })
     },
+    //学校视频上传
     chooseVideo: function() {
         let that = this;
         wx.chooseVideo({
@@ -226,6 +288,10 @@ Page({
                 that.setData({
                     schoolVideo: res.tempFilePath
                 })
+                wx.showLoading({
+                    title: '视频上传中',
+                    mask: true,
+                })
                 getApp().request({
                     url: "org/policy",
                     method: "post",
@@ -236,7 +302,7 @@ Page({
                         let n = videoPath.lastIndexOf('.');
                         let videoPathO = videoPath.substring(n)
                         let sendData = {
-                            "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + videoPathO,
+                            "key": res.data.data.dir + getApp().imageAddress(videoPath) + videoPathO,
                             "OSSAccessKeyId": res.data.data.accessid,
                             "host": res.data.data.host,
                             "expire": res.data.data.expire,
@@ -250,14 +316,6 @@ Page({
                             filePath: videoPath,
                             formData: sendData,
                             success: function(res) {
-                                wx.showLoading({
-                                    title: '视频上传中',
-                                    mask: true,
-                                })
-
-                                setTimeout(function() {
-                                    wx.hideLoading()
-                                }, 5000)
                                 getApp().request({
                                     url: "org/exchange",
                                     data: {
@@ -268,27 +326,20 @@ Page({
                                     },
                                     method: "post",
                                     success: function(res) {
-                                        that.setData({
-                                            schoolVideoId: res.data.data.videoId
-                                        })
-                                        // getApp().request({
-                                        //     url: 'org/add_video_card',
-                                        //     data: {
-                                        //         title: that.data.title,
-                                        //         video_id: res.data.data.videoId,
-                                        //     },
-                                        //     method: 'post',
-                                        //     success: function (res) {
-                                        //         wx.showToast({
-                                        //             title: '视频保存成功',
-                                        //         })
-                                        //         // if (res.data.code == 1) {
-                                        //         //     wx.navigateTo({
-                                        //         //         url: '../../videos/manVideoList/manVideoList',
-                                        //         //     })
-                                        //         // }
-                                        //     }
-                                        // })
+                                        if(Number(res.data.code)==1){
+                                            that.setData({
+                                                schoolVideoId: res.data.data.videoId
+                                            })
+                                            wx.hideLoading()
+                                            wx.showToast({
+                                                title: '视频上传成功',
+                                            })
+                                        }else if(Number(res.data.code)==0){
+                                            wx.showToast({
+                                                title: res.data.msg,
+                                                icon:'none'
+                                            })
+                                        }
                                     }
                                 });
                             }
@@ -319,13 +370,25 @@ Page({
             method: 'post',
             success: function(res) {
                 if (Number(res.data.code) == 1) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'success',
-                        success:function(){
-                            getApp().toIndex()
-                        }
+                    wx.showLoading({
+                        title: '正在保存',
+                        mask: true,
                     })
+                    setTimeout(closeLogin, 2000);
+
+                    function closeLogin() {
+
+                        wx.hideLoading()
+
+                        wx.showToast({
+                            title: '保存成功',
+                            icon: 'success',
+                            mask:true,
+                            success: function () {
+                                getApp().toIndex()
+                            }
+                        })
+                    }
                 } else {
                     wx.showToast({
                         title: res.data.msg,
@@ -334,5 +397,37 @@ Page({
                 }
             }
         })
-    }
+    },
+    // 删除图片功能
+    delImage: function (e) {
+        let that = this;
+        let index = Number(e.currentTarget.dataset.index);
+        //学校环境图片
+        if (Number(e.currentTarget.dataset.id) == 0){
+
+            let actImage = that.data.envImage;
+            let actImageId = that.data.envImageId;
+
+            actImage.splice(index, 1);
+            actImageId.splice(index, 1);
+
+            that.setData({
+                envImage: actImage,
+                envImageId: actImageId,
+            })
+        //学校荣誉图片
+        } else if (Number(e.currentTarget.dataset.id) == 1){
+
+            let actImage = that.data.honorImage;
+            let actImageId = that.data.honorImageId;
+
+            actImage.splice(index, 1);
+            actImageId.splice(index, 1);
+
+            that.setData({
+                honorImage: actImage,
+                honorImageId: actImageId,
+            })
+        }
+    },
 })

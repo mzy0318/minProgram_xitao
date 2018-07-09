@@ -1,7 +1,7 @@
 .pricePersonWrap{
     width:750rpx;
     min-height:1207rpx;
-    background:#F9C000;
+    background:#fff;
     background-size:100% 100%;
     background-repeat:repeat-y;
 }
@@ -17,7 +17,7 @@
 .pricePersonOne{
     width:670rpx;
     height:562rpx;
-    margin:0 auto;
+    margin:20rpx auto 0rpx;
     border-radius:5px 5px 0px 0px;
 }
 .pricePersonONeTitle{
@@ -34,8 +34,9 @@
     border-radius:5px 5px 0px 0px;
 }
 .pricePersonONeTitleText{
-    width:300rpx;
-    line-height:35rpx;
+    width:500rpx;
+    line-height:40rpx;
+    min-height:40rpx;
     font-size:30rpx;
     font-weight:bold;
     margin:0rpx auto;
@@ -46,7 +47,7 @@
 }
 .pricePersonONeRight{
     float:right;
-    width:300rpx;
+    width:100rpx;
     line-height:35rpx;
     font-size:30rpx;
     font-weight:bold;
@@ -157,21 +158,25 @@
 /*第二部分*/
 .pricePersonTwo{
     width:670rpx;
-    height:842rpx;
+    height:742rpx;
     margin:0 auto;
     border-radius:5px 5px 0px 0px;
 }
 .pricePersonTwoImg{
     width:670rpx;
-    height:730rpx;
+    height:630rpx;
     background:#fff;
     overflow:hidden;
 }
 .pricePersonTwoImgTop{
     width:400rpx;
-    height:500rpx;
-    background:lightblue;
+    height:400rpx;
+    background:#fff;
     margin:20rpx auto 0rpx;
+}
+.pricePersonTwoImgTop image{
+    width:400rpx;
+    height:400rpx;
 }
 .pricePersonTwoImgBottom{
     width:100%;
@@ -182,10 +187,12 @@
 .pricePersonTwo .pricePersonTwoImg button{
     font-size:28rpx;
     line-height:60rpx;
-    float:left;
+    /* float:left; */
     color:#fff;
     background:#CC2200;
-    margin:40rpx 0rpx 0rpx 65rpx;
+    margin-top:40rpx;
+    width:300rpx;
+    /* margin:40rpx 0rpx 0rpx 65rpx; */
 }
 /*第三部分  */
 .pricePersonThree{
@@ -225,6 +232,7 @@
     height:300rpx;
     background:lightgreen;
     margin:20rpx auto 0rpx;
+    overflow:hidden;
 }
 .pricePersonThreeImgImage image{
     width:610rpx;

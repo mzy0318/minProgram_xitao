@@ -100,14 +100,11 @@ Page({
     onLoad: function (options) {
         let that = this;
         let version = wx.getExtConfigSync();
-        
-        this.setData({
-            userInfo: getApp().globalData.userInfo
-        })
-
         that.setData({
+            userInfo: getApp().globalData.userInfo,
             versionData: wx.getExtConfigSync(),
         })
+
         // getApp().request({
         //     url:'set_user_info',
         //     data:{},

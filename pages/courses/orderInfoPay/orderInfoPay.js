@@ -18,7 +18,7 @@ Page({
         let that = this;
         that.setData({
             pageData: JSON.parse(options.payInfo),
-            createTime: utils.formatTime(new Date(JSON.parse(options.payInfo).create_time)),
+            createTime: utils.formatTime(new Date(JSON.parse(options.payInfo).create_time*1000)),
         })
     },
 
@@ -79,7 +79,6 @@ Page({
             },
             method: 'post',
             success: function(r) {
-                console.log('r',r)
                 if (r.data.code == 0) {
                     wx.showModal({
                         title: 'error',
@@ -95,9 +94,16 @@ Page({
                         'paySign': data.paySign,
                         'success': function(res) {
                             console.log("success:", res);
+                            wx.navigateTo({
+                                url: '../../studentManage/orderList/orderList',
+                            })
                         },
                         'fail': function(res) {
                             console.log("fail:", res);
+                            wx.showToast({
+                                title: '您已取消订单',
+                                icon:'none'
+                            })
                         }
                     })
                 }

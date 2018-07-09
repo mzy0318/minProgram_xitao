@@ -15,7 +15,7 @@
         <view class='signUpName' wx:for='{{formInfo}}'>
             <view class='signUpNameTitle'>{{item.text}}:</view>
             <view class='signUpNameInput'>
-                <input type='number' name='{{item.require}}' maxlength='11' />
+                <input type='text' name='{{index}}' />
             </view>
         </view>
         <button formType="submit" class='btn'>我要报名</button>

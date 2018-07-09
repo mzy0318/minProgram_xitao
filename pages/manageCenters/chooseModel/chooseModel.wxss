@@ -1,7 +1,7 @@
 .chooseModeWrap{
     width:750rpx;
     min-height:1207rpx;
-    background:#E3E5EC;
+    background:#fff;
 }
 .chooseModeClass{
     width:750rpx;
@@ -20,6 +20,17 @@
     text-align:center;
     font-size:30rpx;
 }
+.borderColor{
+    width:30%;
+    height:80rpx;
+    display:inline-block;
+    margin:0rpx 0rpx 15rpx 15rpx;
+    border-radius:5px;
+    line-height:80rpx;
+    text-align:center;
+    font-size:30rpx;
+    border:2rpx solid #397EFE;
+}
 .chooseModeTheme{
     width:345rpx;
     height:345rpx;
@@ -27,13 +38,14 @@
     background:#FFF;
     margin-left:20rpx;
     margin-top:15rpx;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3);
+    border:1px solid #efefef;
+    box-shadow: 1rpx 1rpx 1rpx 1rpx rgba(0,0,0,0.1); 
     border-radius:5px;
 }
  .chooseModeThemeImg{
     width:345rpx;
     height:250rpx;
-    background:lightblue;
+    background:#fff;
     border-radius:5px 5px 0px 0px;
     overflow: hidden;
 }

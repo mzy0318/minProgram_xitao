@@ -154,7 +154,7 @@
     border-radius: 5px;
 }
 
-.lessonEditThreeContent view {
+.lessonEditThreeContent .chooseImage {
     width: 200rpx;
     height: 150rpx;
     border: 1rpx solid #efefef;
@@ -169,10 +169,7 @@
     font-weight: bold;
 }
 
-.lessonEditThreeContent view:nth-child(1) {
-}
-
-.lessonEditThreeContent view image {
+.lessonEditThreeContent .chooseImage image {
     width: 200rpx;
     height: 150rpx;
 }
@@ -289,7 +286,7 @@
     display: block;
     float: right;
     font-size: 26rpx;
-    text-decoration: line-through;
+    text-decoration: none;
     color: #fff;
     background: #47bafd;
     text-align: center;
@@ -330,7 +327,7 @@
 
 .addFormChild {
     width: 100%;
-    height: 150rpx;
+    height: 210rpx;
     background: #fff;
     position: absolute;
     bottom: 0rpx;
@@ -350,16 +347,17 @@
 }
 
 .addFormChildButton view {
-    width: 20%;
-    line-height: 40rpx;
+    width:120rpx;
+    line-height:60rpx;
     font-size: 30rpx;
-    background: #f3f3f3;
+    background:#f8f8f8;
+    border:1rpx solid #DFDFDF;
     color: #7b7b7b;
     float: left !important;
     margin-top: 5rpx;
     margin-left: 30rpx;
     text-align: center;
-    border: 1rpx solid #7b7b7b;
+    /* border: 1rpx solid #7b7b7b; */
     border-radius: 5px;
 }
 
@@ -408,4 +406,21 @@
 .isEdit checkbox-group {
     float: left;
     border-radius: 100%;
+}
+
+
+/* 删除活动图片 */
+.delImage{
+    width:50rpx;
+    height:50rpx;
+    border-radius:50%;
+    background:rgba(0,0,0,0.5);
+    position:absolute;
+    top:10rpx;
+    right:10rpx;
+    font-size:35rpx;
+    line-height:50rpx;
+    text-align:center;
+    z-index:100;
+    color:#fff;
 }

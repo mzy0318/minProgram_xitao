@@ -9,6 +9,7 @@
             <text decode='true' bindtap='toPriceListInfo' data-index='{{index}}' data-actid='{{item.act_id}}'>.&nbsp;.&nbsp;.</text>
         </view>
     </view>
+    <view class='noData' hidden='{{showTitle}}'>无记录</view> 
 </view>
 <view class='collageListWrap' hidden='{{isPersonInfo}}'>
     <view class='empty'></view>

@@ -1,4 +1,5 @@
 // pages/manageCenters/chooseModel/chooseModel.js
+var utils = require("../../../utils/util.js")
 Page({
 
     /**
@@ -7,6 +8,7 @@ Page({
     data: {
         pageData:'',
         pageTheme:'',
+        classId:0,
     },
 
     /**
@@ -19,6 +21,14 @@ Page({
             data:{},
             method:'get',
             success:function(res){
+                res.data.data.theme = utils.map(res.data.data.theme,function(one){
+                  one.image = utils.rect(one.image,300,280)
+                  return one
+                })
+                res.data.data.catalog.unshift({
+                    name:'全部',
+                    list:res.data.data.theme
+                })
                 that.setData({
                     pageData: res.data.data,
                     pageTheme: res.data.data.theme
@@ -76,6 +86,10 @@ Page({
 
     },
     switchTheme:function(e){
+        let that = this;
+        that.setData({
+            classId: e.currentTarget.dataset.num
+        })
         let pageData = this.data.pageData
         for (let i = 0; i < pageData.catalog.length;i++){
             if (e.currentTarget.dataset.name=='全部'){

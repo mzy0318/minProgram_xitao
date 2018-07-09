@@ -26,9 +26,10 @@
 .modelImage{
     width:290rpx;
     height:380rpx;
-    border-radius:5px 5px 0px 0px;
+    border-radius:5px 5px 5px 5px;
     background:#fff;
     overflow:hidden;
+    box-shadow:2rpx 2rpx 2rpx 1rpx rgba(0,0,0,0.3)
 }
 .modelImage image{
     width:290rpx;

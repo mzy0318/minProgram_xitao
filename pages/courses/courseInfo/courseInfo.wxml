@@ -1,7 +1,7 @@
 <view class='courseInfoWrap'>
     <view class='courseInfoTop'>
         <view class='courseInfoTopImg'>
-            <image src='{{pageData.cover.url}}'></image>
+            <image src='{{pageData.cover.url}}' mode='aspectFill'></image>
         </view>
         <text>{{pageData.title}}</text>
     </view>
@@ -18,12 +18,13 @@
     <view class='courseInfoDescirb'>
         <view class='courseInfoDescirbTitle'>课程摘要</view>
         <view class='empty'></view>
-        <text decode>&nbsp;&nbsp;&nbsp;&nbsp;{{pageData.lesson_summary}}</text>
+        <view class='courseInfoDescirbText'>  {{pageData.lesson_summary}}</view>
+        <view class='empty'></view>
     </view>
     <view class='courseInfoToIndex' bindtap='toIndex'>{{pageData.app_name}}></view>
     <view class='courseInfoInfo'>
-        <view class='courseInfoInfoLeft' bindtap='map'>
-            <text class="iconfont icon-map-">{{pageData.address}}</text>
+        <view class='courseInfoInfoLeft' bindtap='map' data-latitude='{{pageData.latitude}}' data-longitude='{{pageData.longitude}}' data-address='{{pageData.address}}' data-name='{{pageData.app_name}}'>
+            <text class="iconfont icon-map-"></text><text decode>&nbsp;{{pageData.address}}</text>
         </view>
         <view class='courseInfoInfoRight'>
             <text bindtap='tellPhone' data-phonenum='{{pageData.telephone}}' class="iconfont icon-phone-r"></text>
@@ -73,11 +74,11 @@
             <view class='courseInfoShareMiddle'>请留下您的联系方式,以便尽快联系您</view>
             <view class='courseInfoShareBottom'>
                 <form bindsubmit="handleHidden" data-is='1'>
-                    <view>
-                        <input type='number' placeholder='手机号' name='phone' maxlength='11' />
+                    <view class='inputStyle'>
+                        <input type='number' placeholder='手机号' name='phone' placeholder-class='placeStyle' maxlength='11' />
                     </view>
-                    <view>
-                        <input type='text' placeholder='联系人' name='nickname' />
+                    <view class='inputStyle'>
+                        <input type='text' placeholder='联系人' placeholder-class='placeStyle' name='nickname' />
                     </view>
                     <button data-is='1' formType="submit">预约试听</button>
                 </form>

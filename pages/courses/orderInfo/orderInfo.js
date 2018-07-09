@@ -10,6 +10,9 @@ Page({
         pageData:'',
         actId:'',
         actTag:'',
+        isActive:'',  //是不可以添加
+        addClassName:'orderInfoNumAdd',
+        isAllow:'',
     },
 
     /**
@@ -24,14 +27,31 @@ Page({
         getApp().request({
             url:'product',
             data:{
-                act_id: options.actId,
-                act_tag: options.actTag,
+                act_id: that.data.actId,
+                act_tag: that.data.actTag,
             },
             method:'post',
             success:function(res){
-                that.setData({
-                    pageData:res.data.data
-                })
+                if(Number(res.data.code) == 1){
+                    that.setData({
+                        pageData: res.data.data,
+                        isActive: res.data.data.allow_edit_amount
+                    })
+                    if (that.data.isActive) {
+                        that.setData({
+                            addClassName: 'orderInfoNumAdd'
+                        })
+                    }else{
+                        that.setData({
+                            addClassName: 'orderInfoNumJianFalse'
+                        })
+                    }
+                }else if(Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
             }
         })
     },
@@ -106,21 +126,25 @@ Page({
     },
 
     addBtn: function (res) {
-
+        let that = this;
         let n = this.data.initNum + 1
+        if (that.data.isActive){
+            if (n > 1) {
 
-        if (n > 1) {
+                this.setData({
+                    className: 'orderInfoNumJian'
+                })
+            }
 
             this.setData({
 
-                className: 'orderInfoNumJian'
+                initNum: n,
             })
+            
+        }else{
+
+            return false
         }
-
-        this.setData({
-
-            initNum: n,
-        })
     },
     orderSubmit:function(res){
         let that = this;
@@ -132,10 +156,17 @@ Page({
             method:'post',
             data: res.detail.value,
             success:function(res){
-                let payInfo = JSON.stringify(res.data.data)
-                wx.navigateTo({
+                if(res.data.code == 0){
+                  wx.showModal({
+                    title: '提示',
+                    content: res.data.msg
+                  })
+                }else{
+                  let payInfo = JSON.stringify(res.data.data)
+                  wx.navigateTo({
                     url: '../orderInfoPay/orderInfoPay?payInfo=' + payInfo,
-                })
+                  })
+                }
             }
         })
     }

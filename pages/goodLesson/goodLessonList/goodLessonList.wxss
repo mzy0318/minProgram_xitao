@@ -21,8 +21,9 @@
     float:left;
     width:200rpx;
     height:150rpx;
-    background:lightblue;
+    background:#fff;
     margin:25rpx 20rpx;
+    overflow:hidden;
 }
 .contentListLeft image{
     width:200rpx;

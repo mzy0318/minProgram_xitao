@@ -68,9 +68,10 @@
     margin-top:20rpx;
     margin-left:20rpx;
     overflow: hidden;
+    background:#fff;
 }
 .leftImage image{
-    width:280rpx;
+    width:280rpx; 
     height:180rpx;
 }
 .rightText{
@@ -119,14 +120,14 @@
     margin-left:7.5rpx;
 }
 .twoNavChildTop{
-    width:120rpx;
-    height:120rpx;
+    width:100rpx;
+    height:100rpx;
     margin-top:10rpx;
-    margin-left:30rpx;
+    margin-left:40rpx;
 }
 .twoNavChildTop image{
-    width:120rpx;
-    height:120rpx;
+    width:100rpx;
+    height:100rpx;
 }
 .twoNavChildBottom{
     width:180rpx;
@@ -268,7 +269,7 @@
 /* 课外活动/快乐Two */
 .fiveWrap{
     width:750rpx;
-    min-height:680rpx;
+    min-height:480rpx;
     background:#FFF5F4;
     margin:20rpx auto 0rpx;
     padding-bottom:20rpx;
@@ -282,9 +283,20 @@
 .fiveNavChild{
     width:160rpx;
     height:200rpx;
-    background:lightgreen;
+    background:transparent;
     float:left;
     margin-left:13.33rpx;
+}
+.fiveNavTop,.fiveNavTop image{
+    width:130rpx;
+    height:130rpx;
+    margin:0rpx auto;
+}
+.fiveNavbottom{
+    width:160rpx;
+    line-height:40rpx;
+    font-size:24rpx;
+    text-align:center;
 }
 view.fiveNavChild:nth-child(1),view.fiveNavChild:nth-child(5){
     margin-left:0rpx;
@@ -304,6 +316,10 @@ view.fiveNavChild:nth-child(6),view.fiveNavChild:nth-child(5),view.fiveNavChild:
     float:left;
     margin-left:20rpx;
     margin-top:25rpx;
+}
+.fiveLessonContentImage image{
+    width:210rpx;
+    height:160rpx;
 }
 .fiveLessonContentTitle{
     width:300rpx;
@@ -393,7 +409,12 @@ view.fiveNavChild:nth-child(6),view.fiveNavChild:nth-child(5),view.fiveNavChild:
     height:110rpx;
 }
 
-
+/* 多彩/通用 */
+.sevenWrap{
+    width:100%;
+    min-height:680rpx;
+    background:lightblue;    
+}
 
 
 .empty1{

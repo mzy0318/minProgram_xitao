@@ -7,7 +7,11 @@
 .managWarpTop{
     width:750rpx;
     height:350rpx;
-    background:#7254E7;
+    background:#fff;
+}
+.managWarpTop image{
+    width:750rpx;
+    height:350rpx;
 }
 
 .mangeScool{
@@ -27,8 +31,8 @@
 .mangeScoolOptions{
     width:738rpx;
     height:185rpx;
-    border-left:1rpx solid #efefef;
-    border-top:1rpx solid #efefef;
+    /* border-left:1rpx solid #efefef; */
+    /* border-top:1rpx solid #efefef; */
 }
 .mangeScoolOptions .mangeScoolOptionsWrap,.optionsWrap{
     float:left;
@@ -36,6 +40,8 @@
     height:183rpx;
     border-right:1rpx solid #efefef;
     border-bottom:1rpx solid #efefef;
+    border-top:1rpx solid #efefef;
+    margin-top:-1px;
 }
 .iconSize{
     display:block;
@@ -58,8 +64,8 @@
 .mangeStuMarktOptions{
     height:650rpx;
     width:738rpx;
-    border-left:1rpx solid #efefef;
-    border-top:1rpx solid #efefef;
+    /* border-left:1rpx solid #efefef; */
+    /* border-top:1rpx solid #efefef; */
     background:#fff;
 }
 .optionsTop{
@@ -67,16 +73,20 @@
     height:60rpx;
     background:#E3465B;
     border-radius:5px;
-    margin:30rpx auto 0rpx;
+    margin:40rpx auto 0rpx;
     position:relative;
 }
  .optionsTop .iconStyle{
     display:block !important;
-    top:7rpx;
-    left:13rpx;
-    position:absolute;
+    /* top:7rpx;
+    left:11rpx; */
+    position:absolute; 
     color:#fff;
     font-size:40rpx;
+    top:50%;
+    left:50%;
+    margin-left:-18.5rpx;
+    margin-top:-22rpx; 
 }
 
 .managVersion{

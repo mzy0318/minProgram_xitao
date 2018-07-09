@@ -20,7 +20,7 @@
     width:670rpx;
     min-height:485rpx;
     border-radius:5px 5px 0px 0px;
-    margin:0rpx auto 0rpx;
+    margin:20rpx auto 0rpx;
     background:#fff;
 }
 
@@ -35,7 +35,8 @@
 
 .killPriceInfoTop .killPriceInfoTopText{
     width:600rpx;
-    line-height:35rpx;
+    min-height:40rpx;
+    line-height:40rpx;
     font-size:30rpx;
     font-weight:bold;
     margin:0rpx auto;
@@ -63,7 +64,7 @@
     height:350rpx;
     margin-top:20rpx;
     margin-left:35rpx;
-    background:#fff;
+    background:#fff; 
 }
 
 .killPriceInfoRange{
@@ -219,6 +220,7 @@
     width:610rpx;
     height:300rpx;
     margin:0 auto;
+    overflow:hidden;
 }
 .infoTwoImgImage image{
     width:610rpx;
@@ -371,7 +373,7 @@
 }
 .writeInfo{
     width:660rpx;
-    height:400rpx;
+    min-height:400rpx;
     background:#fff;
     position:absolute;
     top:50%;
@@ -379,25 +381,28 @@
     margin-left:-330rpx;
     margin-top:-200rpx;
     border-radius:5px;
+    padding-bottom:20rpx;
 }
 
-.writeInfo view:nth-child(1){
+.writeInfo>view:nth-child(1){
     width:690rpx;
     line-height:40rpx;
     font-size:30rpx;
     text-align:center;
     margin-top:30rpx;
 }
-.writeInfo view:nth-child(2),.writeInfo view:nth-child(3){
+.writeInfo .inputStyle{
     width:480rpx;
-    line-height:80rpx;
+    height:65rpx;
+    line-height:65rpx;
     background:#F2F2F2;
     margin:40rpx auto 0rpx;
     border-radius:5px;
 }
-.writeInfo view:nth-child(2) input,.writeInfo view:nth-child(3) input{
+.writeInfo .inputStyle input{
     width:460rpx;
-    line-height:80rpx;
+    height:65rpx;
+    line-height:65rpx;
     background:#F2F2F2;
     font-size:30rpx;
     border-radius:5px;
@@ -451,10 +456,10 @@
 
 .otherOptionsChild{
     width:120rpx;
-    height:450rpx;
+    height:320rpx;
     background:transparent;
     position:absolute;
-    top:-400rpx;
+    top:-300rpx;
     right:0rpx;
 }
 .otherOptionsChild view{
@@ -573,6 +578,7 @@
     margin-left:20rpx;
     float:left;
     margin-top:25rpx;
+    border:1rpx solid #fff;
  }
  .modelContentChildContent view:nth-child(1){
      width:200rpx;
@@ -584,12 +590,38 @@
 .modelContentChildContent view:nth-child(2){
      width:200rpx;
      height:115rpx;
-     background:red;
+     background:#fff;
  } 
 
  .modelContentChildContent view:nth-child(2) image{
      width:200rpx;
      height:115rpx;
  }
+ /* 音乐控制 */
+.musicControl{
+    width:50rpx;
+    height:50rpx;
+    border-radius:50%;
+    position:fixed;
+    top:50rpx;
+    right:30rpx;
+    background:#964499;
+}
+.fontStyleT{
+    display:block;
+    color:#fff;
+    float:left;
+    margin-top:9rpx;
+    margin-left:8rpx;
+}
+
+@keyframes headRotate{
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+view.viewRotate{
+    animation: headRotate 5s linear;
+    animation-iteration-count:infinite;
+}
 
 

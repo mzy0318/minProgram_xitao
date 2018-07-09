@@ -4,7 +4,7 @@
         <view class='manListContentTop' bindtap='toLessonInfo' data-id='{{item.id}}' >{{item.title}}</view>
         <view class='manListContentMiddel'>
             <view class='ListContentMiddelLeft' bindtap='toLessonInfo' data-id='{{item.id}}'>
-                <image src='{{item.cover.url}}' mode='scaleToFill' ></image>
+                <image src='{{item.cover.url}}' mode='widthFix' ></image>
             </view>
             <view class='ListContentMiddelRight'>
                 <view class='contentMiddelRightChild' data-acttag='{{item.act_tag}}' data-id='{{item.id}}' bindtap='toUserInfo'>查看报名<text>{{item.total_joiner?'('+item.total_joiner+')':''}}</text></view>
@@ -15,7 +15,7 @@
         <view class='manListContentBottom'>
             <view class='contentBottomChild' bindtap='delActive' data-id='{{item.id}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-lajixiang'></text>删除</view>
             <view class='contentBottomChild' bindtap='toLessonEdit' data-id='{{item.id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
-            <view class='contentBottomChild'><text class='iconfont icon-share'></text>分享</view>
+            <button class='contentBottomChild' hover-class='none' bindtap='sharePage' data-actid='{{item.id}}' data-title='{{item.title}}' ><text class='iconfont icon-share'></text>分享</button>
         </view>
     </view>
     <view class='manListBottom'>

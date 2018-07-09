@@ -1,0 +1,5 @@
+<view class='enCodeImage' bindtap='priveImage'>
+    <image src='{{videoImage}}' mode='widthFix'></image>
+</view>
+<view class='enCodeImageTitle'>点击图片,保存到手机相册,分享到朋友圈</view>
+<button bindtap='toBack' class='enCodeBtn'>返回</button>

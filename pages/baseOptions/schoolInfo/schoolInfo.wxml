@@ -9,50 +9,10 @@
 </swiper>
 <view class='schoolInfoText'>
     {{pageData.school_intro}}
-    <!-- <text class='containerO' decode='true'>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;智慧招生,最火爆的招生的招生小程序。包含砍价、拼团、在线课程、在线作业、在线招生报名、在线课程销售等多项功能，帮助交易培训机构打造自己的官网小程序，功能多样化，有效并且实用。智慧招生隶属于郑州西陶网络科技有限公司，本公司成立于2014年，是集软件开发推广为一体的综合性销售服务公司，目前已与3000多家教育培训班尝试合作，定向研发。专注于招生策划，软件研发，从根本解决招生难题，招生经验丰富，欢迎各大学校合作。
-  </text>
-    <view class='containerTwo'>
-        <text>智慧招生小程序的价值是什么？</text>
-        <text>1.依托于微信，用户基数大，使用频繁，客户粘性度高。</text>
-        <text> 2.无需下载，不占内存，随时使用，用完即走。</text>
-        <text>3.和App对比：成本低，周期短，无需入住应用商城。</text>
-        <text>4.推广速度快，依托依托微信流量，减少推广营销费用。</text>
-        <text>5.客户使用方便，运营成本低，难度小。</text>
-        <text>6.满足不同客户的需求，有需求即可搭建。</text>
-    </view>
-    <view class='containerTh'>
-        <text>为什么选择我们智慧招生小程序?</text>
-        <text class='schoolInfoTitle'>Top1曝光:</text>
-        <text>1.全国微信用户可以搜索到小程序。如：英语培训，北京数学辅导</text>
-        <text>2.学校周围5公里可在附近看到小程序;</text>
-        <text class='schoolInfoTitle'>Top2渠道:</text>
-        <text>1.品牌形象;</text>
-        <text>2.专属logo,专属名称，老师及课程介绍;</text>
-        <text class='schoolInfoTitle'>Top3招生互动:</text>
-        <text>招生方案功能包括：砍价，拼团，作业，视频等。</text>
-    </view>
-    <view class='containerFour'>
-        <text>选择智慧招生</text>
-        <text>1.实惠实用，全部功能，全部模板不限数量，不限制次数使用。</text>
-        <text>2.价格优势，功能齐全，相对于同行较低的价格。</text>
-        <text>3.功能强大，一键发起活动，创建多个活动，吸引众多参与人数</text>
-        <text>4.客服在线，专业客服一对一在线指导，节假日无休。</text>
-        <text>5.专业团队，一流互联网公司，专业研发，专业策划团队。</text>
-        <text>6.更新优化，每日优化，每月更新。</text>
-    </view>
-    <view class='containerFive'>
-        <text>智慧招生小程序搭建咨询：扫描下方客服微信二维码联系我们</text>
-    </view> -->
-    <!-- <view class='schoolInfoImg'>
-        <view wx:for='{{imgData}}'>
-            <image src='{{item}}' />
-        </view>
-    </view> -->
 </view>
 <view class='schoolVideo' hidden='{{isVideo}}'>
-    <video src=''></video>
+    <video src='{{pageData.brand.url}}'></video>
 </view>
-<view class='honorImage'>
-    <image wx:for='{{pageData.honor}}' src='{{item}}'></image>
+<view class='honorImage' wx:for='{{pageData.honor}}'>
+    <image src='{{item.url}}' mode='widthFix'></image>
 </view>

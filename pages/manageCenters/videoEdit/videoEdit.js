@@ -15,6 +15,7 @@ Page({
         bgImage:'',
         isEdit:'',
         id:'',
+        isSave:0,
     },
 
     /**
@@ -22,7 +23,8 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        if (Number(options.isEdit)==1) {
+        console.log('options', options)
+        if (Number(options.isEdit) == 1) {
             that.setData({
                 isEdit: options.isEdit,
                 id: options.id,
@@ -54,10 +56,10 @@ Page({
                 isEdit: options.isEdit
             })
             wx.setNavigationBarTitle({
-                title: JSON.parse(wx.getStorageSync('userInfo')).nickName + '的祝福视频',
+                title: getApp().globalData.userInfo.nickName + '的祝福视频',
             })
             that.setData({
-                title: JSON.parse(wx.getStorageSync('userInfo')).nickName + '的祝福视频',
+                title: getApp().globalData.userInfo.nickName + '的祝福视频',
                 bannerImage: options.image,
                 bgImage: options.bg,
             })
@@ -91,23 +93,27 @@ Page({
      */
     onUnload: function () {
         let that = this;
-        wx.showModal({
-            title: '上传视频才可以保存贺卡,确定退出?',
-            content: '',
-            success: function (res) {
-                if (res.confirm) {
-                    if (Number(that.data.isEdit)==1){
+        if (that.data.isSave == 1){
 
-                    } else if (Number(that.data.isEdit) == 0){
-                        wx.navigateBack({})
+        } else if(that.data.isSave == 0){
+            wx.showModal({
+                title: '提示',
+                content: '上传视频才可以保存贺卡,确定退出?',
+                success: function (res) {
+                    if (res.confirm) {
+                        if (Number(that.data.isEdit) == 1) {
+
+                        } else if (Number(that.data.isEdit) == 0) {
+                            wx.navigateBack({})
+                        }
+                    } else if (res.cancel) {
+                        wx.navigateTo({
+                            url: '../../manageCenters/videoEdit/videoEdit?isEdit=' + that.data.isEdit + '&image=' + that.data.bannerImage + '&bg=' + that.data.bgImage + '&id=' + that.data.id,
+                        })
                     }
-                } else if (res.cancel) {
-                    wx.navigateTo({
-                        url: '../../manageCenters/videoEdit/videoEdit?isEdit=' + that.data.isEdit + '&image=' + that.data.bannerImage + '&bg=' + that.data.bgImage + '&id=' + that.data.id,
-                    })
                 }
-            }
-        })
+            })
+        }
     },
 
     /**
@@ -140,6 +146,11 @@ Page({
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;
+                
+                wx.showLoading({
+                    title: '视频上传中',
+                    mask: true,
+                })
 
                 that.setData({
                     videoUrlO: res.tempFilePath,
@@ -155,7 +166,7 @@ Page({
                         let n = videoPath.lastIndexOf('.');
                         let videoPathO = videoPath.substring(n)
                         let sendData = {
-                            "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + videoPathO,
+                            "key": res.data.data.dir + getApp().imageAddress(videoPath) + videoPathO,
                             "OSSAccessKeyId": res.data.data.accessid,
                             "host": res.data.data.host,
                             "expire": res.data.data.expire,
@@ -169,14 +180,6 @@ Page({
                             filePath: videoPath,
                             formData: sendData,
                             success: function (res) {
-                                wx.showLoading({
-                                    title: '视频上传中',
-                                    mask: true,
-                                })
-
-                                setTimeout(function () {
-                                    wx.hideLoading()
-                                }, 5000)
                                 getApp().request({
                                     url: "org/exchange",
                                     data: {
@@ -199,12 +202,27 @@ Page({
                                             },
                                             method:'post',
                                             success:function(res){
-                                                wx.showToast({
-                                                    title: '贺卡保存成功',
-                                                })
-                                                if(res.data.code==1){
-                                                    wx.navigateTo({
-                                                        url: '../../videos/manVideoList/manVideoList',
+                                                if(Number(res.data.code)==1){
+                                                    // wx.navigateTo({
+                                                    //     url: '../../videos/manVideoList/manVideoList',
+                                                    // })
+                                                    wx.hideLoading()
+                                                    that.setData({
+                                                        isSave:1
+                                                    })
+                                                    wx.showToast({
+                                                        title: '贺卡保存成功',
+                                                        icon:'success',
+                                                        success:function(){
+                                                            wx.navigateBack({
+                                                                delta: 2,
+                                                            })      
+                                                        }
+                                                    })
+                                                } else if (Number(res.data.code) == 0){
+                                                    wx.showToast({
+                                                        title: res.code.msg,
+                                                        icon: 'none'
                                                     })
                                                 }
                                             }

@@ -1,5 +1,4 @@
 @import '../../../utils/iconFont.wxss';
-/* @import '../../../utils/iconFontO.wxss'; */
 .contactWrap{
     width:750rpx;
     min-height:1207rpx;

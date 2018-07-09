@@ -28,7 +28,7 @@
         <view class='userInfoContent'>
             <view class='userInfoContentLeft'>微信号</view>
             <view class='userInfoContentRight'>
-                <input type='number' name='we_chat'></input>
+                <input type='text' name='we_chat'></input>
             </view>
         </view>
         <button form-type='submit'>提交</button>

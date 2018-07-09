@@ -27,7 +27,7 @@
 .collageListTopDate{
     width:710rpx;
     line-height:60rpx;
-    background:rgba(0,0,0,0.3);
+    background:rgba(0,0,0,0.6);
     position:absolute;
     left:0rpx;
     bottom:0rpx;
@@ -38,10 +38,10 @@
 .collageListTopState{
     min-width:160rpx;
     line-height:50rpx;
-    font-size:30rpx;
+    font-size:25rpx;
     text-align:center;
     color:#efefef;
-    background:rgba(0,0,0,0.3);
+    background:rgba(0,0,0,0.6);
     position:absolute;
     right:0rpx;
     top:0rpx;

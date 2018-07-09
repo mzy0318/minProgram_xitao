@@ -27,7 +27,7 @@
     <!--模板列表  -->
     <view class='switchModelContent' hidden='{{isModel}}' scroll-x>
         <scroll-view class='switchModelContentChild' scroll-x style='width:{{musicData.length*226}}rpx;'>
-            <view class='modelContentChildContent' wx:for='{{musicData}}' data-image='{{item.image}}' data-bimage='{{item.bg}}' bindtap='changeModel'>
+            <view class='modelContentChildContent' style='border-color:{{index==modelNum?"#3A85FE":"#fff"}}' wx:for='{{musicData}}' wx:key='{{index}}' data-image='{{item.image}}' data-index='{{index}}' data-bimage='{{item.bg}}' bindtap='changeModel'>
                 <view>{{item.name}}</view>
                 <view>
                     <image src='{{item.image}}' mode='scaleToFill' />

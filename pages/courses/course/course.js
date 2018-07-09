@@ -47,13 +47,17 @@ Page({
                     courseData: res.data.data,
                     lessonData: res.data.data.lesson
                 })
-                wx.setStorageSync('lessonAllData', res.data.data.lesson)
+                wx.setStorageSync('lessonAllData', res.data.data.lesson);
+                let lessonClassData = res.data.data.catalog;
+                lessonClassData.unshift({ 'id': 0, 'name': '全部' });
+                that.setData({
+                    lessonClassData: lessonClassData,
+                })
+
             }
         })
-        let lessonClassData = wx.getStorageSync('lessonClassData');
-        lessonClassData.unshift({ 'id': 0, 'name': '全部' });
-        this.setData({
-            lessonClassData: lessonClassData,
+        // let lessonClassData = wx.getStorageSync('lessonClassData');
+        that.setData({
             classId: wx.getStorageSync('classId')
         })
         

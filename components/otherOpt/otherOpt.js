@@ -40,6 +40,7 @@ Component({
         backgroundImage: '',
         musicClassIndex: 0,
         backgroundMusicId:'',
+        modelNum:'',
     },
     attached: function () {
         let that = this;
@@ -112,15 +113,23 @@ Component({
                 backgroundMusicId: e.currentTarget.dataset.musicid,
             })
         },
+        onPageScroll:function(e){
+            console.log(e)
+        },
         //更改模板样式
         changeModel: function (e) {
             let that = this
             let getImageDetail = { bgImage: e.currentTarget.dataset.bimage, bannerImage: e.currentTarget.dataset.image };
             let getImageOption = {};
             that.triggerEvent('getImage', getImageDetail, getImageOption);
+            
+            wx.pageScrollTo({
+                scrollTop: 0
+            })
             that.setData({
                 bannerImage: e.currentTarget.dataset.image,
                 backgroundImage: e.currentTarget.dataset.bimage,
+                modelNum: e.currentTarget.dataset.index
             })
         },
         comfireSubmit: function (e) {
@@ -135,10 +144,10 @@ Component({
                 },
                 method: 'post',
                 success: function (res) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
+                    // wx.showToast({
+                    //     title: res.data.msg,
+                    //     icon: 'none',
+                    // })
                 }
             });
             //提交模板
@@ -152,8 +161,8 @@ Component({
                 method: 'post',
                 success: function (res) {
                     wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
+                        title: '更换成功',
+                        icon: 'success',
                     })
                     that.setData({
                         isCommon: true,

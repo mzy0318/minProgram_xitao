@@ -16,7 +16,7 @@
             <view class='indexCoursesTitle'>课程推荐</view>
             <view class='indexCoursesContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
                 <view class='leftImage'>
-                    <image src='{{item.cover.url}}' mode='scaleToFill'></image>
+                    <image src='{{item.cover.url}}' mode='aspectFill'></image>
                 </view>
                 <view class='rightText'>
                     <view class='rightTextTitle'>{{item.title}}</view>
@@ -44,12 +44,12 @@
                 <swiper-item wx:for='{{lessons}}'>
                     <view class='swiperWrpa' bindtap='toCourseInfo' data-id='{{item.id}}'>
                         <view class='swiperTop'>{{item.title}}</view>
-                        <view class='swiperBottom'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
+                        <view class='swiperBottom'><image src='{{item.cover.url}}' mode='aspectFill'></image></view>
                     </view>
                 </swiper-item>
             </swiper>
         </view>
-        <view class='twoTitle'>学校环境</view>
+        <!-- <view class='twoTitle'>学校环境</view>
         <view class='twoInfo'>
             <view class='twoInfoSwiper'>
                 <swiper>
@@ -61,7 +61,7 @@
             <view class='twoInfoContent'>
                 伟大的渺小
             </view>
-        </view>
+        </view> -->
     </view>
 </template>
 <!-- 美术 -->
@@ -94,22 +94,18 @@
 <!-- 课外活动/初高中 -->
 <template name='five'>
     <view class='fiveWrap'>
-        <view class='fiveNav'>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
-            <view class='fiveNavChild'></view>
+        <view class='fiveNav' >
+            <view class='fiveNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
+                <view class='fiveNavTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view class='fiveNavbottom'>{{item.name}}</view>
+            </view>
         </view>
         <view class='twoTitle'>课程推荐</view>
-        <view class='fiveLessonContent'>
-            <view class='fiveLessonContentImage'><image mode='scaleToFill'></image></view>
+        <view class='fiveLessonContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
+            <view class='fiveLessonContentImage'><image src='{{item.cover.url}}' mode='aspectFill'></image></view>
             <view class='fiveLessonContentTitle'>
-                <view class='lessonContentTitleText'>智慧招生-暑假招生</view>
-                <view class='lessonContent'>2018年培训行业--智慧招生小程序方案</view>
+                <view class='lessonContentTitleText'>{{item.title}}</view>
+                <view class='lessonContent'></view>
             </view>
             <view class='fiveLessonContentIcon'></view>
         </view>
@@ -132,5 +128,11 @@
                 <view class='fourLessonContentBottom'>{{item.title}}</view>
              </view>
         </view>
+    </view>
+</template>
+<!-- 多彩/通用 -->
+<template name='seven'>
+    <view class='sevenWrap'>
+        <view class='sevenNav'></view>
     </view>
 </template>

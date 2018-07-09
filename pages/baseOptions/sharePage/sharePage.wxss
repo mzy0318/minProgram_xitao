@@ -1,10 +1,11 @@
 @import '../../../utils/iconFont.wxss';
-
+page{
+    background:#fff;
+}
 .sharePageWrap{
     width:750rpx;
     height:1200rpx;
     overflow: hidden;
-
 }
 .sharePageInfo{
     width:500rpx;
@@ -13,6 +14,10 @@
     box-shadow:0.5px 0.5px 5px 2px rgba(0,0,0,0.2),-0.5px -0.5px 20px 2px rgba(0,0,0,0.1);
     margin:20rpx auto 0rpx;
     overflow:hidden;
+}
+.sharePageInfo image{
+    width:500rpx;
+    height:890rpx;
 }
 .sharePageTitle{
     width:500rpx;
@@ -75,7 +80,7 @@
 .sharePageAction{
     width:750rpx;
     line-height:40rpx;
-    font-size:26rpx;
+    font-size:24rpx;
     text-align:center;
     color:#C42505;
     margin-top:20rpx;
@@ -85,7 +90,7 @@
     height:155rpx;
     margin:20rpx auto 0rpx;
 }
-.sharePageIcon view{
+.sharePageIcon>view{
     width:125rpx;
     height:125rpx;
     float:left;
@@ -96,6 +101,24 @@
     font-size:22rpx;
     text-align:center;
 }
+.sharePageIcon>button{
+    width:125rpx;
+    height:125rpx;
+    float:left;
+    background:#fff;
+}
+.sharePageIcon>button::after{
+    border:0rpx;
+}
+.sharePageIcon>button>view{
+    width:125rpx;
+    line-height:30rpx;
+    font-size:22rpx;
+    text-align:center;
+    /* background:red; */
+    margin-left:-25rpx;
+}
+
 .iconStyle1,.iconStyle2,.iconStyle3,.iconStyle4{
     display:block;
     width:90rpx;
@@ -106,6 +129,9 @@
     text-align:center;
     margin:0 auto 8rpx;
     color:#fff;
+}
+.iconStyle1{
+    margin-left:-10rpx;
 }
 .iconStyle2{
     background:#6ECB00;

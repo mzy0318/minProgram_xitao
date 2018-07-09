@@ -5,70 +5,90 @@ Page({
      * 页面的初始数据
      */
     data: {
-        pageData:'',
-        videoUrl:'',
-        videoImage:'',
-        manaUser:[
-            {
-                name:'机构主页',
-                method:'toIndex',
-                width:'20%',
-            },{
-                name:'拍摄祝福',
-                method: 'setVideo',
-                width: '20%',
-            },{
-                name:'分享朋友圈',
-                method: '',
-                width: '20%',
-            },{
-                name:'我要制作',
-                method: 'setVideo',
-                width: '20%',
-            }
-        ],
-        user:[
-            {
-                name: '机构主页',
-                method: 'toIndex',
-                width: '33.33%',
-            },{
-                name: '分享朋友圈',
-                method: '',
-                width: '33.33%',
-            },
-        ],
-        optionsContent:'',
+        pageData: '',
+        videoUrl: '',
+        videoImage: '',
+        manaUser: [{
+            name: '机构主页',
+            method: 'toIndex',
+            width: '20%',
+        }, {
+            name: '拍摄祝福',
+            method: 'setVideo',
+            width: '20%',
+        }, {
+            name: '分享朋友圈',
+            method: 'toSharePage',
+            width: '20%',
+        }, {
+            name: '我要制作',
+            method: 'setVideo',
+            width: '20%',
+        }],
+        user: [{
+            name: '机构主页',
+            method: 'toIndex',
+            width: '33.33%',
+        }, {
+            name: '分享朋友圈',
+            method: 'toSharePage',
+            width: '33.33%',
+        }, ],
+        optionsContent: '',
+        actId:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
-        if (Number(options.userType)==0){
+
+        if (options.scene != undefined) {
+            
+            let scene = decodeURIComponent(options.scene);
+
+            console.log('获取到的scene', scene)
+            
             that.setData({
-                optionsContent: that.data.manaUser
-            })
-        } else if (Number(options.userType) == 1){
-            that.setData({
+                actId: options.query.actid,
                 optionsContent: that.data.user
             })
+        } else if (options.scene == undefined) {
+            that.setData({
+                actId: options.id,
+            });
+            if (Number(options.userType) == 0) {
+                that.setData({
+                    optionsContent: that.data.manaUser
+                })
+            } else if (Number(options.userType) == 1) {
+                that.setData({
+                    optionsContent: that.data.user
+                })
+            }
         }
         getApp().request({
-            url:'visitor_video_card',
-            data:{
-                id: options.id
+            url: 'visitor_video_card',
+            data: {
+                id: that.data.actId
             },
-            method:'post',
-            success:function(res){
-                that.setData({
-                    pageData: res.data.data,
-                    videoUrl: res.data.data.video.url
-                })
-                wx.setNavigationBarTitle({
-                    title: res.data.data.title,
-                })
+            method: 'post',
+            success: function(res) {
+                if (Number(res.data.code) == 1) {
+                    that.setData({
+                        pageData: res.data.data,
+                        videoUrl: res.data.data.video.url
+                    })
+                    wx.setNavigationBarTitle({
+                        title: res.data.data.title,
+                    })
+                } else if (Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
+                    })
+                }
             }
         })
     },
@@ -76,71 +96,76 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     },
-    toIndex:function(){
+    toIndex: function() {
         getApp().toIndex()
     },
-    setVideo:function(){
+    setVideo: function() {
         let that = this;
         wx.chooseVideo({
 
-            success:function(res){
+            success: function(res) {
                 that.setData({
                     videoUrl: res.tempFilePath,
                     videoImage: res.thumbTempFilePath,
                 })
             },
-            fail:function(res){
-            }
+            fail: function(res) {}
         })
     },
-    toVideosEdit:function(e){
+    toVideosEdit: function(e) {
         wx.navigateTo({
-            url: '../../manageCenters/videoEdit/videoEdit?id=' + e.currentTarget.dataset.actid+'&isEdit=0',
+            url: '../../manageCenters/videoEdit/videoEdit?id=' + e.currentTarget.dataset.actid + '&isEdit=0',
+        })
+    },
+    toSharePage:function(e){
+        let url = encodeURIComponent(e.currentTarget.dataset.url)
+        wx.navigateTo({
+            url: '../videoSharePage/videoSharePage?actid=' + e.currentTarget.dataset.actid + '&url=' + url + '&title=' + e.currentTarget.dataset.title,
         })
     }
 })

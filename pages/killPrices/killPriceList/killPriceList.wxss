@@ -1,16 +1,22 @@
 @import '../../../utils/iconFont.wxss'; 
 
+page{
+    height:100%;
+}
 .killPriceListWrap{
     width:750rpx;
     min-height:1207rpx;
     background:#fff;
 }
 .killPriceListContet{
+    padding-top:20rpx;
     width:710rpx;
     height:120rpx;
     background:#fff;
     margin:0 auto 20rpx;
-    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.3);
+    box-shadow: 1rpx 1rpx 1rpx 1rpx rgba(0,0,0,0.1);
+    border:1px solid #efefef;
+    border-radius: 5rpx;
 }
 .killPriceListTop,.killPriceListBottom{
     width:100%;
@@ -43,12 +49,21 @@
 
 .collageListWrap{
     width:750rpx;
-    height:1207rpx;
+    height:100%;
     position:fixed;
     top:0rpx;
     left:0rpx;
     z-index:1000;
-    background:#F5F5F5;
+    background:#F5F5F5;  
+    /* position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    background:#f5f5f5;
+    z-index:1000;  */
 }
 .collagePersonListTop{
     width:690rpx;
@@ -88,4 +103,14 @@
 }
 .price{
     color:#C41A16;
+}
+
+.noData{
+    width:100%;
+    height:60rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:60rpx;
+    background:transparent;
 }

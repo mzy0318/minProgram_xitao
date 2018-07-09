@@ -8,6 +8,7 @@ Page({
     data: {
         pageData: '',
         pageNum: 1,
+        showTitle:true,
     },
 
     /**
@@ -24,13 +25,19 @@ Page({
             success: function(res) {
 
                 if (res.data.data.length == 0) {
-                    wx.showToast({
-                        title: '您没有参加该活动',
-                        icon:'none'
+                    // wx.showToast({
+                    //     title: '您没有参加该活动',
+                    //     icon:'none'
+                    // })
+                    that.setData({
+                        showTitle:false
                     })
                 } else if (res.data.data.length != 0){
+                    that.setData({
+                        showTitle: true
+                    })
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
                     }
                     that.setData({
                         pageData: res.data.data
@@ -90,7 +97,7 @@ Page({
                     })
                 } else if (res.data.data.length != 0) {
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
                     }
                     that.setData({
                         pageData: res.data.data
@@ -120,7 +127,7 @@ Page({
                 },
                 success: function(res) {
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time))
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
                     }
                     pageDataArr.push(...res.data.data)
                     that.setData({

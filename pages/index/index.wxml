@@ -1,6 +1,6 @@
 <import src='../../templates/indexModel/indexModel' />
 <view class='indexBanner'>
-    <swiper indicator-dots circular>
+    <swiper indicator-dots circular autoplay>
         <swiper-item wx:for='{{pageData.banner}}'>
             <image src='{{item.url}}' mode='widthFix'></image>
         </swiper-item>

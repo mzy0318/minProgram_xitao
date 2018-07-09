@@ -1,13 +1,13 @@
 <view class='listInfoWrap'>
     <view class='listInfoBanner'>
-        <image src='../../../icon/lessonInfo.jpg' mode='scaleToFill'></image>
+        <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/lesson_one_big_banner.png' mode='scaleToFill'></image>
     </view>
     <view class='listInfoImage'>
         <view class='empty'></view>
         <view class='empty'></view>
         <view class='listInfoImageChild' wx:for='{{pageData.courses}}'>
             <view class='listInfoImageLeft'>
-                <image  src='{{item.cover.url}}' mode='scaleToFill'></image>
+                <image  src='{{item.cover.url}}' mode='widthFix'></image>
             </view>
             <view class='listInfoImageRight'>
                 <view class='listInfoImageRightTop'>{{item.course_name}}</view>
@@ -32,7 +32,7 @@
         <view class='empty'></view>
         <view class='listInfoDataActimg' wx:for='{{pageData.act_image}}'>
             <view class='listInfoDataActimgChild'>
-                <image src='{{item.url}}' mode='scaleToFill'></image>
+                <image src='{{item.url}}' mode='widthFix'></image>
             </view>
         </view>
         <view class='empty'></view>
@@ -48,7 +48,7 @@
                 <text>分享好友</text>
             </button>
         </view>
-        <view class='listInfoBottomMiddle'>智慧招生小程序</view>
+        <!-- <view class='listInfoBottomMiddle'>{{pageData.title}}</view> -->
         <view class='listInfoBottomBtn' bindtap='toIndex'>进入学校</view>
     </view>
 </view>
@@ -56,10 +56,11 @@
     <form bindsubmit='submitInfo'>
         <view class='signUpChild'>
         <view>填写报名信息</view>
-        <view><input placeholder='请输入姓名' type='text' name='nickname' ></input></view>
-        <view><input placeholder='请输入联系电话' type='number' maxlength='11' name='phone' ></input></view>
+        <view class='signUpInput'><input placeholder='请输入姓名' type='text' name='nickname' ></input></view>
+        <view class='signUpInput' ><input placeholder='请输入联系电话' type='number' maxlength='11' name='phone' ></input></view>
+        <view class='signUpInput' wx:for='{{nameOf}}'><input placeholder='{{item}}' type='text' name='{{index}}' ></input></view>
         <button formType="submit">确认</button>
-        <view class='signUpChildClose' data-is='1' bindtap='isShow' >X</view>
+        <view class='signUpChildClose' data-is='1' bindtap='isShow' ><text class='iconfont icon-close fontStyle'></text></view>
     </view>
     </form>
 </view>

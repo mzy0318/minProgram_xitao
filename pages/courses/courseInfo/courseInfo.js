@@ -119,9 +119,10 @@ Page({
     tellPhone: function (e) {
         getApp().tellPhone(e)
     },
-    // map: function () {
-    //     app.map()
-    // },
+    map: function (e) {
+        console.log(e.currentTarget.dataset)
+        app.map(e.currentTarget.dataset.latitude,e.currentTarget.dataset.longitude,e.currentTarget.dataset.name,e.currentTarget.dataset.address,)
+    },
     onShareAppMessage: function (res) {
         if (res.from === 'button') {
         }
