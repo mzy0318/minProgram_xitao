@@ -7,13 +7,18 @@ Page({
      */
     data: {
         personInfo:'',
-        startTime:''
+        startTime:'',
+        actId:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
+        that.setData({
+            actId: options.actId
+        })
         getApp().request({
             url: "bargain_detail",
             method: "post",
@@ -75,7 +80,12 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        let that = this;
+        if(res.from == 'menu'){
+            return {
+                path:'pages/index/index?ageId=5&actId='+that.data.actId
+            }
+        }
     },
     backPage: function () {
         wx.navigateBack({

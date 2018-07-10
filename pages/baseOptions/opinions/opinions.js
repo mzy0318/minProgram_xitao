@@ -63,7 +63,11 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
-
+        if(res.from == 'menu'){
+            return {
+                path: 'pages/index/index?pageId=8',
+            }
+        }
     },
     bindTextAreaBlur: function(e) {
         this.setData({
@@ -82,7 +86,7 @@ Page({
     },
     subPinions: function(e) {
         var that = this
-        console.log(e.detail.value)
+        
         getApp().request({
             url: 'school/feedback',
             data: e.detail.value,

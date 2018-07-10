@@ -1,0 +1,32 @@
+<view class='infoVideo'>
+    <view class='infoVideContent'>
+        <video id='myVideo' src='{{videoData}}'></video>
+    </view>
+    <view class='infoVideoTitle'>{{pageData.title}}<text> [{{pageData.create_time}}]</text></view>
+</view>
+<view class='infoIndex' bindtap='toIndex'>学校介绍 ></view>
+<view class='infoClasses'>
+    <view class='infoClassesTitle'>课集</view>
+    <view class='infoClassesContent'>
+        <view class='classWrap' wx:key='{{index}}' bindtap='chooseVideo' data-index='{{index}}' wx:for='{{pageData.video.length}}'><image src='../../../icon/video.png' mode='scaleToFill'></image></view>
+    </view>
+</view>
+<view class='infoClassesInput'>
+    <form bindsubmit='addComment'>
+        <textarea name='content'></textarea>
+        <button form-type='submit'>提交</button>
+    </form>
+</view>
+<view class='infoClassesConnect'>
+    <view class='classesConnectInfo'>全部评论(长按删除,点按回复)</view>
+    <view class='classesConnectContent' wx:for='{{commentData}}' bindlongtap='longDel'>
+        <view class='contentTop'><image src='{{item.avatar_url}}'></image></view>
+        <view class='contentBottom'>
+            <view class='title'>
+                <text>{{item.nickname}}</text>
+                <text>{{item.create_time}}</text>
+            </view>
+            <view class='content'>{{item.content}}</view>
+        </view>
+    </view>
+</view>

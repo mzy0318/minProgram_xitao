@@ -71,7 +71,12 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        let that = this;
+        if(res.from == 'menu'){
+            return {
+                path:'pages/index/index?pageId=13',
+            }
+        }
     },
     tellPhone: function (e) {
         getApp().tellPhone(e)

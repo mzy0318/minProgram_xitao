@@ -1,0 +1,123 @@
+@import '../../../utils/iconFont.wxss';
+/* page{
+    background:#fff;
+    padding-bottom:10rpx;
+}
+.videoClassImage{
+    width:710rpx;
+    height:330rpx;
+    margin:0rpx auto 0rpx;
+} */
+/* 功能 */
+.videoClassOptions{
+    width:710rpx;
+    height:200rpx;
+    margin:10rpx auto 10rpx;
+}
+.optionsContent{
+    width:142rpx;
+    height:180rpx;
+    float:left;
+    margin-top:10rpx;
+}
+.videoClassOptions>button{
+    width:142rpx;
+    height:180rpx;
+    padding:0rpx;
+    position:relative;
+    background:#fff;
+}
+.iconStyleBtn{
+    font-size:55rpx;
+    color:#fff;
+    float:left;
+    margin-left:15rpx;
+    margin-top:-25rpx;
+}
+button.optionsContent::after{
+    border:0rpx;
+}
+.optionsContentTop{
+    width:80rpx;
+    height:80rpx;
+    border-radius:50%;
+    margin-left:31rpx;
+}
+.optionsContentBottom,.optionsContentBottomBtn{
+    height:80rpx;
+    width:142rpx;
+    font-size:26rpx;
+    line-height:80rpx;
+    text-align:center;
+}
+.optionsContentBottomBtn{
+    position:absolute;
+    left:0rpx;
+    bottom:28rpx;
+    height:60rpx;
+    width:142rpx;
+    font-size:26rpx;
+    line-height:60rpx;
+    text-align:center;
+}
+.iconStyle{
+    font-size:55rpx;
+    color:#fff;
+    float:left;
+    margin-left:15rpx;
+    margin-top:8rpx;
+}
+.iconStyleO{
+    font-size:50rpx;
+    color:#fff;
+    float:left;
+    margin-left:15rpx;
+    margin-top:15rpx;
+}
+/* 视频列表 */
+.videoClassList{
+    width:710rpx;
+    min-height:200rpx;
+    margin:-10rpx auto 0rpx;
+}
+.videoClassContent{
+    width:345rpx;
+    height:260rpx;
+    background:#fff;
+    border-radius:5px;
+    vertical-align:top;
+    display:inline-block;
+    margin-top:15rpx;
+}
+.classContentImg{
+    width:345rpx;
+    height:200rpx;
+}
+.classContentImg image{
+    width:345rpx;
+    height:200rpx;
+}
+.classContentTitle{
+    width:345rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:24rpx;
+}
+view.videoClassContent:nth-child(even){
+    margin-left:20rpx;
+}
+.addressList{
+    width:80rpx;
+    height:80rpx;
+    position:fixed;
+    bottom:30rpx;
+    left:50%;
+    margin-left:-40rpx;
+    background:#4993FE;
+    color:#fff;
+    border-radius:50%;
+    font-size:60rpx;
+    font-weight:bold;
+    line-height:72rpx;
+    text-align:center;
+}

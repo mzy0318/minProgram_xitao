@@ -21,10 +21,10 @@ Page({
             data:{},
             method:'get',
             success:function(res){
-                res.data.data.theme = utils.map(res.data.data.theme,function(one){
-                  one.image = utils.rect(one.image,300,280)
-                  return one
-                })
+                // res.data.data.theme = utils.map(res.data.data.theme,function(one){
+                //   one.image = utils.rect(one.image,300,280)
+                //   return one
+                // })
                 res.data.data.catalog.unshift({
                     name:'全部',
                     list:res.data.data.theme

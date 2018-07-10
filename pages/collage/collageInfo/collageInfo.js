@@ -206,15 +206,18 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        
     },
 
     /**
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        return {
-            title: '私人拼团'
+        let that = this;
+        if(res.from == 'menu'){
+            return {
+                path: 'pages/index/index?actId=' + that.data.actId + '&pageId=2'
+            }
         }
     },
     toSignUp: function () {

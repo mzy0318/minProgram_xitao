@@ -124,9 +124,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     toListInfo:function(e){
         wx.navigateTo({
             url: '../videoListInfo/videoListInfo?id=' + e.currentTarget.dataset.actid + '&userType=0',

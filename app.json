@@ -55,7 +55,13 @@
         "pages/task/taskUserList/taskUserList",
         "components/otherOpt/otherOpt",
         "pages/goodLesson/goodLessonPeople/goodLessonPeople",
-        "pages/videos/videoSharePage/videoSharePage"
+        "pages/videos/videoSharePage/videoSharePage",
+        "pages/videoVote/videoVoteUserList/videoVoteUserList",
+        "pages/videoClass/videoClassManList/videoClassManList",
+        "pages/videoClass/videoClassInfo/videoClassInfo",
+        "pages/videoClass/videoClassUserList/videoClassUserList",
+        "pages/videoClass/videoClassEdit/videoClassEdit"
+
     ],
     "window": {
         "backgroundTextStyle": "dark",

@@ -240,8 +240,13 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-
+    onShareAppMessage: function (res) {
+        let that = this;
+        if (res.from == 'menu'){
+            return {
+                path: 'pages/index/index?pageId=1&actId=' + that.data.actId
+            }
+        }
     },
     priceRankOne: function () {
         this.setData({

@@ -27,12 +27,6 @@ Page({
                 url: '../baseOptions/studentStyle/studentStyle',
                 background: '#1055CC',
             },{
-                name: '活动报名',
-                iconfont: 'iconfont icon-baoming iconfontStyle iconfontSize',
-                url: '../actReg/actRegUserList/actRegUserList',
-                background: '#1055CC',
-                style:'margin-left:20rpx;margin-top:20rpx; iconfontSize'
-            },{
                 name: '联系我们',
                 iconfont: 'iconfont icon-lianxi iconfontStyle iconfontSize',
                 url: '../baseOptions/contactUs/contactUs',
@@ -42,7 +36,14 @@ Page({
                 iconfont: 'iconfont icon-yijian iconfontStyle iconfontSize',
                 url: '../baseOptions/opinions/opinions',
                 background: '#1055CC',
-            },{
+            },
+            {
+              name: '校区导航',
+              iconfont: 'iconfont icon-xiaoqu iconfontStyle iconfontSize',
+              url: '../baseOptions/schoolList/schoolList',
+              background: '#1055CC',
+            },
+            {
                 name: '帮我砍价',
                 iconfont: 'iconfont icon-kanjia iconfontStyle iconfontSize',
                 url: '../killPrices/killPrice/killPrice',
@@ -66,12 +67,12 @@ Page({
             //     url: '../baseOptions/schoolInfo/schoolInfo',
             //     background: '#8990FA',
             // },
-            // {
-            //     name: '视频课堂',
-            //     iconfont: 'iconfont icon-z-shipin iconfontStyle iconfontSize',
-            //     url: '../baseOptions/schoolInfo/schoolInfo',
-            //     background: '#FE7FC2',
-            // },
+            {
+                name: '视频课堂',
+                iconfont: 'iconfont icon-z-shipin iconfontStyle iconfontSize',
+                url: '../videoClass/videoClassUserList/videoClassUserList',
+                background: '#FE7FC2',
+            },
             // {
             //     name: '视频作业',
             //     iconfont: 'iconfont icon-shipin1 iconfontStyle iconfontSize',
@@ -89,17 +90,20 @@ Page({
                 iconfont: 'iconfont icon-icon1 iconfontStyle iconfontSize',
                 url: '../collage/collageList/collageList',
                 background: '#DE4037',
-            }, {
+            },
+            {
                 name: '视频贺卡',
                 iconfont: 'iconfont icon-shipin iconfontStyle iconfontSize',
                 url: '../videos/userVideoList/userVideoList',
                 background: '#8990FA',
-            }, {
-                name: '校区导航',
-                iconfont: 'iconfont icon-xiaoqu iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolList/schoolList',
-                background: '#1055CC',
-            },
+            }, 
+            {
+              name: '活动报名',
+              iconfont: 'iconfont icon-baoming iconfontStyle iconfontSize',
+              url: '../actReg/actRegUserList/actRegUserList',
+              background: '#6ABA59',
+              style: 'margin-left:20rpx;margin-top:20rpx; iconfontSize'
+            }
             // {
             //     name: '打卡作业',
             //     iconfont: 'iconfont icon-job-task iconfontStyle iconfontSize',
@@ -161,9 +165,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     toPage:function(e){
         wx.navigateTo({
             url: e.currentTarget.dataset.url,

@@ -1,3 +1,6 @@
+page{
+      background:#F2F2F2;
+}
 .lessonList{
     width:750rpx;
     min-height:1207rpx;

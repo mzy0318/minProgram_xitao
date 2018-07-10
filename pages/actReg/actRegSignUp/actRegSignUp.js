@@ -67,9 +67,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     submitInfo: function (e) {
         let that = this;
         e.detail.value['act_id'] = that.data.actId

@@ -149,16 +149,16 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    // onShareAppMessage: function() {
 
-    },
+    // },
     toCourseEdit: function(e) {
         wx.navigateTo({
             url: '../lessonCourseEdit/lessonCourseEdit?actNiceId=' + this.data.actNiceId + '&courseId=' + e.currentTarget.dataset.courseid,
         })
 
     },
-    lessonEditBtn: function() {},
+    //提交数据
     formSubmit: function(e) {
         let that = this;
         if (Number(e.detail.target.dataset.id) == 0) {
@@ -252,6 +252,7 @@ Page({
                                 title: '编辑成功',
                                 icon: 'success',
                                 success:function(){
+                                    console.log('数据类型', typeof that.data.actNiceId)
                                     if (that.data.actNiceId == 'undefined') {
                                         wx.navigateBack({
                                             delta: 3

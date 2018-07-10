@@ -1,0 +1,52 @@
+<!-- <swiper indicator-dots autoplay circular>
+    <swiper-item>
+        <view class='videoClassImage'>1</view>
+    </swiper-item>
+    <swiper-item>
+        <view class='videoClassImage'>2</view>
+    </swiper-item>
+    <swiper-item>
+        <view class='videoClassImage'>3</view>
+    </swiper-item>
+</swiper> -->
+<view class='videoClassOptions'>
+    <view class='optionsContent'>
+        <view class='optionsContentTop' style='background:#F89225'> 
+            <text class='iconfont icon-fenleigongnengleimu iconStyle'></text>
+        </view>
+        <view class='optionsContentBottom'>分类</view>
+    </view>
+    <view class='optionsContent'>
+        <view class='optionsContentTop' style='background:#8387F8'>
+            <text class='iconfont icon-biaoqian iconStyleO'></text>
+        </view>
+        <view class='optionsContentBottom'>标签</view>
+    </view>
+    <view class='optionsContent' bindtap='toOptions' data-id='0'>
+        <view class='optionsContentTop' style='background:#7DCD3B'>
+            <text class='iconfont icon-i iconStyleO'></text>
+        </view>
+        <view class='optionsContentBottom'>学校</view>
+    </view>
+    <view class='optionsContent' bindtap='toOptions' data-id='1'>
+        <view class='optionsContentTop' style='background:#CE1111'>
+            <text class='iconfont icon-kecheng iconStyleO'></text>
+        </view>
+        <view class='optionsContentBottom'>课程</view>
+    </view>
+    <button class='optionsContent' hover-class='none' open-type='share'>
+        <view class='optionsContentTop' style='background:#F95A5E'>
+            <text class='iconfont icon-fenxiangtianchong iconStyleBtn'></text>
+        </view>
+        <view class='optionsContentBottomBtn'>分享</view>
+    </button>
+</view>
+<view class='videoClassList'>
+    <view class='videoClassContent' bindtap='toInfo' wx:for='{{pageData.list}}'>
+        <view class='classContentImg'>
+            <image src='{{item.cover.url}}' mode='scaleToFill'></image>
+        </view>
+        <view class='classContentTitle'>{{item.title}}</view>
+    </view>
+</view>
+<view class='addressList' bindtap='goManList'>＋</view>

@@ -5,6 +5,10 @@
     margin-bottom:95rpx;
 }
 
+page{
+  background:#F2F2F2;
+}
+
 .empty{
     width:100%;
     height:20rpx;

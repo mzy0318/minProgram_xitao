@@ -1,3 +1,6 @@
+page{
+  background:#F5F5F5;
+}
 .collageListWrap{
     width:750rpx;
     height:1207rpx;

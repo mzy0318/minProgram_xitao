@@ -1,3 +1,6 @@
+page{
+  background:#f2f2f2;
+}
 .actRegWrap{
     width:750rpx;
     min-height:1207rpx;

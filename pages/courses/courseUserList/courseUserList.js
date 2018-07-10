@@ -153,9 +153,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     toListInfo: function (e) {
         let pageData = JSON.stringify(e.currentTarget.dataset.pagedata)
         wx.navigateTo({

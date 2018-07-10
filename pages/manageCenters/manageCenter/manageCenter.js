@@ -89,13 +89,13 @@ Page({
                 url: 'org/bargain_list',
                 pageType: 8
             }, 
-            // {
-            //     name: '微视频课堂',
-            //     iconfont: 'iconfont icon-shipin1 iconStyle',
-            //     background: '#FE7FC2',
-            //     url: 'org/bargain_list',
-            //     pageType: 9
-            // }, 
+            {
+                name: '微视频课堂',
+                iconfont: 'iconfont icon-shipin1 iconStyle',
+                background: '#FE7FC2',
+                url: 'org/bargain_list',
+                pageType: 9
+            }, 
             // {
             //     name: '视频作业',
             //     iconfont: 'iconfont icon-job-task iconStyle',
@@ -256,25 +256,29 @@ Page({
 
         wx.setStorageSync('pageType', pageType)
         
-        if (pageType == '1' || pageType == '4'){
+        if (Number(pageType) == 1 || Number(pageType) == 4){
             wx.navigateTo({
                 url: '../manageActive/manageActive?url=' + e.currentTarget.dataset.requireurl,
             })
-        } else if (pageType == '2'){
+        } else if (Number(pageType) == 2){
             wx.navigateTo({
                 url: '../../goodLesson/manLessonList/manLessonList?url=' + e.currentTarget.dataset.requireurl,
             })
-        } else if (pageType == '11'){
+        } else if (Number(pageType) == 11){
             wx.navigateTo({
                 url: '../../courses/courseUserList/courseUserList',
             })
-        } else if (pageType == '7'){
+        } else if (Number(pageType) == 7){
             wx.navigateTo({
                 url: '../../videos/manVideoList/manVideoList',
             })
-        }else if(pageType=='8'){
+        }else if(Number(pageType) == 8){
             wx.navigateTo({
                 url: '../../actReg/actRegManList/actRegManList',
+            })
+        } else if (Number(pageType) == 9){
+            wx.navigateTo({
+                url: '../../videoClass/videoClassManList/videoClassManList',
             })
         }
     },

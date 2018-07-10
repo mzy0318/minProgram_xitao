@@ -6,21 +6,21 @@ Page({
      * 页面的初始数据
      */
     data: {
-        pageData:'',
-        isSignUp:true,
-        courseid:'',
-        nameOf:'',
+        pageData: '',
+        isSignUp: true,
+        courseid: '',
+        nameOf: '',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this
 
 
         if (options.scene != undefined) {
-            
+
             let scene = decodeURIComponent(options.scene);
             console.log('获取到的scene', scene)
             that.setData({
@@ -33,45 +33,45 @@ Page({
         }
 
 
-        
+
         getApp().request({
-            url:'lesson_one_act',
-            data:{
-                act_nice_id: options.actId,
+            url: 'lesson_one_act',
+            data: {
+                act_nice_id: that.data.courseid,
             },
-            method:'post',
-            success:function(res){
+            method: 'post',
+            success: function(res) {
                 if (Number(res.data.code) == 0) {
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none'
                     })
                 }
-                res.data.data.start_time = utils.formatDate(new Date(res.data.data.start_time*1000))
-                res.data.data.end_time = utils.formatDate(new Date(res.data.data.end_time*1000));
+                res.data.data.start_time = utils.formatDate(new Date(res.data.data.start_time * 1000))
+                res.data.data.end_time = utils.formatDate(new Date(res.data.data.end_time * 1000));
                 let nameOf = [];
                 let joinInfo = JSON.parse(res.data.data.join_info)
-                for (let i = 0; i < joinInfo.length; i++){
+                for (let i = 0; i < joinInfo.length; i++) {
                     nameOf.push(joinInfo[i].text)
                 }
 
-                res.data.data.cover.url = utils.rect(res.data.data.cover.url,400,300)
-                
-                res.data.data.courses = utils.map(res.data.data.courses,function(one){
-                  one.cover.url = utils.rect(one.cover.url,200,200)
-                  return one
+                res.data.data.cover.url = utils.rect(res.data.data.cover.url, 400, 300)
+
+                res.data.data.courses = utils.map(res.data.data.courses, function(one) {
+                    one.cover.url = utils.rect(one.cover.url, 200, 200)
+                    return one
                 })
 
-                res.data.data.act_image = utils.map(res.data.data.act_image, function (one) {
-                  one.url = utils.rect(one.url, 200, 200)
-                  return one
+                res.data.data.act_image = utils.map(res.data.data.act_image, function(one) {
+                    one.url = utils.rect(one.url, 200, 200)
+                    return one
                 })
 
                 that.setData({
-                    pageData:res.data.data,
+                    pageData: res.data.data,
                     nameOf: nameOf,
                 })
-                if (res.data.data.title){
+                if (res.data.data.title) {
                     wx.setNavigationBarTitle({
                         title: res.data.data.title
                     })
@@ -83,65 +83,70 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-
+    onShareAppMessage: function() {
+        let that = this;
+        if (res.from == 'menu') {
+            return {
+                path: 'pages/index/index?pageId=4&actId=' + that.data.courseid,
+            }
+        }
     },
-    tellPhone:e=>{
+    tellPhone: e => {
         getApp().tellPhone(e)
     },
-    toIndex:()=>{
+    toIndex: () => {
         getApp().toIndex();
     },
-    isShow:function(e){
+    isShow: function(e) {
         let that = this;
         that.setData({
             isSignUp: Boolean(Number(e.currentTarget.dataset.is)),
             courseid: e.currentTarget.dataset.courseid,
         })
     },
-    submitInfo:function(e){
+    submitInfo: function(e) {
         let that = this
         let sendData = e.detail.value;
         sendData['act_nice_course_id'] = this.data.courseid
@@ -150,21 +155,22 @@ Page({
             delete sendData[i]
         }
         getApp().request({
-            url:'join_lesson_one',
+            url: 'join_lesson_one',
             data: sendData,
-            method:'post',
-            success:function(res){
+            method: 'post',
+            success: function(res) {
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
                         title: '正在报名..',
                         mask: true,
                     })
                     setTimeout(closeLogin, 2000)
+
                     function closeLogin() {
                         wx.hideLoading()
                         wx.showToast({
                             title: '感谢报名！我们稍候和您联系 ',
-                            icon:'none'
+                            icon: 'none'
                         })
                         that.setData({
                             isSignUp: true

@@ -22,42 +22,6 @@ Page({
         that.setData({
             actId: options.actId,
         })
-        // let that = this
-        // that.setData({
-        //     actId: options.actId,
-        // })
-        // getApp().request({
-        //     url: 'normal_act',
-        //     method: 'post',
-        //     data: {
-        //         id: that.data.actId,
-        //     },
-        //     success: function(res) {
-        //         if (Date.parse(res.data.data.end_time) > new Date().valueOf()){
-        //             that.setData({
-        //                 btnText:'我要报名',
-        //                 btnClass:'startBtn',
-        //                 statusClass:'startClass'
-        //             })
-        //         } else if (Date.parse(res.data.data.end_time) < new Date().valueOf()){
-        //             that.setData({
-        //                 btnText: '已结束',
-        //                 btnClass: 'stopbtn',
-        //                 statusClass: 'stopClass'
-        //             })
-        //         } else if (Date.parse(res.data.data.start_time) > new Date().valueOf()){
-        //             that.setData({
-        //                 btnText: '未开始',
-        //                 btnClass: 'stopbtn',
-        //                 statusClass: 'waitClass'
-        //             })
-        //         }
-        //         that.setData({
-        //             pageData: res.data.data,
-        //             status: res.data.data.time_status
-        //         })
-        //     }
-        // })
     },
 
     /**
@@ -173,7 +137,12 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
-
+        let that = this;
+        if(res.from == 'menu'){
+            return {
+                path: 'pages/index/index?pageId=10&actId=' + that.data.actId
+            }
+        }
     },
     makePhone: function(e) {
         getApp().tellPhone(e)

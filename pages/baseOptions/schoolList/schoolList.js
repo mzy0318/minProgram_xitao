@@ -74,15 +74,20 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    // onReachBottom: function () {
 
-    },
+    // },
 
     /**
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        let that = this;
+        if(res.from == 'menu'){
+            return {
+                path:'pages/index/index?pageId=11'
+            }
+        }
     },
     makePhone:function(e){
         getApp().tellPhone(e)

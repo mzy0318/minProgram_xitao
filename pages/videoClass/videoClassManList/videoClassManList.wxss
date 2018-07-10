@@ -1,0 +1,122 @@
+@import '../../../utils/iconFont.wxss';
+page{
+    background:#F7F7F7;
+}
+/* 视频列表 */
+.manListWrap{
+    width:720rpx;
+    height:180rpx;
+    margin:0rpx auto;
+    background:#fff;
+    border-bottom:1rpx solid #F0F0F0;
+}
+view.manListWrap:nth-child(1){
+    margin-top:20rpx;
+}
+.manListImage{
+    width:230rpx;
+    height:150rpx;
+    float:left;
+    margin-top:15rpx;
+    border-radius:5px;
+    background:#fff;
+}
+.manListImage image{
+    width:230rpx;
+    height:150rpx;
+}
+.manListContent{
+    width:470rpx;
+    height:150rpx;
+    float:right;
+    margin-top:15rpx;
+}
+.manListTitle{
+    width:470rpx;
+    height:40rpx;
+    font-size:26rpx;
+}
+.manListOther{
+    width:400rpx;
+    height:40rpx;
+}
+.manListOther view{
+    width:33.33%;
+    height:40rpx;
+    float:left;
+    margin-top:55rpx;
+}
+.manListOther view text:nth-child(2){
+    font-size:26rpx;
+    color:#7b7b7b;
+}
+.iconStyle{
+    font-size:28rpx;
+    color:#7b7b7b;
+}
+.iconStyleO{
+    font-size:45rpx;
+}
+.manMore{
+    float:right;
+    margin-right:10rpx;
+}
+/* 页面底部功能 */
+.manOptions{
+    width:100%;
+    height:90rpx;
+    position:fixed;
+    bottom:0rpx;
+    left:0rpx;
+    background:#E2C2B7;
+    z-index:10;
+}
+.manOptionsLeft,.manOptionsRight{
+    width:35%;
+    height:90rpx;
+    line-height:90rpx;
+    float:left;
+    text-align:center;
+    font-size:26rpx;
+    color:#D74826;
+}
+.manOptionsRight{
+    width:65%;
+    float:left;
+    color:#fff;
+    background:#E03C18;
+}
+/* 其它功能 */
+.manOtherOpt{
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.3);
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    z-index:100;
+}
+.manOtherOpt>view:nth-child(1){
+    width:100%;
+    height:650rpx;
+    margin-top:30rpx;
+}
+.otherOptContent{
+    width:100%;
+    height:520rpx;
+    position:absolute;
+    bottom:0rpx;
+    left:0rpx;
+    background:#EEEDF2;
+}
+.otherOptContent view{
+    width:100%;
+    height:100rpx;
+    line-height:100rpx;
+    text-align:center;
+    background:#fff;
+    border-bottom:1rpx solid #efefef;
+}
+.otherOptContent view:nth-child(5){
+    margin-top:10rpx;
+}

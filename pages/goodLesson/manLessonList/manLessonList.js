@@ -133,11 +133,11 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-        return {
-            path:'pages/index/index'
-        }
-    },
+    // onShareAppMessage: function () {
+    //     return {
+    //         path:'pages/index/index'
+    //     }
+    // },
     delActive:function(e){
         getApp().request({
             url:'org/delete_act',

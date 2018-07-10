@@ -97,9 +97,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     submitData: function (e) {
         let that = this
         let sendData = e.detail.value;

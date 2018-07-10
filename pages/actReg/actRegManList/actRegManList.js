@@ -155,11 +155,8 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-        return {
-            path:'/pages/index/index'
-        }
-    },
+    // onShareAppMessage: function () {
+    // },
     toLessonInfo: function (e) {
         wx.navigateTo({
             url: '../actRegListInfo/actRegListInfo?actId=' + e.currentTarget.dataset.id,

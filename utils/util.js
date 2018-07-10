@@ -9,6 +9,17 @@ const formatTime = date => {
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+const dateTime = date => {
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+    const second = date.getSeconds()
+
+    return [month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
+}
+
 const formatTimer = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -40,6 +51,12 @@ const formatDateO = date => {
     const second = date.getSeconds()
 
     return [year, month, day].map(formatNumber).join('.')
+}
+const dayMonth = date => {
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+
+    return [month, day].map(formatNumber).join('-')
 }
 
 const formatNumber = n => {
@@ -147,4 +164,6 @@ module.exports = {
     square: square,
     rect: rect,
     liteDate: liteDate,
+    dayMonth: dayMonth,
+    dateTime: dateTime
 }

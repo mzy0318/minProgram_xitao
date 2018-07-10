@@ -252,10 +252,6 @@ Page({
                                 "policy": res.data.data.policy,
                                 'success_action_status': '200'
                             }
-
-                            // setTimeout(function() {
-                            //     wx.hideLoading()
-                            // }, 5000)
                             wx.uploadFile({
                                 url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
                                 name: 'file',
@@ -272,7 +268,6 @@ Page({
                                         success: function(r) {
                                             r = r.data
                                             if (r.code == 0) {
-                                                // console.log("上传到服务器出错");
                                                 wx.showToast({
                                                     title: '上传到服务器出错',
                                                     icon: 'none'

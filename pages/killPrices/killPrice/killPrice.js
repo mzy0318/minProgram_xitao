@@ -1,4 +1,5 @@
 // pages/killPrices/killPrice/killPrice.js
+var utils = require("../../../utils/util.js")
 Page({
 
     /**
@@ -21,6 +22,10 @@ Page({
             },
             method:'post',
             success: res => {
+                res.data.data.list = utils.map(res.data.data.list,function(one){
+                  one.banner_image_url = utils.square(one.banner_image_url,100)
+                  return one
+                })
                 this.setData({
                     pageData: res.data.data.list
                 })
@@ -128,9 +133,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     toPriceInfo:function(e){
         wx.navigateTo({
             url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,

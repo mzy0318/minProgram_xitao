@@ -2,6 +2,7 @@
     width:750rpx;
     min-height:1207rpx;
     background:#fff;
+    margin-bottom: 20rpx;
 }
 .chooseModeClass{
     width:750rpx;

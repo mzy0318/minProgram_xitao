@@ -146,7 +146,10 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        let that = this;
+        if(res.menu == 'menu'){
+            path: 'pages/index/index?pageId=3&actId=' + that.data.actId + '&joinId=' + that.data.joinId
+        }
     },
     toCollageJoin: function (e) {
         let formInfo = JSON.stringify(e.currentTarget.dataset.forminfo)

@@ -8,97 +8,147 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         orgId: 0,
-        modeCode:'one',
+        modeCode: 'one',
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        optionsUrl: [
-            {
+        optionsUrl: [{
                 tag: 'school_intro',
-                url: '../baseOptions/schoolInfo/schoolInfo',     //学校简介
+                url: '../baseOptions/schoolInfo/schoolInfo', //学校简介
             },
             {
                 tag: 'lesson_navi',
-                url: '../courses/course/course',     //课程导航
+                url: '../courses/course/course', //课程导航
             },
             {
                 tag: 'campus',
-                url: '../baseOptions/schoolList/schoolList',     //校区列表
+                url: '../baseOptions/schoolList/schoolList', //校区列表
             },
             {
                 tag: 'teacher',
-                url: '../baseOptions/teachers/teachers',     //师资力量
+                url: '../baseOptions/teachers/teachers', //师资力量
             },
             {
                 tag: 'student',
-                url: '../baseOptions/studentStyle/studentStyle',     //学员风采
+                url: '../baseOptions/studentStyle/studentStyle', //学员风采
             },
             {
                 tag: 'enlist',
-                url: '../actReg/actRegUserList/actRegUserList',     //活动报名
+                url: '../actReg/actRegUserList/actRegUserList', //活动报名
             },
             {
                 tag: 'contact',
-                url: '../baseOptions/contactUs/contactUs',     //联系我们
+                url: '../baseOptions/contactUs/contactUs', //联系我们
             },
             {
                 tag: 'feedback',
-                url: '../baseOptions/opinions/opinions',     //意见建议
+                url: '../baseOptions/opinions/opinions', //意见建议
             },
             {
                 tag: 'more',
-                url: '../morePage/morePage',     //更多
+                url: '../morePage/morePage', //更多
             },
             {
                 tag: 'bargain',
-                url: '../killPrices/killPrice/killPrice',     //帮我砍价
+                url: '../killPrices/killPrice/killPrice', //帮我砍价
             },
             {
                 tag: 'group',
-                url: '../collage/collageList/collageList',     //拼团
+                url: '../collage/collageList/collageList', //拼团
             },
             {
                 tag: 'lesson_one',
-                url: '../goodLesson/goodLessonList/goodLessonList',     //一元好课
+                url: '../goodLesson/goodLessonList/goodLessonList', //一元好课
             },
             {
                 tag: 'video_card',
-                url: '../videos/userVideoList/userVideoList',     //视频贺卡
+                url: '../videos/userVideoList/userVideoList', //视频贺卡
             },
         ],
         pageData: '',
         isGetUser: false,
-        paintData: [
-            {
-                backgroundColor: '#FEB33C',
-                width: '250rpx',
-            }, {
-                backgroundColor: '#50D0AD',
-                width: '250rpx',
-            }, {
-                backgroundColor: '#FC407A',
-                width: '250rpx',
-            }, {
-                backgroundColor: '#FF633D',
-                width: '250rpx',
-            }, {
-                backgroundColor: '#3EA6FD',
-                width: '500rpx',
-            }, {
-                backgroundColor: '#C55EF5',
-                width: '250rpx',
-            }, {
-                backgroundColor: '#F8964D',
-                width: '250rpx',
-            }, {
-                backgroundColor: '#7F3CD9',
-                width: '250rpx',
-            }
-        ],
+        paintData: [{
+            backgroundColor: '#FEB33C',
+            width: '250rpx',
+        }, {
+            backgroundColor: '#50D0AD',
+            width: '250rpx',
+        }, {
+            backgroundColor: '#FC407A',
+            width: '250rpx',
+        }, {
+            backgroundColor: '#FF633D',
+            width: '250rpx',
+        }, {
+            backgroundColor: '#3EA6FD',
+            width: '500rpx',
+        }, {
+            backgroundColor: '#C55EF5',
+            width: '250rpx',
+        }, {
+            backgroundColor: '#F8964D',
+            width: '250rpx',
+        }, {
+            backgroundColor: '#7F3CD9',
+            width: '250rpx',
+        }],
     },
     //事件处理函数
-    onLoad: function (options) {
+    onLoad: function(options) {
+        if (Number(options.pageId) == 1) {
+            wx.navigateTo({
+                url: '../killPrices/killPriceInfo/killPriceInfo?id=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 2){
+            wx.navigateTo({
+                url: '../collage/collageInfo/collageInfo?actId=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 3){
+            wx.navigateTo({
+                url: '../collage/collageInfo/collageInfo?actId=' + options.actId + '&options.actId=' + options.joinId,
+            })
+        } else if (Number(options.pageId) == 4){
+            wx.navigateTo({
+                url: '../goodLesson/lessonListInfo/lessonListInfo?actId=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 5){
+            wx.navigateTo({
+                url: '../killPrices/killPriceListInfo/killPriceListInfo?actId=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 6){
+            wx.navigateTo({
+                url: '../videos/videoListInfo/videoListInfo?id=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 7){
+            wx.navigateTo({
+                url: '../baseOptions/schoolInfo/schoolInfo',
+            })
+        } else if (Number(options.pageId) == 8){
+            wx.navigateTo({
+                url: '../baseOptions/opinions/opinions',
+            })
+        } else if (Number(options.pageId) == 9){
+            wx.navigateTo({
+                url: '../baseOptions/teachers/teachers',
+            })
+        } else if (Number(options.pageId) == 10){
+            wx.navigateTo({
+                url: '../actReg/actRegListInfo/actRegListInfo?actId=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 11){
+            wx.navigateTo({
+                url: '../baseOptions/schoolList/schoolList',
+            })
+        } else if (Number(options.pageId) == 12){
+            wx.navigateTo({
+                url: '../baseOptions/studentStyle/studentStyle',
+            })
+        } else if (Number(options.pageId) == 13){
+            wx.navigateTo({
+                url: '../baseOptions/contactUs/contactUs',
+            })
+        }
         wx.showLoading({
             title: '',
-            mask:true,
+            mask: true,
         })
         let that = this;
         wx.showShareMenu({
@@ -162,7 +212,7 @@ Page({
             })
         }
     },
-    onShow:function(){
+    onShow: function() {
         let that = this;
         // 选择模板
         if (Number(wx.getStorageSync('schoolModel')) == 2) {
@@ -177,11 +227,11 @@ Page({
             that.setData({
                 modeCode: 'one'
             })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 3 || Number(wx.getStorageSync('schoolModel')) == 12){
+        } else if (Number(wx.getStorageSync('schoolModel')) == 3 || Number(wx.getStorageSync('schoolModel')) == 12) {
             that.setData({
                 modeCode: 'four'
             })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 17){
+        } else if (Number(wx.getStorageSync('schoolModel')) == 17) {
             that.setData({
                 modeCode: 'five'
             })
@@ -216,29 +266,29 @@ Page({
             }
         })
     },
-    redirectPage: function (res) {
+    redirectPage: function(res) {
         wx.navigateTo({
             url: res.target.dataset.url,
         })
     },
-    nav: function (e) {
+    nav: function(e) {
         wx.navigateTo({
             url: e.currentTarget.dataset.url,
         })
     },
-    getUserInfo: function (e) {
+    getUserInfo: function(e) {
         let that = this;
         wx.setStorageSync('userInfo', JSON.stringify(e.detail.userInfo));
         that.setData({
             isGetUser: true
         })
     },
-    toContentPage: function (e) {
+    toContentPage: function(e) {
         wx.navigateTo({
             url: e.currentTarget.dataset.url,
         })
     },
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
         let that = this
         getApp().request({
             url: "home",
@@ -272,7 +322,7 @@ Page({
         // function pullDown(){
         // }
     },
-    toCourseInfo: function (e) {
+    toCourseInfo: function(e) {
         wx.navigateTo({
             url: '../courses/courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
         })

@@ -1,10 +1,11 @@
-
+page{
+  background: #f2f2f2;
+}
 .opinionWrap {
     width: 750rpx;
     height: 1206rpx;
     background: #f2f2f2;
 }
-
 .opinionImg {
     width: 750rpx;
     height: 290rpx;

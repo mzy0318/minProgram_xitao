@@ -15,6 +15,7 @@
     width:670rpx;
     line-height:60rpx;
     font-size:30rpx;
+    text-indent: 20rpx;
 }
 .manListContentMiddel{
     width:710rpx;
@@ -43,7 +44,9 @@
 .contentMiddelRightChild{
     width:250rpx;
     line-height:50rpx;
-    color:#393939;
+    /* color:#393939; */
+    color:#999;
+    border-radius: 5rpx;
     text-align:center;
     font-size:30rpx;
     background:#F2F2F2;
@@ -63,7 +66,8 @@
     text-align:center;
     margin-top:20rpx;
     float:left;
-    border-right:1rpx solid #7b7b7b;
+    /* border-right:1rpx solid #7b7b7b; */
+    border-right:1rpx solid #D8D8D8;
     color:#CA4535;
 }
 button.contentBottomChild::after{

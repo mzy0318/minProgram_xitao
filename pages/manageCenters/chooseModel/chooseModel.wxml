@@ -4,7 +4,7 @@
         <view class='{{classId == index?"borderColor":"chooseModeTitle"}}' wx:for='{{pageData.catalog}}' data-num='{{index}}' bindtap='switchTheme' data-name='{{item.name}}'>{{item.name}}</view>
     </view>
     <view class='chooseModeTheme' wx:for='{{pageTheme}}' data-image='{{item.image}}' data-bg='{{item.bg}}' bindtap='toManageEdit'>
-        <view class='chooseModeThemeImg'><image src='{{item.image}}' mode='scaleToFill' /></view>
+        <view class='chooseModeThemeImg'><image src='{{item.image}}' mode='aspectFill' /></view>
         <view class='chooseModeThemeName'>{{item.name}}</view>
     </view>
 </view>

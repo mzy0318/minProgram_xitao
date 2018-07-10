@@ -1,0 +1,26 @@
+<view class='manListWrap' bindtap='showOpt' data-id='0' data-title='{{item.title}}' wx:for='{{pageData}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>
+    <view class='manListImage'><image src='{{item.cover.url}}'></image></view>
+    <view class='manListContent'>
+        <view class='manListTitle'>{{item.title}}</view>
+        <view class='manMore'><text class='iconfont icon-gengduo iconStyleO'></text></view>
+        <view class='manListOther'>
+            <view><text class='iconfont icon-videoplay iconStyle'></text><text>{{item.video.length}}</text></view>
+            <view><text class='iconfont icon-wodedingdan iconStyle'></text><text>1</text></view>
+            <view><text class='iconfont icon-date iconStyle'></text><text>{{item.create_time}}</text></view>
+        </view>
+    </view>
+</view>
+<view class='manOptions'>
+    <view class='manOptionsLeft' data-id='3' bindtap='showOpt'>返回</view>
+    <view class='manOptionsRight' data-id='2' bindtap='showOpt' >发布新视频</view>
+</view>
+<view class='manOtherOpt' hidden='{{isOptions}}'>
+    <view data-id='1' bindtap='showOpt'></view>
+    <view class='otherOptContent'>
+        <view style='color:#E8525F' bindtap='actOption' data-id='0'>编辑</view>
+        <view style='color:#8F73BE' bindtap='actOption' data-id='1'>删除</view>
+        <view style='color:#3BBED2' bindtap='actOption' data-id='2'>查看</view>
+        <view style='color:#32962A' bindtap='actOption' data-id='3'>分享</view>
+        <view style='color:#000' data-id='1' bindtap='showOpt'>取消</view>
+    </view>
+</view>

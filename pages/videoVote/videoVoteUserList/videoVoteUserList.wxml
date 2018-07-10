@@ -1,0 +1,19 @@
+<view class='voteUserWrap'>
+    <view class='voteUserContent'>
+        <image mode=''></image>
+        <view class='contentLeft'>47</view>
+        <view class='contentRight'>投票中</view>
+        <view class='contentbottom'></view>
+    </view>
+    <view class='voteUserTitle'>小朋友15秒才艺展示!</view>
+</view>
+<view class='voteUserWrap'>
+    <view class='voteUserContent'>
+        <image mode=''></image>
+        <view class='contentLeft'>47</view>
+        <view class='contentRight'>投票中</view>
+        <view class='contentbottom'></view>
+    </view>
+    <view class='voteUserTitle'>小朋友15秒才艺展示!</view>
+</view>
+

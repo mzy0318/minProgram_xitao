@@ -1,0 +1,45 @@
+<form bindsubmit='submitData'>
+    <view class='editTitle'>封面</view>
+    <view class='editImage'>
+        <view class='editImageContent'>
+            <image src='{{coverImage}}' mode='scaleToFill' bindtap='uploadImage'></image>
+        </view>
+    </view>
+    <view class='editTitle'>基本
+        <view>(分类和标签为选填)</view>
+    </view>
+    <view class='editBase'>
+        <view class='editBaseContent'>
+            <text>标题</text>
+            <input name='title' value='{{pageData.title}}'></input>
+        </view>
+        <view class='editBaseContent'>
+            <text>分类</text>
+            <input value='{{pageData.catalog}}' name='catalog'></input>
+        </view>
+        <view class='editBaseContent'>
+            <text>标签</text>
+            <input value='{{pageData.tag}}' name='tag'></input>
+        </view>
+    </view>
+    <view class='editTitle'>描述
+        <view>(选填)</view>
+    </view>
+    <view class='editDescribe'>
+        <view class='editDescribeContent'>
+            <textarea value='{{pageData.description}}' name='description'></textarea>
+        </view>
+    </view>
+    <view class='editTitle'>视频
+        <view>(不能超过60秒)</view>
+    </view>
+    <view class='editVideos'>
+        <view class='empty'></view>
+        <view class='addVideo' bindtap='uploadVideo'>＋</view>
+        <view class='editVideosContent' wx:for='{{videos}}' wx:key='item.id'>
+            <video src='{{item}}'></video>
+            <view class='delVideo' bindtap='delVideo' data-index='{{index}}'>×</view>
+        </view>
+    </view>
+    <button class='editBtn' form-type='submit'>确认发布</button>
+</form>
