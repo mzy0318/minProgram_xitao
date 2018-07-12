@@ -1,0 +1,263 @@
+page{
+    background:#F7F3F2;
+    padding-bottom:20rpx;
+}
+swiper{
+    width:750rpx;
+    height:330rpx;
+}
+.voteInfoImage{
+    width:750rpx;
+    height:330rpx;
+    background:#fff;
+}
+.voteInfoImage image{
+    width:750rpx;
+    height:330rpx;
+}
+/* 视频部分 */
+.userInfoVideo{ 
+    width:710rpx;
+    min-height:100rpx;
+    margin:50rpx auto 0rpx;
+    background:transparent;
+    box-shadow: 2px 2px 2px 2px #70D0DE,-2px -2px 2px 2px #70D0DE;
+    border-radius:5px;
+}
+.userInfoTitle{
+    width:100%;
+    height:150rpx;
+    background:#5CCDDF;
+    overflow:hidden;
+}
+.userInfoTitleTop,.userInfoTitleBottom{
+    width:680rpx;
+    height:60rpx;
+    font-size:30rpx;
+    color:#fff;
+    margin:15rpx auto 0rpx;
+}
+.userInfoTitleTop view{
+    width:50%;
+    height:60rpx;
+    font-size:30rpx;
+    float:left;
+}
+.userInfoTitleTop view:nth-child(2){
+    float:right;
+    text-align:right;
+}
+.userInfoContent{
+    width:640rpx;
+    height:640rpx;
+    background:#fff;
+    margin:30rpx auto 0rpx;
+}
+.userInfoContent video{
+    width:640rpx;
+    height:640rpx;
+}
+.userInfoText{
+    width:640rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    margin:10rpx auto;
+}
+.userInfoBtn{
+    width:620rpx;
+    min-height:100rpx;
+    margin:10rpx auto 10rpx;
+    overflow:hidden;
+}
+.userInfoBtn button{
+    width:290rpx;
+    height:80rpx;
+    line-height:80rpx;
+    float:left;
+    margin-top:34rpx;
+    color:#fff;
+    font-size:30rpx;
+}
+.userInfoBtn button:nth-child(5){
+    width:290rpx;
+    height:80rpx;
+    line-height:80rpx;
+    clear:both;
+    color:#fff;
+    font-size:30rpx;
+    background:#000;
+    margin-left:165rpx;
+}
+.userInfoBtn button:nth-child(even){
+    margin-left:40rpx;
+}
+.userInfoBtn button:nth-child(1),.userInfoBtn button:nth-child(2){
+    background:#F67685;
+    margin-top:10rpx;
+}
+.userInfoBtn button:nth-child(3),.userInfoBtn button:nth-child(4){
+    background:#009900;
+}
+.userInfoEncode{
+    width:100%;
+    height:590rpx;
+    background:#fff;
+    margin-top:20rpx;
+    overflow:hidden;
+}
+.userInfoEncodeImage{
+    width:390rpx;
+    height:390rpx;
+    background:lightgreen;
+    margin:20rpx auto 0rpx;
+}
+.userInfoEncodeImage image{
+    width:390rpx;
+    height:390rpx;
+}
+.userInfoEncodeTitle{
+    width:100%;
+    height:50rpx;
+    line-height:50rpx;
+    font-size:28rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+.userInfoEncode button{
+    width:400rpx;
+    height:70rpx;
+    line-height:70rpx;
+    background:#CC2200;
+    color:#fff;
+    font-size:30rpx;
+    margin-top:25rpx;
+}
+
+/* 活动介绍 */
+.activeInfoWrap{
+    width:720rpx;
+    min-height:100rpx;
+    background:transparent;
+    margin:20rpx auto 0rpx;
+}
+/* 活动介绍  活动说明 */
+.activeInfoInfo{
+    width:720rpx;
+    height:410rpx;
+    background:#fff;
+    position:relative;
+}
+.activeInfoInfoTitle{
+    width:170rpx;
+    height:60rpx;
+    background:#0577AB;
+    color:#fff;
+    border-radius:0px 0px 5px 5px;
+    position:absolute;
+    top:0rpx;
+    left:275rpx;
+    font-size:26rpx;
+    text-align:center;
+    line-height:60rpx;
+}
+.activeInfoInfo>button{
+    width:300rpx;
+    height:60rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#CC2200;
+    font-size:28rpx;
+    margin-top:40rpx;
+}
+.activeInfoInfoTime{
+    width:680rpx;
+    height:100rpx;
+    margin:0rpx auto 30rpx;
+}
+.activeInfoInfoTime view{
+    width:680rpx;
+    height:50rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+}
+.activeInfoInfoTime view:nth-child(2){
+    text-align:center;
+}
+.empty{
+    width:100%;
+    height:45rpx;
+    background:transparent;
+}
+/* 活动介绍  分享活动 */
+.activeInfoShare{
+    width:720rpx;
+    height:610rpx;
+    background:#fff;
+    position:relative;
+    margin-top:20rpx; 
+    overflow:hidden;
+}
+.activeInfoShareImage{
+    width:400rpx;
+    height:400rpx;
+    margin:90rpx auto 0rpx;
+    background:lightgreen;
+}
+.activeInfoShareImage image{
+    width:400rpx;
+    height:400rpx;
+}
+.activeInfoShare button{
+    width:400rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    color:#fff;
+    background:#CC2200;
+    margin-top:30rpx;
+}
+/* 活动介绍 活动详情 */
+.activeInfoImages{
+    width:720rpx;
+    min-height:200rpx;
+    background:#fff;
+    margin-top:20rpx;
+    position:relative;
+}
+.activeInfoImagesText{
+    width:680rpx;
+    min-height:60rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    margin:0rpx auto;
+}
+.activeInfoImage{
+    width:680rpx;
+    min-height:100rpx;
+    background:#fff;
+    margin:0rpx auto 20rpx;
+}
+.activeInfoImage image{
+    width:680rpx;
+}
+.emptyImage{
+    width:720rpx;
+    height:100rpx;
+    background:transparent;
+}
+/* 活动介绍 活动规则 */
+.activeInfoRule{
+    width:720rpx;
+    min-height:200rpx;
+    background:#fff;
+    margin-top:20rpx;
+    position:relative;
+    overflow:hidden;
+}
+.activeInfoRuleImage{
+    width:680rpx;
+    height:500rpx;
+    background-color:lightgreen;
+    margin:100rpx auto 20rpx;
+}

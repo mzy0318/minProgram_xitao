@@ -1,0 +1,70 @@
+<swiper indicator-dots autoplay>
+    <swiper-item  wx:for='{{pageData.ad}}' wx:key='{{item.id}}'>
+        <view class='voteInfoImage'><image  src='{{item.url}}' mode='aspectFill'></image></view>
+    </swiper-item>
+</swiper>
+<view class='userInfoVideo'>
+    <view class='userInfoTitle'>
+        <view class='userInfoTitleTop'>
+            <view>{{pageData.number}}号   {{pageData.nickname}}</view>
+            <view>投票:{{pageData.vote_amount}}  访问:{{pageData.view_amount}}</view>
+        </view>
+        <view class='userInfoTitleBottom'>排名: {{pageData.rank}}</view>
+    </view>
+    <view class='userInfoContent'><video src='{{pageData.video.url}}' poster='{{pageData.cover.url}}'></video></view>
+    <view class='userInfoText'>宣言:{{pageData.declaration}}</view>
+    <view class='userInfoBtn'>
+        <button data-id='0' bindtap='btnOptions'>我要投票</button>
+        <button data-id='1' bindtap='btnOptions' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='0'>我要报名</button>
+        <button open-type='share'>分享拉票</button>
+        <button data-id='3' bindtap='btnOptions'>我的封面</button>
+        <button bindtap='btnOptions' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='1' hidden='{{!pageData.is_self}}'>修改</button>
+    </view>
+    <view class='userInfoEncode'>
+        <view class='userInfoEncodeImage' bindtap='viewImage'><image  src='{{encodeImage}}' mode='scaleToFill'></image></view>
+        <view class='userInfoEncodeTitle'>点击二维码保存,分享到朋友圈</view>
+        <button>复制网址发朋友圈</button>
+    </view>
+</view>
+<!-- 活动规则 -->
+<view class='activeInfoWrap' >
+    <!-- 活动说明 -->
+    <view class='activeInfoInfo'>
+        <view class='activeInfoInfoTitle'>活动说明</view>
+        <view class='empty'></view>
+        <view class='activeInfoInfoTime'>
+            <view>报名时间:</view>
+            <view>{{pageData.enlist_start_time}} 至 {{pageData.enlist_end_time}}</view>
+        </view>
+        <view class='activeInfoInfoTime'>
+            <view>投票时间:</view>
+            <view>{{pageData.vote_start_time}} 至 {{pageData.vote_end_time}}</view>
+        </view>
+        <button bindtap='toIndex'>了解机构 ></button>
+    </view>
+    <!-- 活动分享 -->
+    <view class='activeInfoShare'>
+        <view class='activeInfoInfoTitle'>活动分享</view>
+        <view class='activeInfoShareImage' bindtap='viewImage'><image src='{{encodeImage}}' mode='scaleToFill'></image></view>
+        <button>分享到朋友圈</button>
+    </view>
+    <!-- 活动详情 -->
+    <view class='activeInfoImages' hidden='{{isTitleOne}}'>
+        <view class='activeInfoInfoTitle'>{{pageData.title1}}</view>
+        <view class='emptyImage'></view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image1}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'>{{pageData.content1}}</view>
+    </view>
+    <view class='activeInfoImages' hidden='{{isTitleTwo}}'>
+        <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+        <view class='emptyImage'></view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image2}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'>{{pageData.content2}}</view>
+    </view>
+    <view class='activeInfoImages' hidden='{{isTitleThree}}'>
+        <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+        <view class='emptyImage'></view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image3}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'>{{pageData.content3}}</view>
+    </view>
+</view>

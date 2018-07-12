@@ -1,0 +1,170 @@
+<swiper indicator-dots autoplay>
+    <swiper-item wx:for='{{pageData.ad}}' wx:key='{{item.id}}'>
+        <view class='voteInfoImage'><image src='{{item.url}}' mode='aspectFill'></image></view>
+    </swiper-item>
+</swiper>
+<view class='voteInfoStatus'>
+    <view class='voteInfoStatusChild'>
+        <view>已报名</view>
+        <view>{{pageData.joiner_amount}}</view>
+    </view>
+    <view class='voteInfoStatusChild'>
+        <view>投票人数</view>
+        <view>{{pageData.vote_amount}}</view>
+    </view>
+    <view class='voteInfoStatusChild'>
+        <view>浏览量</view>
+        <view>{{pageData.view_amount}}</view>
+    </view>
+</view>
+<view class='voteInfoInput'>
+    <input placeholder='请输入编号或名字'></input>
+    <button>搜索</button>
+</view>
+<view class='voteInfoOptions'>
+    <view wx:for='{{optData}}' wx:key='{{index}}' bindtap='showContent' style='background-color:{{index==contentIndex?"#0577AB":"#5EC8DB"}}' data-index='{{index}}'>{{item.name}}</view>
+</view>
+<!-- 活动介绍 -->
+<view class='activeInfoWrap' hidden='{{isActive}}'>
+    <!-- 活动说明 -->
+    <view class='activeInfoInfo'>
+        <view class='activeInfoInfoTitle'>活动说明</view>
+        <view class='empty'></view>
+        <view class='activeInfoInfoTime'>
+            <view>报名时间:</view>
+            <view>{{pageData.enlist_start_time}} 至 {{pageData.enlist_end_time}}</view>
+        </view>
+        <view class='activeInfoInfoTime'>
+            <view>投票时间:</view>
+            <view>{{pageData.vote_start_time}} 至 {{pageData.vote_end_time}}</view>
+        </view>
+        <button bindtap='toIndex'>了解机构 ></button>
+    </view>
+    <!-- 活动分享 -->
+    <view class='activeInfoShare'>
+        <view class='activeInfoInfoTitle'>活动分享</view>
+        <view class='activeInfoShareImage'><image src='{{enCodeImage}}' mode='scaleToFill'></image></view>
+        <button>分享到朋友圈</button>
+    </view>
+    <!-- 活动详情 -->
+    <view class='activeInfoImages' hidden='{{isTitleOne}}'>
+        <view class='activeInfoInfoTitle'>{{pageData.title1}}</view>
+        <view class='emptyImage'></view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image1}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'>{{pageData.content1}}</view>
+    </view>
+    <view class='activeInfoImages' hidden='{{isTitleTwo}}'>
+        <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+        <view class='emptyImage'></view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image2}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'>{{pageData.content2}}</view>
+    </view>
+    <view class='activeInfoImages' hidden='{{isTitleThree}}'>
+        <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+        <view class='emptyImage'></view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image3}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'>{{pageData.content3}}</view>
+    </view>
+</view>
+<!-- 前十名 -->
+<view class='activeInfoTop' hidden='{{isTop}}'>
+    <view class='activeInfoTopTitle'>
+        <view>排名</view>
+        <view>编号</view>
+        <view>名称</view>
+        <view>票数</view>
+    </view>
+    <view class='activeInfoTopContent' wx:for='{{topList}}' wx:key='{{item.id}}'>
+        <view>{{index+1}}</view>
+        <view>{{item.number}}</view>
+        <view>{{item.nickname}}</view>
+        <view>{{item.vote_amount}}</view>
+    </view>
+</view>
+<!-- 投票排行 -->
+<view class='activeInfoRank' hidden='{{isRank}}'>
+    <view class='activeInfoRankLeft' >
+        <view class='activeInfoRankContent' wx:for='{{rangeList}}' wx:key='{{index}}'>
+            <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}' ><image src='{{item.cover.url}}'  mode='widthFix'></image></view>
+            <view class='contentBottom' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
+            <view class='contentNum' wx:if='{{index%2 == 0}}'>{{item.number}}</view>
+            <view class='contentVoteNum' wx:if='{{index%2 == 0}}'>{{item.vote_amount}}</view>
+        </view>
+    </view>
+    <view class='activeInfoRankRight'>
+        <view class='activeInfoRankContent' wx:for='{{rangeList}}'>
+            <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+            <view class='contentBottom' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
+            <view class='contentNum' wx:if='{{index%2 == 1}}'>{{item.number}}</view>
+            <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
+        </view> 
+    </view>
+</view>
+<!-- 最新参赛 -->
+<view class='activeInfoJoin' hidden='{{isJoin}}'>
+    <view class='activeInfoRank'>
+        <view class='activeInfoRankLeft'>
+            <view class='activeInfoRankContent'  wx:for='{{newList}}'>
+                <view class='contentTop' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+                <view class='contentBottom' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
+                <view class='contentNum' wx:if='{{index%2 == 0}}'>{{item.number}}</view>
+                <view class='contentVoteNum' wx:if='{{index%2 == 0}}'>{{item.vote_amount}}</view>
+            </view>
+        </view>
+        <view class='activeInfoRankRight'>
+            <view class='activeInfoRankContent'  wx:for='{{newList}}'>
+                <view class='contentTop' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+                <view class='contentBottom' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
+                <view class='contentNum' wx:if='{{index%2 == 1}}'>{{item.number}}</view>
+                <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
+            </view> 
+        </view>
+    </view>
+    <view class='activeInfoWrap'>
+        <!-- 活动说明 -->
+        <view class='activeInfoInfo'>
+            <view class='activeInfoInfoTitle'>活动说明</view>
+        <view class='empty'></view>
+        <view class='activeInfoInfoTime'>
+            <view>报名时间:</view>
+            <view>{{pageData.enlist_start_time}} 至 {{pageData.enlist_end_time}}</view>
+        </view>
+        <view class='activeInfoInfoTime'>
+            <view>投票时间:</view>
+            <view>{{pageData.vote_start_time}} 至 {{pageData.vote_end_time}}</view>
+        </view>
+        <button bindtap='toIndex'>了解机构 ></button>
+        </view>
+        <!-- 活动分享 -->
+        <view class='activeInfoShare'>
+            <view class='activeInfoInfoTitle'>活动分享</view>
+            <view class='activeInfoShareImage'><image src='{{enCodeImage}}' mode='scaleToFill'></image></view>
+            <button>分享到朋友圈</button>
+        </view>
+        <!-- 活动详情 -->
+        <view class='activeInfoImages' hidden='{{isTitleOne}}'>
+            <view class='activeInfoInfoTitle'>{{pageData.title1}}</view>
+            <view class='emptyImage'></view>
+            <view class='activeInfoImage' wx:for='{{pageData.act_image1}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+            <view class='activeInfoImagesText'>{{pageData.content1}}</view>
+        </view>
+        <view class='activeInfoImages' hidden='{{isTitleTwo}}'>
+            <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+            <view class='emptyImage'></view>
+            <view class='activeInfoImage' wx:for='{{pageData.act_image2}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+            <view class='activeInfoImagesText'>{{pageData.content2}}</view>
+        </view>
+        <view class='activeInfoImages' hidden='{{isTitleThree}}'>
+            <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+            <view class='emptyImage'></view>
+            <view class='activeInfoImage' wx:for='{{pageData.act_image3}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+            <view class='activeInfoImagesText'>{{pageData.content3}}</view>
+        </view>
+        <!-- 投票规则  -->
+        <!-- <view class='activeInfoRule'>
+            <view class='activeInfoInfoTitle'>活动规则</view>
+            <view class='activeInfoRuleImage'><image></image></view>
+            <view class='activeInfoImagesText'>我就了解一下</view>
+        </view> -->
+    </view>
+</view>

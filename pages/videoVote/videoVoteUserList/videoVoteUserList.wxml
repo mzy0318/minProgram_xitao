@@ -1,19 +1,11 @@
-<view class='voteUserWrap'>
+<view class='voteUserWrap' wx:for='{{pageData}}' wx:key='{{item.id}}' data-actid='{{item.id}}' bindtap='toInfo'>
     <view class='voteUserContent'>
-        <image mode=''></image>
-        <view class='contentLeft'>47</view>
-        <view class='contentRight'>投票中</view>
-        <view class='contentbottom'></view>
+        <image  src='{{item.cover.url}}' mode='widthFix'></image>
+        <view class='contentLeft'>{{item.view_amount}}</view>
+        <view class='contentRight'>{{item.status}}</view>
+        <view class='contentbottom'>{{item.vote_start_time}} 至 {{item.vote_end_time}}</view>
     </view>
-    <view class='voteUserTitle'>小朋友15秒才艺展示!</view>
+    <view class='voteUserTitle'>{{item.title}}</view>
 </view>
-<view class='voteUserWrap'>
-    <view class='voteUserContent'>
-        <image mode=''></image>
-        <view class='contentLeft'>47</view>
-        <view class='contentRight'>投票中</view>
-        <view class='contentbottom'></view>
-    </view>
-    <view class='voteUserTitle'>小朋友15秒才艺展示!</view>
-</view>
+
 

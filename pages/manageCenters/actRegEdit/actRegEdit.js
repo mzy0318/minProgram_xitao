@@ -167,10 +167,6 @@ Page({
                             "policy": res.data.data.policy,
                             'success_action_status': '200'
                         }
-                        wx.showToast({
-                            title: '获取Key成功',
-                            icon: 'success'
-                        })
                         wx.uploadFile({
                             url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
                             name: 'file',

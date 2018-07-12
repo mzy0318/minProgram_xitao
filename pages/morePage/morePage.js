@@ -61,12 +61,12 @@ Page({
                 url: '../goodLesson/goodLessonList/goodLessonList',
                 background: '#FD9D22',
             },
-            // {
-            //     name: '视频投票',
-            //     iconfont: 'iconfont icon-zan1 iconfontStyle iconfontSize',
-            //     url: '../baseOptions/schoolInfo/schoolInfo',
-            //     background: '#8990FA',
-            // },
+            {
+                name: '视频投票',
+                iconfont: 'iconfont icon-zan1 iconfontStyle iconfontSize',
+                url: '../videoVote/videoVoteUserList/videoVoteUserList',
+                background: '#8990FA',
+            },
             {
                 name: '视频课堂',
                 iconfont: 'iconfont icon-z-shipin iconfontStyle iconfontSize',

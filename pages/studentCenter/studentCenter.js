@@ -55,13 +55,13 @@ Page({
             //     url: '../killPrices/killPriceList/killPriceList',
             //     pageTypeStu: 7,
             // },
-            // {
-            //     name: '视频投票',
-            //     iconfont: 'iconfont icon-zan1 iconStyle',
-            //     background: '#8990FA',
-            //     url: '../killPrices/killPriceList/killPriceList',
-            //     pageTypeStu: 8,
-            // }, 
+            {
+                name: '视频投票',
+                iconfont: 'iconfont icon-zan1 iconStyle',
+                background: '#8990FA',
+                url: '../videoVote/videoVoteStuList/videoVoteStuList',
+                pageTypeStu: 8,
+            }, 
             // {
             //     name: '视频贺卡',
             //     iconfont: 'iconfont icon-meiguihua iconStyle',
@@ -76,13 +76,13 @@ Page({
                 url: '../killPrices/killPriceList/killPriceList',
                 pageTypeStu: 10,
             },
-            // {
-            //     name: '微视频课堂',
-            //     iconfont: 'iconfont icon-shipin1 iconStyle',
-            //     background: '#FE7FC2',
-            //     url: '../killPrices/killPriceList/killPriceList',
-            //     pageTypeStu: 11,
-            // },
+            {
+                name: '微视频课堂',
+                iconfont: 'iconfont icon-shipin1 iconStyle',
+                background: '#FE7FC2',
+                url: '../videoClass/videoClassStuList/videoClassStuList',
+                pageTypeStu: 11,
+            },
             // {
             //     name: '视频作业',
             //     iconfont: 'iconfont icon-job-task iconStyle',

@@ -1,0 +1,10 @@
+<view class='empty'></view>
+<view class='voteUserWrap' wx:for='{{pageData}}' wx:key='{{item.id}}' data-joinid='{{item.id}}' bindtap='toInfo'>
+    <view class='voteUserContent'>
+        <image  src='{{item.cover.url}}' mode='widthFix'></image>
+        <view class='contentRight' hidden='{{true}}'></view>
+        <view class='contentbottom'>报名时间: {{item.create_time}}</view>
+    </view>
+    <view class='voteUserTitle'>{{item.title}}</view>
+</view>
+<view class='noData' hidden='{{showTitle}}'>无记录</view>

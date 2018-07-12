@@ -9,14 +9,15 @@
         <view class='videoClassImage'>3</view>
     </swiper-item>
 </swiper> -->
+<!-- 功能 -->
 <view class='videoClassOptions'>
-    <view class='optionsContent'>
+    <view class='optionsContent' bindtap='isContent' data-id='0'>
         <view class='optionsContentTop' style='background:#F89225'> 
             <text class='iconfont icon-fenleigongnengleimu iconStyle'></text>
         </view>
-        <view class='optionsContentBottom'>分类</view>
+        <view class='optionsContentBottom' >分类</view>
     </view>
-    <view class='optionsContent'>
+    <view class='optionsContent' bindtap='isContent' data-id='1'>
         <view class='optionsContentTop' style='background:#8387F8'>
             <text class='iconfont icon-biaoqian iconStyleO'></text>
         </view>
@@ -41,8 +42,17 @@
         <view class='optionsContentBottomBtn'>分享</view>
     </button>
 </view>
+<!-- 分类 -->
+<view class='catalogClass' hidden='{{isCatalog}}'>
+    <text decode>分类:&nbsp;&nbsp;</text><view wx:for='{{catalogList}}' data-index='{{index}}' data-name='{{item}}' style='color:{{index == catalogNum?"#4993FE":"#000"}}' bindtap='switchTag' data-id='0'>{{item}}</view>
+</view>
+<!-- 标签 -->
+<view class='catalogClass' hidden='{{isTag}}'>
+    <text decode>标签:&nbsp;&nbsp;</text><view wx:for='{{tagList}}' data-index='{{index}}' data-name='{{item}}' style='color:{{index == tagNum?"#4993FE":"#000"}}' bindtap='switchTag' data-id='1'>{{item}}</view>
+</view>
+<!-- 课程 -->
 <view class='videoClassList'>
-    <view class='videoClassContent' bindtap='toInfo' wx:for='{{pageData.list}}'>
+    <view class='videoClassContent' bindtap='toInfo' data-id='{{item.id}}' wx:for='{{listData}}'>
         <view class='classContentImg'>
             <image src='{{item.cover.url}}' mode='scaleToFill'></image>
         </view>

@@ -95,7 +95,6 @@ Page({
             that.setData({
                 isOptions: false,
                 actId: e.currentTarget.dataset.actid,
-                actTag: e.currentTarget.dataset.acttag,
                 title: e.currentTarget.dataset.title,
             })
         } else if (Number(e.currentTarget.dataset.id) == 1) {
@@ -137,16 +136,18 @@ Page({
                         })
                         setTimeout(closeLogin, 1500)
 
-                        wx.hideLoading()
-                        wx.showToast({
-                            title: '删除成功',
-                            icon: 'success',
-                            success: function () {
-                                wx.redirectTo({
-                                    url: '../videoClassManList/videoClassManList',
-                                })
-                            }
-                        })
+                        function closeLogin(){
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: '删除成功',
+                                icon: 'success',
+                                success: function () {
+                                    wx.redirectTo({
+                                        url: '../videoClassManList/videoClassManList',
+                                    })
+                                }
+                            })
+                        }
                     } else {
                         wx.showToast({
                             title: res.data.msg,
@@ -158,7 +159,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 2) {
             //查看
             wx.navigateTo({
-                url: '../videoClassInfo/videoClassInfo?actId=' + that.data.actId + '&actTag=' + that.data.actTag,
+                url: '../videoClassInfo/videoClassInfo?actId=' + that.data.actId,
             })
         } else if (Number(e.currentTarget.dataset.id) == 3) {
             //分享

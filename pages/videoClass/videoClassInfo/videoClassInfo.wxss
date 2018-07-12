@@ -101,6 +101,7 @@ page{
     background:#F0F0F0;
     border-radius:5px;
     margin-top:20rpx;
+    padding-bottom:10rpx;
 }
 .contentTop{
     width:60rpx;
@@ -142,4 +143,40 @@ page{
     height:50rpx;
     line-height:50rpx;
     font-size:24rpx;
+}
+.contentRely{
+    width:630rpx;
+    min-height:50rpx;
+    background:#fff;
+    border-radius:5px;
+    margin-top:10rpx;
+    margin-left:80rpx;
+    clear:both;
+}
+.contentRelyLeft{
+    height:50rpx;
+    float:left;
+}
+.contentRelyLeft image{
+    height:50rpx;
+    width:50rpx;
+    border-radius:50%;
+    overflow:hidden;
+    float:left;
+}
+.contentRelyLeft view{
+    height:50rpx;
+    font-size:24rpx;
+    color:#569CD6;
+    line-height:50rpx;
+    text-align:center;
+    float:left;
+    margin-left:10rpx;
+}
+.contentRelyRight{
+    height:50rpx;
+    font-size:24rpx;
+    line-height:50rpx;
+    float:left;
+    margin-left:20rpx;
 }

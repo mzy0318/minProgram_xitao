@@ -1,0 +1,312 @@
+page{
+    background:#F6F1F0;
+    padding-bottom:20rpx;
+}
+swiper{
+    width:750rpx;
+    height:330rpx;
+}
+.voteInfoImage{
+    width:750rpx;
+    height:330rpx;
+    background:#fff;
+}
+.voteInfoImage image{
+    width:750rpx;
+    height:330rpx;
+}
+.voteInfoStatus{
+    width:720rpx;
+    height:120rpx;
+    background:#5EC8DB;
+    margin:40rpx auto 20rpx;
+    border-radius:10px;
+    overflow:hidden;
+}
+.voteInfoStatusChild{
+    width:238rpx;
+    height:90rpx;
+    float:left;
+    border-right:2rpx solid #fff;
+    margin-top:15rpx;
+}
+view.voteInfoStatusChild:nth-child(3){
+    border-right:0rpx;
+}
+.voteInfoStatusChild view{
+    width:238rpx;
+    height:45rpx;
+    text-align:center;
+    font-size:24rpx;
+    color:#fff;
+}
+.voteInfoInput,.voteInfoOptions{
+    width:720rpx;
+    height:90rpx;
+    margin:0rpx auto 20rpx;
+}
+.voteInfoInput input{
+    width:550rpx;
+    height:70rpx;
+    font-size:28rpx;
+    text-align:center;
+    border:4rpx solid #A0D7E0;
+    border-radius:10rpx;
+    float:left;
+    margin-left:0rpx;
+    margin-top:3rpx;
+    background:#fff;
+}
+.voteInfoInput button{
+    width:150rpx;
+    height:78rpx;
+    background:#C1180C;
+    float:right;
+    font-size:26rpx;
+    color:#fff;
+    line-height:78rpx;
+}
+.voteInfoOptions view{
+    width:168.75rpx;
+    height:80rpx;
+    float:left;
+    margin-left:15rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-size:26rpx;
+    color:#fff;
+    background:#5EC8DB;
+    margin-top:5rpx;
+}
+.voteInfoOptions view:nth-child(1){
+    margin-left:0rpx;
+}
+/* 活动介绍 */
+.activeInfoWrap{
+    width:720rpx;
+    min-height:100rpx;
+    background:transparent;
+    margin:20rpx auto 0rpx;
+}
+/* 活动介绍  活动说明 */
+.activeInfoInfo{
+    width:720rpx;
+    height:410rpx;
+    background:#fff;
+    position:relative;
+}
+.activeInfoInfoTitle{
+    width:170rpx;
+    height:60rpx;
+    background:#0577AB;
+    color:#fff;
+    border-radius:0px 0px 5px 5px;
+    position:absolute;
+    top:0rpx;
+    left:275rpx;
+    font-size:26rpx;
+    text-align:center;
+    line-height:60rpx;
+}
+.activeInfoInfo>button{
+    width:300rpx;
+    height:60rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#CC2200;
+    font-size:28rpx;
+    margin-top:40rpx;
+}
+.activeInfoInfoTime{
+    width:680rpx;
+    height:100rpx;
+    margin:0rpx auto 30rpx;
+}
+.activeInfoInfoTime view{
+    width:680rpx;
+    height:50rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+}
+.activeInfoInfoTime view:nth-child(2){
+    text-align:center;
+}
+.empty{
+    width:100%;
+    height:45rpx;
+    background:transparent;
+}
+/* 活动介绍  分享活动 */
+.activeInfoShare{
+    width:720rpx;
+    height:610rpx;
+    background:#fff;
+    position:relative;
+    margin-top:20rpx; 
+    overflow:hidden;
+}
+.activeInfoShareImage{
+    width:400rpx;
+    height:400rpx;
+    margin:90rpx auto 0rpx;
+    background:lightgreen;
+}
+.activeInfoShareImage image{
+    width:400rpx;
+    height:400rpx;
+}
+.activeInfoShare button{
+    width:400rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    color:#fff;
+    background:#CC2200;
+    margin-top:30rpx;
+}
+/* 活动介绍 活动详情 */
+.activeInfoImages{
+    width:720rpx;
+    min-height:200rpx;
+    background:#fff;
+    margin-top:20rpx;
+    position:relative;
+}
+.activeInfoImagesText{
+    width:680rpx;
+    min-height:50rpx;
+    line-height:50rpx;
+    font-size:28rpx;
+    margin:0rpx auto;
+}
+.activeInfoImage{
+    width:680rpx;
+    min-height:100rpx;
+    background:#fff;
+    margin:0rpx auto 20rpx;
+}
+.activeInfoImage image{
+    width:680rpx;
+}
+.emptyImage{
+    width:720rpx;
+    height:100rpx;
+    background:transparent;
+}
+/* 活动介绍 活动规则 */
+.activeInfoRule{
+    width:720rpx;
+    min-height:200rpx;
+    background:#fff;
+    margin-top:20rpx;
+    position:relative;
+    overflow:hidden;
+}
+.activeInfoRuleImage{
+    width:680rpx;
+    height:500rpx;
+    background-color:lightgreen;
+    margin:100rpx auto 20rpx;
+}
+
+/* 前十名 */
+.activeInfoTop{
+    width:720rpx;
+    min-height:100rpx;
+    padding-bottom:5rpx;
+    margin:0rpx auto;
+    background:#fff;
+}
+.activeInfoTopTitle,.activeInfoTopContent{
+    width:720rpx;
+    height:60rpx;
+}
+.activeInfoTopTitle view,.activeInfoTopContent view{
+    width:25%;
+    height:60rpx;
+    line-height:60rpx;
+    font-weight:bold;
+    font-size:26rpx;
+    float:left;
+    text-align:center;
+}
+.activeInfoTopTitle view:nth-child(4),.activeInfoTopContent view:nth-child(4){
+    color:#C1180C;
+}
+.activeInfoTopContent view{
+    font-weight:normal;
+}
+.activeInfoTopContent view:nth-child(1){
+    font-weight:bold;
+}
+
+/* 投票排行 */
+.activeInfoRank{
+    width:720rpx;
+    min-height:100rpx;
+    padding-bottom:5rpx;
+    margin:0rpx auto;
+    background:#fff;
+    overflow:hidden;
+}
+.activeInfoRankLeft,.activeInfoRankRight{
+    width:337.5rpx;
+    min-height:100rpx;
+    float:left;
+    margin-left:15rpx;
+    margin-top:10rpx;
+}
+.activeInfoRankContent{
+    width:337.5rpx;
+    min-height:10rpx;
+    background:#fff;
+    margin-top:10rpx;
+    position:relative;
+}
+.contentNum{
+    height:40rpx;
+    font-size:24rpx;
+    color:#fff;
+    text-align:center;
+    padding:0rpx 8rpx;
+    position:absolute;
+    left:0rpx;
+    top:0rpx;
+    background:#5DABB6;
+}
+.contentTop{
+    width:337.5rpx;
+    position:relative;
+}
+.contentTop image{
+    width:337.5rpx;
+}
+.contentBottom{
+    width:100%;
+    height:60rpx;
+    background:#5CCDDF;
+    color:#fff;
+    line-height:60rpx;
+    text-align:center;
+    font-size:26rpx;
+}
+/* 最新参赛 */
+.activeInfoJoin{
+    width:720rpx;
+    min-height:100rpx;
+    padding-bottom:5rpx;
+    margin:0rpx auto;
+    background:transparent;
+}
+
+.contentVoteNum{
+    height:40rpx;
+    font-size:24rpx;
+    color:#fff;
+    text-align:center;
+    padding:0rpx 8rpx;
+    position:absolute;
+    right:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.6);
+}

@@ -7,10 +7,12 @@ Page({
     data: {
         pageData:'',
         actId:'',
-        videoId:1,
+        videoId:0,
         videoData:'',
         actTag:'',
         commentData:'',
+        content:'',
+        isRely:'',
     },
 
     /**
@@ -19,9 +21,6 @@ Page({
     onLoad: function(options) {
 
         let that = this;
-        that.setData({
-            actTag:options.actTag
-        })
         if (options.scene != undefined) {
             let scene = decodeURIComponent(options.scene);
             console.log('获取到的scene', scene)
@@ -48,7 +47,8 @@ Page({
                    
                     that.setData({
                         pageData:res.data.data,
-                        videoData: res.data.data.video[that.data.videoId].url,
+                        videoData: res.data.data.video[Number(that.data.videoId)].url,
+                        actTag:res.data.data.act_tag
                     })
                 } else if (Number(res.data.code) == 0){
                     wx.showToast({
@@ -71,7 +71,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        this.getComment();
+        let that = this;
+        that.getComment();
     },
 
     /**
@@ -115,23 +116,38 @@ Page({
         this.videoContext.play();
         let that = this;
         that.setData({
-            videoData: that.data.pageData.video[e.currentTarget.dataset.index].url
+            videoData: that.data.pageData.video[Number(e.currentTarget.dataset.index)].url
         })
         this.videoContext.play();
     },
     //长按删除评论
-    longDel:function(){
+    longDel:function(e){
         wx.showModel({
             title:'删除',
             content:'确认删除评论吗?',
             success:function(res){
                 if(res.confirm){
                     getApp().request({
-                        url:'',
-                        data:'',
-                        method:post,
-                        success:function(){
-
+                        url:'org/video_class_delete_comment',
+                        data:{
+                            id: e.currentTarget.dataset.id
+                        },
+                        method:'post',
+                        success:function(res){
+                            if(Number(res.data.code) == 1){
+                                wx.showToast({
+                                    title: '删除成功',
+                                    icon:'success',
+                                    success:function(){
+                                        that.getComment();
+                                    }
+                                })
+                            } else if (Number(res.data.code) == 0){
+                                wx.showToast({
+                                    title: res.data.msg,
+                                    icon:'none',
+                                })
+                            }
                         }
                     })
                 }else if(res.cancel){
@@ -149,7 +165,7 @@ Page({
                 act_id: that.data.actId,
                 act_tag: that.data.actTag,
                 content: e.detail.value.content,
-                reply_id:'',
+                reply_id:that.data.isRely,
             },
             method:'post',
             success:function(res){
@@ -157,6 +173,9 @@ Page({
                     wx.showToast({
                         title: '提交成功',
                         success:function(){
+                            that.setData({
+                                content:'',
+                            })
                             that.getComment();
                         }
                     })
@@ -164,30 +183,39 @@ Page({
             }
         })
     },
-    // 获取评论列表
+    switchRely:function(e){
+        let that = this;
+        that.setData({
+            isRely: e.currentTarget.dataset.id,
+            content: '回复 ' + e.currentTarget.dataset.name + ': ',
+        })
+
+    },
     getComment:function(){
         let that = this;
-        //评论列表
         getApp().request({
             url: 'comment_list',
             data: {
                 page: '1',
                 act_id: that.data.actId,
-                act_tag: that.data.actTag
+                act_tag: 'video_class',
             },
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    for(let i = 0;i<res.data.data.list.length;i++){
-                        res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time*1000))
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time * 1000))
                     }
                     that.setData({
                         commentData: res.data.data.list
                     })
                 } else if (Number(res.data.code) == 0) {
                     wx.showToast({
-                        title: res.code.msg,
+                        title: '列表请求失败',
                         icon: 'none',
+                        success: function () {
+                            console.log(res.data.msg)
+                        }
                     })
                 }
             }
