@@ -23,7 +23,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        console.log('options', options)
         if (Number(options.isEdit) == 1) {
             that.setData({
                 isEdit: options.isEdit,
@@ -146,12 +145,23 @@ Page({
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;
-                
+                var time = 30;
                 wx.showLoading({
-                    title: '视频上传中',
+                    title: '请耐心等待',
                     mask: true,
                 })
-
+                let timer = setInterval(timeSub,1000);
+                function timeSub(){
+                    time -= 1;
+                    if(time <= 0){
+                        clearInterval(timer)
+                        wx.hideLoading(),
+                        wx.showToast({
+                            title: '请重新上传视频',
+                            icon:'none',
+                        })
+                    }
+                }
                 that.setData({
                     videoUrlO: res.tempFilePath,
                     videoImage: res.thumbTempFilePath
@@ -193,19 +203,24 @@ Page({
                                         that.setData({
                                             videoId: res.data.data.videoId
                                         })
+                                        clearInterval(timer)
+                                        var actId = '';
+                                        if (Number(that.data.isEdit) == 1){
+                                            actId = that.data.id
+                                        } else if (Number(that.data.isEdit) == 0){
+                                            actId = '';
+                                        }
                                         getApp().request({
                                             url:'org/add_video_card',
                                             data:{
                                                 title:that.data.title,
                                                 video_id: res.data.data.videoId,
                                                 banner_image_url: that.data.bannerImage,
+                                                id: actId,
                                             },
                                             method:'post',
                                             success:function(res){
                                                 if(Number(res.data.code)==1){
-                                                    // wx.navigateTo({
-                                                    //     url: '../../videos/manVideoList/manVideoList',
-                                                    // })
                                                     wx.hideLoading()
                                                     that.setData({
                                                         isSave:1
@@ -214,9 +229,15 @@ Page({
                                                         title: '贺卡保存成功',
                                                         icon:'success',
                                                         success:function(){
-                                                            wx.navigateBack({
-                                                                delta: 2,
-                                                            })      
+                                                            if(Number(that.data.isEdit) == 1){
+                                                                wx.navigateBack({
+                                                                    delta: 1,
+                                                                })
+                                                            } else if (Number(that.data.isEdit) == 0){
+                                                                wx.navigateBack({
+                                                                    delta: 2,
+                                                                })  
+                                                            }    
                                                         }
                                                     })
                                                 } else if (Number(res.data.code) == 0){

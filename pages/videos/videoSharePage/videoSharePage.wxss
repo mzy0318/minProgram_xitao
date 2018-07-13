@@ -1,7 +1,7 @@
 .enCodeImage{
     width:600rpx;
     /* height:940rpx; */
-    margin:250rpx auto 0rpx;
+    margin:200rpx auto 0rpx;
     background:#fff;
 }
 .enCodeImage image{

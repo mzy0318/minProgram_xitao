@@ -26,12 +26,16 @@ Page({
         that.setData({
             actId:options.actId,
             isEdit: options.isEdit,
-            joinId: options.joinId
+            joinId: options.joinId,
         });
         if (Number(that.data.isEdit) == 0){
             that.setData({
                 isShow:false
             })
+            wx.setNavigationBarTitle({
+                title: '参加报名',
+            })
+            // 请求页面展示性数据
             getApp().request({
                 url: 'visitor_video_vote',
                 data: {
@@ -81,6 +85,10 @@ Page({
             that.setData({
                 isShow: true
             })
+            wx.setNavigationBarTitle({
+                title: '修改报名信息',
+            })
+            // 编辑前先请求用户数据
             getApp().request({
                 url:'join_video_vote',
                 data:{
@@ -161,34 +169,49 @@ Page({
     addActive:function(e){
         let that = this;
         let sendData = e.detail.value;
-        sendData['cover_image'] = that.data.coverImageId;
-        sendData['video'] = that.data.videoId;
-        sendData['act_video_vote_id'] = that.data.actId
+        var showMessage = '';
+        var showResult = '';
+        if (Number(that.data.isEdit) == 1){
+            sendData['cover_image'] = that.data.coverImageId;
+            sendData['video'] = that.data.videoId;
+            sendData['act_video_vote_id'] = that.data.actId;
+            sendData['video_vote_joiner_id'] = that.data.joinId;
+            showMessage = '正在保存';
+            showResult = '保存成功'
+        } else if (Number(that.data.isEdit) == 0){
+            sendData['cover_image'] = that.data.coverImageId;
+            sendData['video'] = that.data.videoId;
+            sendData['act_video_vote_id'] = that.data.actId; 
+            sendData['video_vote_joiner_id'] = '';
+            showMessage = '正在报名';
+            showResult = '报名成功'
+        }
+
         getApp().request({
-            url:'join_video_vote',
-            data:sendData,
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
+            url: 'join_video_vote',
+            data: sendData,
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
                     wx.showLoading({
-                        title: '正在报名',
+                        title: showMessage,
                         mask: true,
                     })
                     setTimeout(closeLogin, 2000)
                     function closeLogin() {
                         wx.hideLoading()
                         wx.showToast({
-                            title: '报名成功',
-                            icon:'success',
-                            success:function(){
-
+                            title: showResult,
+                            icon: 'success',
+                            success: function () {
+                                wx.navigateBack({})
                             }
                         })
                     }
-                } else if (Number(res.data.code) == 0){
+                } else if (Number(res.data.code) == 0) {
                     wx.showToast({
                         title: res.data.msg,
-                        icon:'none'
+                        icon: 'none'
                     })
                 }
             }
@@ -277,12 +300,24 @@ Page({
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;
+                var time = 30;
 
                 wx.showLoading({
-                    title: '视频上传中',
+                    title: '请耐心等待',
                     mask: true,
                 })
-
+                let timer = setInterval(timeSub, 1000);
+                function timeSub() {
+                    time -= 1;
+                    if (time <= 0) {
+                        clearInterval(timer)
+                        wx.hideLoading(),
+                        wx.showToast({
+                            title: '请重新上传视频',
+                            icon: 'none',
+                        })
+                    }
+                }
                 that.setData({
                     isVideo:false,
                     video: res.tempFilePath,
@@ -323,6 +358,7 @@ Page({
                                     method: "post",
                                     success: function (res) {
                                         if(Number(res.data.code) == 1){
+                                            clearInterval(timer)
                                             that.setData({
                                                 videoId: res.data.data.videoId
                                             })

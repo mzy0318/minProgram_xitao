@@ -69,13 +69,13 @@ Page({
             //     url: 'org/bargain_list',
             //     pageType: 5
             // }, 
-            // {
-            //     name: '视频投票',
-            //     iconfont: 'iconfont icon-zan1 iconStyle',
-            //     background: '#8990FA',
-            //     url: 'org/bargain_list',
-            //     pageType: 6
-            // }, 
+            {
+                name: '视频投票',
+                iconfont: 'iconfont icon-zan1 iconStyle',
+                background: '#8990FA',
+                url: 'org/bargain_list',
+                pageType: 6
+            }, 
             {
                 name: '视频贺卡',
                 iconfont: 'iconfont icon-meiguihua iconStyle',
@@ -279,6 +279,10 @@ Page({
         } else if (Number(pageType) == 9){
             wx.navigateTo({
                 url: '../../videoClass/videoClassManList/videoClassManList',
+            })
+        } else if (Number(pageType) == 6){
+            wx.navigateTo({
+                url: '../../videoVote/videoVoteManList/videoVoteManList',
             })
         }
     },

@@ -18,17 +18,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options',options)
         let that = this
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = 'actid=' + options.actId + '&joinid=' + options.joinId;
+        let mzy = 'actid:' + options.actId + ':joinid:' + options.joinId;
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
-            console.log('获取到的scene', scene)
+            let sceneArr = scene.split(':')
             that.setData({
-                actId: options.query.actid,
-                joinId: options.query.joinid,
+                actId: sceneArr[1],
+                joinId: sceneArr[3],
             })
         } else if (options.scene == undefined){
             that.setData({

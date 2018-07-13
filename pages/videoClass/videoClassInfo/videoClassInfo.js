@@ -25,7 +25,7 @@ Page({
             let scene = decodeURIComponent(options.scene);
             console.log('获取到的scene', scene)
             that.setData({
-                actId: options.query.actid,
+                actId: options.scene.actid,
             })
         } else if (options.scene == undefined) {
             that.setData({

@@ -18,8 +18,11 @@
     </view>
 </view>
 <view class='voteInfoInput'>
-    <input placeholder='请输入编号或名字'></input>
-    <button>搜索</button>
+    <form bindsubmit='toGetInfo' data-id='1'>
+        <view class='{{className}}'><input placeholder='请输入编号或名字' name='key' value='{{empty}}'></input></view>
+        <button style='display:{{isJoin}}' bindtap='toGetInfo' data-id='0'>报名</button>
+        <button form-type='submit' data-id='1'>搜索</button>
+    </form>
 </view>
 <view class='voteInfoOptions'>
     <view wx:for='{{optData}}' wx:key='{{index}}' bindtap='showContent' style='background-color:{{index==contentIndex?"#0577AB":"#5EC8DB"}}' data-index='{{index}}'>{{item.name}}</view>

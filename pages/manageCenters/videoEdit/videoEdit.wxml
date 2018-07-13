@@ -3,9 +3,9 @@
     <view class='listInfoVideo' ><video src='{{videoUrlO}}' poster='{{videoImage}}'></video></view>
 </view>
 <view class='listInfoBottom'>
-    <button bindtap='toIndex'>机构主页</button>
-    <button bindtap='setVideo'>拍摄祝福</button>
-    <button open-type='share'>发给好友</button>
-    <button>分享朋友圈</button>
-    <button bindtap='toVideosEdit' data-actid='{{pageData.id}}'>我要制作</button>
+    <!-- <button bindtap='toIndex'>机构主页</button>
+    <button open-type='share'>发给好友</button> -->
+    <!-- <button>分享朋友圈</button> -->
+    <button bindtap='setVideo'>上传视频</button> 
+    <!-- <button bindtap='toVideosEdit' data-actid='{{pageData.id}}'>我要制作</button> -->
 </view>

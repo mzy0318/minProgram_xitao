@@ -46,6 +46,12 @@ view.manListWrap:nth-child(1){
     float:left;
     margin-top:55rpx;
 }
+.manListOther view:nth-child(1),.manListOther view:nth-child(2){
+    width:28%;
+}
+.manListOther view:nth-child(3){
+    width:43.99%;
+}
 .manListOther view text:nth-child(2){
     font-size:26rpx;
     color:#7b7b7b;

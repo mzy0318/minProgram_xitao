@@ -1,0 +1,9 @@
+<view class='voteManListOne'>该功能过于繁杂,请在电脑端管理</view>
+ <!-- <view class='voteManListTwo'>a.zhihuizhaosheng.com</view>
+<view class='voteManListThree'>该功能过于繁杂,请在电脑端管理</view>
+<view class='voteManListThree'>电脑端支持:</view>
+<view class='voteManListThree'>1.编辑学校、课程、老师信息</view>
+<view class='voteManListThree'>2.申请独立的学校小程序</view>
+<view class='voteManListThree'>3.在线管理全部营销活动</view>
+<view class='voteManListThree'>4.更换专业大气的学校模板</view> -->
+<button class='voteManListBtn' bindtap='toBack'>返回</button> 

@@ -15,21 +15,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        getApp().request({
-            url:'org/video_card_list',
-            method:'post',
-            data:{
-                page:that.data.pageNum,
-            },
-            success:function(res){
-                for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
-                }
-                that.setData({
-                    pageData:res.data.data.list
-                })
-            }
-        })
     },
 
     /**
@@ -43,7 +28,22 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let that = this;
+        getApp().request({
+            url: 'org/video_card_list',
+            method: 'post',
+            data: {
+                page: that.data.pageNum,
+            },
+            success: function (res) {
+                for (let i = 0; i < res.data.data.list.length; i++) {
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                }
+                that.setData({
+                    pageData: res.data.data.list
+                })
+            }
+        })
     },
 
     /**

@@ -61,6 +61,7 @@
         "pages/videoVote/videoVoteInfo/videoVoteInfo",
         "pages/videoVote/videoVoteUserInfo/videoVoteUserInfo",
         "pages/videoVote/videoVoteSignup/videoVoteSignup",
+        "pages/videoVote/videoVoteManList/videoVoteManList",
         "pages/videoClass/videoClassManList/videoClassManList",
         "pages/videoClass/videoClassInfo/videoClassInfo",
         "pages/videoClass/videoClassUserList/videoClassUserList",

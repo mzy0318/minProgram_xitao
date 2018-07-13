@@ -282,6 +282,7 @@ Page({
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;
+                var time = 30;
                 that.setData({
                     isVideo: false,
                 })
@@ -289,9 +290,21 @@ Page({
                     schoolVideo: res.tempFilePath
                 })
                 wx.showLoading({
-                    title: '视频上传中',
+                    title: '请耐心等待',
                     mask: true,
                 })
+                let timer = setInterval(timeSub, 1000);
+                function timeSub() {
+                    time -= 1;
+                    if (time <= 0) {
+                        clearInterval(timer)
+                        wx.hideLoading(),
+                        wx.showToast({
+                            title: '请重新上传视频',
+                            icon: 'none',
+                        })
+                    }
+                }
                 getApp().request({
                     url: "org/policy",
                     method: "post",
@@ -327,6 +340,7 @@ Page({
                                     method: "post",
                                     success: function(res) {
                                         if(Number(res.data.code)==1){
+                                            clearInterval(timer)
                                             that.setData({
                                                 schoolVideoId: res.data.data.videoId
                                             })

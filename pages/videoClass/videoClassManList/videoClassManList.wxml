@@ -4,8 +4,8 @@
         <view class='manListTitle'>{{item.title}}</view>
         <view class='manMore'><text class='iconfont icon-gengduo iconStyleO'></text></view>
         <view class='manListOther'>
-            <view><text class='iconfont icon-videoplay iconStyle'></text><text>{{item.video.length}}</text></view>
-            <view><text class='iconfont icon-wodedingdan iconStyle'></text><text>1</text></view>
+            <view><text class='iconfont icon-videoplay iconStyle'></text><text>{{item.video_amount}}</text></view>
+            <view><text class='iconfont icon-wodedingdan iconStyle'></text><text>{{item.comment_amount}}</text></view>
             <view><text class='iconfont icon-date iconStyle'></text><text>{{item.create_time}}</text></view>
         </view>
     </view>

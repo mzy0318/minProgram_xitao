@@ -8,32 +8,40 @@ Page({
         pageData: '',
         videoUrl: '',
         videoImage: '',
-        manaUser: [{
-            name: '机构主页',
-            method: 'toIndex',
-            width: '20%',
-        }, {
-            name: '拍摄祝福',
-            method: 'setVideo',
-            width: '20%',
-        }, {
-            name: '分享朋友圈',
-            method: 'toSharePage',
-            width: '20%',
-        }, {
-            name: '我要制作',
-            method: 'setVideo',
-            width: '20%',
-        }],
-        user: [{
-            name: '机构主页',
-            method: 'toIndex',
-            width: '33.33%',
-        }, {
-            name: '分享朋友圈',
-            method: 'toSharePage',
-            width: '33.33%',
-        }, ],
+        manaUser: [
+            {
+                name: '机构主页',
+                method: 'toIndex',
+                width: '33.33%',
+            },
+            // {
+            //     name: '拍摄祝福',
+            //     method: 'setVideo',
+            //     width: '20%',
+            // },
+            {
+                name: '分享朋友圈',
+                method: 'toSharePage',
+                width: '33.33%',
+            },
+            // {
+            //     name: '我也要制作',
+            //     method: 'setVideo',
+            //     width: '20%',
+            // }
+        ],
+        user: [
+            {
+                name: '机构主页',
+                method: 'toIndex',
+                width: '33.33%',
+            },
+            {
+                name: '分享朋友圈',
+                method: 'toSharePage',
+                width: '33.33%',
+            }, 
+        ],
         optionsContent: '',
         actId:'',
     },
@@ -44,17 +52,21 @@ Page({
     onLoad: function(options) {
         let that = this;
 
-        if (options.scene != undefined) {
-            
+        if (options.scene != undefined) {  
             let scene = decodeURIComponent(options.scene);
-
+            let opts = JSON.stringify(options.scene)
+            wx.showModal({
+                title: '测试',
+                content: opts,
+            })
             console.log('获取到的scene', scene)
             
             that.setData({
-                actId: options.query.actid,
-                optionsContent: that.data.user
+                actId: options.scene.id,
+                optionsContent: that.data.user,
             })
         } else if (options.scene == undefined) {
+
             that.setData({
                 actId: options.id,
             });

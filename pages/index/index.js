@@ -145,6 +145,14 @@ Page({
             wx.navigateTo({
                 url: '../baseOptions/contactUs/contactUs',
             })
+        } else if (Number(options.pageId) == 14){
+            wx.navigateTo({
+                url: '../videoVote/videoVoteInfo/videoVoteInfo?actId=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 15){
+            wx.navigateTo({
+                url: '../videoVote/videoVoteUserInfo/videoVoteUserInfo?joinId=' + options.joinId,
+            })
         }
         wx.showLoading({
             title: '',
@@ -318,9 +326,6 @@ Page({
                 wx.stopPullDownRefresh()
             }
         })
-        // setTimeout(pullDown,2000)
-        // function pullDown(){
-        // }
     },
     toCourseInfo: function(e) {
         wx.navigateTo({

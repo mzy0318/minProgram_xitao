@@ -24,7 +24,7 @@ Page({
             let scene = decodeURIComponent(options.scene);
             console.log('获取到的scene', scene)
             that.setData({
-                courseid: options.query.actid,
+                courseid: options.scene.actid,
             })
         } else if (options.scene == undefined) {
             that.setData({

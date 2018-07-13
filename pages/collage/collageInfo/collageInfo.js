@@ -49,8 +49,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        console.log('options.scene', options)
-
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 actionOptions: false
@@ -63,22 +61,20 @@ Page({
 
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
-            console.log('获取到的scene',scene)
+            let n = scene.indexOf('=');
+            console.log('options', options)
             that.setData({
-                actId: options.query.actid,
-                actTag: options.query.acttag,
+                actId: scene.slice(n + 1),
             })
         } else if (options.scene == undefined){
             that.setData({
                 actId: options.actId,
-                actTag: options.acttag,
-                // encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
             })
         }
         
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = 'actid=' + options.actId + '&acttag=' + options.acttag;
+        let mzy = encodeURI('actid=' + options.actId);
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })

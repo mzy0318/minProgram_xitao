@@ -182,7 +182,7 @@ Page({
             success: function (res) {
                 if (Number(res.data.code) == 1) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = formatTime.dayMonth(new Date(res.data.data.list[i].create_time * 1000))
+                        res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000))
                     }
                     that.setData({
                         pageData: res.data.data.list

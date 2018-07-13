@@ -81,7 +81,7 @@ App({
         // console.log('getApp().getExtConfig()', getApp().getExtConfig())
         var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version+"/";
         var dev = "http://192.168.1.112:8888/"+ getApp().getExtConfig().version+"/";
-        return  dev;
+        return  online;
     },
     hasLogin: false,//默认app是未登录状态
     request: param => {
