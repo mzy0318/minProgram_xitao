@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 674077 */
-  src: url('//at.alicdn.com/t/font_674077_4gpnx9a3647.eot');
-  src: url('//at.alicdn.com/t/font_674077_4gpnx9a3647.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_674077_4gpnx9a3647.woff') format('woff'),
-  url('//at.alicdn.com/t/font_674077_4gpnx9a3647.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_674077_4gpnx9a3647.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_674077_51iiv1rs8e3.eot');
+  src: url('//at.alicdn.com/t/font_674077_51iiv1rs8e3.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_674077_51iiv1rs8e3.woff') format('woff'),
+  url('//at.alicdn.com/t/font_674077_51iiv1rs8e3.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_674077_51iiv1rs8e3.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -29,6 +29,8 @@
 .icon-phone:before { content: "\e600"; }
 
 .icon-wechat:before { content: "\e694"; }
+
+.icon-exit:before { content: "\e650"; }
 
 .icon-lajixiang:before { content: "\e645"; }
 

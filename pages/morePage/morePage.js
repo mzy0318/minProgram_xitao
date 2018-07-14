@@ -68,7 +68,7 @@ Page({
                 background: '#8990FA',
             },
             {
-                name: '视频课堂',
+                name: '微视频课堂',
                 iconfont: 'iconfont icon-z-shipin iconfontStyle iconfontSize',
                 url: '../videoClass/videoClassUserList/videoClassUserList',
                 background: '#FE7FC2',

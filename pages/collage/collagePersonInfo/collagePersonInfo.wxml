@@ -47,7 +47,7 @@
         <view class='oneTitle'>
             <view class='oneTitleChild'>分享活动</view>
         </view>
-        <view class='collageInfoSixContent'>
+        <view class='collageInfoSixContent' bindtap='shareFriends'>
             <image src='{{encodeID}}' mode='scaleToFill' ></image>
         </view>
         <button bindtap='shareFriends'>分享到朋友圈</button>

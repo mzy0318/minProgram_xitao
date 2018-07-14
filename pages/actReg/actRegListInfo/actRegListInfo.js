@@ -19,9 +19,19 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        that.setData({
-            actId: options.actId,
-        })
+        if (options.scene != undefined) {
+
+            let scene = decodeURIComponent(options.scene);
+            let n = scene.indexOf('=');
+            that.setData({
+                actId: scene.slice(n + 1),
+            })
+        } else if (options.scene == undefined) {
+            that.setData({
+                actId: options.actId,
+            })
+        }
+        
     },
 
     /**
@@ -97,7 +107,6 @@ Page({
                 id: that.data.actId,
             },
             success: function (res) {
-                // console.log(Date.parse(res.data.data.end_time), new Date().valueOf());
                 if (Date.parse(res.data.data.end_time) > new Date().valueOf()) {
                     that.setData({
                         btnText: '我要报名',

@@ -26,9 +26,9 @@ Page({
 
         if (options.scene != undefined) {
             let scene = decodeURIComponent(options.scene);
-            console.log('获取到的scene', scene)
+            let n = scene.indexOf('=');
             that.setData({
-                joinId: options.scene.joinId,
+                joinId: scene.slice(n + 1),
             })
         } else if (options.scene == undefined) {
             that.setData({

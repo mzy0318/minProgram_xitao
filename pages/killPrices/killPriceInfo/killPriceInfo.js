@@ -274,9 +274,10 @@ Page({
         getApp().tellPhone(e)
     },
     toPricePerson: function (e) {
-        let personInfo = JSON.stringify(e.currentTarget.dataset)
+        let that = this;
+        console.log('e.currentTarget.dataset.joinid', e.currentTarget.dataset.joinid)
         wx.navigateTo({
-            url: '../killPricePerson/killPricePerson?personInfo=' + personInfo + '&nickName=' + e.currentTarget.dataset.nickname,
+            url: '../killPricePerson/killPricePerson?actId=' + e.currentTarget.dataset.actid + '&joinId=' + e.currentTarget.dataset.joinid,
         })
     },
     joinActive: function (e) {

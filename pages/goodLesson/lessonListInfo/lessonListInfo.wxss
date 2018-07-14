@@ -222,11 +222,11 @@ page{
 }
 .signUpWrap{
     width:750rpx;
-    height:1207rpx;
+    height:1400rpx;
     background:rgba(0,0,0,0.3);
     position:fixed;
     top:0rpx;
-    left:0rpx;
+    left:0rpx; 
 }
 .signUpChild{
     width:670rpx;
@@ -237,7 +237,7 @@ page{
     top:50%;
     left:50%;
     margin-left:-335rpx;
-    margin-top:-290rpx;
+    margin-top:-300rpx;
     padding-bottom:30rpx;
 }
 .signUpChild view{

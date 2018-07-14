@@ -192,7 +192,7 @@ Page({
     },
     sharePage:function(e){
         wx.navigateTo({
-            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/goodLesson/lessonListInfo/lessonListInfo',
+            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/goodLesson/lessonListInfo/lessonListInfo&actTag=' + e.currentTarget.dataset.acttag,
         })
     }
 })

@@ -17,18 +17,20 @@ Page({
     onLoad: function (options) {
         let that = this;
         let sendData = {};
+        console.log('options',options)
         sendData['id'] = Number(options.actId); 
         sendData['page'] = options.page;
         sendData['title'] = options.title;
         sendData['scale'] = 0.3;
         sendData['org_id'] = String(getApp().getExtConfig().orgId);
         sendData['visitor_id'] = String(wx.getStorageSync('visitorId'));
+        sendData['act_tag'] = options.actTag
         //二维码地址
         let mzy = 'actid=' + sendData.id + '&acttag=' + undefined;
         that.setData({
             pageData: getApp().globalData.userInfo,
-            urlAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.3&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id,
-            urlBigAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.5&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id,
+            urlAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.3&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id + '&act_tag=' + sendData.act_tag,
+            urlBigAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.5&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id + '&act_tag=' + sendData.act_tag,
             enCodeImage: getApp().getEncodeImage(sendData.page,mzy)
         })
         // getApp().request({

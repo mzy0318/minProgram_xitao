@@ -16,17 +16,6 @@ App({
         wx.login({
             success: res => {
                 this.userCode = res.code;
-                // wx.request({
-                //     url: 'https://www.zhihuizhaosheng.com/' + wx.getExtConfigSync().version + '/login',
-                //     data: {
-                //         code: res.code,
-                //         org_id: wx.getExtConfigSync().orgId,
-                //     },
-                //     method: 'POST',
-                //     success: function (res) {
-                //         console.log('隐藏登录', res)
-                //     }
-                // })
             }
         })
         // 获取用户信息
@@ -80,8 +69,8 @@ App({
     getHost: () => {
         // console.log('getApp().getExtConfig()', getApp().getExtConfig())
         var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version+"/";
-        var dev = "http://192.168.1.112:8888/"+ getApp().getExtConfig().version+"/";
-        return  online;
+        var dev = "http://192.168.1.112:8123/"+ getApp().getExtConfig().version+"/";
+        return  dev;
     },
     hasLogin: false,//默认app是未登录状态
     request: param => {

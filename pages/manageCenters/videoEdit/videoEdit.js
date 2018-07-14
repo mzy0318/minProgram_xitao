@@ -142,118 +142,112 @@ Page({
         let that = this;
         wx.chooseVideo({
             success: function (res) {
+
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;
                 var time = 30;
-                wx.showLoading({
-                    title: '请耐心等待',
-                    mask: true,
-                })
-                let timer = setInterval(timeSub,1000);
-                function timeSub(){
-                    time -= 1;
-                    if(time <= 0){
-                        clearInterval(timer)
-                        wx.hideLoading(),
-                        wx.showToast({
-                            title: '请重新上传视频',
-                            icon:'none',
-                        })
-                    }
-                }
-                that.setData({
-                    videoUrlO: res.tempFilePath,
-                    videoImage: res.thumbTempFilePath
-                })
-                getApp().request({
-                    url: "org/policy",
-                    method: "post",
-                    data: {
-                        "type": "video"
-                    },
-                    success: function (res) {
-                        let n = videoPath.lastIndexOf('.');
-                        let videoPathO = videoPath.substring(n)
-                        let sendData = {
-                            "key": res.data.data.dir + getApp().imageAddress(videoPath) + videoPathO,
-                            "OSSAccessKeyId": res.data.data.accessid,
-                            "host": res.data.data.host,
-                            "expire": res.data.data.expire,
-                            "signature": res.data.data.signature,
-                            "policy": res.data.data.policy,
-                            'success_action_status': '200'
+                if (Number(res.size) < 31257280){
+                    wx.showLoading({
+                        title: '请耐心等待',
+                        mask: true,
+                    })
+                    let timer = setInterval(timeSub, 1000);
+                    function timeSub() {
+                        time -= 1;
+                        if (time <= 0) {
+                            clearInterval(timer)
+                            wx.hideLoading(),
+                                wx.showToast({
+                                    title: '请重新上传视频',
+                                    icon: 'none',
+                                })
                         }
-                        wx.uploadFile({
-                            url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                            name: 'file',
-                            filePath: videoPath,
-                            formData: sendData,
-                            success: function (res) {
-                                getApp().request({
-                                    url: "org/exchange",
-                                    data: {
-                                        "key": sendData.key,
-                                        "type": "video",
-                                        size: Number(size),
-                                        duration: Number(duration.toFixed(0)),
-                                    },
-                                    method: "post",
-                                    success: function (res) {
-                                        that.setData({
-                                            videoId: res.data.data.videoId
-                                        })
-                                        clearInterval(timer)
-                                        var actId = '';
-                                        if (Number(that.data.isEdit) == 1){
-                                            actId = that.data.id
-                                        } else if (Number(that.data.isEdit) == 0){
-                                            actId = '';
-                                        }
-                                        getApp().request({
-                                            url:'org/add_video_card',
-                                            data:{
-                                                title:that.data.title,
-                                                video_id: res.data.data.videoId,
-                                                banner_image_url: that.data.bannerImage,
-                                                id: actId,
-                                            },
-                                            method:'post',
-                                            success:function(res){
-                                                if(Number(res.data.code)==1){
-                                                    wx.hideLoading()
-                                                    that.setData({
-                                                        isSave:1
-                                                    })
-                                                    wx.showToast({
-                                                        title: '贺卡保存成功',
-                                                        icon:'success',
-                                                        success:function(){
-                                                            if(Number(that.data.isEdit) == 1){
-                                                                wx.navigateBack({
-                                                                    delta: 1,
-                                                                })
-                                                            } else if (Number(that.data.isEdit) == 0){
-                                                                wx.navigateBack({
-                                                                    delta: 2,
-                                                                })  
-                                                            }    
-                                                        }
-                                                    })
-                                                } else if (Number(res.data.code) == 0){
-                                                    wx.showToast({
-                                                        title: res.code.msg,
-                                                        icon: 'none'
-                                                    })
-                                                }
-                                            }
-                                        })
-                                    }
-                                });
-                            }
-                        })
                     }
-                })
+                    that.setData({
+                        videoUrlO: res.tempFilePath,
+                        videoImage: res.thumbTempFilePath
+                    })
+
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
+
+                    wx.uploadFile({
+                        url: getApp().getHost() + 'upload',
+                        filePath: that.data.videoUrlO,
+                        name: 'file',
+                        header: header,
+                        formData:{
+                            size: Number(size),
+                            duration: Number(duration.toFixed(0)),
+                        },
+                        success: function (res) {
+                            let r = JSON.parse(res.data)
+                            if (Number(r.code) == 1) {
+                                that.setData({
+                                    videoId: r.data.videoId,
+                                })
+                                clearInterval(timer)
+                                var actId = '';
+                                if (Number(that.data.isEdit) == 1) {
+                                    actId = that.data.id
+                                } else if (Number(that.data.isEdit) == 0) {
+                                    actId = '';
+                                }
+                                getApp().request({
+                                    url: 'org/add_video_card',
+                                    data: {
+                                        title: that.data.title,
+                                        video_id: r.data.videoId,
+                                        banner_image_url: that.data.bannerImage,
+                                        id: actId,
+                                    },
+                                    method: 'post',
+                                    success: function (res) {
+                                        if (Number(res.data.code) == 1) {
+                                            wx.hideLoading()
+                                            that.setData({
+                                                isSave: 1
+                                            })
+                                            wx.showToast({
+                                                title: '贺卡保存成功',
+                                                icon: 'success',
+                                                success: function () {
+                                                    if (Number(that.data.isEdit) == 1) {
+                                                        wx.navigateBack({
+                                                            delta: 1,
+                                                        })
+                                                    } else if (Number(that.data.isEdit) == 0) {
+                                                        wx.navigateBack({
+                                                            delta: 2,
+                                                        })
+                                                    }
+                                                }
+                                            })
+                                        } else if (Number(res.data.code) == 0) {
+                                            wx.showToast({
+                                                title: res.code.msg,
+                                                icon: 'none'
+                                            })
+                                        }
+                                    }
+                                })
+
+                            } else {
+                                wx.showToast({
+                                    title: r.msg,
+                                    icon: 'none',
+                                })
+                            }
+                        }
+                    })
+                } else if (Number(res.size) >= 31257280){
+                    wx.showToast({
+                        title: '视频大于30M,请重新选择',
+                        icon:'none'
+                    })
+                }
             }
         })
     }

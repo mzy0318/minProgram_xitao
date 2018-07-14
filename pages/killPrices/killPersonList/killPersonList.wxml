@@ -3,7 +3,7 @@
     <view class='personListInputName'>
     </view>
     <view class='personListContent' wx:for='{{userList.list}}'>
-        <view class='personListTitle' bindtap='toKillPriceInfo' data-act_id='{{item.act_id}}' data-joiner_id='{{item.joiner_id}}' data-nickname='{{item.nickname}}'>{{item.title}}</view>
+        <view class='personListTitle' bindtap='toKillPriceInfo' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}' data-nickname='{{item.nickname}}'>{{item.title}}</view>
         <view class='personListInfo' bindtap='toListInfo' data-index='{{index}}' data-actId='{{item.act_id}}' data-joinerId='{{item.joiner_id}}'>
             <view>姓名: {{item.nickname}}</view>
             <view>电话: {{item.phone}}</view>

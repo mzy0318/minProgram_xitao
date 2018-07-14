@@ -229,65 +229,36 @@ Page({
                 })
                 let imagePath = res.tempFilePaths[0]
 
-                let n = imagePath.lastIndexOf('.');
-
-                imagePath = imagePath.substring(n);
-
                 wx.showLoading({
                     title: '图片上传中...',
                     mask: true,
                 })
-                getApp().request({
-                    url: 'org/policy',
-                    method: 'post',
-                    data: {
-                        "type": "image"
-                    },
+                var header = {};
+                header.Cookie = wx.getStorageSync('cookie');
+                header['Content-Type'] = 'multipart/form-data';
+
+                wx.uploadFile({
+                    url: getApp().getHost() + 'upload',
+                    filePath: that.data.coverImage,
+                    name: 'file',
+                    header: header,
                     success: function (res) {
-                        let sendData = {
-                            "key": res.data.data.dir + getApp().imageAddress(that.data.coverImage) + imagePath,
-                            "OSSAccessKeyId": res.data.data.accessid,
-                            "host": res.data.data.host,
-                            "expire": res.data.data.expire,
-                            "signature": res.data.data.signature,
-                            "policy": res.data.data.policy,
-                            'success_action_status': '200'
+                        let r = JSON.parse(res.data)
+                        if (Number(r.code) == 1) {
+                            that.setData({
+                                coverImageId: r.data.imageId,
+                            });
+                            wx.hideLoading();
+                            wx.showToast({
+                                title: '上传成功',
+                                icon: 'success'
+                            })
+                        } else {
+                            wx.showToast({
+                                title: r.msg,
+                                icon: 'none',
+                            })
                         }
-                        wx.uploadFile({
-                            url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                            name: 'file',
-                            filePath: that.data.coverImage,
-                            formData: sendData,
-                            success: function (res) {
-                                getApp().request({
-                                    url: "org/exchange",
-                                    data: {
-                                        "key": sendData.key,
-                                        "type": "image",
-                                    },
-                                    method: "post",
-                                    success: function (r) {
-                                        r = r.data
-                                        if (r.code == 0) {
-                                            // console.log("上传到服务器出错");
-                                            wx.showToast({
-                                                title: '上传到服务器出错',
-                                                icon: 'none'
-                                            })
-                                        } else if (Number(r.code) == 1) {
-                                            that.setData({
-                                                coverImageId: r.data.imageId
-                                            })
-                                            wx.hideLoading()
-                                            wx.showToast({
-                                                title: '图片上传成功',
-                                                icon: 'success',
-                                            })
-                                        }
-                                    }
-                                });
-                            }
-                        })
                     }
                 })
             },
@@ -301,79 +272,85 @@ Page({
                 let size = res.size;
                 let duration = res.duration;
                 var time = 30;
-
-                wx.showLoading({
-                    title: '请耐心等待',
-                    mask: true,
-                })
-                let timer = setInterval(timeSub, 1000);
-                function timeSub() {
-                    time -= 1;
-                    if (time <= 0) {
-                        clearInterval(timer)
-                        wx.hideLoading(),
-                        wx.showToast({
-                            title: '请重新上传视频',
-                            icon: 'none',
-                        })
-                    }
-                }
-                that.setData({
-                    isVideo:false,
-                    video: res.tempFilePath,
-                    videoImage: res.thumbTempFilePath
-                })
-                getApp().request({
-                    url: "org/policy",
-                    method: "post",
-                    data: {
-                        "type": "video"
-                    },
-                    success: function (res) {
-                        let n = videoPath.lastIndexOf('.');
-                        let videoPathO = videoPath.substring(n)
-                        let sendData = {
-                            "key": res.data.data.dir + getApp().imageAddress(videoPath) + videoPathO,
-                            "OSSAccessKeyId": res.data.data.accessid,
-                            "host": res.data.data.host,
-                            "expire": res.data.data.expire,
-                            "signature": res.data.data.signature,
-                            "policy": res.data.data.policy,
-                            'success_action_status': '200'
+                if (Number(res.size) < 31257280){
+                    wx.showLoading({
+                        title: '请耐心等待',
+                        mask: true,
+                    })
+                    let timer = setInterval(timeSub, 1000);
+                    function timeSub() {
+                        time -= 1;
+                        if (time <= 0) {
+                            clearInterval(timer)
+                            wx.hideLoading(),
+                                wx.showToast({
+                                    title: '请重新上传视频',
+                                    icon: 'none',
+                                })
                         }
-                        wx.uploadFile({
-                            url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                            name: 'file',
-                            filePath: videoPath,
-                            formData: sendData,
-                            success: function (res) {
-                                getApp().request({
-                                    url: "org/exchange",
-                                    data: {
-                                        "key": sendData.key,
-                                        "type": "video",
-                                        size: Number(size),
-                                        duration: Number(duration.toFixed(0)),
-                                    },
-                                    method: "post",
-                                    success: function (res) {
-                                        if(Number(res.data.code) == 1){
-                                            clearInterval(timer)
-                                            that.setData({
-                                                videoId: res.data.data.videoId
-                                            })
-                                            wx.hideLoading();
-                                            wx.showToast({
-                                                title: '视频上传成功',
-                                                icon:'success'
-                                            })
-                                        }
-                                    }
-                                });
-                            }
-                        })
                     }
-                })
+                    that.setData({
+                        isVideo: false,
+                        video: res.tempFilePath,
+                        videoImage: res.thumbTempFilePath
+                    })
+                    getApp().request({
+                        url: "org/policy",
+                        method: "post",
+                        data: {
+                            "type": "video"
+                        },
+                        success: function (res) {
+                            let n = videoPath.lastIndexOf('.');
+                            let videoPathO = videoPath.substring(n)
+                            let sendData = {
+                                "key": res.data.data.dir + getApp().imageAddress(videoPath) + videoPathO,
+                                "OSSAccessKeyId": res.data.data.accessid,
+                                "host": res.data.data.host,
+                                "expire": res.data.data.expire,
+                                "signature": res.data.data.signature,
+                                "policy": res.data.data.policy,
+                                'success_action_status': '200'
+                            }
+                            wx.uploadFile({
+                                url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
+                                name: 'file',
+                                filePath: videoPath,
+                                formData: sendData,
+                                success: function (res) {
+                                    getApp().request({
+                                        url: "org/exchange",
+                                        data: {
+                                            "key": sendData.key,
+                                            "type": "video",
+                                            size: Number(size),
+                                            duration: Number(duration.toFixed(0)),
+                                        },
+                                        method: "post",
+                                        success: function (res) {
+                                            if (Number(res.data.code) == 1) {
+                                                clearInterval(timer)
+                                                that.setData({
+                                                    videoId: res.data.data.videoId
+                                                })
+                                                wx.hideLoading();
+                                                wx.showToast({
+                                                    title: '视频上传成功',
+                                                    icon: 'success'
+                                                })
+                                            }
+                                        }
+                                    });
+                                }
+                            })
+                        }
+                    })
+                } else if (Number(res.size) >= 31257280){
+                    wx.showToast({
+                        title: '视频大于30M,请重新选择',
+                        icon: 'none'
+                    })
+                }
             }
         })
     }

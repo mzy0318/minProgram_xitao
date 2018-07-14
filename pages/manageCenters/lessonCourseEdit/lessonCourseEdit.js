@@ -133,73 +133,37 @@ Page({
                     coverImage: res.tempFilePaths[0]
                 })
                 let imgPath = res.tempFilePaths[0]
+                
                 wx.showLoading({
                     title: '图片上传中...',
                     mask:true,
                 })
-                getApp().request({
-                    url: "org/policy",
-                    method: "post",
-                    data: {
-                        "type": "image"
-                    },
-                    success: function (res) {
-                        let n = imgPath.lastIndexOf('.');
-                        let imgPathO = imgPath.substring(n)
-                        let sendData = {
-                            "key": res.data.data.dir + getApp().imageAddress(imgPath) + imgPathO,
-                            "OSSAccessKeyId": res.data.data.accessid,
-                            "host": res.data.data.host,
-                            "expire": res.data.data.expire,
-                            "signature": res.data.data.signature,
-                            "policy": res.data.data.policy,
-                            'success_action_status': '200'
-                        }
-                        wx.uploadFile({
-                            url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                            name: 'file',
-                            filePath: imgPath,
-                            formData: sendData,
-                            success: function (res) {
-                                // wx.showLoading({
-                                //     title: '图片上传中',
-                                //     mask:true,
-                                // })
+                var header = {};
+                header.Cookie = wx.getStorageSync('cookie');
+                header['Content-Type'] = 'multipart/form-data';
 
-                                // setTimeout(function () {
-                                //     wx.hideLoading()
-                                // }, 5000)
-                                getApp().request({
-                                    url: "org/exchange",
-                                    data: {
-                                        "key": sendData.key,
-                                        "type": "image",
-                                    },
-                                    method: "post",
-                                    success: function (r) {
-                                        r = r.data
-                                        if (r.code == 0) {
-                                            // console.log("上传到服务器出错");
-                                            // return
-                                            wx.showToast({
-                                                title: '上传到服务器出错',
-                                                icon: 'none'
-                                            })
-                                        }else if(Number(r.code)==1){
-                                            //得到图片的id和地
-                                            that.setData({
-                                                couveImageId: r.data.imageId
-                                            })
-                                            wx.hideLoading()
-                                            wx.showToast({
-                                                title: '图片上传成功',
-                                                icon:'success',
-                                            })
-                                        }
-                                    }
-                                });
-                            }
-                        })
+                wx.uploadFile({
+                    url: getApp().getHost() + 'upload',
+                    filePath: that.data.coverImage,
+                    name: 'file',
+                    header: header,
+                    success: function (res) {
+                        let r = JSON.parse(res.data)
+                        if (Number(r.code) == 1) {
+                            that.setData({
+                                couveImageId: r.data.imageId,
+                            });
+                            wx.hideLoading();
+                            wx.showToast({
+                                title: '上传成功',
+                                icon: 'success'
+                            })
+                        } else {
+                            wx.showToast({
+                                title: r.msg,
+                                icon: 'none',
+                            })
+                        }
                     }
                 })
             },

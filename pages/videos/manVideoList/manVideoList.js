@@ -171,7 +171,7 @@ Page({
     },
     toSharePage: function (e) {
         wx.navigateTo({
-            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/videos/videoListInfo/videoListInfo',
+            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/videos/videoListInfo/videoListInfo&actTag=' + e.currentTarget.dataset.acttag,
         })
     }
 })

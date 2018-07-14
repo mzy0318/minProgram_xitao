@@ -96,6 +96,7 @@ Page({
                 isOptions: false,
                 actId: e.currentTarget.dataset.actid,
                 title: e.currentTarget.dataset.title,
+                actTag: e.currentTarget.dataset.acttag
             })
         } else if (Number(e.currentTarget.dataset.id) == 1) {
             //菜单隐藏
@@ -164,7 +165,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 3) {
             //分享
             wx.navigateTo({
-                url: '../../baseOptions/sharePage/sharePage?title=' + that.data.title + '&actId=' + that.data.actId +'&page=pages/videoClass/videoClassInfo/videoClassInfo',
+                url: '../../baseOptions/sharePage/sharePage?title=' + that.data.title + '&actId=' + that.data.actId +'&page=pages/videoClass/videoClassInfo/videoClassInfo&acttag=' + that.data.actTag,
             })
         }
     },

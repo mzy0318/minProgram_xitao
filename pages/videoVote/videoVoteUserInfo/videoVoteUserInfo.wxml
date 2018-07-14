@@ -43,11 +43,11 @@
         <button bindtap='toIndex'>了解机构 ></button>
     </view>
     <!-- 活动分享 -->
-    <view class='activeInfoShare'>
+    <!-- <view class='activeInfoShare'>
         <view class='activeInfoInfoTitle'>活动分享</view>
         <view class='activeInfoShareImage' bindtap='viewImage'><image src='{{encodeImage}}' mode='scaleToFill'></image></view>
         <button>分享到朋友圈</button>
-    </view>
+    </view> -->
     <!-- 活动详情 -->
     <view class='activeInfoImages' hidden='{{isTitleOne}}'>
         <view class='activeInfoInfoTitle'>{{pageData.title1}}</view>

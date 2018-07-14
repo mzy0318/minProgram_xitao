@@ -379,12 +379,12 @@ Page({
         //砍价活动
         if (Number(pageType) == 4) {
             wx.navigateTo({
-                url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/killPrices/killPriceInfo/killPriceInfo',
+                url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/killPrices/killPriceInfo/killPriceInfo&actTag=' + e.currentTarget.dataset.acttag,
             })
             //私人拼团
         } else if (Number(pageType) == 1) {
             wx.navigateTo({
-                url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/collage/collageInfo/collageInfo',
+                url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/collage/collageInfo/collageInfo&actTag=' + e.currentTarget.dataset.acttag,
             })
         }
 

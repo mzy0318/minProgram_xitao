@@ -62,7 +62,6 @@ Page({
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
             let n = scene.indexOf('=');
-            console.log('options', options)
             that.setData({
                 actId: scene.slice(n + 1),
             })
@@ -95,13 +94,6 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function (options) {
         let that = this;
         getApp().request({
             url: 'personal_group_act',
@@ -114,7 +106,7 @@ Page({
                 if (Number(res.data.code) == 1) {
                     // 背景音乐
                     innerAudioContext.src = res.data.data.music,
-                    innerAudioContext.play();
+                        innerAudioContext.play();
                     innerAudioContext.onPlay(() => {
                         that.setData({
                             showMusic: false,
@@ -149,7 +141,7 @@ Page({
                         status: new Date().valueOf() >= res.data.data.end_time * 1000 ? '已结束' : '进行中',
                         joinId: res.data.data.joiner_id,
                         bannerImage: res.data.data.banner_image_url,
-                        backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url:'',
+                        backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
                         bgMusic: res.data.data.music,
                     });
                 } else if (Number(res.data.code) == 0) {
@@ -174,6 +166,13 @@ Page({
                 })
             }
         });
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function (options) {
+        
     },
 
     /**
@@ -355,10 +354,7 @@ Page({
                             bottomOption: true,
                         })
                     } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
+                        console.log(res.data.msg)
                     }
 
                 }
@@ -367,7 +363,7 @@ Page({
             // 更换背景图
             let imagePath = that.data.backgroundImage
             let n = imagePath.lastIndexOf('.');
-            imagePath = imagePath.substring(n);
+            let imagePathO = imagePath.substring(n);
             getApp().request({
                 url: 'org/policy',
                 method: 'post',
@@ -376,7 +372,7 @@ Page({
                 },
                 success: function (res) {
                     let sendData = {
-                        "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + '_' + getApp().randomNum() + imagePath,
+                        "key": res.data.data.dir + getApp().imageAddress(imagePath) + imagePathO,
                         "OSSAccessKeyId": res.data.data.accessid,
                         "host": res.data.data.host,
                         "expire": res.data.data.expire,

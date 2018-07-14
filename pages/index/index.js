@@ -103,7 +103,7 @@ Page({
             })
         } else if (Number(options.pageId) == 3){
             wx.navigateTo({
-                url: '../collage/collageInfo/collageInfo?actId=' + options.actId + '&options.actId=' + options.joinId,
+                url: '../collage/collagePersonInfo/collagePersonInfo?actId=' + options.actId + '&joinId=' + options.joinId,
             })
         } else if (Number(options.pageId) == 4){
             wx.navigateTo({
@@ -153,6 +153,10 @@ Page({
             wx.navigateTo({
                 url: '../videoVote/videoVoteUserInfo/videoVoteUserInfo?joinId=' + options.joinId,
             })
+        } else if (Number(options.pageId) == 16){
+            wx.navigateTo({
+                url: '../videoClass/videoClassInfo/videoClassInfo?actId=' + options.actId,
+            })
         }
         wx.showLoading({
             title: '',
@@ -169,9 +173,6 @@ Page({
         }
         wx.login({
             success: res => {
-                // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                // console.log("host:",getApp().globalData.host)
-                // console.log("org_id:", getApp().config.orgId,"code:",res.code)
                 getApp().request({
                     url: "login",
                     method: "post",
@@ -181,12 +182,9 @@ Page({
                     },
                     success: r => {
                         var cookie = wx.getStorageSync('cookie');
-                        // getApp().request({
-                        //     url: "login_status",
-                        //     success: r => {
-                        //         console.log("login status:", r);
-                        //     },
-                        // });
+                        if (r.header["Set-Cookie"]) {
+                            wx.setStorageSync('cookie', r.header["Set-Cookie"]);
+                        }
                     }
                 })
             }

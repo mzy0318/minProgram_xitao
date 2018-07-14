@@ -311,71 +311,93 @@ Page({
                     actImage: actImage,
                 })
                 let imageArr = res.tempFilePaths;
+
+                var header = {};
+                header.Cookie = wx.getStorageSync('cookie');
+                header['Content-Type'] = 'multipart/form-data';
+
                 for (let i = 0; i < imageArr.length; i++) {
 
-                    let n = imageArr[i].lastIndexOf('.');
-
-                    let imageArrO = imageArr[i].substring(n)
-
-                    wx.showLoading({
-                        title: '图片上传中',
-                        mask: true,
-                    })
-                    getApp().request({
-                        url: 'org/policy',
-                        method: 'post',
-                        data: {
-                            "type": "image"
-                        },
-                        success: function(res) {
-                            let sendData = {
-                                "key": res.data.data.dir + getApp().imageAddress(imageArr[i]) + imageArrO,
-                                "OSSAccessKeyId": res.data.data.accessid,
-                                "host": res.data.data.host,
-                                "expire": res.data.data.expire,
-                                "signature": res.data.data.signature,
-                                "policy": res.data.data.policy,
-                                'success_action_status': '200'
+                    wx.uploadFile({
+                        url: getApp().getHost() + 'upload',
+                        filePath: imageArr[i],
+                        name: 'file',
+                        header: header,
+                        success: function (res) {
+                            let r = JSON.parse(res.data)
+                            if (Number(r.code) == 1) {
+                                arr.push(r.data.imageId);
+                                that.setData({
+                                    actImageId: arr
+                                })
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: '上传成功',
+                                    icon: 'success'
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: r.msg,
+                                    icon: 'none',
+                                })
                             }
-                            wx.uploadFile({
-                                url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                                name: 'file',
-                                filePath: imageArr[i],
-                                formData: sendData,
-                                success: function(res) {
-                                    getApp().request({
-                                        url: "org/exchange",
-                                        data: {
-                                            "key": sendData.key,
-                                            "type": "image",
-                                        },
-                                        method: "post",
-                                        success: function(r) {
-                                            r = r.data
-                                            if (r.code == 0) {
-                                                // console.log("上传到服务器出错");
-                                                // return
-                                                wx.showToast({
-                                                    title: '上传到服务器出错',
-                                                    icon: 'none'
-                                                })
-                                            } else if (Number(r.code) == 1) {
-                                                arr.push(r.data.imageId)
-                                                that.setData({
-                                                    actImageId: arr
-                                                })
-                                                wx.hideLoading()
-                                                wx.showToast({
-                                                    title: '图片上传成功',
-                                                    icon: 'success'
-                                                })
-                                            }
-                                        }
-                                    });
-                                }
-                            })
                         }
                     })
+                    // getApp().request({
+                    //     url: 'org/policy',
+                    //     method: 'post',
+                    //     data: {
+                    //         "type": "image"
+                    //     },
+                    //     success: function(res) {
+                    //         let sendData = {
+                    //             "key": res.data.data.dir + getApp().imageAddress(imageArr[i]) + imageArrO,
+                    //             "OSSAccessKeyId": res.data.data.accessid,
+                    //             "host": res.data.data.host,
+                    //             "expire": res.data.data.expire,
+                    //             "signature": res.data.data.signature,
+                    //             "policy": res.data.data.policy,
+                    //             'success_action_status': '200'
+                    //         }
+                    //         wx.uploadFile({
+                    //             url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
+                    //             name: 'file',
+                    //             filePath: imageArr[i],
+                    //             formData: sendData,
+                    //             success: function(res) {
+                    //                 getApp().request({
+                    //                     url: "org/exchange",
+                    //                     data: {
+                    //                         "key": sendData.key,
+                    //                         "type": "image",
+                    //                     },
+                    //                     method: "post",
+                    //                     success: function(r) {
+                    //                         r = r.data
+                    //                         if (r.code == 0) {
+                    //                             // console.log("上传到服务器出错");
+                    //                             // return
+                    //                             wx.showToast({
+                    //                                 title: '上传到服务器出错',
+                    //                                 icon: 'none'
+                    //                             })
+                    //                         } else if (Number(r.code) == 1) {
+                    //                             arr.push(r.data.imageId)
+                    //                             that.setData({
+                    //                                 actImageId: arr
+                    //                             })
+                    //                             wx.hideLoading()
+                    //                             wx.showToast({
+                    //                                 title: '图片上传成功',
+                    //                                 icon: 'success'
+                    //                             })
+                    //                         }
+                    //                     }
+                    //                 });
+                    //             }
+                    //         })
+                    //     }
+                    // })
                 }
             },
         })
@@ -385,70 +407,43 @@ Page({
         wx.chooseImage({
             count: 1,
             success: function(res) {
+
                 let imagePath = res.tempFilePaths[0]
                 that.setData({
                     isCover: 'inline-block',
                     coverImage: res.tempFilePaths[0],
                 })
-                let n = imagePath.lastIndexOf('.');
 
-                let imagePathO = imagePath.substring(n)
                 wx.showLoading({
                     title: '图片上传中',
                 })
-                getApp().request({
-                    url: 'org/policy',
-                    method: 'post',
-                    data: {
-                        "type": "image"
-                    },
-                    success: function(res) {
-                        let sendData = {
-                            "key": res.data.data.dir + getApp(imagePath).imageAddress() + imagePathO,
-                            "OSSAccessKeyId": res.data.data.accessid,
-                            "host": res.data.data.host,
-                            "expire": res.data.data.expire,
-                            "signature": res.data.data.signature,
-                            "policy": res.data.data.policy,
-                            'success_action_status': '200'
-                        }
-                        
 
-                        // setTimeout(function() {
-                        //     wx.hideLoading()
-                        // }, 5000)
-                        wx.uploadFile({
-                            url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                            name: 'file',
-                            filePath: imagePath,
-                            formData: sendData,
-                            success: function(res) {
-                                getApp().request({
-                                    url: "org/exchange",
-                                    data: {
-                                        "key": sendData.key,
-                                        "type": "image",
-                                    },
-                                    method: "post",
-                                    success: function(r) {
-                                        r = r.data
-                                        if (r.code == 0) {
-                                            console.log("上传到服务器出错");
-                                            return
-                                        } else if (r.code == 1){
-                                            that.setData({
-                                                coverImageId: r.data.imageId
-                                            })
-                                            wx.hideLoading()
-                                            wx.showToast({
-                                                title: '图片上传成功',
-                                                icon: 'success'
-                                            })
-                                        } 
-                                    }
-                                });
-                            }
-                        })
+                var header = {};
+                header.Cookie = wx.getStorageSync('cookie');
+                header['Content-Type'] = 'multipart/form-data';
+
+                wx.uploadFile({
+                    url: getApp().getHost() + 'upload',
+                    filePath: that.data.coverImage,
+                    name: 'file',
+                    header: header,
+                    success: function (res) {
+                        let r = JSON.parse(res.data)
+                        if (Number(r.code) == 1) {
+                            that.setData({
+                                coverImageId: r.data.imageId,
+                            });
+                            wx.hideLoading();
+                            wx.showToast({
+                                title: '上传成功',
+                                icon: 'success'
+                            })
+                        } else {
+                            wx.showToast({
+                                title: r.msg,
+                                icon: 'none',
+                            })
+                        }
                     }
                 })
             },

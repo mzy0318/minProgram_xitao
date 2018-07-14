@@ -54,15 +54,10 @@ Page({
 
         if (options.scene != undefined) {  
             let scene = decodeURIComponent(options.scene);
-            let opts = JSON.stringify(options.scene)
-            wx.showModal({
-                title: '测试',
-                content: opts,
-            })
-            console.log('获取到的scene', scene)
-            
+            console.log('scene', scene)
+            let n = scene.indexOf('=');
             that.setData({
-                actId: options.scene.id,
+                actId: scene.slice(n + 1),
                 optionsContent: that.data.user,
             })
         } else if (options.scene == undefined) {

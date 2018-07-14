@@ -111,19 +111,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-
-        // if(wx.getStorageSync('loginCode')==1){
-        //     this.setData({
-        //         islogin: 'none',
-        //     })
-        // }else{
-        //     wx.setNavigationBarTitle({
-        //         title: '智慧招生小程序',
-        //     })
-        //     this.setData({
-        //         islogin: 'block',
-        //     })
-        // }
         let version = wx.getExtConfigSync();
         that.setData({
             versionData: wx.getExtConfigSync(),
@@ -148,7 +135,7 @@ Page({
             })
         } else {
             wx.setNavigationBarTitle({
-                title: '智慧招生小程序',
+                title: '招生小程序登录',
             })
             this.setData({
                 islogin: 'block',
@@ -188,9 +175,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     getPhone: function (e) {
         this.setData({
             phoneNum: e.detail.value,
@@ -289,6 +276,17 @@ Page({
     toEditPage:function(e){
         wx.navigateTo({
             url: e.currentTarget.dataset.url,
+        })
+    },
+    exitApp:function(){
+        let that = this;
+        wx.setStorageSync('loginCode', 3);
+        wx.setNavigationBarTitle({
+            title: '招生小程序登录',
+        })
+        that.setData({
+            islogin: 'block',
+            isContent: 'none'
         })
     }
 })

@@ -23,7 +23,7 @@ Page({
             url: "bargain_detail",
             method: "post",
             data: {
-                act_id: options.actId
+                act_id: that.data.actId,
             },
             success: res => {
                 this.setData({

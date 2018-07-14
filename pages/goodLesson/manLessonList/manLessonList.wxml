@@ -13,7 +13,7 @@
         <view class='manListContentBottom'>
             <view class='contentBottomChild' bindtap='delActive' data-id='{{item.act_nice_id}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-lajixiang'></text>删除</view>
             <view class='contentBottomChild' bindtap='toLessonEdit' data-id='{{item.act_nice_id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
-            <button bindtap='sharePage' data-actid='{{item.act_nice_id}}' data-title='{{item.title}}' class='contentBottomChild' hover-class='none'><text class='iconfont icon-share'></text>分享</button>
+            <button bindtap='sharePage' data-acttag='{{item.act_tag}}' data-actid='{{item.act_nice_id}}' data-title='{{item.title}}' class='contentBottomChild' hover-class='none'><text class='iconfont icon-share'></text>分享</button>
         </view>
     </view>
     <view class='manListBottom'>

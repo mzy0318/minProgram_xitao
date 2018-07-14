@@ -70,7 +70,7 @@
             <view class='infoThreeContentOne' hidden='{{isHidden}}'>
                 <view class='contentOne'>已有<text>{{killPricePeople.total_joiner}}</text>人报名</view>
                 <view class='contentTwo'>他们总计被砍了<text>{{killPricePeople.total_bargain_times}}</text>次,总计￥<text>{{killPricePeople.total_reduce}}</text>元</view>
-                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople.list}}' data-nickname='{{item.nickname}}' data-act_id='{{item.act_id}}' data-joiner_id='{{item.joiner_id}}'>
+                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople.list}}' data-nickname='{{item.nickname}}' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}'>
                     <view><image src='{{item.avatar_url}}' mode='scaleToFill' /></view>
                     <view><text>{{item.nickname}}</text><text >已被砍掉￥{{item.reduce_price}}元></text></view>
                 </view>

@@ -14,7 +14,7 @@ Page({
         joinInfo: '',
         joinName:'',
         actId:'',
-        joinerId:'',
+        joinId:'',
     },
 
     /**
@@ -22,21 +22,20 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        console.log('options.scene', options)
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = 'actid=' + JSON.parse(options.personInfo).act_id + '&joinerid=' + JSON.parse(options.personInfo).joiner_id;
+        let mzy = 'actid:' + options.actId + ':joinid:' + options.joinId;
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
-            console.log('获取到的scene', scene)
+            let sceneArr = scene.split(':');
             that.setData({
-                actId: options.query.actid,
-                joinerId: options.query.joinerid,
+                actId: sceneArr[1],
+                joinId: sceneArr[3],
             })
         }else{
             that.setData({
-                actId: JSON.parse(options.personInfo).act_id,
-                joinerId: JSON.parse(options.personInfo).joiner_id,
+                actId: options.actId,
+                joinId: options.joinId,
             })
         }
         
@@ -48,20 +47,10 @@ Page({
             url: 'bargain_act',
             data: {
                 act_id: that.data.actId,
-                joiner_id: that.data.joinerId,
+                joiner_id: that.data.joinId,
             },
             method: 'post',
             success: res => {
-                // let innerAudioContext = wx.createInnerAudioContext();
-                // innerAudioContext.autoplay = true;
-                // innerAudioContext.src = res.data.data.music;
-                // innerAudioContext.onPlay(() => {
-                //     console.log('开始播放')
-                // })
-                // innerAudioContext.onError((res) => {
-                //     console.log(res.errMsg)
-                //     console.log(res.errCode)
-                // })
                 that.setData({
                     pageData: res.data.data,
                     backgroundImage: res.data.data.act_image[0].url,
@@ -75,15 +64,22 @@ Page({
         getApp().request({
             url: 'bargain_range',
             data: {
-                act_id: JSON.parse(options.personInfo).act_id,
-                joiner_id: JSON.parse(options.personInfo).joiner_id,
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
                 page: 1
             },
             method: 'post',
             success: res => {
-                this.setData({
-                    peopleData: res.data.data
-                })
+                if(Number(res.data.code) == 1){
+                    this.setData({
+                        peopleData: res.data.data
+                    })
+                } else if (Number(res.data.code) == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
             }
         });
     },
@@ -142,11 +138,12 @@ Page({
         getApp().tellPhone(e)
     },
     helpHer: function () {
+        let that = this;
         getApp().request({
             url: 'bargain',
             data: {
-                act_id: JSON.parse(this.data.joinInfo.personInfo).act_id,
-                joiner_id: JSON.parse(this.data.joinInfo.personInfo).joiner_id,
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
             },
             method: 'post',
             success: function (res) {
@@ -166,17 +163,15 @@ Page({
         })
     },
     toBack: function (e) {
-        // wx.navigateTo({
-        //     url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,
-        // })
         wx.navigateBack({})
     },
     getJoinerList:function(){
+        let that = this;
         getApp().request({
             url: 'bargain_range',
             data: {
-                act_id: JSON.parse(this.data.joinInfo.personInfo).act_id,
-                joiner_id: JSON.parse(this.data.joinInfo.personInfo).joiner_id,
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
                 page: 1
             },
             method: 'post',

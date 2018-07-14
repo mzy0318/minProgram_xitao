@@ -273,66 +273,39 @@ Page({
                     title: '图片上传中...',
                     mask: true,
                 })
+
+                var header = {};
+                header.Cookie = wx.getStorageSync('cookie');
+                header['Content-Type'] = 'multipart/form-data';
+
                 for (let i = 0; i < imgPath.length; i++) {
 
-                    let n = imgPath[i].lastIndexOf('.');
-
-                    let imgPathO = imgPath[i].substring(n);
-
-                    getApp().request({
-                        url: "org/policy",
-                        method: "post",
-                        data: {
-                            "type": "image"
-                        },
-                        success: function(res) {
-                            let sendData = {
-                                "key": res.data.data.dir + getApp().imageAddress(imgPath[i]) + imgPathO,
-                                "OSSAccessKeyId": res.data.data.accessid,
-                                "host": res.data.data.host,
-                                "expire": res.data.data.expire,
-                                "signature": res.data.data.signature,
-                                "policy": res.data.data.policy,
-                                'success_action_status': '200'
+                    wx.uploadFile({
+                        url: getApp().getHost() + 'upload',
+                        filePath: imgPath[i],
+                        name: 'file',
+                        header: header,
+                        success: function (res) {
+                            let r = JSON.parse(res.data)
+                            if (Number(r.code) == 1) {
+                                actImg.push(r.data.imageId);
+                                that.setData({
+                                    actImageID: actImg
+                                })
+                                that.setData({
+                                    actImg0: r.data.imageId,
+                                });
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: '上传成功',
+                                    icon: 'success'
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: r.msg,
+                                    icon: 'none',
+                                })
                             }
-                            wx.uploadFile({
-                                url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                                name: 'file',
-                                filePath: imgPath[i],
-                                formData: sendData,
-                                success: function(res) {
-                                    getApp().request({
-                                        url: "org/exchange",
-                                        data: {
-                                            "key": sendData.key,
-                                            "type": "image",
-                                        },
-                                        method: "post",
-                                        success: function(r) {
-                                            r = r.data
-                                            if (r.code == 0) {
-                                                // console.log("上传到服务器出错");
-                                                // return
-                                                wx.showToast({
-                                                    title: '上传到服务器出错',
-                                                    icon: 'none'
-                                                })
-                                            }else if(Number(r.code)==1){
-                                                //得到图片的id和地址
-                                                actImg.push(r.data.imageId)
-                                                that.setData({
-                                                    actImg0: actImg,
-                                                })
-                                                wx.hideLoading()
-                                                wx.showToast({
-                                                    title: '图片上传成功',
-                                                    icon:'success',
-                                                })
-                                            }
-                                        }
-                                    });
-                                }
-                            })
                         }
                     })
                 }

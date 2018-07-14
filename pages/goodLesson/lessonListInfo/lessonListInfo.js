@@ -22,9 +22,9 @@ Page({
         if (options.scene != undefined) {
 
             let scene = decodeURIComponent(options.scene);
-            console.log('获取到的scene', scene)
+            let n = scene.indexOf('=');
             that.setData({
-                courseid: options.scene.actid,
+                courseid: scene.slice(n + 1),
             })
         } else if (options.scene == undefined) {
             that.setData({
@@ -125,12 +125,12 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    onShareAppMessage: function(res) {
         let that = this;
         if (res.from == 'menu') {
-            return {
-                path: 'pages/index/index?pageId=4&actId=' + that.data.courseid,
-            }
+        }
+        return {
+            path: 'pages/index/index?pageId=4&actId=' + that.data.courseid,
         }
     },
     tellPhone: e => {

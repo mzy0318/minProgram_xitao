@@ -365,11 +365,11 @@
 /*弹窗  */
 .writeInfoWrap{
     width:750rpx;
-    height:1207rpx;
+    height:1400rpx;
     position:fixed;
     top:0rpx;
     left:0rpx;
-    background:rgba(0,0,0,0.4);
+    background:rgba(0,0,0,0.3);
 }
 .writeInfo{
     width:660rpx;
@@ -379,7 +379,7 @@
     top:50%;
     left:50%;
     margin-left:-330rpx;
-    margin-top:-200rpx;
+    margin-top:-300rpx;
     border-radius:5px;
     padding-bottom:20rpx;
 }

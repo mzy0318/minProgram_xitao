@@ -200,15 +200,15 @@ Page({
 
     },
     toKillPriceInfo:function(e){
-        let personInfo = JSON.stringify(e.currentTarget.dataset)
+        let that = this;
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
         if (Number(pageTypeStu) == 6) {
             wx.navigateTo({
-                url: '../killPricePerson/killPricePerson?personInfo=' + personInfo + '&nickName=' + e.currentTarget.dataset.nickname,
+                url: '../killPricePerson/killPricePerson?joinId=' + e.currentTarget.dataset.joinid + '&actId=' + e.currentTarget.dataset.actid,
             })
         } else if (Number(pageTypeStu) == 3) {
             wx.navigateTo({
-                url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joiner_id + '&actId=' + e.currentTarget.dataset.act_id,
+                url: '../../collage/collagePersonInfo/collagePersonInfo?joinId=' + e.currentTarget.dataset.joinid + '&actId=' + e.currentTarget.dataset.actid,
             })
         }
     },

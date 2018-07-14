@@ -288,8 +288,8 @@
     margin-left:13.33rpx;
 }
 .fiveNavTop,.fiveNavTop image{
-    width:130rpx;
-    height:130rpx;
+    width:100rpx;
+    height:100rpx;
     margin:0rpx auto;
 }
 .fiveNavbottom{

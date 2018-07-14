@@ -8,10 +8,34 @@
     width:750rpx;
     height:350rpx;
     background:#fff;
+    position:relative;
 }
-.managWarpTop image{
+.managWarpTop>image{
     width:750rpx;
     height:350rpx;
+}
+.managWarpTop>view{
+    width:100rpx;
+    padding:0rpx 8rpx;
+    height:50rpx;
+    line-height:30rpx;
+    background:transparent;
+    color:#7b7b7b;
+    position:absolute;
+    right:10rpx;
+    top:20rpx;
+    font-size:30rpx;
+    font-weight:bold;
+}
+.managWarpTop>view>text{
+    display:block;
+    float:right;
+    margin-top:3rpx;
+   
+}
+.managWarpTop>view>image{
+    width:35rpx;
+    height:35rpx;
 }
 
 .mangeScool{
