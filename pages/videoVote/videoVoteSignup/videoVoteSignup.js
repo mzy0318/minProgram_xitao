@@ -237,16 +237,13 @@ Page({
                 header.Cookie = wx.getStorageSync('cookie');
                 header['Content-Type'] = 'multipart/form-data';
 
-                wx.uploadFile({
-                    url: getApp().getHost() + 'upload',
+                getApp().uploadFile({
+                    url: 'upload',
                     filePath: that.data.coverImage,
-                    name: 'file',
-                    header: header,
                     success: function (res) {
-                        let r = JSON.parse(res.data)
-                        if (Number(r.code) == 1) {
+                        if (Number(res.code) == 1) {
                             that.setData({
-                                coverImageId: r.data.imageId,
+                                coverImageId: res.data.imageId,
                             });
                             wx.hideLoading();
                             wx.showToast({
@@ -255,12 +252,12 @@ Page({
                             })
                         } else {
                             wx.showToast({
-                                title: r.msg,
+                                title: res.msg,
                                 icon: 'none',
                             })
                         }
                     }
-                })
+                },header)
             },
         })
     },
@@ -268,16 +265,20 @@ Page({
         let that = this;
         wx.chooseVideo({
             success: function (res) {
+
                 let videoPath = res.tempFilePath;
                 let size = res.size;
                 let duration = res.duration;
                 var time = 30;
+
                 if (Number(res.size) < 31257280){
                     wx.showLoading({
                         title: '请耐心等待',
                         mask: true,
                     })
+
                     let timer = setInterval(timeSub, 1000);
+
                     function timeSub() {
                         time -= 1;
                         if (time <= 0) {
@@ -294,57 +295,41 @@ Page({
                         video: res.tempFilePath,
                         videoImage: res.thumbTempFilePath
                     })
-                    getApp().request({
-                        url: "org/policy",
-                        method: "post",
-                        data: {
-                            "type": "video"
+
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
+
+                    wx.uploadFile({
+                        url: getApp().getHost() + 'upload',
+                        filePath: videoPath,
+                        name: 'file',
+                        header: header,
+                        formData: {
+                            size: Number(size),
+                            duration: Number(duration.toFixed(0)),
                         },
                         success: function (res) {
-                            let n = videoPath.lastIndexOf('.');
-                            let videoPathO = videoPath.substring(n)
-                            let sendData = {
-                                "key": res.data.data.dir + getApp().imageAddress(videoPath) + videoPathO,
-                                "OSSAccessKeyId": res.data.data.accessid,
-                                "host": res.data.data.host,
-                                "expire": res.data.data.expire,
-                                "signature": res.data.data.signature,
-                                "policy": res.data.data.policy,
-                                'success_action_status': '200'
+                            let r = JSON.parse(res.data)
+                            if (Number(r.code) == 1) {
+                                clearInterval(timer)
+                                that.setData({
+                                    videoId: r.data.videoId,
+                                });
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: '上传成功',
+                                    icon: 'success'
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: r.msg,
+                                    icon: 'none',
+                                })
                             }
-                            wx.uploadFile({
-                                url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                                name: 'file',
-                                filePath: videoPath,
-                                formData: sendData,
-                                success: function (res) {
-                                    getApp().request({
-                                        url: "org/exchange",
-                                        data: {
-                                            "key": sendData.key,
-                                            "type": "video",
-                                            size: Number(size),
-                                            duration: Number(duration.toFixed(0)),
-                                        },
-                                        method: "post",
-                                        success: function (res) {
-                                            if (Number(res.data.code) == 1) {
-                                                clearInterval(timer)
-                                                that.setData({
-                                                    videoId: res.data.data.videoId
-                                                })
-                                                wx.hideLoading();
-                                                wx.showToast({
-                                                    title: '视频上传成功',
-                                                    icon: 'success'
-                                                })
-                                            }
-                                        }
-                                    });
-                                }
-                            })
                         }
                     })
+
                 } else if (Number(res.size) >= 31257280){
                     wx.showToast({
                         title: '视频大于30M,请重新选择',

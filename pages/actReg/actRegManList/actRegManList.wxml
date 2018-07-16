@@ -7,7 +7,7 @@
                 <image src='{{item.cover.url}}' mode='widthFix' ></image>
             </view>
             <view class='ListContentMiddelRight'>
-                <view class='contentMiddelRightChild' data-acttag='{{item.act_tag}}' data-id='{{item.id}}' bindtap='toUserInfo'>查看报名<text>{{item.total_joiner?'('+item.total_joiner+')':''}}</text></view>
+                <view class='contentMiddelRightChild' data-acttag='{{item.act_tag}}' data-id='{{item.id}}' data-title='{{item.title}}' bindtap='toUserInfo'>查看报名<text>{{item.total_joiner?'('+item.total_joiner+')':''}}</text></view>
                 <view class='contentMiddelRightStatus'>状态:<text class='textstatus' decode>&nbsp;{{item.status}}</text></view>
                 <view class='contentMiddelRightStatus'>结束:<text>{{item.end_time}}</text></view>
             </view>

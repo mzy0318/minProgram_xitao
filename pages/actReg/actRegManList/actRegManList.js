@@ -197,7 +197,7 @@ Page({
     },
     toUserInfo: function (e) {
         wx.navigateTo({
-            url: '../actRegUserInfo/actRegUserInfo?actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.id,
+            url: '../actRegUserInfo/actRegUserInfo?actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.id + '&title=' + e.currentTarget.dataset.title,
         })
     },
     taBack:function(){

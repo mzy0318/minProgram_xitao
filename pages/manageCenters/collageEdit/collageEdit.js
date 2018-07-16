@@ -344,15 +344,12 @@ Page({
 
                 for (let i = 0; i < imgPath.length; i++){
 
-                    wx.uploadFile({
-                        url: getApp().getHost() + 'upload',
+                    getApp().uploadFile({
+                        url:'upload',
                         filePath: imgPath[i],
-                        name: 'file',
-                        header: header,
                         success: function (res) {
-                            let r = JSON.parse(res.data)
-                            if (Number(r.code) == 1) {
-                                actImg.push(r.data.imageId);
+                            if (Number(res.code) == 1) {
+                                actImg.push(res.data.imageId);
                                 that.setData({
                                     actImg0: actImg
                                 })
@@ -363,12 +360,12 @@ Page({
                                 })
                             } else {
                                 wx.showToast({
-                                    title: r.msg,
+                                    title: res.msg,
                                     icon: 'none',
                                 })
                             }
                         }
-                    })
+                    },header)
                 }
             }
         })
@@ -393,16 +390,13 @@ Page({
                 header.Cookie = wx.getStorageSync('cookie');
                 header['Content-Type'] = 'multipart/form-data';
 
-                wx.uploadFile({
-                    url: getApp().getHost() + 'upload',
+                getApp().uploadFile({
+                    url:'upload',
                     filePath: that.data.coverImg,
-                    name: 'file',
-                    header: header,
                     success: function (res) {
-                        let r = JSON.parse(res.data)
-                        if (Number(r.code) == 1) {
+                        if (Number(res.code) == 1) {
                             that.setData({
-                                coveImgId: r.data.imageId,
+                                coveImgId: res.data.imageId,
                             });
                             wx.hideLoading();
                             wx.showToast({
@@ -411,12 +405,12 @@ Page({
                             })
                         } else {
                             wx.showToast({
-                                title: r.msg,
+                                title: res.msg,
                                 icon: 'none',
                             })
                         }
                     }
-                })
+                },header)
             }
         })
     },

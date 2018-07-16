@@ -248,6 +248,7 @@ Page({
                         mask: true,
                     })
                     let timer = setInterval(timeSub, 1000);
+
                     function timeSub() {
                         time -= 1;
                         if (time <= 0) {
@@ -271,8 +272,9 @@ Page({
                         success: function (res) {
                             let r = JSON.parse(res.data)
                             if (Number(r.code) == 1) {
+                                clearInterval(timer)
                                 that.setData({
-                                    schoolVideoId: r.data.imageId,
+                                    schoolVideoId: r.data.videoId,
                                 });
                                 wx.hideLoading();
                                 wx.showToast({

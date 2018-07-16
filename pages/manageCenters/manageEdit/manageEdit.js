@@ -32,7 +32,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log('options',options)
         let that = this
         that.setData({
             actId: options.id,
@@ -43,7 +42,7 @@ Page({
             startDate: util.formatDate(new Date(toDay)),
             endDate: util.formatDate(new Date(toFuture)),
         })
-        if (options.id == undefined) {
+        if (String(options.id) == 'undefined') {
             this.setData({
                 backgroundImage: options.image
             })
@@ -203,7 +202,7 @@ Page({
                             title: '发布成功',
                             icon:'success'
                         })
-                        if (that.data.actId == undefined) {
+                        if (String(that.data.actId) == 'undefined') {
 
                             wx.navigateBack({ delta: 2 });
 
@@ -212,9 +211,6 @@ Page({
                             wx.navigateBack({})
                         }
                     }
-                    // wx.navigateTo({
-                    //     url: '../manageActive/manageActive?url=org/bargain_list',
-                    // })
                 }else{
                     wx.showToast({
                         title: res.data.msg,
@@ -290,10 +286,7 @@ Page({
                             if (Number(r.code) == 1) {
                                 actImg.push(r.data.imageId);
                                 that.setData({
-                                    actImageID: actImg
-                                })
-                                that.setData({
-                                    actImg0: r.data.imageId,
+                                    actImg0: actImg,
                                 });
                                 wx.hideLoading();
                                 wx.showToast({

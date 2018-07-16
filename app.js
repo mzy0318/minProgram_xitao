@@ -67,7 +67,6 @@ App({
     },
     dev: false,
     getHost: () => {
-        // console.log('getApp().getExtConfig()', getApp().getExtConfig())
         var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version+"/";
         var dev = "http://192.168.1.112:8123/"+ getApp().getExtConfig().version+"/";
         return  dev;
@@ -230,6 +229,26 @@ App({
     },
     // 生成图片地址
     imageAddress:function(name){
-        return md5.hexMD5(new Date().getTime() + name + uuid.uuid()) 
+        return md5.hexMD5(new Date().getTime() + name + uuid.uuid());
+    },
+    //上传图片
+    uploadFile:function(obj,header){
+
+        let url = getApp().getHost() + obj.url;
+        let filePath = obj.filePath;
+        let success = obj.success;
+
+        wx.uploadFile({
+            url: url,
+            filePath: filePath,
+            name: 'file',
+            header: header,
+            success: function (res) {
+                let respons = JSON.parse(res.data);
+                if(Number(respons.code) == 1){
+                    success(respons)
+                }
+            }
+        })
     }
 })

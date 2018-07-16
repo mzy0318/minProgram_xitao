@@ -142,16 +142,13 @@ Page({
                 header.Cookie = wx.getStorageSync('cookie');
                 header['Content-Type'] = 'multipart/form-data';
 
-                wx.uploadFile({
-                    url: getApp().getHost() + 'upload',
+                getApp().uploadFile({
+                    url: 'upload',
                     filePath: that.data.coverImage,
-                    name: 'file',
-                    header: header,
                     success: function (res) {
-                        let r = JSON.parse(res.data)
-                        if (Number(r.code) == 1) {
+                        if (Number(res.code) == 1) {
                             that.setData({
-                                couveImageId: r.data.imageId,
+                                couveImageId: res.data.imageId,
                             });
                             wx.hideLoading();
                             wx.showToast({
@@ -159,13 +156,14 @@ Page({
                                 icon: 'success'
                             })
                         } else {
+                            wx.hideLoading();
                             wx.showToast({
-                                title: r.msg,
+                                title: res.msg,
                                 icon: 'none',
                             })
                         }
                     }
-                })
+                },header)
             },
         })
     },

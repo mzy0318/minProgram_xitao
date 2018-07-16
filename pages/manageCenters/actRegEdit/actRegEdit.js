@@ -121,9 +121,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    // onShareAppMessage: function() {
 
-    },
+    // },
     getEndTime: function(e) {
         let that = this;
         that.setData({
@@ -149,30 +149,27 @@ Page({
                 header.Cookie = wx.getStorageSync('cookie');
                 header['Content-Type'] = 'multipart/form-data';
 
-                wx.uploadFile({
-                    url: getApp().getHost() + 'upload',
+                getApp().uploadFile({
+                    url:'upload',
                     filePath: that.data.coverImage,
-                    name: 'file',
-                    header: header,
-                    success: function (res) {
-                        let r = JSON.parse(res.data)
-                        if(Number(r.code) == 1){
+                    success:function(res){
+                        if(Number(res.code) == 1){
                             that.setData({
-                                coverImageID: r.data.imageId,
+                                coverImageID: res.data.imageId,
                             });
                             wx.hideLoading();
                             wx.showToast({
                                 title: '上传成功',
-                                icon:'success'
+                                icon: 'success'
                             })
-                        }else{
+                        } else if (Number(res.code) == 0){
                             wx.showToast({
-                                title: r.msg,
-                                icon:'none',
+                                title: res.msg,
+                                icon: 'none',
                             })
                         }
                     }
-                })
+                },header)
             },
         })
     },
@@ -201,15 +198,12 @@ Page({
 
                 for (let i = 0; i < imageArr.length; i++) {
 
-                    wx.uploadFile({
-                        url: getApp().getHost() + 'upload',
+                    getApp().uploadFile({
+                        url: 'upload',
                         filePath: imageArr[i],
-                        name: 'file',
-                        header: header,
                         success: function (res) {
-                            let r = JSON.parse(res.data)
-                            if (Number(r.code) == 1) {
-                                arr.push(r.data.imageId);
+                            if (Number(res.code) == 1) {
+                                arr.push(res.data.imageId);
                                 that.setData({
                                     actImageID: arr
                                 })
@@ -220,12 +214,12 @@ Page({
                                 })
                             } else {
                                 wx.showToast({
-                                    title: r.msg,
+                                    title: res.msg,
                                     icon: 'none',
                                 })
                             }
                         }
-                    })
+                    },header)
                 }
             },
         })

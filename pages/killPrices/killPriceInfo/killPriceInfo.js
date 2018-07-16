@@ -75,13 +75,6 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function (options) {
         let that = this;
         getApp().request({
             url: 'bargain_act',
@@ -91,7 +84,7 @@ Page({
             },
             method: 'post',
             success: res => {
-                if(Number(res.data.code) == 1){
+                if (Number(res.data.code) == 1) {
                     //背景音乐
                     innerAudioContext.src = res.data.data.music;
                     innerAudioContext.play();
@@ -106,7 +99,7 @@ Page({
                             animationClass: 'musicControl'
                         })
                     })
-                    innerAudioContext.onError((res)=>{
+                    innerAudioContext.onError((res) => {
                         console.log(res)
                     })
                     let nameInfo = []
@@ -128,11 +121,11 @@ Page({
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,
                     })
-                }else if(Number(res.data.code) == 0){
+                } else if (Number(res.data.code) == 0) {
                     wx.showToast({
                         title: res.data.msg,
-                        icon:'none',
-                        mask:true,
+                        icon: 'none',
+                        mask: true,
                     })
                 }
             }
@@ -151,6 +144,13 @@ Page({
                 })
             }
         })
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function (options) {
+
         
     },
 
@@ -375,6 +375,7 @@ Page({
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: function (res) {
+                console.log('切换背景音乐',res)
                 that.setData({
                     backgroundImage: res.tempFilePaths[0],
                     bottomOption: false,
@@ -480,92 +481,69 @@ Page({
                             isCommon: true,
                             bottomOption: true,
                         })
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
                     }
+                    // } else if (Number(res.data.code) == 0) {
+                    //     wx.showToast({
+                    //         title: res.data.msg,
+                    //         icon: 'none',
+                    //     })
+                    // }
 
                 }
             })
         } else if (e.currentTarget.dataset.type == 'bgImage'){
             // 更换背景图
+
             let imagePath = that.data.backgroundImage
             let n = imagePath.lastIndexOf('.');
             imagePath = imagePath.substring(n);
-            getApp().request({
-                url: 'org/policy',
-                method: 'post',
-                data: {
-                    "type": "image"
-                },
+
+            var header = {};
+            header.Cookie = wx.getStorageSync('cookie');
+            header['Content-Type'] = 'multipart/form-data';
+
+            wx.uploadFile({
+                url: getApp().getHost() + 'upload',
+                filePath: that.data.backgroundImage,
+                name: 'file',
+                header: header,
                 success: function (res) {
-                    let sendData = {
-                        "key": res.data.data.dir + new Date().valueOf() + getApp().randomNum() + '_' + getApp().randomNum() + imagePath,
-                        "OSSAccessKeyId": res.data.data.accessid,
-                        "host": res.data.data.host,
-                        "expire": res.data.data.expire,
-                        "signature": res.data.data.signature,
-                        "policy": res.data.data.policy,
-                        'success_action_status': '200'
-                    }
-                    wx.uploadFile({
-                        url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                        name: 'file',
-                        filePath: that.data.backgroundImage,
-                        formData: sendData,
-                        success: function (res) {
-                            getApp().request({
-                                url: "org/exchange",
-                                data: {
-                                    "key": sendData.key,
-                                    "type": "image",
-                                },
-                                method: "post",
-                                success: function (r) {
-                                    r = r.data
-                                    console.log(r)
-                                    if (r.code == 0) {
-                                        wx.showToast({
-                                            title: '上传到服务器出错',
-                                            icon: 'none'
-                                        })
-                                    } else if (Number(r.code) == 1) {
-                                        that.setData({
-                                            coverImageID: r.data.imageId
-                                        })
-                                        getApp().request({
-                                            url:'org/edit_background',
-                                            data:{
-                                                act_id: e.currentTarget.dataset.id,
-                                                tag: wx.getStorageSync('actTag'),
-                                                bg_image_url: r.data.res,
-                                            },
-                                            method:'post',
-                                            success:function(res){
-                                                if(Number(res.data.code) == 1){
-                                                    wx.showToast({
-                                                        title: '更换成功',
-                                                        icon:'success',
-                                                        success:function(){
-                                                            that.setData({
-                                                                isCommon: true,
-                                                                bottomOption: true,
-                                                            })
-                                                        }
-                                                    })
-                                                }
-                                            }
-                                        })
-                                    }
+                    let r = JSON.parse(res.data)
+                    if (Number(r.code) == 1) {
+
+                        getApp().request({
+                            url: 'org/edit_background',
+                            data: {
+                                act_id: e.currentTarget.dataset.id,
+                                tag: wx.getStorageSync('actTag'),
+                                bg_image_url: r.data.res,
+                            },
+                            method: 'post',
+                            success: function (res) {
+                                if (Number(res.data.code) == 1) {
+                                    wx.showToast({
+                                        title: '更换成功',
+                                        icon: 'success',
+                                        success: function () {
+                                            that.setData({
+                                                isCommon: true,
+                                                bottomOption: true,
+                                            })
+                                        }
+                                    })
                                 }
-                            });
-                        }
-                    })
+                            }
+                        })
+
+
+                    } else {
+                        wx.showToast({
+                            title: r.msg,
+                            icon: 'none',
+                        })
+                    }
                 }
             })
-
         }
         
     },

@@ -18,6 +18,9 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        wx.setNavigationBarTitle({
+            title: options.title,
+        })
         that.setData({
             actId: options.actId,
             actTag: options.actTag,

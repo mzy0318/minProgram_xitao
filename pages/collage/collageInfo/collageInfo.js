@@ -362,82 +362,56 @@ Page({
         } else if (e.currentTarget.dataset.type == 'bgImage') {
             // 更换背景图
             let imagePath = that.data.backgroundImage
-            let n = imagePath.lastIndexOf('.');
-            let imagePathO = imagePath.substring(n);
-            getApp().request({
-                url: 'org/policy',
-                method: 'post',
-                data: {
-                    "type": "image"
-                },
+
+            var header = {};
+            header.Cookie = wx.getStorageSync('cookie');
+            header['Content-Type'] = 'multipart/form-data';
+
+            wx.uploadFile({
+                url: getApp().getHost() + 'upload',
+                filePath: imagePath,
+                name: 'file',
+                header: header,
                 success: function (res) {
-                    let sendData = {
-                        "key": res.data.data.dir + getApp().imageAddress(imagePath) + imagePathO,
-                        "OSSAccessKeyId": res.data.data.accessid,
-                        "host": res.data.data.host,
-                        "expire": res.data.data.expire,
-                        "signature": res.data.data.signature,
-                        "policy": res.data.data.policy,
-                        'success_action_status': '200'
-                    }
-                    wx.uploadFile({
-                        url: 'https://wise.oss-cn-hangzhou.aliyuncs.com/',
-                        name: 'file',
-                        filePath: that.data.backgroundImage,
-                        formData: sendData,
-                        success: function (res) {
-                            getApp().request({
-                                url: "org/exchange",
-                                data: {
-                                    "key": sendData.key,
-                                    "type": "image",
-                                },
-                                method: "post",
-                                success: function (r) {
-                                    r = r.data
-                                    console.log(r)
-                                    if (r.code == 0) {
-                                        wx.showToast({
-                                            title: '上传到服务器出错',
-                                            icon: 'none'
-                                        })
-                                    } else if (Number(r.code) == 1) {
-                                        that.setData({
-                                            coverImageID: r.data.imageId
-                                        })
-                                        getApp().request({
-                                            url: 'org/edit_background',
-                                            data: {
-                                                act_id: e.currentTarget.dataset.id,
-                                                tag: wx.getStorageSync('actTag'),
-                                                bg_image_url: r.data.res,
-                                            },
-                                            method: 'post',
-                                            success: function (res) {
-                                                if (Number(res.data.code) == 1) {
-                                                    wx.showToast({
-                                                        title: '更换成功',
-                                                        icon: 'success',
-                                                        success: function () {
-                                                            that.setData({
-                                                                isCommon: true,
-                                                                bottomOption: true,
-                                                            })
-                                                        }
-                                                    })
-                                                }
-                                            }
-                                        })
-                                    }
+                    let r = JSON.parse(res.data)
+                    if (Number(r.code) == 1) {
+                        that.setData({
+                            coverImageID: r.data.imageId,
+                        });
+                        console.log('r.data.res', r.data.res)
+                        getApp().request({
+                            url: 'org/edit_background',
+                            data: {
+                                act_id: e.currentTarget.dataset.id,
+                                tag: wx.getStorageSync('actTag'),
+                                bg_image_url: r.data.res,
+                            },
+                            method: 'post',
+                            success: function (res) {
+                                if (Number(res.data.code) == 1) {
+                                    wx.showToast({
+                                        title: '更换成功',
+                                        icon: 'success',
+                                        success: function () {
+                                            that.setData({
+                                                isCommon: true,
+                                                bottomOption: true,
+                                            })
+                                        }
+                                    })
                                 }
-                            });
-                        }
-                    })
+                            }
+                        })
+        
+                    } else {
+                        wx.showToast({
+                            title: r.msg,
+                            icon: 'none',
+                        })
+                    }
                 }
             })
-
         }
-
     },
     switchTabs: function (e) {
         let that = this;
