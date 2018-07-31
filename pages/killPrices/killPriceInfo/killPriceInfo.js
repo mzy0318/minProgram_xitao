@@ -41,6 +41,7 @@ Page({
         musicNum:'',
         showMusic:true,
         animationClass: 'musicControl',
+        btnBgImage: '../../../icon/optBtn.png'
     },
 
     /**
@@ -293,7 +294,8 @@ Page({
             data: sendData,
             method: 'post',
             success: res => {
-                let pageInfo = JSON.stringify(res.data.data)
+                let pageInfo = JSON.stringify(res.data.data);
+                let respons = res;
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
                         title: '正在提交...',
@@ -311,7 +313,7 @@ Page({
                                     isClosed: 'none',
                                 })
                                 wx.navigateTo({
-                                    url: '../killPricePerson/killPricePerson?personInfo=' + pageInfo,
+                                    url: '../killPricePerson/killPricePerson?actId=' + respons.data.data.act_id + '&joinId=' + respons.data.data.joiner_id,
                                 })
                             }
                         });

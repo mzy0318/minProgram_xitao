@@ -1,15 +1,4 @@
-<!-- <swiper indicator-dots autoplay circular>
-    <swiper-item>
-        <view class='videoClassImage'>1</view>
-    </swiper-item>
-    <swiper-item>
-        <view class='videoClassImage'>2</view>
-    </swiper-item>
-    <swiper-item>
-        <view class='videoClassImage'>3</view>
-    </swiper-item>
-</swiper> -->
-<!-- 功能 -->
+
 <view class='videoClassOptions'>
     <view class='optionsContent' bindtap='isContent' data-id='0'>
         <view class='optionsContentTop' style='background:#F89225'> 
@@ -54,7 +43,7 @@
 <view class='videoClassList'>
     <view class='videoClassContent' bindtap='toInfo' data-id='{{item.id}}' wx:for='{{listData}}'>
         <view class='classContentImg'>
-            <image src='{{item.cover.url}}' mode='scaleToFill'></image>
+            <image src='{{item.cover.url}}' mode='widthFix'></image>
         </view>
         <view class='classContentTitle'>{{item.title}}</view>
     </view>

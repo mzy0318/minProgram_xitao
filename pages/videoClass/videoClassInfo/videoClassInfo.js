@@ -13,6 +13,8 @@ Page({
         commentData:'',
         content:'',
         isRely:'',
+        isAuto:false,
+        lock:false,
     },
 
     /**
@@ -64,7 +66,6 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
-        this.videoContext = wx.createVideoContext('myVideo');
     },
 
     /**
@@ -115,16 +116,16 @@ Page({
         getApp().toIndex()
     },
     chooseVideo:function(e){
-        this.videoContext.play();
         let that = this;
         that.setData({
-            videoData: that.data.pageData.video[Number(e.currentTarget.dataset.index)].url
+            isAuto: true,
+            videoData: that.data.pageData.video[Number(e.currentTarget.dataset.index)].url,
         })
-        this.videoContext.play();
     },
     //长按删除评论
     longDel:function(e){
-        wx.showModel({
+        let that = this;
+        wx.showModal({
             title:'删除',
             content:'确认删除评论吗?',
             success:function(res){
@@ -141,6 +142,9 @@ Page({
                                     title: '删除成功',
                                     icon:'success',
                                     success:function(){
+                                        that.setData({
+                                            content: '',
+                                        })
                                         that.getComment();
                                     }
                                 })
@@ -153,30 +157,48 @@ Page({
                         }
                     })
                 }else if(res.cancel){
-                    return false
+                    return 
                 }
             }
         })
     },
+    touchend:function(){
+        let that = this;
+        if(that.data.lock){
+            setTimeout(()=>{
+                that.setData({
+                    lock:false
+                })
+            },100)
+        }
+    },
+    switchRely: function (e) {
+        let that = this;
+        
+        that.setData({
+            isRely: e.currentTarget.dataset.id,
+            content: '回复 ' + e.currentTarget.dataset.name + ': ',
+        })
+    },
     //添加一个评论
     addComment:function(e){
-        let that = this;
+        let that = this; 
         getApp().request({
-            url:'visitor_add_comment',
-            data:{
+            url: 'visitor_add_comment',
+            data: {
                 act_id: that.data.actId,
                 act_tag: that.data.actTag,
                 content: e.detail.value.content,
-                reply_id:that.data.isRely,
+                reply_id: that.data.isRely,
             },
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
                     wx.showToast({
                         title: '提交成功',
-                        success:function(){
+                        success: function () {
                             that.setData({
-                                content:'',
+                                content: '',
                             })
                             that.getComment();
                         }
@@ -184,14 +206,6 @@ Page({
                 }
             }
         })
-    },
-    switchRely:function(e){
-        let that = this;
-        that.setData({
-            isRely: e.currentTarget.dataset.id,
-            content: '回复 ' + e.currentTarget.dataset.name + ': ',
-        })
-
     },
     getComment:function(){
         let that = this;

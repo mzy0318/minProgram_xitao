@@ -1,0 +1,58 @@
+<view class='homeWork' hidden='{{isWork}}'>
+    <view class='homeWorkContent'>
+        <view class='empty'></view>
+        <view class='homeWorkImage'>
+            <view><image  src ='{{pageData.avatar_url}}' mode='scaleToFill'></image></view>
+            <text decode>&nbsp;{{pageData.realname}}</text>
+        </view>
+        <!-- 录音 -->
+        <view class='homeWorkAudio'>
+            <view wx:for='{{pageData.homework.audio}}' data-url='{{item.url}}' data-id='{{item.id}}' bindtap='playAudio' wx:key='{{item.id}}'><image src='{{audioUrl==item.id?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image></view>
+        </view>
+        <!-- 图片 视频 -->
+        <view class='homeWorkVideo'>
+            <view wx:for='{{pageData.homework.image}}' wx:key='{{item.id}}' bindtap='previewImage' data-url='{{item.url}}'><image src='{{item.url}}' mode='scaleToFill'></image></view>
+            <view wx:for='{{pageData.homework.video}}' wx:key='{{item.id}}'>
+                <video src='{{item.url}}'>
+                    <cover-view data-url='{{item.url}}' bindtap='previewVideo'></cover-view>
+                </video>
+            </view>
+        </view>
+        <!-- 作业信息 -->
+        <view class='homeWorkInfo'>
+            <view class='homeWorkInfoTime'>{{pageData.homework.create_time}}</view>
+            <view class='homeWorkInfoMore' data-id='0' bindtap='infoOpt'><text class='iconfont icon-more'></text></view>
+            <view class='homeWorkInfoOpt' hidden='{{isInfo}}'>
+                <view data-id='1' bindtap='infoOpt' data-homeid='{{pageData.homework.id}}' data-iszan='{{pageData.has_thumb}}'><text class='iconfont icon-love'></text><text decode>&nbsp;{{pageData.has_thumb?"取消":"点赞"}}</text></view>
+                <view data-id='2' bindtap='infoOpt' data-homeid='{{pageData.homework.id}}'><text class='iconfont icon-message'></text><text decode>&nbsp;评论</text></view>
+            </view>
+        </view>
+        <!-- 作业 点赞列表 -->
+        <view class='homeWorkZanList' hidden='{{isZanList}}'>
+            <text class='iconfont icon-love'></text>
+            <text> {{zanList}}</text>
+        </view>
+<!-- 评论列表 -->
+        <view class='commentList' wx:for='{{commentList}}' wx:key='{{index}}'>
+            <view class='emtpy'></view>
+            <view class='commentContent'>
+                <text>{{item.realname}}:</text>
+                <text decode>&nbsp;&nbsp;{{item.text}}</text>
+            </view>
+            <!-- 音频 -->
+            <view class='commentAudio'>
+                <view wx:for='{{item.audio}}' data-url='{{item.url}}' bindtap='playAudio' data-id='{{item.id}}' wx:key='{{item.id}}'><image src='{{audioUrl==item.id?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image></view>
+            </view>
+            <!-- 图片/视频 -->
+            <view class='commentVideo'>
+                <view wx:for='{{item.image}}' wx:key='{{item.id}}' bindtap='previewImage' data-url='{{item.url}}'><image src='{{item.url}}' mode='scaleToFill'></image></view>
+                <view wx:for='{{item.video}}' wx:key='{{item.id}}'>
+                    <video src='{{item.url}}'>
+                        <cover-view data-url='{{item.url}}' bindtap='previewVideo'></cover-view>
+                    </video>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<video style='display:none' bindended='stopVideo' id='myVideo' src='{{otherVideo}}' autoplay></video>

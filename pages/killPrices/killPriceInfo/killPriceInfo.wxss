@@ -3,6 +3,7 @@
     width:750rpx;
     min-height:1207rpx;
     background-repeat:repeat;
+    padding-bottom:20rpx;
 }
 
 .killPriceBanner{
@@ -452,6 +453,10 @@
     background:rgba(192,192,192,0.5);
     border-radius:50%;
     position:relative;
+}
+.otherOptions image{
+    width:100rpx;
+    height:100rpx;
 }
 
 .otherOptionsChild{

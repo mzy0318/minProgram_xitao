@@ -1,0 +1,11 @@
+<view class='userListWrap'>
+    <view class='userListLeft'><image mode='scaleToFill'></image></view>
+    <view class='userListRight'>
+        <view>智慧招生-教培机构</view>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>
+            <text>报名: 5 </text>
+            <button>去报名</button>
+        </view>
+    </view>
+</view>

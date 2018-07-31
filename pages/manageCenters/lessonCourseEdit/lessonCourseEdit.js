@@ -128,42 +128,57 @@ Page({
         wx.chooseImage({
             count: 1,
             success: function (res) {
-                that.setData({
-                    isCover: false,
-                    coverImage: res.tempFilePaths[0]
-                })
-                let imgPath = res.tempFilePaths[0]
-                
-                wx.showLoading({
-                    title: '图片上传中...',
-                    mask:true,
-                })
-                var header = {};
-                header.Cookie = wx.getStorageSync('cookie');
-                header['Content-Type'] = 'multipart/form-data';
 
-                getApp().uploadFile({
-                    url: 'upload',
-                    filePath: that.data.coverImage,
-                    success: function (res) {
-                        if (Number(res.code) == 1) {
-                            that.setData({
-                                couveImageId: res.data.imageId,
-                            });
-                            wx.hideLoading();
-                            wx.showToast({
-                                title: '上传成功',
-                                icon: 'success'
-                            })
-                        } else {
-                            wx.hideLoading();
-                            wx.showToast({
-                                title: res.msg,
-                                icon: 'none',
-                            })
+                //图片大小判定
+                let imgArr = res.tempFiles;
+                let size = imgArr.every((item, index, arr) => {
+                    return item.size < 6291456
+                })
+
+                if(size){
+                    that.setData({
+                        isCover: false,
+                        coverImage: res.tempFilePaths[0]
+                    })
+                    let imgPath = res.tempFilePaths[0]
+
+                    wx.showLoading({
+                        title: '图片上传中...',
+                        mask: true,
+                    })
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
+
+                    getApp().uploadFile({
+                        url: 'upload',
+                        filePath: that.data.coverImage,
+                        success: function (res) {
+                            if (Number(res.code) == 1) {
+                                that.setData({
+                                    couveImageId: res.data.imageId,
+                                });
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: '上传成功',
+                                    icon: 'success'
+                                })
+                            } else {
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: res.msg,
+                                    icon: 'none',
+                                })
+                            }
                         }
-                    }
-                },header)
+                    }, header)
+                }else{
+                    wx.showToast({
+                        title: '选择图片必须小于6M',
+                        icon: 'none'
+                    })
+                }
+
             },
         })
     },

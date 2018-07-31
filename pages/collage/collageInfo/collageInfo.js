@@ -42,6 +42,7 @@ Page({
         iconOpen: 'iconfont icon-menu iconStyle',
         showMusic:true,
         animationClass:'musicControl',
+        btnBgImage:'../../../icon/optBtn.png'
     },
 
     /**
@@ -52,6 +53,17 @@ Page({
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 actionOptions: false
+            })
+            getApp().request({
+                url: 'org/music_list',
+                data: {},
+                method: 'post',
+                success: res => {
+                    this.setData({
+                        musicClass: res.data.data,
+                        musicData: res.data.data[0].list
+                    })
+                }
             })
         } else {
             this.setData({
@@ -76,17 +88,6 @@ Page({
         let mzy = encodeURI('actid=' + options.actId);
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
-        })
-        getApp().request({
-            url: 'org/music_list',
-            data: {},
-            method: 'post',
-            success: res => {
-                this.setData({
-                    musicClass: res.data.data,
-                    musicData: res.data.data[0].list
-                })
-            }
         })
     },
 
@@ -131,6 +132,13 @@ Page({
                             isButton: false
                         })
                     }
+                    res.data.data.cover.url = utils.rect(res.data.data.cover.url,325,155);
+                    if (res.data.data.act_image.length>0){
+                        for (let i = 0; i < res.data.data.act_image.length;i++){
+                            res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 325, 155)
+                        }
+                    }
+                    
                     that.setData({
                         pageData: res.data.data,
                         collagePrice: res.data.data.act_set[0].price,
@@ -139,7 +147,7 @@ Page({
                         startTime: utils.formatDate(new Date(res.data.data.start_time * 1000)),
                         endTime: utils.formatDate(new Date(res.data.data.end_time * 1000)),
                         status: new Date().valueOf() >= res.data.data.end_time * 1000 ? '已结束' : '进行中',
-                        joinId: res.data.data.joiner_id,
+                        joinId: res.data.data.joiner_id ? res.data.data.joiner_id:'',
                         bannerImage: res.data.data.banner_image_url,
                         backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
                         bgMusic: res.data.data.music,
@@ -257,10 +265,13 @@ Page({
     },
     toCollageSign: function (e) {
         let info = JSON.stringify(e.currentTarget.dataset.forminfo);
-
+        if (e.currentTarget.dataset.is){
             wx.navigateTo({
                 url: '../collageSignup/collageSignup?actId=' + e.currentTarget.dataset.actid + '&info=' + info + '&btnId=' + e.currentTarget.dataset.btnid + '&joinerId=' + e.currentTarget.dataset.joinerid,
             })
+        }else{
+            return 
+        }
     },
     toPersonInfo: function () {
         wx.navigateTo({

@@ -21,7 +21,7 @@
                     <view class='oneRuleChildBottomLeft'>凑齐{{personNum}}人即可享受</view>
                     <view class='oneRuleChildBottomRight'><text>￥{{pageData.original_price}}元</text>￥{{collagePrice}}元</view>
                 </view>
-                <button data-btnid='0' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' bindtap='toCollageSign' hidden='{{!isButton}}' data-joinerid='undefined'>我要开团</button>
+                <button data-btnid='0' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' data-is='{{1}}' bindtap='toCollageSign' hidden='{{!isButton}}' data-joinerid='undefined'>我要开团</button>
             </view>
         </view>
     </view>
@@ -107,14 +107,15 @@
     <!-- 其他功能按钮 -->
     <view class='otherOptionWrap' hidden='{{actionOptions}}'>
         <view bindtap='isOptions' class='otherOptions'>
-            <text class='{{isOption?iconOpen:iconClose}}'></text>
+            <image src='{{isOption?"../../../icon/menu.png":"../../../icon/close.png"}}' mode='scaleToFill'></image>
+            <!-- <text class='{{isOption?iconOpen:iconClose}}'></text> -->
         </view>
         <view class='otherOptionsChild' hidden='{{isOption}}'>
-            <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
+            <view bindtap='switchModel' data-url='org/banner_list' style='background-image:url({{btnBgImage}})'>更换模版</view>
             <!-- <view bindtap='upDataImg' data-type='banner'>更换大图</view> -->
-            <view bindtap='upDataImg' data-type='background'>更换背景</view>
-            <view bindtap='switchModel' data-url='org/music_list' >背景音乐</view>
-            <view bindtap='toEditPage' data-id='{{pageData.id}}'>编辑</view>
+            <view bindtap='upDataImg' data-type='background' style='background-image:url({{btnBgImage}})'>更换背景</view>
+            <view bindtap='switchModel' data-url='org/music_list'  style='background-image:url({{btnBgImage}})'>背景音乐</view>
+            <view bindtap='toEditPage' data-id='{{pageData.id}}' style='background-image:url({{btnBgImage}})'>编辑</view>
         </view>
     </view>
     <!-- 其他功能模板 -->

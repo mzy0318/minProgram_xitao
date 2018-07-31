@@ -22,7 +22,8 @@ Page({
                 if(Number(res.data.code) == 1){
                     for(let i = 0;i<res.data.data.list.length;i++){
                         res.data.data.list[i].vote_start_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_start_time * 1000))
-                        res.data.data.list[i].vote_end_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_end_time*1000))
+                        res.data.data.list[i].vote_end_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_end_time*1000));
+                        res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url,365,165)
                     }
                     that.setData({
                         pageData:res.data.data.list

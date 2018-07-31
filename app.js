@@ -1,23 +1,21 @@
 let md5 = require('./utils/md5.js')
 let uuid = require('./utils/uuid.js')
+let formart = require('./utils/util.js')
 
 App({
 
     visitorId: '',
-    onLaunch: function (options) {
+    onLaunch: function(options) {
         // 课程分类
         wx.setStorageSync('classId', 0)
-        // 展示本地存储能力
-        var logs = wx.getStorageSync('logs') || []
-        logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
+
 
         // 登录
-        wx.login({
-            success: res => {
-                this.userCode = res.code;
-            }
-        })
+        // wx.login({
+        //     success: res => {
+        //         this.userCode = res.code;
+        //     }
+        // })
         // 获取用户信息
         wx.getSetting({
             success: res => {
@@ -35,24 +33,13 @@ App({
                     }
                 })
             }
-        }),
-        wx.getUserInfo({
-            success: res => {
-                // console.log('用户信息', res)
-                this.globalData.userInfo = res.userInfo
-
-                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                // 所以此处加入 callback 以防止这种情况
-                if (this.userInfoReadyCallback) {
-                    this.userInfoReadyCallback(res)
-                }
-            }
         })
     },
-    
+    // 小程序版本及功能选项
+    funcOpt:'',
     config: null,
     //获取ext.json文件内容
-    getExtConfig: function () {
+    getExtConfig: function() {
         if (this.config === null) {
 
             this.config = wx.getExtConfigSync();
@@ -67,16 +54,18 @@ App({
     },
     dev: false,
     getHost: () => {
-        var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version+"/";
-        var dev = "http://192.168.1.112:8123/"+ getApp().getExtConfig().version+"/";
-        return  dev;
+        var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
+        var dev = "http://192.168.1.112:8123/" + getApp().getExtConfig().version + "/";
+        return dev;
     },
-    hasLogin: false,//默认app是未登录状态
+    hasLogin: false, //默认app是未登录状态
+    isLogin: true,
+    // 请求数据方法
     request: param => {
         var host = getApp().getHost();
 
         var data = param.data || {};
-        var success = param.success || function () { };
+        var success = param.success || function() {};
         var url = param.url || "";
         url = host + url;
         var method = param.method || "GET";
@@ -94,10 +83,9 @@ App({
         if (param.url == "login") {
             return
         }
-
         var othis = this;
         console.log('url', url)
-        console.log('data',data)
+        console.log('data', data)
         if (getApp().hasLogin) {
             //直接执行请求
             wx.request({
@@ -137,12 +125,15 @@ App({
                         })
                         return
                     } else {
-                        console.log("code:", res.code);
+                        // console.log("code:", res.code);
                         // othis.visitorId = res.code.
                     }
                     wx.request({
                         'url': host + "login",
-                        'data': { "code": res.code, "org_id": getApp().getExtConfig().orgId },
+                        'data': {
+                            "code": res.code,
+                            "org_id": getApp().getExtConfig().orgId
+                        },
                         'method': "POST",
                         'header': header,
                         'success': r => {
@@ -152,15 +143,18 @@ App({
                                     content: r.data.msg,
                                 })
                             } else {
+                                // 获取小程序版本
+                                getApp().funcOpt = r.data.data;
                                 wx.setStorageSync('visitorId', r.data.data.visitor_id)
                                 if (r.header["Set-Cookie"]) {
                                     wx.setStorageSync('cookie', r.header["Set-Cookie"]);
                                 }
 
-                                getApp().hasLogin = true
+                                getApp().hasLogin = true;
+                                getApp().isLogin = true,
 
-                                //然后执行请求
-                                getApp().request(param)
+                                    //然后执行请求
+                                    getApp().request(param)
                             }
                         },
                     })
@@ -168,7 +162,8 @@ App({
             })
         }
     },
-    map: function (latitude, longitude, name, address) {
+    //地图 
+    map: function(latitude, longitude, name, address) {
         wx.openLocation({
             latitude: latitude,
             longitude: longitude,
@@ -178,43 +173,43 @@ App({
         })
     },
     //拨打电话
-    tellPhone: function (e) {
+    tellPhone: function(e) {
         wx.makePhoneCall({
             phoneNumber: e.currentTarget.dataset.phonenum,
         })
     },
     //进入首页
-    toIndex: function () {
+    toIndex: function() {
         wx.switchTab({
             url: '/pages/index/index',
         })
     },
     //随机数
-    randomNum: function () {
+    randomNum: function() {
         return Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
     },
-    showToast:function(msg){
+    showToast: function(msg) {
         wx.showToast({
             title: msg,
-            icon:'none',
+            icon: 'none',
             mask: true,
         })
     },
     // 删除活动
-    delActive:function(actId,actTag,url){
+    delActive: function(actId, actTag, url) {
         getApp().request({
-            url:'org/delete_act',
-            data:{
+            url: 'org/delete_act',
+            data: {
                 act_id: actId,
                 act_tag: actTag
             },
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code)==1){
+            method: 'post',
+            success: function(res) {
+                if (Number(res.data.code) == 1) {
                     wx.showToast({
                         title: res.data.msg,
-                        icon:'none',
-                        mask:true,
+                        icon: 'none',
+                        mask: true,
                     })
                     wx.navigateTo({
                         url: url,
@@ -224,15 +219,15 @@ App({
         })
     },
     // 获取二维码
-    getEncodeImage:function(url,mzy){
+    getEncodeImage: function(url, mzy) {
         return 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
     },
     // 生成图片地址
-    imageAddress:function(name){
+    imageAddress: function(name) {
         return md5.hexMD5(new Date().getTime() + name + uuid.uuid());
     },
     //上传图片
-    uploadFile:function(obj,header){
+    uploadFile: function(obj, header) {
 
         let url = getApp().getHost() + obj.url;
         let filePath = obj.filePath;
@@ -243,12 +238,58 @@ App({
             filePath: filePath,
             name: 'file',
             header: header,
-            success: function (res) {
+            success: function(res) {
                 let respons = JSON.parse(res.data);
-                if(Number(respons.code) == 1){
+                if (Number(respons.code) == 1) {
                     success(respons)
                 }
             }
+        })
+    },
+    // uploadVideoFile:function(){
+
+    // },
+    //七天日历
+    sevenDay: function(date, arr) {
+        let toDay = date;
+        let currentDataArr = [];
+
+        for (let i = 0; i < 7; i++) {
+
+            let index = i - 3;
+
+            let listArr = {
+                'day': toDay,
+                'timeString': toDay.timeString + 86400000 * index
+            };
+
+            currentDataArr.push(formart.dateWeek(new Date(listArr.timeString)));
+        };
+
+        for (let i = 0; i < currentDataArr.length; i++) {
+            currentDataArr[i].hasWork = arr[i]
+            if (currentDataArr[i].week == 0) {
+                currentDataArr[i].week = '日'
+            } else if (currentDataArr[i].week == 1) {
+                currentDataArr[i].week = '一'
+            } else if (currentDataArr[i].week == 2) {
+                currentDataArr[i].week = '二'
+            } else if (currentDataArr[i].week == 3) {
+                currentDataArr[i].week = '三'
+            } else if (currentDataArr[i].week == 4) {
+                currentDataArr[i].week = '四'
+            } else if (currentDataArr[i].week == 5) {
+                currentDataArr[i].week = '五'
+            } else if (currentDataArr[i].week == 6) {
+                currentDataArr[i].week = '六'
+            }
+        };
+        return currentDataArr
+    },
+    //放大查看图片
+    previewImage(url) {
+        wx.previewImage({
+            urls: [url],
         })
     }
 })

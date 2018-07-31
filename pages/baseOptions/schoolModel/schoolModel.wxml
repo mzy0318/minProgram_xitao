@@ -3,7 +3,7 @@
     <view></view>
 </view>
 <view class='empty'></view>
-<view class='modelContent' wx:for='{{pageData}}' bindtap='toModeInfo' data-modelinfo='{{item}}'>
+<view class='modelContent' wx:for='{{pageData}}' bindtap='toModeInfo' data-name='{{item.name}}' data-url='{{item.cover}}' data-id='{{item.id}}'>
     <view class='modelImage'><image src='{{item.cover}}?x-oss-process=image/resize,m_fill,w_200,h_400,limit_0/auto-orient,1/quality,q_100'  mode='widthFix'></image></view>
     <view class='modelText'>{{item.name}}</view>
 </view>

@@ -1,0 +1,13 @@
+<view class='manListSearch'>
+    <input placeholder='请输入姓名,电话' type='text' confirm-type='search' bindconfirm='bindKeyInput'></input>
+</view>
+<!-- 老师列表 -->
+<!-- <view class='empty'></view> -->
+<view class='teacherList'>
+    <view class='teacherListContent' bindtap='editPersonInfo' data-userid='{{item.id}}' wx:for='{{pageData}}' wx:key='{{index}}'>
+        <view class='contentImage'><image src='{{item.avatar_url}}' mode='scaleToFill'></image></view>
+        <view class='contentName'>{{item.realname}}</view>
+        <view class='contentPhone' hidden='{{isPhone}}'>{{item.phone}}</view>
+        <view class='contentFloat'>〉</view>
+    </view>
+</view>

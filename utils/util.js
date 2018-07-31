@@ -8,7 +8,14 @@ const formatTime = date => {
 
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
-
+// 月
+const month = date =>{
+    return date.getMonth() + 1;
+}
+//年
+const year = date => {
+    return date.getFullYear()
+}
 const dateTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -33,11 +40,21 @@ const formatTimer = date => {
 
 const formatDate = date => {
     const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
     const hour = date.getHours()
     const minute = date.getMinutes()
-    const second = date.getSeconds()
+    const second = date.getSeconds();
+    if(month >= 10){
+        month = month;
+    }else{
+        month = '0' + month
+    };
+    if (day >= 10){
+        day = day
+    }else{
+        day = '0' + day
+    }
 
     return [year, month, day].map(formatNumber).join('-')
 }
@@ -153,6 +170,14 @@ const rect = function (url, width, height) {
   }
 }
 
+const dateWeek = function (date){
+    let timeString = date.valueOf();
+    const day = date.getDate();
+    const weekDay = date.getDay()
+    
+    return { day: day, timeString: timeString, week: weekDay}
+} 
+
 module.exports = {
     formatTime: formatTime,
     formatDate: formatDate,
@@ -165,5 +190,8 @@ module.exports = {
     rect: rect,
     liteDate: liteDate,
     dayMonth: dayMonth,
-    dateTime: dateTime
+    dateTime: dateTime,
+    dateWeek: dateWeek,
+    month: month,
+    year: year,
 }

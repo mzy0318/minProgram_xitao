@@ -40,7 +40,7 @@
 
 .mangeScool{
     width:750rpx;
-    height:248rpx;
+    min-height:248rpx;
     background:#fff;
     margin-top:10rpx;
 }
@@ -54,12 +54,23 @@
 }
 .mangeScoolOptions{
     width:738rpx;
-    height:185rpx;
+    min-height:185rpx;
     /* border-left:1rpx solid #efefef; */
     /* border-top:1rpx solid #efefef; */
 }
-.mangeScoolOptions .mangeScoolOptionsWrap,.optionsWrap{
-    float:left;
+.mangeScoolOptions .mangeScoolOptionsWrap{
+    width:183rpx;
+    height:183rpx;
+    border-right:1rpx solid #efefef;
+    border-bottom:1rpx solid #efefef;
+    border-top:1rpx solid #efefef;
+    margin-top:-1px;
+    display:inline-block;
+    vertical-align: top;
+}
+.optionsWrap{
+    display:inline-block;
+    vertical-align: top;
     width:183rpx;
     height:183rpx;
     border-right:1rpx solid #efefef;
@@ -86,7 +97,7 @@
     background:#fff;
 }
 .mangeStuMarktOptions{
-    height:650rpx;
+    min-height:10rpx;
     width:738rpx;
     /* border-left:1rpx solid #efefef; */
     /* border-top:1rpx solid #efefef; */

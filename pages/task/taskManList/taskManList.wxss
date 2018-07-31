@@ -1,0 +1,97 @@
+page{
+    background:#F5F5F5;
+    position:relative;
+}
+.manListSearch{
+    width:100%;
+    height:120rpx;
+    background:#f5f5f5;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    z-index:100;
+}
+.manListSearch input{
+    width:710rpx;
+    height:80rpx;
+    background:#fff;
+    border-radius:5px;
+    margin:20rpx auto;
+    font-size:30rpx;
+    line-height:80rpx;
+    text-align:center;
+}
+/* 作业列表 */
+.emptyO{
+    width:750rpx;
+    height:120rpx;
+    background:transparent;
+}
+.taskUserContent{
+    width:710rpx;
+    height:280rpx;
+    background:#fff;
+    margin:0rpx auto 20rpx;
+    border-radius:5px;  
+    position:relative;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3)
+}
+.taskUserStatus{
+    width:140rpx;
+    height:40rpx;
+    line-height:40rpx;
+    position:absolute;
+    right:0rpx;
+    top:0rpx;
+    color:#fff;
+    text-align:center;
+    font-size:26rpx;
+}
+.taskUserTitle{
+    width:710rpx;
+    height:100rpx;
+    line-height:100rpx;
+    text-indent:40rpx;
+    font-size:35rpx;
+}
+.taskUserNum{
+    width:710rpx;
+    height:60rpx;
+}
+.taskUserNum view{
+    width:200rpx;
+    height:60rpx;
+    line-height:60rpx;
+    float:left;
+    font-size:26rpx;
+    color:#7b7b7b;
+    margin-left:40rpx;
+
+}
+.taskUserNum view text{
+    color:#000;
+}
+.taskUserNum view:nth-child(2){
+    margin-left:150rpx;
+}
+.taskUserOptions{
+    width:710rpx;
+    height:100rpx;
+    margin-top:20rpx;
+    background:#EEEEEE;
+    border-radius:0px 0px 10px 10px;
+}
+.taskUserOptions view{
+    width:25%;
+    height:100rpx;
+    float:left;
+    text-align:center;
+    font-size:30rpx;
+    line-height:100rpx;
+    color:#7b7b7b;
+}
+.empty{
+    width:750rpx;
+    height:20rpx;
+    background:transparent;
+}

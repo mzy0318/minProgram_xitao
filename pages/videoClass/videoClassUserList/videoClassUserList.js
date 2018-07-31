@@ -1,4 +1,5 @@
 // pages/videoClass/videoClassUserList/videoClassUserList.js
+let utils = require('../../../utils/util.js')
 Page({
 
     /**
@@ -35,6 +36,9 @@ Page({
                 if (Number(res.data.code) == 1) {
                     res.data.data.catalog.unshift('全部')
                     res.data.data.tag.unshift('全部')
+                    for(let i = 0;i<res.data.data.list.length;i++){
+                        res.data.data.list[i].cover.url = utils.rect(res.data.data.list[i].cover.url,172,100)
+                    }
                     that.setData({
                         catalogList: res.data.data.catalog,
                         tagList: res.data.data.tag,
@@ -99,6 +103,9 @@ Page({
                     wx.hideLoading()
                     res.data.data.catalog.unshift('全部')
                     res.data.data.tag.unshift('全部')
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].cover.url = utils.rect(res.data.data.list[i].cover.url, 172, 100)
+                    }
                     that.setData({
                         catalogList: res.data.data.catalog,
                         tagList: res.data.data.tag,
@@ -140,7 +147,10 @@ Page({
                         wx.hideLoading()
                         res.data.data.catalog.unshift('全部')
                         res.data.data.tag.unshift('全部');
-                        pageDataArr.push(...res.data.data.list)
+                        pageDataArr.push(...res.data.data.list);
+                        for (let i = 0; i < pageDataArr.length; i++) {
+                            pageDataArr[i].cover.url = utils.rect(pageDataArr[i].cover.url, 172, 100)
+                        }
                         that.setData({
                             catalogList: res.data.data.catalog,
                             tagList: res.data.data.tag,

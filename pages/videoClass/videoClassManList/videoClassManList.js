@@ -17,7 +17,9 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) { },
+    onLoad: function (options) {
+        
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -165,7 +167,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 3) {
             //分享
             wx.navigateTo({
-                url: '../../baseOptions/sharePage/sharePage?title=' + that.data.title + '&actId=' + that.data.actId +'&page=pages/videoClass/videoClassInfo/videoClassInfo&acttag=' + that.data.actTag,
+                url: '../../baseOptions/sharePage/sharePage?title=' + that.data.title + '&actId=' + that.data.actId +'&page=pages/videoClass/videoClassInfo/videoClassInfo&actTag=' + that.data.actTag,
             })
         }
     },
@@ -182,8 +184,10 @@ Page({
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
+
                     for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000))
+                        res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
+                        res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url,115,75)
                     }
                     that.setData({
                         pageData: res.data.data.list

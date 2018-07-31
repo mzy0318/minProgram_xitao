@@ -1,6 +1,6 @@
 <view class='infoVideo'>
     <view class='infoVideContent'>
-        <video id='myVideo' src='{{videoData}}'></video>
+        <video id='myVideo' src='{{videoData}}' autoplay='{{isAuto}}'></video>
     </view>
     <view class='infoVideoTitle'>{{pageData.title}}<text> [{{pageData.create_time}}]</text></view>
 </view>
@@ -19,7 +19,7 @@
 </view>
 <view class='infoClassesConnect'>
     <view class='classesConnectInfo'>全部评论(长按删除,点按回复)</view>
-    <view class='classesConnectContent' wx:for='{{commentData}}' wx:key='{{item.id}}' bindlongpress='longDel' data-id='{{item.id}}' bindtap='switchRely' data-name='{{item.nickname?item.nickname:"访客"}}'>
+    <view class='classesConnectContent' wx:for='{{commentData}}' wx:key='{{item.id}}' bindlongtap='longDel'  data-id='{{item.id}}' bindtap='switchRely' data-name='{{item.nickname?item.nickname:"访客"}}'>
         <view class='contentTop'><image src='{{item.avatar_url}}'></image></view>
         <view class='contentBottom'>
             <view class='title'>

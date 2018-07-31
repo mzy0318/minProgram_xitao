@@ -159,6 +159,7 @@ Page({
             data: sendData,
             method: 'post',
             success: function(res) {
+                let respons = res;
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
                         title: '正在报名..',
@@ -168,10 +169,26 @@ Page({
 
                     function closeLogin() {
                         wx.hideLoading()
-                        wx.showToast({
-                            title: '感谢报名！我们稍候和您联系 ',
-                            icon: 'none'
-                        })
+                        if (respons.data.data.need_pay){
+                            wx.showModal({
+                                title: '提示',
+                                content: '报名成功,请付款.',
+                                showCancel:false,
+                                success:function(res){ 
+                                    if(res.confirm){
+                                        wx.navigateTo({
+                                            url: '../../courses/orderInfo/orderInfo?joinId=' + respons.data.data.joiner_id + '&actTag=' + respons.data.data.act_tag + '&actId=' + respons.data.data.act_nice_course_id,
+                                        })
+                                    }
+                                }
+                            })
+                        }else {
+                            wx.showToast({
+                                title: '感谢报名,稍后我们会跟您联系',
+                                icon:'none'
+                            })
+                        }
+                       
                         that.setData({
                             isSignUp: true
                         })

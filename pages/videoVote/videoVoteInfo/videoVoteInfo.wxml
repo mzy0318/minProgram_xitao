@@ -47,7 +47,7 @@
     <view class='activeInfoShare'>
         <view class='activeInfoInfoTitle'>活动分享</view>
         <view class='activeInfoShareImage'><image src='{{enCodeImage}}' mode='scaleToFill'></image></view>
-        <button>分享到朋友圈</button>
+        <button bindtap='saveEncodeImage' >保存二维码到本地</button>
     </view>
     <!-- 活动详情 -->
     <view class='activeInfoImages' hidden='{{isTitleOne}}'>
@@ -142,7 +142,7 @@
         <view class='activeInfoShare'>
             <view class='activeInfoInfoTitle'>活动分享</view>
             <view class='activeInfoShareImage'><image src='{{enCodeImage}}' mode='scaleToFill'></image></view>
-            <button>分享到朋友圈</button>
+            <button bindtap='saveEncodeImage' >保存二维码到本地</button>
         </view>
         <!-- 活动详情 -->
         <view class='activeInfoImages' hidden='{{isTitleOne}}'>
@@ -163,11 +163,5 @@
             <view class='activeInfoImage' wx:for='{{pageData.act_image3}}'><image src='{{item.url}}' mode='widthFix'></image></view>
             <view class='activeInfoImagesText'>{{pageData.content3}}</view>
         </view>
-        <!-- 投票规则  -->
-        <!-- <view class='activeInfoRule'>
-            <view class='activeInfoInfoTitle'>活动规则</view>
-            <view class='activeInfoRuleImage'><image></image></view>
-            <view class='activeInfoImagesText'>我就了解一下</view>
-        </view> -->
     </view>
 </view>

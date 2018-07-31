@@ -53,7 +53,13 @@ Page({
                         title: res.data.data.app_name,
                     })
                     res.data.data.start_time = getTime.formatDate(new Date(res.data.data.start_time * 1000))
-                    res.data.data.end_time = getTime.formatDate(new Date(res.data.data.end_time * 1000))
+                    res.data.data.end_time = getTime.formatDate(new Date(res.data.data.end_time * 1000));
+                    res.data.data.cover.url = getTime.rect(res.data.data.cover.url, 325, 155);
+                    if (res.data.data.act_image.length > 0) {
+                        for (let i = 0; i < res.data.data.act_image.length; i++) {
+                            res.data.data.act_image[i].url = getTime.rect(res.data.data.act_image[i].url, 325, 155)
+                        }
+                    }
                     that.setData({
                         pageData: res.data.data
                     })

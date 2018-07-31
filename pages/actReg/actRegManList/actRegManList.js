@@ -14,28 +14,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // let that = this;
-        // getApp().request({
-        //     url: 'org/normal_list',
-        //     data: {
-        //         page: that.data.pageNum
-        //     },
-        //     method: 'post',
-        //     success: function (res) {
-        //         if(Number(res.data.code)==1){
-        //             for (let i = 0; i < res.data.data.length; i++) {
-        //                 res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
-        //             }
-        //             that.setData({
-        //                 pageData: res.data.data
-        //             })
-        //         } else if (Number(res.data.code) == 0){
-        //             wx.showToast({
-        //                 title: res.data.msg,
-        //             })
-        //         }
-        //     }
-        // })
     },
 
     /**

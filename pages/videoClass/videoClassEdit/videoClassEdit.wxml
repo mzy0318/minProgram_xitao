@@ -2,7 +2,8 @@
     <view class='editTitle'>封面</view>
     <view class='editImage'>
         <view class='editImageContent'>
-            <image src='{{coverImage}}' mode='scaleToFill' bindtap='uploadImage'></image>
+            <view bindtap='uploadImage' hidden='{{!isText}}'>+</view>
+            <image src='{{coverImage}}' mode='widthFix' bindtap='uploadImage' hidden='{{isText}}'></image>
         </view>
     </view>
     <view class='editTitle'>基本

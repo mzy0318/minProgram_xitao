@@ -162,10 +162,6 @@ Page({
                         title: '我的私人拼团',
                     })
                     if (data.list.length == 0) {
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        //     icon: 'none',
-                        // })
                         that.setData({
                             showTitle: false
                         })
@@ -220,8 +216,12 @@ Page({
             })
         } else if (pageTypeStu == 3){
             let userInfo = this.data.userList.list[e.currentTarget.dataset.index];
-            userInfo.start_time = util.formatTime(new Date(userInfo.start_time*1000));
-            userInfo.end_time = util.formatTime(new Date(userInfo.end_time*1000));
+            if (typeof userInfo.start_time == 'string'){
+
+            } else if (typeof userInfo.start_time == 'number'){
+                userInfo.start_time = util.formatTime(new Date(userInfo.start_time * 1000));
+                userInfo.end_time = util.formatTime(new Date(userInfo.end_time * 1000));
+            }
             userInfo.is_leader = userInfo.is_leader?'团长':'团员';
             this.setData({
                 isPersonInfo:false,

@@ -255,51 +255,65 @@ Page({
         let that = this
         wx.chooseImage({
             success: function(res) {
-                let actImage = [];  //图片数组
-                let actImg = [];  //图片数组ID
-                actImg.push(...that.data.actImg0)
-                actImage.push(...that.data.imageData)
-                actImage.push(...res.tempFilePaths)
-                that.setData({
-                    imageData: actImage
-                })
-                let imgPath = res.tempFilePaths;  //图片数组
 
-                wx.showLoading({
-                    title: '图片上传中...',
-                    mask: true,
+                //图片大小判定
+                let imgArr = res.tempFiles;
+                let size = imgArr.every((item, index, arr) => {
+                    return item.size < 6291456
                 })
 
-                var header = {};
-                header.Cookie = wx.getStorageSync('cookie');
-                header['Content-Type'] = 'multipart/form-data';
+                if(size){
+                    let actImage = [];  //图片数组
+                    let actImg = [];  //图片数组ID
+                    actImg.push(...that.data.actImg0)
+                    actImage.push(...that.data.imageData)
+                    actImage.push(...res.tempFilePaths)
+                    that.setData({
+                        imageData: actImage
+                    })
+                    let imgPath = res.tempFilePaths;  //图片数组
 
-                for (let i = 0; i < imgPath.length; i++) {
+                    wx.showLoading({
+                        title: '图片上传中...',
+                        mask: true,
+                    })
 
-                    wx.uploadFile({
-                        url: getApp().getHost() + 'upload',
-                        filePath: imgPath[i],
-                        name: 'file',
-                        header: header,
-                        success: function (res) {
-                            let r = JSON.parse(res.data)
-                            if (Number(r.code) == 1) {
-                                actImg.push(r.data.imageId);
-                                that.setData({
-                                    actImg0: actImg,
-                                });
-                                wx.hideLoading();
-                                wx.showToast({
-                                    title: '上传成功',
-                                    icon: 'success'
-                                })
-                            } else {
-                                wx.showToast({
-                                    title: r.msg,
-                                    icon: 'none',
-                                })
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
+
+                    for (let i = 0; i < imgPath.length; i++) {
+
+                        wx.uploadFile({
+                            url: getApp().getHost() + 'upload',
+                            filePath: imgPath[i],
+                            name: 'file',
+                            header: header,
+                            success: function (res) {
+                                let r = JSON.parse(res.data)
+                                if (Number(r.code) == 1) {
+                                    actImg.push(r.data.imageId);
+                                    that.setData({
+                                        actImg0: actImg,
+                                    });
+                                    wx.hideLoading();
+                                    wx.showToast({
+                                        title: '上传成功',
+                                        icon: 'success'
+                                    })
+                                } else {
+                                    wx.showToast({
+                                        title: r.msg,
+                                        icon: 'none',
+                                    })
+                                }
                             }
-                        }
+                        })
+                    }
+                }else{
+                    wx.showToast({
+                        title: '选择图片必须小于6M',
+                        icon: 'none'
                     })
                 }
             },

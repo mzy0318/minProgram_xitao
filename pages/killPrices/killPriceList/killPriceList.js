@@ -35,10 +35,7 @@ Page({
                 },
                 success: res => {
                     if (res.data.data.list.length == 0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        //     icon:'none',
-                        // })
+
                         that.setData({
                             showTitle: false
                         })
@@ -66,9 +63,6 @@ Page({
                 success: res => {
                     let userData = res.data.data.list;
                     if (userData.length==0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        // })
                         that.setData({
                             showTitle: false
                         })
@@ -102,9 +96,7 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length==0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        // })
+
                         that.setData({
                             showTitle: false
                         })
@@ -112,6 +104,9 @@ Page({
                         that.setData({
                             showTitle: true
                         })
+                        for (let i = 0; i < res.data.data.list.length;i++){
+                            res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
                         that.setData({
                             userList: res.data.data.list
                         })   
@@ -140,6 +135,9 @@ Page({
                         that.setData({
                             showTitle: true
                         })
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
                         that.setData({
                             userList: res.data.data.list
                         })   
@@ -198,9 +196,6 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length==0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        // })
                         that.setData({
                             showTitle: false
                         })
@@ -227,9 +222,6 @@ Page({
                 },
                 success: function (res) {
                     if (res.data.data.list.length == 0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        // })
                         that.setData({
                             showTitle: false
                         })
@@ -366,13 +358,25 @@ Page({
                 personInfo: this.data.oriData[e.currentTarget.dataset.index]
             })
         } else if (Number(pageTypeStu) == 10) {
-            this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time*1000))
+            if (typeof this.data.userList[e.currentTarget.dataset.index].create_time == 'string'){
+
+            } else if (typeof this.data.userList[e.currentTarget.dataset.index].create_time == 'number'){
+
+                this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time * 1000))
+            }
+            
             this.setData({
                 actReg: false,
                 personInfo: this.data.userList[e.currentTarget.dataset.index]
             })
         } else if (Number(pageTypeStu) == 4) {
-            this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time*1000))
+            if (typeof this.data.userList[e.currentTarget.dataset.index].create_time == 'string') {
+
+            } else if (typeof this.data.userList[e.currentTarget.dataset.index].create_time == 'number') {
+
+                this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time * 1000))
+            }
+            // this.data.userList[e.currentTarget.dataset.index].create_time = utils.formatTime(new Date(this.data.userList[e.currentTarget.dataset.index].create_time*1000))
             that.setData({
                 lesson: false,
                 personInfo: this.data.userList[e.currentTarget.dataset.index]

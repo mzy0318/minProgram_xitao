@@ -11,17 +11,19 @@ Page({
         isTitleTwo: true,
         isTitleThree: true,
         encodeImage:'',
+        myCoverImage:'',
     },
 
     /**
-     * 生命周期函数--监听页面加载
+     * 生命周期函数--监听页面加载   
      */
     onLoad: function(options) {
         let that = this;
         let url = 'pages/videoVote/videoVoteUserInfo/videoVoteUserInfo';
         let scene = 'joinId=' + options.joinId
         that.setData({
-            encodeImage: getApp().getEncodeImage(url, scene)
+            encodeImage: getApp().getEncodeImage(url, scene),
+            myCoverImage: 'https://www.zhihuizhaosheng.com/' + getApp().getExtConfig().version + '/ideo_vote_my_cover?id=' + options.joinId
         })
 
         if (options.scene != undefined) {
@@ -124,7 +126,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 3){
             //我的封面
             wx.previewImage({
-                urls: [that.data.pageData.cover.url],
+                urls: [that.data.myCoverImage],
             })
         }
     },
@@ -191,6 +193,21 @@ Page({
                         icon: 'none',
                     })
                 }
+            }
+        })
+    },
+    //保存图片到本地
+    saveEncodeImage:function(){
+        let that = this;
+        wx.downloadFile({
+            url: that.data.encodeImage,
+            success: function (res) {
+                wx.saveImageToPhotosAlbum({
+                    filePath: res.tempFilePath,
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
             }
         })
     }

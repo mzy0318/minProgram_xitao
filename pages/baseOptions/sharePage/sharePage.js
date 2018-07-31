@@ -17,7 +17,7 @@ Page({
     onLoad: function (options) {
         let that = this;
         let sendData = {};
-        console.log('options',options)
+        console.log('options', options)
         sendData['id'] = Number(options.actId); 
         sendData['page'] = options.page;
         sendData['title'] = options.title;
@@ -33,15 +33,6 @@ Page({
             urlBigAddress: 'https://www.zhihuizhaosheng.com/placard?id=' + sendData.id + '&page=' + sendData.page + '&title=' + sendData.title + '&scale=0.5&org_id=' + sendData.org_id + '&visitor_id=' + sendData.visitor_id + '&act_tag=' + sendData.act_tag,
             enCodeImage: getApp().getEncodeImage(sendData.page,mzy)
         })
-        // getApp().request({
-        //     url:'placard',
-        //     data:sendData,
-        //     method:'get',
-        //     sucess:function(res){
-        //         console.log(res)
-        //     }        
-        // })
-        
     },
 
     /**

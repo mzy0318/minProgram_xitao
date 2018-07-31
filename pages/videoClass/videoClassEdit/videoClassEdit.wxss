@@ -25,10 +25,23 @@ page{
     height:350rpx;
     margin:10rpx auto;
     background:#F0F0F0;
+    position:relative;
 }
-.editImageContent image{
+.editImageContent>image{
     width:710rpx;
     height:350rpx;
+}
+.editImageContent>view{
+    width:710rpx;
+    height:350rpx;
+    font-size:80rpx;
+    font-weight:bold;
+    color:#7b7b7b;
+    line-height:350rpx;
+    text-align:center;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
 }
 .editBase{
     width:100%;

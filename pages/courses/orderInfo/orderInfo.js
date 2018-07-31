@@ -7,32 +7,34 @@ Page({
     data: {
         initNum: 1,
         className: 'orderInfoNumJianFalse',
-        pageData:'',
-        actId:'',
-        actTag:'',
-        isActive:'',  //是不可以添加
-        addClassName:'orderInfoNumAdd',
-        isAllow:'',
+        pageData: '',
+        actId: '',
+        actTag: '',
+        isActive: '', //是不可以添加
+        addClassName: 'orderInfoNumAdd',
+        isAllow: '',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
         that.setData({
             actId: options.actId,
             actTag: options.actTag,
+            joinId: options.joinId,
         })
         getApp().request({
-            url:'product',
-            data:{
+            url: 'product',
+            data: {
                 act_id: that.data.actId,
                 act_tag: that.data.actTag,
             },
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
+            method: 'post',
+            success: function(res) {
+                console.log('res',res)
+                if (Number(res.data.code) == 1) {
                     that.setData({
                         pageData: res.data.data,
                         isActive: res.data.data.allow_edit_amount
@@ -41,15 +43,15 @@ Page({
                         that.setData({
                             addClassName: 'orderInfoNumAdd'
                         })
-                    }else{
+                    } else {
                         that.setData({
                             addClassName: 'orderInfoNumJianFalse'
                         })
                     }
-                }else if(Number(res.data.code) == 0){
+                } else if (Number(res.data.code) == 0) {
                     wx.showToast({
                         title: res.data.msg,
-                        icon:'none',
+                        icon: 'none',
                     })
                 }
             }
@@ -59,42 +61,42 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
@@ -105,7 +107,7 @@ Page({
 
     // },
 
-    jianBtn: function (res) {
+    jianBtn: function(res) {
 
         if (this.data.initNum - 1 <= 1) {
 
@@ -125,10 +127,10 @@ Page({
 
     },
 
-    addBtn: function (res) {
+    addBtn: function(res) {
         let that = this;
         let n = this.data.initNum + 1
-        if (that.data.isActive){
+        if (that.data.isActive) {
             if (n > 1) {
 
                 this.setData({
@@ -140,34 +142,21 @@ Page({
 
                 initNum: n,
             })
-            
-        }else{
 
-            return false
+        } else {
+
+            return
         }
     },
-    orderSubmit:function(res){
+    orderSubmit: function(res) {
         let that = this;
         res.detail.value['act_id'] = that.data.actId
         res.detail.value['act_tag'] = that.data.actTag
-        res.detail.value['amount'] = that.data.initNum
-        getApp().request({
-            url:'generate_order',
-            method:'post',
-            data: res.detail.value,
-            success:function(res){
-                if(res.data.code == 0){
-                  wx.showModal({
-                    title: '提示',
-                    content: res.data.msg
-                  })
-                }else{
-                  let payInfo = JSON.stringify(res.data.data)
-                  wx.navigateTo({
-                    url: '../orderInfoPay/orderInfoPay?payInfo=' + payInfo,
-                  })
-                }
-            }
-        })
+        res.detail.value['amount'] = that.data.initNum;
+        res.detail.value['joiner_id'] = that.data.joinId ? that.data.joinId:'';
+
+        wx.navigateTo({
+            url: '../orderInfoPay/orderInfoPay?actId=' + res.detail.value.act_id + '&actTag=' + res.detail.value.act_tag + '&amount=' + res.detail.value.amount + '&joinId=' + res.detail.value.joiner_id + '&nickname=' + res.detail.value.nickname + '&note=' + res.detail.value.note + '&phone=' + res.detail.value.phone +'&isInfo=0',
+        });
     }
 })

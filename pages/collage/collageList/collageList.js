@@ -34,6 +34,7 @@ Page({
                     that.setData({
                         pageData: data,
                     })
+                    console.log('that.data.pageData', that.data.pageData)
                     wx.stopPullDownRefresh()
                 } else if (Nmuber(res.data.code) == 0) {
                     wx.showToast({
@@ -88,8 +89,8 @@ Page({
                 if(Number(res.data.code)==1){
                     let data = res.data.data.list
                     for (let i = 0; i < data.length; i++) {
-                        data[i].start_time = utils.formatTime(new Date(data[i].start_time * 1000))
-                        data[i].end_time = utils.formatTime(new Date(data[i].end_time * 1000))
+                        data[i].start_time = utils.liteDate(new Date(data[i].start_time * 1000))
+                        data[i].end_time = utils.liteDate(new Date(data[i].end_time * 1000))
                     }
                     that.setData({
                         pageData: data,

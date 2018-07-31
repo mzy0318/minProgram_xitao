@@ -1,0 +1,130 @@
+<view class='listInfoContent' hidden='{{isJob}}'>
+    <view class='listInfoTime'>2018年7月14日(星期六)</view>
+    <view class='homeWorkContent'>
+        <view class='empty'></view>
+        <view class='homeWorkImage'>
+            <view>
+                <image mode='scaleToFill'></image>
+            </view>
+            <text decode>&nbsp;星期四</text>
+        </view>
+        <!-- 留言 -->
+        <view class='homeWorkText'>测试</view>
+        <!-- 录音 -->
+        <view class='homeWorkAudio'>
+            <view></view>
+        </view>
+        <!-- 图片 视频 -->
+        <view class='homeWorkVideo'>
+            <view></view>
+            <view></view>
+        </view>
+    </view>
+</view>
+<form bindsubmit='submitData' hidden='{{isContent}}'>
+    <!-- 内容 -->
+    <view class='replyContent'>
+        <view class='replyTitle'>
+            <view>内容</view>
+        </view>
+        <view class='replyInput'>
+            <textarea name='text' value='{{text}}'></textarea>
+        </view>
+    </view>
+    <!-- 图片 -->
+    <view class='replyImage' hidden='{{isImage}}'>
+        <view class='replyTitle'>
+            <view>图片</view>
+        </view>
+        <view class='replyImageList'>
+            <view class='replyImageContent' wx:for='{{actImage}}' wx:key='{{index}}'>
+                <image src='{{item}}' mode='widthFix'></image>
+                <view class='delImage' data-index='{{index}}' bindtap='delImage' data-id='0'>×</view>
+            </view>
+        </view>
+    </view>
+    <!-- 视频 -->
+    <view class='replyImage' hidden='{{isVideo}}'>
+        <view class='replyTitle'>
+            <view>视频</view>
+        </view>
+        <view class='replyImageList'>
+            <view class='replyImageContent' wx:for='{{videos}}' wx:key='{{index}}'>
+                <video src='{{item}}'></video>
+                <view class='delImage' data-index='{{index}}' bindtap='delImage' data-id='1'>×</view>
+            </view>
+        </view>
+    </view>
+    <!-- 音频 -->
+    <view class='replyAudio' hidden='{{isAudio}}'>
+        <view class='replyTitle'>
+            <view>语音</view>
+        </view>
+        <view class='replyAudioList' wx:for='{{audios}}'  data-url='{{item}}' bindtap='playAudio' wx:key='{{index}}'>
+            <view class='replyAudioContent'>
+                <image src='{{audioUrl==item?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image>
+                <view class='delImage' data-index='{{index}}' bindtap='delImage' data-id='2'>×</view>
+            </view>
+        </view>
+    </view>
+    <view class='taskReplyOpts'>
+        <view bindtap='chooseImage'>
+            <text>图片+</text>
+        </view>
+        <view bindtap='chooseVideo'>
+            <text>视频+</text>
+        </view>
+        <view bindtap='chooseAudio'>
+            <text>语音+</text>
+        </view>
+    </view>
+    <button class='replyBtn' form-type='submit' hidden='{{isEdit==1?true:false}}'>提交</button>
+    <view class='replyBtns' hidden='{{isEdit==1?false:true}}'>
+        <button bindtap='delWork'>删除</button>
+        <button form-type='submit'>提交</button>
+        <button bindtap='copyCourse' hidden='{{isMark == 3?false:true}}'>拷贝</button>
+    </view>
+</form>
+<view class='audioWrap' hidden='{{isGetAudio}}'>
+    <view class='audioContent'>
+        <view class='audioTitle'>点击一下开始录音</view>
+        <view class='audioImage' style='border-color:{{borderColor}}' bindtap='getAudio'>
+            <image src='{{audioIcon}}' mode='scaleToFill'></image>
+        </view>
+    </view>
+</view>
+<!-- 拷贝 -->
+<view class='copyWran' hidden='{{isCopy}}'>
+    <view class='courseDate'>课程日期: {{startDate}} 至 {{endDate}}</view>
+    <view class='courseDate'>课程作业: {{toDay}} </view>
+    <view class='dateWrap'>
+        <view class='dateTitle'>
+            <text decode>&nbsp;{{yearMonth}}</text>
+            <view class='dateTitleBtn'>
+                <view data-id='0' bindtap='changeMonth'>∨</view>
+                <view data-id='1' bindtap='changeMonth'>∧</view>
+            </view>
+        </view>
+        <view class='dateWeek'>
+            <view>一</view>
+            <view>二</view>
+            <view>三</view>
+            <view>四</view>
+            <view>五</view>
+            <view>六</view>
+            <view>日</view>
+        </view>
+        <view class='weekDay'>
+            <view class='weekDayContent' wx:for='{{dayList}}' data-index='{{index}}' bindtap='chooseDate' data-year='{{item.year}}' data-day='{{item.day}}' data-month='{{item.month}}' data-enable='{{item.enable}}' data-haswork='{{item.hasAssignment}}' wx:key='{{index}}' style='color:{{item.enable?"#000":"#7b7b7b"}}'>
+                <view class='contentText' style='border-color:{{item.color}}'>{{item.day}}</view>
+                <view class='weekDayDian' hidden='{{!item.hasAssignment}}'></view>
+            </view>
+        </view>
+    </view>
+    <view class='copyBtns'>
+        <button data-id='0' bindtap='copyBtns'>取消</button>
+        <button data-id='1' bindtap='copyBtns'>提交</button>
+    </view>
+    <view class='copyText'>您可能将本作业拷贝到其他日期,减少工作量</view>
+    <view class='copyTextO'>点击上面的日期可多选,提交后即可完成拷贝</view>
+</view>

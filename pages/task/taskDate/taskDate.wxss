@@ -1,0 +1,94 @@
+page{
+    background:#F2F2F2;
+}
+.dateRank{
+    width:700rpx;
+    height:120rpx;
+    background:#fff;
+    margin:30rpx auto;
+}
+.dateRank>view{
+    width:700rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    background:#F9F9F9;
+}
+.dateRank>view:nth-child(2)>text:nth-child(1){
+    color:#D55050;
+}
+.dateRank>view:nth-child(2)>text:nth-child(2){
+    color:#7b7b7b;
+}
+.dateWrap{
+    width:700rpx;
+    min-height:100rpx;
+    margin:100rpx auto 0rpx;
+    background:lightgreen;
+}
+.dateWeek{
+    width:700rpx;
+    height:80rpx;
+    background:#F5F5F5;
+}
+.dateWeek>view{
+    width:100rpx;
+    line-height:80rpx;
+    text-align:center;
+    font-size:30rpx;
+    float:left;
+}
+.dateWeek>view:nth-child(6),.dateWeek>view:nth-child(7){
+    color:#D15353;
+}
+.weekDay{
+    width:700rpx;
+    min-height:80rpx;
+    background:#fff;
+}
+.weekDayContent{
+    display:inline-block;
+    vertical-align: top;
+    width:100rpx;
+    height:80rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-size:35rpx;
+    position:relative;
+}
+.weekDayDian{
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:red;
+    position:absolute;
+    bottom:5rpx;
+    left:50%;
+    margin-left:-1.5px;
+}
+.dateTitle{
+    width:700rpx;
+    height:100rpx;
+    background:#fff;
+}
+.dateTitleBtn{
+    width:210rpx;
+    height:100rpx;
+    float:right;
+}
+.dateTitle text{
+    display:block;
+    height:100rpx;
+    line-height:100rpx;
+    font-size:30rpx;
+    float:left;
+}
+.dateTitleBtn view{
+    width:100rpx;
+    height:100rpx;
+    float:right;
+    border:1px solid #efefef;
+    font-size:40rpx;
+    line-height:100rpx;
+    text-align:center;
+}

@@ -1,0 +1,107 @@
+page{
+    background:#F2F2F2;
+}
+/* 页面功能 */
+.manListOpt{
+    width:100%;
+    height:90rpx;
+    background:#E7C9BE;
+    position:fixed;
+    left:0rpx;
+    bottom:0rpx;
+}
+.manListOpt view{
+    float:left;
+    line-height:90rpx;
+    font-size:26rpx;
+    text-align:center;
+}
+.manListOpt view:nth-child(1){
+    width:30%;
+    color:#D75022;
+}
+.manListOpt view:nth-child(2){
+    width:70%;
+    color:#E7C9BE;
+    background:#E94811;
+}
+/* 内容 */
+.manListContent{
+    width:710rpx;
+    min-height:40rpx;
+    background:#fff;
+    margin:20rpx auto 0rpx;
+}
+.contentTitle{
+    height:80rpx;
+    width:710rpx;
+    font-size:35rpx;
+    text-indent:20rpx;
+    background:#F6F7F9;
+}
+.contentTitle view{
+    float:left;
+    height:80rpx;
+    line-height:80rpx;
+}
+.contentTitle view:nth-child(2){
+    float:right;
+    color:#7b7b7b;
+}
+.contentMiddel{
+    width:710rpx;
+    height:240rpx;
+    background:#fff;
+}
+.contetnMiddleLeft{
+    width:400rpx;
+    height:200rpx;
+    float:left;
+    margin-top:20rpx;
+    margin-left:20rpx;
+    background:lightblue;
+}
+.contetnMiddleRight{
+    width:260rpx;
+    height:200rpx;
+    float:right;
+    margin-right:18rpx;
+    margin-top:20rpx;
+}
+.contetnMiddleRight>view{
+    width:260rpx;
+    height:50rpx;
+    font-size:24rpx;
+    background:#F2F2F2;
+    text-align:center;
+    line-height:50rpx;
+    border:0.5px solid #E9E9E9;
+}
+.contetnMiddleRight>view>text{
+    color:#BB3217;
+}
+.contentBottom{
+    width:710rpx;
+    height:80rpx;
+    background:#F9F9F9;
+    font-size:30rpx;
+}
+.contentBottom view{
+    width:33%;
+    height:40rpx;
+    line-height:40rpx;
+    float:left;
+    text-align:center;
+    margin-top:20rpx;
+    border-right:0.5px solid #DEDEDE;
+}
+.contentBottom>view:nth-child(3){
+    border-right:0px;
+    color:#33AD2E;
+}
+.contentBottom>view:nth-child(1){
+    color:#CD2D19;
+}
+.contentBottom>view:nth-child(2){
+    color:#329ED3;
+}

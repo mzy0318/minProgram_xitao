@@ -1,0 +1,12 @@
+<view class='manSetWrap' wx:for='{{pageData}}' wx:key='{{index}}'>
+    <view class='manSetTop'><text>◆ </text><text>{{item.title}}</text></view>
+    <view class='manSetBottom'>
+        <button wx:for='{{item.btnOpt}}' data-id='{{item.id}}' wx:key='{{item.id}}' bindtap='optionsBtn'>{{item.name}}</button>
+    </view>
+</view>
+<view class='manSetWrap' hidden='{{isTeacher}}'>
+    <view class='manSetTop'><text>◆ </text><text>完善我的资料</text></view>
+    <view class='manSetBottomO'>
+        <button data-id='7' bindtap='optionsBtn'>更改资料</button>
+    </view>
+</view>

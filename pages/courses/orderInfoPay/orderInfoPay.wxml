@@ -12,7 +12,7 @@
     <view class='infoPayProduct'>
         <view class='infoPayProductTop'>
             <view class='infoPayProductLeft'><text></text>{{pageData.title}}</view>
-            <view class='infoPayProductRight'>{{pageDtat.phone}}</view>
+            <view class='infoPayProductRight'>{{pageData.phone}}</view>
         </view>
         <view class='infoPayProductBottom'>
             <view class='infoPayProductBottomImage'><image src='{{pageData.cover.url}}' mode='scaleToFill'></image></view>
@@ -21,16 +21,16 @@
     </view>
     <view class='infoPayList'>
         <view>▪ 类型:<text decode>&nbsp;&nbsp;{{pageData.type}}</text></view>
-        <view>▪ 原价:<text decode>&nbsp;&nbsp;{{pageData.original_price}}.00</text></view>
+        <view>▪ 原价:<text decode>&nbsp;&nbsp;{{pageData.original_price}}元</text></view>
         <view>▪ 单价:<text decode>&nbsp;&nbsp;{{pageData.unit_price}}</text></view>
         <view>▪ 数量:<text decode>&nbsp;&nbsp;{{pageData.amount}}</text></view>
-        <view>▪ 总价:<text decode>&nbsp;&nbsp;￥{{pageData.money}}.00</text></view>
-        <view>▪ 优惠:<text decode>&nbsp;&nbsp;￥{{pageData.discount}}.00</text></view>
+        <view>▪ 总价:<text decode>&nbsp;&nbsp;￥{{pageData.money}}元</text></view>
+        <view>▪ 优惠:<text decode>&nbsp;&nbsp;￥{{pageData.discount}}元</text></view>
     </view>
     <view class='payInfo'>
         <view class='empty'></view>
-        <view>实付款:<text decode>￥{{pageData.money}}.00</text></view>
-        <view>下单时间:{{createTime}}</view>
+        <view>实付款:<text decode>￥{{pageData.money}}</text></view>
+        <view>下单时间: {{createTime}}</view>
     </view>
-    <button bindtap='payMoney'>立即付款</button>
+    <button bindtap='payMoney' style='background-color:{{bgColor}}'>立即付款</button>
 </view>

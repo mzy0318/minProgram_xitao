@@ -120,50 +120,64 @@ Page({
         let that = this;
         wx.chooseImage({
             success: function(res) {
-                let actImg = [];
-                let actImage = [];
-                actImg.push(...that.data.envImageId);
-                actImage.push(...that.data.envImage);
-                actImage.push(...res.tempFilePaths);
-                that.setData({
-                    envImage: actImage,
+
+                //图片大小判定
+                let imgArr = res.tempFiles;
+                let size = imgArr.every((item,index,arr)=>{
+                    return  item.size < 6291456
                 })
-                let imgPath = res.tempFilePaths;
-                wx.showLoading({
-                    title: '图片上传中...',
-                    mask: true,
-                })
+                
+                if(size){
+                    let actImg = [];
+                    let actImage = [];
+                    actImg.push(...that.data.envImageId);
+                    actImage.push(...that.data.envImage);
+                    actImage.push(...res.tempFilePaths);
+                    that.setData({
+                        envImage: actImage,
+                    })
+                    let imgPath = res.tempFilePaths;
+                    wx.showLoading({
+                        title: '图片上传中...',
+                        mask: true,
+                    })
 
-                var header = {};
-                header.Cookie = wx.getStorageSync('cookie');
-                header['Content-Type'] = 'multipart/form-data';
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
 
-                for (let i = 0; i < imgPath.length; i++) {
+                    for (let i = 0; i < imgPath.length; i++) {
 
-                    wx.uploadFile({
-                        url: getApp().getHost() + 'upload',
-                        filePath: imgPath[i],
-                        name: 'file',
-                        header: header,
-                        success: function (res) {
-                            let r = JSON.parse(res.data)
-                            if (Number(r.code) == 1) {
-                                actImg.push(r.data.imageId);
-                                that.setData({
-                                    envImageId: actImg
-                                })
-                                wx.hideLoading();
-                                wx.showToast({
-                                    title: '上传成功',
-                                    icon: 'success'
-                                })
-                            } else {
-                                wx.showToast({
-                                    title: r.msg,
-                                    icon: 'none',
-                                })
+                        wx.uploadFile({
+                            url: getApp().getHost() + 'upload',
+                            filePath: imgPath[i],
+                            name: 'file',
+                            header: header,
+                            success: function (res) {
+                                let r = JSON.parse(res.data)
+                                if (Number(r.code) == 1) {
+                                    actImg.push(r.data.imageId);
+                                    that.setData({
+                                        envImageId: actImg
+                                    })
+                                    wx.hideLoading();
+                                    wx.showToast({
+                                        title: '上传成功',
+                                        icon: 'success'
+                                    })
+                                } else {
+                                    wx.showToast({
+                                        title: r.msg,
+                                        icon: 'none',
+                                    })
+                                }
                             }
-                        }
+                        })
+                    }
+                }else{
+                    wx.showToast({
+                        title: '选择图片必须小于6M',
+                        icon:'none'
                     })
                 }
             },
@@ -174,49 +188,62 @@ Page({
         let that = this;
         wx.chooseImage({
             success: function(res) {
-                let actImg = [];
-                let honorImage = [];
-                actImg.push(...that.data.honorImageId);
-                honorImage.push(...that.data.honorImage)
-                honorImage.push(...res.tempFilePaths)
-                that.setData({
-                    honorImage: honorImage,
-                })
-                wx.showLoading({
-                    title: '图片上传中...',
-                    mask: true,
-                })
-                let imgPath = res.tempFilePaths;
 
-                var header = {};
-                header.Cookie = wx.getStorageSync('cookie');
-                header['Content-Type'] = 'multipart/form-data';
+                //图片大小判定
+                let imgArr = res.tempFiles;
+                let size = imgArr.every((item, index, arr) => {
+                    return item.size < 6291456
+                })
+                if(size){
+                    let actImg = [];
+                    let honorImage = [];
+                    actImg.push(...that.data.honorImageId);
+                    honorImage.push(...that.data.honorImage)
+                    honorImage.push(...res.tempFilePaths)
+                    that.setData({
+                        honorImage: honorImage,
+                    })
+                    wx.showLoading({
+                        title: '图片上传中...',
+                        mask: true,
+                    })
+                    let imgPath = res.tempFilePaths;
 
-                for (let i = 0; i < imgPath.length; i++) {
-                    wx.uploadFile({
-                        url: getApp().getHost() + 'upload',
-                        filePath: imgPath[i],
-                        name: 'file',
-                        header: header,
-                        success: function (res) {
-                            let r = JSON.parse(res.data)
-                            if (Number(r.code) == 1) {
-                                actImg.push(r.data.imageId);
-                                that.setData({
-                                    honorImageId: actImg
-                                })
-                                wx.hideLoading();
-                                wx.showToast({
-                                    title: '上传成功',
-                                    icon: 'success'
-                                })
-                            } else {
-                                wx.showToast({
-                                    title: r.msg,
-                                    icon: 'none',
-                                })
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
+
+                    for (let i = 0; i < imgPath.length; i++) {
+                        wx.uploadFile({
+                            url: getApp().getHost() + 'upload',
+                            filePath: imgPath[i],
+                            name: 'file',
+                            header: header,
+                            success: function (res) {
+                                let r = JSON.parse(res.data)
+                                if (Number(r.code) == 1) {
+                                    actImg.push(r.data.imageId);
+                                    that.setData({
+                                        honorImageId: actImg
+                                    })
+                                    wx.hideLoading();
+                                    wx.showToast({
+                                        title: '上传成功',
+                                        icon: 'success'
+                                    })
+                                } else {
+                                    wx.showToast({
+                                        title: r.msg,
+                                        icon: 'none',
+                                    })
+                                }
                             }
-                        }
+                        })
+                    }
+                }else{
+                    wx.showToast({
+                        title: '选择图片必须小于6M',
+                        icon: 'none'
                     })
                 }
             },
@@ -235,7 +262,7 @@ Page({
                 header.Cookie = wx.getStorageSync('cookie');
                 header['Content-Type'] = 'multipart/form-data';
 
-                if (Number(res.size) < 31257280){
+                if ((Number(res.size) < 73400320) && (Number(res.duration) < 60)){
                     var time = 30;
                     that.setData({
                         isVideo: false,
@@ -289,9 +316,9 @@ Page({
                             }
                         }
                     })
-                } else if (Number(res.size) >= 31257280){
+                } else if ((Number(res.size) >= 73400320) || (Number(res.duration) >= 60)){
                     wx.showToast({
-                        title: '视频大于30M,请重新选择',
+                        title: '视频大于70M或长度大于60s,请重新选择',
                         icon: 'none'
                     })
                 }

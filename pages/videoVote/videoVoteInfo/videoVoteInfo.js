@@ -273,6 +273,21 @@ Page({
             })
         }
     },
+    //保存二维码到本地
+    saveEncodeImage: function () {
+        let that = this;
+        wx.downloadFile({
+            url: that.data.enCodeImage,
+            success: function (res) {
+                wx.saveImageToPhotosAlbum({
+                    filePath: res.tempFilePath,
+                    success: function (res) {
+                        console.log(res)
+                    }
+                })
+            }
+        })
+    },
     getPageData: function() {
         let that = this;
         getApp().request({

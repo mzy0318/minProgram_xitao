@@ -1,0 +1,125 @@
+<!-- 页面功能 -->
+<view class='manListOpt'>
+    <view>返回</view>
+    <view>发布新活动</view>
+</view>
+<!-- 内容 -->
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>
+<view class='manListContent'>
+    <view class='contentTitle'>
+        <view>六一儿童节,集赞赢大礼包</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view>查看报名<text>(5)</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view>删除</view>
+        <view>编辑</view>
+        <view>分享</view>
+    </view>
+</view>

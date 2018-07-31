@@ -1,0 +1,172 @@
+@import '../../../utils/iconFont.wxss';
+.infoBannerImage{
+    width:750rpx;
+    height:410rpx;
+    background:#FEF065;
+}
+.infoBackImage{
+    width:750rpx;
+    min-height:100rpx;
+    background:#FEF065;
+    padding-bottom:130rpx;
+}
+.laudActImage,.laudActInfo,.laudActInfoList{
+    width:690rpx;
+    min-height:80rpx;
+    background:#fff;
+    margin:0rpx auto;
+    border-radius:10px;
+    padding-top:1px;
+    padding-bottom:30rpx;
+    box-shadow:.5px .5px 5px 2px rgba(192,192,192,.3);
+}
+.laudActImageTitle{
+    width:640rpx;
+    font-size:32rpx;
+    font-weight:bold;
+    border-left:5px solid #F8C001;
+    text-indent:20rpx;
+    margin:30rpx auto;
+}
+.laudActImages{
+    width:640rpx;
+    min-height:100rpx;
+    margin:20rpx auto 0rpx;
+    background:lightgreen;
+}
+.laudActImages>image{
+    width:640rpx;
+}
+/* 连接点 */
+.viewMiddle{
+    width:640rpx;
+    height:24rpx;
+    background:transparent;
+    margin:0rpx auto;
+}
+.viewMiddle>view{
+    width:7px;
+    height:24rpx;
+    background:#fff;
+    float:left;
+    margin-left:50rpx;
+}
+.viewMiddle>view:nth-child(2){
+    float:right;
+    margin-right:50rpx;
+}
+/* 活动说明 */
+.laudActInfoTitle{
+    width:640rpx;
+    height:50rpx;
+    margin:20rpx auto 0rpx;
+}
+.laudActInfoTitle>view{
+    width:140rpx;
+    line-height:50rpx;
+    font-size:30rpx;
+    font-weight:bold;
+    border-bottom:0.5px solid #EFC73D;
+    text-align:center;
+}
+.laudActInfoDate{
+    width:640rpx;
+    line-height:50rpx;
+    font-size:26rpx;
+    color:#212121;
+    margin:15rpx auto 0rpx;
+}
+.laudActInfoText{
+    width:640rpx;
+    min-height:40rpx;
+    line-height:40rpx;
+    font-size:26rpx;
+    color:#212121;
+    margin:40rpx auto 0rpx;
+}
+/* 报名列表/玩法介绍 */
+.laudActInfoOpts{
+    width:640rpx;
+    height:50rpx;
+    margin:20rpx auto 0rpx;
+}
+.laudActInfoOpts view{
+    width:140rpx;
+    line-height:50rpx;
+    font-size:30rpx;
+    text-align:center;
+    float:left;
+    margin-left:30rpx;
+}
+view.selected{
+    font-weight:bold;
+    border-bottom:1px solid #EFC73D;
+}
+.laudActInfoContent{
+    width:640rpx;
+    min-height:300rpx;
+    margin:20rpx auto 0rpx;
+}
+.nameList{
+    width:300rpx;
+    height:250rpx;
+    display:inline-block;
+    vertical-align:top;
+    border:.5px solid #efefef;
+    margin-top:20rpx;
+}
+.laudActInfoContent>view:nth-child(even){
+    margin-left:30rpx;
+}
+.nameListTop{
+    width:300rpx;
+    height:150rpx;
+    background:lightgreen;
+}
+.nameListTopName,.nameListTopCount{
+    width:300rpx;
+    line-height:40rpx;
+    font-size:30rpx;
+    text-align:center;
+    margin-top:5rpx;
+}
+.nameListTopCount{
+    margin-top:10rpx;
+}
+.laudActInfoContent>text{
+    line-height:40rpx;
+    font-size:26rpx;
+    color:#212121;
+}
+.listInfoOpts{
+    width:750rpx;
+    height:100rpx;
+    position:fixed;
+    bottom:0rpx;
+    left:0rpx;
+    background:#fff;
+}
+.listInfoOpts>view{
+    width:150rpx;
+    height:100rpx;
+    float:left;
+    text-align:center;
+    font-size:26rpx;
+}
+.listInfoOpts>view>text{
+    display:block;
+    width:40rpx;
+    height:40rpx;
+    font-size:40rpx;
+    margin:10rpx auto;
+}
+.listInfoOpts>view:nth-child(3){
+    width:450rpx;
+    line-height:100rpx;
+    font-size:30rpx;
+    color:#000;
+    background:#F9C000;
+}
+.iconStyle{
+    font-size:30rpx;
+}

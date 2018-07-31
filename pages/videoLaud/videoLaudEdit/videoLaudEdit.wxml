@@ -1,0 +1,54 @@
+<!-- 主题模板 -->
+<view class='editTitle'>主题模板</view>
+<view class='editTitleImage'>
+    <view></view>
+    <view>发布后可重新选择模板和音乐</view>
+</view>
+<!-- 活动信息 -->
+<view class='editTitle'>活动信息</view>
+<view class='editActInfo'>
+    <view class='editActInfoContent'>
+        <view>活动名称:</view>
+        <input type='text' placeholder='感恩有你,积赞换大奖'></input>
+    </view>
+    <view class='editActInfoContent'>
+        <view>开始日期:</view>
+        <picker mode='date' start='{{startTime}}' bindchange='getDate' data-id='0'>{{startDate}}</picker>
+    </view>
+    <view class='editActInfoContent'>
+        <view>截止日期:</view>
+        <picker mode='date' start='{{endTime}}' bindchange='getDate' data-id='1'>{{endDate}}</picker>
+    </view>
+    <view class='editActInfoContent'>
+        <view>报名热线:</view>
+        <input type='number' maxlength='11'></input>
+    </view>
+</view>
+<!-- 报名信息 -->
+<view class='editTitle'>报名信息</view>
+<view class='joinInfo'>
+    <view class='joinInfoContent'>姓名</view>
+    <view class='joinInfoContent'>电话</view>
+    <view class='joinInfoAdd'>+新增报名项</view>
+</view>
+<!-- 上传图片 -->
+<view class='editTitle'>多图上传</view>
+<view class='editImageWrap'>
+    <view class='editAddImage'><text class='iconfont icon-photo'></text></view>
+    <view class='editImageContent'>
+        <view><image mode='scaleToFill'></image></view>
+    </view>
+</view>
+<!-- 上传视频 -->
+<view class='editTitle'>视频拍摄(可选,模版拍摄)</view>
+<view class='editImageWrap'>
+    <view class='editAddImage'><text class='iconfont icon-video iconStyle'></text></view>
+    <view class='editVideoContent'>
+        <view><video></video></view>
+    </view>
+</view>
+<!-- 详细信息 -->
+<view class='editTitle'>详细信息</view>
+<view class='editTextInfo'>
+    <view><textarea placeholder='如积赞的最终奖励,如何兑换奖品等'></textarea></view>
+</view>

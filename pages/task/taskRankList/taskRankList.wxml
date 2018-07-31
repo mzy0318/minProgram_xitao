@@ -1,0 +1,57 @@
+<view class='rankImage'>
+    <image src='../../../icon/rankList.png' mode='scaleToFill'></image>
+</view>
+<view class='homeOptions'>
+    <view data-index='0' bindtap='switchOpt' style='color:{{optNum==0?"#2CC07A":"#000"}}'>
+        <text>作业</text>
+    </view>
+    <view data-index='1' bindtap='switchOpt' style='color:{{optNum==1?"#2CC07A":"#000"}}'>
+        <text>点赞</text>
+    </view>
+    <view data-index='2' bindtap='switchOpt' style='color:{{optNum==2?"#2CC07A":"#000"}}'>
+        <text>积分</text>
+    </view>
+</view>
+<!-- 作业 -->
+<view class='rankWork' hidden='{{isWork}}'>
+    <view class='rankWorkContent' wx:for='{{pageData}}' wx:key='{{index}}'>
+        <view class='rankWorkIcon'></view>
+        <view class='rankWorkImage'>
+            <image src='{{item.avatar_url}}' mode='scaleToFill'></image>
+        </view>
+        <view class='rankWorkText'>
+            <view>{{item.realname}}</view>
+            <view>{{item.count}}次</view>
+        </view>
+    </view>
+</view>
+<!-- 点赞 -->
+<view class='rankZan' hidden='{{isZan}}'>
+    <view class='rankWork'>
+        <view class='rankWorkContent' wx:for='{{pageData}}' wx:key='{{index}}'>
+            <view class='rankWorkIcon'></view>
+            <view class='rankWorkImage'>
+                <image src='{{item.avatar_url}}' mode='scaleToFill'></image>
+            </view>
+            <view class='rankWorkText'>
+                <view>{{item.realname}}</view>
+                <view>{{item.count}}次</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 积分 -->
+<view class='rankScore' hidden='{{isScore}}'>
+    <view class='rankWork'>
+        <view class='rankWorkContent' wx:for='{{pageData}}' wx:key='{{index}}'>
+            <view class='rankWorkIcon'></view>
+            <view class='rankWorkImage'>
+                <image src='{{item.avatar_url}}' mode='scaleToFill'></image>
+            </view>
+            <view class='rankWorkText'>
+                <view>{{item.realname}}</view>
+                <view>{{item.count}}分</view>
+            </view>
+        </view>
+    </view>
+</view>

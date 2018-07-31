@@ -74,8 +74,9 @@ Page({
 
     // },
     toModeInfo:function(e){
+        console.log('e.currentTarget.dataset', e.currentTarget.dataset)
         wx.navigateTo({
-            url: '../schoolModelInfo/schoolModelInfo?modelInfo=' + JSON.stringify(e.currentTarget.dataset.modelinfo),
+            url: '../schoolModelInfo/schoolModelInfo?name=' + e.currentTarget.dataset.name + '&id=' + e.currentTarget.dataset.id + '&url=' + e.currentTarget.dataset.url,
         })
     }
 })

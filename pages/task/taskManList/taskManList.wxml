@@ -1,0 +1,19 @@
+<view class='manListSearch'>
+    <input placeholder='请输入课程标题'  type='text' confirm-type='search' bindconfirm='inputkey'></input>
+</view>
+<!-- 内容 -->
+<view class='emptyO'></view> 
+<view class='taskUserContent' wx:for='{{pageData}}' wx:key='{{item.id}}'>
+    <view class='taskUserStatus' bindtap='toInfo' data-courseid='{{item.id}}' style='background-color:{{item.bgColor}}'>{{item.status}}</view>
+    <view class='taskUserTitle' bindtap='toInfo' data-courseid='{{item.id}}' >{{item.title}}</view>
+    <view class='taskUserNum' bindtap='toInfo' data-courseid='{{item.id}}'>
+        <view>作业数<text> {{item.assignment_amount}} </text>次</view>
+        <view>已提交<text> {{item.homework_amount}} </text>次</view>
+    </view>
+    <view class='taskUserOptions'>
+        <view data-id='0' bindtap='optionsBtn' data-title='{{item.title}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'><text>邀请学员</text></view>
+        <view data-id='1' bindtap='optionsBtn' data-courseid='{{item.id}}' data-title='{{item.title}}' data-timestring='{{item.start_time}}'><text>打卡日历</text></view>
+        <view data-id='2' bindtap='optionsBtn' data-actid='{{item.id}}'><text style='color:#3C9ED1'>编辑课程</text></view>
+        <view data-id='3' bindtap='optionsBtn' data-actid='{{item.id}}' ><text style='color:#C13624'>删除课程</text></view>
+    </view>
+</view>

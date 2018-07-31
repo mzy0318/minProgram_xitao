@@ -8,7 +8,8 @@ Page({
     data: {
         pageData: '',
         createTime: '',
-        orderNumber: '',
+        isInfo:'',
+        bgColor:'#F15352'
     },
 
     /**
@@ -17,9 +18,41 @@ Page({
     onLoad: function(options) {
         let that = this;
         that.setData({
-            pageData: JSON.parse(options.payInfo),
-            createTime: utils.formatTime(new Date(JSON.parse(options.payInfo).create_time*1000)),
+            isInfo: Number(options.isInfo),
         })
+        if(Number(options.isInfo) == 0){
+            let sendData = {};
+            sendData['act_id'] = options.actId;
+            sendData['act_tag'] = options.actTag;
+            sendData['phone'] = options.phone;
+            sendData['nickname'] = options.nickname;
+            sendData['note'] = options.note;
+            sendData['amount'] = options.amount;
+            sendData['joiner_id'] = options.joinId;
+            getApp().request({
+                url: 'generate_order',
+                method: 'post',
+                data: sendData,
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        that.setData({
+                            pageData: res.data.data,
+                            createTime: utils.formatTime(new Date(res.data.data.create_time * 1000)),
+                        })
+                    } else {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        } else if (Number(options.isInfo) == 1){
+            that.setData({
+                pageData: JSON.parse(options.payInfo),
+                createTime: JSON.parse(options.payInfo).create_time
+            })
+        }
     },
 
     /**
@@ -72,42 +105,95 @@ Page({
     // },
     payMoney: function() {
         let that = this;
-        getApp().request({
-            url: 'pay',
-            data: {
-                order_number: String(that.data.pageData.order_number),
-            },
-            method: 'post',
-            success: function(r) {
-                if (r.data.code == 0) {
-                    wx.showModal({
-                        title: 'error',
-                        content: r.data.msg,
-                    })
-                } else {
-                    var data = r.data.data;
-                    wx.requestPayment({
-                        'timeStamp': data.timeStamp,
-                        'nonceStr': data.nonceStr,
-                        'package': data.package,
-                        'signType': data.signType,
-                        'paySign': data.paySign,
-                        'success': function(res) {
-                            console.log("success:", res);
-                            wx.navigateTo({
-                                url: '../../studentManage/orderList/orderList',
+        
+        if(that.data.isInfo == 1){
+            if (Number(that.data.is_pay) == 0){
+                that.setData({
+                    bgColor: '#F15352'
+                })
+                getApp().request({
+                    url: 'pay',
+                    data: {
+                        order_number: String(that.data.pageData.order_number),
+                    },
+                    method: 'post',
+                    success: function (r) {
+                        if (r.data.code == 0) {
+                            wx.showModal({
+                                title: 'error',
+                                content: r.data.msg,
                             })
-                        },
-                        'fail': function(res) {
-                            console.log("fail:", res);
-                            wx.showToast({
-                                title: '您已取消订单',
-                                icon:'none'
+                        } else {
+                            var data = r.data.data;
+                            wx.requestPayment({
+                                'timeStamp': data.timeStamp,
+                                'nonceStr': data.nonceStr,
+                                'package': data.package,
+                                'signType': data.signType,
+                                'paySign': data.paySign,
+                                'success': function (res) {
+                                    wx.navigateTo({
+                                        url: '../../studentManage/orderList/orderList',
+                                    })
+                                },
+                                'fail': function (res) {
+                                    console.log("fail:", res);
+                                    wx.showToast({
+                                        title: '您已取消订单',
+                                        icon: 'none'
+                                    })
+                                }
                             })
                         }
-                    })
-                }
+                    }
+                })
+            } else if (Number(that.data.is_pay) == 0){
+                that.setData({
+                    bgColor: '#7b7b7b'
+                })
+                return 
             }
-        })
+        } else if (that.data.isInfo == 1){
+            that.setData({
+                bgColor: '#F15352'
+            })
+            getApp().request({
+                url: 'pay',
+                data: {
+                    order_number: String(that.data.pageData.order_number),
+                },
+                method: 'post',
+                success: function (r) {
+                    if (r.data.code == 0) {
+                        wx.showModal({
+                            title: 'error',
+                            content: r.data.msg,
+                        })
+                    } else {
+                        var data = r.data.data;
+                        wx.requestPayment({
+                            'timeStamp': data.timeStamp,
+                            'nonceStr': data.nonceStr,
+                            'package': data.package,
+                            'signType': data.signType,
+                            'paySign': data.paySign,
+                            'success': function (res) {
+                                wx.navigateTo({
+                                    url: '../../studentManage/orderList/orderList',
+                                })
+                            },
+                            'fail': function (res) {
+                                console.log("fail:", res);
+                                wx.showToast({
+                                    title: '您已取消订单',
+                                    icon: 'none'
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        
     },
 })

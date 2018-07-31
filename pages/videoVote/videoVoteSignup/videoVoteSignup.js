@@ -223,41 +223,54 @@ Page({
             count: 1,
             success: function (res) {
 
-                that.setData({
-                    isCover:false,
-                    coverImage: res.tempFilePaths[0]
+                //图片大小判定
+                let imgArr = res.tempFiles;
+                let size = imgArr.every((item, index, arr) => {
+                    return item.size < 6291456
                 })
-                let imagePath = res.tempFilePaths[0]
 
-                wx.showLoading({
-                    title: '图片上传中...',
-                    mask: true,
-                })
-                var header = {};
-                header.Cookie = wx.getStorageSync('cookie');
-                header['Content-Type'] = 'multipart/form-data';
+                if(size){
+                    that.setData({
+                        isCover: false,
+                        coverImage: res.tempFilePaths[0]
+                    })
+                    let imagePath = res.tempFilePaths[0]
 
-                getApp().uploadFile({
-                    url: 'upload',
-                    filePath: that.data.coverImage,
-                    success: function (res) {
-                        if (Number(res.code) == 1) {
-                            that.setData({
-                                coverImageId: res.data.imageId,
-                            });
-                            wx.hideLoading();
-                            wx.showToast({
-                                title: '上传成功',
-                                icon: 'success'
-                            })
-                        } else {
-                            wx.showToast({
-                                title: res.msg,
-                                icon: 'none',
-                            })
+                    wx.showLoading({
+                        title: '图片上传中...',
+                        mask: true,
+                    })
+                    var header = {};
+                    header.Cookie = wx.getStorageSync('cookie');
+                    header['Content-Type'] = 'multipart/form-data';
+
+                    getApp().uploadFile({
+                        url: 'upload',
+                        filePath: that.data.coverImage,
+                        success: function (res) {
+                            if (Number(res.code) == 1) {
+                                that.setData({
+                                    coverImageId: res.data.imageId,
+                                });
+                                wx.hideLoading();
+                                wx.showToast({
+                                    title: '上传成功',
+                                    icon: 'success'
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: res.msg,
+                                    icon: 'none',
+                                })
+                            }
                         }
-                    }
-                },header)
+                    }, header)
+                }else{
+                    wx.showToast({
+                        title: '选择图片必须小于6M',
+                        icon: 'none'
+                    })
+                }
             },
         })
     },
@@ -271,7 +284,7 @@ Page({
                 let duration = res.duration;
                 var time = 30;
 
-                if (Number(res.size) < 31257280){
+                if ((Number(res.size) < 73400320) && (Number(res.duration) < 60)){
                     wx.showLoading({
                         title: '请耐心等待',
                         mask: true,
@@ -330,9 +343,9 @@ Page({
                         }
                     })
 
-                } else if (Number(res.size) >= 31257280){
+                } else if ((Number(res.size) >= 73400320) || (Number(res.duration) >= 60)){
                     wx.showToast({
-                        title: '视频大于30M,请重新选择',
+                        title: '视频大于70M或长度大于60s,请重新选择',
                         icon: 'none'
                     })
                 }

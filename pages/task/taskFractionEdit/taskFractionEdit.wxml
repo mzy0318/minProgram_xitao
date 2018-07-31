@@ -1,0 +1,25 @@
+<form bindsubmit='subScoreSet'>
+    <view class='fractionContent'>
+        <view class='fractionName'>是否开启</view>
+        <view class='fractionInput'>
+            <switch checked='{{isChecked}}' bindchange='switchStatus'></switch>
+        </view>
+    </view>
+    <view class='fractionContent'>
+        <view class='fractionName'>提交作业</view>
+        <view class='fractionInput'>
+            <input type='number' name='finish_homework_score' value='{{pageData.finish_homework_score}}'></input> 积分</view>
+    </view>
+    <view class='fractionContent'>
+        <view class='fractionName'>获得点赞</view>
+        <view class='fractionInput'>
+            <input type='number' name='be_thumb_score' value='{{pageData.be_thumb_score}}'></input> 积分</view>
+    </view>
+    <view class='fractionText'>
+        <view class='fractionName'>兑换说明</view>
+        <view class='fractionTextarea'>
+            <textarea name='note' value='{{pageData.note}}'></textarea>
+        </view>
+    </view>
+    <button class='fractionBtn' form-type='submit'>提交</button>
+</form>

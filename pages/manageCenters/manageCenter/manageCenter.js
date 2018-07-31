@@ -14,18 +14,28 @@ Page({
                 iconfont: 'iconfont icon-genghuanpifu iconSize',
                 color:'#1196DB',
                 url: '../../baseOptions/schoolModel/schoolModel',
+                isShow:false,
             },
-            //{
-            //     name: '打卡作业',
-            //     iconfont: 'iconfont icon-job-task iconSize',
-            //     color: '#870E04',
-            //     url: '../schoolEdit/schoolEdit',
-            // }
+            {
+                name: '打卡作业',
+                iconfont: 'iconfont icon-job-task iconSize',
+                color: '#870E04',
+                url: '../../task/taskManSet/taskManSet',
+                isShow: true,
+            },
+            {
+                name: '学员跟进',
+                iconfont: 'iconfont icon-genjinjilu iconSize',
+                url: '../../courses/courseUserList/courseUserList',
+                color: '#02AEA7',
+                isShow: false,
+            },
             {
                 name: '学校简介',
                 iconfont: 'iconfont icon-xuexiao iconSize',
                 color: '#1196DB',
                 url:'../schoolEdit/schoolEdit',
+                isShow: false,
             },
         ],
         pageStuData:[
@@ -34,13 +44,15 @@ Page({
                 iconfont: 'iconfont icon-pintuan iconStyle',
                 background:'#E3465B',
                 url: 'org/personal_group_list',
-                pageType:1
+                pageType:1,
+                tag:'personal_group',
             },{
                 name: '一元上好课',
                 iconfont: 'iconfont icon-yiyuanchoujiang iconStyle',
                 background: '#FD9D22',
                 url: 'org/bargain_list',
-                pageType: 2
+                pageType: 2,
+                tag: 'lesson_one',
             },
             // {
             //     name: '视频点赞',
@@ -54,13 +66,8 @@ Page({
                 iconfont: 'iconfont icon-kanjia iconStyle',
                 background: '#00D4BE',
                 url: 'org/bargain_list',
-                pageType: 4
-            },{
-                name: '学员跟进',
-                iconfont: 'iconfont icon-genjinjilu iconStyle',
-                url: 'org/bargain_list',
-                background: '#02AEA7',
-                pageType:11,
+                pageType: 4,
+                tag: 'bargain',
             },
             // {
             //     name: '万人拼团',
@@ -74,28 +81,32 @@ Page({
                 iconfont: 'iconfont icon-zan1 iconStyle',
                 background: '#8990FA',
                 url: 'org/bargain_list',
-                pageType: 6
+                pageType: 6,
+                tag: 'video_vote',
             }, 
             {
                 name: '视频贺卡',
                 iconfont: 'iconfont icon-meiguihua iconStyle',
                 background: '#1196DB',
                 url: 'org/video_card_list',
-                pageType: 7
+                pageType: 7,
+                tag: 'video_card',
             }, {
                 name: '活动报名',
                 iconfont: 'iconfont icon-sign iconStyle',
                 background: '#FF6766',
                 url: 'org/bargain_list',
-                pageType: 8
+                pageType: 8,
+                tag: 'normal',
             }, 
             {
                 name: '微视频课堂',
                 iconfont: 'iconfont icon-shipin1 iconStyle',
                 background: '#FE7FC2',
                 url: 'org/bargain_list',
-                pageType: 9
-            }, 
+                pageType: 9,
+                tag: 'video_class',
+            },
             // {
             //     name: '视频作业',
             //     iconfont: 'iconfont icon-job-task iconStyle',
@@ -103,7 +114,9 @@ Page({
             //     url: 'org/bargain_list',
             //     pageType: 10
             // }
-        ]
+        ],
+        phone:'',
+        pwd:'',
     },
 
     /**
@@ -112,8 +125,38 @@ Page({
     onLoad: function (options) {
         let that = this;
         let version = wx.getExtConfigSync();
+        wx.setStorageSync('loginCode', 3)
         that.setData({
             versionData: wx.getExtConfigSync(),
+        });
+        // 判断功能页面功能
+        let funcOpt = getApp().funcOpt.function;
+        let pageData = that.data.pageStuData;
+        for (let i = 0; i < funcOpt.length; i++){
+            if (funcOpt[i].tag == 'punch') {
+                that.data.pageManagData[1].isShow = false
+                funcOpt.splice(i, 1);
+                i = funcOpt.length + 1
+            } else {
+                that.data.pageManagData[1].isShow = true;
+                i = funcOpt.length + 1
+            }
+        }
+        for (let i = 0; i < funcOpt.length;i++){
+            if (funcOpt[i].tag == 'sale_lesson'){
+                funcOpt.splice(i,1)
+            }
+            for (let j = 0; j < pageData.length;j++){
+                if (funcOpt[i].tag == pageData[j].tag){
+                    funcOpt[i].iconfont = pageData[j].iconfont
+                    funcOpt[i].background = pageData[j].background
+                    funcOpt[i].url = pageData[j].url
+                    funcOpt[i].pageType = pageData[j].pageType
+                }
+            }
+        };
+        that.setData({
+            pageStuData: funcOpt,
         })
     },
 
@@ -271,6 +314,10 @@ Page({
             wx.navigateTo({
                 url: '../../videoVote/videoVoteManList/videoVoteManList',
             })
+        } else if (Number(pageType) == 12){
+            wx.navigateTo({
+                url: '../../task/taskManSet/taskManSet',
+            })
         }
     },
     toEditPage:function(e){
@@ -280,13 +327,25 @@ Page({
     },
     exitApp:function(){
         let that = this;
-        wx.setStorageSync('loginCode', 3);
-        wx.setNavigationBarTitle({
-            title: '招生小程序登录',
-        })
-        that.setData({
-            islogin: 'block',
-            isContent: 'none'
+        getApp().request({
+            url:'logout',
+            data:{},
+            method:'post',
+            success:function(res){
+                if(Number(res.data.code) == 1){
+                    getApp().isLogin = false;
+                    wx.setStorageSync('loginCode', 3);
+                    wx.setNavigationBarTitle({
+                        title: '招生小程序登录',
+                    })
+                    that.setData({
+                        islogin: 'block',
+                        isContent: 'none',
+                        phone: '',
+                        pwd: '',
+                    })
+                }
+            }
         })
     }
 })

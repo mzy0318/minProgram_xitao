@@ -1,7 +1,6 @@
 /* 瑜伽 课外快乐 驾考 */
 .indexBackground {
     width: 750rpx;
-    min-height:650rpx;
     background:#F7A784;
     padding-bottom:30rpx;
 }

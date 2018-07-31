@@ -5,13 +5,13 @@ Page({
      * 页面的初始数据
      */
     data: {
-        pageStuData: [
+        baseData:[
             {
                 name: '我的订单',
                 iconfont: 'iconfont icon-zuoye iconStyle',
                 background: '#A145AF',
                 url: '../studentManage/orderList/orderList',
-                pageTypeStu:1,
+                pageTypeStu: 1,
             },
             {
                 name: '预约试听',
@@ -20,12 +20,15 @@ Page({
                 url: '../courses/stuCourseList/stuCourseList',
                 pageTypeStu: 2,
             },
+        ],
+        pageStuData: [
             {
                 name: '私人拼团',
                 iconfont: 'iconfont icon-pintuan iconStyle',
                 background: '#E3465B',
                 url: '../killPrices/killPersonList/killPersonList',
                 pageTypeStu: 3,
+                tag:'personal_group',
             },
             {
                 name: '一元上好课',
@@ -33,6 +36,7 @@ Page({
                 background: '#FD9D22',
                 url: '../killPrices/killPriceList/killPriceList',
                 pageTypeStu: 4,
+                tag: 'lesson_one',
             },
             // {
             //     name: '视频点赞',
@@ -47,6 +51,7 @@ Page({
                 background: '#00D4BE',
                 url:'../killPrices/killPersonList/killPersonList',
                 pageTypeStu: 6,
+                tag: 'bargain',
             },
             // {
             //     name: '万人拼团',
@@ -61,6 +66,7 @@ Page({
                 background: '#8990FA',
                 url: '../videoVote/videoVoteStuList/videoVoteStuList',
                 pageTypeStu: 8,
+                tag: 'video_vote',
             }, 
             // {
             //     name: '视频贺卡',
@@ -75,6 +81,7 @@ Page({
                 background: '#FF6766',
                 url: '../killPrices/killPriceList/killPriceList',
                 pageTypeStu: 10,
+                tag: 'normal',
             },
             {
                 name: '微视频课堂',
@@ -82,6 +89,7 @@ Page({
                 background: '#FE7FC2',
                 url: '../videoClass/videoClassStuList/videoClassStuList',
                 pageTypeStu: 11,
+                tag: 'video_class',
             },
             // {
             //     name: '视频作业',
@@ -99,20 +107,62 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        // 获取页面功能
+        let funcOpt = getApp().funcOpt.function;
+        let pageData = that.data.pageStuData;
+        for (let i = 0; i < funcOpt.length; i++){
+            if (funcOpt[i].tag == 'sale_lesson') {
+                funcOpt.splice(i, 1)
+            }
+            if (funcOpt[i].tag == 'punch') {
+                funcOpt.splice(i, 1)
+            }
+            if (funcOpt[i].tag == 'video_card') {
+                funcOpt.splice(i, 1)
+            }
+            for (let j = 0; j < pageData.length;j++){
+                if (funcOpt[i].tag == pageData[j].tag){
+                    funcOpt[i].iconfont = pageData[j].iconfont
+                    funcOpt[i].background = pageData[j].background
+                    funcOpt[i].url = pageData[j].url
+                    funcOpt[i].pageTypeStu = pageData[j].pageTypeStu
+                }
+            }
+            that.setData({
+                pageStuData: funcOpt
+            })
+        }
+        // 获取版本信息
         let version = wx.getExtConfigSync();
         that.setData({
-            userInfo: getApp().globalData.userInfo,
             versionData: wx.getExtConfigSync(),
         })
-
-        // getApp().request({
-        //     url:'set_user_info',
-        //     data:{},
-        //     method:'post',
-        //     success:function(res){
-        //         console.log(res)
-        //     }
-        // })
+        // 获取用户信息
+        wx.getSetting({
+            success: res => {
+                // console.log('授权结果', res);
+                if (res.authSetting['scope.userInfo']){
+                    wx.getUserInfo({
+                        success: res => {
+                            // console.log('用户信息', res)
+                            getApp().globalData.userInfo = res.userInfo
+                            that.setData({
+                                userInfo: res.userInfo
+                            })
+                            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                            // 所以此处加入 callback 以防止这种情况
+                            if (this.userInfoReadyCallback) {
+                                this.userInfoReadyCallback(res)
+                            }
+                        }
+                    })
+                }else {
+                    that.setData({
+                        userInfo: { nickName: '访客', avatarUrl:'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png'}
+                    })
+                }
+            }
+        });
     },
 
     /**

@@ -1,0 +1,81 @@
+page{
+    background:#F5F5F5;
+}
+.manListSearch{
+    width:100%;
+    height:120rpx;
+    background:#f5f5f5;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    z-index:100;
+}
+.manListSearch input{
+    width:710rpx;
+    height:80rpx;
+    background:#fff;
+    border-radius:5px;
+    margin:20rpx auto;
+    font-size:30rpx;
+    line-height:80rpx;
+    text-align:center;
+}
+/* 老师列表 */
+.empty{
+    width:100%;
+    height:120rpx;
+    background:transparent;
+}
+.teacherList{
+    width:710rpx;
+    line-height:100rpx;
+    background:#fff;
+    margin:120rpx auto 0rpx;
+}
+.teacherListContent{
+    width:710rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #efefef;
+}
+.contentImage{
+    width:60rpx;
+    height:60rpx;
+    border-radius:50%;
+    background:#fff;
+    float:left;
+    margin-left:20rpx;
+    margin-top:20rpx;
+    overflow:hidden;
+    box-shadow: -2px 2px 2px 1px rgba(0,0,0,0.3)
+}
+.contentImage image{
+    width:60rpx;
+    height:60rpx;
+}
+.contentName{
+    width:200rpx;
+    height:60rpx;
+    float:left;
+    font-size:30rpx;
+    line-height:60rpx;
+    margin-left:15rpx;
+    margin-top:20rpx;
+}
+.contentPhone{
+    width:200rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    float:left;
+    margin-top:20rpx;
+    margin-left:50rpx;
+}
+.contentFloat{
+    width:50rpx;
+    height:60rpx;
+    line-height:60rpx;
+    float:right;
+    font-size:35rpx;
+    color:#7b7b7b;
+    margin-top:20rpx;
+}

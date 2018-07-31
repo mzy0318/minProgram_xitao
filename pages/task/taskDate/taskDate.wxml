@@ -1,0 +1,28 @@
+<view class='dateRank'>
+    <view>{{title}}</view>
+    <view>共布置了<text> {{count}} </text>次<text> (从{{startDate}}至{{endDate}})</text></view>
+</view>
+<view class='dateWrap'>
+    <view class='dateTitle'>
+        <text decode>&nbsp;{{yearMonth}}</text>
+        <view class='dateTitleBtn'>
+            <view data-id='0' bindtap='changeMonth'>∨</view>
+            <view data-id='1' bindtap='changeMonth'>∧</view>
+        </view>
+    </view>
+    <view class='dateWeek'>
+        <view>一</view>
+        <view>二</view>
+        <view>三</view>
+        <view>四</view>
+        <view>五</view>
+        <view>六</view>
+        <view>日</view>
+    </view>
+    <view class='weekDay'>
+        <view class='weekDayContent' wx:for='{{dayList}}' bindtap='toInfo' data-year='{{item.year}}' data-day='{{item.day}}' data-month='{{item.month}}' data-enable='{{item.enable}}' wx:key='{{index}}' style='color:{{item.enable?"#000":"#7b7b7b"}}'>
+            {{item.day}}
+            <view class='weekDayDian' hidden='{{!item.hasAssignment}}'></view>
+        </view>
+    </view>
+</view>

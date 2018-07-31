@@ -1,0 +1,77 @@
+<view class='empty'></view>
+<view class='listInfoImage'>
+    <image src='{{pageData.avatar_url}}' mode='scaleToFill'></image>
+</view>
+<!-- 内容 -->
+<view class='listInfoContent'>
+    <view class='listInfoWrap'>
+        <view>真实姓名:</view>
+        <view>{{pageData.realname}}</view>
+    </view>
+    <view class='listInfoWrap'>
+        <view>手机号码:</view>
+        <view>{{pageData.phone}}</view>
+    </view>
+    <view class='listInfoWrap' hidden='{{isStu}}'>
+        <view>家长:</view>
+        <view>{{pageData.parent}}</view>
+    </view>
+    <view class='listInfoWrap' hidden='{{!isStu}}'>
+        <view>职称:</view>
+        <view>{{pageData.title}}</view>
+    </view>
+    <view class='listInfoWrap'>
+        <view>性别:</view>
+        <view>{{pageData.gender?'女':'男'}}</view>
+    </view>
+    <view class='listInfoWrap'>
+        <view>昵称:</view>
+        <view>{{pageData.nickname}}</view>
+    </view>
+    <view class='listInfoWrap'>
+        <view>生日:</view>
+        <view>{{pageData.birthday}}</view>
+    </view>
+    <view class='listInfoWrap' hidden='{{isStu}}'>
+        <view>地址:</view>
+        <view>{{pageData.address}}</view>
+    </view>
+    <view class='listInfoWrap'>
+        <view>加入时间:</view>
+        <view>{{pageData.create_time}}</view>
+    </view>
+    <view class='listInfoCount' hidden='{{isStu}}'>
+        <view>积分:</view>
+        <view>{{pageData.score}}</view>
+    </view>
+</view>
+<button class='editBtn' data-id='0' bindtap='bottomOpts' data-userid='{{pageData.id}}'>修改</button>
+<view class='btns' hidden='{{isStu}}'>
+    <button data-id='1' bindtap='bottomOpts'>+积分</button>
+    <button data-id='2' bindtap='bottomOpts'>-积分</button>
+</view>
+<button class='editBtn' hidden='{{isStu}}' data-id='3' bindtap='bottomOpts'>主页</button>
+<!-- 学分加减功能 -->
+<view class='scoreWrap' hidden='{{isScore}}'>
+    <view class='scoreContent'>
+        <view class='scoreTitle'>{{scoreTitle}}</view>
+        <form bindsubmit='stuScore'>
+            <view class='scoreNum'>
+                <view>积分:</view>
+                <view>
+                    <input type='number' name='score' value='{{scoreData}}'></input>
+                </view>
+            </view>
+            <view class='scoreText'>
+                <view>备注:</view>
+                <view>
+                    <textarea fixed name='note' value='{{note}}'></textarea>
+                </view>
+            </view>
+            <view class='scoreBtn'>
+                <button bindtap='scoreOpt' data-id='0'>取消</button>
+                <button bindtap='scoreOpt' form-type='submit' data-id='1'>提交</button>
+            </view>
+        </form>
+    </view>
+</view>

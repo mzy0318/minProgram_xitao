@@ -72,7 +72,10 @@ Page({
                         statusClass: 'waitClass'
                     })
                 }
-                res.data.data.cover_image.url = utils.rect(res.data.data.cover_image.url,500)
+                for (let i = 0; i < res.data.data.act_image.length; i++) {
+                    res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 355, 200)
+                }
+                res.data.data.cover_image.url = utils.rect(res.data.data.cover_image.url,375,175)
                 that.setData({
                     pageData: res.data.data,
                     status: res.data.data.time_status
@@ -126,6 +129,10 @@ Page({
                         statusClass: 'waitClass'
                     })
                 }
+                for (let i = 0; i < res.data.data.act_image.length;i++){
+                    res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 355, 200)
+                }
+                res.data.data.cover_image.url = utils.rect(res.data.data.cover_image.url, 375, 175)
                 that.setData({
                     pageData: res.data.data,
                     status: res.data.data.time_status

@@ -1,0 +1,6 @@
+<view class='inviTeacher'><image src='../../../icon/requestTeacher.png' mode='scaleToFill'></image></view>
+<view class='inviTeacherTitle'>欢迎加入</view>
+<view class='inviTeacherBtn'>
+    <button open-type='share'>邀请老师</button>
+    <button bindtap='toJoinTeacher'>我要加入</button>
+</view>

@@ -23,7 +23,7 @@
     <view class='userInfoEncode'>
         <view class='userInfoEncodeImage' bindtap='viewImage'><image  src='{{encodeImage}}' mode='scaleToFill'></image></view>
         <view class='userInfoEncodeTitle'>点击二维码保存,分享到朋友圈</view>
-        <button>复制网址发朋友圈</button>
+        <button bindtap='saveEncodeImage'>保存二维码到本地</button>
     </view>
 </view>
 <!-- 活动规则 -->

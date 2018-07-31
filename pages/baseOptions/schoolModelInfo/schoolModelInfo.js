@@ -6,6 +6,9 @@ Page({
      */
     data: {
         pageData:'',
+        name:'',
+        id:'',
+        url:'',
     },
 
     /**
@@ -14,7 +17,9 @@ Page({
     onLoad: function (options) {
         let that = this;
         that.setData({
-            pageData: JSON.parse(options.modelInfo)
+            name: options.name,
+            id: options.id,
+            url: options.url,
         })
     },
 
@@ -71,12 +76,12 @@ Page({
         getApp().request({
             url: 'org/template_set',
             data: {
-                id: that.data.pageData.id
+                id: that.data.id
             },
             method: 'post',
             success: function (res) {
                 if(Number(res.data.code)==1){
-                    wx.setStorageSync('schoolModel', that.data.pageData.id)
+                    wx.setStorageSync('schoolModel', that.data.id)
                     wx.showLoading({
                         title: '正在更新模板',
                         mask:true,

@@ -1,0 +1,234 @@
+@import '../../../utils/iconFont.wxss';
+page{
+    background:#F2F2F2;
+}
+.homeWork{
+    width:710rpx;
+    min-height:100rpx;
+    margin:20rpx auto 0rpx;
+    background:transparent;
+}
+.homeWorkContent{
+    width:710rpx;
+    min-height:100rpx;
+    background:#fff;
+    padding-bottom:15rpx;
+}
+.empty{
+    width:100%;
+    height:20rpx;
+}
+.homeWorkImage{
+    width:670rpx;
+    height:80rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#7b7b7b;
+    margin:0rpx auto;
+}
+.homeWorkImage>view{
+    width:80rpx;
+    height:80rpx;
+    border-radius:50%;
+    background:#fff;
+    float:left;
+}
+.homeWorkImage>view>image{
+    width:80rpx;
+    height:80rpx;
+}
+/* 作业 录音 */
+.homeWorkAudio{
+    width:670rpx;
+    min-height:10rpx;
+    background:#fff;
+    margin:10rpx auto 0rpx;
+}
+.homeWorkAudio view{
+    width:300rpx;
+    height:80rpx;
+    border-radius:5px;
+    background:#9EEB6B;
+    margin-bottom:10rpx;
+}
+.homeWorkAudio view image{
+    width:300rpx;
+    height:80rpx;
+}
+/* 作业 图片 视频 */
+.homeWorkVideo{
+    width:420rpx;
+    min-height:200rpx;
+    margin-top:20rpx;
+    margin-left:20rpx;
+    padding-bottom:10rpx;
+}
+.homeWorkVideo view{
+    width:200rpx;
+    height:200rpx;
+    display:inline-block;
+    background:#fff;
+    vertical-align:top;
+    margin-top:10rpx;
+}
+.homeWorkVideo view:nth-child(even){
+    margin-left:10rpx;
+}
+.homeWorkVideo view image{
+    width:200rpx;
+    height:200rpx;
+}
+.homeWorkVideo view video{
+    width:200rpx;
+    height:200rpx;
+}
+.homeWorkVideo view video cover-view{
+    width:200rpx;
+    height:200rpx;
+    background:transparent;
+}
+/* 作业信息 */
+.homeWorkInfo{
+    width:670rpx;
+    height:40rpx;
+    margin:10rpx auto 0rpx;
+    padding-bottom:15rpx;
+    position:relative;
+}
+.homeWorkInfoTime,.homeWorkInfoMore{
+    width:300rpx;
+    height:40rpx;
+    line-height:40rpx;
+    font-size:24rpx;
+    color:#7b7b7b;
+    float:left;
+}
+.homeWorkInfoMore{
+    width:50rpx;
+    float:right;
+    text-align:right;
+}
+.homeWorkInfoMore text{
+    font-size:50rpx;
+    color:#8593B0;
+}
+.homeWorkInfoOpt{
+    width:340rpx;
+    height:60rpx;
+    background:#393A3F;
+    border-radius:5px;
+    position:absolute;
+    right:60rpx;
+    top:-13rpx;
+    overflow:hidden;
+}
+.homeWorkInfoOpt view{
+    width:49%;
+    height:40rpx;
+    float:left;
+    margin-top:10rpx;
+    line-height:40rpx;
+    text-indent:30rpx;
+}
+.homeWorkInfoOpt view:nth-child(2){
+    border-left:1px solid #000;
+}
+.homeWorkInfoOpt view text{
+    color:#fff;
+    font-size:26rpx;
+    line-height:40rpx;
+}
+.homeWorkInfoOpt view text:nth-child(1){
+    font-size:35rpx;
+}
+/* 点赞列表 */
+.homeWorkZanList{
+    width:670rpx;
+    min-height:35rpx;
+    margin:10rpx auto 5rpx;
+    border-radius:5px;
+    background:#F2F2F2;
+    text-indent:15rpx;
+    line-height:35rpx;
+}
+.homeWorkZanList text{
+    font-size:26rpx;
+    color:#A2AABC;
+}
+.homeWorkZanList text:nth-child(1){
+    font-size:35rpx;
+    color:#A2AABC;
+}
+/* 评论列表 */
+.commentList{
+    width:670rpx;
+    min-height:10rpx;
+    margin:10rpx auto 0rpx;
+    background:#F2F2F2;
+}
+.emtpy{
+    width:100%;
+    height:20rpx;
+    background:transparent;
+}
+.commentContent{
+    width:100%;
+    min-height:40rpx;
+    line-height:40rpx;
+    font-size:24rpx;
+    text-indent:15rpx;
+}
+.commentContent text{
+    color:#54779A;
+}
+.commentContent text:nth-child(2){
+    color:#525252;
+}
+.commentAudio{
+    width:670rpx;
+    min-height:0rpx;
+    margin:20rpx auto 0rpx;
+}
+.commentAudio view{
+    width:300rpx;
+    height:80rpx;
+    border-radius:5px;
+    background:#9EEB6B;
+    margin-bottom:10rpx;
+    margin-left:15rpx;
+}
+.commentAudio view image{
+    width:300rpx;
+    height:80rpx;
+}
+.commentVideo{
+    width:420rpx;
+    min-height:0rpx;
+    margin-top:20rpx;
+    margin-left:20rpx;
+    padding-bottom:10rpx
+}
+.commentVideo view{
+    width:200rpx;
+    height:200rpx;
+    display:inline-block;
+    background:lightblue;
+    vertical-align:top;
+    margin-top:10rpx;
+}
+.commentVideo view:nth-child(even){
+    margin-left:10rpx;
+}
+.commentVideo view image{
+    width:200rpx;
+    height:200rpx;
+}
+.commentVideo view video{
+    width:200rpx;
+    height:200rpx;
+}
+.commentVideo view video cover-view{
+    width:200rpx;
+    height:200rpx;
+    background:transparent;
+}

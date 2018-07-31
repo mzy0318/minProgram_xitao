@@ -1,4 +1,3 @@
-
 <view class='killPriceInfoWrap' style='background-image:url({{backgroundImage}})'>
     <view class='killPriceBanner'>
         <image src='{{bannerImage}}' mode='scaleToFill' />
@@ -15,7 +14,7 @@
         </view>
         <view class='killPriceInfoRange'>
             <view class='rangeWrap'>
-                <view class='rangeChild'></view>
+                <view class='rangeChild' style='width:50%'></view>
             </view>
             <view class='rangePrice'>
                 <view class='rangePriceLeft'>
@@ -67,14 +66,16 @@
             <view bindtap='priceRankTwo' class='{{isHidden?"borderStyle":""}}'>玩法介绍</view>
         </view>
         <view class='infoThreeContent'  >
+            <!-- 砍价排行 -->
             <view class='infoThreeContentOne' hidden='{{isHidden}}'>
                 <view class='contentOne'>已有<text>{{killPricePeople.total_joiner}}</text>人报名</view>
                 <view class='contentTwo'>他们总计被砍了<text>{{killPricePeople.total_bargain_times}}</text>次,总计￥<text>{{killPricePeople.total_reduce}}</text>元</view>
-                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople.list}}' data-nickname='{{item.nickname}}' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}'>
+                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople.list}}' data-nickname='{{item.nickname}}' wx:key='{{index}}' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}'>
                     <view><image src='{{item.avatar_url}}' mode='scaleToFill' /></view>
                     <view><text>{{item.nickname}}</text><text >已被砍掉￥{{item.reduce_price}}元></text></view>
                 </view>
             </view>
+            <!-- 玩法介绍 -->
             <view class='infoThreeContentTwo' hidden='{{isShow}}'>
                 <text>{{pageData.rule}}</text>
                 <button bindtap='isClose' data-display='block'>报名参与>></button>
@@ -98,14 +99,15 @@
     <!--  -->
     <view class='otherOptionWrap' hidden='{{actionOptions}}'>
         <view bindtap='isOptions' class='otherOptions'>
-            <text class='{{isOption?iconOpen:iconClose}}'></text>
+            <image src='{{isOption?"../../../icon/menu.png":"../../../icon/close.png"}}' mode='scaleToFill'></image>
+            <!-- <text class='{{isOption?iconOpen:iconClose}}'></text> -->
         </view>
         <view class='otherOptionsChild' hidden='{{isOption}}'>
-            <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
+            <view bindtap='switchModel' data-url='org/banner_list' style='background-image:url({{btnBgImage}})'>更换模版</view>
             <!-- <view bindtap='upDataImg' data-type='banner'>更换大图</view> -->
-            <view bindtap='upDataImg' data-type='background'>更换背景</view>
-            <view bindtap='switchModel' data-url='org/music_list' >背景音乐</view>
-            <view bindtap='toEditPage' data-id='{{pageData.id}}'>编辑</view>
+            <view bindtap='upDataImg' data-type='background' style='background-image:url({{btnBgImage}})'>更换背景</view>
+            <view bindtap='switchModel' data-url='org/music_list' style='background-image:url({{btnBgImage}})'>背景音乐</view>
+            <view bindtap='toEditPage' data-id='{{pageData.id}}' style='background-image:url({{btnBgImage}})'>编辑</view>
         </view>
     </view>
     <!-- 其他功能部分 -->

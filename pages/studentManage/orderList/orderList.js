@@ -25,10 +25,7 @@ Page({
             success: function(res) {
 
                 if (res.data.data.length == 0) {
-                    // wx.showToast({
-                    //     title: '您没有参加该活动',
-                    //     icon:'none'
-                    // })
+
                     that.setData({
                         showTitle:false
                     })
@@ -91,11 +88,13 @@ Page({
             },
             success: function(res) {
                 if (res.data.data.length == 0) {
-                    wx.showToast({
-                        title: '您没有参加该活动',
-                        icon: 'none'
+                    that.setData({
+                        showTitle: false
                     })
                 } else if (res.data.data.length != 0) {
+                    that.setData({
+                        showTitle: true
+                    })
                     for (let i = 0; i < res.data.data.length; i++) {
                         res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
                     }
@@ -152,7 +151,7 @@ Page({
     toPayInfo: function(e) {
         let payInfo = JSON.stringify(e.currentTarget.dataset.payinfo)
         wx.navigateTo({
-            url: '../../courses/orderInfoPay/orderInfoPay?payInfo=' + payInfo,
+            url: '../../courses/orderInfoPay/orderInfoPay?payInfo=' + payInfo + '&isInfo=1',
         })
     }
 })

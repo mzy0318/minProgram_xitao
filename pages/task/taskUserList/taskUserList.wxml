@@ -1,16 +1,14 @@
-<view class='taskUserWrap'>
-    <view class='empty'></view>
-    <view class='taskUserContent'>
-        <view class='taskUserStatus'>进行中</view>
-        <view class='taskUserTitle'>练习舞蹈21天</view>
-        <view class='taskUserNum'>
-            <view>作业数<text> 1 </text>次</view>
-            <view>您已打卡<text> 0 </text>次</view>
-        </view>
-        <view class='taskUserOptions'>
-            <view><text>排行榜</text></view>
-            <view><text>邀请好友</text></view>
-            <view><text>打卡日历</text></view>
-        </view>
+<view class='taskUserContent' wx:for='{{pageData}}' wx:key='{{item.id}}'>
+    <view class='taskUserStatus' style='background-color:{{item.bgColor}}'>{{item.status}}</view>
+    <view class='taskUserTitle' bindtap='toInfo' data-courseid='{{item.id}}' data-pwd='{{item.password}}' data-starttime='{{item.start_time}}' data-endtime='{{item.end_time}}' data-title='{{item.title}}'>{{item.title}}</view>
+    <view class='taskUserNum' bindtap='toInfo' data-courseid='{{item.id}}' data-pwd='{{item.password}}' data-starttime='{{item.start_time}}' data-endtime='{{item.end_time}}' data-title='{{item.title}}'>
+        <view>作业数<text> {{item.assignment_amount}} </text>次</view>
+        <view>您已打卡<text> {{item.homework_amount}} </text>次</view>
     </view>
-</view> 
+    <view class='taskUserOptions'>
+        <view bindtap='optToInfo' data-id='0' data-courseid='{{item.id}}'><text>排行榜</text></view>
+        <view bindtap='optToInfo' data-id='1' data-title='{{item.title}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'><text>邀请好友</text></view>
+        <view bindtap='optToInfo' data-id='2' data-courseid='{{item.id}}' data-timestring='{{item.start_time}}' data-title='{{item.title}}'><text>打卡日历</text></view>
+    </view>
+</view>
+

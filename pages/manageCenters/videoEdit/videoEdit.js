@@ -147,7 +147,7 @@ Page({
                 let size = res.size;
                 let duration = res.duration;
                 var time = 30;
-                if (Number(res.size) < 31257280){
+                if ((Number(res.size) < 73400320) && (Number(res.duration) < 60)){
                     wx.showLoading({
                         title: '请耐心等待',
                         mask: true,
@@ -242,9 +242,9 @@ Page({
                             }
                         }
                     })
-                } else if (Number(res.size) >= 31257280){
+                } else if ((Number(res.size) >= 73400320) || (Number(res.duration) >= 60)){
                     wx.showToast({
-                        title: '视频大于30M,请重新选择',
+                        title: '视频大于70M或长度大于60s,请重新选择',
                         icon:'none'
                     })
                 }

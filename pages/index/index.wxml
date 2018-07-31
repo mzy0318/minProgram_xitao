@@ -1,18 +1,10 @@
 <import src='../../templates/indexModel/indexModel' />
 <view class='indexBanner'>
     <swiper indicator-dots circular autoplay>
-        <swiper-item wx:for='{{pageData.banner}}'>
+        <swiper-item wx:for='{{pageData.banner}}' wx:key='{{index}}'>
             <image src='{{item.url}}' mode='widthFix'></image>
         </swiper-item>
     </swiper>
 </view>
+<template is='{{modeCode}}' data='{{item:paintData,home:pageData.home_icon,lessons:pageData.course,contentHeight:contentHeight}}'></template>
 
-<template is='{{modeCode}}' data='{{item:paintData,home:pageData.home_icon,lessons:pageData.course}}'></template>
-
-<!-- <view class='getUserInfoWrap' hidden='{{isGetUser}}'>
-    <view class='getUserInfoContent'>
-        <view>获取你的用户信息</view>
-        <button open-type='getUserInfo' bindgetuserinfo='getUserInfo'>确认</button>
-        <button>取消</button>
-    </view> 
-</view> -->

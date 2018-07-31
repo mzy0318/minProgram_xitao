@@ -1,0 +1,36 @@
+<!-- 头像 -->
+<view class='teacherEditImage'><image bindtap='chooseImage' src='{{coverImage}}' mode='scaleToFill'></image></view>
+<!-- 表单 -->
+<form bindsubmit='joinStudent'>
+    <view class='teacherEditInput'>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>昵称</view>
+            <view class='contentRight'><input type='text' value='{{pageData.nickname}}' name='nickname'></input></view>
+        </view>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>姓名</view>
+            <view class='contentRight'><input type='text' value='{{pageData.realname}}' name='realname'></input></view>
+        </view>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>手机</view>
+            <view class='contentRight'><input type='number' maxlength='11' value='{{pageData.phone}}' name='phone'></input></view>
+        </view>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>家长</view>
+            <view class='contentRight'><input type='text' value='{{pageData.parent}}' name='parent'></input></view>
+        </view>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>地址</view>
+            <view class='contentRight'><input type='text' value='{{pageData.address}}' name='address'></input></view>
+        </view>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>性别</view>
+            <view class='contentRight'><picker data-id='{{0}}' bindchange='switchSex' mode='selector' value='{{index}}' range='{{sexArr}}'>{{sexArr[index]}}</picker></view>
+        </view>
+        <view class='teacherEditContent'>
+            <view class='contentLeft'>出生</view>
+            <view class='contentRight'><picker data-id='{{1}}' bindchange='switchSex' start='1900-01-01' mode='date' value='{{startDate}}' start='{{startDate}}'>{{startDate}}</picker></view>
+        </view>
+    </view>
+    <button class='teacherBtn' form-type='submit'>确认</button>
+</form>

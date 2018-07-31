@@ -13,6 +13,12 @@
     <view class='stuCenterBottom'>
         <view class='stuCenterBottomTitle'>会员服务</view>
         <view class='stuCenterBottomContent'>
+            <view class='centerBottomContentWrap' wx:for='{{baseData}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage'>
+                <view class='optionsTop' style='background:{{item.background}}'>
+                    <text class='{{item.iconfont}}'></text>
+                </view>
+                <view class='optionsBottom'>{{item.name}}</view>
+            </view>
             <view class='centerBottomContentWrap' wx:for='{{pageStuData}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage'>
                 <view class='optionsTop' style='background:{{item.background}}'>
                     <text class='{{item.iconfont}}'></text>

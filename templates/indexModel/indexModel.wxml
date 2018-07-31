@@ -1,6 +1,6 @@
 <!-- 瑜伽  课外快乐  驾考 -->
 <template name='one'>
-    <view class='indexBackground'>
+    <view class='indexBackground' style='min-height:{{contentHeight}}+"px";'>
         <view class='empty'></view>
         <!-- 导航 -->
         <view class='indexOptons'>
@@ -31,7 +31,7 @@
 </template>
 <!-- 幼儿园 -->
 <template name='two'>
-    <view class='twoWrap'>
+    <view class='twoWrap' style='min-height:{{contentHeight}}+"px";'>
         <view class='empty'></view>
         <view class='twoNav' >
             <view class='twoNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
@@ -67,7 +67,7 @@
 </template>
 <!-- 美术 -->
 <template name='three'>
-    <view class='threeWrap'>
+    <view class='threeWrap' style='min-height:{{contentHeight}}+"px";'>
         <view class='threeChild' wx:for='{{home}}' style='background:{{item.backgroundColor}};width:{{item.width}}' data-url='{{item.url}}' bindtap='nav'>
             <view class='threeChildTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
             <view class='threeChildBottom'>{{item.name}}</view>
@@ -76,7 +76,7 @@
 </template>
 <!-- 课外活动/初高中 -->
 <template name='four'>
-    <view class='fourWrap'>
+    <view class='fourWrap' style='min-height:{{contentHeight}}+"px";'>
         <view class='empty'></view>
         <view class='twoNav'>
             <view class='twoNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
@@ -95,7 +95,7 @@
 </template>
 <!-- 课外活动/初高中 -->
 <template name='five'>
-    <view class='fiveWrap'>
+    <view class='fiveWrap' style='min-height:{{contentHeight}}+"px";'>
         <view class='empty'></view>
         <view class='fiveNav' >
             <view class='fiveNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
@@ -116,7 +116,7 @@
 </template>
 <!-- 外语/色彩斑斓 -->
 <template name='six'>
-    <view class='sixWrap'>
+    <view class='sixWrap' style='min-height:{{contentHeight}}+"px";'>
         <view class='empty1'></view>
         <view class='sixNav'>
             <view class='sixNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
@@ -135,7 +135,7 @@
 </template>
 <!-- 多彩/通用 -->
 <template name='seven'>
-    <view class='sevenWrap'>
+    <view class='sevenWrap' style='min-height:{{contentHeight}}+"px";'>
         <view class='sevenNav'></view>
     </view>
 </template>

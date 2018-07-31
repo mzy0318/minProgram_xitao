@@ -1,5 +1,9 @@
 <view class='morePageWrap'>
-    <view class='morePageWrapChild' wx:for='{{pageData}}' data-url='{{item.url}}' bindtap='toPage' >
+    <view class='morePageWrapChild' wx:for='{{baseOpt}}' wx:key='{{index}}' data-url='{{item.url}}' bindtap='toPage' >
+        <view class='morePageWrapTop' style='background:{{item.background}};'><text class='{{item.iconfont}}' style='{item.style}'></text></view>
+        <view class='morePageWrapBottom'>{{item.name}}</view>
+    </view>
+    <view class='morePageWrapChild' wx:for='{{actOpt}}' wx:key='{{item.tag}}' data-url='{{item.url}}' bindtap='toPage' >
         <view class='morePageWrapTop' style='background:{{item.background}};'><text class='{{item.iconfont}}' style='{item.style}'></text></view>
         <view class='morePageWrapBottom'>{{item.name}}</view>
     </view>

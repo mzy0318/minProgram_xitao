@@ -1,0 +1,72 @@
+<view class='homeImage'><image src='{{baseInfo.avatar_url}}' mode='scaleToFill'></image></view>
+<view class='homeName'>{{baseInfo.realname}}</view>
+<view class='homeOptions'>
+    <view data-index='0' bindtap='switchOpt' style='color:{{optNum==0?"#2CC07A":"#000"}}'><text>作业({{baseInfo.do_homework_amount}})</text></view>
+    <view data-index='1' bindtap='switchOpt' style='color:{{optNum==1?"#2CC07A":"#000"}}'><text>点赞({{baseInfo.thumb_amount}})</text></view>
+    <view data-index='2' bindtap='switchOpt' style='color:{{optNum==2?"#2CC07A":"#000"}}'><text>积分</text></view>
+</view>
+<!-- 积分 -->
+<view class='homeScore' hidden='{{isScore}}'>
+    <view class='homeScoreTitle'>
+        <view>当前 {{score}} 积分</view>
+        <view>·完成一次作业,获得 {{scoreRule.finish_homework_score}} 积分</view>
+        <view>·作业被点赞,获得 {{scoreRule.be_thumb_score}} 积分</view>
+        <view>兑换积分:{{scoreRule.note}}</view>
+    </view>
+    <view class='homeScoreList' wx:for='{{scoreList}}' wx:key='{{item.id}}'>
+        <view class='homeScoreListLeft'>
+            <view>{{item.note}}</view>
+            <view>{{item.create_time}}</view>
+        </view>
+        <view class='homeScoreListRight' style='color:{{item.score>0?"#C43B1E":"#0D920D"}}'>{{item.score>0?'+'+item.score:item.score}} </view>
+    </view>
+</view>
+<!-- 点赞列表 -->
+<view class='homeZan' hidden='{{isZan}}'>
+    <view class='homeZanContent' wx:for='{{zanList}}' wx:key='{{index}}'>
+        <view>{{item.name}}</view>
+        <view>{{item.create_time}}</view>
+    </view>
+</view>
+<!-- 作业 -->
+<view class='homeWork' hidden='{{isWork}}'>
+    <view class='homeWorkContent' wx:for='{{homeList}}' wx:key='{{index}}'>
+        <view class='empty'></view>
+        <view class='homeWorkImage'>
+            <view><image src='{{homeWorkData.avatar_url}}' mode='scaleToFill'></image></view>
+            <text decode>&nbsp;{{homeWorkData.realname}}</text>
+        </view>
+        <!-- 留言 -->
+        <view class='homeWorkText'>{{item.text}}</view>
+        <!-- 录音 -->
+        <view class='homeWorkAudio'>
+            <view wx:for='{{item.audio}}' data-id='{{item.id}}' data-url='{{item.url}}' bindtap='playAudio' wx:key='{{item.id}}'>
+                <image src='{{audioUrl==item.id?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image>
+            </view>
+        </view>
+        <!-- 图片 视频 -->
+        <view class='homeWorkVideo'>
+            <view wx:for='{{item.image}}' wx:key='{{item.id}}' bindtap='previewImage' data-url='{{item.url}}'><image src='{{item.url}}' mode='scaleToFill'></image></view>
+            <view wx:for='{{item.video}}' wx:key='{{item.id}}'>
+                <video src='{{item.url}}'>
+                    <cover-view data-url='{{item.url}}' bindtap='previewVideo'></cover-view>
+                </video>
+            </view>
+        </view>
+        <!-- 作业信息 -->
+        <view class='homeWorkInfo'>
+            <view class='homeWorkInfoTime'>{{item.create_time}}</view>
+            <view class='homeWorkInfoMore' data-id='0' bindtap='infoOpt' data-index='{{index}}'><text class='iconfont icon-more'></text></view>
+            <view class='homeWorkInfoOpt' hidden='{{index==homeNum?false:true}}'>
+                <view data-id='1' bindtap='infoOpt' data-homeid='{{item.id}}' data-zan='{{item.thumb}}'><text class='iconfont icon-love'></text><text decode>&nbsp;{{item.thumb?"取消":"点赞"}}</text></view>
+                <view data-id='2' bindtap='infoOpt' data-time='{{item.create_time}}' data-courseid='{{item.punch_course_id}}' data-homeid='{{item.id}}' data-stuid='{{item.student_id}}'><text class='iconfont icon-message'></text><text decode>&nbsp;评论</text></view>
+            </view>
+        </view>
+        <!-- 作业 点赞列表 -->
+        <view class='homeWorkZanList' hidden='{{item.isZanList}}'>
+            <text class='iconfont icon-love'></text>
+            <text wx:for='{{item.thumb_person}}' wx:key='{{index}}'> {{item}}</text>
+        </view>
+    </view>
+</view>
+<video style='display:none' bindended='stopVideo' id='myVideo' src='{{otherVideo}}' autoplay></video>

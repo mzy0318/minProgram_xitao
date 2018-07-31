@@ -51,7 +51,9 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-
+        wx.showLoading({
+            title: '正在加载',
+        })
         if (options.scene != undefined) {  
             let scene = decodeURIComponent(options.scene);
             console.log('scene', scene)
@@ -90,6 +92,7 @@ Page({
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,
                     })
+                    wx.hideLoading()
                 } else if (Number(res.data.code) == 0){
                     wx.showToast({
                         title: res.data.msg,

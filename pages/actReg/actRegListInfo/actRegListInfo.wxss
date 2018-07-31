@@ -107,7 +107,7 @@
 .actRegInfoTextImage{
     width:710rpx;
     height:400rpx;
-    background:lightblue;
+    background:#fff;
     margin:0rpx auto 0rpx;
     overflow:hidden;
 }

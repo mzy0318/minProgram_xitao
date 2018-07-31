@@ -1,0 +1,74 @@
+<form bindsubmit='addCourse'>
+    <!--课程设置-->
+    <view class='courseEdit'>
+        <view class='courseEditTitle'>◆课程设置
+            <text>(必填)</text>
+        </view>
+        <view class='courseEditContent'>
+            <view class='editContentLeft'>课程标题:</view>
+            <view class='editContentRight'>
+                <input type='text' placeholder='请输入打卡课程标题' name='title' value='{{pageData.title}}'></input>
+            </view>
+        </view>
+        <view class='courseEditContent'>
+            <view class='editContentLeft'>活动日期:</view>
+            <view class='editContentRight'>
+                从
+                <picker mode='date' value='{{startDate}}'  data-id='0' bindchange='getTime'>{{startDate}}</picker> 至
+                <picker mode='date' value='{{endDate}}' data-id='1' bindchange='getTime'>{{endDate}}</picker>
+            </view>
+        </view>
+    </view>
+    <!-- 负责老师 -->
+    <view class='courseEditTeacher'>
+        <view class='courseEditTitle'>◆负责老师
+            <text>(必填)</text>
+        </view>
+        <view class='addTeacher'>
+            <view class='teacherList' wx:for='{{teacher}}' wx:key='{{index}}' bindtap='delTeacher' data-index='{{index}}' >{{item}}</view>
+            <view class='addTeacherBtn' bindtap='showTeacher' data-is='1'>+</view>
+        </view>
+    </view>
+    <!-- 作业设置 -->
+    <view class='taskSet'>
+        <view class='courseEditTitle'>◇课程设置
+            <text>(选填)</text>
+        </view>
+        <view class='courseEditContent'>
+            <view class='editContentLeft'>进入密码:</view>
+            <view class='editContentRight'>
+                <input type='text' placeholder='请输入进入密码' name='password' value='{{pageData.password}}'></input>
+            </view>
+        </view>
+        <view class='courseEditContent'>
+            <view class='editContentLeft'>显示状态:</view>
+            <view class='editContentRight' style='color:#000' bindtap='showStatus' data-is='1'>{{status}}</view>
+        </view>
+    </view>
+    <!-- 保存设置 -->
+    <button class='courseEditBtn' form-type='submit'>保存设置</button>
+</form>
+<!-- 老师列表 -->
+<view class='teacherListWrap' hidden='{{isTeacher}}'>
+    <view class='closeTeahcer' bindtap='showTeacher' data-is='0'></view>
+    <view class='teacherListContent' hidden='{{}}'>
+        <view class='teacherListTitle'>
+            <view>请选择负责老师</view>
+            <view bindtap='showTeacher' data-is='0'>关闭</view>
+        </view>
+        <view class='teacherContent'>
+            <view wx:for='{{teacherList}}' wx:key='{{item.id}}' bindtap='getTeacher' data-info='{{item}}'>{{item.realname}}</view>
+        </view>
+    </view>
+</view>
+<!-- 状态列表 -->
+<view class='teacherListWrap' hidden='{{isStatus}}'>
+    <view class='closeTeahcer' bindtap='showStatus' data-is='0'></view>
+    <view class='statusList'>
+        <view class='statusListTitle'>显示状态</view>
+        <view class='statusListContent'>
+            <view wx:for='{{statusList}}' wx:key='{{index}}' data-index='{{index}}' bindtap='switchStatus'>{{item}}</view>
+            <view bindtap='showStatus' data-is='0'>取消</view>
+        </view>
+    </view>
+</view>

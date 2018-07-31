@@ -1,0 +1,66 @@
+page{
+    background:#F5F5F5;
+}
+/* 头像 */
+.teacherEditImage{
+    width:300rpx;
+    height:300rpx;
+    border-radius:50%;
+    background:#fff;
+    margin:40rpx auto;
+    overflow:hidden;
+}
+.teacherEditImage image{
+    width:300rpx;
+    height:300rpx;
+}
+/* 表单 */
+.teacherEditInput{
+    width:670rpx;
+    min-height:110rpx;
+    background:#fff;
+    margin:10rpx auto 10rpx;
+}
+.teacherEditContent{
+    width:670rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #efefef;
+}
+.contentLeft{
+    float:left;
+    width:120rpx;
+    height:100rpx;
+    line-height:100rpx;
+    font-size:30rpx;
+    text-align:right;
+    color:#212121;
+}
+.contentRight{
+    float:left;
+    width:520rpx;
+    height:80rpx;
+    background:#F2F2F2;
+    margin-left:20rpx;
+    margin-top:10rpx;
+}
+.contentRight input{
+    width:500rpx;
+    height:80rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    margin-left:20rpx;
+}
+.teacherBtn{
+    width:670rpx;
+    height:80rpx;
+    line-height:80rpx;
+    margin:50rpx auto;
+    font-size:30rpx;
+}
+.contentRight picker{
+    width:500rpx;
+    height:80rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    margin-left:20rpx;
+}

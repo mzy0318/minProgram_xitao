@@ -1,0 +1,52 @@
+<view class='infoBannerImage'><image mode='scaleToFill'></image></view>
+<view class='infoBackImage'>
+    <!-- 活动图片 -->
+    <view class='laudActImage'>
+        <view class='laudActImageTitle'>六一儿童节,集赞赢大礼包</view>
+        <view class='laudActImages'><image mode='widthFix'></image></view>
+    </view>
+    <view class='viewMiddle'>
+        <view></view>
+        <view></view>
+    </view>
+    <!-- 活动说明 -->
+    <view class='laudActInfo'>
+        <view class='laudActInfoTitle'>
+            <view>活动说明</view>
+        </view>
+        <view class='laudActInfoDate'>活动时间: 2018-06-15 - 2018-06-20</view>
+        <view class='laudActInfoDate'>联系电话: 13061899461</view>
+        <view class='laudActInfoText'><text>基本原则基本原则模压地苛基本原则模压地基本原则模压地 基本原则模压地基本原则基本原则模压地 基本原则模压地 基本原则塔顶地基本原则模压地基本原则模压地顶替</text></view>
+    </view>
+    <view class='viewMiddle'>
+        <view></view>
+        <view></view>
+    </view>
+    <!-- 报名列表/玩法介绍 -->
+    <view class='laudActInfoList'>
+        <view class='laudActInfoOpts'>
+            <view wx:for='{{opts}}' class='{{optIndex==index?"selected":""}}' wx:key='{{index}}' bindtap='swithcOpts' data-index='{{index}}'>{{item.name}}</view>
+        </view>
+        <!-- 报名列表 -->
+        <view class='laudActInfoContent' hidden='{{isNameList}}'>
+            <view class='nameList'>
+                <view class='nameListTop'></view>
+                <view class='nameListTopName'>李璐</view>
+                <view class='nameListTopCount'>积攒数: 18</view>
+            </view>
+        </view>
+        <!--玩法介绍-->
+        <view class='laudActInfoContent' hidden='{{isPlayWay}}'><text>哦村基本原则模压地基本原则模压地</text></view>
+    </view>
+</view>
+<view class='listInfoOpts'>
+    <view>
+        <text class='iconfont icon-ionc--  iconStyle' style='color:#B2B2B2'></text>
+        <view>我的</view>
+    </view>
+    <view>
+        <text class='iconfont icon-share' style='color:#4AA34B'></text>
+        <view>分享</view>
+    </view>
+    <view>我要报名</view>
+</view>

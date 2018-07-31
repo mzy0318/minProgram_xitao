@@ -1,0 +1,471 @@
+@import '../../../utils/iconFont.wxss';
+page{
+    background:#f2f2f2;
+    padding-bottom:30rpx;
+}
+.listInfoWrap{
+    width:100%;
+    min-height:280rpx;
+    background:#fff;
+    padding-bottom:50rpx;
+}
+.listInfoWeek{
+    width:690rpx;
+    height:60rpx;
+    background:#f2f2f2;
+    margin:0rpx auto;
+}
+.listInfoWeek view{
+    width:95rpx;
+    height:60rpx;
+    float:left;
+    font-size:30rpx;
+    line-height:60rpx;
+    text-align:center;
+    color:#9F9F9F;
+}
+.listInfoWeek view:nth-child(1){
+    margin-left:12.5rpx;
+}
+.listInfoDate{
+    width:690rpx;
+    height:90rpx;
+    background:#F9F9F9;
+    margin:0rpx auto;
+}
+.listInfoDate>view{
+    width:95rpx;
+    height:60rpx;
+    float:left;
+    font-size:30rpx;
+    line-height:60rpx;
+    text-align:center;
+    color:#000;
+    position:relative;
+}
+.listInfoDate>view>view{
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:red;
+    position:absolute;
+    bottom:3rpx;
+    left:32rpx;
+}
+.listInfoDate view:nth-child(4){
+    color:#3971C6;
+}
+.listInfoDate view:nth-child(1){
+    margin-left:12.5rpx;
+}
+/* 每天的日期的内容 */
+.listInfoContent{
+    width:690rpx;
+    min-height:80rpx;
+    border-radius:5px;
+    border:2px solid #98B1C6;
+    margin:10rpx auto 0rpx;
+}
+.listInfoBtn,.listInfoBtnO{
+    width:690rpx;
+    height:100rpx;
+    margin:25rpx auto 0rpx;
+}
+.listInfoBtn button{
+    width:300rpx;
+    height:100rpx;
+    float:left;
+}
+.listInfoBtn button:nth-child(1){
+    margin-left:40rpx;
+}
+.listInfoBtn button:nth-child(2){
+    margin-left:10rpx;
+}
+.listInfoBtnO button{
+    width:300rpx;
+    height:100rpx;
+}
+.listInfoContentText{
+    width:690rpx;
+    line-height:80rpx;
+    text-align:center;
+    font-size:26rpx;
+}
+.homeWorkContent{
+    width:690rpx;
+    min-height:100rpx;
+    background:#fff;
+    padding-bottom:15rpx;
+    margin:0rpx auto 30rpx;
+    border-radius:5px;
+    position:relative;
+}
+.homeworkEdit{
+    width:60rpx;
+    height:60rpx;
+    background:#fff;
+    border-radius:5px;
+    position:absolute;
+    top:30rpx;
+    right:20rpx;    
+}
+.iconStyle{
+    display:block;
+    width:50rpx;
+    height:50rpx;
+    line-height:50rpx;
+    font-size:40rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+.empty{
+    width:100%;
+    height:20rpx;
+}
+.homeWorkImage{
+    width:670rpx;
+    height:80rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#7b7b7b;
+    margin:0rpx auto;
+}
+.homeWorkImage>view{
+    width:80rpx;
+    height:80rpx;
+    border-radius:50%;
+    background:#fff;
+    float:left;
+    overflow:hidden;
+}
+.homeWorkImage>view>image{
+    width:80rpx;
+    height:80rpx;
+}
+/* 留言 */
+.homeWorkText{
+    width:690rpx;
+    min-height:10rpx;
+    line-height:40rpx;
+    font-size:30rpx;
+    text-indent:20rpx;
+}
+/* 作业 录音 */
+.homeWorkAudio{
+    width:670rpx;
+    min-height:10rpx;
+    background:#fff;
+    margin:10rpx auto 0rpx;
+}
+.homeWorkAudio view{
+    width:300rpx;
+    height:80rpx;
+    border-radius:5px;
+    margin-bottom:8rpx;
+}
+.homeWorkAudio view image{
+    width:300rpx;
+    height:80rpx;
+}
+/* 作业 图片 视频 */
+.homeWorkVideo{
+    width:420rpx;
+    min-height:10rpx;
+    margin-top:10rpx;
+    margin-left:20rpx;
+    padding-bottom:10rpx;
+}
+.homeWorkVideo view{
+    width:200rpx;
+    height:200rpx;
+    display:inline-block;
+    background:#fff;
+    vertical-align:top;
+    margin-top:5rpx;
+    border:.5px solid #efefef;
+}
+.homeWorkVideo view:nth-child(even){
+    margin-left:10rpx;
+}
+.homeWorkVideo view image{
+    width:200rpx;
+    height:200rpx;
+}
+.homeWorkVideo view video{
+    width:200rpx;
+    height:200rpx;
+}
+.secondImage{
+    width:50rpx !important;
+    height:50rpx !important;
+    margin-left:75rpx;
+    margin-top:75rpx;
+    float:left;
+    border-radius:50%;
+}
+/* 作业信息 */
+.homeWorkInfo{
+    width:670rpx;
+    height:40rpx;
+    margin:10rpx auto 0rpx;
+    padding-bottom:15rpx;
+    position:relative;
+}
+.homeWorkInfoTime,.homeWorkInfoMore{
+    width:300rpx;
+    height:40rpx;
+    line-height:40rpx;
+    font-size:24rpx;
+    color:#7b7b7b;
+    float:left;
+}
+.homeWorkInfoMore{
+    width:50rpx;
+    float:right;
+    text-align:right;
+}
+.homeWorkInfoMore text{
+    font-size:50rpx;
+    color:#8593B0;
+}
+.homeWorkInfoOpt{
+    width:340rpx;
+    height:60rpx;
+    background:#393A3F;
+    border-radius:5px;
+    position:absolute;
+    right:60rpx;
+    top:-13rpx;
+    overflow:hidden;
+}
+.homeWorkInfoOpt view{
+    width:49%;
+    height:40rpx;
+    float:left;
+    margin-top:10rpx;
+    line-height:40rpx;
+    text-indent:30rpx;
+}
+.homeWorkInfoOpt view:nth-child(2){
+    border-left:1px solid #000;
+}
+.homeWorkInfoOpt view text{
+    color:#fff;
+    font-size:26rpx;
+    line-height:40rpx;
+}
+.homeWorkInfoOpt view text:nth-child(1){
+    font-size:35rpx;
+}
+/* 点赞列表 */
+.homeWorkZanList{
+    width:670rpx;
+    min-height:35rpx;
+    margin:10rpx auto 5rpx;
+    border-radius:5px;
+    background:#F2F2F2;
+    text-indent:15rpx;
+    line-height:35rpx;
+}
+.homeWorkZanList text{
+    font-size:26rpx;
+    color:#A2AABC;
+}
+.homeWorkZanList text:nth-child(1){
+    font-size:35rpx;
+    color:#A2AABC;
+}
+/* 学员作业 */
+.stuWork{
+    width:100%;
+    height:100rpx;
+    background:transparent;
+    font-size:26rpx;
+    line-height:100rpx;
+    text-align:center;
+    color:#3C3C3C;
+}
+
+/* 我的作业 */
+.myJobContent{
+    width:690rpx;
+    min-height:80rpx;
+    border-radius:5px;
+    border:2px solid #efefef;
+    margin:10rpx auto 0rpx;
+}
+.myJobTitle{
+    width:100%;
+    line-height:80rpx;
+    font-size:30rpx;
+    text-align:center;
+    color:#DADADA;
+}
+/* 日历的三个功能 */
+.listInfoOpt{
+    width:690rpx;
+    height:80rpx;
+    background:#F8F8F8;
+    margin:0rpx auto 0rpx;
+}
+.listInfoOpt view{
+    font-size:26rpx;
+    line-height:80rpx;
+    width:100rpx;
+    float:left;
+    text-indent:20rpx;
+}
+.listInfoOpt view:nth-child(1){
+    width:300rpx;
+}
+.listInfoOpt view:nth-child(2){
+    width:300rpx;
+    height:80rpx;
+    float:right;
+}
+.listInfoOpt view:nth-child(2) view{
+    width:50rpx;
+    height:50rpx;
+    float:right;
+    margin-top:15rpx;
+    margin-right:10rpx;
+    background:#fff;
+}
+.listInfoOpt view:nth-child(2)>view>text{
+    display:block;
+    width:50rpx;
+    height:50rpx;
+    font-size:50rpx;
+    float:left;
+    margin-left:-19rpx;
+    margin-top:-19rpx;
+    color:#7b7b7b;
+}
+.listInfoOpt view:nth-child(2)>view:nth-child(3)>text{
+    font-size:59rpx;
+}
+.listInfoOpt view:nth-child(2)>view:nth-child(1)>text{
+    margin-top:-14rpx;
+    font-size:49rpx;
+}
+.listInfoOpt view:nth-child(2) view:nth-child(1){
+    margin-right:5rpx;
+}
+.dateWrapO{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    background:rgba(0,0,0,0.3);
+}
+.dateWrap{
+    width:700rpx;
+    min-height:100rpx;
+    position:absolute;
+    left:25rpx;
+    top:200rpx;
+    background:transparent;
+    z-index:1000;
+}
+.dateWeek{
+    width:700rpx;
+    height:80rpx;
+    background:#F5F5F5;
+}
+.dateWeek>view{
+    width:100rpx;
+    line-height:80rpx;
+    text-align:center;
+    font-size:30rpx;
+    float:left;
+}
+.dateWeek>view:nth-child(6),.dateWeek>view:nth-child(7){
+    color:#D15353;
+}
+.weekDay{
+    width:700rpx;
+    min-height:80rpx;
+    background:#fff;
+}
+.weekDayContent{
+    display:inline-block;
+    vertical-align: top;
+    width:100rpx;
+    height:80rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-size:35rpx;
+    position:relative;
+}
+.weekDayDian{
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:red;
+    position:absolute;
+    bottom:5rpx;
+    left:50%;
+    margin-left:-1.5px;
+}
+.dateTitle{
+    width:700rpx;
+    height:100rpx;
+    background:#fff;
+}
+.dateTitleBtn{
+    width:210rpx;
+    height:100rpx;
+    float:right;
+}
+.dateTitle text{
+    display:block;
+    height:100rpx;
+    line-height:100rpx;
+    font-size:30rpx;
+    float:left;
+    text-indent:25rpx;
+}
+.dateTitleBtn view{
+    width:100rpx;
+    height:100rpx;
+    float:right;
+    border:1px solid #efefef;
+    font-size:40rpx;
+    line-height:100rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+/* 关闭 */
+.dateBtn{
+    width:300rpx;
+    height:80rpx;
+    line-height:80rpx;
+    margin-top:30rpx;
+    font-size:30rpx;
+}
+/* 密码 */
+.pwdWrap{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    background:#f2f2f2;
+}
+.pwdWrap input,.pwdWrap button{
+    width:550rpx;
+    height:100rpx;
+    line-height:100rpx;
+    background:#fff;
+    margin:200rpx auto 0rpx;
+    text-align:center;
+    font-size:35rpx;
+}
+.pwdWrap button{
+    margin-top:40rpx;
+}
+
+
+

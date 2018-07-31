@@ -564,6 +564,10 @@ button.btnStyle{
     border-radius:50%;
     position:relative;
 }
+.otherOptions image{
+    width:100rpx;
+    height:100rpx;
+}
 
 .otherOptionsChild{
     width:120rpx;

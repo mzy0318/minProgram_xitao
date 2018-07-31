@@ -1,0 +1,185 @@
+<view class='listInfoWrap'>
+    <view class='listInfoOpt'>
+        <view>{{title}}</view>
+        <view>
+            <!-- 分享 -->
+            <view data-id='0' bindtap='listOpts' data-title='{{pageData.title}}'><text class='iconfont icon-ArtboardCopy' style='color:#44B549;'></text></view>
+            <!-- 日历 -->
+            <view data-id='1' bindtap='listOpts'><text class='iconfont icon-date1'></text></view>
+            <!-- 今天 -->
+            <view data-id='2' bindtap='listOpts'><text class='iconfont icon-today' style='color:{{isToday?"#13237B":"#7b7b7b"}}'></text></view>
+        </view>
+    </view>
+    <!-- 星期 -->
+    <view class='listInfoWeek'>
+        <view wx:for='{{currentDataArr}}' wx:key='{{index}}'>{{item.week}}</view>
+    </view>
+    <!-- 日期 -->
+    <view class='listInfoDate'>
+        <view class='infoDateContent' wx:for='{{currentDataArr}}' wx:key='{{index}}' bindtap='switchDate' data-info='{{item}}'>
+            {{item.day}}
+            <view hidden='{{!item.hasWork}}'></view>
+        </view>
+    </view>
+    <!-- 布置作业 -->
+    <view class='listInfoContent'>
+        <view class='listInfoContentText' hidden='{{isStuwork}}'>{{currentText}}</view>
+        <view class='listInfoContentText' bindtap='setHomework' data-id='0' hidden='{{isTeacwork}}'>{{teacherText}}</view>
+        <view class='homeWorkContent' hidden='{{isAssignment}}'>
+            <view class='empty'></view>
+            <view class='homeWorkImage'>
+                <view>
+                    <image src='{{assignment.avatar_url}}' mode='scaleToFill'></image>
+                </view>
+                <text decode>&nbsp;{{assignment.realname}}</text>
+            </view>
+            <!-- 留言 -->
+            <view class='homeWorkText'>{{assignment.text}}</view>
+            <!-- 录音 -->
+            <view class='homeWorkAudio'>
+                <view wx:for='{{assignment.audio}}' data-url='{{item.url}}' bindtap='playAudio'  data-ismy='0' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                   <image src='{{audioUrl==item.id?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image>
+                </view>
+            </view>
+            <!-- 图片 视频 -->
+            <view class='homeWorkVideo'>
+                <view wx:for='{{assignment.image}}' wx:key='{{item.id}}' bindtap='previewImage' data-url='{{item.url}}'>
+                    <image src='{{item.url}}' mode='scaleToFill'></image>
+                </view>
+                <view wx:for='{{assignment.video}}' wx:key='{{item.id}}' data-url='{{item.url}}' bindtap='previewVideo'>
+                    <image class='secondImage' src='{{item.cover}}'></image>
+                </view>
+            </view>
+            <!-- 编辑布置的作业 -->
+            <view class='homeworkEdit' bindtap='setHomework' data-id='1' data-courseid='{{assignment.punch_course_id}}' data-assigment='{{assignment.id}}' hidden='{{!pageData.is_teacher}}'>
+                <text class='iconfont icon-edit iconStyle'></text>
+            </view>
+        </view>
+    </view>
+    <view class='listInfoBtn' hidden='{{isRank}}'>
+        <button data-id='0' bindtap='infoBtn'>排行榜</button>
+        <button data-id='1' bindtap='infoBtn' data-assignment='{{assignment.id}}'>去打卡</button>
+    </view>
+    <view class='listInfoBtnO' hidden='{{isMyRank}}'>
+        <button data-id='0' bindtap='infoBtn'>排行榜</button>
+    </view>
+    <!-- 我的作业 -->
+    <view class='myJobTitle' hidden='{{isMyHomework}}'>我的作业</view>
+    <view class='myJobContent' hidden='{{isMyHomework}}'>
+        <view class='homeWorkContent'>
+            <view class='empty'></view>
+            <view class='homeWorkImage'>
+                <view>
+                    <image src='{{myHomework.avatar_url}}' mode='scaleToFill'></image>
+                </view>
+                <text decode>&nbsp;{{myHomework.realname}}</text>
+            </view>
+            <!-- 留言 -->
+            <view class='homeWorkText'>{{myHomework.text}}</view>
+            <!-- 录音 -->
+            <view class='homeWorkAudio'>
+                <view wx:for='{{myHomework.audio}}' data-url='{{item.url}}' data-id='{{item.id}}' bindtap='playMyAudio' data-ismy='1' wx:key='{{item.id}}'>
+                    <image src='{{isMy==item.id?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image>
+                </view>
+            </view>
+            <!-- 图片 视频 -->
+            <view class='homeWorkVideo'>
+                <view wx:for='{{myHomework.image}}' wx:key='{{item.id}}' bindtap='previewImage' data-url='{{item.url}}'>
+                    <image src='{{item.url}}' mode='scaleToFill'></image>
+                </view>
+                <view wx:for='{{myHomework.video}}' wx:key='{{item.id}}' data-url='{{item.url}}' bindtap='previewVideo'>
+                    <image class='secondImage' src='{{item.cover}}'></image>
+                </view>
+            </view>
+            <view class='homeworkEdit' bindtap='toEdit' data-homeid='{{myHomework.id}}' data-assignment='{{myHomework.assignment_id}}'>
+                <text class='iconfont icon-edit iconStyle'></text>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 学员作业 -->
+<view class='stuWork' hidden='{{isAllHomework}}'>学员作业</view>
+<view class='homeWorkContent' wx:for='{{allHomework}}' wx:key='{{index}}' hidden='{{isAllHomework}}'>
+    <view class='empty'></view>
+    <view class='homeWorkImage'>
+        <view bindtap='toHome' data-userid='{{item.student_id}}'>
+            <image src='{{item.avatar_url}}' mode='scaleToFill'></image>
+        </view>
+        <text decode>&nbsp;{{item.realname}}</text>
+    </view>
+    <!-- 留言 -->
+    <view class='homeWorkText'>{{item.text}}</view>
+    <!-- 录音 -->
+    <view class='homeWorkAudio'>
+        <view wx:for='{{item.audio}}' data-url='{{item.url}}' data-id='{{item.id}}' bindtap='playAudio'  data-ismy='0' wx:key='{{item.id}}'>
+            <image src='{{audioUrl==item.id?"../../../icon/playing.gif":"../../../icon/play.png"}}'></image>
+        </view>
+    </view>
+    <!-- 图片 视频 -->
+    <view class='homeWorkVideo'>
+        <view wx:for='{{item.image}}' wx:key='{{item.id}}' bindtap='previewImage' data-url='{{item.url}}'>
+            <image src='{{item.url}}' mode='scaleToFill'></image>
+        </view>
+        <view wx:for='{{item.video}}' wx:key='{{item.id}}' data-url='{{item.url}}' bindtap='previewVideo'>
+            <image class='secondImage' src='{{item.cover}}'></image>
+        </view>
+    </view>
+    <!-- 作业信息 -->
+    <view class='homeWorkInfo'>
+        <view class='homeWorkInfoTime'>{{item.create_time}}</view>
+        <view class='homeWorkInfoMore' data-id='0' bindtap='infoOpt' data-index='{{index}}'>
+            <text class='iconfont icon-more'></text>
+        </view>
+        <view class='homeWorkInfoOpt' hidden='{{index==homeNum?false:true}}'>
+            <view data-id='1' bindtap='infoOpt' data-iszan='{{item.has_thumb}}' data-homeid='{{item.id}}'>
+                <text class='iconfont icon-love'></text>
+                <text decode>&nbsp;{{item.has_thumb?'取消':'点赞'}}</text>
+            </view>
+            <view data-id='2' bindtap='infoOpt' data-courseid='{{item.punch_course_id}}' data-stuid='{{item.student_id}}'>
+                <text class='iconfont icon-message'></text>
+                <text decode>&nbsp;评论</text>
+            </view>
+        </view>
+    </view>
+    <!-- 作业 点赞列表 -->
+    <view class='homeWorkZanList' hidden='{{item.thumb_person==""?true:false}}'>
+        <text class='iconfont icon-love'></text>
+        <text> {{item.thumb_person}}</text>
+    </view>
+</view>
+<!-- 打卡日历 -->
+<view class='dateWrapO' hidden='{{isDates}}'>
+    <view class='dateWrap'>
+        <view class='dateTitle'>
+            <text decode>&nbsp;{{yearMonth}}</text>
+            <view class='dateTitleBtn'>
+                <view data-id='0' bindtap='changeMonth'>∨</view>
+                <view data-id='1' bindtap='changeMonth'>∧</view>
+            </view>
+        </view>
+        <view class='dateWeek'>
+            <view>一</view>
+            <view>二</view>
+            <view>三</view>
+            <view>四</view>
+            <view>五</view>
+            <view>六</view>
+            <view>日</view>
+        </view>
+        <view class='weekDay'>
+            <view class='weekDayContent' wx:for='{{dayList}}' bindtap='toDateInfo' data-year='{{item.year}}' data-day='{{item.day}}' data-month='{{item.month}}' data-enable='{{item.enable}}' wx:key='{{index}}' style='color:{{item.enable?"#000":"#7b7b7b"}}'>
+                {{item.day}}
+                <view class='weekDayDian' hidden='{{!item.hasAssignment}}'></view>
+            </view>
+        </view>
+        <button class='dateBtn' bindtap='cancelDate'>关闭</button>
+    </view>
+</view>
+<!-- 密码 -->
+<view class='pwdWrap' hidden='{{isPwd}}'>
+    <form bindsubmit='confirmPwd'>
+        <input type='password' placeholder='请输入密码' name='password'></input>
+        <button form-type='submit'>进入</button>
+    </form>
+</view>
+<video class='videoPlay' style='display:none' bindended='stopVideo' data-display='{{isOtherDisplay}}' id='myVideo' src='{{otherVideo}}' autoplay></video>

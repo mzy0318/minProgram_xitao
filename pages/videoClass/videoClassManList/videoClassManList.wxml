@@ -1,5 +1,5 @@
 <view class='manListWrap' bindtap='showOpt' data-id='0' data-title='{{item.title}}' wx:for='{{pageData}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>
-    <view class='manListImage'><image src='{{item.cover.url}}'></image></view>
+    <view class='manListImage'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
     <view class='manListContent'>
         <view class='manListTitle'>{{item.title}}</view>
         <view class='manMore'><text class='iconfont icon-gengduo iconStyleO'></text></view>

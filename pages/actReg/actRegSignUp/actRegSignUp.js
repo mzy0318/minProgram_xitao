@@ -14,7 +14,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options', options.info)
         let that = this;
         that.setData({
             actId: options.actId,
@@ -82,21 +81,35 @@ Page({
             data: e.detail.value,
             method: 'post',
             success: function (res) {
+                let respons = res;
                 if(Number(res.data.code)==1){
                     wx.showLoading({
                         title: '正在报名...',
                         mask: true,
                     })
-                    setTimeout(closeLogin, 2000)
+
+                    setTimeout(closeLogin, 2000);
+
                     function closeLogin() {
                         wx.hideLoading()
-                        wx.showToast({
-                            title: '报名成功',
-                            icon:'success'
-                        })
-                        that.setData({
-                            isShow: true
-                        })
+                        if(respons.data.data.need_pay){
+                            wx.showModal({
+                                title: '提示',
+                                content: '报名成功,请付款.',
+                                showCancel: false,
+                                success: function (res) {
+                                    if (res.confirm) {
+                                        wx.navigateTo({
+                                            url: '../../courses/orderInfo/orderInfo?joinId=' + respons.data.data.joiner_id + '&actTag=' + respons.data.data.tag + '&actId=' + respons.data.data.act_id,
+                                        })
+                                    }
+                                }
+                            })
+                        }else{
+                            that.setData({
+                                isShow: true
+                            })
+                        }
                     }
                 } else if (Number(res.data.code) == 0){
                     wx.showToast({

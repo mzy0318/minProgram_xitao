@@ -4,12 +4,12 @@ const app = getApp()
 
 Page({
     data: {
-        motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
         orgId: 0,
         modeCode: 'one',
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
+        contentHeight:0,
         optionsUrl: [{
                 tag: 'school_intro',
                 url: '../baseOptions/schoolInfo/schoolInfo', //学校简介
@@ -62,6 +62,14 @@ Page({
                 tag: 'video_card',
                 url: '../videos/userVideoList/userVideoList', //视频贺卡
             },
+            {
+                tag: 'video_class',
+                url: '../videoClass/videoClassUserList/videoClassUserList', //视频课堂
+            },
+            {
+                tag: 'punch',
+                url: '../task/taskUserList/taskUserList', //打卡作业
+            },
         ],
         pageData: '',
         isGetUser: false,
@@ -93,6 +101,15 @@ Page({
     },
     //事件处理函数
     onLoad: function(options) {
+        let that = this;
+        // 是否为教师
+        wx.setStorageSync('isTeacher', 0)
+        //获取设备高度
+        wx.setStorageSync('devHeight', wx.getSystemInfoSync().windowHeight);
+        that.setData({
+            contentHeight: Number(wx.getStorageSync('devHeight')) - 175
+         })
+        //  分享从主页向目标页面跳转
         if (Number(options.pageId) == 1) {
             wx.navigateTo({
                 url: '../killPrices/killPriceInfo/killPriceInfo?id=' + options.actId,
@@ -157,12 +174,19 @@ Page({
             wx.navigateTo({
                 url: '../videoClass/videoClassInfo/videoClassInfo?actId=' + options.actId,
             })
+        } else if (Number(options.pageId) == 17){
+            wx.navigateTo({
+                url: '../task/taskTeacherEdit/taskTeacherEdit',
+            })
+        } else if (Number(options.pageId) == 18){
+            wx.navigateTo({
+                url: '../task/taskUserListInfo/taskUserListInfo?courseId=' + options.courseId,
+            })
         }
         wx.showLoading({
             title: '',
             mask: true,
         })
-        let that = this;
         wx.showShareMenu({
             withShareTicket: true
         })
@@ -171,55 +195,10 @@ Page({
                 isGetUser: true,
             })
         }
-        wx.login({
-            success: res => {
-                getApp().request({
-                    url: "login",
-                    method: "post",
-                    data: {
-                        code: res.code,
-                        org_id: getApp().getExtConfig().orgId,
-                    },
-                    success: r => {
-                        var cookie = wx.getStorageSync('cookie');
-                        if (r.header["Set-Cookie"]) {
-                            wx.setStorageSync('cookie', r.header["Set-Cookie"]);
-                        }
-                    }
-                })
-            }
-        })
-
-
-        if (app.globalData.userInfo) {
-            this.setData({
-                userInfo: app.globalData.userInfo,
-                hasUserInfo: true
-            })
-        } else if (this.data.canIUse) {
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            // 所以此处加入 callback 以防止这种情况
-            app.userInfoReadyCallback = res => {
-                this.setData({
-                    userInfo: res.userInfo,
-                    hasUserInfo: true
-                })
-            }
-        } else {
-            // 在没有 open-type=getUserInfo 版本的兼容处理
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo
-                    this.setData({
-                        userInfo: res.userInfo,
-                        hasUserInfo: true
-                    })
-                }
-            })
-        }
     },
     onShow: function() {
         let that = this;
+        that.getData()
         // 选择模板
         if (Number(wx.getStorageSync('schoolModel')) == 2) {
             that.setData({
@@ -242,35 +221,6 @@ Page({
                 modeCode: 'five'
             })
         }
-
-        getApp().request({
-            url: "home",
-            method: "post",
-            data: {},
-            success: res => {
-
-                for (let i = 0; i < res.data.data.home_icon.length; i++) {
-                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
-                    res.data.data.home_icon[i].width = that.data.paintData[i].width;
-                    for (let j = 0; j < that.data.optionsUrl.length; j++) {
-                        if (res.data.data.home_icon[i].tag == that.data.optionsUrl[j].tag) {
-                            res.data.data.home_icon[i].url = that.data.optionsUrl[j].url
-                        }
-                    }
-                }
-                that.setData({
-                    pageData: res.data.data
-                })
-                wx.setNavigationBarTitle({
-                    title: res.data.data.app_name,
-                });
-                wx.setNavigationBarColor({
-                    frontColor: res.data.data.navi_font_color,
-                    backgroundColor: res.data.data.navi_background_color,
-                })
-                wx.hideLoading()
-            }
-        })
     },
     redirectPage: function(res) {
         wx.navigateTo({
@@ -296,11 +246,22 @@ Page({
     },
     onPullDownRefresh: function() {
         let that = this
+        that.getData()
+    },
+    toCourseInfo: function(e) {
+        wx.navigateTo({
+            url: '../courses/courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
+        })
+    },
+    // 获取页面数据
+    getData:function(){
+        let that = this;
         getApp().request({
             url: "home",
             method: "post",
             data: {},
             success: res => {
+                wx.hideLoading()
                 for (let i = 0; i < res.data.data.home_icon.length; i++) {
                     res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
                     res.data.data.home_icon[i].width = that.data.paintData[i].width;
@@ -320,14 +281,8 @@ Page({
                     frontColor: res.data.data.navi_font_color,
                     backgroundColor: res.data.data.navi_background_color,
                 })
-
                 wx.stopPullDownRefresh()
             }
-        })
-    },
-    toCourseInfo: function(e) {
-        wx.navigateTo({
-            url: '../courses/courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
         })
     }
 })

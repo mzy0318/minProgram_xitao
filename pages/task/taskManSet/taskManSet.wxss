@@ -1,0 +1,50 @@
+page{
+    background:#F2F2F2;
+}
+.manSetWrap{
+    width:670rpx;
+    height:290rpx;
+    background:#fff;
+    margin:40rpx auto 0rpx;
+    box-shadow:1px 1px 15px 5px rgba(192,192,192,0.3);
+}
+.manSetTop{
+    width:670rpx;
+    border:1rpx solid #efefef;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#7b7b7b;
+    text-indent:50rpx;
+}
+.manSetTop text:nth-child(1){
+    color:#000;
+    font-size:45rpx;
+    line-height:80rpx;
+}
+.manSetBottom,.manSetBottomO{
+    width:670rpx;
+    height:209rpx;
+}
+.manSetBottom button{
+    float:left;
+    width:240rpx;
+    height:80rpx;
+    line-height:80rpx;
+    background:#F5F5F5;
+    margin-top:65rpx;
+    font-size:30rpx;
+    color:#585858;
+    margin-left:63rpx;
+}
+.manSetBottom button::after{
+    border:0rpx;
+}
+.manSetBottomO button{
+    width:543rpx;
+    height:80rpx;
+    line-height:80rpx;
+    background:#F5F5F5;
+    margin-top:65rpx;
+    font-size:30rpx;
+    color:#585858;
+}
