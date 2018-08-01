@@ -1,0 +1,11 @@
+<view class='personListContent'>
+    <view class='personListTitle'>六一儿童节集赞大礼包</view>
+    <view class='personListInfo'>
+        <view>姓名: 你猜</view>
+        <view>电话: 13045654167</view>
+    </view>
+    <view class='personListDate'>时间: 2018-07-08 21:12:43</view>
+</view>
+<view class='noData' hidden='{{true}}'>无记录</view>
+<!-- 详细信息 -->
+<view class='stuListInfo'></view>

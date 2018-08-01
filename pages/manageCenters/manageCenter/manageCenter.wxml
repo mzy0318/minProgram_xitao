@@ -1,25 +1,22 @@
-<view class='managWarp' style='display:{{isContent}}'>
+<view  style='display:{{isContent}}'>
     <view class='managWarpTop'>
         <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/org_banner.png'></image>
         <!-- <view bindtap='exitApp'><image src='../../../icon/exit.png' mode='scaleToFill'></image> <text>注销</text></view> -->
     </view>
+    <view class='addEmpty'></view>
     <view class='mangeScool'>
         <text class='mangeScoolTitle'>学校管理</text>
         <view class='mangeScoolOptions'>
-            <view class='mangeScoolOptionsWrap' wx:for='{{pageManagData}}' wx:key='{{index}}' bindtap='toEditPage' data-url='{{item.url}}' hidden='{{item.isShow}}'>
+            <view class='mangeScoolOptionsWrap' wx:for='{{pageManagData}}' wx:key='{{index}}' bindtap='toEditPage' data-url='{{item.url}}' style='display:{{item.show}}'>
                 <text class='{{item.iconfont}}' style='color:{{item.color}};'></text>
                 <view class='mangeScoolOptionsWrapBottom'>{{item.name}}</view>
             </view>
-            <!-- <view class='mangeScoolOptionsWrap' bindtap='exitApp'>
-                <text class='iconfont icon-exit iconSize' style='color:#E3465B;'></text>
-                <view class='mangeScoolOptionsWrapBottom'>注销</view>
-            </view> -->
         </view>
     </view>
     <view class='mangeStuMarkt'>
         <text class='mangeStuMarktTitle'>招生营销</text>
         <view class='mangeStuMarktOptions'>
-            <view class='optionsWrap' wx:for='{{pageStuData}}' wx:key='{{index}}' data-pageType='{{item.pageType}}' bindtap='toManageActive' data-requireurl='{{item.url}}'>
+            <view class='optionsWrap' wx:for='{{funcOpt}}' wx:key='{{index}}' data-pageType='{{item.pageType}}' bindtap='toManageActive' data-requireurl='{{item.url}}' style='display:{{item.show}}'>
                 <view class='optionsTop' style='background:{{item.background}}'>
                     <text class='{{item.iconfont}}'></text>
                 </view>
@@ -27,7 +24,7 @@
             </view>
         </view>
     </view>
-    <view class='mangeScool'>
+    <view class='mangeStuMarkt'>
         <text class='mangeScoolTitle'>更多功能</text>
         <view class='mangeScoolOptions'>
             <view class='mangeScoolOptionsWrap' bindtap='exitApp'>
@@ -37,8 +34,7 @@
         </view>
     </view>
     <view class='managVersion'>
-        <text>招生小程序</text>
-        <text>{{versionData.version}}</text>
+        <text>{{versionData}}</text>
     </view>
 </view>
 <!--登陆部分-->
@@ -56,5 +52,4 @@
         </view>
         <button class='loginWrapBtn' form-type='submit' >立即登录</button>
     </form>
-
 </view>

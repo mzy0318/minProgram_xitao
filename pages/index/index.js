@@ -70,6 +70,10 @@ Page({
                 tag: 'punch',
                 url: '../task/taskUserList/taskUserList', //打卡作业
             },
+            {
+                tag: 'video_vote',
+                url: '../videoVote/videoVoteUserList/videoVoteUserList', //视频投票
+            },
         ],
         pageData: '',
         isGetUser: false,

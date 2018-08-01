@@ -5,8 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        baseData:[
-            {
+        baseData: [{
                 name: '我的订单',
                 iconfont: 'iconfont icon-zuoye iconStyle',
                 background: '#A145AF',
@@ -21,14 +20,14 @@ Page({
                 pageTypeStu: 2,
             },
         ],
-        pageStuData: [
-            {
+        pageStuData: [{
                 name: '私人拼团',
                 iconfont: 'iconfont icon-pintuan iconStyle',
                 background: '#E3465B',
                 url: '../killPrices/killPersonList/killPersonList',
                 pageTypeStu: 3,
-                tag:'personal_group',
+                tag: 'personal_group',
+                show:'inline-block',
             },
             {
                 name: '一元上好课',
@@ -37,6 +36,7 @@ Page({
                 url: '../killPrices/killPriceList/killPriceList',
                 pageTypeStu: 4,
                 tag: 'lesson_one',
+                show: 'inline-block',
             },
             // {
             //     name: '视频点赞',
@@ -49,9 +49,10 @@ Page({
                 name: '帮我砍学费',
                 iconfont: 'iconfont icon-kanjia iconStyle',
                 background: '#00D4BE',
-                url:'../killPrices/killPersonList/killPersonList',
+                url: '../killPrices/killPersonList/killPersonList',
                 pageTypeStu: 6,
                 tag: 'bargain',
+                show: 'inline-block',
             },
             // {
             //     name: '万人拼团',
@@ -67,7 +68,8 @@ Page({
                 url: '../videoVote/videoVoteStuList/videoVoteStuList',
                 pageTypeStu: 8,
                 tag: 'video_vote',
-            }, 
+                show: 'inline-block',
+            },
             // {
             //     name: '视频贺卡',
             //     iconfont: 'iconfont icon-meiguihua iconStyle',
@@ -82,6 +84,7 @@ Page({
                 url: '../killPrices/killPriceList/killPriceList',
                 pageTypeStu: 10,
                 tag: 'normal',
+                show: 'inline-block',
             },
             {
                 name: '微视频课堂',
@@ -90,6 +93,7 @@ Page({
                 url: '../videoClass/videoClassStuList/videoClassStuList',
                 pageTypeStu: 11,
                 tag: 'video_class',
+                show: 'inline-block',
             },
             // {
             //     name: '视频作业',
@@ -99,49 +103,51 @@ Page({
             //     pageTypeStu: 12,
             // }
         ],
-        userInfo:'',
+        userInfo: '',
+        funcOpt: '',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
         // 获取页面功能
         let funcOpt = getApp().funcOpt.function;
-        let pageData = that.data.pageStuData;
-        for (let i = 0; i < funcOpt.length; i++){
+        
+        for (let i = 0; i < funcOpt.length; i++) {
+            funcOpt[i].show = 'inline-block'
             if (funcOpt[i].tag == 'sale_lesson') {
-                funcOpt.splice(i, 1)
+                funcOpt[i].show = 'none'
+            } else if (funcOpt[i].tag == 'punch') {
+                funcOpt[i].show = 'none'
+            } else if (funcOpt[i].tag == "video_card") {
+                funcOpt[i].show = 'none'
             }
-            if (funcOpt[i].tag == 'punch') {
-                funcOpt.splice(i, 1)
-            }
-            if (funcOpt[i].tag == 'video_card') {
-                funcOpt.splice(i, 1)
-            }
-            for (let j = 0; j < pageData.length;j++){
-                if (funcOpt[i].tag == pageData[j].tag){
-                    funcOpt[i].iconfont = pageData[j].iconfont
-                    funcOpt[i].background = pageData[j].background
-                    funcOpt[i].url = pageData[j].url
-                    funcOpt[i].pageTypeStu = pageData[j].pageTypeStu
-                }
-            }
-            that.setData({
-                pageStuData: funcOpt
-            })
         }
-        // 获取版本信息
-        let version = wx.getExtConfigSync();
+        console.log('funcOpt', funcOpt)
         that.setData({
-            versionData: wx.getExtConfigSync(),
+            funcOpt: funcOpt
         })
+        // 版本号
+        let version = wx.getExtConfigSync();
+        let funcOptId = getApp().funcOpt.function_id;
+        let versionText = '';
+        if (Number(funcOptId) == 1) {
+            versionText = ' 基础版'
+        } else if (Number(funcOptId) == 2) {
+            versionText = ' 营销版'
+        } else if (Number(funcOptId) == 3) {
+            versionText = ' 豪华版'
+        }
+        that.setData({
+            versionData: version.version + versionText,
+        });
         // 获取用户信息
         wx.getSetting({
             success: res => {
                 // console.log('授权结果', res);
-                if (res.authSetting['scope.userInfo']){
+                if (res.authSetting['scope.userInfo']) {
                     wx.getUserInfo({
                         success: res => {
                             // console.log('用户信息', res)
@@ -156,9 +162,12 @@ Page({
                             }
                         }
                     })
-                }else {
+                } else {
                     that.setData({
-                        userInfo: { nickName: '访客', avatarUrl:'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png'}
+                        userInfo: {
+                            nickName: '访客',
+                            avatarUrl: 'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png'
+                        }
                     })
                 }
             }
@@ -168,42 +177,57 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-
+    onShow: function() {
+        let that = this;
+        let pageData = that.data.pageStuData;
+        let funcOpt = that.data.funcOpt;
+        for (let i = 0; i < funcOpt.length;i++){
+            for (let j = 0; j < pageData.length; j++) {
+                if (funcOpt[i].tag == pageData[j].tag) {
+                    funcOpt[i].iconfont = pageData[j].iconfont
+                    funcOpt[i].background = pageData[j].background
+                    funcOpt[i].url = pageData[j].url
+                    funcOpt[i].pageTypeStu = pageData[j].pageTypeStu;
+                }
+            }
+        }
+        that.setData({
+            funcOpt: funcOpt
+        })
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
@@ -213,7 +237,7 @@ Page({
     // onShareAppMessage: function () {
 
     // },
-    toOptionPage:function(e){
+    toOptionPage: function(e) {
         wx.setStorageSync('pageTypeStu', e.currentTarget.dataset.pagetypestu)
         wx.navigateTo({
             url: e.currentTarget.dataset.url,

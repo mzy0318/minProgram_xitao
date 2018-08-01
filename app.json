@@ -85,7 +85,8 @@
         "pages/videoClass/videoClassInfo/videoClassInfo",
         "pages/videoClass/videoClassUserList/videoClassUserList",
         "pages/videoClass/videoClassEdit/videoClassEdit",
-        "pages/videoClass/videoClassStuList/videoClassStuList"
+        "pages/videoClass/videoClassStuList/videoClassStuList",
+        "pages/videoLaud/videoLaudStuList/videoLaudStuList"
     ],
     "window": {
         "backgroundTextStyle": "dark",

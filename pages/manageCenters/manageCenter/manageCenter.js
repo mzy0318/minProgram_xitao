@@ -5,54 +5,55 @@ Page({
      * 页面的初始数据
      */
     data: {
-        islogin:'block',
-        isContent:'none',
-        versionData:'',
-        pageManagData:[
-            {
-                name:'更换模板',
+        islogin: 'block',
+        isContent: 'none',
+        versionData: '',
+        funcOpt: '',
+        pageManagData: [{
+                name: '更换模板',
                 iconfont: 'iconfont icon-genghuanpifu iconSize',
-                color:'#1196DB',
+                color: '#1196DB',
                 url: '../../baseOptions/schoolModel/schoolModel',
-                isShow:false,
+                show:'inline-block',
             },
             {
                 name: '打卡作业',
                 iconfont: 'iconfont icon-job-task iconSize',
                 color: '#870E04',
                 url: '../../task/taskManSet/taskManSet',
-                isShow: true,
+                show: 'inline-block',
             },
             {
                 name: '学员跟进',
                 iconfont: 'iconfont icon-genjinjilu iconSize',
                 url: '../../courses/courseUserList/courseUserList',
                 color: '#02AEA7',
-                isShow: false,
+                show: 'inline-block',
             },
             {
                 name: '学校简介',
                 iconfont: 'iconfont icon-xuexiao iconSize',
                 color: '#1196DB',
-                url:'../schoolEdit/schoolEdit',
-                isShow: false,
+                url: '../schoolEdit/schoolEdit',
+                show: 'inline-block',
             },
         ],
-        pageStuData:[
-            {
+        pageStuData: [{
                 name: '私人拼团',
                 iconfont: 'iconfont icon-pintuan iconStyle',
-                background:'#E3465B',
+                background: '#E3465B',
                 url: 'org/personal_group_list',
-                pageType:1,
-                tag:'personal_group',
-            },{
+                pageType: 1,
+                tag: 'personal_group',
+                show: 'inline-block',
+            }, {
                 name: '一元上好课',
                 iconfont: 'iconfont icon-yiyuanchoujiang iconStyle',
                 background: '#FD9D22',
                 url: 'org/bargain_list',
                 pageType: 2,
                 tag: 'lesson_one',
+                show: 'inline-block',
             },
             // {
             //     name: '视频点赞',
@@ -68,6 +69,7 @@ Page({
                 url: 'org/bargain_list',
                 pageType: 4,
                 tag: 'bargain',
+                show: 'inline-block',
             },
             // {
             //     name: '万人拼团',
@@ -75,6 +77,7 @@ Page({
             //     background: '#DE4037',
             //     url: 'org/bargain_list',
             //     pageType: 5
+            //     show: 'inline-block',
             // }, 
             {
                 name: '视频投票',
@@ -83,7 +86,8 @@ Page({
                 url: 'org/bargain_list',
                 pageType: 6,
                 tag: 'video_vote',
-            }, 
+                show: 'inline-block',
+            },
             {
                 name: '视频贺卡',
                 iconfont: 'iconfont icon-meiguihua iconStyle',
@@ -91,6 +95,7 @@ Page({
                 url: 'org/video_card_list',
                 pageType: 7,
                 tag: 'video_card',
+                show: 'inline-block',
             }, {
                 name: '活动报名',
                 iconfont: 'iconfont icon-sign iconStyle',
@@ -98,7 +103,8 @@ Page({
                 url: 'org/bargain_list',
                 pageType: 8,
                 tag: 'normal',
-            }, 
+                show: 'inline-block',
+            },
             {
                 name: '微视频课堂',
                 iconfont: 'iconfont icon-shipin1 iconStyle',
@@ -106,75 +112,101 @@ Page({
                 url: 'org/bargain_list',
                 pageType: 9,
                 tag: 'video_class',
+                show: 'inline-block',
             },
             // {
             //     name: '视频作业',
             //     iconfont: 'iconfont icon-job-task iconStyle',
             //     background: '#84D23E',
             //     url: 'org/bargain_list',
-            //     pageType: 10
+            //     pageType: 10,
+            //     show: 'inline-block',
             // }
         ],
-        phone:'',
-        pwd:'',
+        phone: '',
+        pwd: '',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
+        // 版本号
         let version = wx.getExtConfigSync();
-        wx.setStorageSync('loginCode', 3)
+        let funcOptId = getApp().funcOpt.function_id;
+        let versionText = '';
+        if (Number(funcOptId) == 1) {
+            versionText = ' 基础版'
+        } else if (Number(funcOptId) == 2) {
+            versionText = ' 营销版'
+        } else if (Number(funcOptId) == 3) {
+            versionText = ' 豪华版'
+        }
         that.setData({
-            versionData: wx.getExtConfigSync(),
+            versionData: version.version + versionText,
         });
+        wx.setStorageSync('loginCode', 3);
         // 判断功能页面功能
         let funcOpt = getApp().funcOpt.function;
-        let pageData = that.data.pageStuData;
-        for (let i = 0; i < funcOpt.length; i++){
-            if (funcOpt[i].tag == 'punch') {
-                that.data.pageManagData[1].isShow = false
-                funcOpt.splice(i, 1);
-                i = funcOpt.length + 1
-            } else {
-                that.data.pageManagData[1].isShow = true;
-                i = funcOpt.length + 1
-            }
-        }
-        for (let i = 0; i < funcOpt.length;i++){
-            if (funcOpt[i].tag == 'sale_lesson'){
-                funcOpt.splice(i,1)
-            }
-            for (let j = 0; j < pageData.length;j++){
-                if (funcOpt[i].tag == pageData[j].tag){
-                    funcOpt[i].iconfont = pageData[j].iconfont
-                    funcOpt[i].background = pageData[j].background
-                    funcOpt[i].url = pageData[j].url
-                    funcOpt[i].pageType = pageData[j].pageType
-                }
+        let index = 0;
+        for (let i = 0; i < funcOpt.length; i++) {
+            funcOpt[i].show = 'inline-block';
+            if (funcOpt[i].tag == 'sale_lesson') {
+                funcOpt[i].show = 'none';
+            } else if (funcOpt[i].tag == 'punch') {
+                funcOpt[i].show = 'none';
+                index = 1;
             }
         };
+        let pageManagData = that.data.pageManagData;
+        if(index == 0){
+            pageManagData[1].show = 'none';
+            that.setData({
+                pageManagData: pageManagData
+            })
+        } else if (index == 1){
+            pageManagData[1].show = 'inline-block';
+            that.setData({
+                pageManagData: pageManagData
+            })
+        }
         that.setData({
-            pageStuData: funcOpt,
+            funcOpt: funcOpt,
         })
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
+        let that = this;
+        let pageData = that.data.pageStuData;
+        let funcOpt = that.data.funcOpt;
+        for (let i = 0; i < funcOpt.length;i++){
+            for (let j = 0; j < pageData.length; j++) {
+                if (funcOpt[i].tag == pageData[j].tag) {
+                    funcOpt[i].iconfont = pageData[j].iconfont
+                    funcOpt[i].background = pageData[j].background
+                    funcOpt[i].url = pageData[j].url
+                    funcOpt[i].pageType = pageData[j].pageType
+                }
+            }
+        }
+        that.setData({
+            funcOpt: funcOpt,
+        })
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 islogin: 'none',
-                isContent:'block',
+                isContent: 'block',
             })
         } else {
             wx.setNavigationBarTitle({
@@ -182,7 +214,7 @@ Page({
             })
             this.setData({
                 islogin: 'block',
-                isContent:'none'
+                isContent: 'none'
             })
         }
     },
@@ -190,28 +222,28 @@ Page({
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
@@ -221,17 +253,17 @@ Page({
     // onShareAppMessage: function () {
 
     // },
-    getPhone: function (e) {
+    getPhone: function(e) {
         this.setData({
             phoneNum: e.detail.value,
         })
     },
-    getPwd: function (e) {
+    getPwd: function(e) {
         this.setData({
             pwdNum: e.detail.value,
         })
     },
-    login: function (e) {
+    login: function(e) {
         let that = this;
         let senddata = e.detail.value
         if (senddata.phone == '') {
@@ -251,16 +283,17 @@ Page({
                 method: 'post',
                 success: res => {
                     wx.setStorageSync('loginCode', res.data.code)
-                    if(Number(res.data.code)==1){
+                    if (Number(res.data.code) == 1) {
                         wx.setNavigationBarTitle({
                             title: '管理中心',
                         })
                         wx.showLoading({
-                            title:'正在登录',
-                            mask:true,
+                            title: '正在登录',
+                            mask: true,
                         })
-                        setTimeout(closeLogin,2000)
-                        function closeLogin (){
+                        setTimeout(closeLogin, 2000)
+
+                        function closeLogin() {
                             wx.hideLoading()
                             wx.showToast({
                                 title: '登录成功',
@@ -270,69 +303,69 @@ Page({
                                 isContent: 'block'
                             })
                         }
-                    } else if (Number(res.data.code)==0){
+                    } else if (Number(res.data.code) == 0) {
                         wx.showToast({
                             title: res.data.msg,
-                            icon:'none'
+                            icon: 'none'
                         })
                     }
                 }
             })
         }
     },
-    toManageActive:function(e){
+    toManageActive: function(e) {
 
         let pageType = e.currentTarget.dataset.pagetype
 
         wx.setStorageSync('pageType', pageType)
-        
-        if (Number(pageType) == 1 || Number(pageType) == 4){
+
+        if (Number(pageType) == 1 || Number(pageType) == 4) {
             wx.navigateTo({
                 url: '../manageActive/manageActive?url=' + e.currentTarget.dataset.requireurl,
             })
-        } else if (Number(pageType) == 2){
+        } else if (Number(pageType) == 2) {
             wx.navigateTo({
                 url: '../../goodLesson/manLessonList/manLessonList?url=' + e.currentTarget.dataset.requireurl,
             })
-        } else if (Number(pageType) == 11){
+        } else if (Number(pageType) == 11) {
             wx.navigateTo({
                 url: '../../courses/courseUserList/courseUserList',
             })
-        } else if (Number(pageType) == 7){
+        } else if (Number(pageType) == 7) {
             wx.navigateTo({
                 url: '../../videos/manVideoList/manVideoList',
             })
-        }else if(Number(pageType) == 8){
+        } else if (Number(pageType) == 8) {
             wx.navigateTo({
                 url: '../../actReg/actRegManList/actRegManList',
             })
-        } else if (Number(pageType) == 9){
+        } else if (Number(pageType) == 9) {
             wx.navigateTo({
                 url: '../../videoClass/videoClassManList/videoClassManList',
             })
-        } else if (Number(pageType) == 6){
+        } else if (Number(pageType) == 6) {
             wx.navigateTo({
                 url: '../../videoVote/videoVoteManList/videoVoteManList',
             })
-        } else if (Number(pageType) == 12){
+        } else if (Number(pageType) == 12) {
             wx.navigateTo({
                 url: '../../task/taskManSet/taskManSet',
             })
         }
     },
-    toEditPage:function(e){
+    toEditPage: function(e) {
         wx.navigateTo({
             url: e.currentTarget.dataset.url,
         })
     },
-    exitApp:function(){
+    exitApp: function() {
         let that = this;
         getApp().request({
-            url:'logout',
-            data:{},
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
+            url: 'logout',
+            data: {},
+            method: 'post',
+            success: function(res) {
+                if (Number(res.data.code) == 1) {
                     getApp().isLogin = false;
                     wx.setStorageSync('loginCode', 3);
                     wx.setNavigationBarTitle({
