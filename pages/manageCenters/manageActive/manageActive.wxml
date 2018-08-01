@@ -16,7 +16,7 @@
         </view>
         <view class='manageActiveOptions'>
             <text bindtap='delActive' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>删除</text>
-            <text bindtap='tomanageEdit' data-id='{{item.id}}' data->编辑</text>
+            <text bindtap='tomanageEdit' data-id='{{item.id}}' >编辑</text>
             <button bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}'>分享</button>
         </view>
     </view>

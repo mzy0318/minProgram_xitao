@@ -37,6 +37,7 @@
         "pages/killPrices/killPriceListInfo/killPriceListInfo",
         "pages/killPrices/killPersonList/killPersonList",
         "pages/killPrices/killPriceList/killPriceList",
+        "pages/killPrices/killPriceManList/killPriceManList",
         "pages/collage/collageSignup/collageSignup",
         "pages/collage/collageList/collageList",
         "pages/collage/collagePersonInfo/collagePersonInfo",

@@ -12,7 +12,7 @@
 .schListInfoImage{
     width:750rpx;
     height:460rpx;
-    background:lightblue;
+    background:#fff;
 }
 .schListInfoImage image{
     width:750rpx;

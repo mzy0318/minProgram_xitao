@@ -60,8 +60,9 @@ page{
     vertical-align:top;
 }
 .classWrap image{
-    width:120rpx;
-    height:120rpx;
+    width:80rpx;
+    height:80rpx;
+    margin:20rpx 20rpx;
 }
 .infoClassesInput{
     width:720rpx;

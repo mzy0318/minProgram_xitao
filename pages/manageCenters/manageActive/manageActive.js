@@ -24,47 +24,6 @@ Page({
         that.setData({
             url: options.url
         })
-
-        // let pageType = wx.getStorageSync('pageType')
-        // if (Number(pageType) == 1) {
-        //     that.setData({
-        //         btnText: '发布新拼团'
-        //     })
-        // } else if (Number(pageType) == 4) {
-        //     that.setData({
-        //         btnText: '发布新砍价'
-        //     })
-        // }
-        // getApp().request({
-        //     url: that.data.url,
-        //     data: {
-        //         page: that.data.pageNum,
-        //     },
-        //     method: 'post',
-        //     success: res => {
-        //         if (Number(pageType) == 1){
-        //             for (let i = 0; i < res.data.data.list.length;i++){
-        //                 res.data.data.list[i].coverImage = res.data.data.list[i].cover.url
-        //             }
-        //             // that.setData({
-        //             //     coverImage: res.data.data.cover.url
-        //             // })
-        //         } else if (Number(pageType) == 4){
-        //             for (let i = 0; i < res.data.data.list.length; i++) {
-        //                 res.data.data.list[i].coverImage = res.data.data.list[i].banner_image_url
-        //             }
-        //         }
-        //         this.setData({
-        //             pageData: res.data.data.list
-        //         })
-        //         if (Number(res.data.code) == 0){
-        //             wx.showToast({
-        //                 title: res.data.msg,
-        //                 icon: 'none',
-        //             })
-        //         }
-        //     }
-        // })
     },
 
     /**
@@ -110,9 +69,6 @@ Page({
                     for (let i = 0; i < res.data.data.list.length; i++) {
                       res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].cover.url,200,100)
                     }
-                    // that.setData({
-                    //     coverImage: res.data.data.cover.url
-                    // })
                 } else if (Number(pageType) == 4) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
                       res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].banner_image_url,200,100)
@@ -175,9 +131,6 @@ Page({
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].coverImage = res.data.data.list[i].cover.url
                     }
-                    // that.setData({
-                    //     coverImage: res.data.data.cover.url
-                    // })
                 } else if (Number(pageType) == 4) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].coverImage = res.data.data.list[i].banner_image_url
@@ -228,9 +181,6 @@ Page({
                         for (let i = 0; i < pageDataArr.length; i++) {
                             pageDataArr[i].coverImage = pageDataArr[i].cover.url
                         }
-                        // that.setData({
-                        //     coverImage: res.data.data.cover.url
-                        // })
                     } else if (Number(pageType) == 4) {
                         for (let i = 0; i < pageDataArr.length; i++) {
                             pageDataArr[i].coverImage = pageDataArr[i].banner_image_url
@@ -249,22 +199,8 @@ Page({
         }
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    // onShareAppMessage: function(res) {
-    //     if (res.from === 'button') {
-    //         // 来自页面内转发按钮
-    //         console.log(res);
-    //         return {
-    //             path: '/pages/index/index'
-    //         }
-    //     }
-    // },
     toback: function() {
-        wx.navigateBack({
-
-        })
+        wx.navigateBack({})
     },
     toPersonList: function(e) {
         let pageType = wx.getStorageSync('pageType');

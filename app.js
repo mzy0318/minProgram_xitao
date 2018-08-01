@@ -59,7 +59,7 @@ App({
         var dev = "http://192.168.1.112:8123/" + getApp().getExtConfig().version + "/";
         return dev;
     },
-    hasLogin: false, //默认app是未登录状态
+    hasLogin: wx.getStorageSync('hasLogin'), //默认app是未登录状态
     isLogin: true,
     // 请求数据方法
     request: param => {
@@ -85,9 +85,9 @@ App({
             return
         }
         var othis = this;
-        console.log('url', url)
-        console.log('data', data)
-        if (getApp().hasLogin) {
+        if (getApp().hasLogin == '1') {
+            console.log('url', url)
+            console.log('data', data)
             //直接执行请求
             wx.request({
                 url: url,
@@ -146,12 +146,13 @@ App({
                             } else {
                                 // 获取小程序版本
                                 getApp().funcOpt = r.data.data;
+                                wx.setStorageSync('funcOpt', r.data.data)
                                 wx.setStorageSync('visitorId', r.data.data.visitor_id)
                                 if (r.header["Set-Cookie"]) {
                                     wx.setStorageSync('cookie', r.header["Set-Cookie"]);
                                 }
-
-                                getApp().hasLogin = true;
+                                wx.setStorageSync('hasLogin', '1');
+                                getApp().hasLogin = wx.getStorageSync('hasLogin'),
                                 getApp().isLogin = true,
 
                                     //然后执行请求
@@ -247,9 +248,6 @@ App({
             }
         })
     },
-    // uploadVideoFile:function(){
-
-    // },
     //七天日历
     sevenDay: function(date, arr) {
         let toDay = date;

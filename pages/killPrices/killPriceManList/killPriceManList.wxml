@@ -1,0 +1,27 @@
+<!-- 页面功能 -->
+<view class='manListOpt'>
+    <view>返回</view>
+    <view>发布新活动</view>
+</view>
+<!-- 内容 -->
+<view class='manListContent'  wx:for='{{pageData}}' wx:key='id' data-id='{{item.id}}'>
+    <view class='contentTitle' data-id='{{item.id}}' bindtap='toKillPirce' data-acttag='{{item.act_tag}}'>
+        <view>{{item.title}}</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image src='{{item.coverImage}}' mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view bindtap='toPersonList' data-id='{{item.id}}'>查看报名<text>({{item.total_joiner}})</text></view>
+            <view>销售价格:<text> {{item.original_price}}元</text></view>
+            <view>最低价格:<text style='color:#E75A23'> {{item.now_price}}元</text></view>
+            <!-- <view>砍价幅度:<text> {{item.}}</text></view> -->
+            <view>砍价限制:<text> {{item.bargain_limit_type}}</text></view>
+        </view>
+    </view>
+    <view class='contentBottom'>
+        <view bindtap='delActive' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}' >删除</view>
+        <view bindtap='tomanageEdit' data-id='{{item.id}}'>编辑</view>
+        <view bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}'>分享</view>
+    </view>
+</view>

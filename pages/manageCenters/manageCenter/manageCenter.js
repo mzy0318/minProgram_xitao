@@ -134,7 +134,7 @@ Page({
         let that = this;
         // 版本号
         let version = wx.getExtConfigSync();
-        let funcOptId = getApp().funcOpt.function_id;
+        let funcOptId = wx.getStorageSync('funcOpt').function_id;
         let versionText = '';
         if (Number(funcOptId) == 1) {
             versionText = ' 基础版'
@@ -148,7 +148,7 @@ Page({
         });
         wx.setStorageSync('loginCode', 3);
         // 判断功能页面功能
-        let funcOpt = getApp().funcOpt.function;
+        let funcOpt = wx.getStorageSync('funcOpt').function;
         let index = 0;
         for (let i = 0; i < funcOpt.length; i++) {
             funcOpt[i].show = 'inline-block';
@@ -319,7 +319,7 @@ Page({
 
         wx.setStorageSync('pageType', pageType)
 
-        if (Number(pageType) == 1 || Number(pageType) == 4) {
+        if (Number(pageType) == 1) {
             wx.navigateTo({
                 url: '../manageActive/manageActive?url=' + e.currentTarget.dataset.requireurl,
             })
@@ -350,6 +350,10 @@ Page({
         } else if (Number(pageType) == 12) {
             wx.navigateTo({
                 url: '../../task/taskManSet/taskManSet',
+            })
+        } else if (Number(pageType) == 4){
+            wx.navigateTo({
+                url: '../../killPrices/killPriceManList/killPriceManList',
             })
         }
     },

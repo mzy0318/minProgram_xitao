@@ -41,7 +41,8 @@ Page({
         musicNum:'',
         showMusic:true,
         animationClass: 'musicControl',
-        btnBgImage: '../../../icon/optBtn.png'
+        btnBgImage: '../../../icon/optBtn.png',
+        rangPage:1,
     },
 
     /**
@@ -136,13 +137,15 @@ Page({
             data: {
                 act_id: that.data.actId,
                 joiner_id: '0',
-                page: '1'
+                page: that.data.rangPage,
             },
             method: 'post',
             success: data => {
-                this.setData({
-                    killPricePeople: data.data.data,
-                })
+                if (data.data.code == 1) {
+                    this.setData({
+                        killPricePeople: data.data.data,
+                    })
+                }
             }
         })
     },
@@ -185,6 +188,9 @@ Page({
     },
     onPullDownRefresh: function () {
         let that = this;
+        that.setData({
+            rangPage: 1
+        })
         getApp().request({
             url: 'bargain_act',
             data: {
@@ -219,7 +225,7 @@ Page({
             data: {
                 act_id: that.data.actId,
                 joiner_id: '0',
-                page: '1'
+                page: that.data.rangPage
             },
             method: 'post',
             success: data => {
@@ -235,7 +241,29 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.killPricePeople);
+        if (that.data.killPricePeople.length >= that.data.rangPage * 10){
+            that.setData({
+                rangPage: rangPage+1,
+            })
+            getApp().request({
+                url: 'bargain_range',
+                data: {
+                    act_id: that.data.actId,
+                    joiner_id: '0',
+                    page: that.data.rangPage
+                },
+                method: 'post',
+                success: data => {
+                    pageDataArr.push(...data.data.data)
+                    this.setData({
+                        killPricePeople: pageDataArr,
+                    })
+                }
+            })
+        } 
     },
 
     /**
@@ -342,6 +370,7 @@ Page({
             isOption: !this.data.isOption
         })
     },
+    // 切换模板
     switchModel: function (e) {
         if (e.currentTarget.dataset.url == 'org/music_list') {
             this.setData({
@@ -439,6 +468,7 @@ Page({
             modelNum: e.currentTarget.dataset.index
         })
     },
+    // 确认
     comfireSubmit: function (e) {
         let that = this;
         if (e.currentTarget.dataset.type == 'Banner'){
@@ -458,10 +488,10 @@ Page({
                             icon: 'none',
                         })
                     }
-                    // that.setData({
-                    //     isCommon: true,
-                    //     bottomOption: true,
-                    // })
+                    that.setData({
+                        isCommon: true,
+                        bottomOption: true,
+                    })
                 }
             });
             //更换banner图
@@ -484,12 +514,6 @@ Page({
                             bottomOption: true,
                         })
                     }
-                    // } else if (Number(res.data.code) == 0) {
-                    //     wx.showToast({
-                    //         title: res.data.msg,
-                    //         icon: 'none',
-                    //     })
-                    // }
 
                 }
             })

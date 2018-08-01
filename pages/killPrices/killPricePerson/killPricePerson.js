@@ -15,6 +15,8 @@ Page({
         joinName:'',
         actId:'',
         joinId:'',
+        rangPage:1,
+        peopleDataList:'',
     },
 
     /**
@@ -43,45 +45,11 @@ Page({
             joinInfo: options,
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })
-        getApp().request({
-            url: 'bargain_act',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: that.data.joinId,
-            },
-            method: 'post',
-            success: res => {
-                that.setData({
-                    pageData: res.data.data,
-                    backgroundImage: res.data.data.act_image[0].url,
-                    endTime: util.formatTime(new Date(res.data.data.end_time*1000)),
-                })
-                wx.setNavigationBarTitle({
-                    title: res.data.data.title,
-                })
-            }
-        });
-        getApp().request({
-            url: 'bargain_range',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: that.data.joinId,
-                page: 1
-            },
-            method: 'post',
-            success: res => {
-                if(Number(res.data.code) == 1){
-                    this.setData({
-                        peopleData: res.data.data
-                    })
-                } else if (Number(res.data.code) == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
-                }
-            }
-        });
+        //页面数据
+        that.getPageData()
+        // 排行榜数据
+        that.getRangeDate()
+        
     },
 
     /**
@@ -116,16 +84,49 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        that.setData({
+            rangPage: 1
+        });
+        that.getPageData();
+        that.getRangeDate();
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        return {
-            title: this.data.peopleData.title,
-        }
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.peopleDataList);
+        if (that.data.peopleDataList.length >= that.data.rangPage * 10) {
+            that.setData({
+                rangPage: rangPage + 1,
+            })
+            getApp().request({
+                url: 'bargain_range',
+                data: {
+                    act_id: that.data.actId,
+                    joiner_id: that.data.joinId,
+                    page: that.data.rangPage
+                },
+                method: 'post',
+                success: res => {
+                    if (Number(res.data.code) == 1) {
+                        pageDataArr.push(...res.data.data.list)
+                        this.setData({
+                            peopleData: res.data.data,
+                            peopleDataList: pageDataArr,
+                        })
+                    } else if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            });
+        } 
     },
 
     /**
@@ -165,23 +166,15 @@ Page({
     toBack: function (e) {
         wx.navigateBack({})
     },
+    // 刷新
     getJoinerList:function(){
         let that = this;
-        getApp().request({
-            url: 'bargain_range',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: that.data.joinId,
-                page: 1
-            },
-            method: 'post',
-            success: res => {
-                this.setData({
-                    peopleData: res.data.data
-                })
-            }
+        that.setData({
+            rangPage:1
         })
+        that.getRangeDate()
     },
+    // 回主页
     toIndex: function () {
         wx.switchTab({
             url: '/pages/index/index',
@@ -211,5 +204,56 @@ Page({
                 urls: [that.data.encodeID],
             })
         }, 1500)
+    },
+    // 获取页面数据
+    getPageData:function(e){
+        let that = this;
+        getApp().request({
+            url: 'bargain_act',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
+            },
+            method: 'post',
+            success: res => {
+                wx.stopPullDownRefresh()
+                that.setData({
+                    pageData: res.data.data,
+                    backgroundImage: res.data.data.act_image[0].url,
+                    endTime: util.formatTime(new Date(res.data.data.end_time * 1000)),
+                })
+                wx.setNavigationBarTitle({
+                    title: res.data.data.title,
+                })
+            }
+        });
+    },
+    // 获取排行数据
+    getRangeDate:function(e){
+        let that = this;
+        // 砍价排行榜
+        getApp().request({
+            url: 'bargain_range',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
+                page: that.data.rangPage
+            },
+            method: 'post',
+            success: res => {
+                if (Number(res.data.code) == 1) {
+                    wx.stopPullDownRefresh()
+                    that.setData({
+                        peopleDataList: res.data.data.list,
+                        peopleData: res.data.data,
+                    })
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        });
     }
 })

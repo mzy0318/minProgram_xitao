@@ -80,7 +80,7 @@
         </view>
         <view class='pricePersonFourContent'>
             <view class='contentTwo'>{{peopleData.joiner_nickname}}的好友,帮TA砍掉了￥<text>{{peopleData.total_reduce}}</text>元</view>
-            <view class='contentThree' wx:for='{{peopleData.list}}'>
+            <view class='contentThree' wx:for='{{peopleDataList}}' wx:key='{{index}}'>
                 <view><image mode='scaleToFill' src='{{item.avatar_url}}' /></view>
                 <view><text>{{item.nickname == ''?"访客":item.nickname}}</text><text>已砍掉￥{{item.reduce}}元</text></view>
             </view>

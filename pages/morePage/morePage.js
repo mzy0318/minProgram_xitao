@@ -137,9 +137,10 @@ Page({
     onLoad: function(options) {
         let that = this;
         let pageData = that.data.pageData;
-        let funcOpt = getApp().funcOpt.function;
+        let funcOpt = wx.getStorageSync('funcOpt').function;
         for (let i = 0; i < funcOpt.length;i++){
             for (let j = 0; j < pageData.length;j++){
+                
                 if (funcOpt[i].tag == pageData[j].tag){
                     funcOpt[i].iconfont = pageData[j].iconfont;
                     funcOpt[i].url = pageData[j].url;

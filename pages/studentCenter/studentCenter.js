@@ -113,7 +113,7 @@ Page({
     onLoad: function(options) {
         let that = this;
         // 获取页面功能
-        let funcOpt = getApp().funcOpt.function;
+        let funcOpt = wx.getStorageSync('funcOpt').function;
         
         for (let i = 0; i < funcOpt.length; i++) {
             funcOpt[i].show = 'inline-block'
@@ -125,13 +125,12 @@ Page({
                 funcOpt[i].show = 'none'
             }
         }
-        console.log('funcOpt', funcOpt)
         that.setData({
             funcOpt: funcOpt
         })
         // 版本号
         let version = wx.getExtConfigSync();
-        let funcOptId = getApp().funcOpt.function_id;
+        let funcOptId = wx.getStorageSync('funcOpt').function_id;
         let versionText = '';
         if (Number(funcOptId) == 1) {
             versionText = ' 基础版'
