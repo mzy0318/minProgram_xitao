@@ -1,5 +1,4 @@
 @import '../../../utils/iconFont.wxss';
-/* @import '../../../utils/iconFontO.wxss'; */
 .actRegUserWrap{
     width:710rpx;
     height:140rpx;

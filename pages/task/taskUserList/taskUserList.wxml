@@ -8,7 +8,7 @@
     <view class='taskUserOptions'>
         <view bindtap='optToInfo' data-id='0' data-courseid='{{item.id}}'><text>排行榜</text></view>
         <view bindtap='optToInfo' data-id='1' data-title='{{item.title}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'><text>邀请好友</text></view>
-        <view bindtap='optToInfo' data-id='2' data-courseid='{{item.id}}' data-timestring='{{item.start_time}}' data-title='{{item.title}}'><text>打卡日历</text></view>
+        <view bindtap='optToInfo' data-id='2' data-courseid='{{item.id}}' data-pwd='{{item.password}}' data-timestring='{{item.start_time}}' data-title='{{item.title}}'><text>打卡日历</text></view>
     </view>
 </view>
 

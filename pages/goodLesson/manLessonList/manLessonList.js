@@ -14,26 +14,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // let that = this
-        // getApp().request({
-        //     url:'org/lesson_one_list',
-        //     data:{
-        //         page:that.data.pageNum,
-        //     },
-        //     method:'post',
-        //     success:function(res){
-        //         if(Number(res.data.code) == 1){
-        //             that.setData({
-        //                 pageData: res.data.data
-        //             })
-        //         } else if (Number(res.data.code) == 0){
-        //             wx.showToast({
-        //                 title: res.data.msg,
-        //                 icon:'none',
-        //             })
-        //         }
-        //     }
-        // })
     },
 
     /**
@@ -42,39 +22,41 @@ Page({
     onReady: function () {
 
     },
-    loadData:function(){
-      let that = this
-      getApp().request({
-        url: 'org/lesson_one_list',
-        data: {
-          page: that.data.pageNum,
-        },
-        method: 'post',
-        success: function (res) {
-          wx.stopPullDownRefresh()
+    // 获取页面数据
+    loadData: function () {
+        let that = this
+        getApp().request({
+            url: 'org/lesson_one_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                wx.stopPullDownRefresh()
 
-          if (Number(res.data.code) == 1) {
-            res.data.data = utils.map(res.data.data,function(one){
-              one.cover.url = utils.rect(one.cover.url,200,100)
-              return one
-            })
-            that.setData({
-              pageData: res.data.data
-            })
-          } else if (Number(res.data.code) == 0) {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none',
-            })
-          }
-        }
-      })
+                if (Number(res.data.code) == 1) {
+                    res.data.data = utils.map(res.data.data, function (one) {
+                        one.cover.url = utils.rect(one.cover.url, 200, 100)
+                        return one
+                    })
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
     },
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.loadData()
+        let that = this;
+        that.loadData()
     },
 
     /**
@@ -95,7 +77,11 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-      this.loadData()
+        let that = this;
+        that.setData({
+            pageNum:1
+        })
+        that.loadData()
     },
 
     /**
@@ -129,16 +115,8 @@ Page({
             })
         }
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    // onShareAppMessage: function () {
-    //     return {
-    //         path:'pages/index/index'
-    //     }
-    // },
     delActive:function(e){
+        let that = this;
         getApp().request({
             url:'org/delete_act',
             data:{
@@ -152,20 +130,13 @@ Page({
                         title: '删除成功',
                         icon: 'success',
                         success:function(){
-                            wx.redirectTo({
-                                url: '../manLessonList/manLessonList',
-                            })
+                            that.loadData()
                         }
                     })
                 }else{
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',
-                        // success: function () {
-                        //     wx.redirectTo({
-                        //         url: '../manLessonList/manLessonList',
-                        //     })
-                        // }
                     })
                 }
             }
@@ -177,8 +148,7 @@ Page({
         })
     },
     taBack:function(){
-        wx.navigateBack({
-        })
+        wx.navigateBack({})
     },
     toLessonInfo:function(e){
         wx.navigateTo({

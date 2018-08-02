@@ -85,7 +85,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 2) {
             //打卡日历
             wx.navigateTo({
-                url: '../taskDate/taskDate?courseId=' + e.currentTarget.dataset.courseid + '&timeString=' + e.currentTarget.dataset.timestring + '&title=' + e.currentTarget.dataset.title,
+                url: '../taskDate/taskDate?courseId=' + e.currentTarget.dataset.courseid + '&timeString=' + e.currentTarget.dataset.timestring + '&title=' + e.currentTarget.dataset.title + '&pwd=' + e.currentTarget.dataset.pwd,
             })
         }
     },

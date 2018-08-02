@@ -24,7 +24,7 @@ Page({
         getApp().request({
             url:'org/lesson_one_joiner_list',
             data:{
-                act_nice_course_id: that.data.actId
+                act_nice_id: that.data.actId
             },
             method:'post',
             success:function(res){

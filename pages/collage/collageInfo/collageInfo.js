@@ -100,85 +100,12 @@ Page({
      */
     onReady: function () {
         let that = this;
-        getApp().request({
-            url: 'personal_group_act',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: '',
-            },
-            method: 'post',
-            success: res => {
-                if (Number(res.data.code) == 1) {
-                    // 背景音乐
-                    innerAudioContext.src = res.data.data.music,
-                        innerAudioContext.play();
-                    innerAudioContext.onPlay(() => {
-                        that.setData({
-                            showMusic: false,
-                            animationClass: 'musicControl viewRotate'
-                        })
-                    })
-                    innerAudioContext.onStop(() => {
-                        that.setData({
-                            animationClass: 'musicControl'
-                        })
-                    })
-
-                    wx.setNavigationBarTitle({
-                        title: res.data.data.app_name,
-                    })
-                    if (res.data.data.joiner_id == undefined) {
-                        that.setData({
-                            isButton: true
-                        })
-                    } else if (res.data.data.joiner_id != undefined) {
-                        that.setData({
-                            isButton: false
-                        })
-                    }
-                    res.data.data.cover.url = utils.rect(res.data.data.cover.url,325,155);
-                    if (res.data.data.act_image.length>0){
-                        for (let i = 0; i < res.data.data.act_image.length;i++){
-                            res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 325, 155)
-                        }
-                    }
-                    
-                    that.setData({
-                        pageData: res.data.data,
-                        collagePrice: res.data.data.act_set[0].price,
-                        personNum: res.data.data.act_set[0].person,
-                        priceInfo: '凑齐' + res.data.data.act_set[0].person + '人即可享受每人' + res.data.data.act_set[0].price + '元',
-                        startTime: utils.formatDate(new Date(res.data.data.start_time * 1000)),
-                        endTime: utils.formatDate(new Date(res.data.data.end_time * 1000)),
-                        status: new Date().valueOf() >= res.data.data.end_time * 1000 ? '已结束' : '进行中',
-                        joinId: res.data.data.joiner_id ? res.data.data.joiner_id:'',
-                        bannerImage: res.data.data.banner_image_url,
-                        backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
-                        bgMusic: res.data.data.music,
-                        musicId: res.data.data.music_id,
-                    });
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-            }
-        })
         // 拼团列表
-        getApp().request({
-            url: 'personal_group_range',
-            data: {
-                act_id: that.data.actId,
-                page: 1,
-            },
-            method: 'post',
-            success: res => {
-                that.setData({
-                    collageData: res.data.data.list
-                })
-            }
-        });
+        that.getRangeData()
+        // 页面数据
+        that.getpageData()
+        
+        
     },
 
     /**
@@ -207,7 +134,11 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        // 拼团列表
+        that.getRangeData()
+        // 页面数据
+        that.getpageData()
     },
 
     /**
@@ -522,7 +453,7 @@ Page({
     toEditPage: function (e) {
         let that = this;
         wx.navigateTo({
-            url: '../../manageCenters/collageEdit/collageEdit?id=' + e.currentTarget.dataset.id,
+            url: '../../manageCenters/collageEdit/collageEdit?isEdit=1&id=' + e.currentTarget.dataset.id,
         })
     },
     shareFriends:function(){
@@ -543,5 +474,92 @@ Page({
     stopMusic:function(){
         let that = this;
         innerAudioContext.stop()
+    },
+    // 获取拼团列表
+    getRangeData:function(){
+        let that = this;
+        getApp().request({
+            url: 'personal_group_range',
+            data: {
+                act_id: that.data.actId,
+                page: 1,
+            },
+            method: 'post',
+            success: res => {
+                that.setData({
+                    collageData: res.data.data.list
+                })
+            }
+        });
+    },
+    // 获取页面数据 
+    getpageData:function(e){
+        let that = this;
+        getApp().request({
+            url: 'personal_group_act',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: '',
+            },
+            method: 'post',
+            success: res => {
+                if (Number(res.data.code) == 1) {
+                    wx.stopPullDownRefresh()
+                    // 背景音乐
+                    innerAudioContext.src = res.data.data.music,
+                        innerAudioContext.play();
+                    innerAudioContext.onPlay(() => {
+                        that.setData({
+                            showMusic: false,
+                            animationClass: 'musicControl viewRotate'
+                        })
+                    })
+                    innerAudioContext.onStop(() => {
+                        that.setData({
+                            animationClass: 'musicControl'
+                        })
+                    })
+
+                    wx.setNavigationBarTitle({
+                        title: res.data.data.app_name,
+                    })
+                    if (res.data.data.joiner_id == undefined) {
+                        that.setData({
+                            isButton: true
+                        })
+                    } else if (res.data.data.joiner_id != undefined) {
+                        that.setData({
+                            isButton: false
+                        })
+                    }
+                    res.data.data.cover.url = utils.rect(res.data.data.cover.url, 325, 155);
+                    if (res.data.data.act_image.length > 0) {
+                        for (let i = 0; i < res.data.data.act_image.length; i++) {
+                            res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 325, 155)
+                        }
+                    }
+
+                    that.setData({
+                        pageData: res.data.data,
+                        collagePrice: res.data.data.act_set[0].price,
+                        personNum: res.data.data.act_set[0].person,
+                        priceInfo: '凑齐' + res.data.data.act_set[0].person + '人即可享受每人' + res.data.data.act_set[0].price + '元',
+                        startTime: utils.formatDate(new Date(res.data.data.start_time * 1000)),
+                        endTime: utils.formatDate(new Date(res.data.data.end_time * 1000)),
+                        status: new Date().valueOf() >= res.data.data.end_time * 1000 ? '已结束' : '进行中',
+                        joinId: res.data.data.joiner_id ? res.data.data.joiner_id : '',
+                        bannerImage: res.data.data.banner_image_url,
+                        backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
+                        bgMusic: res.data.data.music,
+                        musicId: res.data.data.music_id,
+                    });
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
     }
 })

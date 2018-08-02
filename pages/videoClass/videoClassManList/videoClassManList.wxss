@@ -1,6 +1,7 @@
 @import '../../../utils/iconFont.wxss';
 page{
     background:#F7F7F7;
+    padding-bottom:110rpx;
 }
 /* 视频列表 */
 .manListWrap{

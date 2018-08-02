@@ -1,5 +1,6 @@
 {
     "navigationBarTitleText": "咨询详情",
     "navigationBarBackgroundColor": "#000000",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
 }

@@ -1,3 +1,4 @@
+@import '../../../utils/iconFont.wxss';
 page{
     background:#F2F2F2;
 }
@@ -33,7 +34,7 @@ page{
     margin:20rpx auto 0rpx;
 }
 .contentTitle{
-    height:80rpx;
+    min-height:80rpx;
     width:710rpx;
     font-size:35rpx;
     text-indent:20rpx;
@@ -41,7 +42,7 @@ page{
 }
 .contentTitle view{
     float:left;
-    height:80rpx;
+    min-height:80rpx;
     line-height:80rpx;
 }
 .contentTitle view:nth-child(2){

@@ -1,5 +1,7 @@
+@import '../../../utils/iconFont.wxss';
 page{
     background:#F2F2F2;
+    padding-bottom:110rpx;
 }
 /* 页面功能 */
 .manListOpt{
@@ -33,15 +35,15 @@ page{
     margin:20rpx auto 0rpx;
 }
 .contentTitle{
-    height:80rpx;
     width:710rpx;
+    min-height:80rpx;
     font-size:35rpx;
     text-indent:20rpx;
     background:#F6F7F9;
 }
 .contentTitle view{
     float:left;
-    height:80rpx;
+    min-height:80rpx;
     line-height:80rpx;
 }
 .contentTitle view:nth-child(2){

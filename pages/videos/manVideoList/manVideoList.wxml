@@ -1,24 +1,22 @@
-<view class='manListWrap'>
-    <view class='empty'></view>
-    <view class='manListContent' wx:for='{{pageData}}'>
-        <view class='manListContentTop' bindtap='toListInfo' data-actid='{{item.id}}'>{{item.title}}</view>
-        <view class='manListContentMiddel'>
-            <view class='ListContentMiddelLeft' bindtap='toListInfo' data-actid='{{item.id}}'>
-                <image src='{{item.banner_image_url}}' mode='scaleToFill' ></image>
-            </view>
-            <view class='ListContentMiddelRight'>
-                <view class='contentMiddelRightChild' bindtap='toListInfo' data-actid='{{item.id}}'>查看贺卡</view>
-                <view class='contentMiddelDate'>时间:<text>{{item.create_time}}</text></view>
-            </view>
+<view class='empty'></view>
+<view class='manListContent' wx:for='{{pageData}}'>
+    <view class='manListContentTop' bindtap='toListInfo' data-actid='{{item.id}}'>{{item.title}}</view>
+    <view class='manListContentMiddel'>
+        <view class='ListContentMiddelLeft' bindtap='toListInfo' data-actid='{{item.id}}'>
+            <image src='{{item.banner_image_url}}' mode='scaleToFill' ></image>
         </view>
-        <view class='manListContentBottom'>
-            <view class='contentBottomChild' bindtap='moveAct' data-tag='{{item.act_tag}}' data-id='{{item.id}}'><text class='iconfont icon-lajixiang'></text>删除</view>
-            <view class='contentBottomChild' bindtap='toVideosEdit' data-actid='{{item.id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
-            <view class='contentBottomChild' data-acttag='{{item.act_tag}}' bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}'><text class='iconfont icon-share'></text>分享</view>
+        <view class='ListContentMiddelRight'>
+            <view class='contentMiddelRightChild' bindtap='toListInfo' data-actid='{{item.id}}'>查看贺卡</view>
+            <view class='contentMiddelDate'>时间:<text>{{item.create_time}}</text></view>
         </view>
     </view>
-    <view class='manListBottom'>
-        <view class='manListBottomLeft' bindtap='taBack'>返回</view>
-        <view class='manListBottomRight' bindtap='chooseModel'>发布新祝福</view>
+    <view class='manListContentBottom'>
+        <view class='contentBottomChild' bindtap='moveAct' data-tag='{{item.act_tag}}' data-id='{{item.id}}'><text class='iconfont icon-lajixiang'></text>删除</view>
+        <view class='contentBottomChild' bindtap='toVideosEdit' data-actid='{{item.id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
+        <view class='contentBottomChild' data-acttag='{{item.act_tag}}' bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}'><text class='iconfont icon-share'></text>分享</view>
     </view>
+</view>
+<view class='manListBottom'>
+    <view class='manListBottomLeft' bindtap='taBack'>返回</view>
+    <view class='manListBottomRight' bindtap='chooseModel'>发布新祝福</view>
 </view>

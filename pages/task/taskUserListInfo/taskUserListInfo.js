@@ -92,7 +92,6 @@ Page({
         let that = this;
         that.videoContext = wx.createVideoContext('myVideo');
         innerAudioContext.onEnded(() => {
-            console.log('可以了')
             that.setData({
                 audioUrl: '',
                 isMy: '',

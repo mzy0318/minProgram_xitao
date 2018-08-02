@@ -145,9 +145,11 @@ Page({
                                 title: '删除成功',
                                 icon: 'success',
                                 success: function () {
-                                    wx.redirectTo({
-                                        url: '../videoClassManList/videoClassManList',
+                                    that.setData({
+                                        isOptions: true,
                                     })
+                                    let num = 1;
+                                    that.getData(num)
                                 }
                             })
                         }

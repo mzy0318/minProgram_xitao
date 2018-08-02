@@ -139,9 +139,10 @@ Page({
         })
     },
     switchTabO: function(e) {
-        this.setData({
-            isShowO: !this.data.isShowO,
-            isHiddenO: !this.data.isHiddenO,
+        let that = this;
+        that.setData({
+            isShowO: !that.data.isShowO,
+            isHiddenO: !that.data.isHiddenO,
             getBargainLimitType: e.currentTarget.dataset.value
         })
     },
@@ -154,29 +155,22 @@ Page({
             original_price: e.detail.value.original_price,
             now_price: e.detail.value.now_price,
             pay_status: e.detail.value.pay_status ? 1 : 0,
-            start_time: this.data.startDate,
-            end_time: this.data.endDate,
+            start_time: that.data.startDate,
+            end_time: that.data.endDate,
             joiner_limit: e.detail.value.joiner_limit,
             telephone: e.detail.value.telephone,
             address: e.detail.value.address,
             rule: e.detail.value.rule,
-            // join_info_require: this.data.nameInfoId,
-            // join_info_text: this.data.nameInfo,
-            bargain_type: this.data.getbargainType ? this.data.getbargainType : 1,
-            bargain_limit_type: this.data.getBargainLimitTyp ? this.data.getBargainLimitType : 1,
+            bargain_type: that.data.getbargainType ? that.data.getbargainType : 1,
+            bargain_limit_type: that.data.getBargainLimitType ? that.data.getBargainLimitType : 1,
             bargain_param: e.detail.value.bargain_paramO ? e.detail.value.bargain_paramO : e.detail.value.bargain_paramT,
-            banner_image_url: this.data.backgroundImage,
+            banner_image_url: that.data.backgroundImage,
             status: e.detail.value.joiner_limit ? 1 : 0,
         }
         for (let i = 0; i < that.data.actImg0.length; i++){
             sendData['act_image[' + i + ']'] = that.data.actImg0[i];
         }
-        // for (let i = 0; i < that.data.joinInfo.length; i++) {
-        //     sendData['join_info_text[' + i + ']'] = that.data.joinInfo[i];
-        //     sendData['join_info_require[' + i + ']'] = that.data.joinInfoId[i];
-        // }
         for (let i = 0; i < that.data.nameInfo.length; i++) {
-            // let index = i + 2;
             sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i];
             sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i];
         }

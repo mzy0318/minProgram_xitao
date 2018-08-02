@@ -145,7 +145,7 @@ Page({
     tomanageEdit: function(e) {
         let that = this;
         wx.navigateTo({
-            url: '../../manageCenters/collageEdit/collageEdit?id=' + e.currentTarget.dataset.id,
+            url: '../../manageCenters/collageEdit/collageEdit?isEdit=1&id=' + e.currentTarget.dataset.id,
         })
     },
     // 分享页面

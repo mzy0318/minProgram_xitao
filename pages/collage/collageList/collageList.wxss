@@ -1,11 +1,8 @@
 page{
   background:#F5F5F5;
+  padding-bottom:10rpx;
 }
-.collageListWrap{
-    width:750rpx;
-    height:1207rpx;
-    background:#F5F5F5;
-}
+
 .empty{
     width:750rpx;
     height:20rpx;
@@ -20,7 +17,7 @@ page{
 .collageListTop{
     width:710rpx;
     height:320rpx;
-    background:lightblue;
+    background:#fff;
     position:relative;
 }
 .collageListTop image{

@@ -87,6 +87,7 @@ Page({
             method: 'post',
             success: function (res) {
                 if(Number(res.data.code)==1){
+                    wx.stopPullDownRefresh()
                     let data = res.data.data.list
                     for (let i = 0; i < data.length; i++) {
                         data[i].start_time = utils.liteDate(new Date(data[i].start_time * 1000))
@@ -95,7 +96,6 @@ Page({
                     that.setData({
                         pageData: data,
                     })
-                    wx.stopPullDownRefresh()
                 } else if (Nmuber(res.data.code) == 0){
                     wx.showToast({
                         title: res.data.msg,

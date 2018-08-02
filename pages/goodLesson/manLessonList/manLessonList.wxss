@@ -1,9 +1,7 @@
 @import '../../../utils/iconFont.wxss';
-.manListWrap{
-    width:750rpx;
-    min-height:1207rpx;
+page{
     background:#F2F2F2;
-    padding-bottom:100rpx;
+    padding-bottom:110rpx;
 }
 .manListContent{
     width:710rpx;
@@ -66,7 +64,6 @@
     text-align:center;
     margin-top:20rpx;
     float:left;
-    /* border-right:1rpx solid #7b7b7b; */
     border-right:1rpx solid #D8D8D8;
     color:#CA4535;
 }

@@ -1,10 +1,14 @@
 @import '../../../utils/iconFont.wxss';
-.manListWrap{
+page{
+    background:#F2F2F2;
+    padding-bottom:110rpx;
+}
+/* .manListWrap{
     width:750rpx;
     min-height:1207rpx;
     background:#F2F2F2;
     padding-bottom:100rpx;
-}
+} */
 .manListContent{
     width:710rpx;
     min-height:320rpx;

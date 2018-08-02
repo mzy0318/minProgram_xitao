@@ -20,7 +20,6 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
     },
 
     /**
@@ -28,31 +27,7 @@ Page({
      */
     onShow: function () {
         let that = this;
-        getApp().request({
-            url: 'org/normal_list',
-            data: {
-                page: that.data.pageNum
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
-                    }
-                    res.data.data = utils.map(res.data.data,function(one){
-                      one.cover.url = utils.rect(one.cover.url,200,100)
-                      return one
-                    })
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -77,22 +52,7 @@ Page({
         that.setData({
             pageNum:1
         })
-        getApp().request({
-            url: 'org/normal_list',
-            data: {
-                page: that.data.pageNum
-            },
-            method: 'post',
-            success: function (res) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time*1000))
-                }
-                that.setData({
-                    pageData: res.data.data
-                })
-                wx.stopPullDownRefresh()
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -146,6 +106,7 @@ Page({
         })
     },
     delActive: function (e) {
+        let that = this;
         getApp().request({
             url: 'org/delete_act',
             data: {
@@ -159,9 +120,10 @@ Page({
                         title: '删除成功',
                         icon:'success',
                         success:function(){
-                            wx.redirectTo({
-                                url: '../actRegManList/actRegManList',
+                            that.setData({
+                                pageNum: 1
                             })
+                            that.getPageData()
                         }
                     })
                 } else if (Number(res.data.code) == 0){
@@ -184,6 +146,36 @@ Page({
     sharePage:function(e){
         wx.navigateTo({
             url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/actReg/actRegListInfo/actRegListInfo&actTag=' + e.currentTarget.dataset.acttag,
+        })
+    },
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'org/normal_list',
+            data: {
+                page: that.data.pageNum
+            },
+            method: 'post',
+            success: function (res) {
+                if(res.data.code == 1){
+                    wx.stopPullDownRefresh();
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
+                    }
+                    res.data.data = utils.map(res.data.data, function (one) {
+                        one.cover.url = utils.rect(one.cover.url, 200, 100)
+                        return one
+                    })
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                } else if (res.data.code == 0){
+                    wx.showToast({
+                        title: res.code.msg,
+                        icon:'none',
+                    })
+                }
+            }
         })
     }
 })

@@ -179,8 +179,9 @@ Page({
                 url: '../videoClass/videoClassInfo/videoClassInfo?actId=' + options.actId,
             })
         } else if (Number(options.pageId) == 17){
+            // 打卡作业  加入老师
             wx.navigateTo({
-                url: '../task/taskTeacherEdit/taskTeacherEdit',
+                url: '../task/taskTeacherEdit/taskTeacherEdit?isIndex=1',
             })
         } else if (Number(options.pageId) == 18){
             wx.navigateTo({

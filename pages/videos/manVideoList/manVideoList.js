@@ -15,6 +15,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        that.getPageData()
     },
 
     /**
@@ -28,22 +29,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        let that = this;
-        getApp().request({
-            url: 'org/video_card_list',
-            method: 'post',
-            data: {
-                page: that.data.pageNum,
-            },
-            success: function (res) {
-                for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
-                }
-                that.setData({
-                    pageData: res.data.data.list
-                })
-            }
-        })
+        
     },
 
     /**
@@ -68,22 +54,7 @@ Page({
         that.setData({
             pageNum: 1,
         })
-        getApp().request({
-            url: 'org/video_card_list',
-            method: 'post',
-            data: {
-                page: that.data.pageNum,
-            },
-            success: function (res) {
-                for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
-                }
-                that.setData({
-                    pageData: res.data.data.list
-                })
-                wx.stopPullDownRefresh()
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -142,7 +113,9 @@ Page({
             url: '../../manageCenters/chooseModel/chooseModel',
         })
     },
+    // 删除活动
     moveAct:function(e){
+        let that = this;
         getApp().request({
             url:'org/delete_act',
             method:'post',
@@ -156,12 +129,17 @@ Page({
                         title: '删除成功',
                         icon:'success',
                         success:function(){
-                            
+                            that.setData({
+                                pageNum:1
+                            })
+                            that.getPageData()
                         }
                     })
-                    // wx.navigateTo({
-                    //     url:'../../videos/manVideoList/manVideoList'
-                    // })
+                } else if (res.data.code == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
                 }
             }    
         })
@@ -172,6 +150,33 @@ Page({
     toSharePage: function (e) {
         wx.navigateTo({
             url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/videos/videoListInfo/videoListInfo&actTag=' + e.currentTarget.dataset.acttag,
+        })
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'org/video_card_list',
+            method: 'post',
+            data: {
+                page: that.data.pageNum,
+            },
+            success: function (res) {
+                if(res.data.code == 1){
+                    wx.stopPullDownRefresh()
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    that.setData({
+                        pageData: res.data.data.list
+                    })
+                } else if (res.data.code == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
+            }
         })
     }
 })

@@ -10,12 +10,15 @@ Page({
         courseId:'',
         startDate:'',
         endDate:'',
+        startTime: '',
+        endTime: '',
         count:'',
         month:'',
         year:'',
         yearMonth:'',
         timeString:'',
         title:'',
+        pwd:'',
     },
 
     /**
@@ -23,7 +26,9 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
+        console.log('options', options)
         that.setData({
+            pwd:options.pwd,
             title:options.title,
             courseId: options.courseId,
             month:formate.month(new Date(options.timeString*1000)),
@@ -80,6 +85,7 @@ Page({
     // onShareAppMessage: function() {
 
     // }
+    // 具体作业
     toInfo:function(e){
         let that = this;
         let month = Number(e.currentTarget.dataset.month) > 10 ? Number(e.currentTarget.dataset.month) : ('0' + Number(e.currentTarget.dataset.month))
@@ -87,7 +93,7 @@ Page({
         let date = e.currentTarget.dataset.year + '-' + month + '-' + day
         if (e.currentTarget.dataset.enable){
             wx.navigateTo({
-                url: '../taskUserListInfo/taskUserListInfo?courseId=' + that.data.courseId + '&date=' + date + '&isDate=1',
+                url: '../taskUserListInfo/taskUserListInfo?courseId=' + that.data.courseId + '&date=' + date + '&isDate=1&title='+that.data.title+'&pwd='+that.data.pwd +'&startTime='+that.data.startTime+'&endTime='+that.data.endTime,
             })
         }else{
 
@@ -154,6 +160,8 @@ Page({
                     }
                     that.setData({
                         dayList: dateList,
+                        startTime: res.data.data.start_time,
+                        endTime: res.data.data.end_time,
                         startDate: formate.formatDate(new Date(res.data.data.start_time * 1000)),
                         endDate: formate.formatDate(new Date(res.data.data.end_time * 1000)),
                         count: res.data.data.assign_times

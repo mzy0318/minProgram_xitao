@@ -51,7 +51,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        console.log('options',options)
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 actionOptions: false
@@ -84,76 +83,25 @@ Page({
      */
     onReady: function () {
         let that = this;
-        getApp().request({
-            url: 'bargain_act',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: '0',
-            },
-            method: 'post',
-            success: res => {
-                if (Number(res.data.code) == 1) {
-                    //背景音乐
-                    innerAudioContext.src = res.data.data.music;
-                    innerAudioContext.play();
-                    innerAudioContext.onPlay(() => {
-                        that.setData({
-                            showMusic: false,
-                            animationClass: 'musicControl viewRotate'
-                        })
-                    })
-                    innerAudioContext.onStop(() => {
-                        that.setData({
-                            animationClass: 'musicControl'
-                        })
-                    })
-                    innerAudioContext.onError((res) => {
-                        console.log(res)
-                    })
-                    let nameInfo = []
-                    for (let i = 0; i < res.data.data.join_info.length; i++) {
-                        nameInfo.push(res.data.data.join_info[i].text)
-                    }
-                    that.setData({
-                        pageData: res.data.data,
-                        startTime: util.formatTime(new Date(res.data.data.start_time * 1000)),
-                        endTime: util.formatTime(new Date(res.data.data.end_time * 1000)),
-                        activeId: that.data.actId,
-                        bannerImage: res.data.data.banner_image_url,
-                        backgroundImage: res.data.data.bg_image_url,
-                        backgroundMusic: res.data.data.music,  //背景音乐
-                        musicId: res.data.data.music_id,  //背景音乐ID
-                        activeImage: res.data.data.act_image,
-                        nameInfo: nameInfo,
-                    })
-                    wx.setNavigationBarTitle({
-                        title: res.data.data.title,
-                    })
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                        mask: true,
-                    })
-                }
-            }
+        // 播放事件
+        innerAudioContext.onPlay(() => {
+            that.setData({
+                showMusic: false,
+                animationClass: 'musicControl viewRotate'
+            })
         })
-        getApp().request({
-            url: 'bargain_range',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: '0',
-                page: that.data.rangPage,
-            },
-            method: 'post',
-            success: data => {
-                if (data.data.code == 1) {
-                    this.setData({
-                        killPricePeople: data.data.data,
-                    })
-                }
-            }
+        innerAudioContext.onStop(() => {
+            that.setData({
+                animationClass: 'musicControl'
+            })
         })
+        innerAudioContext.onError((res) => {
+            console.log(res)
+        })
+        // 获取页面数据
+        that.getPageData();
+        // 获取砍价排行榜
+        that.getRangeData();
     },
 
     /**
@@ -197,50 +145,9 @@ Page({
         that.setData({
             rangPage: 1
         })
-        getApp().request({
-            url: 'bargain_act',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: '0',
-            },
-            method: 'post',
-            success: res => {
-                let nameInfo = []
-                for (let i = 0; i < res.data.data.join_info.length; i++) {
-                    nameInfo.push(res.data.data.join_info[i].text)
-                }
-                that.setData({
-                    pageData: res.data.data,
-                    startTime: util.formatTime(new Date(res.data.data.start_time*1000)),
-                    endTime: util.formatTime(new Date(res.data.data.end_time*1000)),
-                    activeId: options.id,
-                    bannerImage: res.data.data.banner_image_url,
-                    backgroundImage: res.data.data.bg_image_url,
-                    backgroundMusic: res.data.data.music,
-                    musicId: res.data.data.music_id,
-                    activeImage: res.data.data.act_image,
-                    nameInfo: nameInfo,
-                })
-                wx.setNavigationBarTitle({
-                    title: res.data.data.title,
-                })
-            }
-        })
-        getApp().request({
-            url: 'bargain_range',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: '0',
-                page: that.data.rangPage
-            },
-            method: 'post',
-            success: data => {
-                this.setData({
-                    killPricePeople: data.data.data,
-                })
-                wx.stopPullDownRefresh()
-            }
-        })
+        that.getPageData();
+        // 获取砍价排行榜
+        that.getRangeData();
     },
 
     /**
@@ -332,7 +239,7 @@ Page({
                 let respons = res;
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
-                        title: '正在提交...',
+                        title: '正在报名',
                         mask: true,
                     })
                     setTimeout(closeLogin, 2000)
@@ -341,11 +248,14 @@ Page({
                         wx.hideLoading();
 
                         wx.showToast({
-                            title: '提交成功',
+                            title: '报名成功',
                             success:function(){
                                 that.setData({
                                     isClosed: 'none',
                                 })
+                                that.getPageData();
+                                // 获取砍价排行榜
+                                that.getRangeData();
                                 wx.navigateTo({
                                     url: '../killPricePerson/killPricePerson?actId=' + respons.data.data.act_id + '&joinId=' + respons.data.data.joiner_id,
                                 })
@@ -582,7 +492,7 @@ Page({
     toEditPage: function (e) {
         let that = this;
         wx.navigateTo({
-            url:'../../manageCenters/manageEdit/manageEdit?id='+e.currentTarget.dataset.id,
+            url:'../../manageCenters/manageEdit/manageEdit?isEdit=1&id='+e.currentTarget.dataset.id,
         })
     },
     switchTabs: function (e) {
@@ -602,6 +512,72 @@ Page({
         innerAudioContext.stop()
         that.setData({
             animationClass: 'musicControl'
+        })
+    },
+    // 获取砍价排行傍
+    getRangeData:function(){
+        let that = this;
+        getApp().request({
+            url: 'bargain_range',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: '0',
+                page: that.data.rangPage,
+            },
+            method: 'post',
+            success: data => {
+                if (data.data.code == 1) {
+                    wx.stopPullDownRefresh()
+                    this.setData({
+                        killPricePeople: data.data.data,
+                    })
+                }
+            }
+        })
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'bargain_act',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: '0',
+            },
+            method: 'post',
+            success: res => {
+                if (Number(res.data.code) == 1) {
+                    wx.stopPullDownRefresh()
+                    //背景音乐
+                    innerAudioContext.src = res.data.data.music;
+                    innerAudioContext.play();
+                    let nameInfo = []
+                    for (let i = 0; i < res.data.data.join_info.length; i++) {
+                        nameInfo.push(res.data.data.join_info[i].text)
+                    }
+                    that.setData({
+                        pageData: res.data.data,
+                        startTime: util.formatTime(new Date(res.data.data.start_time * 1000)),
+                        endTime: util.formatTime(new Date(res.data.data.end_time * 1000)),
+                        activeId: that.data.actId,
+                        bannerImage: res.data.data.banner_image_url,
+                        backgroundImage: res.data.data.bg_image_url,
+                        backgroundMusic: res.data.data.music,  //背景音乐
+                        musicId: res.data.data.music_id,  //背景音乐ID
+                        activeImage: res.data.data.act_image,
+                        nameInfo: nameInfo,
+                    })
+                    wx.setNavigationBarTitle({
+                        title: res.data.data.title,
+                    })
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                        mask: true,
+                    })
+                }
+            }
         })
     }
 })

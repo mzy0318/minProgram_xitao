@@ -67,21 +67,7 @@ Page({
      */
     onShow: function () {
         let that = this
-        App.request({
-            url: 'org/sale_lesson_appoint_list',
-            data: {},
-            method: 'post',
-            success: function (res) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
-                    res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
-                    res.data.data[i].status = that.data.status[res.data.data[i].status].name;
-                }
-                that.setData({
-                    pageData: res.data.data,
-                });
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -103,24 +89,7 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this
-        App.request({
-            url: 'org/sale_lesson_appoint_list',
-            data: {},
-            method: 'post',
-            success: function (res) {
-                for (let i = 0; i < res.data.data.length; i++) {
-                    res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
-                    res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
-                    res.data.data[i].status = that.data.status[res.data.data[i].status].name;
-                }
-                that.setData({
-                    pageData: res.data.data,
-                    // xinData: that.data.xinArr[res.data.data.intention],
-                });
-                wx.stopPullDownRefresh()
-                // console.log('that.data.xinData', that.data.xinData)
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -149,31 +118,16 @@ Page({
             data: e.detail.value,
             method: 'post',
             success: function (res) {
-                
                 if (Number(res.data.code) == 1) {
                     wx.showToast({
                         title: '添加成功',
                         icon: 'none',
                     })
-                    App.request({
-                        url: 'org/sale_lesson_appoint_list',
-                        data: {},
-                        method: 'post',
-                        success: function (res) {
-                            for (let i = 0; i < res.data.data.length; i++) {
-                                res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
-                                res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color;
-                                res.data.data[i].status = that.data.status[res.data.data[i].status].name;
-                            }
-                            if(Number(res.data.code)==1){
-                                that.setData({
-                                    pageData: res.data.data,
-                                    isShow: true,
-                                    cancelData: '＋'
-                                })
-                            }
-                        }
+                    that.setData({
+                        isShow: true,
+                        cancelData: '＋'
                     })
+                    that.getPageData()
                 }
             }
         })
@@ -198,5 +152,33 @@ Page({
                 title: '快速新增咨询',
             })
         }
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        App.request({
+            url: 'org/sale_lesson_appoint_list',
+            data: {},
+            method: 'post',
+            success: function (res) {
+                if (res.data.code == 1) {
+                    wx.stopPullDownRefresh()
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time * 1000));
+                        res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
+                        res.data.data[i].status = that.data.status[res.data.data[i].status].name;
+                    }
+                    that.setData({
+                        pageData: res.data.data,
+
+                    });
+                } else if (res.data.code == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
     }
 })

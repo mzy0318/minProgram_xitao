@@ -120,7 +120,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 1) {
             //打卡日历
             wx.navigateTo({
-                url: '../taskDate/taskDate?courseId=' + e.currentTarget.dataset.courseid + '&timeString=' + e.currentTarget.dataset.timestring + '&title=' + e.currentTarget.dataset.title,
+                url: '../taskDate/taskDate?courseId=' + e.currentTarget.dataset.courseid + '&timeString=' + e.currentTarget.dataset.timestring + '&title=' + e.currentTarget.dataset.title + '&pwd=' + e.currentTarget.dataset.pwd,
             })
         } else if (Number(e.currentTarget.dataset.id) == 2) {
             //编辑课程
@@ -154,7 +154,7 @@ Page({
     // 作业详情页面
     toInfo:function(e){
         wx.navigateTo({
-            url: '../taskUserListInfo/taskUserListInfo?courseId=' + e.currentTarget.dataset.courseid + '&isDate=0&pwd=' + e.currentTarget.dataset.pwd,
+            url: '../taskUserListInfo/taskUserListInfo?courseId=' + e.currentTarget.dataset.courseid + '&isDate=0&pwd=' + e.currentTarget.dataset.pwd + '&endTime=' + e.currentTarget.dataset.endtime + '&startTime=' + e.currentTarget.dataset.starttime + '&title=' + e.currentTarget.dataset.title,
         })
     },
     // 搜索

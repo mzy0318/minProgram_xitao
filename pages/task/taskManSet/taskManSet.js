@@ -48,6 +48,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+
     },
 
     /**
@@ -122,7 +123,7 @@ Page({
         } else if (Number(e.currentTarget.dataset.id) == 3){
             //邀请老师
             wx.navigateTo({
-                url: '../taskInviTeacher/taskInviTeacher',
+                url: '../taskInviTeacher/taskInviTeacher?isIndex=0',
             })
         } else if (Number(e.currentTarget.dataset.id) == 4){
             //老师管理

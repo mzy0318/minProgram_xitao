@@ -1,4 +1,8 @@
 @import '../../../utils/iconFont.wxss';
+page{
+    background:#F2F2F2;
+    padding-bottom:110rpx;
+}
 .manListWrap{
     width:750rpx;
     min-height:1207rpx;

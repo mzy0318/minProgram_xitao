@@ -76,6 +76,7 @@ Page({
                             } else if (userData[i].is_leader == 0) {
                                 userData[i].is_leader = '【团员】'
                             }
+                            userData[i].create_time = utils.formatTime(new Date(userData[i].create_time*1000))
                         }
                         that.setData({
                             userList: userData,
@@ -320,7 +321,7 @@ Page({
         let pageTypeStu = wx.getStorageSync('pageTypeStu');
         if (Number(pageTypeStu) == 6) {
             wx.navigateTo({
-                url: '../killPricePerson/killPricePerson?personInfo=' + sendData,
+                url: '../killPricePerson/killPricePerson?joinId=' + e.currentTarget.dataset.joinerid + '&actId=' + e.currentTarget.dataset.actid,
             })
         } else if (Number(pageTypeStu) == 3) {
             wx.navigateTo({

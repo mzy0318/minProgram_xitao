@@ -49,7 +49,8 @@
                     <view class='jianForm' data-index='{{index}}' bindtap='jianForm'>
                         <view class='jianFormChild' data-index='{{index}}'></view>
                     </view>{{item}}
-                    <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+                    <view class='isEdit'>
+                        <switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
                 </view>
                 <view class='addInfo' bindtap='showOptions' data-is='0'>+新增报名项</view>
             </view>

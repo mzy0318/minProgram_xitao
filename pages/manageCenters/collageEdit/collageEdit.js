@@ -43,6 +43,7 @@ Page({
         isID:'',
         isCoverImg:true,
         isActImg:true,
+        isEdit:'',
     },
 
     /**
@@ -53,6 +54,7 @@ Page({
         this.setData({
             bannerImg: options.image,
             isID: options.id,
+            isEdit:options.isEdit,
         })
         let toDay = new Date().valueOf();
         let toFuture = new Date().valueOf() + 2592000000
@@ -60,7 +62,11 @@ Page({
             startTime: util.formatDate(new Date(toDay)),
             endTime: util.formatDate(new Date(toFuture)),
         })
-        if(options.id != undefined){
+
+        if (that.data.isEdit == 1){
+            wx.setNavigationBarTitle({
+                title: '编辑拼团活动',
+            })
             getApp().request({
                 url: 'org/make_personal_group',
                 method: 'get',
@@ -139,7 +145,10 @@ Page({
                     })
                 }
             })
-        }else{
+        } else if (that.data.isEdit == 0){
+            wx.setNavigationBarTitle({
+                title: '发布拼团活动',
+            })
         }
     },
 
