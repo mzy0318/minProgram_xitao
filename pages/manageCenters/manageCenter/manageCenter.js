@@ -321,7 +321,7 @@ Page({
 
         if (Number(pageType) == 1) {
             wx.navigateTo({
-                url: '../manageActive/manageActive?url=' + e.currentTarget.dataset.requireurl,
+                url: '../../collage/collageManList/collageManList',
             })
         } else if (Number(pageType) == 2) {
             wx.navigateTo({

@@ -294,7 +294,6 @@ Page({
         }
     },
     toKillPirce: function(e) {
-        wx.setStorageSync('actTag', e.currentTarget.dataset.acttag)
         let pageType = wx.getStorageSync('pageType')
         //砍价活动
         if (Number(pageType) == 4) {
@@ -304,7 +303,7 @@ Page({
             //私人拼团
         } else if (Number(pageType) == 1) {
             wx.navigateTo({
-                url: '../../collage/collageInfo/collageInfo?actId=' + e.currentTarget.dataset.id + '&acttag=' + e.currentTarget.dataset.acttag,
+                url: '../../collage/collageInfo/collageInfo?actId=' + e.currentTarget.dataset.id + '&actTag=' + e.currentTarget.dataset.acttag,
             })
         }
 

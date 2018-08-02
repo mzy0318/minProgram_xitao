@@ -21,10 +21,6 @@ Page({
             data:{},
             method:'get',
             success:function(res){
-                // res.data.data.theme = utils.map(res.data.data.theme,function(one){
-                //   one.image = utils.rect(one.image,300,280)
-                //   return one
-                // })
                 res.data.data.catalog.unshift({
                     name:'全部',
                     list:res.data.data.theme
@@ -103,15 +99,17 @@ Page({
             }
         }
     },
+    // 
     toManageEdit:function(e){
+        let that = this;
         let pageType = wx.getStorageSync('pageType');
-        if (pageType==4){
+        if (pageType == 4){
             wx.navigateTo({
-                url: '../manageEdit/manageEdit?image=' + e.currentTarget.dataset.image + '&id=undefined',
+                url: '../manageEdit/manageEdit?image=' + e.currentTarget.dataset.image + '&id=undefined&isEdit=0',
             })
         } else if (pageType == 1){
             wx.navigateTo({
-                url: '../collageEdit/collageEdit?image=' + e.currentTarget.dataset.image + '&id=undefined',
+                url: '../collageEdit/collageEdit?image=' + e.currentTarget.dataset.image + '&id=undefined&isEdit=0',
             })
         } else if (pageType == 7){
             wx.navigateTo({

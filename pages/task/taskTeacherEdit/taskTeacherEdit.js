@@ -10,7 +10,6 @@ Page({
         startDate: '',
         jobName:'老师',
         coverImage: '',
-        coverImageO:'',
         coverImageId:'',
         isEdit:'',
         userId:'',

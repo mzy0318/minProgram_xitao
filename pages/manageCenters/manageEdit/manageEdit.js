@@ -25,7 +25,8 @@ Page({
         imageData: '',  //图片数组
         actImg0: '',   //图片ID数组
         editTitle: undefined,
-        backgroundImage: ' ',
+        backgroundImage: '',
+        isEdit:'',
     },
 
     /**
@@ -35,6 +36,7 @@ Page({
         let that = this
         that.setData({
             actId: options.id,
+            isEdit:options.isEdit
         })
         let toDay = new Date().valueOf();
         let toFuture = new Date().valueOf() + 2592000000
@@ -42,11 +44,17 @@ Page({
             startDate: util.formatDate(new Date(toDay)),
             endDate: util.formatDate(new Date(toFuture)),
         })
-        if (String(options.id) == 'undefined') {
+        if (that.data.isEdit == 0) {
             this.setData({
                 backgroundImage: options.image
             })
-        } else {
+            wx.setNavigationBarTitle({
+                title: '发布砍价活动',
+            })
+        } else if (that.data.isEdit == 1){
+            wx.setNavigationBarTitle({
+                title: '编辑砍价活动',
+            })
             getApp().request({
                 url: 'org/make_bargain',
                 data: {
@@ -61,9 +69,6 @@ Page({
                     for (let i = 0; i < res.data.data.join_info.length; i++) {
                         joinInfo.push(res.data.data.join_info[i].text);
                         joinInfoId.push(res.data.data.join_info[i].require)
-
-                        // joinInfo.splice(0, 2);
-                        // joinInfoId.splice(0, 2)
                     }
                     for (let i = 0; i < res.data.data.act_image.length;i++){
                         imageData.push( res.data.data.act_image[i].url),
@@ -126,13 +131,6 @@ Page({
     onReachBottom: function() {
 
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    // onShareAppMessage: function() {
-
-    // },
     switchTab: function(e) {
         this.setData({
             isShow: !this.data.isShow,
@@ -202,11 +200,11 @@ Page({
                             title: '发布成功',
                             icon:'success'
                         })
-                        if (String(that.data.actId) == 'undefined') {
+                        if (that.data.isEdit == 0) {
 
                             wx.navigateBack({ delta: 2 });
 
-                        } else {
+                        } else if (that.data.isEdit == 1){
 
                             wx.navigateBack({})
                         }

@@ -43,6 +43,7 @@ Page({
         animationClass: 'musicControl',
         btnBgImage: '../../../icon/optBtn.png',
         rangPage:1,
+        actTag:'',
     },
 
     /**
@@ -50,6 +51,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        console.log('options',options)
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 actionOptions: false
@@ -71,6 +73,10 @@ Page({
                 actId: options.id,
             })
         }
+        // 获取活动actTag
+        that.setData({
+            actTag:options.actTag,
+        })
     },
 
     /**
@@ -406,7 +412,6 @@ Page({
             sizeType: ['original', 'compressed'],
             sourceType: ['album', 'camera'],
             success: function (res) {
-                console.log('切换背景音乐',res)
                 that.setData({
                     backgroundImage: res.tempFilePaths[0],
                     bottomOption: false,
@@ -478,14 +483,38 @@ Page({
                 data: {
                     act_id: e.currentTarget.dataset.id,
                     music_id: this.data.musicId,
-                    tag: wx.getStorageSync('actTag'),
+                    tag: that.data.actTag,
                 },
                 method: 'post',
                 success: function (res) {
+                    console.log('res',res)
                     if(Number(res.data.code) == 1){
                         wx.showToast({
                             title: '更换成功',
                             icon: 'none',
+                        })
+                        //更换banner图
+                        getApp().request({
+                            url: 'org/edit_banner',
+                            data: {
+                                act_id: e.currentTarget.dataset.id,
+                                banner_image_url: that.data.bannerImage,
+                                tag: that.data.actTag,
+                            },
+                            method: 'post',
+                            success: function (res) {
+                                if (Number(res.data.code) == 1) {
+                                    wx.showToast({
+                                        title: '更换成功',
+                                        icon: 'none',
+                                    })
+                                    that.setData({
+                                        isCommon: true,
+                                        bottomOption: true,
+                                    })
+                                }
+
+                            }
                         })
                     }
                     that.setData({
@@ -494,29 +523,6 @@ Page({
                     })
                 }
             });
-            //更换banner图
-            getApp().request({
-                url: 'org/edit_banner',
-                data: {
-                    act_id: e.currentTarget.dataset.id,
-                    banner_image_url: this.data.bannerImage,
-                    tag: wx.getStorageSync('actTag'),
-                },
-                method: 'post',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        wx.showToast({
-                            title: '更换成功',
-                            icon: 'none',
-                        })
-                        that.setData({
-                            isCommon: true,
-                            bottomOption: true,
-                        })
-                    }
-
-                }
-            })
         } else if (e.currentTarget.dataset.type == 'bgImage'){
             // 更换背景图
 
@@ -541,7 +547,7 @@ Page({
                             url: 'org/edit_background',
                             data: {
                                 act_id: e.currentTarget.dataset.id,
-                                tag: wx.getStorageSync('actTag'),
+                                tag: that.data.actTag,
                                 bg_image_url: r.data.res,
                             },
                             method: 'post',

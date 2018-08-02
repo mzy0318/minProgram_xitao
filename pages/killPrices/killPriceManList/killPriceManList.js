@@ -110,14 +110,14 @@ Page({
     toKillPirce:function(e){
         let that = this;
         wx.navigateTo({
-            url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id + '&acttag=' + e.currentTarget.dataset.acttag,
+            url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id + '&actTag=' + e.currentTarget.dataset.acttag,
         })
     },
     // 编辑活动
     tomanageEdit:function(e){
         let that = this;
         wx.navigateTo({
-            url: '../../manageCenters/manageEdit/manageEdit?id=' + e.currentTarget.dataset.id,
+            url: '../../manageCenters/manageEdit/manageEdit?id=' + e.currentTarget.dataset.id +'&isEdit=1',
         })
     },
     // 删除活动
@@ -147,6 +147,16 @@ Page({
                 }
             }
         })
+    },
+    // 新建活动
+    toChooseModel: function () {
+        wx.navigateTo({
+            url: '../../manageCenters/chooseModel/chooseModel',
+        })
+    },
+    // 返回
+    toback: function () {
+        wx.navigateBack({})
     },
     // 获取页面数据
     getData:function(e){

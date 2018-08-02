@@ -43,6 +43,7 @@
         "pages/collage/collagePersonInfo/collagePersonInfo",
         "pages/collage/collageInfo/collageInfo",
         "pages/collage/collageBuild/collageBuild",
+        "pages/collage/collageManList/collageManList",
         "pages/videos/manVideoList/manVideoList",
         "pages/videos/videoListInfo/videoListInfo",
         "pages/manageCenters/videoEdit/videoEdit",

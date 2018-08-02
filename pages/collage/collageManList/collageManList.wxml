@@ -13,10 +13,10 @@
         <view class='contetnMiddleLeft'><image src='{{item.coverImage}}' mode='scaleToFill'></image></view>
         <view class='contetnMiddleRight'>
             <view bindtap='toPersonList' data-id='{{item.id}}'>查看报名<text>({{item.total_joiner}})</text></view>
-            <view>销售价格:<text> {{item.original_price}}元</text></view>
-            <view>最低价格:<text style='color:#E75A23'> {{item.now_price}}元</text></view>
-            <!-- <view>砍价幅度:<text> {{item.}}</text></view> -->
-            <view>砍价限制:<text> {{item.bargain_limit_type}}</text></view>
+            <view>价格:<text style='color:#E75A23'> {{item.bottom_price}}-{{item.original_price}}</text></view>
+            <view>状态:<text style='color:#54B050'> {{item.time_status}}</text></view>
+            <view>开始:<text> {{item.start_time}}</text></view>
+            <view>结束:<text> {{item.end_time}}</text></view>
         </view>
     </view>
     <view class='contentBottom'>

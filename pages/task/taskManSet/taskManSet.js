@@ -62,12 +62,12 @@ Page({
      */
     onShow: function() {
         let that = this;
-        let isTeacher = Number(wx.getStorageSync('isTeacher'));
+        let isTeacher = wx.getStorageSync('isTeacher');
         if(isTeacher == 1){
             that.setData({
                 isTeacher: false,
             })
-        }else{
+        } else if (isTeacher == 0){
             that.setData({
                 isTeacher: true,
             })

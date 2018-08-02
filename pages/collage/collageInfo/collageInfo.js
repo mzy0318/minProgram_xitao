@@ -42,7 +42,7 @@ Page({
         iconOpen: 'iconfont icon-menu iconStyle',
         showMusic:true,
         animationClass:'musicControl',
-        btnBgImage:'../../../icon/optBtn.png'
+        btnBgImage:'../../../icon/optBtn.png',
     },
 
     /**
@@ -50,6 +50,10 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        // 获取活动actTag
+        that.setData({
+            actTag: options.actTag
+        })
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 actionOptions: false
@@ -151,6 +155,7 @@ Page({
                         bannerImage: res.data.data.banner_image_url,
                         backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
                         bgMusic: res.data.data.music,
+                        musicId: res.data.data.music_id,
                     });
                 } else if (Number(res.data.code) == 0) {
                     wx.showToast({
@@ -328,48 +333,40 @@ Page({
                 url: 'org/edit_music',
                 data: {
                     act_id: e.currentTarget.dataset.id,
-                    music_id: this.data.musicId,
-                    tag: wx.getStorageSync('actTag'),
+                    music_id: that.data.musicId,
+                    tag: that.data.actTag,
                 },
                 method: 'post',
                 success: function (res) {
                     if (Number(res.data.code) == 1) {
-                        wx.showToast({
-                            title: '更换成功',
-                            icon: 'none',
+                        getApp().request({
+                            url: 'org/edit_banner',
+                            data: {
+                                act_id: e.currentTarget.dataset.id,
+                                banner_image_url: that.data.bannerImage,
+                                tag: that.data.actTag,
+                            },
+                            method: 'post',
+                            success: function (res) {
+                                if (Number(res.data.code) == 1) {
+                                    wx.showToast({
+                                        title: '更换成功',
+                                        icon: 'none',
+                                    })
+                                    that.setData({
+                                        isCommon: true,
+                                        bottomOption: true,
+                                    })
+                                } else if (Number(res.data.code) == 0) {
+                                    console.log(res.data.msg)
+                                }
+
+                            }
                         })
                     }
-                    // that.setData({
-                    //     isCommon: true,
-                    //     bottomOption: true,
-                    // })
                 }
             });
             //更换banner图
-            getApp().request({
-                url: 'org/edit_banner',
-                data: {
-                    act_id: e.currentTarget.dataset.id,
-                    banner_image_url: this.data.bannerImage,
-                    tag: wx.getStorageSync('actTag'),
-                },
-                method: 'post',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        wx.showToast({
-                            title: '更换成功',
-                            icon: 'none',
-                        })
-                        that.setData({
-                            isCommon: true,
-                            bottomOption: true,
-                        })
-                    } else if (Number(res.data.code) == 0) {
-                        console.log(res.data.msg)
-                    }
-
-                }
-            })
         } else if (e.currentTarget.dataset.type == 'bgImage') {
             // 更换背景图
             let imagePath = that.data.backgroundImage
@@ -394,7 +391,7 @@ Page({
                             url: 'org/edit_background',
                             data: {
                                 act_id: e.currentTarget.dataset.id,
-                                tag: wx.getStorageSync('actTag'),
+                                tag: that.data.actTag,
                                 bg_image_url: r.data.res,
                             },
                             method: 'post',

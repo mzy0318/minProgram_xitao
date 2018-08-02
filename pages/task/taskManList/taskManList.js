@@ -151,9 +151,10 @@ Page({
             })
         } 
     },
+    // 作业详情页面
     toInfo:function(e){
         wx.navigateTo({
-            url: '../taskUserListInfo/taskUserListInfo?courseId=' + e.currentTarget.dataset.courseid+'&isDate=0',
+            url: '../taskUserListInfo/taskUserListInfo?courseId=' + e.currentTarget.dataset.courseid + '&isDate=0&pwd=' + e.currentTarget.dataset.pwd,
         })
     },
     // 搜索

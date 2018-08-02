@@ -73,6 +73,7 @@ Page({
             data:{},
             method:'get',
             success:function(res){
+                let avatar_url = res.data.data.avatar_url;
                 if(Number(res.data.code) == 1){
                     wx.setStorageSync('isTeacher', 1)
                     wx.setStorageSync('teacherId', res.data.data.teacher_id)
@@ -81,17 +82,17 @@ Page({
                             title: '恭喜您,匹配成功',
                             content: '',
                             showCancel:false,
-                            success:function(r){
-                                if(r.confirm){
+                            success:function(data){
+                                if(data.confirm){
                                     wx.navigateBack({})
                                 }
                             }
                         })
                     }else{
-                        wx.navigateTo({
-                            url: '../taskTeacherEdit/taskTeacherEdit?isEdit=0&url=' + res.data.data.avatar_url,
-                        })
                         wx.setStorageSync('isTeacher', 0)
+                        wx.navigateTo({
+                            url: '../taskTeacherEdit/taskTeacherEdit?isEdit=0&url=' + avatar_url,
+                        })
                     }
                 }else{
                     wx.showToast({
