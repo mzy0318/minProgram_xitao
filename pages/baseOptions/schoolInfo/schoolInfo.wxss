@@ -70,7 +70,7 @@ swiper{
     width:710rpx;
     height:350rpx;
     margin:0rpx auto;
-    background:lightblue;
+    background:#fff;
 }
 .schoolVideo video{
     width:710rpx;
@@ -82,8 +82,8 @@ swiper{
     width:710rpx;
     min-height:60rpx;
     font-size:30rpx;
-    text-indent:20rpx;
-    line-height:60rpx;
+    /* text-indent:20rpx; */
+    line-height:40rpx;
     color:#373737;
     margin:10rpx auto 10rpx;
 }

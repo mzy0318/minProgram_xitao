@@ -412,6 +412,7 @@ Page({
             data: sendData,
             method:'post',
             success:function(res){
+                console.log('res',res)
                 if(Number(res.data.code) == 1){
                     wx.showLoading({
                         title: title,
@@ -937,8 +938,8 @@ Page({
                                 duration: Number(duration.toFixed(0)),
                             },
                             success: function (res) {
+                                console.log('res',res)
                                 let r = JSON.parse(res.data);
-                                console.log('r', r)
                                 if (Number(r.code) == 1) {
                                     wx.hideLoading()
                                     audiosId.push(r.data.audioId);

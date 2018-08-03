@@ -49,7 +49,7 @@ Page({
                    
                     that.setData({
                         pageData:res.data.data,
-                        videoData: res.data.data.video[Number(that.data.videoId)].url,
+                        videoData: res.data.data.video[0].url,
                         actTag:res.data.data.act_tag
                     })
                 } else if (Number(res.data.code) == 0){
@@ -66,6 +66,8 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
+        let that = this;
+        that.videoContext = wx.createVideoContext('myVideo')
     },
 
     /**
@@ -118,9 +120,10 @@ Page({
     chooseVideo:function(e){
         let that = this;
         that.setData({
-            isAuto: true,
             videoData: that.data.pageData.video[Number(e.currentTarget.dataset.index)].url,
+            isAuto: true,
         })
+        that.videoContext.play();
     },
     //长按删除评论
     longDel:function(e){

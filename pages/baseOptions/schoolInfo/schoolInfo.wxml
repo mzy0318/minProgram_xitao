@@ -7,9 +7,7 @@
         </swiper-item>
     </block>
 </swiper>
-<view class='schoolInfoText'>
-    {{pageData.school_intro}}
-</view>
+<view class='schoolInfoText'><text>{{pageData.school_intro}}</text></view>
 <view class='schoolVideo' hidden='{{isVideo}}'>
     <video src='{{pageData.brand.url}}'></video>
 </view>

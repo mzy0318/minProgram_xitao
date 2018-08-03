@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/collectAct/collectActInfo/collectActInfo",
         "pages/index/index",
         "pages/studentCenter/studentCenter",
         "pages/morePage/morePage",
@@ -83,12 +84,14 @@
         "pages/videoLaud/videoLaudListInfo/videoLaudListInfo",
         "pages/videoLaud/videoLaudManList/videoLaudManList",
         "pages/videoLaud/videoLaudUserList/videoLaudUserList",
+        "pages/videoLaud/videoLaudStuList/videoLaudStuList",
         "pages/videoClass/videoClassManList/videoClassManList",
         "pages/videoClass/videoClassInfo/videoClassInfo",
         "pages/videoClass/videoClassUserList/videoClassUserList",
         "pages/videoClass/videoClassEdit/videoClassEdit",
         "pages/videoClass/videoClassStuList/videoClassStuList",
-        "pages/videoLaud/videoLaudStuList/videoLaudStuList"
+        "pages/collectAct/collectActUserList/collectActUserList",
+        "pages/collectAct/collectActManList/collectActManList"
     ],
     "window": {
         "backgroundTextStyle": "dark",

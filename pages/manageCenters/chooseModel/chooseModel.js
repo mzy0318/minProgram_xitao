@@ -112,6 +112,7 @@ Page({
                 url: '../collageEdit/collageEdit?image=' + e.currentTarget.dataset.image + '&id=undefined&isEdit=0',
             })
         } else if (pageType == 7){
+            // 视频贺卡
             wx.navigateTo({
                 url: '../videoEdit/videoEdit?image=' + e.currentTarget.dataset.image + '&id=undefined&isEdit=0&bg=' + e.currentTarget.dataset.bg,
             })

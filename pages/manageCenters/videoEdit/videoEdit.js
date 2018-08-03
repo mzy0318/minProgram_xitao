@@ -55,10 +55,11 @@ Page({
                 isEdit: options.isEdit
             })
             wx.setNavigationBarTitle({
-                title: getApp().globalData.userInfo.nickName + '的祝福视频',
+                title: getApp().globalData.userInfo == null ? '祝福视频' : getApp().globalData.userInfo.nickName + '的祝福视频',
             })
+           
             that.setData({
-                title: getApp().globalData.userInfo.nickName + '的祝福视频',
+                title: getApp().globalData.userInfo == null ? '祝福视频' : getApp().globalData.userInfo.nickName + '的祝福视频',
                 bannerImage: options.image,
                 bgImage: options.bg,
             })

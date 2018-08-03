@@ -1,0 +1,104 @@
+@import '../../../utils/iconFont.wxss';
+.infoBannerImage{
+    width:750rpx;
+    height:410rpx;
+    background:#FEF065;
+}
+.infoBackImage{
+    width:750rpx;
+    min-height:100rpx;
+    background:#FEF065;
+    padding-bottom:130rpx;
+}
+.laudActImage,.laudActInfo,.actInfoConnect,.actInfoRange,.actInfoIntruc{
+    width:690rpx;
+    min-height:80rpx;
+    background:#fff;
+    margin:0rpx auto;
+    border-radius:10px;
+    padding-top:1px;
+    padding-bottom:30rpx;
+    box-shadow:.5px .5px 5px 2px rgba(192,192,192,.3);
+}
+.laudActImageTitle{
+    width:640rpx;
+    font-size:32rpx;
+    font-weight:bold;
+    border-left:5px solid #F8C001;
+    text-indent:20rpx;
+    margin:30rpx auto;
+}
+.laudActImages{
+    width:640rpx;
+    min-height:100rpx;
+    margin:20rpx auto 0rpx;
+    background:lightgreen;
+}
+.laudActImages>image{
+    width:640rpx;
+}
+/* 连接点 */
+.viewMiddle{
+    width:640rpx;
+    height:24rpx;
+    background:transparent;
+    margin:0rpx auto;
+}
+.viewMiddle>view{
+    width:7px;
+    height:24rpx;
+    background:#fff;
+    float:left;
+    margin-left:50rpx;
+}
+.viewMiddle>view:nth-child(2){
+    float:right;
+    margin-right:50rpx;
+}
+/* 活动说明 */
+.laudActInfoTitle{
+    width:640rpx;
+    height:50rpx;
+    margin:20rpx auto 0rpx;
+}
+.laudActInfoTitle>view{
+    width:140rpx;
+    line-height:50rpx;
+    font-size:30rpx;
+    font-weight:bold;
+    border-bottom:0.5px solid #FCCBAA;
+    text-align:center;
+}
+.laudActInfoDate{
+    width:640rpx;
+    line-height:50rpx;
+    font-size:26rpx;
+    color:#212121;
+    margin:15rpx auto 0rpx;
+}
+.laudActInfoText{
+    width:640rpx;
+    min-height:40rpx;
+    line-height:40rpx;
+    font-size:26rpx;
+    color:#212121;
+    margin:40rpx auto 0rpx;
+}
+/* 当前排名 */
+.rangeTitle,.rangeContent{
+    width:640rpx;
+    height:80rpx;
+    margin:0rpx auto;
+}
+.rangeTitle view,.rangeContent view{
+    width:33.33%;
+    height:80rpx;
+    line-height:80rpx;
+    float:left;
+    font-size:30rpx;
+    text-align:center;
+}
+.rangeContent{
+    border-bottom:.5rpx solid #efefef;
+}
+

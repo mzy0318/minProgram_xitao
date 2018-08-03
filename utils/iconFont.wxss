@@ -1,12 +1,11 @@
 @font-face {
   font-family: 'iconfont';  /* project id 674077 */
-  src: url('//at.alicdn.com/t/font_674077_f8e4wk1w8j5.eot');
-  src: url('//at.alicdn.com/t/font_674077_f8e4wk1w8j5.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_674077_f8e4wk1w8j5.woff') format('woff'),
-  url('//at.alicdn.com/t/font_674077_f8e4wk1w8j5.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_674077_f8e4wk1w8j5.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_674077_h3ehcinqoym.eot');
+  src: url('//at.alicdn.com/t/font_674077_h3ehcinqoym.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_674077_h3ehcinqoym.woff') format('woff'),
+  url('//at.alicdn.com/t/font_674077_h3ehcinqoym.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_674077_h3ehcinqoym.svg#iconfont') format('svg');
 }
-
 .iconfont {
   font-family:"iconfont" !important;
   font-size:16px;
@@ -38,6 +37,8 @@
 .icon-lajixiang:before { content: "\e645"; }
 
 .icon-wodedingdan:before { content: "\e655"; }
+
+.icon-image-copy:before { content: "\e60b"; }
 
 .icon-fenleigongnengleimu:before { content: "\e76f"; }
 
@@ -77,6 +78,8 @@
 
 .icon-video:before { content: "\e642"; }
 
+.icon-textread:before { content: "\e628"; }
+
 .icon-map-:before { content: "\e95d"; }
 
 .icon-phone-r:before { content: "\e966"; }
@@ -104,4 +107,6 @@
 .icon-download:before { content: "\e603"; }
 
 .icon-gengduo:before { content: "\e64c"; }
+
+
 

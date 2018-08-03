@@ -14,8 +14,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this;
-        that.getPageData()
     },
 
     /**
@@ -29,7 +27,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        
+        let that = this;
+        that.getPageData()
     },
 
     /**
@@ -148,8 +147,10 @@ Page({
         wx.navigateBack({})
     },
     toSharePage: function (e) {
+        let that = this;
+        let url = encodeURIComponent(e.currentTarget.dataset.url)
         wx.navigateTo({
-            url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/videos/videoListInfo/videoListInfo&actTag=' + e.currentTarget.dataset.acttag,
+            url: '../videoSharePage/videoSharePage?actid=' + e.currentTarget.dataset.actid + '&url=' + url + '&title=' + e.currentTarget.dataset.title,
         })
     },
     // 获取页面数据

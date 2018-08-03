@@ -79,17 +79,20 @@
     float:left;
     margin-top:20rpx;
     margin-left:20rpx;
+    position:relative;
 }
 .rightTextTitle{
     width:360rpx;
-    line-height:80rpx;
-    font-size:35rpx;
+    line-height:35rpx;
+    font-size:30rpx;
 }
 .rightTextPrice{
     width:360rpx;
     height:40rpx;
     font-size:26rpx;
-    margin-top:20rpx;
+    position:absolute;
+    bottom:10rpx;
+    left:0rpx;
 }
 .rightTextPrice text:nth-child(1){
     font-size:28rpx;

@@ -17,9 +17,11 @@ Page({
             data:{},
             method:'post',
             success:res=>{
-                this.setData({
-                    pageData:res.data.data
-                })
+                if(res.data.code == 1){
+                    this.setData({
+                        pageData: res.data.data
+                    })
+                }
             }
         })
     },

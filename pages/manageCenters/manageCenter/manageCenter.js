@@ -146,7 +146,23 @@ Page({
         that.setData({
             versionData: version.version + versionText,
         });
-        wx.setStorageSync('loginCode', 3);
+        // 是否已经登录
+        if (wx.getStorageSync('loginCode') == 1) {
+            this.setData({
+                islogin: 'none',
+                isContent: 'block',
+            })
+        } else {
+            wx.setNavigationBarTitle({
+                title: '招生小程序登录',
+            })
+            this.setData({
+                islogin: 'block',
+                isContent: 'none'
+            })
+        }
+        // 重新登录
+        // wx.setStorageSync('loginCode', 3);
         // 判断功能页面功能
         let funcOpt = wx.getStorageSync('funcOpt').function;
         let index = 0;
@@ -203,20 +219,6 @@ Page({
         that.setData({
             funcOpt: funcOpt,
         })
-        if (wx.getStorageSync('loginCode') == 1) {
-            this.setData({
-                islogin: 'none',
-                isContent: 'block',
-            })
-        } else {
-            wx.setNavigationBarTitle({
-                title: '招生小程序登录',
-            })
-            this.setData({
-                islogin: 'block',
-                isContent: 'none'
-            })
-        }
     },
 
     /**
@@ -232,27 +234,6 @@ Page({
     onUnload: function() {
 
     },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    // onShareAppMessage: function () {
-
-    // },
     getPhone: function(e) {
         this.setData({
             phoneNum: e.detail.value,
@@ -263,6 +244,7 @@ Page({
             pwdNum: e.detail.value,
         })
     },
+    // 登录
     login: function(e) {
         let that = this;
         let senddata = e.detail.value
@@ -370,7 +352,6 @@ Page({
             method: 'post',
             success: function(res) {
                 if (Number(res.data.code) == 1) {
-                    getApp().isLogin = false;
                     wx.setStorageSync('loginCode', 3);
                     wx.setNavigationBarTitle({
                         title: '招生小程序登录',

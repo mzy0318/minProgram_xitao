@@ -1,0 +1,72 @@
+<view class='infoBannerImage'><image mode='scaleToFill'></image></view>
+<view class='infoBackImage'>
+    <!-- 活动图片 -->
+    <view class='laudActImage'>
+        <view class='laudActImageTitle'>六一儿童节,集赞赢大礼包</view>
+        <view class='laudActImages'></view>
+    </view>
+    <view class='viewMiddle'>
+        <view></view>
+        <view></view>
+    </view>
+    <!-- 活动说明 -->
+    <view class='laudActInfo'>
+        <view class='laudActInfoTitle'>
+            <view>活动说明</view>
+        </view>
+        <view class='laudActInfoText'><text>基本原则基本原则模压地苛基本原则模压地基本原则模压地基本原则模压地基本原则基本原则模压地基本原则模压地 基本原则塔顶地基本原则模压地基本原则模压地顶替</text></view>
+    </view>
+    <view class='viewMiddle'>
+        <view></view>
+        <view></view>
+    </view>
+    <!-- 联系方式 -->
+    <view class='actInfoConnect'>
+        <view class='laudActInfoTitle'>
+            <view>联系方式</view>
+        </view>
+        <view class='laudActInfoDate'>活动时间: 2018-06-15 - 2018-06-20</view>
+        <view class='laudActInfoDate'>联系电话: 13061899461</view>
+        <view class='laudActInfoDate'>机构地址: 郑州市管城区裕鸿国际D座2011室</view>
+    </view>
+    <view class='viewMiddle'>
+        <view></view>
+        <view></view>
+    </view>
+    <!-- 机构介绍 -->
+    <view class='actInfoIntruc'>
+         <view class='laudActInfoTitle'>
+            <view>机构介绍</view>
+        </view>
+    </view>
+    <view class='viewMiddle'>
+        <view></view>
+        <view></view>
+    </view>
+    <!-- 当前排名 -->
+    <view class='actInfoRange'>
+        <view class='laudActInfoTitle'>
+            <view>当前排名</view>
+        </view>
+        <view class='rangeTitle'>
+            <view>排名</view>
+            <view>姓名</view>
+            <view>糖果数量</view>
+        </view>
+        <view class='rangeContent'>
+            <view>1</view>
+            <view>张**</view>
+            <view>200</view>
+        </view>
+        <view class='rangeContent'>
+            <view>1</view>
+            <view>张**</view>
+            <view>200</view>
+        </view>
+        <view class='rangeContent'>
+            <view>1</view>
+            <view>张**</view>
+            <view>200</view>
+        </view>
+    </view>
+</view>
