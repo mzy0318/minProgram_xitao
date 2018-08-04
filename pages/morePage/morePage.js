@@ -127,6 +127,12 @@ Page({
                 url: '../baseOptions/schoolList/schoolList',
                 background: '#1055CC',
             },
+            {
+                name: '收集',
+                iconfont: 'iconfont icon-dtweishouji iconfontStyle iconfontSize',
+                url: '../collectAct/collectActUserList/collectActUserList',
+                background: '#FF4F1C',
+            },
         ],
         actOpt:[],
     },

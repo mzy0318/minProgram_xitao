@@ -1,0 +1,54 @@
+page{
+    background:#F5F5F5;
+}
+.personListInputName{
+    width:710rpx;
+    height:80rpx;
+    background:#fff;
+    margin:0 auto;
+}
+.empty{
+    width:100%;
+    height:20rpx;
+    background:transparent;
+}
+.personListContent{
+    width:710rpx;
+    height:200rpx;
+    background:#fff;
+    margin:20rpx auto 0rpx;
+}
+.personListTitle{
+    width:670rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    color:#000;
+    margin:0 auto;
+    border-bottom:1rpx solid #efefef;
+}
+.personListInfo,.personListDate{
+    width:670rpx;
+    line-height:60rpx;
+    font-size:30rpx;
+    color:#939393;
+    margin:0rpx auto;
+}
+.personListInfo view{
+   width:48%;
+   float:left;
+}
+.personListInfo view:nth-child(2){
+   float:right;
+}
+.personListDate{
+    color:#E1E1E1;
+}
+.noData{
+    width:100%;
+    height:60rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:60rpx;
+    background:transparent;
+}

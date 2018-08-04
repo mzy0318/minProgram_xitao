@@ -7,31 +7,3 @@
     </view>
     <view class='voteUserTitle'>糖果收集大作战</view>
 </view>
-<view class='voteUserWrap'>
-    <view class='voteUserContent'>
-        <image  src='{{item.cover.url}}' mode='widthFix'></image>
-        <!-- <view class='contentLeft'>{{item.view_amount}}</view> -->
-        <view class='contentRight'>活动进行中</view>
-        <view class='contentbottom'>2018-02-11 00:00至 2019-02-11 00:00</view>
-    </view>
-    <view class='voteUserTitle'>糖果收集大作战</view>
-</view>
-<view class='voteUserWrap'>
-    <view class='voteUserContent'>
-        <image  src='{{item.cover.url}}' mode='widthFix'></image>
-        <!-- <view class='contentLeft'>{{item.view_amount}}</view> -->
-        <view class='contentRight'>活动进行中</view>
-        <view class='contentbottom'>2018-02-11 00:00至 2019-02-11 00:00</view>
-    </view>
-    <view class='voteUserTitle'>糖果收集大作战</view>
-</view>
-
-<view class='voteUserWrap'>
-    <view class='voteUserContent'>
-        <image  src='{{item.cover.url}}' mode='widthFix'></image>
-        <!-- <view class='contentLeft'>{{item.view_amount}}</view> -->
-        <view class='contentRight'>活动进行中</view>
-        <view class='contentbottom'>2018-02-11 00:00至 2019-02-11 00:00</view>
-    </view>
-    <view class='voteUserTitle'>糖果收集大作战</view>
-</view>

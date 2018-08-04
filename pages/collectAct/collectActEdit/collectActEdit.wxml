@@ -1,0 +1,144 @@
+<form bindsubmit='submitData' hidden='{{!isContent}}'>
+    <!-- 主题模板 -->
+    <view class='editTitle'>主题模板</view>
+    <view class='editTitleImage'>
+        <view></view>
+        <view>发布后可重新选择模板和音乐</view>
+    </view>
+    <!-- 活动信息 -->
+    <view class='editTitle'>活动信息</view>
+    <view class='editActInfo'>
+        <view class='editActInfoContentO'>
+            <view>活动名称:</view>
+            <input type='text' placeholder='感恩有你,积赞换大奖' name='title'></input>
+        </view>
+        <view class='editActInfoContentO'>
+            <view>开始日期:</view>
+            <picker mode='date' start='{{startTime}}' bindchange='getDate' data-id='0'>{{startDate}}</picker>
+        </view>
+        <view class='editActInfoContentO'>
+            <view>截止日期:</view>
+            <picker mode='date' start='{{endTime}}' bindchange='getDate' data-id='1'>{{endDate}}</picker>
+        </view>
+        <view class='editActInfoContentO'>
+            <view>领奖时间:</view>
+            <picker mode='date' start='{{prizeTime}}' bindchange='getDate' data-id='2'>{{prizeDate}}</picker>
+        </view>
+        <view class='editActInfoContentO'>
+            <view>报名热线:</view>
+            <input type='number' maxlength='11' name='phone'></input>
+        </view>
+        <view class='editActInfoContentO'>
+            <view>机构地址:</view>
+            <input type='text' name='address'></input>
+        </view>
+    </view>
+    <!-- 糖果设置 -->
+    <view class='editTitle'>糖果设置</view>
+    <view class='editActInfo'>
+        <view class='editActInfoContent'>
+            <view>最多可收集:</view>
+            <input type='number'></input>
+            <view>个糖果</view>
+        </view>
+        <view class='editActInfoContent'>
+            <view>优惠总份数:</view>
+            <input type='number' name='gift_amount'></input>
+            <view>份</view>
+        </view>
+        <view class='editActInfoContent'>
+            <view>剩余份数:</view>
+            <input type='number'></input>
+            <view>份</view>
+        </view>
+    </view>
+    <!-- 优惠设置 -->
+    <view class='editTitle'>优惠设置</view>
+    <view class='editActInfo'>
+        <view class='editActInfoContent'>
+            <view>收集:</view>
+            <input type='number' name='amount'></input>
+            <view>个糖果</view>
+        </view>
+        <view class='editActInfoContentO'>
+            <view>奖品设置:</view>
+            <input type='text' placeholder='设置奖励奖品' name='prize'></input>
+        </view>
+    </view>
+    <!-- 报名信息 -->
+    <view class='editTitle'>报名信息</view>
+    <view class='joinInfo'>
+        <view class='joinInfoContent'>姓名</view>
+        <view class='joinInfoContent'>电话</view>
+        <view class='joinInfoContent' wx:for='{{nameInfo}}' wx:key='{{index}}'>
+            <view class='jianForm' data-index='{{index}}' bindtap='jianForm'>
+                <view class='jianFormChild' data-index='{{index}}'></view>
+            </view>
+            <text>{{item}}</text>
+            <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+        </view>
+        <view class='joinInfoAdd' bindtap='addForm' data-is='0'>+新增报名项</view>
+    </view>
+    <!-- 活动规则 -->
+    <view class='editTitle'>活动规则</view>
+    <view class='actRuleWrap'>
+        <view class='actRuleContent' wx:for='{{ruleContent}}' wx:key='{{index}}' wx:for-index='contentIndex' wx:for-item='contentItem'>
+            <view class='actRuleText'>
+                <text>{{contentItem.text}}</text>
+            </view>
+            <view class='actRuleImage' wx:for='{{contentItem.images}}'>
+                <image src='{{item}}' mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='actRuleBtn'>
+            <view data-contentindex='0' bindtap='addText'>
+                <text class='iconfont icon-edit'> 添加文字</text>
+            </view>
+            <view data-contentindex='0' bindtap='chooseImage'>
+                <text class='iconfont icon-image-copy'> 添加图片</text>
+            </view>
+        </view>
+    </view>
+    <!-- 机构介绍 -->
+    <view class='editTitle'>机构介绍</view>
+    <view class='actRuleWrap'>
+        <view class='actRuleContent' wx:for='{{orgContent}}' wx:key='{{index}}' wx:for-index='contentIndex' wx:for-item='contentItem'>
+            <view class='actRuleText'>
+                <text>{{contentItem.text}}</text>
+            </view>
+            <view class='actRuleImage' wx:for='{{contentItem.images}}'>
+                <image src='{{item}}' mode='widthFix'></image>
+            </view>
+        </view>
+        <view class='actRuleBtn'>
+            <view data-contentindex='1' bindtap='addText'>
+                <text class='iconfont icon-edit'> 添加文字</text>
+            </view>
+            <view data-contentindex='1' bindtap='chooseImage'>
+                <text class='iconfont icon-image-copy'> 添加图片</text>
+            </view>
+        </view>
+    </view>
+    <!-- 发布活动 -->
+    <button class='collectActBtn' form-type='submit'>发布活动</button>
+</form>
+<view class='editTextWrap' hidden='{{isContent}}'>
+    <form bindsubmit='getText'>
+        <view class='editTextContent'>
+            <textarea name='content'></textarea>
+        </view>
+        <button class='editTextBtn' form-type='submit'>确定</button>
+    </form>
+</view>
+<!-- 报名信息额外内容 -->
+<view class='addFormWrap' hidden='{{isForm}}' bindtap='showOptions' data-is='1'>
+    <view class='addFormChild'>
+        <view class='addFormChildTitle'>常用报名项</view>
+        <view class='addFormChildButton'>
+            <view bindtap='addNameOptions' data-value='年龄'>年龄</view>
+            <view bindtap='addNameOptions' data-value='住址'>住址</view>
+            <view bindtap='addNameOptions' data-value='备注'>备注</view>
+            <view bindtap='addNameOptions' data-value='其他'>其他</view>
+        </view>
+    </view>
+</view>

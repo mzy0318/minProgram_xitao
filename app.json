@@ -91,6 +91,8 @@
         "pages/videoClass/videoClassEdit/videoClassEdit",
         "pages/videoClass/videoClassStuList/videoClassStuList",
         "pages/collectAct/collectActUserList/collectActUserList",
+        "pages/collectAct/collectActStuList/collectActStuList",
+        "pages/collectAct/collectActEdit/collectActEdit",
         "pages/collectAct/collectActManList/collectActManList"
     ],
     "window": {

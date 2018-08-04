@@ -1,4 +1,4 @@
-// pages/collectAct/collectActInfo/collectActInfo.js
+// pages/collectAct/collectActStuList/collectActStuList.js
 Page({
 
     /**
@@ -56,24 +56,4 @@ Page({
     onReachBottom: function() {
 
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    },
-    getPapeData:function(e){
-        let that = this;
-        getApp().request({
-            url:'org/sugar',
-            data:{},
-            method:'get',
-            success:function(res){
-                if(res.data.code == 1){
-                    
-                }
-            }
-        })
-    }
 })

@@ -1,0 +1,9 @@
+<view class='personListContent'>
+    <view class='personListTitle'>一个活动而已</view>
+    <view class='personListInfo'>
+        <view>姓名: 林五</view>
+        <view>电话: 13045617897</view>
+    </view>
+    <view class='personListDate'>时间: 2018-07-23 12:00:00</view>
+</view>
+<view class='noData' hidden='{{showTitle}}'>无记录</view>

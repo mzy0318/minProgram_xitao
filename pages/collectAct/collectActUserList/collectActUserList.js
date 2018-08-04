@@ -56,4 +56,16 @@ Page({
     onReachBottom: function () {
 
     },
+    // 获取页面数据
+    getPageData:function(e){
+        let that = this;
+        getApp().request({
+            url:'sugar/list',
+            data:{},
+            method:'get',
+            success:(res) => {
+                
+            }
+        })
+    }
 })

@@ -122,6 +122,15 @@ Page({
             //     pageType: 10,
             //     show: 'inline-block',
             // }
+            {
+                name: '糖果大作战',
+                iconfont: 'iconfont icon-heart iconStyle',
+                background: '#FE7FC2',
+                url: 'org/bargain_list',
+                pageType: 13,
+                tag: 'video_class',
+                show: 'inline-block',
+            },
         ],
         phone: '',
         pwd: '',
@@ -336,6 +345,10 @@ Page({
         } else if (Number(pageType) == 4){
             wx.navigateTo({
                 url: '../../killPrices/killPriceManList/killPriceManList',
+            })
+        } else if (Number(pageType) == 13){
+            wx.navigateTo({
+                url: '../../collectAct/collectActManList/collectActManList',
             })
         }
     },

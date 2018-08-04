@@ -1,11 +1,11 @@
 <!-- 页面功能 -->
 <view class='manListOpt'>
-    <view>返回</view>
-    <view>发布新活动</view>
+    <view bindtap='pageOpt' data-id='0'>返回</view>
+    <view bindtap='pageOpt' data-id='1'>发布新活动</view>
 </view>
 <!-- 内容 -->
 <view class='manListContent'>
-    <view class='contentTitle'>
+    <view class='contentTitle' bindtap='toActInfo'>
         <view>六一儿童节,集赞赢大礼包</view>
         <view>〉</view>
     </view>
@@ -20,8 +20,8 @@
         </view>
     </view>
     <view class='contentBottom'>
-        <view data-id='0' bindtap='actOpts'><text class='iconfont icon-lajixiang' ></text>删除</view>
-        <view data-id='1' bindtap='actOpts'><text class='iconfont icon-wodedingdan' ></text>编辑</view>
-        <view data-id='2' bindtap='actOpts'><text class='iconfont icon-share'></text>分享</view>
+        <view data-id='0' data-actid='{{item.id}}' bindtap='actOpts'><text class='iconfont icon-lajixiang'></text>删除</view>
+        <view data-id='1' data-actid='{{item.id}}' bindtap='actOpts'><text class='iconfont icon-wodedingdan' ></text>编辑</view>
+        <view data-id='2' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}' bindtap='actOpts'><text class='iconfont icon-share'></text>分享</view>
     </view>
 </view>

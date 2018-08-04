@@ -32,10 +32,114 @@
     width:640rpx;
     min-height:100rpx;
     margin:20rpx auto 0rpx;
-    background:lightgreen;
+    border-bottom:.5rpx solid #efefef;
 }
-.laudActImages>image{
+.laudActImagesContent{
+   width:128rpx;
+   height:250rpx;
+   display:inline-block;
+   vertical-align:top;
+   font-size:26rpx;
+   text-align:center;
+}
+.laudActImagesContent>view>image{
+    width:128rpx;
+    height:140rpx;
+}
+.laudActImagesContent>view>text{
+    display:block;
+}
+/* 个人信息 */
+.laudActPersonInfo{
     width:640rpx;
+    height:170rpx;
+    border-bottom:.5rpx solid #efefef;
+    margin:0rpx auto;
+}
+.personInfoImage{
+    width:130rpx;
+    height:130rpx;
+    border-radius:50%;
+    background:lightblue;
+    float:left;
+    margin-top:20rpx;
+}
+.personInfoImage>image{
+    width:130rpx;
+    height:130rpx;
+}
+.personInfoText{
+    width:410rpx;
+    height:130rpx;
+    float:left;
+    margin-left:20rpx;
+    margin-top:20rpx;
+}
+.personInfoText>view{
+    font-size:26rpx;
+    line-height:45rpx;
+}
+.personInfoText>view:nth-child(1)>text{
+    font-size:35rpx;
+}
+/* 优惠 */
+.collectActText{
+    width:640rpx;
+    height:80rpx;
+    border-bottom:.5rpx solid #efefef;
+    margin:0rpx auto;
+    font-size:30rpx;
+    line-height:80rpx;
+    color:#2E3035;
+}
+/* 参与者 */
+.collectActRange{
+    width:640rpx;
+    height:80rpx;
+    border-bottom:.5rpx solid #efefef;
+    margin:0rpx auto;
+}
+.collectActRange>view{
+    float:left;
+}
+.collectActRangeImage{
+    width:50rpx;
+    height:50rpx;
+    border-radius:50%;
+    background:lightblue;
+    margin-top:15rpx;
+}.collectActRangeImage>image{
+    width:50rpx;
+    height:50rpx;
+}
+.collectActRangeName{
+    width:100rpx;
+    height:80rpx;
+    line-height:80rpx;
+    margin-left:10rpx;
+    font-size:26rpx;
+    color:#545454;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+.collectActRangeTime{
+    line-height:80rpx;
+    color:#7b7b7b;
+    margin-left:90rpx;
+    font-size:22rpx;
+}
+.collectActRangeGetted{
+    line-height:80rpx;
+    font-size:26rpx;
+    margin-left:10rpx;
+}
+.collectActRangeIcon{
+    width:55rpx;
+    height:55rpx;
+    background:lightgreen;
+    margin-left:8rpx;
+    margin-top:12.5rpx;
 }
 /* 连接点 */
 .viewMiddle{
@@ -76,13 +180,24 @@
     color:#212121;
     margin:15rpx auto 0rpx;
 }
-.laudActInfoText{
+.laudActInfoWrap{
     width:640rpx;
     min-height:40rpx;
-    line-height:40rpx;
+    margin:40rpx auto 0rpx;
+}
+.laudActInfoText{
+    width:640rpx;
+    min-height:35rpx;
     font-size:26rpx;
     color:#212121;
-    margin:40rpx auto 0rpx;
+    background:lightgreen;
+}
+.laudActInfoImage{
+    width:640rpx;
+    min-height:0rpx;
+}
+.laudActInfoImage>image{
+    width:640rpx;
 }
 /* 当前排名 */
 .rangeTitle,.rangeContent{
@@ -100,5 +215,34 @@
 }
 .rangeContent{
     border-bottom:.5rpx solid #efefef;
+}
+/* 活动倒计时 */
+.countDown{
+    width:500rpx;
+    line-height:50rpx;
+    background:#FF77A5;
+    color:#fff;
+    font-size:26rpx;
+    text-align:center;
+    border-radius:0px 0px 8px 8px;
+    position:fixed;
+    top:0rpx;
+    left:50%;
+    margin-left:-250rpx;
+}
+/* 我要报名 */
+.joinAct{
+    width:250rpx;
+    line-height:60rpx;
+    background:#FF77A5;
+    color:#fff;
+    border:3px solid #FBCBA9;
+    text-align:center;
+    font-size:30rpx;
+    border-radius:10px;
+    position:fixed;
+    bottom:50rpx;
+    left:50%;
+    margin-left:-125rpx;
 }
 

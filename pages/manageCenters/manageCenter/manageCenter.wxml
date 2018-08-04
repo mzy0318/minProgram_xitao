@@ -16,7 +16,8 @@
     <view class='mangeStuMarkt'>
         <text class='mangeStuMarktTitle'>招生营销</text>
         <view class='mangeStuMarktOptions'>
-            <view class='optionsWrap' wx:for='{{funcOpt}}' wx:key='{{index}}' data-pageType='{{item.pageType}}' bindtap='toManageActive' data-requireurl='{{item.url}}' style='display:{{item.show}}'>
+                                            <!-- funcOpt -->
+            <view class='optionsWrap' wx:for='{{pageStuData}}' wx:key='{{index}}' data-pageType='{{item.pageType}}' bindtap='toManageActive' data-requireurl='{{item.url}}' style='display:{{item.show}}'>
                 <view class='optionsTop' style='background:{{item.background}}'>
                     <text class='{{item.iconfont}}'></text>
                 </view>

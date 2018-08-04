@@ -3,7 +3,81 @@
     <!-- 活动图片 -->
     <view class='laudActImage'>
         <view class='laudActImageTitle'>六一儿童节,集赞赢大礼包</view>
-        <view class='laudActImages'></view>
+        <view class='laudActImages'>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/01.png'></image></view>
+                <view>
+                    <text>彩虹味</text>
+                    <text>共 <text style='color:red'>0</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/02.png'></image></view>
+                <view>
+                    <text>草莓味</text>
+                    <text>共 <text style='color:red'>0</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/03.png'></image></view>
+                <view>
+                    <text>芒果味</text>
+                    <text>共 <text style='color:red'>0</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/04.png'></image></view>
+                <view>
+                    <text>西瓜味</text>
+                    <text>共 <text style='color:red'>0</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/05.png'></image></view>
+                <view>
+                    <text>蓝莓味</text>
+                    <text>共 <text style='color:red'>0</text> 个</text>
+                </view>
+            </view>
+        </view>
+        <view class='laudActPersonInfo'>
+            <view class='personInfoImage'><image></image></view>
+            <view class='personInfoText'>
+                <view><text style='color:#FC76A3'>陌陌</text> 1301234****</view>
+                <view>已抢到<text style='color:#FC76A3'> 12 </text>个糖果,当前排名<text style='color:#FC76A3'> 12 </text>位</view>
+                <view>告诉朋友打开网页帮你集糖果</view>
+            </view>
+        </view>
+        <view class='collectActText'>
+            优惠共<text style='color:#FC76A3'> 200 </text>份 / 剩余<text style='color:#FC76A3'> 200 </text>份
+        </view>
+        <view class='collectActRange'>
+            <view class='collectActRangeImage'></view>
+            <view class='collectActRangeName'>我的名字</view>
+            <view class='collectActRangeTime'>08/03 16:24 </view>
+            <view class='collectActRangeGetted'>抢到</view>
+            <view class='collectActRangeIcon'></view>
+            <view class='collectActRangeIcon'></view>
+            <view class='collectActRangeIcon'></view>
+        </view>
+         <view class='collectActRange'>
+            <view class='collectActRangeImage'></view>
+            <view class='collectActRangeName'>我的名字</view>
+            <view class='collectActRangeTime'>08/03 16:24 </view>
+            <view class='collectActRangeGetted'>抢到</view>
+            <view class='collectActRangeIcon'></view>
+            <view class='collectActRangeIcon'></view>
+            <view class='collectActRangeIcon'></view>
+        </view>
+         <view class='collectActRange'>
+            <view class='collectActRangeImage'></view>
+            <view class='collectActRangeName'>我的名字</view>
+            <view class='collectActRangeTime'>08/03 16:24 </view>
+            <view class='collectActRangeGetted'>抢到</view>
+            <view class='collectActRangeIcon'></view>
+            <view class='collectActRangeIcon'></view>
+            <view class='collectActRangeIcon'></view>
+        </view>
     </view>
     <view class='viewMiddle'>
         <view></view>
@@ -14,7 +88,10 @@
         <view class='laudActInfoTitle'>
             <view>活动说明</view>
         </view>
-        <view class='laudActInfoText'><text>基本原则基本原则模压地苛基本原则模压地基本原则模压地基本原则模压地基本原则基本原则模压地基本原则模压地 基本原则塔顶地基本原则模压地基本原则模压地顶替</text></view>
+        <view class='laudActInfoWrap'>
+            <view class='laudActInfoText'><text>周六的一波新活动周六的一波新活动周六的一波新活动周六的一波新活动周六的一波新活动周六的一波新活动</text></view>
+            <view class='laudActInfoImage'><image mode='widthFix'></image></view>
+        </view>
     </view>
     <view class='viewMiddle'>
         <view></view>
@@ -37,6 +114,10 @@
     <view class='actInfoIntruc'>
          <view class='laudActInfoTitle'>
             <view>机构介绍</view>
+        </view>
+        <view class='laudActInfoWrap'>
+            <view class='laudActInfoText'><text>周六的一波新活动周六的一波新活动周六的一波新活动周六的一波新活动周六的一波新活动周六的一波新活动</text></view>
+            <view class='laudActInfoImage'><image mode='widthFix'></image></view>
         </view>
     </view>
     <view class='viewMiddle'>
@@ -70,3 +151,9 @@
         </view>
     </view>
 </view>
+<!-- 活动倒计时 -->
+<view class='countDown'>活动倒计时: 13天 19时 39分 47秒</view>
+<!-- 报名按钮 -->
+<view class='joinAct'>我要报名</view>
+<!-- 报名页面 -->
+<view></view>

@@ -57,7 +57,7 @@ App({
     getHost: () => {
         var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
         var dev = "http://192.168.1.112:8123/" + getApp().getExtConfig().version + "/";
-        return online;
+        return dev;
     },
     hasLogin: wx.getStorageSync('hasLogin'), //默认app是未登录状态
     isLogin: true,
