@@ -5,12 +5,14 @@ Page({
      * 页面的初始数据
      */
     data: {
+        pageData:'',
         startDate: '',
         endDate: '',
         startTime: '',
         endTime: '',
-        prizeDate: '',
+        // prizeDate: '',
         prizeTime: '',
+        actSet: [1,1,1,1],  //优惠设置
         ruleContent: [],
         orgContent: [],
         isContent:true,
@@ -18,6 +20,8 @@ Page({
         isForm: true,
         nameInfo: [],
         nameInfoId: [],
+        bannerImage:'',
+        actId:'',
     },
 
     /**
@@ -32,9 +36,61 @@ Page({
             startTime: format.formatDate(new Date()),
             endDate: format.formatDate(new Date(currentDate)),
             endTime: format.formatDate(new Date(currentDate)),
-            prizeDate: format.formatDate(new Date()),
-            prizeTime: format.formatDate(new Date()),
+            // prizeDate: format.formatDate(new Date()),
+            // prizeTime: format.formatDate(new Date()),
+            isEdit:options.isEdit,
         })
+        if(that.data.isEdit == 0){
+            wx.setNavigationBarTitle({
+                title: '发布新活动',
+            })
+            that.setData({
+                bannerImage: format.rect(options.image,160,75),
+            })
+        } else if (that.data.isEdit == 1){
+            wx.setNavigationBarTitle({
+                title: '编辑活动',
+            })
+            that.setData({
+                actId:options.actId
+            })
+            getApp().request({
+                url:'org/sugar',
+                data:{
+                    id:that.data.actId,
+                },
+                method:'get',
+                success:function(res){
+                    if(res.data.code == 1){
+                        let nameInfo = [];
+                        let nameInfoId = [];
+                        let actSet = that.data.actSet;
+                        if (res.data.data.join_info.length>0){
+                            for (let i = 0; i < res.data.data.join_info.length;i++){
+                                nameInfo.push(res.data.data.join_info[i].text)
+                                nameInfoId.push(res.data.data.join_info[i].require)
+                            }
+                        }
+                        if (res.data.data.act_set.length > 0){
+                            for (let i = 0; i < res.data.data.act_set.length;i++){
+                                actSet[i] = res.data.data.act_set[i]
+                            }
+                        }
+                        that.setData({
+                            bannerImage: format.rect(res.data.data.banner_image_url, 160, 75),
+                            pageData:res.data.data,
+                            ruleContent: res.data.data.rule,
+                            orgContent: res.data.data.org_intro,
+                            nameInfo: nameInfo,
+                            nameInfoId: nameInfoId,
+                            startDate: format.formatDate(new Date(res.data.data.start_time*1000)),
+                            endDate: format.formatDate(new Date(res.data.data.end_time * 1000)),
+                            actSet: actSet,
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -64,6 +120,24 @@ Page({
     onUnload: function() {
 
     },
+    // 添加优惠设置
+    // addActset:function(e){
+    //     let that = this;
+    //     if (e.target.dataset.id == '1'){
+    //         let actSet = that.data.actSet;
+    //         actSet.push({display:false});
+    //         that.setData({
+    //             actSet: actSet,
+    //         })
+    //     } else if (e.target.dataset.id == '0'){
+    //         let actSet = that.data.actSet;
+    //         actSet[e.target.dataset.index].display = true
+    //         that.setData({
+    //             actSet: actSet,
+    //         })
+    //     }
+    //     console.log('actSet', that.data.actSet)
+    // },
     // 获取日期
     getDate: function(e) {
         let that = this;
@@ -76,10 +150,6 @@ Page({
             // 结束日期
             that.setData({
                 endDate: e.detail.value,
-            })
-        } else if (Number(e.target.dataset.id) == 2) {
-            that.setData({
-                prizeDate: e.detail.value,
             })
         }
     },
@@ -177,26 +247,31 @@ Page({
     submitData: function(e) {
         let that = this;
         let sendData = e.detail.value;
+        let actSet = [];
         if(that.data.isEdit == 0){
             sendData['id'] = '';
         }else if(that.data.isEdit == 1){
-
+            sendData['id'] = that.data.actId;
         }
         sendData['start_time'] = that.data.startDate;
         sendData['end_time'] = that.data.endDate;
-        sendData['prize_time'] = that.data.prizeDate;
-        sendData['act_set'] = {'amount': e.detail.value.amount,'prize': e.detail.value.prize};
-        delete sendData.amount;
-        delete sendData.prize;
         sendData['rule'] = JSON.stringify(that.data.ruleContent);
         sendData['org_intro'] = JSON.stringify(that.data.orgContent);
+        sendData['banner_image_url'] = that.data.bannerImage;
         if (that.data.nameInfo.length > 0){
             for (let i = 0; i < that.data.nameInfo.length;i++){
                 sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i]
                 sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i]
             }
         }
-        console.log('sendData', sendData);
+        for (let i = 0; i < that.data.actSet.length;i++){
+            if (sendData['amount' + i] != ''){
+                actSet.push({ amount: parseInt(sendData['amount' + i]), prize: sendData['prize' + i]})
+            }
+            delete sendData['amount' + i];
+            delete sendData['prize' + i];
+        }
+        sendData['act_set'] = JSON.stringify(actSet);
         getApp().request({
             url:'org/sugar/add',
             data: sendData,
@@ -232,44 +307,117 @@ Page({
         that.setData({
             contentIndex: e.currentTarget.dataset.contentindex,
         });
-        if (that.data.contentIndex == 0) {
+        if (e.currentTarget.dataset.contentindex == 0) {
             // 活动规则图片
             let ruleContent = that.data.ruleContent;
             if (JSON.stringify(ruleContent) == '[]'){
-
                 ruleContent.push({ 'text':'', 'images': [] });
-
-            }else {
-                return 
             }
             let images = ruleContent[ruleContent.length - 1].images;
             wx.chooseImage({
                 success: function (res) {
-                    images.push(...res.tempFilePaths);
-                    ruleContent[ruleContent.length - 1].images;
-                    that.setData({
-                        ruleContent: ruleContent
+                    let imgArr = res.tempFiles;
+                    let size = imgArr.every((item, index, arr) => {
+                        return item.size < 6291456
                     })
+                    if(size){
+
+                        wx.showLoading({
+                            title: '图片上传中...',
+                            mask: true,
+                        })
+
+                        var header = {};
+                        header.Cookie = wx.getStorageSync('cookie');
+                        header['Content-Type'] = 'multipart/form-data';
+
+                        for (let i = 0; i < imgArr.length; i++){
+                            getApp().uploadFile({
+                                url: 'upload',
+                                filePath: imgArr[i].path,
+                                success: function (res) {
+                                    if (Number(res.code) == 1) {
+                                        images.push(res.data.res);
+                                        that.setData({
+                                            ruleContent: ruleContent
+                                        })
+                                        wx.hideLoading();
+                                        wx.showToast({
+                                            title: '上传成功',
+                                            icon: 'success'
+                                        })
+                                    } else if (Number(res.code) == 0) {
+                                        wx.showToast({
+                                            title: res.msg,
+                                            icon: 'none',
+                                        })
+                                    }
+                                }
+                            }, header)
+                        }
+                    }else{
+                        wx.showToast({
+                            title: '选择图片必须小于6M',
+                            icon: 'none'
+                        })
+                    }
                 },
             });
-        } else if (that.data.contentIndex == 1) {
+        } else if (e.currentTarget.dataset.contentindex == 1) {
             // 机构介绍图片
             let orgContent = that.data.orgContent;
             if (JSON.stringify(orgContent) == '[]') {
-
                 orgContent.push({ 'text': '', 'images': [] });
-
-            } else {
-                return
             }
             let images = orgContent[orgContent.length - 1].images;
             wx.chooseImage({
                 success: function (res) {
-                    images.push(...res.tempFilePaths);
-                    orgContent[orgContent.length - 1].images;
-                    that.setData({
-                        orgContent: orgContent
+
+                    let imgArr = res.tempFiles;
+                    let size = imgArr.every((item, index, arr) => {
+                        return item.size < 6291456
                     })
+                    if (size) {
+
+                        wx.showLoading({
+                            title: '图片上传中...',
+                            mask: true,
+                        })
+
+                        var header = {};
+                        header.Cookie = wx.getStorageSync('cookie');
+                        header['Content-Type'] = 'multipart/form-data';
+
+                        for (let i = 0; i < imgArr.length; i++) {
+                            getApp().uploadFile({
+                                url: 'upload',
+                                filePath: imgArr[i].path,
+                                success: function (res) {
+                                    if (Number(res.code) == 1) {
+                                        images.push(res.data.res);
+                                        that.setData({
+                                            orgContent: orgContent
+                                        })
+                                        wx.hideLoading();
+                                        wx.showToast({
+                                            title: '上传成功',
+                                            icon: 'success'
+                                        })
+                                    } else if (Number(res.code) == 0) {
+                                        wx.showToast({
+                                            title: res.msg,
+                                            icon: 'none',
+                                        })
+                                    }
+                                }
+                            }, header)
+                        }
+                    } else {
+                        wx.showToast({
+                            title: '选择图片必须小于6M',
+                            icon: 'none'
+                        })
+                    }
                 },
             });
         }

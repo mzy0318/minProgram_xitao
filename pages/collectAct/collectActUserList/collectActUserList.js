@@ -1,18 +1,21 @@
-// pages/collectAct/collectActUserList/collectActUserList.js
+let format = require('../../../utils/util.js')
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        pageData: '',
+        statusText: '活动进行中',
+        statusColor: 'green',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let that = this;
+        that.getPageData()
     },
 
     /**
@@ -47,7 +50,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        let that = this;
+        that.getPageData()
     },
 
     /**
@@ -55,6 +59,13 @@ Page({
      */
     onReachBottom: function () {
 
+    },
+    // 活动详情页面
+    toInfoPage:function(e){
+        let that = this;
+        wx.navigateTo({
+            url: '../collectActInfo/collectActInfo?actId=' + e.currentTarget.dataset.actid,
+        })
     },
     // 获取页面数据
     getPageData:function(e){
@@ -64,7 +75,24 @@ Page({
             data:{},
             method:'get',
             success:(res) => {
-                
+                if(res.data.code == 1){
+                    wx.stopPullDownRefresh();
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        if (res.data.data.list[i].end_time * 1000 > new Date().valueOf()) {
+                            res.data.data.list[i].statusText = '活动进行中';
+                            res.data.data.list[i].statusColor = 'green';
+                        } else if (res.data.data.list[i].end_time * 1000 <= new Date().valueOf()) {
+                            res.data.data.list[i].statusText = '活动已结束';
+                            res.data.data.list[i].statusColor = 'red';
+                        }
+                        res.data.data.list[i].start_time = format.formatTime(new Date(res.data.data.list[i].start_time * 1000));
+                        res.data.data.list[i].end_time = format.formatTime(new Date(res.data.data.list[i].end_time * 1000));
+                        res.data.data.list[i].banner_image_url = format.rect(res.data.data.list[i].banner_image_url, 200, 100)
+                    }
+                    that.setData({
+                        pageData: res.data.data.list
+                    })
+                }
             }
         })
     }

@@ -56,9 +56,6 @@ Page({
                     for (let i = 0; i < res.data.data.join_info.length; i++) {
                         joinInfo.push(res.data.data.join_info[i].text);
                         joinInfoId.push(res.data.data.join_info[i].require)
-
-                        // joinInfo.splice(0, 2);
-                        // joinInfoId.splice(0, 2)
                     }
                     that.setData({
                         pageData: res.data.data,

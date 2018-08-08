@@ -1,5 +1,6 @@
+page{
 
-
+}
 .killPriceWrap{
     width:710rpx;
     height:250rpx;
@@ -38,6 +39,9 @@
     line-height:40rpx;
     font-size:30rpx;
     font-weight:hold;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 
 .killPirceOptionsMiddle{
@@ -70,10 +74,12 @@
     text-indent:10rpx;
 }
 
-.killPirceOptionsBottom button{
+.killPirceOptionsBottom>button{
     width:180rpx;
-    line-height:60rpx;
+    height:45rpx;
+    line-height:45rpx;
     float:right;
     background:#FF6634;
     color:#fff;
+    font-size:26rpx;
 }

@@ -5,7 +5,7 @@
     <view class='pricePersonOne'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
-            <view class='pricePersonONeTitleText'>{{pageData.title}}</view>
+            <view class='pricePersonONeTitleText'><text>{{pageData.title}}</text></view>
         </view>
         <view class='pricePersonOneRange'>
             <view class='pricePersonOneShow'>
@@ -35,7 +35,7 @@
     <view class='pricePersonTwo'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
-            <view class='pricePersonONeTitleText'>砍价二维码</view>
+            <view class='pricePersonONeTitleText'><text>砍价二维码</text></view>
         </view>
         <view class='pricePersonTwoImg'>
             <view class='pricePersonTwoImgTop' bindtap='shareFriends'>
@@ -53,7 +53,7 @@
     <view class='pricePersonThree'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
-            <view class='pricePersonONeTitleText'>{{pageData.app_name}}</view>
+            <view class='pricePersonONeTitleText'><text>{{pageData.app_name}}</text></view>
         </view>
         <view class='pricePersonThreeText'>
             <!-- <view>开始时间:<text>2018-05-25</text></view> -->
@@ -75,7 +75,7 @@
     <view class='pricePersonFour'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
-            <view class='pricePersonONeTitleText'>砍价风云榜</view>
+            <view class='pricePersonONeTitleText'><text>砍价风云榜</text></view>
             <view class='pricePersonONeRight' bindtap='getJoinerList'>[刷新]</view>
         </view>
         <view class='pricePersonFourContent'>

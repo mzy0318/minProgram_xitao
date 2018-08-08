@@ -1,6 +1,7 @@
 @import '../../../utils/iconFont.wxss';
 page{
     background:#F2F2F2;
+    padding-bottom:110rpx;
 }
 /* 页面功能 */
 .manListOpt{
@@ -40,10 +41,16 @@ page{
     text-indent:20rpx;
     background:#F6F7F9;
 }
-.contentTitle view{
+.contentTitle>view{
     float:left;
     height:80rpx;
     line-height:80rpx;
+}
+.contentTitle>view:nth-child(1){
+    width:650rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .contentTitle view:nth-child(2){
     float:right;
@@ -60,7 +67,11 @@ page{
     float:left;
     margin-top:20rpx;
     margin-left:20rpx;
-    background:lightblue;
+    background:#fff;
+}
+.contetnMiddleLeft>image{
+    width:400rpx;
+    height:200rpx;
 }
 .contetnMiddleRight{
     width:260rpx;
@@ -70,7 +81,7 @@ page{
     margin-top:20rpx;
 }
 .contetnMiddleRight>view{
-    font-size:20rpx;
+    font-size:19rpx;
     color:#7b7b7b;
     margin-top:5rpx;
 }

@@ -17,16 +17,17 @@
 /*第一部分  */
 .pricePersonOne{
     width:670rpx;
-    height:562rpx;
+    min-height:562rpx;
     margin:20rpx auto 0rpx;
     border-radius:5px 5px 0px 0px;
 }
 .pricePersonONeTitle{
     width:670rpx;
-    height:80rpx;
+    min-height:80rpx;
     background:#fff;
     border-radius:5px 5px 0px 0px;
     border-bottom:1rpx solid #efefef;
+    padding-bottom:10rpx;
 }
 .empty0{
     width:100%;
@@ -35,16 +36,21 @@
     border-radius:5px 5px 0px 0px;
 }
 .pricePersonONeTitleText{
-    width:500rpx;
+    width:600rpx;
     line-height:40rpx;
     min-height:40rpx;
     font-size:30rpx;
     font-weight:bold;
     margin:0rpx auto;
-    text-indent:20rpx;
     border-left:3px solid #F8C002;
-    float:left;
     margin-left:30rpx;
+}
+.pricePersonONeTitleText>text{
+    display:block;
+    width:580rpx;
+    line-height:40rpx;
+    min-height:40rpx;
+    margin-left:20rpx;
 }
 .pricePersonONeRight{
     float:right;
@@ -55,17 +61,18 @@
     text-align:right;
     margin-right:30rpx;
     color:#CC2200;
+    margin-top:-37rpx;
 }
 .pricePersonOneRange{
     width:670rpx;
-    height:450rpx;
+    min-height:450rpx;
     background:#fff;
     overflow:hidden;
     border-radius:0px 0px 5px 5px;
 }
 .pricePersonOneShow{
     width:670rpx;
-    height:120rpx;
+    min-height:120rpx;
     position:relative;
 }
 .pricePersonOneShowChild{
@@ -160,7 +167,7 @@
 .pricePersonTwo{
     width:670rpx;
     height:742rpx;
-    margin:0 auto;
+    margin:25rpx auto 0rpx;
     border-radius:5px 5px 0px 0px;
 }
 .pricePersonTwoImg{

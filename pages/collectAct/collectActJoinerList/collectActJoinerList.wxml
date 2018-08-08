@@ -1,0 +1,22 @@
+<view class='killPriceListContet' wx:for='{{pageData}}'>
+    <view class='killPriceListTop' bindtap='toActInfo' data-userid='{{item.id}}' >
+        <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.nickname}}</text>
+        <text>{{item.create_time}}</text>
+    </view>
+    <view class='killPriceListBottom'>
+        <text class='iconfont icon-phone iconColor' decode='true' bindtap='tellPhone' data-phonenum='{{item.phone}}'>&nbsp;&nbsp;{{item.phone}}</text>
+        <text decode='true' data-index='{{index}}' bindtap='hiddenInfo' data-id='0'>.&nbsp;.&nbsp;.</text>
+    </view>
+</view>
+<view class='noData' hidden='{{isNoData}}'>无记录</view>
+<view class='collageListWrap' hidden='{{isPersonInfo}}'>
+    <view class='empty'></view>
+    <view class='empty'></view>
+    <view class='collagePersonListTop'>
+        <view class='childView'>用户昵称:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <view class='childView'>手机号码:<text decode >&nbsp;&nbsp;{{personInfo.phone}}</text></view>
+        <view class='childView'>获得糖果:<text decode  style='color:red;'>&nbsp;&nbsp;{{personInfo.zan_amount}}个</text></view>
+        <view class='childView'>参与时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
+    </view>
+    <button bindtap='hiddenInfo' data-id='1'>返回</button>
+</view>

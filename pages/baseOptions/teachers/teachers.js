@@ -6,6 +6,7 @@ Page({
      */
     data: {
         teacherData:null,
+        bgColor:'',
     },
 
     /**
@@ -16,9 +17,17 @@ Page({
             url: 'school/teacher/list',
             data: {},
             success: res => {
-                this.setData({
-                    teacherData: res.data.data,
-                })
+                if(res.data.code == 1){
+                    this.setData({
+                        teacherData: res.data.data,
+                        bgColor: res.data.data[0].bg_color
+                    })
+                }else{
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
             }
         })
     },
@@ -74,5 +83,11 @@ Page({
                 path:'pages/index/index?pageId=9'
             }
         }
-    }
+    },
+    switchBgcolor:function(e){
+        let that = this;
+        that.setData({
+            bgColor: that.data.teacherData[e.detail.current].bg_color
+        })
+    },
 })

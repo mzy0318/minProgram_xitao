@@ -3,15 +3,15 @@
   width:720rpx;
   margin:20rpx auto 20rpx;
 }
-.wrapView image{
-  width:100%;
+.wrapView>image{
+  width:720rpx;
 }
 .studentInfo{
     width:680rpx;
-    line-height:60rpx;
-    /* background:lightblue; */
+    min-height:40rpx;
+    line-height:40rpx;
     margin:0 auto;
-    text-align:center;
+    text-align:center; 
     font-size:30rpx;
     color:#7b7b7b;
 }

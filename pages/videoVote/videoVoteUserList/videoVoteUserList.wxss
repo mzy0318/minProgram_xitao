@@ -62,6 +62,9 @@ page{
     text-align:center;
     font-size:30rpx;
     font-weight:bold;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 view.voteUserWrap:nth-child(1){
     margin-top:20rpx;

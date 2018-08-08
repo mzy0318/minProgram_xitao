@@ -1,9 +1,6 @@
-/* pages/teachers/teachers.wxss */
-
 .teacherWrap {
     position: fixed;
     width: 100%;
-    background: linear-gradient(to top, #add8e6, #fff);
     height: 100%;
     display: flex;
     flex-direction: column;

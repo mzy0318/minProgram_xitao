@@ -26,14 +26,14 @@
                 <text>{{item.nickname?item.nickname:'访客'}}</text>
                 <text>{{item.create_time}}</text>
             </view>
-            <view class='content'>{{item.content}}</view>
+            <view class='content'><text>{{item.content}}</text></view>
         </view>
         <view class='contentRely' wx:for='{{item.reply}}'>
             <view class='contentRelyLeft'>
                 <image src='{{item.avatar_url}}'></image>
                 <view>{{item.nickname?item.nickname:'访客'}} :</view>
             </view>
-            <view class='contentRelyRight'>{{item.content}}</view>
+            <view class='contentRelyRight'><text>{{item.content}}</text></view>
         </view>
     </view>
 </view>

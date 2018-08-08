@@ -27,23 +27,28 @@
 
 .killPriceInfoTop{
     width:670rpx;
-    height:80rpx;
+    min-height:80rpx;
     background:#fff;
     border-radius:5px 5px 0px 0px;
     border-bottom:1rpx solid #efefef;
     box-shadow:0px 2px 2px 2px #E2E6ED;
+    padding-bottom:10rpx;
 }
 
-.killPriceInfoTop .killPriceInfoTopText{
+.killPriceInfoTop>.killPriceInfoTopText{
     width:600rpx;
     min-height:40rpx;
     line-height:40rpx;
     font-size:30rpx;
     font-weight:bold;
     margin:0rpx auto;
-    text-indent:20rpx;
     border-left:3px solid #F8C002;
-    
+}
+.killPriceInfoTopText>text{
+    display:block;
+    width:580rpx;
+    margin-left:20rpx;
+    min-height:40rpx;
 }
 
 .empty{
@@ -181,6 +186,9 @@
     margin:0rpx auto;
     text-indent:20rpx;
     border-left:3px solid #F8C002;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 
 .infoTwoInfo{
@@ -191,14 +199,14 @@
     border-bottom:1rpx solid #efefef;
 }
 
-.infoTwoInfo view{
-    font-size:28rpx;
+.infoTwoInfo>view{
+    font-size:26rpx;
     margin:30rpx 0rpx 0rpx 30rpx;
     color:#414141;
 }
 
-.infoTwoInfo view text{
-    margin-left:40rpx;
+.infoTwoInfo>view>text{
+    margin-left:10rpx;
 }
 
 
@@ -212,9 +220,15 @@
 
 .infoTwoImgTitle{
     width:670rpx;
-    line-height:80rpx;
-    font-size:30rpx;
-    text-indent:30rpx;
+    line-height:40rpxrpx;
+    min-height:40rpx;
+    font-size:28rpx;
+    color:#7b7b7b;
+}
+.infoTwoImgTitle>text{
+    display:block;
+    width:610rpx;
+    margin:10rpx auto 0rpx;
 }
 
 .infoTwoImgImage{
@@ -339,22 +353,22 @@
 }
 .infoThreeContentTwo{
     width:600rpx;
-    height:450rpx;
+    min-height:450rpx;
     margin:25rpx auto 25rpx;
 }
 
-.infoThreeContentTwo text{
+.infoThreeContentTwo>text{
     display:block;
-    font-size:30rpx;
+    font-size:28rpx;
+    color:#7b7b7b;
     margin-top:20rpx;
     margin-left:30rpx;
     line-height:40rpx;
 }
 .infoThreeContentTwo text:nth-child(1){
-    
     margin-top:60rpx;
 }
-.infoThreeContentTwo button{
+.infoThreeContentTwo>button{
     width:300rpx;
     background:#CC2200;
     color:#fff;

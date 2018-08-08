@@ -116,6 +116,11 @@ Page({
             wx.navigateTo({
                 url: '../videoEdit/videoEdit?image=' + e.currentTarget.dataset.image + '&id=undefined&isEdit=0&bg=' + e.currentTarget.dataset.bg,
             })
+        } else if (pageType == 13) {
+            // 收集糖果
+            wx.navigateTo({
+                url: '../../collectAct/collectActEdit/collectActEdit?image=' + e.currentTarget.dataset.image + '&isEdit=0&bg=' + e.currentTarget.dataset.bg,
+            })
         }
         
     }

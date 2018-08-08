@@ -23,6 +23,7 @@ Page({
         bannerImage: '',
         backgroundImage: '',
         bgMusic: '',
+        backgroundMusic:'',
         encodeID:'',
         isButton:true,
         myPerson:'',
@@ -43,6 +44,7 @@ Page({
         showMusic:true,
         animationClass:'musicControl',
         btnBgImage:'../../../icon/optBtn.png',
+        isStopMusic: true,
     },
 
     /**
@@ -94,7 +96,19 @@ Page({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })
     },
-
+    //停止/播放音乐
+    isStopMusic: function () {
+        let that = this;
+        that.setData({
+            isStopMusic: !that.data.isStopMusic,
+        })
+        if (that.data.isStopMusic) {
+            innerAudioContext.src = that.data.backgroundMusic;
+            innerAudioContext.play()
+        } else {
+            innerAudioContext.stop()
+        }
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -550,7 +564,7 @@ Page({
                         joinId: res.data.data.joiner_id ? res.data.data.joiner_id : '',
                         bannerImage: res.data.data.banner_image_url,
                         backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
-                        bgMusic: res.data.data.music,
+                        backgroundMusic: res.data.data.music,
                         musicId: res.data.data.music_id,
                     });
                 } else if (Number(res.data.code) == 0) {

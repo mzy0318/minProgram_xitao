@@ -13,11 +13,11 @@ page{
 .voteUserContent{
     width:710rpx;
     height:330rpx;
-    background:lightgreen;
+    background:#fff;
     position:relative;
     overflow:hidden;
 }
-.voteUserContent image{
+.voteUserContent>image{
     width:710rpx;
     height:330rpx;
 }
@@ -36,7 +36,7 @@ page{
     height:50rpx;
     line-height:50rpx;
     font-size:26rpx;
-    background:#6D5DDA;
+    background:#fff;
     color:rgba(255,255,255,0.5);
     position:absolute;
     right:0rpx;
@@ -63,6 +63,9 @@ page{
     text-align:center;
     font-size:30rpx;
     font-weight:bold;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 view.voteUserWrap:nth-child(1){
     margin-top:20rpx;

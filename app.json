@@ -1,6 +1,5 @@
 {
     "pages": [
-        "pages/collectAct/collectActInfo/collectActInfo",
         "pages/index/index",
         "pages/studentCenter/studentCenter",
         "pages/morePage/morePage",
@@ -26,12 +25,12 @@
         "pages/baseOptions/teachers/teachers",
         "pages/baseOptions/schoolInfo/schoolInfo",
         "pages/baseOptions/opinions/opinions",
+        "pages/baseOptions/schoolList/schoolList",
         "pages/baseOptions/studentStyle/studentStyle",
         "pages/baseOptions/contactUs/contactUs",
         "pages/baseOptions/sharePage/sharePage",
         "pages/baseOptions/schoolModel/schoolModel",
         "pages/baseOptions/schoolModelInfo/schoolModelInfo",
-        "pages/baseOptions/schoolList/schoolList",
         "pages/killPrices/killPrice/killPrice",
         "pages/killPrices/killPricePerson/killPricePerson",
         "pages/killPrices/killPriceInfo/killPriceInfo",
@@ -92,8 +91,11 @@
         "pages/videoClass/videoClassStuList/videoClassStuList",
         "pages/collectAct/collectActUserList/collectActUserList",
         "pages/collectAct/collectActStuList/collectActStuList",
+        "pages/collectAct/collectActInfo/collectActInfo",
         "pages/collectAct/collectActEdit/collectActEdit",
-        "pages/collectAct/collectActManList/collectActManList"
+        "pages/collectAct/collectActManList/collectActManList",
+        "pages/collectAct/collectActJoinerList/collectActJoinerList",
+        "pages/collectAct/collectActUserInfo/collectActUserInfo"
     ],
     "window": {
         "backgroundTextStyle": "dark",

@@ -41,12 +41,18 @@ page{
     text-indent:20rpx;
     background:#F6F7F9;
 }
-.contentTitle view{
+.contentTitle>view{
     float:left;
     min-height:80rpx;
     line-height:80rpx;
 }
-.contentTitle view:nth-child(2){
+.contentTitle>view:nth-child(1){
+    width:650rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+.contentTitle>view:nth-child(2){
     float:right;
     color:#7b7b7b;
 }

@@ -20,6 +20,7 @@ page{
     width:120rpx;
     height:120rpx;
     border-radius:50%;
+    background:#fff;
     float:left;
     overflow: hidden;
 }
@@ -28,18 +29,28 @@ page{
     height:120rpx;
 }
 .stuCenterTopRight{
-    width:300rpx;
+    min-width:300rpx;
     height:120rpx;
     float:right;
     margin-right:50rpx;
 }
-.stuCenterTopRight view{
+.stuCenterTopRight>view{
     font-size:28rpx;
     line-height:40rpx;
     color:#fff;
     margin-top:10rpx;
 }
-.stuCenterTopRight view:nth-child(2){
+.stuCenterTopRight>button{
+    width:180rpx;
+    height:55rpx;
+    line-height:55rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    padding:0rpx 0rpx;
+    box-sizing: content-box;
+    margin-left:0rpx;
+}
+.stuCenterTopRight>view:nth-child(2){
     font-size:22rpx;
 }
 .stuCenterBottom{
@@ -113,4 +124,32 @@ page{
     font-size:24rpx;
     text-align:center;
     color:#7b7b7b;
+}
+/* 用户信息 */
+.userInfoWrap{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0rpx;
+    left:0rpx;
+    background:rgba(0,0,0,0.3);
+}
+.userInfoContent{
+    width:600rpx;
+    height:780rpx;
+    background:#fff;
+    border-radius:6px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-300rpx;
+    margin-top:-390rpx;
+}
+.userInfoTitle{
+    width:540rpx;
+    line-height:60rpx;
+    margin:20rpx auto 0rpx;
+    font-size:30rpx;
+    text-align:center;
+    font-weight:bold;
 }

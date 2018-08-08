@@ -104,6 +104,9 @@ button.optionsContent::after{
     height:60rpx;
     line-height:60rpx;
     font-size:24rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 view.videoClassContent:nth-child(even){
     margin-left:20rpx;

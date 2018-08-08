@@ -221,7 +221,7 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-            path: 'pages/index/index?pageId=18?courseId=' + that.data.courseId
+            path: 'pages/index/index?pageId=18?courseId=' + that.data.courseId + '&pwd=' + that.data.pwd
         }
     },
     // 学生主页

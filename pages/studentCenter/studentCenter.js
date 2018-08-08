@@ -105,6 +105,7 @@ Page({
         ],
         userInfo: '',
         funcOpt: '',
+        isUserInfo:false,
     },
 
     /**
@@ -142,35 +143,21 @@ Page({
         that.setData({
             versionData: version.version + versionText,
         });
-        // 获取用户信息
-        wx.getSetting({
-            success: res => {
-                // console.log('授权结果', res);
-                if (res.authSetting['scope.userInfo']) {
-                    wx.getUserInfo({
-                        success: res => {
-                            // console.log('用户信息', res)
-                            getApp().globalData.userInfo = res.userInfo
-                            that.setData({
-                                userInfo: res.userInfo
-                            })
-                            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                            // 所以此处加入 callback 以防止这种情况
-                            if (this.userInfoReadyCallback) {
-                                this.userInfoReadyCallback(res)
-                            }
-                        }
-                    })
-                } else {
-                    that.setData({
-                        userInfo: {
-                            nickName: '访客',
-                            avatarUrl: 'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png'
-                        }
-                    })
-                }
-            }
-        });
+        // 是否获取用户信息
+        if (getApp().globalData.userInfo){
+            that.setData({
+                userInfo: getApp().globalData.userInfo,
+                isUserInfo: true,
+            })
+        }else{
+            // that.setData({
+            //     userInfo: {
+            //         nickName: '访客',
+            //         avatarUrl: 'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png',
+            //     },
+            //     isUserInfo: true,
+            // })       
+        }
     },
 
     /**
@@ -241,5 +228,40 @@ Page({
         wx.navigateTo({
             url: e.currentTarget.dataset.url,
         })
+    },
+    // 获取用户信息
+    getUserInfo:function(e){
+        let that = this;
+        if (e.detail.userInfo == undefined){
+            that.setData({
+                userInfo: {
+                    nickName:'访客',
+                    avatarUrl: 'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png',
+                },
+                isUserInfo: true,
+            })
+        }else{
+            getApp().globalData.userInfo = e.detail.userInfo;
+            that.setData({
+                userInfo: e.detail.userInfo,
+                isUserInfo: true,
+            })
+            let sendData = {};
+            sendData['nickname'] = e.detail.userInfo.nickName
+            sendData['avatar_url'] = e.detail.userInfo.avatarUrl
+            sendData['province'] = e.detail.userInfo.province
+            sendData['city'] = e.detail.userInfo.city
+            sendData['country'] = e.detail.userInfo.country
+            sendData['language'] = e.detail.userInfo.language
+            sendData['gender'] = e.detail.userInfo.gender
+            getApp().request({
+                url:'set_user_info',
+                data: sendData,
+                method:'post',
+                success:function(res){
+                }
+            })
+        }
+        
     }
 })

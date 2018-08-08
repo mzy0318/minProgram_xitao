@@ -231,7 +231,7 @@ view.widthInput{
     width:720rpx;
     height:60rpx;
 }
-.activeInfoTopTitle view,.activeInfoTopContent view{
+.activeInfoTopTitle>view,.activeInfoTopContent>view{
     width:25%;
     height:60rpx;
     line-height:60rpx;
@@ -248,6 +248,11 @@ view.widthInput{
 }
 .activeInfoTopContent view:nth-child(1){
     font-weight:bold;
+}
+.activeInfoTopContent>view:nth-child(3){
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 
 /* 投票排行 */

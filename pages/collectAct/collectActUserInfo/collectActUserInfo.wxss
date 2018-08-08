@@ -11,11 +11,9 @@
 .infoBackImage{
     width:750rpx;
     min-height:100rpx;
-    background:#fff;
+    background:#FEF065;
     padding-bottom:130rpx;
     padding-top:30rpx;
-    background-size:100% 100%;
-    background-repeat: no-repeact;
 }
 .laudActImage,.laudActInfo,.actInfoConnect,.actInfoRange,.actInfoIntruc{
     width:690rpx;
@@ -91,19 +89,20 @@
 .personInfoText>view{
     font-size:26rpx;
     line-height:45rpx;
+    overflow:hidden;
 }
 .personInfoText>view:nth-child(1)>text{
     font-size:35rpx;
 }
 /* 优惠 */
-.collectActText,.collectText{
+.collectActText{
     width:640rpx;
     height:80rpx;
     margin:0rpx auto;
     font-size:30rpx;
     line-height:80rpx;
     color:#2E3035;
-    text-align:center;
+    text-align:left;
 }
 .collectActText{
     margin-top:30rpx;
@@ -162,9 +161,13 @@
 .collectActRangeIcon{
     width:55rpx;
     height:55rpx;
-    background:lightgreen;
+    background:#fff;
     margin-left:8rpx;
     margin-top:12.5rpx;
+}
+.collectActRangeIcon>image{
+    width:55rpx;
+    height:55rpx;
 }
 /* 连接点 */
 .viewMiddle{
@@ -260,6 +263,11 @@
 }
 .rangeContent{
     border-bottom:.5rpx solid #efefef;
+}
+.rangeTitle>view:nth-child(2){
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 
 /* 活动倒计时 */

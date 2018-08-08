@@ -1,9 +1,9 @@
-<view class='voteUserWrap'>
+<view class='voteUserWrap' wx:for='{{pageData}}' wx:key='{{item.id}}' bindtap='toInfoPage' data-actid='{{item.id}}'>
     <view class='voteUserContent'>
-        <image  src='{{item.cover.url}}' mode='widthFix'></image>
+        <image  src='{{item.banner_image_url}}' mode='widthFix'></image>
         <!-- <view class='contentLeft'>{{item.view_amount}}</view> -->
-        <view class='contentRight'>活动进行中</view>
-        <view class='contentbottom'>2018-02-11 00:00 至 2019-02-11 00:00</view>
+        <view class='contentRight' style='background:{{item.statusColor}}'>{{item.statusText}}</view>
+        <view class='contentbottom'>{{item.start_time}} 至 {{item.end_time}}</view>
     </view>
-    <view class='voteUserTitle'>糖果收集大作战</view>
+    <view class='voteUserTitle'>{{item.title}}</view>
 </view>

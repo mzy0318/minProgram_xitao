@@ -3,6 +3,7 @@
     width:750rpx;
     min-height:1207rpx;
     background:#f2f2f2;
+    margin-top:20rpx;
 }
 .schListContent{
     width:750rpx;
@@ -33,6 +34,20 @@
     line-height:80rpx;
     background:#fff;
     margin:0 auto;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+/* 地图 */
+.schListMap{
+    width:670rpx;
+    height:300rpx;
+    background:#fff;
+    margin:0rpx auto 10rpx;
+}
+.schListMap>map{
+    width:670rpx;
+    height:300rpx;
 }
 
 .iconStyle{

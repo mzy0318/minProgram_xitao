@@ -154,9 +154,20 @@ Page({
         res.detail.value['act_tag'] = that.data.actTag
         res.detail.value['amount'] = that.data.initNum;
         res.detail.value['joiner_id'] = that.data.joinId ? that.data.joinId:'';
-
-        wx.navigateTo({
-            url: '../orderInfoPay/orderInfoPay?actId=' + res.detail.value.act_id + '&actTag=' + res.detail.value.act_tag + '&amount=' + res.detail.value.amount + '&joinId=' + res.detail.value.joiner_id + '&nickname=' + res.detail.value.nickname + '&note=' + res.detail.value.note + '&phone=' + res.detail.value.phone +'&isInfo=0',
-        });
+        if (res.detail.value.nickname == ''){
+            wx.showToast({
+                title: '姓名不能为空',
+                icon:'none',
+            })
+        } else if (res.detail.value.phone == ''){
+            wx.showToast({
+                title: '电话不能为空',
+                icon: 'none',
+            })
+        }else{
+            wx.navigateTo({
+                url: '../orderInfoPay/orderInfoPay?actId=' + res.detail.value.act_id + '&actTag=' + res.detail.value.act_tag + '&amount=' + res.detail.value.amount + '&joinId=' + res.detail.value.joiner_id + '&nickname=' + res.detail.value.nickname + '&note=' + res.detail.value.note + '&phone=' + res.detail.value.phone + '&isInfo=0',
+            });
+        }
     }
 })

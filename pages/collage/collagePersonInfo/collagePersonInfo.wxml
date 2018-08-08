@@ -4,7 +4,7 @@
     </view>
     <view class='collageInfoOne'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>{{pageData.title}}</view>
+            <view class='oneTitleChild'><text>{{pageData.title}}</text></view>
         </view>
         <view class='oneImage'>
             <view class='empty'></view>
@@ -29,7 +29,7 @@
     </view>
     <view class='myTeam'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>我的团员</view>
+            <view class='oneTitleChild'><text>我的团员</text></view>
         </view>
         <view class='divBoxChildWrap'>
             <view class='divBoxChild' wx:for='{{personInfo}}'>
@@ -43,24 +43,26 @@
         </view>
         <button open-type='share'>推荐好友</button>
     </view>
+    <!-- 分享活动 -->
     <view class='collageInfoSix'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>分享活动</view>
+            <view class='oneTitleChild'><text>分享活动</text></view>
         </view>
         <view class='collageInfoSixContent' bindtap='shareFriends'>
             <image src='{{encodeID}}' mode='scaleToFill' ></image>
         </view>
         <button bindtap='shareFriends'>分享到朋友圈</button>
     </view>
+    <!-- 团长奖励 -->
     <view class='headerReward'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>团长奖励</view>
+            <view class='oneTitleChild'><text>团长奖励</text></view>
         </view>
-        <view class='headerRewardContent'>{{pageData.leader_reward}}</view>
+        <view class='headerRewardContent'><text>{{pageData.leader_reward}}</text></view>
     </view>
     <view class='collageInfoTwo'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>机构介绍</view>
+            <view class='oneTitleChild'><text>机构介绍</text></view>
         </view>
         <text decode='true'>活动时间:&nbsp;&nbsp;{{pageData.start_time}} 至 {{pageData.end_time}}</text>
         <text decode='true'>机构名称:&nbsp;&nbsp;{{pageData.app_name}}</text>
@@ -70,25 +72,25 @@
         </view>
         <view class='empty'></view>
     </view>
+    <!-- 活动介绍 -->
     <view class='collageInfoThree'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>活动介绍</view>
+            <view class='oneTitleChild'><text>活动介绍</text></view>
         </view>
         <view class='oneImage'>
             <view class='empty'></view>
-            <view class='threeImageText'>{{pageData.description}}</view>
+            <view class='threeImageText'><text>{{pageData.description}}</text></view>
             <view class='oneImageContent' wx:for='{{pageData.act_image}}'>
                 <image src='{{item.url}}' mode='scaleToFill' />
             </view>
             <view class='empty'></view>
         </view>
     </view>
+    <!-- 活动规则 -->
     <view class='collageInfoFour'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>活动规则</view>
+            <view class='oneTitleChild'><text>活动规则</text></view>
         </view>
-        <view class='fourContent'>
-            {{pageData.rule}}
-        </view>
+        <view class='fourContent'><text>{{pageData.rule}}</text></view>
     </view>
 </view>

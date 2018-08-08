@@ -1,4 +1,3 @@
-<!--pages/schoolnfo/schoolInfo.wxml-->
 <import src='../template/swiper.wxml' />
 <swiper width="100%" indicator-dots="true" indicator-color="{{indicatorColor}}" autoplay="{{autoplay}}" duration="{{duration}}" interval="{{interval}}" indicator-active-color="indicatorActiveColor">
     <block wx:for="{{pageData.environment}}">

@@ -1,6 +1,6 @@
-<view class='teacherWrap'>
-    <swiper indicator-dots='{{true}}' circular='{{true}}'>
-        <swiper-item wx:for='{{teacherData}}'>
+<view class='teacherWrap' style='background: linear-gradient(to top, {{bgColor}}, #fff);'>
+    <swiper indicator-dots='{{true}}' circular='{{true}}' bindchange='switchBgcolor'>
+        <swiper-item wx:for='{{teacherData}}' wx:key='{{index}}'  data-index='{{index}}'>
             <view class='teaContent'>
                 <view class='teaContentImg'>
                     <image src='{{item.avatar_url.url}}' mode='scaleToFill' />

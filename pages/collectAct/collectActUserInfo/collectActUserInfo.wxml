@@ -1,20 +1,66 @@
 <view class='infoBannerImage'>
     <image src='{{pageData.banner_image_url}}' mode='scaleToFill'></image>
 </view>
-<view class='infoBackImage' style='background-image:url({{pageData.bg_image_url}})'>
+<view class='infoBackImage'>
     <!-- 活动图片 -->
     <view class='laudActImage'>
         <view class='laudActImageTitle'><text>{{pageData.title}}</text></view>
-        <view class='collectText'>
-            <view hidden='{{isText}}'>亲,你还未参加活动!</view>
-            <view hidden='{{isText}}'>优惠数量有限,点击<text>'我要参加'</text>报名吧</view>
-            <view hidden='{{!isText}}'>亲,你已经参加活动!</view>
-            <view hidden='{{!isText}}'>点击<text>'我的主页'</text>,查看获得的水果</view>
-            <view>活动真实有效,欢迎到店咨询</view>
+        <view class='laudActImages'>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/01.png'></image></view>
+                <view>
+                    <text>彩虹味</text>
+                    <text>共 <text style='color:red'>{{pageData.joiner.rainbow_sugar_amount}}</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/02.png'></image></view>
+                <view>
+                    <text>草莓味</text>
+                    <text>共 <text style='color:red'>{{pageData.joiner.strawberry_sugar_amount}}</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/03.png'></image></view>
+                <view>
+                    <text>芒果味</text>
+                    <text>共 <text style='color:red'>{{pageData.joiner.mango_sugar_amount}}</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/04.png'></image></view>
+                <view>
+                    <text>西瓜味</text>
+                    <text>共 <text style='color:red'>{{pageData.joiner.watermelon_sugar_amount}}</text> 个</text>
+                </view>
+            </view>
+            <view class='laudActImagesContent'>
+                <view><image src='../../../icon/05.png'></image></view>
+                <view>
+                    <text>蓝莓味</text>
+                    <text>共 <text style='color:red'>{{pageData.joiner.blueberry_sugar_amount}}</text> 个</text>
+                </view>
+            </view>
+        </view> 
+         <view class='laudActPersonInfo'>
+            <view class='personInfoImage'><image src='{{pageData.joiner.avatar_url}}'></image></view>
+            <view class='personInfoText'>
+                <view><text style='color:#FC76A3'>{{pageData.joiner.nickname}}</text> {{pageData.joiner.phone}}</view>
+                <view>已抢到<text style='color:#FC76A3'> {{pageData.joiner.zan_amount}} </text>个糖果,当前排名<text style='color:#FC76A3'> {{pageData.joiner.rank}} </text>位</view>
+                <view>分享小程序,让朋友帮你集糖果</view>
+            </view>
         </view>
         <view class='collectActText'>
             优惠共
-            <text style='color:#FC76A3'> {{pageData.gift_amount}} </text>份 / 剩余<text style='color:#FC76A3'> {{pageData.rest_gift_amount}} </text>份
+            <text style='color:#FC76A3'> {{pageData.gift_amount}} </text>份 / 剩余
+            <text style='color:#FC76A3'> {{pageData.rest_gift_amount}} </text>份
+        </view>
+        <view class='collectActRange' wx:for='{{helperData}}' wx:key='{{item.id}}'>
+            <view class='collectActRangeImage'><image src='{{item.avatar_url}}' mode='scaleToFill'></image></view>
+            <view class='collectActRangeName'>{{item.nickname}}</view>
+            <view class='collectActRangeTime'>{{item.create_time}} </view>
+            <view class='collectActRangeGetted'>抢到</view>
+            <view class='collectActRangeIcon' wx:for='{{item.sugar}}' wx:key='{{index}}'><image src='{{item}}' mode='scaleToFill'></image></view>
         </view>
     </view>
     <view class='viewMiddle'>
@@ -95,7 +141,7 @@
             <view>姓名</view>
             <view>糖果数量</view>
         </view>
-        <view class='rangeContent' wx:for='{{rangeData}}' wx:key='{{index}}' data-userid='{{item.id}}'>
+        <view class='rangeContent' wx:for='{{rangeData}}' wx:key='{{index}}'>
             <view>{{index+1}}</view>
             <view>{{item.nickname}}</view>
             <view>{{item.zan_amount}}</view>
@@ -104,24 +150,3 @@
 </view>
 <!-- 活动倒计时 -->
 <view class='countDown'>活动倒计时: {{countDown.day}}天 {{countDown.hour}}时 {{countDown.minute}}分 {{countDown.socend}}秒</view>
-<!-- 报名按钮 -->
-<view class='joinAct' bindtap='showJoiner' data-id='1'>{{btnText}}</view>
-<!-- 报名页面 -->
-<view class='joinerWrap' hidden='{{isJoiner}}'>
-    <view class='joinerContent'>
-        <view>填写报名信息</view>
-        <form bindsubmit='joinAct'>
-            <view>
-                <input type='text' placeholder='请输入姓名' name='nickname'></input>
-            </view>
-            <view>
-                <input type='number' placeholder='请输入联系电话' name='phone' maxlength='11'></input>
-            </view>
-            <view wx:for='{{nameInfo}}'>
-                <input type='text' placeholder='请输入{{item.name}}({{item.nameId == 1?"必填":"非必填"}})' name='{{"info["+index+"]"}}'></input>
-            </view>
-            <button form-type='submit'>确认</button>
-        </form>
-        <view class='closeDiv' bindtap='showJoiner' data-id='0'>×</view>
-    </view>
-</view>

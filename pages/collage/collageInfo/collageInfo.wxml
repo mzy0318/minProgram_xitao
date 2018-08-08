@@ -4,7 +4,7 @@
     </view>
     <view class='collageInfoOne'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>{{pageData.title}}</view>
+            <view class='oneTitleChild'><text decode>{{pageData.title}}</text></view>
         </view>
         <view class='oneImage'>
             <view class='empty'></view>
@@ -27,7 +27,7 @@
     </view>
     <view class='collageInfoFive'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>已开团</view>
+            <view class='oneTitleChild'><text>已开团</text></view>
         </view>
         <view class='infoFive'>活动时间:{{startTime}} 至 {{endTime}}({{status}})</view>
         <view class='collageInfoContent' wx:for='{{collageData}}'>
@@ -47,9 +47,10 @@
         </view>
         <view class='empty'></view>
     </view>
+    <!-- 机构介绍 -->
     <view class='collageInfoTwo'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>机构介绍</view>
+            <view class='oneTitleChild'><text>机构介绍</text></view>
         </view>
         <text decode='true'>活动时间:&nbsp;&nbsp;{{startTime}} 至 {{endTime}}</text>
         <text decode='true'>机构名称:&nbsp;&nbsp;{{pageData.app_name}}</text>
@@ -59,28 +60,30 @@
         </view>
         <view class='empty'></view>
     </view>
+    <!-- 活动介绍 -->
     <view class='collageInfoThree'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>活动介绍</view>
+            <view class='oneTitleChild'><text>活动介绍</text></view>
         </view>
         <view class='oneImage'>
             <view class='empty'></view>
-            <view class='threeImageText'>{{pageData.description}}</view>
+            <view class='threeImageText'><text>{{pageData.description}}</text></view>
             <view class='oneImageContent' wx:for='{{pageData.act_image}}'>
                 <image src='{{item.url}}' mode='scaleToFill' />
             </view>
             <view class='empty'></view>
         </view>
     </view>
+    <!-- 活动规则 -->
     <view class='collageInfoFour'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>活动规则</view>
+            <view class='oneTitleChild'><text>活动规则</text></view>
         </view>
-        <view class='fourContent'>{{pageData.rule}}</view>
+        <view class='fourContent'><text>{{pageData.rule}}</text></view>
     </view>
     <view class='collageInfoSix'>
         <view class='oneTitle'>
-            <view class='oneTitleChild'>分享活动</view>
+            <view class='oneTitleChild'><text>分享活动</text></view>
         </view>
         <view class='collageInfoSixContent' bindtap='shareFriends'>
             <image src='{{encodeID}}' mode='scaleToFill' ></image>
@@ -151,5 +154,5 @@
         </view>
     </view>
 </view>
-<view class='{{animationClass}}' animation='{{animationData}}' hidden='{{showMusic}}' bindtap='stopMusic'><text class='iconfont icon-music fontStyleT'></text></view>
+<view class='{{animationClass}}' animation='{{animationData}}' hidden='{{showMusic}}' bindtap='isStopMusic'><text class='iconfont icon-music fontStyleT'></text></view>
 <!-- <other-option bindgetImage='getImage' bindgetBackgroundImage='getBackgroundImage' bindgetMusic='getMusic' actid='{{pageData.id}}' acttag='{{actTag}}' banImage='{{pageData.banner_image_url}}' backImage='{{pageData.bg_image_url}}' bgMusicId='{{pageData.music_id}}' bgMusic='{{pageData.music}}'></other-option> -->

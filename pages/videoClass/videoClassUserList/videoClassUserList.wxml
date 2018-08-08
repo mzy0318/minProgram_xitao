@@ -1,4 +1,3 @@
-
 <view class='videoClassOptions'>
     <view class='optionsContent' bindtap='isContent' data-id='0'>
         <view class='optionsContentTop' style='background:#F89225'> 

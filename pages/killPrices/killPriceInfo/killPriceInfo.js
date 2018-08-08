@@ -44,6 +44,7 @@ Page({
         btnBgImage: '../../../icon/optBtn.png',
         rangPage:1,
         actTag:'',
+        isStopMusic:true,
     },
 
     /**
@@ -139,6 +140,19 @@ Page({
     //停止播放音乐
     stopMusic:function(){
         innerAudioContext.stop()
+    },
+    //停止/播放音乐
+    isStopMusic:function(){
+        let that = this;
+        that.setData({
+            isStopMusic: !that.data.isStopMusic,
+        })
+        if (that.data.isStopMusic){
+            innerAudioContext.src = that.data.backgroundMusic;
+            innerAudioContext.play()
+        }else{
+            innerAudioContext.stop()
+        }
     },
     onPullDownRefresh: function () {
         let that = this;

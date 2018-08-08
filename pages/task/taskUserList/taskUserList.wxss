@@ -28,6 +28,9 @@ page{
     line-height:100rpx;
     text-indent:40rpx;
     font-size:35rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .taskUserNum{
     width:710rpx;

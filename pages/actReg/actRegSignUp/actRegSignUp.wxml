@@ -1,7 +1,7 @@
 <view class='signUpWrap' hidden='{{isShow}}'>
     <form bindsubmit='submitInfo' >
         <view class='signUpName'>
-            <view class='signUpNameTitle'>联系报名:</view>
+            <view class='signUpNameTitle'>用户姓名:</view>
             <view class='signUpNameInput'>
                 <input type='text' name='nickname' />
             </view>

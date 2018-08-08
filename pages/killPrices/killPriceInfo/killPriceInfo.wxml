@@ -6,7 +6,7 @@
     <view class='killPriceInfoOne'>
         <view class='killPriceInfoTop'>
             <view class='empty'></view>
-            <view class='killPriceInfoTopText'>{{pageData.title}}</view>
+            <view class='killPriceInfoTopText'><text>{{pageData.title}}</text></view>
         </view>
         <!-- coverImage -->
         <view class='killPriceInfoImg'>
@@ -47,7 +47,7 @@
                 <view>机构地址:<text>{{pageData.address}}</text></view>
             </view>
             <view class='infoTwoImg'>
-                <view class='infoTwoImgTitle'>快来参加!!!</view>
+                <view class='infoTwoImgTitle'><text>快来参加!!!</text></view>
                 <view class='infoTwoImgImage' wx:for='{{activeImage}}'>
                     <image src='{{item.url}}' mode='widthFix' />
                 </view>
@@ -143,4 +143,4 @@
         </view>
     </view>
 </view>
-<view class='{{animationClass}}' hidden='{{showMusic}}' bindtap='stopMusic'><text class='iconfont icon-music fontStyleT'></text></view>
+<view class='{{animationClass}}' hidden='{{showMusic}}' bindtap='isStopMusic'><text class='iconfont icon-music fontStyleT'></text></view>

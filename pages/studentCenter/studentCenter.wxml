@@ -4,7 +4,8 @@
             <image src='{{userInfo.avatarUrl}}' mode='scaleToFill' />
         </view>
         <view class='stuCenterTopRight'>
-            <view>{{userInfo.nickName}}</view>
+            <view wx:if='{{isUserInfo}}'>{{userInfo.nickName}}</view>
+            <button wx:else hover-class='none' open-type='getUserInfo' bindgetuserinfo="getUserInfo">点击获得头像</button>
             <view>欢迎您!!!</view>
         </view>
     </view>
@@ -12,13 +13,13 @@
 <view class='stuCenterBottom'>
     <view class='stuCenterBottomTitle'>会员服务</view>
     <view class='stuCenterBottomContent'>
-        <view class='centerBottomContentWrap' wx:for='{{baseData}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage'>
+        <view class='centerBottomContentWrap' wx:for='{{baseData}}' wx:key='{{index}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage'>
             <view class='optionsTop' style='background:{{item.background}}'>
                 <text class='{{item.iconfont}}'></text>
             </view>
             <view class='optionsBottom'>{{item.name}}</view>
         </view>
-        <view class='centerBottomContentWrap' wx:for='{{funcOpt}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage' style='display:{{item.show}}'>
+        <view class='centerBottomContentWrap' wx:for='{{funcOpt}}' wx:key='{{index}}' data-pagetypestu='{{item.pageTypeStu}}' data-url='{{item.url}}' bindtap='toOptionPage' style='display:{{item.show}}'>
             <view class='optionsTop' style='background:{{item.background}}'>
                 <text class='{{item.iconfont}}'></text>
             </view>
@@ -29,3 +30,10 @@
 <view class='managVersion'>
     <text>{{versionData}}</text>
 </view>
+<!-- 获取用户信息 -->
+<!-- <view class='userInfoWrap'>
+    <view class='userInfoContent'>
+        <view class='userInfoTitle'>小程序名称 申请获得以下权限</view>
+        <view class='userInfoText'>·获得你的公开信息(昵称,头像等)</view>
+    </view>
+</view> -->

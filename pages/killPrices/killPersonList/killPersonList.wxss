@@ -1,100 +1,120 @@
-.personListWrap{
-    width:750rpx;
-    min-height:1207rpx;
-    background:#F5F5F5;
-}
-.personListInputName{
-    width:710rpx;
-    height:80rpx;
-    background:#fff;
-    margin:0 auto;
-}
-.empty{
-    width:100%;
-    height:20rpx;
-    background:transparent;
-}
-.personListContent{
-    width:710rpx;
-    height:200rpx;
-    background:#fff;
-    margin:20rpx auto 0rpx;
-}
-.personListTitle{
-    width:670rpx;
-    line-height:80rpx;
-    font-size:30rpx;
-    color:#000;
-    margin:0 auto;
-    border-bottom:1rpx solid #efefef;
-}
-.personListInfo,.personListDate{
-    width:670rpx;
-    line-height:60rpx;
-    font-size:30rpx;
-    color:#939393;
-    margin:0rpx auto;
-}
-.personListInfo view{
-   width:48%;
-   float:left;
-}
-.personListInfo view:nth-child(2){
-   float:right;
-}
-.personListDate{
-    color:#E1E1E1;
+.personListWrap {
+    width: 750rpx;
+    min-height: 1207rpx;
+    background: #f5f5f5;
 }
 
-
-
-.collagePersonList{
-    width:750rpx;
-    height:1207rpx;
-    position:fixed;
-    top:0rpx;
-    left:0rpx;
-    z-index:1000;
-    background:#F5F5F5;
-}
-.collagePersonListTop{
-    width:690rpx;
-    min-height:85rpx;
-    background:#fff;
-    margin:0 auto;
-}
-.childView{
-    width:100%;
-    line-height:80rpx;
-    border-bottom:1rpx solid #efefef;
-    font-size:30rpx;
-    text-indent:20rpx;
-    color:#7b7b7b;
-}
-.collagePersonListMiddle{
-    width:690rpx;
-    min-height:85rpx;
-    background:#fff;
-    margin:40rpx auto;
-}
-.collagePersonListBottom{
-    width:690rpx;
-    min-height:85rpx;
-    background:#fff;
-    margin:0rpx auto;
-}
-.collagePersonList>button{
-    width:400rpx;
-    line-height:80rpx;
-    margin-top:50rpx;
+.personListInputName {
+    width: 710rpx;
+    height: 80rpx;
+    background: #fff;
+    margin: 0 auto;
 }
 
-.noData{
-    width:100%;
-    height:60rpx;
-    font-size:26rpx;
-    color:#7b7b7b;
-    text-align:center;
-    line-height:60rpx;
-    background:transparent;
+.empty {
+    width: 100%;
+    height: 20rpx;
+    background: transparent;
+}
+
+.personListContent {
+    width: 710rpx;
+    height: 200rpx;
+    background: #fff;
+    margin: 20rpx auto 0rpx;
+}
+
+.personListTitle {
+    width: 670rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    color: #000;
+    margin: 0 auto;
+    border-bottom: 1rpx solid #efefef;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.personListInfo, .personListDate {
+    width: 670rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    color: #939393;
+    margin: 0rpx auto;
+}
+
+.personListInfo>view {
+    width: 48%;
+    float: left;
+}
+
+.personListInfo>view:nth-child(1) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.personListInfo>view:nth-child(2) {
+    float: right;
+}
+
+.personListDate {
+    color: #e1e1e1;
+}
+
+.collagePersonList {
+    width: 750rpx;
+    height: 1207rpx;
+    position: fixed;
+    top: 0rpx;
+    left: 0rpx;
+    z-index: 1000;
+    background: #f5f5f5;
+}
+
+.collagePersonListTop {
+    width: 690rpx;
+    min-height: 85rpx;
+    background: #fff;
+    margin: 0 auto;
+}
+
+.childView {
+    width: 100%;
+    line-height: 80rpx;
+    border-bottom: 1rpx solid #efefef;
+    font-size: 30rpx;
+    text-indent: 20rpx;
+    color: #7b7b7b;
+}
+
+.collagePersonListMiddle {
+    width: 690rpx;
+    min-height: 85rpx;
+    background: #fff;
+    margin: 40rpx auto;
+}
+
+.collagePersonListBottom {
+    width: 690rpx;
+    min-height: 85rpx;
+    background: #fff;
+    margin: 0rpx auto;
+}
+
+.collagePersonList>button {
+    width: 400rpx;
+    line-height: 80rpx;
+    margin-top: 50rpx;
+}
+
+.noData {
+    width: 100%;
+    height: 60rpx;
+    font-size: 26rpx;
+    color: #7b7b7b;
+    text-align: center;
+    line-height: 60rpx;
+    background: transparent;
 }

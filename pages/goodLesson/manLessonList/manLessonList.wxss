@@ -14,6 +14,9 @@ page{
     line-height:60rpx;
     font-size:30rpx;
     text-indent: 20rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .manListContentMiddel{
     width:710rpx;

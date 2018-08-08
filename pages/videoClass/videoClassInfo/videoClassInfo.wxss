@@ -20,8 +20,11 @@ page{
     height:80rpx;
     line-height:80rpx;
     font-size:30rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
-.infoVideoTitle text{
+.infoVideoTitle>text{
     font-size:24rpx;
     color:#7b7b7b;
 }
@@ -155,29 +158,33 @@ page{
     clear:both;
 }
 .contentRelyLeft{
-    height:50rpx;
-    float:left;
+    min-height:50rpx;
+    display:inline-block;
+    vertical-align: top;
 }
-.contentRelyLeft image{
+.contentRelyLeft>image{
     height:50rpx;
     width:50rpx;
     border-radius:50%;
     overflow:hidden;
-    float:left;
+    display:inline-block;
+    vertical-align: top;
 }
-.contentRelyLeft view{
+.contentRelyLeft>view{
     height:50rpx;
     font-size:24rpx;
     color:#569CD6;
     line-height:50rpx;
     text-align:center;
-    float:left;
+    display:inline-block;
+    vertical-align: top;
     margin-left:10rpx;
 }
 .contentRelyRight{
-    height:50rpx;
+    min-height:50rpx;
     font-size:24rpx;
     line-height:50rpx;
-    float:left;
+    display:inline-block;
+    vertical-align: top;
     margin-left:20rpx;
 }

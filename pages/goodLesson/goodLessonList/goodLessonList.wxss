@@ -1,11 +1,6 @@
 page{
       background:#F2F2F2;
 }
-.lessonList{
-    width:750rpx;
-    min-height:1207rpx;
-    background:#F2F2F2;
-}
 .lessonBanner{
     width:750rpx;
     height:350rpx;
@@ -41,6 +36,9 @@ page{
 .contentListRightTop{
     font-size:30rpx;
     color:#101010;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .contentListRightMiddle{
     font-size:24rpx;

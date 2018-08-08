@@ -31,6 +31,9 @@ page{
     text-align:center;
     font-size:35rpx;
     color:#7b7b7b;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .actRegLeft{
     width:360rpx;

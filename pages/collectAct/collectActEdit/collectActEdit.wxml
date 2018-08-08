@@ -2,7 +2,9 @@
     <!-- 主题模板 -->
     <view class='editTitle'>主题模板</view>
     <view class='editTitleImage'>
-        <view></view>
+        <view>
+            <image src='{{bannerImage}}'></image>
+        </view>
         <view>发布后可重新选择模板和音乐</view>
     </view>
     <!-- 活动信息 -->
@@ -10,7 +12,7 @@
     <view class='editActInfo'>
         <view class='editActInfoContentO'>
             <view>活动名称:</view>
-            <input type='text' placeholder='感恩有你,积赞换大奖' name='title'></input>
+            <input type='text' placeholder='感恩有你,积赞换大奖' name='title' value='{{pageData.title}}'></input>
         </view>
         <view class='editActInfoContentO'>
             <view>开始日期:</view>
@@ -22,48 +24,56 @@
         </view>
         <view class='editActInfoContentO'>
             <view>领奖时间:</view>
-            <picker mode='date' start='{{prizeTime}}' bindchange='getDate' data-id='2'>{{prizeDate}}</picker>
+            <input type='text' placeholder='请输入领奖时间' name='prize_time' value='{{pageData.prize_time}}'></input>
         </view>
         <view class='editActInfoContentO'>
             <view>报名热线:</view>
-            <input type='number' maxlength='11' name='phone'></input>
+            <input type='number' maxlength='11' name='phone' value='{{pageData.phone}}'></input>
         </view>
         <view class='editActInfoContentO'>
             <view>机构地址:</view>
-            <input type='text' name='address'></input>
+            <input type='text' name='address' value='{{pageData.address}}'></input>
         </view>
     </view>
     <!-- 糖果设置 -->
     <view class='editTitle'>糖果设置</view>
     <view class='editActInfo'>
-        <view class='editActInfoContent'>
+        <!-- <view class='editActInfoContent'>
             <view>最多可收集:</view>
             <input type='number'></input>
             <view>个糖果</view>
-        </view>
+        </view> -->
         <view class='editActInfoContent'>
             <view>优惠总份数:</view>
-            <input type='number' name='gift_amount'></input>
+            <input type='number' name='gift_amount' value='{{pageData.gift_amount}}'></input>
             <view>份</view>
         </view>
-        <view class='editActInfoContent'>
+        <!-- <view class='editActInfoContent'>
             <view>剩余份数:</view>
             <input type='number'></input>
             <view>份</view>
-        </view>
+        </view> -->
     </view>
     <!-- 优惠设置 -->
     <view class='editTitle'>优惠设置</view>
     <view class='editActInfo'>
-        <view class='editActInfoContent'>
-            <view>收集:</view>
-            <input type='number' name='amount'></input>
-            <view>个糖果</view>
+        <view class='editActInfoWrap' wx:for='{{actSet}}' wx:key='{{index}}' >
+            <view class='editActInfoChild'>
+                <view>收集:</view>
+                <input type='number' name='{{"amount"+index}}' placeholder='300' value='{{item.amount}}'></input>
+                <view>个糖果获得</view>
+            </view>
+            <view class='editActInfoChildO'>
+                <input type='text' placeholder='设置奖品' name='{{"prize"+index}}' value='{{item.prize}}'></input>
+            </view>
+            <!-- <view class='delDiscount' >
+                <text class='iconfont icon-lajixiang iconStyle' bindtap='addActset' data-index='{{index}}' data-id='0'></text>
+            </view> -->
         </view>
-        <view class='editActInfoContentO'>
-            <view>奖品设置:</view>
-            <input type='text' placeholder='设置奖励奖品' name='prize'></input>
-        </view>
+        <view class='empty'></view>
+        <!-- <button class='addDiscount' bindtap='addActset' data-id='1'>
+            <text class='iconfont icon-edit'> 添加优惠</text>
+        </button> -->
     </view>
     <!-- 报名信息 -->
     <view class='editTitle'>报名信息</view>
@@ -75,7 +85,8 @@
                 <view class='jianFormChild' data-index='{{index}}'></view>
             </view>
             <text>{{item}}</text>
-            <view class='isEdit'><switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+            <view class='isEdit'>
+                <switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
         </view>
         <view class='joinInfoAdd' bindtap='addForm' data-is='0'>+新增报名项</view>
     </view>

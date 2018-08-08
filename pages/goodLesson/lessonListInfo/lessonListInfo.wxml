@@ -18,6 +18,7 @@
         </view>
         <view class='empty'></view>
     </view>
+    <!-- 活动介绍 -->
     <view class='listInfoData'>
         <view class='listInfoDataTitle'>
             <view class='listInfoDataTitleChild'>活动介绍</view>
@@ -28,7 +29,7 @@
             <text decode>联系地址:&nbsp;&nbsp;{{pageData.address}}</text>
         </view>
         <view class='empty'></view>
-        <view class='listInfoDataText'>{{pageData.description}}</view>
+        <view class='listInfoDataText'><text>{{pageData.description}}</text></view>
         <view class='empty'></view>
         <view class='listInfoDataActimg' wx:for='{{pageData.act_image}}'>
             <view class='listInfoDataActimgChild'>
@@ -37,6 +38,7 @@
         </view>
         <view class='empty'></view>
     </view>
+    <!--  -->
     <view class='listInfoBottom'>
         <view class='listInfoBottomTop'>
             <view data-phonenum='{{pageData.telephone}}' bindtap='tellPhone'>

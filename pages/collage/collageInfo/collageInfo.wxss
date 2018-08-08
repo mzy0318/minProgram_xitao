@@ -27,21 +27,28 @@
 }
 .oneTitle{
     width:710rpx;
-    height:90rpx;
+    min-height:90rpx;
     border-radius:5px 5px 0 0;
     overflow:hidden;
     border-bottom:1rpx solid #efefef;
 }
 .oneTitleChild{
     width:670rpx;
+    min-height:35rpx;
     line-height:35rpx;
     font-size:30rpx;
     border-left:2px solid #913225;
-    text-indent:20rpx;
     margin-left:20rpx;
     font-weight:bold;
     margin-top:30rpx;
     color:#913225;
+    padding-bottom:5rpx;
+}
+.oneTitleChild>text{
+    display:block;
+    width:650rpx;
+    min-height:35rpx;
+    margin-left:20rpx;
 }
 .oneImage{
     width:710rpx;
@@ -160,7 +167,7 @@ view.viewTyle{
     border:1rpx solid #efefef;
     /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
 }
-.collageInfoTwo text{
+.collageInfoTwo>text{
     display:block;
     width:710rpx;
     line-height:80rpx;
@@ -194,8 +201,8 @@ view.viewTyle{
 }
 .threeImageText{
     width:650rpx;
-    min-height:40rpx;
-    line-height:40rpx;
+    min-height:35rpx;
+    line-height:35rpx;
     color:#7b7b7b;
     font-size:26rpx;
     margin:0rpx auto 0rpx;
@@ -214,6 +221,7 @@ view.viewTyle{
 }
 .fourContent{
     width:650rpx;
+    min-height:40rpx;
     font-size:26rpx;
     color:#7b7b7b;
     line-height:40rpx;

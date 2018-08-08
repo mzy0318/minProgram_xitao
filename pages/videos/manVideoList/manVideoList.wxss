@@ -21,6 +21,9 @@ page{
     font-size:30rpx;
     font-weight:bold;
     text-indent:20rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .manListContentMiddel{
     width:710rpx;

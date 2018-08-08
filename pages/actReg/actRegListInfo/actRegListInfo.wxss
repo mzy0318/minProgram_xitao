@@ -17,11 +17,10 @@
 }
 .actRegInfoTitleText{
     width:710rpx;
-    /* min-height:40rpx; */
-    line-height:60rpx;
+    min-height:40rpx;
+    line-height:40rpx;
     margin:0 auto;
-    font-size:32rpx;
-    /* font-weight:bold; */
+    font-size:30rpx;
 }
 /* 活动时间 */
 .actRegInfoTime{
@@ -32,23 +31,25 @@
 }
 .actRegInfoTimeOne{
     width:700rpx;
-    height:100rpx;
+    height:80rpx;
     border-bottom:1rpx solid #efefef;
     margin:0 auto;
     position:relative;
 }
-.actRegInfoTimeOne view:nth-child(1),.actRegInfoTimeOne view:nth-child(2){
-    width:150rpx;
-    height:100rpx;
-    line-height:100rpx;
+.actRegInfoTimeOne>view:nth-child(1),.actRegInfoTimeOne>view:nth-child(2){
+    width:120rpx;
+    height:80rpx;
+    line-height:80rpx;
     color:#7b7b7b;
-    font-size:32rpx;
+    font-size:26rpx;
     float:left;
 }
-.actRegInfoTimeOne view:nth-child(2){
+.actRegInfoTimeOne>view:nth-child(2){
     color:#000;
-    width:500rpx;
-    text-indent:20rpx;
+    width:530rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .actRegInfoTimeOne view:nth-child(2) text{
     color:red;
@@ -59,7 +60,7 @@
     line-height:60rpx;
     position:absolute;
     right:0rpx;
-    top:20rpx;
+    top:10rpx;
     font-size:26rpx;
     color:#fff;
     text-align:center;
@@ -99,9 +100,10 @@
 }
 .actRegInfoTextContent{
     width:710rpx;
-    height:80rpx;
+    min-height:80rpx;
     margin:20rpx auto 0rpx;
-    font-size:30rpx;
+    line-height:40rpx;
+    font-size:28rpx;
     color:#7b7b7b;
 }
 .actRegInfoTextImage{

@@ -9,7 +9,8 @@ Page({
         pageData: '',
         createTime: '',
         isInfo:'',
-        bgColor:'#F15352'
+        bgColor:'#F15352',
+        is_pay:'',
     },
 
     /**
@@ -17,6 +18,7 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
+        console.log('options',options)
         that.setData({
             isInfo: Number(options.isInfo),
         })
@@ -107,7 +109,7 @@ Page({
         let that = this;
         
         if(that.data.isInfo == 1){
-            if (Number(that.data.is_pay) == 0){
+            if (Number(that.data.pageData.is_pay) == 0){
                 that.setData({
                     bgColor: '#F15352'
                 })
@@ -147,13 +149,12 @@ Page({
                         }
                     }
                 })
-            } else if (Number(that.data.is_pay) == 0){
+            } else if (Number(that.data.pageData.is_pay) == 1){
                 that.setData({
                     bgColor: '#7b7b7b'
                 })
-                return 
             }
-        } else if (that.data.isInfo == 1){
+        } else if (that.data.isInfo == 0){
             that.setData({
                 bgColor: '#F15352'
             })
