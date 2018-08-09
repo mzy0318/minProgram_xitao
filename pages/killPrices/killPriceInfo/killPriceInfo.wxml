@@ -47,7 +47,7 @@
                 <view>机构地址:<text>{{pageData.address}}</text></view>
             </view>
             <view class='infoTwoImg'>
-                <view class='infoTwoImgTitle'><text>快来参加!!!</text></view>
+                <view class='infoTwoImgTitle'><text>{{pageData.org_intro}}</text></view>
                 <view class='infoTwoImgImage' wx:for='{{activeImage}}'>
                     <image src='{{item.url}}' mode='widthFix' />
                 </view>

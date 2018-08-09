@@ -39,7 +39,7 @@
             </view>
         </view>
         <view class='signUpInputName'>
-            <view class='signUpInputNameLeft'>联系姓名:</view>
+            <view class='signUpInputNameLeft'>用户姓名:</view>
             <view class='signUpInputNameRight'><input type='text' name='realname' value='{{pageData.realname}}'></input></view>
         </view>
         <view class='signUpInputName'>

@@ -30,7 +30,7 @@ Page({
         isTitleTwo: true,
         isTitleThree: true,
         className: 'infoInputWrap',
-        isJoin: 'block',
+        isJoins: 'block',
         empty:'',
     },
 
@@ -71,6 +71,9 @@ Page({
      */
     onShow: function() {
         let that = this;
+        that.setData({
+            contentIndex: 0,
+        })
         that.getPageData()
     },
 
@@ -288,6 +291,7 @@ Page({
             }
         })
     },
+    // 获取页面数据
     getPageData: function() {
         let that = this;
         getApp().request({
@@ -303,12 +307,12 @@ Page({
                     })
                     if ((res.data.data.enlist_end_time * 1000) < new Date().valueOf()) {
                         that.setData({
-                            isJoin: 'none',
+                            isJoins: 'none',
                             className: 'infoInputWrap widthInput',
                         })
                     } else {
                         that.setData({
-                            isJoin: 'block',
+                            isJoins: 'block',
                             className: 'infoInputWrap',
                         })
                     }

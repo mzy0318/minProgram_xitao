@@ -114,10 +114,18 @@
             </view>
         </view>
         <view class='manageEditSix'>
-            <view class='manageEditOneTitle'>活动信息</view>
+            <view class='manageEditOneTitle'>机构介绍</view>
             <view class='manageEditSixContent'>
                 <view class='manageEditSixWrap'>
-                    <textarea placeholder='活动说明' value='{{pageData.rule}}' name='rule' />
+                    <textarea placeholder='机构介绍' value='{{pageData.org_intro}}' name='org_intro' />
+                </view>
+            </view>
+        </view>
+        <view class='manageEditSix'>
+            <view class='manageEditOneTitle'>玩法介绍</view>
+            <view class='manageEditSixContent'>
+                <view class='manageEditSixWrap'>
+                    <textarea placeholder='玩法介绍' value='{{pageData.rule}}' name='rule' />
                 </view>
             </view>
             <view class='sixEmpty'></view>

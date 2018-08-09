@@ -1,0 +1,103 @@
+/* 报名选项 */
+page{
+    background:#f2f2f2;
+    padding-bottom:20rpx;
+}
+.voteSignupInput{
+    width:710rpx;
+    min-height:100rpx;
+    margin:50rpx auto 0rpx;
+    background:#fff;
+    box-shadow: 2px 2px 2px 2px #70D0DE,-2px -2px 2px 2px #70D0DE;
+    border-radius:5px;
+    padding-bottom:20rpx;
+}
+.signUpInputTitle{
+    width:100%;
+    line-height:60rpx;
+    font-size:40rpx;
+    text-align:center;
+}
+.signUpInputName{
+    width:630rpx;
+    height:80rpx;
+    margin:30rpx auto;
+}
+.signUpInputNameLeft{
+    width:140rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:30rpx;
+    text-align:center;
+    float:left;
+}
+.signUpInputNameRight{
+    width:440rpx;
+    height:70rpx;
+    float:left;
+    margin-left:40rpx;
+    border:1px solid #2C7C66;
+    border-radius:5px 5px;
+}
+.signUpInputNameRight input{
+    width:425rpx;
+    height:60rpx;
+    margin-top:5rpx;
+    margin-left:15rpx;
+    font-size:30rpx;
+}
+/* 作品封面 */
+.signUpInputImage{
+    width:630rpx;
+    height:280rpx;
+    margin:30rpx auto 30rpx;
+}
+.chooseImageWrap{
+    width:440rpx;
+    height:280rpx;
+    float:left;
+    margin-left:40rpx;
+}
+.chooseImage,.chooseImageO{
+    width:210rpx;
+    height:270rpx;
+    border:1px solid #2C7C66;
+    float:left;
+    margin-top:3rpx;
+    border-radius:5px;
+    line-height:270rpx;
+    font-size:24rpx;
+    color:#7b7b7b;
+    text-align:center;
+}
+.chooseImageO{
+    margin-left:12rpx;
+    overflow:hidden;
+}
+.chooseImageO image,.chooseImageO video{
+    width:210rpx;
+    height:270rpx;
+}
+.textAreaWrap{
+    width:440rpx;
+    height:280rpx;
+    float:left;
+    margin-left:40rpx;
+    border:1rpx solid #2C7C66;
+    border-radius:5px;
+}
+.textAreaWrap textarea{
+    width:420rpx;
+    height:260rpx;
+    margin-top:10rpx;
+    margin-left:10rpx;
+    font-size:30rpx;
+}
+.signUpBtn{
+    width:300rpx;
+    height:80rpx;
+    color:#fff;
+    background:#F67685;
+    font-size:30rpx;
+    line-height:80rpx;
+}

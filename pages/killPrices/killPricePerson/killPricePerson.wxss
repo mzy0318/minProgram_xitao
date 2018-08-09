@@ -65,7 +65,7 @@
 }
 .pricePersonOneRange{
     width:670rpx;
-    min-height:450rpx;
+    min-height:410rpx;
     background:#fff;
     overflow:hidden;
     border-radius:0px 0px 5px 5px;
@@ -138,16 +138,16 @@
 .pricePersonOneRange .rangePriceLeft view:nth-child(2),.pricePersonOneRange .rangePriceRight view:nth-child(2){
     color:#A8A8A8;
 }
-
-.pricePersonOneRange button{
-    width:250rpx;
+.pricePersonOneRange>button{
+    width:210rpx;
+    height:60rpx;
     background:#CC2200;
     color:#fff;
-    line-height:80rpx;
+    line-height:60rpx;
     margin-top:-40rpx;
     font-size:30rpx;
     float:left;
-    margin-left:55rpx;
+    margin-left:80rpx;
 }
 
 .bottomLine view{
@@ -162,7 +162,35 @@
     float:right;
     margin-right:60rpx;
 }
+/* 去支付 */
+.payMeny{
+    width:670rpx;
+    min-height:20rpx;
+    background:#fff;
+    margin:0rpx auto;
+    padding-bottom:20rpx;
+}
+.payMeny>view{
+    width:670rpx;
+    height:80rpx;
+    line-height:80rpx;
+    text-align:center;
+    font-size:30rpx;
 
+}
+.payMeny>view>text{
+    color:#CC2200;
+    font-size:36rpx;
+    font-weight:bold;
+}
+.payMeny>button{
+    width:260rpx;
+    height:60rpx;
+    line-height:60rpx;
+    background:#CC2200;
+    color:#fff;
+    font-size:28rpx;
+}
 /*第二部分*/
 .pricePersonTwo{
     width:670rpx;
@@ -205,34 +233,37 @@
 /*第三部分  */
 .pricePersonThree{
     width:670rpx;
-    min-height:902rpx;
+    min-height:10rpx;
     margin:0 auto;
 }
-
 .pricePersonThreeText{
     width:100%;
-    height:240rpx;
+    min-height:240rpx;
     background:#fff;
-    border-bottom:1rpx solid #efefef;
-    overflow: hidden;
+    padding-top:1rpx;
 }
-.pricePersonThreeText view{
+.pricePersonThreeText>view{
     font-size:28rpx;
     margin:30rpx 0rpx 0rpx 30rpx;
     color:#414141;
 }
-
 .pricePersonThreeImg{
     width:670rpx;
     min-height:550rpx;
     background:#fff;
 }
-
 .pricePersonThreeImgTitle{
     width:670rpx;
-    line-height:80rpx;
-    font-size:30rpx;
-    text-indent:30rpx;
+    line-height:40rpx;
+    min-height:40rpx;
+    font-size:28rpx;
+    color:#7b7b7b;
+    padding-top:1rpx;
+}
+.pricePersonThreeImgTitle>text{
+    display:block;
+    width:610rpx;
+    margin:10rpx auto 0rpx;
 }
 
 .pricePersonThreeImgImage{
@@ -242,7 +273,7 @@
     margin:20rpx auto 0rpx;
     overflow:hidden;
 }
-.pricePersonThreeImgImage image{
+.pricePersonThreeImgImage>image{
     width:610rpx;
     height:300rpx;
 }
@@ -259,7 +290,7 @@
     width:670rpx;
     min-height:500rpx;
     background:#fff;
-    margin:0 auto;
+    margin:25rpx auto 0rpx;
 }
 .pricePersonFourContent{
     width:600rpx;

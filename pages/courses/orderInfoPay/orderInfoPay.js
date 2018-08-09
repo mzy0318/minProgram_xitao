@@ -18,7 +18,6 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        console.log('options',options)
         that.setData({
             isInfo: Number(options.isInfo),
         })
@@ -42,6 +41,7 @@ Page({
                             createTime: utils.formatTime(new Date(res.data.data.create_time * 1000)),
                         })
                     } else {
+                        wx.navigateBack({})
                         wx.showToast({
                             title: res.data.msg,
                             icon: 'none',
@@ -107,7 +107,6 @@ Page({
     // },
     payMoney: function() {
         let that = this;
-        
         if(that.data.isInfo == 1){
             if (Number(that.data.pageData.is_pay) == 0){
                 that.setData({

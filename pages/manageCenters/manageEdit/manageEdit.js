@@ -150,7 +150,6 @@ Page({
         let that = this;
         let sendData = {
             id: that.data.actId,
-
             title: e.detail.value.title,
             original_price: e.detail.value.original_price,
             now_price: e.detail.value.now_price,
@@ -166,6 +165,7 @@ Page({
             bargain_param: e.detail.value.bargain_paramO ? e.detail.value.bargain_paramO : e.detail.value.bargain_paramT,
             banner_image_url: that.data.backgroundImage,
             status: e.detail.value.joiner_limit ? 1 : 0,
+            org_intro: e.detail.value.org_intro,
         }
         for (let i = 0; i < that.data.actImg0.length; i++){
             sendData['act_image[' + i + ']'] = that.data.actImg0[i];

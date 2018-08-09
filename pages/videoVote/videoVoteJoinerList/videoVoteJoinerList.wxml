@@ -1,0 +1,19 @@
+<view class='activeInfoRankLeft'>
+    <view class='activeInfoRankContent' wx:for='{{pageData}}'>
+        <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+        <view class='contentBottom' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
+        <view class='contentNum' wx:if='{{index%2 == 0}}'>{{item.number}}</view>
+        <view class='contentVoteNum' wx:if='{{index%2 == 0}}'>{{item.vote_amount}}</view>
+        <view class='contentEdit' wx:if='{{index%2 == 0}}' data-joinid='{{item.id}}' bindtap='toEditPage'><text class='iconfont icon-edit iconStyle'></text></view>
+    </view>
+</view>
+<view class='activeInfoRankRight'>
+    <view class='activeInfoRankContent' wx:for='{{pageData}}'>
+        <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+        <view class='contentBottom' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
+        <view class='contentNum' wx:if='{{index%2 == 1}}'>{{item.number}}</view>
+        <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
+        <view class='contentEdit' wx:if='{{index%2 == 1}}' data-joinid='{{item.id}}' bindtap='toEditPage'><text class='iconfont icon-edit iconStyle'></text></view>
+    </view>
+</view>
+<view class='addJoin' bindtap='addJoiner'>添加选手</view>

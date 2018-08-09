@@ -292,31 +292,32 @@ view.fiveContentImage:nth-child(1){
     width:230rpx;
     height:150rpx;
 }
-/*第六部分*/
+/*玩法介绍*/
 .manageEditSix{
     clear:both;
     width:710rpx;
-    min-height:790rpx;
+    min-height:90rpx;
     margin:0rpx auto;
 }
 .manageEditSixContent{
     width:710rpx;
-    height:710rpx;
+    min-height:10rpx;
     background:#fff;
     margin:0rpx auto;
     border-radius:10rpx;
+    padding-top:1rpx;
+    padding-bottom:10rpx;
 }
 .manageEditSixWrap{
     width:680rpx;
-    height:680rpx;
-    float:left;
+    height:380rpx;
     margin-left:15rpx;
-    margin-top:15rpx;
+    margin-top:10rpx;
     border:1rpx solid #efefef;
 }
 .manageEditSixWrap textarea{
     width:660rpx;
-    height:660rpx;
+    height:360rpx;
     margin-left:10rpx;
     margin-top:10rpx;
     font-size:30rpx;

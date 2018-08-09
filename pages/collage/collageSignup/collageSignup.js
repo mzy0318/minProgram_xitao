@@ -10,6 +10,7 @@ Page({
         actId:'',
         btnID:'',
         joinerId:'',
+        isJoin:true,
     },
 
     /**
@@ -24,6 +25,15 @@ Page({
             btnID: Number(options.btnId),
             joinerId: options.joinerId
         })
+        if (that.data.btnID == 1){
+            that.setData({
+                isJoin:true,
+            })
+        } else if (that.data.btnID == 0){
+            that.setData({
+                isJoin: false,
+            })
+        }
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -85,9 +95,11 @@ Page({
         let arr = []
         let sendData = {};
         if (that.data.btnID == 0){
+            // 发起新团
             sendData['nickname'] = e.detail.value.nickname
             sendData['phone'] = e.detail.value.phone
-            sendData['act_id'] = this.data.actId
+            sendData['act_id'] = that.data.actId
+            sendData['person_amount'] = e.detail.value.person_amount;
             for (let i = 0; i < that.data.formInfo.length; i++) {
                 // arr.push(e.detail.value[i])
                 sendData['info[' + i + ']'] = e.detail.value[i]
@@ -126,14 +138,14 @@ Page({
                 }
             })
         } else if (that.data.btnID == 1){
+            // 参加拼团
             sendData['nickname'] = e.detail.value.nickname
             sendData['phone'] = e.detail.value.phone
-            sendData['act_id'] = this.data.actId
+            sendData['act_id'] = this.data.actId   
+            sendData['person_amount'] = 0;   
             for (let i = 0; i < that.data.formInfo.length; i++) {
-                // arr.push(e.detail.value[i])
                 sendData['info[' + i + ']'] = e.detail.value[i]
             }
-            // sendData['info[]'] = arr;
             sendData['joiner_id'] = that.data.joinerId,
                 getApp().request({
                     url: 'join_personal_group',

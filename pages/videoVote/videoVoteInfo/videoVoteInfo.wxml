@@ -20,7 +20,7 @@
 <view class='voteInfoInput'>
     <form bindsubmit='toGetInfo' data-id='1'>
         <view class='{{className}}'><input placeholder='请输入编号或名字' name='key' value='{{empty}}'></input></view>
-        <button style='display:{{isJoin}}' bindtap='toGetInfo' data-id='0'>报名</button>
+        <button style='display:{{isJoins}}' bindtap='toGetInfo' data-id='0'>报名</button>
         <button form-type='submit' data-id='1'>搜索</button>
     </form>
 </view>

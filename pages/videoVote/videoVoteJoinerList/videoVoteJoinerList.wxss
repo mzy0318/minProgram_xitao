@@ -1,0 +1,91 @@
+@import '../../../utils/iconFont.wxss';
+page{
+    background:#f2f2f2;
+    padding-bottom:120rpx;
+}
+/* 投票排行 */
+.activeInfoRankLeft,.activeInfoRankRight{
+    width:345rpx;
+    min-height:100rpx;
+    display:inline-block;
+    vertical-align: top;
+    margin-left:20rpx;
+}
+.activeInfoRankContent{
+    width:345rpx;
+    min-height:10rpx;
+    background:transparent;
+    margin-top:10rpx;
+    position:relative;
+}
+.contentTop{
+    width:345rpx;
+    position:relative;
+}
+.contentTop>image{
+    width:345rpx;
+}
+.contentBottom{
+    width:100%;
+    height:60rpx;
+    background:#5CCDDF;
+    color:#fff;
+    line-height:60rpx;
+    text-align:center;
+    font-size:26rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+.contentNum{
+    height:40rpx;
+    font-size:24rpx;
+    color:#fff;
+    text-align:center;
+    padding:0rpx 8rpx;
+    position:absolute;
+    left:0rpx;
+    top:0rpx;
+    background:#5DABB6;
+}
+.contentVoteNum{
+    height:40rpx;
+    font-size:24rpx;
+    color:#fff;
+    text-align:center;
+    padding:0rpx 8rpx;
+    position:absolute;
+    right:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.6);
+}
+/* 添加选手 */
+.addJoin{
+    width:100%;
+    height:90rpx;
+    background:#5CCDDF;
+    position:fixed;
+    left:0rpx;
+    bottom:0rpx;
+    color:#fff;
+    line-height:90rpx;
+    font-size:26rpx;
+    text-align:center;
+}
+/* 编辑 */
+.contentEdit{
+    width:50rpx;
+    height:50rpx;
+    position:absolute;
+    bottom:6rpx;
+    right:5rpx;
+}
+.iconStyle{
+    display:block;
+    width:50rpx;
+    height:50rpx;
+    font-size:40rpx;
+    color:#7b7b7b;
+    margin-left:5rpx;
+    margin-top:4rpx;
+}

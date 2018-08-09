@@ -220,7 +220,7 @@
 
 .infoTwoImgTitle{
     width:670rpx;
-    line-height:40rpxrpx;
+    line-height:40rpx;
     min-height:40rpx;
     font-size:28rpx;
     color:#7b7b7b;

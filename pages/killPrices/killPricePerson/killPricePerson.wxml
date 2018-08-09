@@ -27,6 +27,10 @@
             <button open-type='share'>邀请朋友帮忙</button>
             <button bindtap='helpHer'>帮他砍</button>
         </view>
+        <view class='payMeny' hidden='{{isPay}}'>
+            <view>已经砍到<text>{{pageData.pay_price}}</text>元!!!</view>
+            <button data-actid='{{pageData.id}}' data-acttag='{{pageData.act_tag}}' bindtap='toPayPage'>去支付</button>
+        </view>
         <view class='bottomLine'>
             <view></view>
             <view></view>
@@ -62,7 +66,7 @@
             <view>机构地址:<text> {{pageData.address}}</text></view>
         </view>
         <view class='pricePersonThreeImg'>
-            <view class='pricePersonThreeImgTitle'>快来参加!!!</view>
+            <view class='pricePersonThreeImgTitle'><text>{{pageData.org_intro}}</text></view>
             <view class='pricePersonThreeImgImage'><image src='{{backgroundImage}}' mode='widthFix' /></view>
             <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
             <button bindtap='toIndex'>了解机构></button>

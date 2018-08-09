@@ -1,21 +1,21 @@
-let formatTime = require('../../../utils/util.js')
+// pages/videoVote/videoVoteAddJoiner/videoVoteAddJoiner.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        coverImage:'',    //封面图片地址
-        coverImageId:'',  //封面图片ID
-        video:'',   //视频地址
-        videoId:'', //视频地址Id
-        isCover:true,
-        isVideo:true,
-        actId:'',
-        pageData:'',
-        isEdit:'',
-        isShow:false,
-        joinId:'',
+        coverImage: '',    //封面图片地址
+        coverImageId: '',  //封面图片ID
+        video: '',   //视频地址
+        videoId: '', //视频地址Id
+        isCover: true,
+        isVideo: true,
+        actId: '',
+        pageData: '',
+        isEdit: '',
+        isShow: false,
+        joinId: '',
     },
 
     /**
@@ -23,99 +23,50 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        console.log('options',options)
         that.setData({
-            actId:options.actId,
-            isEdit: options.isEdit,
-            joinId: options.joinId,
-        });
-        if (Number(that.data.isEdit) == 0){
-            that.setData({
-                isShow:false
-            })
+            isEdit:options.isEdit,
+            actId:options.actId
+        })
+
+        if(that.data.isEdit == 0){
             wx.setNavigationBarTitle({
-                title: '参加报名',
+                title: '添加报名',
             })
-            // 请求页面展示性数据
-            getApp().request({
-                url: 'visitor_video_vote',
-                data: {
-                    id: that.data.actId,
-                },
-                method: 'post',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        res.data.data.enlist_end_time = formatTime.formatTime(new Date(res.data.data.enlist_end_time * 1000));
-                        res.data.data.enlist_start_time = formatTime.formatTime(new Date(res.data.data.enlist_start_time * 1000));
-                        res.data.data.vote_end_time = formatTime.formatTime(new Date(res.data.data.vote_end_time * 1000));
-                        res.data.data.vote_start_time = formatTime.formatTime(new Date(res.data.data.vote_start_time * 1000));
-                        if ((res.data.data.status1 != 1) && (res.data.data.title1 != '')) {
-                            that.setData({
-                                isTitleOne: false
-                            })
-                        }else{
-                            that.setData({
-                                isTitleOne: true
-                            })
-                        }
-                        if ((res.data.data.status2 != 1) && (res.data.data.title2 != '')) {
-                            that.setData({
-                                isTitleTwo: false
-                            })
-                        }else {
-                            that.setData({
-                                isTitleTwo: true
-                            })
-                        }
-                        if ((res.data.data.status3 != 1) && (res.data.data.title3 != '')) {
-                            that.setData({
-                                isTitleThree: false
-                            })
-                        }else{
-                            that.setData({
-                                isTitleThree: true
-                            })
-                        }
-                        that.setData({
-                            pageData: res.data.data,
-                        })
-                    }
-                }
-            })
-        } else if (Number(that.data.isEdit) == 1){
-            that.setData({
-                isShow: true
-            })
+
+        } else if (that.data.isEdit == 1){
             wx.setNavigationBarTitle({
                 title: '修改报名信息',
             })
-            // 编辑前先请求用户数据
+            that.setData({
+                joinId:options.joinId
+            })
             getApp().request({
-                url:'join_video_vote',
+                url:'org/video_vote/joiner',
                 data:{
-                    video_vote_joiner_id:that.data.joinId,
+                    joiner_id:that.data.joinId,
                 },
                 method:'get',
                 success:function(res){
-                    if(Number(res.data.code) == 1){
+                    if(res.data.code == 1){
                         that.setData({
-                            pageData:res.data.data,
-                            coverImage: res.data.data.cover.url,    //封面图片地址
-                            coverImageId: res.data.data.cover_image,  //封面图片ID
+                            pageData: res.data.data,
+                            coverImage: res.data.data.cover_image.url,    //封面图片地址
+                            coverImageId: res.data.data.cover_image.id,  //封面图片ID
                             video: res.data.data.video.url,   //视频地址
                             videoId: res.data.data.video.id, //视频地址Id
                             isCover: false,
                             isVideo: false,
                         })
-                    } else if (Number(res.data.code) == 0){
+                    }else{
                         wx.showToast({
                             title: res.data.msg,
-                            icon:'none',
+                            icon: 'none',
                         })
                     }
                 }
             })
         }
-
     },
 
     /**
@@ -165,31 +116,31 @@ Page({
      */
     // onShareAppMessage: function () {
 
-    // },
+    // }
     // 报名
-    addActive:function(e){
+    addActive: function (e) {
         let that = this;
         let sendData = e.detail.value;
         var showMessage = '';
         var showResult = '';
-        if (Number(that.data.isEdit) == 1){
+        if (Number(that.data.isEdit) == 1) {
             sendData['cover_image'] = that.data.coverImageId;
             sendData['video'] = that.data.videoId;
             sendData['act_video_vote_id'] = that.data.actId;
             sendData['video_vote_joiner_id'] = that.data.joinId;
             showMessage = '正在保存';
             showResult = '保存成功'
-        } else if (Number(that.data.isEdit) == 0){
+        } else if (Number(that.data.isEdit) == 0) {
             sendData['cover_image'] = that.data.coverImageId;
             sendData['video'] = that.data.videoId;
-            sendData['act_video_vote_id'] = that.data.actId; 
+            sendData['act_video_vote_id'] = that.data.actId;
             sendData['video_vote_joiner_id'] = '';
             showMessage = '正在报名';
             showResult = '报名成功'
         }
 
         getApp().request({
-            url: 'join_video_vote',
+            url: 'org/video_vote/joiner',
             data: sendData,
             method: 'post',
             success: function (res) {
@@ -218,7 +169,8 @@ Page({
             }
         })
     },
-    chooseImage:function(){
+    // 选择图片
+    chooseImage: function () {
         let that = this;
         wx.chooseImage({
             count: 1,
@@ -230,7 +182,7 @@ Page({
                     return item.size < 6291456
                 })
 
-                if(size){
+                if (size) {
                     that.setData({
                         isCover: false,
                         coverImage: res.tempFilePaths[0]
@@ -266,7 +218,7 @@ Page({
                             }
                         }
                     }, header)
-                }else{
+                } else {
                     wx.showToast({
                         title: '选择图片必须小于6M',
                         icon: 'none'
@@ -275,7 +227,8 @@ Page({
             },
         })
     },
-    chooseVideo:function(){
+    // 选择视频
+    chooseVideo: function () {
         let that = this;
         wx.chooseVideo({
             success: function (res) {
@@ -285,7 +238,7 @@ Page({
                 let duration = res.duration;
                 var time = 30;
 
-                if ((Number(res.size) < 73400320) && (Number(res.duration) < 60)){
+                if ((Number(res.size) < 73400320) && (Number(res.duration) < 60)) {
                     wx.showLoading({
                         title: '请耐心等待',
                         mask: true,
@@ -344,7 +297,7 @@ Page({
                         }
                     })
 
-                } else if ((Number(res.size) >= 73400320) || (Number(res.duration) >= 60)){
+                } else if ((Number(res.size) >= 73400320) || (Number(res.duration) >= 60)) {
                     wx.showToast({
                         title: '视频大于70M或长度大于60s,请重新选择',
                         icon: 'none'

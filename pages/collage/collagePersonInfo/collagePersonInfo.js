@@ -12,6 +12,7 @@ Page({
         actId:'',
         joinId:'',
         priceId: 0,
+        isPay: true,
     },
 
     /**
@@ -38,71 +39,10 @@ Page({
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })
-        
-
-        getApp().request({
-            url:'personal_group_act',
-            data:{
-                act_id: that.data.actId,
-                joiner_id: that.data.joinId,
-            },
-            method:'post',
-            success:function(res){
-                if (Number(res.data.code) == 1){
-                    wx.setNavigationBarTitle({
-                        title: res.data.data.app_name,
-                    })
-                    res.data.data.start_time = getTime.formatDate(new Date(res.data.data.start_time * 1000))
-                    res.data.data.end_time = getTime.formatDate(new Date(res.data.data.end_time * 1000));
-                    res.data.data.cover.url = getTime.rect(res.data.data.cover.url, 325, 155);
-                    if (res.data.data.act_image.length > 0) {
-                        for (let i = 0; i < res.data.data.act_image.length; i++) {
-                            res.data.data.act_image[i].url = getTime.rect(res.data.data.act_image[i].url, 325, 155)
-                        }
-                    }
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                } else if (Number(res.data.code) == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
-                }
-            }
-        })
-        getApp().request({
-            url: 'personal_group_member',
-            data: {
-                act_id: options.actId,
-                joiner_id: options.joinId,
-            },
-            method: 'post',
-            success: function (res) {
-                if(Number(res.data.code)==1){
-                    for(let i = 0;i<res.data.data.list.length;i++){
-                        res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time*1000))
-                    }
-                    that.setData({
-                        personInfo:res.data.data.list
-                    })
-                    if (res.data.data.list.length>0){
-                        that.setData({
-                            isData: true
-                        })
-                    }else{
-                        that.setData({
-                            isData: false
-                        })
-                    }
-                }else{
-                    that.setData({
-                        isData:true
-                    })
-                }
-                
-            }
-        })
+        //获取页面数据
+        that.getPageData();
+        // 获取我的团员
+        getRangeDatafunction()
     },
 
     /**
@@ -137,7 +77,10 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+        //获取页面数据
+        that.getPageData();
+        // 获取我的团员
+        getRangeDatafunction()
     },
 
     /**
@@ -155,6 +98,13 @@ Page({
         if(res.menu == 'menu'){
             path: 'pages/index/index?pageId=3&actId=' + that.data.actId + '&joinId=' + that.data.joinId
         }
+    },
+    // 去支付
+    toPayPage: function (e) {
+        let that = this;
+        wx.navigateTo({
+            url: '../../courses/orderInfo/orderInfo?joinId=' + e.currentTarget.dataset.joinid + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.actid,
+        })
     },
     toCollageJoin: function (e) {
         let formInfo = JSON.stringify(e.currentTarget.dataset.forminfo)
@@ -188,5 +138,90 @@ Page({
                 urls: [that.data.encodeID],
             })
         }, 1500)
-    }
+    },
+    //获取页面数据
+    getPageData:function(e){
+        let that = this;
+        getApp().request({
+            url: 'personal_group_act',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    wx.stopPullDownRefresh()
+                    wx.setNavigationBarTitle({
+                        title: res.data.data.app_name,
+                    })
+                    res.data.data.start_time = getTime.formatDate(new Date(res.data.data.start_time * 1000))
+                    res.data.data.end_time = getTime.formatDate(new Date(res.data.data.end_time * 1000));
+                    res.data.data.cover.url = getTime.rect(res.data.data.cover.url, 325, 155);
+                    if (res.data.data.act_image.length > 0) {
+                        for (let i = 0; i < res.data.data.act_image.length; i++) {
+                            res.data.data.act_image[i].url = getTime.rect(res.data.data.act_image[i].url, 325, 155)
+                        }
+                    }
+                    // 是否去支付
+                    if (res.data.data.could_pay != undefined) {
+                        if (res.data.data.could_pay) {
+                            that.setData({
+                                isPay: false,
+                            })
+                        } else {
+                            that.setData({
+                                isPay: true,
+                            })
+                        }
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
+    //获取团队成员
+    getRangeData:function(e){
+        let that = this;
+        getApp().request({
+            url: 'personal_group_member',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    wx.stopPullDownRefresh()
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    that.setData({
+                        personInfo: res.data.data.list
+                    })
+                    if (res.data.data.list.length > 0) {
+                        that.setData({
+                            isData: true
+                        })
+                    } else {
+                        that.setData({
+                            isData: false
+                        })
+                    }
+                } else {
+                    that.setData({
+                        isData: true
+                    })
+                }
+
+            }
+        })
+    },
 })

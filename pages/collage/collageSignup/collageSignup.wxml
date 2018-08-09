@@ -12,6 +12,12 @@
                 <input type='number' maxlength='11' name='phone' />
             </view>
         </view>
+        <view class='signUpName' hidden='{{isJoin}}'>
+            <view class='signUpNameTitle'>拼团人数:</view>
+            <view class='signUpNameInput'>
+                <input type='number' name='person_amount' />
+            </view>
+        </view>
         <view class='signUpName' wx:for='{{formInfo}}' wx:key='{{index}}'>
             <view class='signUpNameTitle'>{{item.text}}:</view>
             <view class='signUpNameInput'>

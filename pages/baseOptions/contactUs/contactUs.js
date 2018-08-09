@@ -1,4 +1,4 @@
-// pages/contactUs/contactUs.js.js
+let formate = require('../../../utils/util.js')
 let app = getApp()
 Page({
 
@@ -13,11 +13,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        let that = this;
         getApp().request({
             url: 'school/contact',
             data: {},
             success: res => {
-                console.log(res)
+                if(res.data.code == 1){
+                    res.data.data.contact_image.url = formate.rect(res.data.data.contact_image.url,375,215)
+                }
                 this.setData({
                     pageInfo:res.data.data,
                 })

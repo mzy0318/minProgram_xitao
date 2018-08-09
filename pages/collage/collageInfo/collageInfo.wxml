@@ -2,6 +2,7 @@
     <view class='collageInfoBanner'>
         <image src='{{bannerImage}}' mode='scaleToFill' />
     </view>
+    <!-- 标题部分 -->
     <view class='collageInfoOne'>
         <view class='oneTitle'>
             <view class='oneTitleChild'><text decode>{{pageData.title}}</text></view>
@@ -24,7 +25,12 @@
                 <button data-btnid='0' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' data-is='{{1}}' bindtap='toCollageSign' hidden='{{!isButton}}' data-joinerid='undefined'>我要开团</button>
             </view>
         </view>
+        <view class='payInfo' hidden='{{isPay}}'>
+            <view>恭喜你拼团成功,成团价<text>{{pageData.pay_price}}</text>元</view>
+            <button bindtap='toPayPage' data-actid='{{pageData.id}}' data-joinid='{{pageData.joiner_id}}' data-acttag='{{pageData.act_tag}}'>去支付</button>
+        </view>
     </view>
+    <!-- 参团列表 -->
     <view class='collageInfoFive'>
         <view class='oneTitle'>
             <view class='oneTitleChild'><text>已开团</text></view>

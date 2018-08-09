@@ -304,6 +304,9 @@ view.widthInput{
     line-height:60rpx;
     text-align:center;
     font-size:26rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 /* 最新参赛 */
 .activeInfoJoin{

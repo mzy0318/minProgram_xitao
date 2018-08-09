@@ -17,6 +17,7 @@ Page({
         joinId:'',
         rangPage:1,
         peopleDataList:'',
+        isPay:true,
     },
 
     /**
@@ -135,6 +136,14 @@ Page({
     onShareAppMessage: function () {
 
     },
+    // 支付页面
+    toPayPage:function(e){
+        let that = this;
+        wx.navigateTo({
+            url: '../../courses/orderInfo/orderInfo?joinId=' + that.data.joinId + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + that.data.actId,
+        })
+       
+    },
     tellPhone: function (e) {
         getApp().tellPhone(e)
     },
@@ -217,6 +226,19 @@ Page({
             method: 'post',
             success: res => {
                 wx.stopPullDownRefresh()
+                //能否可能支付
+
+                if (res.data.data.could_pay != undefined){
+                    if (res.data.data.could_pay){
+                        that.setData({
+                            isPay: false,
+                        })
+                    }else{
+                        that.setData({
+                            isPay: true,
+                        })
+                    }
+                }
                 that.setData({
                     pageData: res.data.data,
                     backgroundImage: res.data.data.act_image[0].url,
@@ -231,7 +253,6 @@ Page({
     // 获取排行数据
     getRangeDate:function(e){
         let that = this;
-        // 砍价排行榜
         getApp().request({
             url: 'bargain_range',
             data: {

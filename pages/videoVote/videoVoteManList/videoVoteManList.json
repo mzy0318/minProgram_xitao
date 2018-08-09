@@ -1,4 +1,6 @@
 {
-    "navigationBarTitleText": "温馨提示",
-    "enablePullDownRefresh": false
+    "navigationBarTitleText": "视频投票列表",
+    "enablePullDownRefresh": true,
+    "navigationBarBackgroundColor": "#8990FA",
+    "navigationBarTextStyle": "white"
 }

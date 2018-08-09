@@ -1,5 +1,5 @@
 <view class='contactWrap'>
-    <view class='contactUsTop'></view>
+    <view class='contactUsTop' style='background-image:url({{pageInfo.contact_image.url}})'></view>
     <view class='contackUsMiddle'>
         <text decode class='contactTitle'>&nbsp;{{pageInfo.app_name}}</text>
         <view class='contactMap' bindtap='map'>

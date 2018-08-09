@@ -71,7 +71,7 @@
 }
 .oneRule{
     width:710rpx;
-    height:180rpx;
+    min-height:100rpx;
 }
 .oneRuleChild{
     width:670rpx;
@@ -82,7 +82,7 @@
     width:670rpx;
     height:60rpx;
 }
-.oneRuleChildTop view{
+.oneRuleChildTop>view{
     width:120rpx;
     line-height:60rpx;
     font-size:28rpx;
@@ -93,7 +93,7 @@
     color:#E06857;
     float:left;
 }
-.oneRuleChildTop view:nth-child(1){
+.oneRuleChildTop>view:nth-child(1){
     margin-left:0rpx;
 }
 view.viewTyle{
@@ -127,11 +127,11 @@ view.viewTyle{
 }
 .oneRuleChildBottomRight text{
     font-size:24rpx;
-    text-decoration: line-through;
+    text-decoration:line-through;
     color:#78C2F4;
 }
 
-.oneRuleChild button{
+.oneRuleChild>button{
     width:250rpx;
     background:#E64240;
     line-height:60rpx;
@@ -146,7 +146,7 @@ view.viewTyle{
     height:90rpx;
     margin-top:40rpx;
 }
-.oneButton button{
+.oneButton>button{
     width:240rpx;
     line-height:80rpx;
     color:#fff;
@@ -156,6 +156,33 @@ view.viewTyle{
 }
 .oneButton button:nth-child(2){
     background:#CCC;
+}
+.payInfo{
+    width:670rpx;
+    min-height:20rpx;
+    background:#fff;
+    margin:20rpx auto 0rpx;
+    padding-bottom:20rpx;
+}
+.payInfo>view{
+    width:670rpx;
+    text-align:center;
+    font-size:28rpx;
+    line-height:40rpx;
+}
+.payInfo>view>text{
+    font-size:32rpx;
+    color:#E64240;
+    font-weight:bold;
+}
+.payInfo>button{
+    width:260rpx;
+    height:60rpx;
+    background:#E64240;
+    color:#fff;
+    font-size:28rpx;
+    line-height:60rpx;
+    margin-top:20rpx;
 }
 /*第二部分*/
 .collageInfoTwo{

@@ -1,0 +1,48 @@
+<view class='voteSignupInput'>
+    <view class='signUpInputTitle'>报名处</view>
+    <form bindsubmit='addActive'>
+        <view class='signUpInputName'>
+            <view class='signUpInputNameLeft'>参赛称呼:</view>
+            <view class='signUpInputNameRight'>
+                <input type='text' name='nickname' value='{{pageData.nickname}}'></input>
+            </view>
+        </view>
+        <view class='signUpInputImage'>
+            <view class='signUpInputNameLeft'>作品封面:</view>
+            <view class='chooseImageWrap'>
+                <view class='chooseImage' bindtap='chooseImage'>选择一张封面图片</view>
+                <view class='chooseImageO' hidden='{{isCover}}'>
+                    <image src='{{coverImage}}' mode='widthFix'></image>
+                </view>
+            </view>
+        </view>
+        <view class='signUpInputImage'>
+            <view class='signUpInputNameLeft'>作品视频:</view>
+            <view class='chooseImageWrap'>
+                <view class='chooseImage' bindtap='chooseVideo'>选择一个视频作品</view>
+                <view class='chooseImageO' hidden='{{isVideo}}'>
+                    <video src='{{video}}'></video>
+                </view>
+            </view>
+        </view>
+        <view class='signUpInputName'>
+            <view class='signUpInputNameLeft'>用户姓名:</view>
+            <view class='signUpInputNameRight'>
+                <input type='text' name='realname' value='{{pageData.realname}}'></input>
+            </view>
+        </view>
+        <view class='signUpInputName'>
+            <view class='signUpInputNameLeft'>联系电话:</view>
+            <view class='signUpInputNameRight'>
+                <input name='phone' type='number' maxlength='11' value='{{pageData.phone}}'></input>
+            </view>
+        </view>
+        <view class='signUpInputImage'>
+            <view class='signUpInputNameLeft'>参赛宣言:</view>
+            <view class='textAreaWrap'>
+                <textarea name='declaration' value='{{pageData.declaration}}'></textarea>
+            </view>
+        </view>
+        <button form-type='submit' class='signUpBtn'>确认报名</button>
+    </form>
+</view>

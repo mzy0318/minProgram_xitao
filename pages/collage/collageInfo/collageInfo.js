@@ -45,6 +45,7 @@ Page({
         animationClass:'musicControl',
         btnBgImage:'../../../icon/optBtn.png',
         isStopMusic: true,
+        isPay:true,
     },
 
     /**
@@ -173,6 +174,13 @@ Page({
             }
         }
     },
+    // 去支付
+    toPayPage:function(e){
+        let that = this;
+        wx.navigateTo({
+            url: '../../courses/orderInfo/orderInfo?joinId=' + e.currentTarget.dataset.joinid + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.actid,
+        })
+    },
     toSignUp: function () {
         wx.navigateTo({
             url: '../collageSignup/collageSignup',
@@ -213,6 +221,7 @@ Page({
             }
         })
     },
+    // 参加拼团活动
     toCollageSign: function (e) {
         let info = JSON.stringify(e.currentTarget.dataset.forminfo);
         if (e.currentTarget.dataset.is){
@@ -545,6 +554,18 @@ Page({
                         that.setData({
                             isButton: false
                         })
+                    }
+                    // 是否去支付
+                    if (res.data.data.could_pay != undefined) {
+                        if (res.data.data.could_pay) {
+                            that.setData({
+                                isPay: false,
+                            })
+                        } else {
+                            that.setData({
+                                isPay: true,
+                            })
+                        }
                     }
                     res.data.data.cover.url = utils.rect(res.data.data.cover.url, 325, 155);
                     if (res.data.data.act_image.length > 0) {

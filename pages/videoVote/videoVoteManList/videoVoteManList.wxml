@@ -1,9 +1,22 @@
-<view class='voteManListOne'>该功能过于繁杂,请在电脑端管理</view>
- <!-- <view class='voteManListTwo'>a.zhihuizhaosheng.com</view>
-<view class='voteManListThree'>该功能过于繁杂,请在电脑端管理</view>
-<view class='voteManListThree'>电脑端支持:</view>
-<view class='voteManListThree'>1.编辑学校、课程、老师信息</view>
-<view class='voteManListThree'>2.申请独立的学校小程序</view>
-<view class='voteManListThree'>3.在线管理全部营销活动</view>
-<view class='voteManListThree'>4.更换专业大气的学校模板</view> -->
-<button class='voteManListBtn' bindtap='toBack'>返回</button> 
+<!-- 页面功能 -->
+<view class='manListOpt' bindtap='toback'>返回</view>
+<!-- 内容 -->
+<view class='manListContent'  wx:for='{{pageData}}' wx:key='id' data-actid='{{item.id}}'>
+    <view class='contentTitle' data-actid='{{item.id}}' bindtap='toPageInfo' data-acttag='{{item.act_tag}}'>
+        <view>{{item.title}}</view>
+        <view>〉</view>
+    </view>
+    <view class='contentMiddel'>
+        <view class='contetnMiddleLeft'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
+        <view class='contetnMiddleRight'>
+            <view bindtap='toJoinerList' data-actid='{{item.id}}'>查看报名<text>({{item.joiner_amount}})</text></view>
+            <view>报名开始日期:<text>{{item.enlist_start_time}}</text></view>
+            <view>报名截止日期:<text>{{item.enlist_end_time}}</text></view>
+        </view>
+    </view>
+    <!-- <view class='contentBottom'>
+        <view bindtap='delActive' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}' ><text class='iconfont icon-lajixiang'></text>删除</view>
+        <view bindtap='tomanageEdit' data-id='{{item.id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
+        <view bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-share'></text>分享</view>
+    </view> -->
+</view>
