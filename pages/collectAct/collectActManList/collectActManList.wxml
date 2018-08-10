@@ -20,8 +20,8 @@
         </view>
     </view>
     <view class='contentBottom'>
-        <view data-id='0' data-actid='{{item.id}}' bindtap='actOpts'><text class='iconfont icon-lajixiang'></text>删除</view>
-        <view data-id='1' data-actid='{{item.id}}' bindtap='actOpts'><text class='iconfont icon-wodedingdan' ></text>编辑</view>
-        <view data-id='2' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}' bindtap='actOpts'><text class='iconfont icon-share'></text>分享</view>
+        <view data-id='0' data-actid='{{item.id}}' bindtap='actOpts'><text class='iconfont icon-lajixiang'></text> 删除</view>
+        <view data-id='1' data-actid='{{item.id}}' bindtap='actOpts'><text class='iconfont icon-edit' ></text> 编辑</view>
+        <view data-id='2' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}' bindtap='actOpts'><text class='iconfont icon-share'></text> 分享</view>
     </view>
 </view>

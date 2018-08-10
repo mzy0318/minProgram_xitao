@@ -1,17 +1,19 @@
-<view class='contactWrap'>
-    <view class='contactUsTop' style='background-image:url({{pageInfo.contact_image.url}})'></view>
-    <view class='contackUsMiddle'>
-        <text decode class='contactTitle'>&nbsp;{{pageInfo.app_name}}</text>
-        <view class='contactMap' bindtap='map'>
-            <text class="iconfont icon-address iconSize"></text>
-            <text decode>&nbsp;{{pageInfo.address}}</text>
-        </view>
-        <view class='contactMap' data-phonenum='{{pageInfo.telephone}}' bindtap='tellPhone'>
-            <text class="iconfont icon-dianhuatianchong iconSize"></text>
-            <text decode>&nbsp;{{pageInfo.telephone}}</text>
-        </view>
-        <text class="iconfont icon-map"></text>
+<view class='contactUsTop' style='background-image:url({{pageInfo.contact_image.url}})'></view>
+<view class='contackUsMiddle'>
+    <text decode class='contactTitle'>&nbsp;{{pageInfo.app_name}}</text>
+    <view class='contactMap' bindtap='map'>
+        <text class="iconfont icon-address iconSize"></text>
+        <text decode>&nbsp;{{pageInfo.address}}</text>
     </view>
-    <view class='contackUsBottom'>{{pageInfo.other_info}}</view>
-    <button bindtap='tellPhone' data-phonenum='{{pageInfo.telephone}}' class='contactUsBtn'>我要咨询</button>
+    <view class='contactMap' data-phonenum='{{pageInfo.telephone}}' bindtap='tellPhone'>
+        <text class="iconfont icon-dianhuatianchong iconSize"></text>
+        <text decode>&nbsp;{{pageInfo.telephone}}</text>
+    </view>
+    <text class="iconfont icon-map"></text>
+</view>
+<view class='contackUsBottom'>{{pageInfo.other_info}}</view>
+<button bindtap='tellPhone' data-phonenum='{{pageInfo.telephone}}' class='contactUsBtn'>我要咨询</button>
+<view class='schoolNav' bindtap='toSchoolNav'>
+    <view>校区</view>
+    <view>导航</view>
 </view>

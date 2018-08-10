@@ -16,6 +16,7 @@ Page({
         isEdit: '',
         isShow: false,
         joinId: '',
+        btnText:'确认报名',
     },
 
     /**
@@ -23,7 +24,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        console.log('options',options)
         that.setData({
             isEdit:options.isEdit,
             actId:options.actId
@@ -33,13 +33,17 @@ Page({
             wx.setNavigationBarTitle({
                 title: '添加报名',
             })
+            that.setData({
+                btnText: '确认报名',
+            })
 
         } else if (that.data.isEdit == 1){
             wx.setNavigationBarTitle({
                 title: '修改报名信息',
             })
             that.setData({
-                joinId:options.joinId
+                joinId:options.joinId,
+                btnText: '确认修改',
             })
             getApp().request({
                 url:'org/video_vote/joiner',

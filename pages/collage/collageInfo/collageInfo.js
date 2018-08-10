@@ -46,6 +46,7 @@ Page({
         btnBgImage:'../../../icon/optBtn.png',
         isStopMusic: true,
         isPay:true,
+        rangePage:1,
     },
 
     /**
@@ -119,8 +120,6 @@ Page({
         that.getRangeData()
         // 页面数据
         that.getpageData()
-        
-        
     },
 
     /**
@@ -501,11 +500,12 @@ Page({
     // 获取拼团列表
     getRangeData:function(){
         let that = this;
+        let collageData = [];
         getApp().request({
             url: 'personal_group_range',
             data: {
                 act_id: that.data.actId,
-                page: 1,
+                page: that.data.rangePage,
             },
             method: 'post',
             success: res => {
@@ -514,6 +514,27 @@ Page({
                 })
             }
         });
+        while (that.data.collageData.length >= that.data.rangePage*10){
+            collageData.push(...that.data.collageData)
+            that.setData({
+                rangePage: that.data.rangePage + 1,
+            })
+            getApp().request({
+                url: 'personal_group_range',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'post',
+                success: res => {
+                    collageData.push(...res.data.data.list)
+                    that.setData({
+                        collageData:collageData,
+                    })
+                }
+            });
+        }
+
     },
     // 获取页面数据 
     getpageData:function(e){

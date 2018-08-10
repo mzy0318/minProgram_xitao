@@ -98,5 +98,12 @@ Page({
             name: data.app_name,
             address: address,
         })
+    },
+    // 校区导航
+    toSchoolNav:function(e){
+        let that = this;
+        wx.navigateTo({
+            url: '../schoolList/schoolList',
+        })
     }
 })

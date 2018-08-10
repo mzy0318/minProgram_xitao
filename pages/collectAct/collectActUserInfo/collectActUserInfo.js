@@ -9,6 +9,7 @@ Page({
         userId:'',
         pageData:'',
         helperData:'',
+        helperPage:1,
         rangeData:'',
         rangePage:1,
         countDown: {
@@ -36,7 +37,9 @@ Page({
                 name: 'blueberry',
                 url: '../../../icon/05.png'
             },
-        ]
+        ],
+        isExchange:true,
+        value:'',
     },
 
     /**
@@ -67,7 +70,48 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        let that = this;
+        let helperData = [];
+        while (that.data.helperData.length >= that.data.helperPage * 10){
+            helperData.push(...that.data.helperData);
+            that.setData({
+                helperPage: that.data.helperPage + 1
+            })
+            getApp().request({
+                url: 'sugar/helpers',
+                data: {
+                    joiner_id: that.data.userId,
+                    page: that.data.helperPage,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        wx.stopPullDownRefresh()
+                        if (res.data.data.list.length > 0) {
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].create_time = formate.yearMonth(new Date(res.data.data.list[i].create_time * 1000));
+                                for (let j = 0; j < res.data.data.list[i].sugar.length; j++) {
+                                    for (let n = 0; n < that.data.sugarList.length; n++) {
+                                        if (res.data.data.list[i].sugar[j] == that.data.sugarList[n].name) {
+                                            res.data.data.list[i].sugar[j] = that.data.sugarList[n].url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        helperPage.push(...res.data.data.list)
+                        that.setData({
+                            helperData: helperPage,
+                        })
+                    } else {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -104,7 +148,31 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.rangeData)
+        if (that.data.rangeData.length >= that.data.rangePage * 10){
+            that.setData({
+                rangePage: that.data.rangePage+ 1,
+            })
+            getApp().request({
+                url: 'sugar/rank',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        wx.stopPullDownRefresh()
+                        pageDataArr.push(...res.data.data.list)
+                        that.setData({
+                            rangeData:pageDataArr,
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -157,6 +225,52 @@ Page({
             })
         }
     },
+    // 显示兑换糖果页面
+    showAlertDiv:function(e){
+        let that = this;
+        if (e.currentTarget.dataset.id == 0){
+            that.setData({
+                isExchange: true,
+            })
+        } else if (e.currentTarget.dataset.id == 1){
+            that.setData({
+                isExchange: false,
+            })
+        }
+    },
+    // 兑换奖励
+    exchangeReward:function(e){
+        let that = this;
+        getApp().request({
+            url:'sugar/exchange',
+            data:{
+                act_id: that.data.actId,
+                amount: e.detail.value.amount,
+            },
+            method:'post',
+            success:function(res){
+                if(res.data.code == 1){
+                    wx.showToast({
+                        title: res.data.data,
+                        icon:'success',
+                    })
+                    that.setData({
+                        isExchange: true,
+                        value:'',
+                    })
+                }else if(res.data.code == 0){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                    that.setData({
+                        isExchange: true,
+                        value:'',
+                    })
+                }
+            }
+        })
+    },
     // 帮助集糖果者
     getHelperData:function(){
         let that = this;
@@ -164,7 +278,7 @@ Page({
             url:'sugar/helpers',
             data: {
                 joiner_id: that.data.userId,
-                page:1,
+                page:that.data.helperPage,
             },
             method:'get',
             success:function(res){

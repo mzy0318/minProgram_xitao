@@ -20,8 +20,8 @@
         </view>
     </view>
     <view class='contentBottom'>
-        <view bindtap='delActive' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}' ><text class='iconfont icon-lajixiang'></text>删除</view>
-        <view bindtap='tomanageEdit' data-id='{{item.id}}'><text class='iconfont icon-wodedingdan'></text>编辑</view>
-        <view bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-share'></text>分享</view>
+        <view bindtap='delActive' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}' ><text class='iconfont icon-lajixiang'></text> 删除</view>
+        <view bindtap='tomanageEdit' data-id='{{item.id}}'><text class='iconfont icon-edit'></text> 编辑</view>
+        <view bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-share'></text> 分享</view>
     </view>
 </view>

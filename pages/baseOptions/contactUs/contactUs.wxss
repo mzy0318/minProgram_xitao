@@ -1,8 +1,6 @@
 @import '../../../utils/iconFont.wxss';
-.contactWrap{
-    width:750rpx;
-    min-height:1207rpx;
-    position:relative;
+page{
+    background:#fff;
 }
 .contactUsBtn{
   width:270rpx;
@@ -31,7 +29,6 @@
 .contackUsBottom{
   width:710rpx;
   line-height:80rpx;
-  /* box-shadow: 2px 2px 2px 2px rgba(192,192,192,0.3),-2px -2px 2px 2px rgba(192,192,192,0.3); */
   color:#717171;
   text-indent:20px;
   margin-top:240rpx;
@@ -58,5 +55,22 @@
 .iconSize{
     font-size:40rpx !important;
 }
-
-
+/* 校区导航 */
+.schoolNav{
+    width:70rpx;
+    height:70rpx;
+    background:#efefef;
+    border-radius:50%;
+    overflow:hidden;
+    position:absolute;
+    right:70rpx;
+    bottom:180rpx;
+}
+.schoolNav>view{
+    width:70rpx;
+    height:35rpx;
+    font-size:24rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:35rpx;
+}

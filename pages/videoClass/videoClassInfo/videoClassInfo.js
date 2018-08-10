@@ -15,6 +15,7 @@ Page({
         isRely:'',
         isAuto:false,
         lock:false,
+        commentPage:1,
     },
 
     /**
@@ -103,7 +104,39 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        let that = this;
+        let commentData = [];
+        commentData.push(...that.data.commentData)
+        if (that.data.commentData.lenght >= that.data.commentPage*10){
+            that.setData({
+                commentPage: that.data.commentPage + 1,
+            })
+            getApp().request({
+                url: 'comment_list',
+                data: {
+                    page: that.data.commentPage,
+                    act_id: that.data.actId,
+                    act_tag: 'video_class',
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
+                        commentData.push(...res.data.data.list)
+                        that.setData({
+                            commentData: commentData
+                        })
+                    } else if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: '列表请求失败',
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -147,6 +180,7 @@ Page({
                                     success:function(){
                                         that.setData({
                                             content: '',
+                                            commentPage:1
                                         })
                                         that.getComment();
                                     }
@@ -202,6 +236,7 @@ Page({
                         success: function () {
                             that.setData({
                                 content: '',
+                                commentPage:1
                             })
                             that.getComment();
                         }
@@ -215,7 +250,7 @@ Page({
         getApp().request({
             url: 'comment_list',
             data: {
-                page: '1',
+                page: that.data.commentPage,
                 act_id: that.data.actId,
                 act_tag: 'video_class',
             },
@@ -232,9 +267,6 @@ Page({
                     wx.showToast({
                         title: '列表请求失败',
                         icon: 'none',
-                        success: function () {
-                            console.log(res.data.msg)
-                        }
                     })
                 }
             }

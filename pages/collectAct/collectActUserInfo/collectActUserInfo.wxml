@@ -1,7 +1,7 @@
 <view class='infoBannerImage'>
     <image src='{{pageData.banner_image_url}}' mode='scaleToFill'></image>
 </view>
-<view class='infoBackImage'>
+<view class='infoBackImage' style='background-image:url({{pageData.bg_image_url}})'>
     <!-- 活动图片 -->
     <view class='laudActImage'>
         <view class='laudActImageTitle'><text>{{pageData.title}}</text></view>
@@ -150,3 +150,16 @@
 </view>
 <!-- 活动倒计时 -->
 <view class='countDown'>活动倒计时: {{countDown.day}}天 {{countDown.hour}}时 {{countDown.minute}}分 {{countDown.socend}}秒</view>
+<!-- 兑换奖励 -->
+<view class='joinAct' bindtap='showAlertDiv' data-id='1'>兑换奖励</view>
+<!-- 兑换糖果 -->
+<view class='exchangeWrap' hidden='{{isExchange}}'>
+    <view class='exchangeContent'>
+        <form bindsubmit='exchangeReward'>
+            <view>兑换奖励</view>
+            <view><input type='number' name='amount' value='{{value}}' placeholder='请输入糖果数量'></input></view>
+            <button form-type='submit'>兑换</button>
+            <view class='closeDiv' bindtap='showAlertDiv' data-id='0'>×</view>
+        </form>
+    </view>
+</view>

@@ -88,6 +88,13 @@ Page({
                 background: '#4A86E8',
                 tag: 'sale_lesson',
             },
+            {
+                name: '收集',
+                iconfont: 'iconfont icon-dtweishouji iconfontStyle iconfontSize',
+                url: '../collectAct/collectActUserList/collectActUserList',
+                background: '#FF4F1C',
+                tag: 'sugar',
+            },
         ],
         baseOpt:[
             {
@@ -95,44 +102,43 @@ Page({
                 iconfont: 'iconfont icon-xuexiao iconfontStyle iconfontSize',
                 url: '../baseOptions/schoolInfo/schoolInfo',
                 background: '#1055CC',
-            }, {
+            },
+            {
                 name: '机构导航',
                 iconfont: 'iconfont icon-daohang iconfontStyle iconfontSize',
                 url: '../baseOptions/schoolList/schoolList',
                 background: '#1055CC',
-            }, {
+            },
+            {
                 name: '师资力量',
                 iconfont: 'iconfont icon-shizi iconfontStyle iconfontSize',
                 url: '../baseOptions/teachers/teachers',
                 background: '#1055CC',
-            }, {
+            },
+            {
                 name: '学员风采',
                 iconfont: 'iconfont icon-qiyefengcai iconfontStyle iconfontSize',
                 url: '../baseOptions/studentStyle/studentStyle',
                 background: '#1055CC',
-            }, {
+            },
+            {
                 name: '联系我们',
                 iconfont: 'iconfont icon-lianxi iconfontStyle iconfontSize',
                 url: '../baseOptions/contactUs/contactUs',
                 background: '#1055CC',
-            }, {
+            },
+            {
                 name: '意见建议',
                 iconfont: 'iconfont icon-yijian iconfontStyle iconfontSize',
                 url: '../baseOptions/opinions/opinions',
                 background: '#1055CC',
             },
-            {
-                name: '校区导航',
-                iconfont: 'iconfont icon-xiaoqu iconfontStyle iconfontSize',
-                url: '../baseOptions/schoolList/schoolList',
-                background: '#1055CC',
-            },
-            {
-                name: '收集',
-                iconfont: 'iconfont icon-dtweishouji iconfontStyle iconfontSize',
-                url: '../collectAct/collectActUserList/collectActUserList',
-                background: '#FF4F1C',
-            },
+            // {
+            //     name: '校区导航',
+            //     iconfont: 'iconfont icon-xiaoqu iconfontStyle iconfontSize',
+            //     url: '../baseOptions/schoolList/schoolList',
+            //     background: '#1055CC',
+            // },
         ],
         actOpt:[],
     },

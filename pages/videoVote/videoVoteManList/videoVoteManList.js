@@ -97,8 +97,13 @@ Page({
                     that.setData({
                         pageData:res.data.data.list
                     })
+                }else{
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
                 }
-            },
+            }
         })
     }
 })

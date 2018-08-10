@@ -128,7 +128,7 @@ Page({
                 background: '#FE7FC2',
                 url: 'org/bargain_list',
                 pageType: 13,
-                tag: 'video_class',
+                tag: 'sugar',
                 show: 'inline-block',
             },
         ],
@@ -172,6 +172,7 @@ Page({
         }
         // 重新登录
         // wx.setStorageSync('loginCode', 3);
+
         // 判断功能页面功能
         let funcOpt = wx.getStorageSync('funcOpt').function;
         let index = 0;

@@ -11,9 +11,11 @@
 .infoBackImage{
     width:750rpx;
     min-height:100rpx;
-    background:#FEF065;
+    background:#fff;
     padding-bottom:130rpx;
     padding-top:30rpx;
+    background-size:100% 100%;
+    background-repeat: no-repeact;
 }
 .laudActImage,.laudActInfo,.actInfoConnect,.actInfoRange,.actInfoIntruc{
     width:690rpx;
@@ -89,7 +91,9 @@
 .personInfoText>view{
     font-size:26rpx;
     line-height:45rpx;
-    overflow:hidden;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .personInfoText>view:nth-child(1)>text{
     font-size:35rpx;
@@ -360,4 +364,70 @@
     color:#7b7b7b;
     line-height:40rpx !important;
     text-align:center;
+}
+/* 兑换糖果 */
+.exchangeWrap{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.3);
+    z-index:1000;
+}
+.exchangeContent{
+    width:600rpx;
+    height:300rpx;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-300rpx;
+    margin-top:-220rpx;
+    background:#fff;
+    border-radius:8px;
+}
+.exchangeContent view:nth-child(1){
+    width:600rpx;
+    font-size:32rpx;
+    line-height:40rpx;
+    text-align:center;
+    color:#7b7b7b;
+    margin-top:30rpx;
+}
+.exchangeContent view:nth-child(2){
+    width:600rpx;
+    height:60rpx;
+    margin-top:10rpx;
+}
+.exchangeContent view:nth-child(2)>input{
+    width:300rpx;
+    height:60rpx;
+    line-height:60rpx;
+    background:green;
+    margin-left:150rpx;
+    margin-top:25rpx;
+    font-size:26rpx;
+    background:#efefef;
+    border-radius:5px;
+    text-align:center;
+}
+.exchangeContent button{
+    width:300rpx;
+    height:60rpx;
+    margin-top:25rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    background:#1571FA;
+    color:#fff;
+}
+.closeDiv{
+    width:50rpx !important;
+    height:50rpx !important;
+    line-height:50rpx !important;
+    text-align:center;
+    font-size:45rpx !important;
+    position:absolute;
+    background:#efefef;
+    right:-25rpx !important;
+    top:-25rpx !important;
 }

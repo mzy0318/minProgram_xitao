@@ -66,7 +66,36 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.pageData)
+        if (that.data.pageData.length >= that.data.pageNum * 10){
+            that.setData({
+                pageNum: that.data.pageNum + 1,
+            })
+            getApp().request({
+                url: 'org/video_vote/joiners',
+                data: {
+                    id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        wx.stopPullDownRefresh()
+                        pageDataArr.push(...res.data.data.list)
+                        that.setData({
+                            pageData: pageDataArr
+                        })
+                    } else {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
     },
 
     // /**

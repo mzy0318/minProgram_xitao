@@ -1,3 +1,7 @@
+page{
+    background: #f5f5f5;
+    padding-bottom:20rpx;
+}
 .personListWrap {
     width: 750rpx;
     min-height: 1207rpx;

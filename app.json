@@ -27,9 +27,9 @@
         "pages/baseOptions/opinions/opinions",
         "pages/baseOptions/schoolList/schoolList",
         "pages/baseOptions/studentStyle/studentStyle",
-        "pages/baseOptions/contactUs/contactUs",
         "pages/baseOptions/sharePage/sharePage",
         "pages/baseOptions/schoolModel/schoolModel",
+        "pages/baseOptions/contactUs/contactUs",
         "pages/baseOptions/schoolModelInfo/schoolModelInfo",
         "pages/killPrices/killPrice/killPrice",
         "pages/killPrices/killPriceInfo/killPriceInfo",
@@ -96,8 +96,8 @@
         "pages/collectAct/collectActInfo/collectActInfo",
         "pages/collectAct/collectActEdit/collectActEdit",
         "pages/collectAct/collectActManList/collectActManList",
-        "pages/collectAct/collectActJoinerList/collectActJoinerList",
-        "pages/collectAct/collectActUserInfo/collectActUserInfo"
+        "pages/collectAct/collectActUserInfo/collectActUserInfo",
+        "pages/collectAct/collectActJoinerList/collectActJoinerList"
     ],
     "window": {
         "backgroundTextStyle": "dark",

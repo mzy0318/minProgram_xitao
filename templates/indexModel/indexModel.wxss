@@ -85,6 +85,9 @@
     width:360rpx;
     line-height:35rpx;
     font-size:30rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .rightTextPrice{
     width:360rpx;
@@ -172,6 +175,9 @@
     font-size:30rpx;
     font-weight:bold;
     text-align:center;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .swiperBottom{
     width:670rpx;
@@ -267,6 +273,9 @@
     height:40rpx;
     font-size:30rpx;
     text-align:center;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 /* 课外活动/快乐Two */
 .fiveWrap{
@@ -348,6 +357,9 @@ view.fiveNavChild:nth-child(6),view.fiveNavChild:nth-child(5),view.fiveNavChild:
     font-weight:bold;
     text-indent:10rpx;
     border-left:3px solid #F82335;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .lessonContent{
     width:300rpx;

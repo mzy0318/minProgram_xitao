@@ -32,6 +32,9 @@ Page({
         className: 'infoInputWrap',
         isJoins: 'block',
         empty:'',
+        contentIndex:'',
+        rangePage:1,
+        joinerPage:1,
     },
 
     /**
@@ -103,7 +106,39 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
+        let that = this;
+        if (that.data.contentIndex == 2){
+            let rangeList = [];
+            rangeList.push(...that.data.rangeList)
+            if (that.data.rangeList.length >= that.data.rangePage*10){
+                that.setData({
+                    rangePage: that.data.rangePage + 1
+                })
+                getApp().request({
+                    url: 'video_vote_range_joiner',
+                    data: {
+                        act_video_vote_id: that.data.actId,
+                        page: that.data.rangePage,
+                    },
+                    method: 'post',
+                    success: function (res) {
+                        if (Number(res.data.code) == 1) {
+                            rangeList.push(...res.data.data.list);
+                            that.setData({
+                                rangeList: rangeList,
+                            })
+                            wx.hideLoading();
+                        } else if (Number(res.data.code) == 0) {
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none',
+                            })
+                        }
 
+                    }
+                })
+            }
+        }
     },
 
     /**
@@ -127,14 +162,18 @@ Page({
                 isTop: true,
                 isRank: true,
                 isJoin: true,
+                contentIndex:0
             })
         } else if (Number(that.data.contentIndex) == 1) {
             // 最新参赛
+            let newList = [];
             that.setData({
                 isActive: true,
                 isTop: true,
                 isRank: true,
                 isJoin: false,
+                contentIndex: 1,
+                joinerPage:1,
             })
             wx.showLoading({
                 title: '',
@@ -143,7 +182,7 @@ Page({
                 url: 'video_vote_latest_joiner',
                 data: {
                     act_video_vote_id: that.data.actId,
-                    page: 1,
+                    page: that.data.joinerPage,
                 },
                 method: 'post',
                 success: function(res) {
@@ -160,6 +199,34 @@ Page({
                     }
                 }
             })
+            while (that.data.newList.length >= that.data.joinerPage*10){
+                newList.push(...that.data.newList);
+                that.setData({
+                    joinerPage: that.data.joinerPage + 1
+                })
+                getApp().request({
+                    url: 'video_vote_latest_joiner',
+                    data: {
+                        act_video_vote_id: that.data.actId,
+                        page: that.data.joinerPage,
+                    },
+                    method: 'post',
+                    success: function (res) {
+                        if (Number(res.data.code) == 1) {
+                            newList.push(...res.data.data.list)
+                            that.setData({
+                                newList: newList
+                            })
+                            wx.hideLoading();
+                        } else if (Number(res.data.code) == 0) {
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none'
+                            })
+                        }
+                    }
+                })
+            }
         } else if (Number(that.data.contentIndex) == 2) {
             // 投票排行
             that.setData({
@@ -167,6 +234,8 @@ Page({
                 isTop: true,
                 isRank: false,
                 isJoin: true,
+                contentIndex: 2,
+                rangePage:1,
             })
             wx.showLoading({
                 title: '',
@@ -175,7 +244,7 @@ Page({
                 url: 'video_vote_range_joiner',
                 data: {
                     act_video_vote_id: that.data.actId,
-                    page: 1,
+                    page: that.data.rangePage,
                 },
                 method: 'post',
                 success: function(res) {
@@ -200,6 +269,7 @@ Page({
                 isTop: false,
                 isRank: true,
                 isJoin: true,
+                contentIndex: 3
             })
             wx.showLoading({
                 title: '',

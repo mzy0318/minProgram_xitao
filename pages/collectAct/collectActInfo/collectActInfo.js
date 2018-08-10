@@ -95,7 +95,31 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        let that = this;
+        let pageDataArr = [];
+        pageDataArr.push(...that.data.rangeData)
+        if (that.data.rangeData.length >= that.data.rangePage * 10) {
+            that.setData({
+                rangePage: that.data.rangePage + 1,
+            })
+            getApp().request({
+                url: 'sugar/rank',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        wx.stopPullDownRefresh()
+                        pageDataArr.push(...res.data.data.list)
+                        that.setData({
+                            rangeData: pageDataArr,
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**

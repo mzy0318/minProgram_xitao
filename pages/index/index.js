@@ -20,7 +20,7 @@ Page({
         },
         {
             tag: 'campus',
-            url: '../baseOptions/schoolList/schoolList', //校区列表
+            url: '../baseOptions/schoolList/schoolList', //机构导航
         },
         {
             tag: 'teacher',
