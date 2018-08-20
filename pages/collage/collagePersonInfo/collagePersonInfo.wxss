@@ -17,7 +17,7 @@
     width:710rpx;
     min-height:740rpx;
     background:#fff;
-    margin:0 auto 20rpx;
+    margin:20rpx auto 20rpx;
     border-radius:5px;
     box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
 }
@@ -55,10 +55,11 @@
     height:310rpx;
     margin:0rpx auto 20rpx;
 }
-.oneImageContent image{
+.oneImageContent>image{
     width:650rpx;
     height:310rpx;
 }
+
 .empty{
     width:100%;
     height:20rpx;
@@ -205,6 +206,13 @@
     background:#E64240;
     font-size:30rpx;
     color:#fff;
+}
+.threeImageContent{
+    width:650rpx;
+    margin:0rpx auto 10rpx;
+}
+.threeImageContent>image{
+    width:650rpx;
 }
 
 /*活动介绍*/
@@ -353,4 +361,75 @@
 view.viewTyle{
     color:#fff;
     background:#F36A58;
+}
+/* 砍价成功弹窗 */
+.alertDiv{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.3);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.alertContent{
+    width:500rpx;
+    height:300rpx;
+    background:#fff;
+    border-radius:10px;
+}
+.alertTitle{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:32rpx;
+    text-align:center;
+    margin-top:20rpx;
+}
+.alertM{
+    width:500rpx;
+    height:60rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-size:24rpx;
+}
+.alertM>text{
+    color:rgb(221,79,66);
+    font-size:34rpx;
+}
+.alertTitleText{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:32rpx;
+    text-align:center;
+}
+.alertText{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:28rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+.alertBtn{
+    width:500rpx;
+    height:60rpx;
+    display:flex;
+    justify-content: space-around;
+}
+.alertBtn>view{
+    width:150rpx;
+    height:60rpx;
+    font-size:30rpx;
+    line-height:60rpx;
+    text-align:center;
+}
+.alertBtn>view:nth-child(1){
+    color:#888888;
+}
+.alertBtn>view:nth-child(2){
+    color:#118408;
 }

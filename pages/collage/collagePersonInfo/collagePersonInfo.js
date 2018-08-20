@@ -13,6 +13,7 @@ Page({
         joinId:'',
         priceId: 0,
         isPay: true,
+        isAlert: true,
     },
 
     /**
@@ -21,8 +22,10 @@ Page({
     onLoad: function (options) {
         let that = this
         let pages = getCurrentPages()
+
         let url = pages[pages.length - 1].route
         let mzy = 'actid:' + options.actId + ':joinid:' + options.joinId;
+
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
             let sceneArr = scene.split(':')
@@ -42,7 +45,7 @@ Page({
         //获取页面数据
         that.getPageData();
         // 获取我的团员
-        getRangeDatafunction()
+        that.getRangeData();
     },
 
     /**
@@ -80,7 +83,7 @@ Page({
         //获取页面数据
         that.getPageData();
         // 获取我的团员
-        getRangeDatafunction()
+        that.getRangeData()
     },
 
     /**
@@ -95,9 +98,16 @@ Page({
      */
     onShareAppMessage: function () {
         let that = this;
-        if(res.menu == 'menu'){
+        return {
             path: 'pages/index/index?pageId=3&actId=' + that.data.actId + '&joinId=' + that.data.joinId
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     // 去支付
     toPayPage: function (e) {
@@ -105,6 +115,24 @@ Page({
         wx.navigateTo({
             url: '../../courses/orderInfo/orderInfo?joinId=' + e.currentTarget.dataset.joinid + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.actid,
         })
+        innerAudioContext.stop()
+    },
+    // 砍价成功后的弹窗
+    alertBtn: function (e) {
+        let that = this;
+        if (e.currentTarget.dataset.id == 0) {
+            that.setData({
+                isAlert: true,
+            })
+        } else if (e.currentTarget.dataset.id == 1) {
+            wx.navigateTo({
+                url: '../../courses/orderInfo/orderInfo?joinId=' + that.data.joinId + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + that.data.actId,
+            })
+            innerAudioContext.stop()
+            that.setData({
+                isAlert: true,
+            })
+        }
     },
     toCollageJoin: function (e) {
         let formInfo = JSON.stringify(e.currentTarget.dataset.forminfo)
@@ -158,20 +186,22 @@ Page({
                     res.data.data.start_time = getTime.formatDate(new Date(res.data.data.start_time * 1000))
                     res.data.data.end_time = getTime.formatDate(new Date(res.data.data.end_time * 1000));
                     res.data.data.cover.url = getTime.rect(res.data.data.cover.url, 325, 155);
-                    if (res.data.data.act_image.length > 0) {
-                        for (let i = 0; i < res.data.data.act_image.length; i++) {
-                            res.data.data.act_image[i].url = getTime.rect(res.data.data.act_image[i].url, 325, 155)
-                        }
-                    }
+                    // if (res.data.data.act_image.length > 0) {
+                    //     for (let i = 0; i < res.data.data.act_image.length; i++) {
+                    //         res.data.data.act_image[i].url = getTime.rect(res.data.data.act_image[i].url, 325, 155)
+                    //     }
+                    // }
                     // 是否去支付
                     if (res.data.data.could_pay != undefined) {
                         if (res.data.data.could_pay) {
                             that.setData({
                                 isPay: false,
+                                isAlert: false,
                             })
                         } else {
                             that.setData({
                                 isPay: true,
+                                isAlert: true,
                             })
                         }
                     }

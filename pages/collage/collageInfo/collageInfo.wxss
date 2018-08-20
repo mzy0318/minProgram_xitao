@@ -22,7 +22,7 @@
     background:#fff;
     margin:0 auto 20rpx;
     border-radius:5px;
-    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
     border:1px solid #efefef;
 }
 .oneTitle{
@@ -192,7 +192,7 @@ view.viewTyle{
     background:#fff;
     margin:20rpx auto;
     border:1rpx solid #efefef;
-    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
 }
 .collageInfoTwo>text{
     display:block;
@@ -224,7 +224,7 @@ view.viewTyle{
     background:#fff;
     margin:20rpx auto;
     border:1rpx solid #efefef;
-    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
 }
 .threeImageText{
     width:650rpx;
@@ -235,6 +235,13 @@ view.viewTyle{
     margin:0rpx auto 0rpx;
     /* background:lightblue; */
 }
+.threeImageContent{
+    width:650rpx;
+    margin:0rpx auto 10rpx;
+}
+.threeImageContent>image{
+    width:650rpx;
+}
 /*第四部分*/
 .collageInfoFour{
     width:710rpx;
@@ -243,7 +250,7 @@ view.viewTyle{
     border-radius:5px;
     background:#fff;
     margin:20rpx auto;
-    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
     border:1rpx solid #efefef;
 }
 .fourContent{
@@ -261,7 +268,7 @@ view.viewTyle{
     background:#fff;
     border-radius:5px;
     margin:20rpx auto;
-    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
     border:1rpx solid #efefef;
 }
 .infoFive{
@@ -353,7 +360,7 @@ button.btnStyle{
     background:#fff;
     border-radius:5px;
     margin:20rpx auto;
-    /* box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3); */
+    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3),-2px 2px 2px 2px rgba(0,0,0,0.3);
     border:1rpx solid #efefef;
 }
 .collageInfoSixContent{
@@ -572,6 +579,9 @@ button.btnStyle{
      font-size:26rpx;
      text-align:center;
      color:#000;
+     overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
  } 
 .modelContentChildContent view:nth-child(2){
      width:200rpx;
@@ -617,7 +627,7 @@ button.btnStyle{
     line-height:60rpx;
     font-size:28rpx;
     text-align:center;
-     background:rgba(192,192,192,0.8);
+    background:rgba(109,160,212,0.8);
     margin-top:15rpx;
 }
 .iconStyle{
@@ -655,4 +665,75 @@ button.btnStyle{
 view.viewRotate{
     animation: headRotate 5s linear;
     animation-iteration-count:infinite;
+}
+/* 砍价成功弹窗 */
+.alertDiv{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.3);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.alertContent{
+    width:500rpx;
+    height:300rpx;
+    background:#fff;
+    border-radius:10px;
+}
+.alertTitle{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:32rpx;
+    text-align:center;
+    margin-top:20rpx;
+}
+.alertM{
+    width:500rpx;
+    height:60rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-size:24rpx;
+}
+.alertM>text{
+    color:rgb(221,79,66);
+    font-size:34rpx;
+}
+.alertTitleText{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:32rpx;
+    text-align:center;
+}
+.alertText{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:28rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+.alertBtn{
+    width:500rpx;
+    height:60rpx;
+    display:flex;
+    justify-content: space-around;
+}
+.alertBtn>view{
+    width:150rpx;
+    height:60rpx;
+    font-size:30rpx;
+    line-height:60rpx;
+    text-align:center;
+}
+.alertBtn>view:nth-child(1){
+    color:#888888;
+}
+.alertBtn>view:nth-child(2){
+    color:#118408;
 }

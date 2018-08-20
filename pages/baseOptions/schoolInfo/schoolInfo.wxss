@@ -45,21 +45,21 @@ swiper{
   height:345rpx;
   margin:20rpx auto 0rpx;
 }
-.schoolInfoImg view{
+.schoolInfoImg>view{
   width:50%;
   height:100%;
   float:left;
 }
 
-.schoolInfoImg view image{
+.schoolInfoImg>view>image{
   width:100%;
   height:100%;
 }
 
 .honorImage{
     width:710rpx;
-    min-height:350rpx;
-    margin:20rpx auto 20rpx;
+    min-height:50rpx;
+    margin:0rpx auto 5rpx;
 }
 .honorImage image{
     width:710rpx;

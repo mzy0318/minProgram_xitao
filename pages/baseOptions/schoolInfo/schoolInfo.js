@@ -25,7 +25,7 @@ Page({
                 orgid: getApp().getExtConfig().orgId
             },
             success: res => {
-                if (res.data.data.brand == null){
+                if (JSON.stringify(res.data.data.brand) == '{}'){
                     that.setData({
                         isVideo:true,
                     })
@@ -88,10 +88,15 @@ Page({
      */
     onShareAppMessage: function () {
         let that = this;
-        if(res.from == 'menu'){
-            return {
-                path:'pages/index/index?pageId=7'
-            }
+        return {
+            path: 'pages/index/index?pageId=7'
         }
+    },
+    //查看图片
+    previewImages:function(e){
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     }
 })

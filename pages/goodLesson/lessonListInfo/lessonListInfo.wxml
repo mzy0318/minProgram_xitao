@@ -31,8 +31,9 @@
         <view class='empty'></view>
         <view class='listInfoDataText'><text>{{pageData.description}}</text></view>
         <view class='empty'></view>
-        <view class='listInfoDataActimg' wx:for='{{pageData.act_image}}'>
-            <view class='listInfoDataActimgChild'>
+        <!-- 活动图片 -->
+        <view class='listInfoDataActimg' >
+            <view class='listInfoDataActimgChild' bindtap='previewImages' wx:for='{{pageData.act_image}}' wx:key='{{index}}' wx:key='{{item.id}}' data-url='{{item.url}}'>
                 <image src='{{item.url}}' mode='widthFix'></image>
             </view>
         </view>

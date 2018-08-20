@@ -74,8 +74,8 @@
         <view class='oneImage'>
             <view class='empty'></view>
             <view class='threeImageText'><text>{{pageData.description}}</text></view>
-            <view class='oneImageContent' wx:for='{{pageData.act_image}}'>
-                <image src='{{item.url}}' mode='scaleToFill' />
+            <view class='threeImageContent' wx:for='{{pageData.act_image}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'>
+                <image src='{{item.url}}' mode='widthFix' />
             </view>
             <view class='empty'></view>
         </view>
@@ -120,11 +120,11 @@
             <!-- <text class='{{isOption?iconOpen:iconClose}}'></text> -->
         </view>
         <view class='otherOptionsChild' hidden='{{isOption}}'>
-            <view bindtap='switchModel' data-url='org/banner_list' style='background-image:url({{btnBgImage}})'>更换模版</view>
+            <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
             <!-- <view bindtap='upDataImg' data-type='banner'>更换大图</view> -->
-            <view bindtap='upDataImg' data-type='background' style='background-image:url({{btnBgImage}})'>更换背景</view>
-            <view bindtap='switchModel' data-url='org/music_list'  style='background-image:url({{btnBgImage}})'>背景音乐</view>
-            <view bindtap='toEditPage' data-id='{{pageData.id}}' style='background-image:url({{btnBgImage}})'>编辑</view>
+            <view bindtap='upDataImg' data-type='background'>更换背景</view>
+            <view bindtap='switchModel' data-url='org/music_list' >背景音乐</view>
+            <view bindtap='toEditPage' data-id='{{pageData.id}}'>编辑</view>
         </view>
     </view>
     <!-- 其他功能模板 -->
@@ -162,3 +162,15 @@
 </view>
 <view class='{{animationClass}}' animation='{{animationData}}' hidden='{{showMusic}}' bindtap='isStopMusic'><text class='iconfont icon-music fontStyleT'></text></view>
 <!-- <other-option bindgetImage='getImage' bindgetBackgroundImage='getBackgroundImage' bindgetMusic='getMusic' actid='{{pageData.id}}' acttag='{{actTag}}' banImage='{{pageData.banner_image_url}}' backImage='{{pageData.bg_image_url}}' bgMusicId='{{pageData.music_id}}' bgMusic='{{pageData.music}}'></other-option> -->
+<!-- 砍价成功弹窗 -->
+<view class='alertDiv' hidden='{{isAlert}}'>
+    <view class='alertContent'>
+        <view class='alertTitle'>恭喜你拼团成功!!!</view>
+        <view class='alertM'>成团价<text>{{pageData.pay_price}}</text>元</view>
+        <view class='alertText'>赶快去支付吧</view>
+        <view class='alertBtn'>
+            <view bindtap='alertBtn' data-id='0' data-acttag='{{pageData.act_tag}}'>取消</view>
+            <view bindtap='alertBtn' data-id='1' data-acttag='{{pageData.act_tag}}'>确定</view>
+        </view>
+    </view>
+</view>

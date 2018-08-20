@@ -44,7 +44,7 @@
         <view class='empty'></view>
         <view class='actRegInfoTextTitle'>活动详情</view>
         <view class='actRegInfoTextContent'><text>{{pageData.rule}}</text></view>
-        <view class='actRegInfoTextImage' wx:for='{{pageData.act_image}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='actRegInfoTextImage' wx:for='{{pageData.act_image}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
         <view class='empty'></view>
     </view>
     <view class='bottomOpt'>

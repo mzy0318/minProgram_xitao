@@ -45,6 +45,7 @@ Page({
         rangPage:1,
         actTag:'',
         isStopMusic:true,
+        widthV: 0,
     },
 
     /**
@@ -71,12 +72,9 @@ Page({
         } else if (options.scene == undefined) {
             that.setData({
                 actId: options.id,
+                actTag: wx.getStorageSync('actTag'),
             })
         }
-        // 获取活动actTag
-        that.setData({
-            actTag:options.actTag,
-        })
     },
 
     /**
@@ -198,11 +196,16 @@ Page({
      */
     onShareAppMessage: function (res) {
         let that = this;
-        if (res.from == 'menu'){
-            return {
-                path: 'pages/index/index?pageId=1&actId=' + that.data.actId
-            }
+        return {
+            path: 'pages/index/index?pageId=1&actId=' + that.data.actId
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     priceRankOne: function () {
         this.setData({
@@ -231,7 +234,6 @@ Page({
     },
     toPricePerson: function (e) {
         let that = this;
-        console.log('e.currentTarget.dataset.joinid', e.currentTarget.dataset.joinid)
         wx.navigateTo({
             url: '../killPricePerson/killPricePerson?actId=' + e.currentTarget.dataset.actid + '&joinId=' + e.currentTarget.dataset.joinid,
         })
@@ -401,52 +403,52 @@ Page({
     comfireSubmit: function (e) {
         let that = this;
         if (e.currentTarget.dataset.type == 'Banner'){
-            // 更换背景音乐
+            //更换banner图
             getApp().request({
-                url: 'org/edit_music',
+                url: 'org/edit_banner',
                 data: {
                     act_id: e.currentTarget.dataset.id,
-                    music_id: this.data.musicId,
+                    banner_image_url: that.data.bannerImage,
                     tag: that.data.actTag,
                 },
                 method: 'post',
                 success: function (res) {
-                    console.log('res',res)
-                    if(Number(res.data.code) == 1){
+                    if (Number(res.data.code) == 1) {
                         wx.showToast({
                             title: '更换成功',
                             icon: 'none',
                         })
-                        //更换banner图
+                        // 更换背景音乐
                         getApp().request({
-                            url: 'org/edit_banner',
+                            url: 'org/edit_music',
                             data: {
                                 act_id: e.currentTarget.dataset.id,
-                                banner_image_url: that.data.bannerImage,
+                                music_id: that.data.musicId,
                                 tag: that.data.actTag,
                             },
                             method: 'post',
                             success: function (res) {
+                                console.log('res', res)
                                 if (Number(res.data.code) == 1) {
                                     wx.showToast({
                                         title: '更换成功',
                                         icon: 'none',
                                     })
-                                    that.setData({
-                                        isCommon: true,
-                                        bottomOption: true,
-                                    })
                                 }
-
+                                that.setData({
+                                    isCommon: true,
+                                    bottomOption: true,
+                                })
                             }
+                        });
+                        that.setData({
+                            isCommon: true,
+                            bottomOption: true,
                         })
                     }
-                    that.setData({
-                        isCommon: true,
-                        bottomOption: true,
-                    })
+
                 }
-            });
+            })
         } else if (e.currentTarget.dataset.type == 'bgImage'){
             // 更换背景图
 
@@ -561,6 +563,7 @@ Page({
             method: 'post',
             success: res => {
                 if (Number(res.data.code) == 1) {
+                    let widthV = '';
                     wx.stopPullDownRefresh()
                     //背景音乐
                     innerAudioContext.src = res.data.data.music;
@@ -568,6 +571,20 @@ Page({
                     let nameInfo = []
                     for (let i = 0; i < res.data.data.join_info.length; i++) {
                         nameInfo.push(res.data.data.join_info[i].text)
+                    }
+                    res.data.data.cover.url = util.rect(res.data.data.cover.url,335,195);
+                    // 进度条
+                    if (res.data.data.current_price == res.data.data.original_price) {
+                        widthV = '0%'
+                    } else if ((res.data.data.original_price - res.data.data.current_price) == res.data.data.now_price) {
+                        widthV = '100%'
+                    } else {
+                        let value = (res.data.data.original_price - res.data.data.current_price) / (res.data.data.original_price - res.data.data.now_price) * 100;
+                        if (value >= 100) {
+                            widthV = '100%'
+                        } else {
+                            widthV = Math.floor(value) + '%'
+                        }
                     }
                     that.setData({
                         pageData: res.data.data,
@@ -580,6 +597,8 @@ Page({
                         musicId: res.data.data.music_id,  //背景音乐ID
                         activeImage: res.data.data.act_image,
                         nameInfo: nameInfo,
+                        actTag: res.data.data.act_tag,
+                        widthV: widthV                     
                     })
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,

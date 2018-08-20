@@ -36,6 +36,7 @@ Page({
                 data: sendData,
                 success: function (res) {
                     if (Number(res.data.code) == 1) {
+                        res.data.data.cover.url = utils.rect(res.data.data.cover.url,120,60)
                         that.setData({
                             pageData: res.data.data,
                             createTime: utils.formatTime(new Date(res.data.data.create_time * 1000)),
@@ -50,6 +51,7 @@ Page({
                 }
             })
         } else if (Number(options.isInfo) == 1){
+            JSON.parse(options.payInfo).cover.url = utils.rect(JSON.parse(options.payInfo).cover.url, 120, 60)
             that.setData({
                 pageData: JSON.parse(options.payInfo),
                 createTime: JSON.parse(options.payInfo).create_time

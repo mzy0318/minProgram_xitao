@@ -1,9 +1,7 @@
 .pricePersonWrap{
     width:750rpx;
     min-height:1207rpx;
-    background:#fff;
-    background-size:100% 100%;
-    background-repeat:repeat-y;
+    background-repeat:repeat;
     padding-bottom:20rpx;
 }
 .killPriceBanner{
@@ -17,7 +15,7 @@
 /*第一部分  */
 .pricePersonOne{
     width:670rpx;
-    min-height:562rpx;
+    min-height:10rpx;
     margin:20rpx auto 0rpx;
     border-radius:5px 5px 0px 0px;
 }
@@ -71,19 +69,21 @@
     border-radius:0px 0px 5px 5px;
 }
 .pricePersonOneShow{
-    width:670rpx;
+    width:600rpx;
     min-height:120rpx;
     position:relative;
+    margin:0rpx auto;
+    box-sizing:content-box;
 }
 .pricePersonOneShowChild{
-    width:200rpx;
-    line-height:60rpx;
+    width:170rpx;
+    line-height:55rpx;
     background:#CC2200;
     position:absolute;
-    left:30rpx;
+    left:0rpx;
     top:30rpx;
     border-radius:5px;
-    font-size:30rpx;
+    font-size:24rpx;
     text-align:center;
     color:#fff;
 }
@@ -98,15 +98,15 @@
     border-color: rgba(136, 183, 213, 0);
 }
 
-.pricePersonOneRange .rangeWrap{
+.pricePersonOneRange>.rangeWrap{
     width:600rpx;
     height:40rpx;
     background:#CACACA;
     margin:0rpx auto 0rpx;
     border-radius:30rpx;
+    overflow:hidden;
 }
-.pricePersonOneRange .rangeWrap .rangeChild{
-    width:100rpx;
+.pricePersonOneRange>.rangeWrap>.rangeChild{
     height:40rpx;
     background:#F4BD01;
     border-radius:30rpx;
@@ -234,7 +234,7 @@
 .pricePersonThree{
     width:670rpx;
     min-height:10rpx;
-    margin:0 auto;
+    margin:0rpx auto;
 }
 .pricePersonThreeText{
     width:100%;
@@ -268,29 +268,33 @@
 
 .pricePersonThreeImgImage{
     width:610rpx;
-    height:300rpx;
-    background:lightgreen;
+    min-height:30rpx;
+    background:#fff;
     margin:20rpx auto 0rpx;
-    overflow:hidden;
 }
 .pricePersonThreeImgImage>image{
     width:610rpx;
-    height:300rpx;
 }
-.pricePersonThreeImg button{
+.pricePersonThreeImgBtn{
+    width:610rpx;
+    height:60rpx;
+    margin-top:20rpx;
+    padding-bottom:20rpx;
+}
+.pricePersonThreeImgBtn>button{
     font-size:28rpx;
     line-height:60rpx;
     float:left;
     color:#fff;
     background:#CC2200;
-    margin:40rpx 0rpx 0rpx 90rpx;
+    margin:0rpx 0rpx 0rpx 90rpx;
 }
 /*第四部分  */
 .pricePersonFour{
     width:670rpx;
     min-height:500rpx;
     background:#fff;
-    margin:25rpx auto 0rpx;
+    margin:20rpx auto 0rpx;
 }
 .pricePersonFourContent{
     width:600rpx;
@@ -343,5 +347,76 @@
     float:right;
     margin-right:-80rpx;
     color:#CC2200;
+}
+/* 砍价成功弹窗 */
+.alertDiv{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.3);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.alertContent{
+    width:500rpx;
+    height:300rpx;
+    background:#fff;
+    border-radius:10px;
+}
+.alertTitle{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:32rpx;
+    text-align:center;
+    margin-top:20rpx;
+}
+.alertM{
+    width:500rpx;
+    height:60rpx;
+    text-align:center;
+    line-height:80rpx;
+    font-size:24rpx;
+}
+.alertM>text{
+    color:rgb(221,79,66);
+    font-size:34rpx;
+}
+.alertTitleText{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:32rpx;
+    text-align:center;
+}
+.alertText{
+    width:500rpx;
+    height:70rpx;
+    line-height:70rpx;
+    font-size:28rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
+.alertBtn{
+    width:500rpx;
+    height:60rpx;
+    display:flex;
+    justify-content: space-around;
+}
+.alertBtn>view{
+    width:150rpx;
+    height:60rpx;
+    font-size:30rpx;
+    line-height:60rpx;
+    text-align:center;
+}
+.alertBtn>view:nth-child(1){
+    color:#888888;
+}
+.alertBtn>view:nth-child(2){
+    color:#118408;
 }
 

@@ -85,7 +85,7 @@
 /* 活动详情 */
 .actRegInfoText{
     width:750rpx;
-    min-height:520rpx;
+    min-height:100rpx;
     background:#fff;
     margin:20rpx auto 0rpx;
 }
@@ -100,7 +100,7 @@
 }
 .actRegInfoTextContent{
     width:710rpx;
-    min-height:80rpx;
+    min-height:40rpx;
     margin:20rpx auto 0rpx;
     line-height:40rpx;
     font-size:28rpx;
@@ -108,14 +108,12 @@
 }
 .actRegInfoTextImage{
     width:710rpx;
-    height:400rpx;
     background:#fff;
-    margin:0rpx auto 0rpx;
+    margin:0rpx auto 10rpx;
     overflow:hidden;
 }
-.actRegInfoTextImage image{
+.actRegInfoTextImage>image{
     width:710rpx;
-    height:400rpx;
 }
 .bottomOpt{
     width:750rpx;

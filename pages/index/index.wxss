@@ -1,4 +1,7 @@
 @import '../../templates/indexModel/indexModel.wxss';
+page{
+    background:#f5f5f5;
+}
 .indexBanner {
     width: 750rpx;
     height: 350rpx;

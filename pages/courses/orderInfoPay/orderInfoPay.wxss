@@ -33,6 +33,9 @@
     float:left;
     font-size:30rpx;
     text-indent:20rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .infoNumberInfoRight{
     float:right;
@@ -94,6 +97,9 @@
     float:left;
     margin-left:20rpx;
     margin-top:30rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .infoPayList{
     width:750rpx;

@@ -36,8 +36,6 @@ Page({
             startTime: format.formatDate(new Date()),
             endDate: format.formatDate(new Date(currentDate)),
             endTime: format.formatDate(new Date(currentDate)),
-            // prizeDate: format.formatDate(new Date()),
-            // prizeTime: format.formatDate(new Date()),
             isEdit:options.isEdit,
         })
         if(that.data.isEdit == 0){
@@ -45,7 +43,7 @@ Page({
                 title: '发布新活动',
             })
             that.setData({
-                bannerImage: format.rect(options.image,160,75),
+                bannerImage:options.image,
             })
         } else if (that.data.isEdit == 1){
             wx.setNavigationBarTitle({
@@ -67,7 +65,7 @@ Page({
                         let actSet = that.data.actSet;
                         if (res.data.data.join_info.length>0){
                             for (let i = 0; i < res.data.data.join_info.length;i++){
-                                nameInfo.push(res.data.data.join_info[i].text)
+                                nameInfo.push({ name: res.data.data.join_info[i].text, id: res.data.data.join_info[i].require})
                                 nameInfoId.push(res.data.data.join_info[i].require)
                             }
                         }
@@ -77,7 +75,7 @@ Page({
                             }
                         }
                         that.setData({
-                            bannerImage: format.rect(res.data.data.banner_image_url, 160, 75),
+                            bannerImage: res.data.data.banner_image_url,
                             pageData:res.data.data,
                             ruleContent: res.data.data.rule,
                             orgContent: res.data.data.org_intro,
@@ -191,30 +189,43 @@ Page({
             nameInfo: nameInfo,
             nameInfoId: nameInfoId,
         })
+    
     },
     // 报名信息是否为必填
     isMustEdit: function (e) {
         let that = this;
+        let nameInfo = that.data.nameInfo;
         let nameInfoId = that.data.nameInfoId
         if (e.detail.value) {
+            nameInfo[e.target.dataset.index].id = 1
             nameInfoId[e.target.dataset.index] = 1
         } else {
+            nameInfo[e.target.dataset.index].id = 0
             nameInfoId[e.target.dataset.index] = 0
         }
         that.setData({
+            nameInfo: nameInfo,
             nameInfoId: nameInfoId
         })
+    
     },
     // 选中额外报名信息
     addNameOptions: function (e) {
         let that = this;
         let arr = that.data.nameInfo;
         let arrO = that.data.nameInfoId;
-
-        if (arr.includes(e.target.dataset.value)){
+        let isTrue = '';
+        for(let i = 0;i<arr.length;i++){
+            if (e.target.dataset.value == arr[i].name){
+                isTrue = true
+            }else{
+                isTrue = false
+            }
+        }
+        if (isTrue){
 
         }else{
-            arr.push(e.target.dataset.value);
+            arr.push({name:e.target.dataset.value,id:0});
             arrO.push(0);
             that.setData({
                 nameInfo: arr,
@@ -260,7 +271,7 @@ Page({
         sendData['banner_image_url'] = that.data.bannerImage;
         if (that.data.nameInfo.length > 0){
             for (let i = 0; i < that.data.nameInfo.length;i++){
-                sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i]
+                sendData['join_info_text[' + i + ']'] = that.data.nameInfo[i].name
                 sendData['join_info_require[' + i + ']'] = that.data.nameInfoId[i]
             }
         }

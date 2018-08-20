@@ -1,438 +1,1249 @@
 /* 瑜伽 课外快乐 驾考 */
+
 .indexBackground {
     width: 750rpx;
-    background:#F7A784;
-    padding-bottom:30rpx;
+    background: transparent;
+    padding-bottom: 30rpx;
 }
-.empty{
-    width:750rpx;
-    height:25rpx;
-}
-.indexOptons{
-    width:700rpx;
-    height:350rpx;
-    background:#fff;
-    border-radius:5px;
-    margin:0rpx auto 25rpx;
-}
-.indexOptonsChild{
-    width:175rpx;
-    height:175rpx;
-    float:left;
-}
-.indexOptionsTop{
-    width:100rpx;
-    height:100rpx;
-    margin:20rpx auto 0rpx;
-}
-.indexOptionsTop image{
-    width:100rpx;
-    height:100rpx;
-}
-.indexOptionsBottom{
-    width:100%;
-    line-height:40rpx;
-    font-size:30rpx;
-    text-align:center;
-    margin-top:10rpx;
-}
- /* 课程导航 */
-.indexCourses{
-    width:700rpx;
-    min-height:300rpx;
-    background:#fff;
-    border-radius:5px;
-    margin:0rpx auto;
-    padding-bottom:25rpx;
-}
-.indexCoursesTitle{
-    width:700rpx;
-    line-height:80rpx;
-    border-radius:5px 5px 0px 0px;
-    color:#F75B69;
-    font-size:40rpx;
-    text-align:center;
-}
-.indexCoursesContent{
-    width:695rpx;
-    min-height:220rpx;
-    margin-bottom:20rpx;
-    border-top:1rpx solid #efefef;
-    border-bottom:1rpx solid #efefef;
-}
-.leftImage{
-    width:280rpx;
-    height:180rpx;
-    float:left;
-    margin-top:20rpx;
-    margin-left:20rpx;
-    overflow: hidden;
-    background:#fff;
-}
-.leftImage image{
-    width:280rpx; 
-    height:180rpx;
-}
-.rightText{
-    width:360rpx;
-    height:180rpx;
-    float:left;
-    margin-top:20rpx;
-    margin-left:20rpx;
-    position:relative;
-}
-.rightTextTitle{
-    width:360rpx;
-    line-height:35rpx;
-    font-size:30rpx;
-    overflow: hidden;
-    white-space: nowrap; 
-    text-overflow:ellipsis;
-}
-.rightTextPrice{
-    width:360rpx;
-    height:40rpx;
-    font-size:26rpx;
-    position:absolute;
-    bottom:10rpx;
-    left:0rpx;
-}
-.rightTextPrice text:nth-child(1){
-    font-size:28rpx;
-    color:#F82335;
-}
-.rightTextPrice text:nth-child(2){
-    font-size:22rpx;
-    color:#7b7b7b;
-    text-decoration:line-through;
-}
-/* 幼儿园 */
-.twoWrap{
+
+.empty {
     width: 750rpx;
-    min-height:650rpx;
-    background:#f2f2f2;
-    padding-bottom:20rpx;
+    height: 25rpx;
 }
-.twoNav{
-    width:750rpx;
-    height:400rpx;
-    background:#fff;
-}
-.twoNavChild{
-    width:180rpx;
-    height:200rpx;
-    float:left;
-    margin-left:7.5rpx;
-}
-.twoNavChildTop{
-    width:100rpx;
-    height:100rpx;
-    margin-top:10rpx;
-    margin-left:40rpx;
-}
-.twoNavChildTop image{
-    width:100rpx;
-    height:100rpx;
-}
-.twoNavChildBottom{
-    width:180rpx;
-    height:50rpx;
-    font-size:30rpx;
-    text-align:center;
-    margin-top:10rpx;
-}
-.twoTitle{
-    width:100%;
-    height:100rpx;
-    line-height:100rpx;
-    text-align:center;
-    font-size:35rpx;
-    color:#E27131;
-    font-weight:bold;
-}
-.twoSwiper{
-    width:710rpx;
-    height:380rpx;
-    background:#fff;
-    margin:0rpx auto 0rpx;
-}
-.twoSwiper swiper{
-    background:red;
-    border-radius:10rpx;
-    background:#f2f2f2;
-    height:380rpx;
-}
-.swiperWrpa{
-    width:710rpx;
-    height:380rpx;
-    background:#fff;
-    border-radius:10rpx;
-}
-.swiperTop{
-    width:710rpx;
-    height:60rpx;
-    line-height:60rpx;
-    font-size:30rpx;
-    font-weight:bold;
-    text-align:center;
+
+.indexOptons {
+    width: 750rpx;
+    height: 330rpx;
+    background: #fff;
+    border-radius: 5px;
+    margin: 0rpx auto 25rpx;
     overflow: hidden;
-    white-space: nowrap; 
-    text-overflow:ellipsis;
 }
-.swiperBottom{
-    width:670rpx;
-    height:300rpx;
-    margin:0 auto;
+
+.indexOptonsChild {
+    width: 175rpx;
+    height: 165rpx;
+    float: left;
+    background: #fff;
+    margin-left: 10rpx;
 }
-.swiperBottom image{
-    width:670rpx;
-    height:300rpx;
+
+.indexOptionsTop {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 10rpx auto 0rpx;
 }
-.twoInfo{
-    width:710rpx;
-    min-height:500rpx;
-    background:#fff;
-    margin:0 auto;
-    border-radius:10px;
+
+.indexOptionsTop>image {
+    width: 100rpx;
+    height: 100rpx;
 }
-.twoInfoSwiper{
-    width:710rpx;
-    height:320rpx;
+
+.indexOptionsBottom {
+    width: 100%;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
 }
-.twoInfoImage{
-    width:670rpx;
-    height:280rpx;
-    margin:20rpx auto;
-    background:lightgreen;
+
+/* 课程导航 */
+
+.indexCourses {
+    width: 700rpx;
+    min-height: 30rpx;
+    background: #f5f5f5;
+    border-radius: 5px;
+    margin: 0rpx auto;
+    padding-bottom: 0rpx;
 }
-.twoInfoContent{
-    width:670rpx;
-    min-height:460rpx;
-    margin:0rpx auto 20rpx;
-    font-size:30rpx;
-    color:#7b7b7b;
+
+.indexCoursesTitle {
+    width: 700rpx;
+    line-height: 80rpx;
+    border-radius: 5px 5px 0px 0px;
+    color: #f75b69;
+    font-size: 40rpx;
+    text-align: center;
+    background: #fff;
 }
+
+.indexCoursesContent {
+    width: 700rpx;
+    min-height: 220rpx;
+    margin-bottom: 20rpx;
+    border-top: 1rpx solid #efefef;
+    border-bottom: 1rpx solid #efefef;
+    margin-top: 0rpx;
+    background: #fff;
+}
+
+.leftImage {
+    width: 280rpx;
+    height: 180rpx;
+    float: left;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    overflow: hidden;
+    background: #fff;
+}
+
+.leftImage image {
+    width: 280rpx;
+    height: 180rpx;
+}
+
+.rightText {
+    width: 360rpx;
+    height: 180rpx;
+    float: left;
+    margin-top: 20rpx;
+    margin-left: 20rpx;
+    position: relative;
+}
+
+.rightTextTitle {
+    width: 360rpx;
+    line-height: 35rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 40rpx;
+}
+
+.rightTextPrice {
+    width: 360rpx;
+    height: 40rpx;
+    font-size: 26rpx;
+    position: absolute;
+    bottom: 45rpx;
+    left: 0rpx;
+}
+
+.rightTextPrice text:nth-child(1) {
+    font-size: 28rpx;
+    color: #f82335;
+}
+
+.rightTextPrice text:nth-child(2) {
+    font-size: 22rpx;
+    color: #7b7b7b;
+    text-decoration: line-through;
+}
+
+/* 幼儿园 */
+
+.twoWrap {
+    width: 750rpx;
+    min-height: 650rpx;
+    background: #f2f2f2;
+    padding-bottom: 20rpx;
+}
+
+.twoNav {
+    width: 750rpx;
+    height: 360rpx;
+    background: #fff;
+}
+
+.twoNavChild {
+    width: 180rpx;
+    height: 180rpx;
+    float: left;
+    margin-left: 7.5rpx;
+}
+
+.twoNavChildTop {
+    width: 80rpx;
+    height: 80rpx;
+    margin-top: 20rpx;
+    margin-left: 50rpx;
+}
+
+.twoNavChildTop image {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.twoNavChildBottom {
+    width: 180rpx;
+    height: 50rpx;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
+    color: #7b7b7b;
+}
+
+.twoTitle {
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 35rpx;
+    color: #e27131;
+    font-weight: bold;
+}
+
+.twoSwiper {
+    width: 710rpx;
+    height: 380rpx;
+    background: #fff;
+    margin: 0rpx auto 0rpx;
+}
+
+.twoSwiper swiper {
+    background: red;
+    border-radius: 10rpx;
+    background: #f2f2f2;
+    height: 380rpx;
+}
+
+.swiperWrpa {
+    width: 710rpx;
+    height: 380rpx;
+    background: #fff;
+    border-radius: 10rpx;
+}
+
+.swiperTop {
+    width: 710rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.swiperBottom {
+    width: 670rpx;
+    height: 300rpx;
+    margin: 0 auto;
+}
+
+.swiperBottom image {
+    width: 670rpx;
+    height: 300rpx;
+}
+
+.twoInfo {
+    width: 710rpx;
+    min-height: 500rpx;
+    background: #fff;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.twoInfoSwiper {
+    width: 710rpx;
+    height: 320rpx;
+}
+
+.twoInfoImage {
+    width: 670rpx;
+    height: 280rpx;
+    margin: 20rpx auto;
+    background: lightgreen;
+}
+
+.twoInfoContent {
+    width: 670rpx;
+    min-height: 460rpx;
+    margin: 0rpx auto 20rpx;
+    font-size: 30rpx;
+    color: #7b7b7b;
+}
+
 /* 美术 */
-.threeWrap{
-    width:750rpx;
-    height:750rpx;
-    margin-top:20rpx;
-    padding-bottom:20rpx;
+
+.threeData {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0rpx;
+    left: 0rpx;
+    background: #f5f5f5;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
 }
-.threeChild{
-    width:250rpx;
-    height:250rpx;
-    float:left;
+
+.threeBanner {
+    width: 650rpx;
+    height: 300rpx;
+    margin: 0rpx auto;
 }
-.threeChildTop{
-    width:150rpx;
-    height:150rpx;
-    margin:20rpx auto 0rpx;
+
+.threeBanner>swiper {
+    width: 650rpx;
+    height: 300rpx;
+    overflow: hidden;
 }
-.threeChildTop image{
-    width:150rpx;
-    height:150rpx;
+
+.threeBanner>swiper>image {
+    width: 650rpx;
+    height: 300rpx;
 }
-.threeChildBottom{
-    width:100%;
-    height:60rpx;
-    font-size:30rpx;
-    text-align:center;
-    color:#fff;
-    margin-top:20rpx;
+
+.threeWrap {
+    width: 660rpx;
+    min-height: 750rpx;
+    margin: 0rpx auto;
 }
+
+.threeChild {
+    height: 210rpx;
+    float: left;
+    margin-left: 10rpx;
+    margin-top: 10rpx;
+}
+
+view.threeChild:nth-child(1), view.threeChild:nth-child(4),
+view.threeChild:nth-child(6) {
+    margin-left: 0rpx;
+}
+
+.threeChildTop {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 40rpx auto 0rpx;
+}
+
+.threeChildTop image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.threeChildBottom {
+    width: 100%;
+    height: 60rpx;
+    font-size: 30rpx;
+    text-align: center;
+    color: #fff;
+    margin-top: 20rpx;
+}
+
 /* 课外活动 */
 .fourWrap{
+    width: 750rpx;
+    min-height: 10rpx;
+    background: transparent;
+    position:relative;
+}
+.fourWrap::before{
+    content: "";
+    width:760rpx;
+    height:26rpx;
+    background:red;
+    position:absolute;
+    top:-26rpx;
+    left:-5rpx;
+    border-radius:90% 90% 0rpx 0rpx;
+    background:#fff;
+    z-index:0;
+}
+.fourEmpty{
     width:750rpx;
-    min-height:500rpx;
+    height:500rpx;
+    background:#fff;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
 }
-.fourLesson{
+.fourNav{
     width:750rpx;
-    min-height:330rpx;
-}
-.fourLessonContent{
-    width:320rpx;
-    min-height:330rpx;
-    border-radius:10rpx;
-    margin-left:30rpx;
-    margin-bottom:20rpx;
-    display:inline-block;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.3) ;
-}
-.fourLessonContentTop{
-    width:320rpx;
     height:280rpx;
-    overflow:hidden;
+    background:#fff;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    align-content:space-around;
 }
-.fourLessonContentTop image{
-    width:320rpx;
-    height:280rpx;
+.fourNav>view{
+    width:160rpx;
+    height:130rpx;
+    background:#fff;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    align-content:space-around;
 }
-.fourLessonContentBottom{
-    width:320rpx;
+.fourNav>view>view:nth-child(1){
+    width:80rpx;
+    height:80rpx;
+    border-radius:50%;
+}
+.fourNav>view>view:nth-child(1)>image{
+    width:80rpx;
+    height:80rpx;
+}
+.fourNav>view>view:nth-child(2){
+    width:160rpx;
     height:40rpx;
-    font-size:30rpx;
+    font-size:26rpx;
+    color:#2C2C2C;
     text-align:center;
-    overflow: hidden;
-    white-space: nowrap; 
-    text-overflow:ellipsis;
+}
+.fourTitle{
+    width:700rpx;
+    height:90rpx;
+    margin:20rpx auto 0rpx;
+    background:#fff;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.fourTitle>image{
+    width:630rpx;
+    height:77rpx;
 }
 /* 课外活动/快乐Two */
-.fiveWrap{
-    width:750rpx;
-    min-height:480rpx;
-    background:#FFF5F4;
-    margin:20rpx auto 0rpx;
-    padding-bottom:20rpx;
+
+.fiveWrap {
+    width: 750rpx;
+    min-height: 480rpx;
+    padding-bottom: 20rpx;
+    position:relative;
 }
-.fiveNav{
-    width:680rpx;
-    height:410rpx;
-    background:#efefef;
-    margin:0rpx auto;
-}
-.fiveNavChild{
-    width:160rpx;
-    height:200rpx;
-    background:transparent;
-    float:left;
-    margin-left:13.33rpx;
-}
-.fiveNavTop,.fiveNavTop image{
-    width:100rpx;
-    height:100rpx;
-    margin:0rpx auto;
-}
-.fiveNavbottom{
-    width:160rpx;
-    line-height:40rpx;
-    font-size:24rpx;
-    text-align:center;
-}
-view.fiveNavChild:nth-child(1),view.fiveNavChild:nth-child(5){
-    margin-left:0rpx;
-}
-view.fiveNavChild:nth-child(6),view.fiveNavChild:nth-child(5),view.fiveNavChild:nth-child(7),view.fiveNavChild:nth-child(8){
-    margin-top:10rpx;
-}
-.fiveLessonContent{
-    width:680rpx;
-    height:210rpx;
+.fiveWrap::before{
+    content:'';
+    width:770rpx;
+    height:55rpx;
     background:#fff;
-    margin:0rpx auto 30rpx;
+    border-radius:100% 100% 0rpx 0rpx;
+    position:absolute;
+    top:-30rpx;
+    left:-10rpx;
+    z-index:10;
 }
-.fiveLessonContentImage{
-    width:210rpx;
-    height:160rpx;
-    float:left;
-    margin-left:20rpx;
-    margin-top:25rpx;
-}
-.fiveLessonContentImage image{
-    width:210rpx;
-    height:160rpx;
-}
-.fiveLessonContentTitle{
-    width:300rpx;
-    height:160rpx;
-    margin-left:20rpx;
-    margin-top:25rpx;
-    float:left;
-}
-.fiveLessonContentIcon{
-    width:110rpx;
-    height:110rpx;
-    float:left;
-    margin-left:20rpx;
-    margin-top:70rpx;
-}
-.fiveLessonContentIcon image{
-    width:110rpx;
-    height:110rpx;
-}
-.lessonContentTitleText{
-    width:300rpx;
-    line-height:30rpx;
-    font-size:30rpx;
-    font-weight:bold;
-    text-indent:10rpx;
-    border-left:3px solid #F82335;
-    overflow: hidden;
-    white-space: nowrap; 
-    text-overflow:ellipsis;
-}
-.lessonContent{
-    width:300rpx;
-    font-size:26rpx;
-    color:#7b7b7b;
-    margin-top:10rpx;
+.fiveNav {
+    width: 750rpx;
+    height: 410rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: space-around;
+    padding-top: 20rpx;
 }
 
+.fiveNavChild {
+    width: 155rpx;
+    height: 175rpx;
+}
+
+.fiveNavTop {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 20rpx auto 0rpx;
+    position:relative;
+}
+
+.fiveNavTop>image{
+    width: 80rpx;
+    height: 80rpx;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
+}
+
+.fiveNavbottom {
+    width: 155rpx;
+    line-height: 40rpx;
+    font-size: 24rpx;
+    text-align: center;
+    color: #fff;
+    margin-top: 15rpx;
+}
+
+view.fiveNavChild:nth-child(1), view.fiveNavChild:nth-child(5) {
+    margin-left: 0rpx;
+}
+
+view.fiveNavChild:nth-child(6), view.fiveNavChild:nth-child(5),
+view.fiveNavChild:nth-child(7), view.fiveNavChild:nth-child(8) {
+    margin-top: 10rpx;
+}
+
+.fiveLessonContent {
+    width: 680rpx;
+    height: 210rpx;
+    background: #fff;
+    margin: 0rpx auto 30rpx;
+}
+
+.fiveLessonContentImage {
+    width: 210rpx;
+    height: 160rpx;
+    float: left;
+    margin-left: 20rpx;
+    margin-top: 25rpx;
+}
+
+.fiveLessonContentImage image {
+    width: 210rpx;
+    height: 160rpx;
+}
+
+.fiveLessonContentTitle {
+    width: 300rpx;
+    height: 160rpx;
+    margin-left: 20rpx;
+    margin-top: 25rpx;
+    float: left;
+}
+
+.fiveLessonContentIcon {
+    width: 110rpx;
+    height: 110rpx;
+    float: left;
+    margin-left: 20rpx;
+    margin-top: 70rpx;
+}
+
+.fiveLessonContentIcon image {
+    width: 110rpx;
+    height: 110rpx;
+}
+
+.lessonContentTitleText {
+    width: 300rpx;
+    line-height: 30rpx;
+    font-size: 30rpx;
+    font-weight: bold;
+    text-indent: 10rpx;
+    border-left: 3px solid #f82335;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fiveTitle {
+    width: 750rpx;
+    height: 90rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fiveTitle>image {
+    width: 372rpx;
+    height: 42rpx;
+}
+
+.lessonContent {
+    width: 300rpx;
+    font-size: 26rpx;
+    color: #7b7b7b;
+    margin-top: 10rpx;
+}
 
 /* 外语/色彩斑斓 */
-.sixWrap{
-    width:750rpx;
-    min-height:680rpx;
-    background:#F1F1F1;
-    margin:20rpx auto 0rpx;
-    padding-bottom:20rpx;
+
+.sixWrap {
+    width: 750rpx;
+    min-height: 680rpx;
+    background: #f1f1f1;
+    margin: 0rpx auto;
 }
-.sixTitle{
-    width:100%;
-    height:100rpx;
-    line-height:100rpx;
-    text-align:center;
-    font-size:35rpx;
-    color:#E27131;
-    font-weight:bold;
+
+.sixTitle {
+    width: 750rpx;
+    height: 65rpx;
+    line-height: 65rpx;
+    margin-top: 20rpx;
+    text-align: center;
+    background: #fff;
 }
-.sixNav{
-    width:750rpx;
-    height:580rpx;
+
+.sixTitle>image {
+    width: 372rpx;
+    height: 42rpx;
+    margin-top: 12rpx;
 }
-.sixNavChild{
-    width:340rpx;
-    height:130rpx;
-    border-radius:10px;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3);
-    float:left;
-    margin-left:25rpx;
-    margin-top:15rpx;
-    background:#fff;
+
+.sixNav {
+    width: 750rpx;
+    min-height: 10rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    padding-bottom: 20rpx;
 }
-.sixNavChildLeft{
-    width:200rpx;
-    height:90rpx;
-    line-height:90rpx;
-    float:left;
-    margin-top:20rpx;
-    margin-left:10rpx;
-    text-align:center;
-    font-size:30rpx;
-    color:#000;
+
+.sixNavChild {
+    width: 316rpx;
+    height: 90rpx;
+    background: -webkit-linear-gradient(right, #f1951b, #f67838, #fe5a56);
+    box-shadow: 0rpx 10rpx 100rpx -5rpx rgba(245, 127, 49, 0.4);
+    margin-top: 20rpx;
 }
-.sixNavChildRight{
-    width:110rpx;
-    height:110rpx;
-    float:right;
+
+.sixNavChildLeft {
+    width: 180rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    color: #fff;
+    float: left;
+    margin-left: 10rpx;
+    text-align: center;
+    font-size: 28rpx;
+}
+
+.sixNavChildRight {
+    width: 90rpx;
+    height: 90rpx;
+    float: right;
+    margin-top: 5rpx;
+    margin-right: 15rpx;
+}
+
+.sixNavChildRight image {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.sixLesson {
+    width: 750rpx;
+    min-height: 20rpx;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.sixLessonChild {
+    width: 346rpx;
+    height: 280rpx;
+    margin-top: 0rpx;
+    margin-bottom: 15rpx;
+    background: #fff;
+    margin-left: 20rpx;
+}
+
+.sixLessonTop {
+    width: 346rpx;
+    height: 160rpx;
+}
+
+.sixLessonTop>image {
+    width: 346rpx;
+    height: 160rpx;
+}
+
+.sixLessonMiddle {
+    width: 346rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #7b7b7b;
+    font-size: 28rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sixLessonBottom {
+    width: 346rpx;
+    height: 60rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sixLessonBottom>view {
+    width: 160rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+
+.sixLessonBottom>view:nth-child(1)>text:nth-child(1) {
+    font-size: 30rpx;
+    color: #c91905;
+}
+
+.sixLessonBottom>view:nth-child(1)>text:nth-child(2) {
+    font-size: 22rpx;
+    color: #7b7b7b;
+    text-decoration: line-through;
+}
+
+.sixLessonBottom>view:nth-child(2) {
+    text-align: right;
+    color: #7b7b7b;
+    margin-right: 10rpx;
+}
+
+/* 多彩/通用  第七个seven*/
+
+.sevenWrap, .eightWrap, .nineWrap, .tenWrap, .elevenWrap, .twelveWrap,.sixteenWrap {
+    width: 750rpx;
+    min-height: 10rpx;
+    background: transparent;
+}
+
+.sevenNav {
+    width: 750rpx;
+    height: 380rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.sevenNav>view {
+    width: 153rpx;
+    height: 170rpx;
+    background: lightgreen;
+}
+
+.sevenNav>view>view:nth-child(1) {
+    width: 153rpx;
+    height: 45rpx;
+    font-size: 24rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 50rpx;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.sevenNav>view>view:nth-child(2) {
+    width: 153rpx;
+    height: 125rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sevenNav>view>view:nth-child(2)>image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.sevenTitle {
+    width: 750rpx;
+    height: 80rpx;
+    margin: 20rpx auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.sevenTitle>image {
+    width: 711rpx;
+    height: 79rpx;
+}
+
+/* 第八个 */
+
+.eightNav {
+    width: 750rpx;
+    height: 470rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.eightNav>view {
+    width: 330rpx;
+    height: 90rpx;
+    background: linear-gradient(to right, #feafa8, #fbcec9, #f5edeb);
+    border-radius: 45rpx;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0rpx 20rpx 50rpx -10rpx #fbd0cb;
+}
+
+.eightNav>view>view:nth-child(1) {
+    width: 200rpx;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+    font-size: 30rpx;
+    color: #fff;
+}
+
+.eightNav>view>view:nth-child(2), .eightNav>view>view:nth-child(2)>image {
+    width: 75rpx;
+    height: 75rpx;
+}
+
+.eightTitle {
+    width: 750rpx;
+    height: 90rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.eightTitle>image {
+    height: 60rpx;
+    width: 412rpx;
+}
+
+/* 第九个模板 */
+
+.nineNav {
+    width: 750rpx;
+    height: 350rpx;
+    background: transparent;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.nineNav>view {
+    width: 155rpx;
+    height: 152rpx;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.nineNav>view>view:nth-child(1) {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.nineNav>view>view:nth-child(1)>image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.nineNav>view>view:nth-child(2) {
+    width: 155rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 26rpx;
+    color: #515151;
+}
+
+.nineTitle {
+    width: 750rpx;
+    height: 90rpx;
+    margin-bottom: 15rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nineTitle>image {
+    width: 711rpx;
+    height: 86rpx;
+}
+
+/* 第十个模板 */
+
+.tenNav {
+    width: 750rpx;
+    height: 380rpx;
+    background: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.tenNav>view {
+    width: 160rpx;
+    height: 160rpx;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.tenNav>view>view:nth-child(1) {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.tenNav>view>view:nth-child(1)>image {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.tenNav>view>view:nth-child(2) {
+    font-size: 26rpx;
+    color: #7b7b7b;
+    width: 160rpx;
+    line-height: 40rpx;
+    text-align: center;
+    margin-bottom: 10rpx;
     margin-top:10rpx;
-    margin-right:10rpx;
-}
-.sixNavChildRight image{
-    width:110rpx;
-    height:110rpx;
 }
 
-/* 多彩/通用 */
-.sevenWrap{
-    width:100%;
-    min-height:680rpx;
-    background:lightblue;    
+/* 第十一个模板 */
+.elevenWrap{
+    width: 750rpx;
+    min-height: 10rpx;
+    background: transparent;
+    position:relative;
+}
+.elevenWrap::before{
+    content:'';
+    width:770rpx;
+    height:60rpx;
+    background:#fff;
+    border-radius:100% 100% 0rpx 0rpx;
+    position:absolute;
+    top:-29rpx;
+    left:-10rpx;
+    z-index:10;
+}
+.elevenNav, .twelveNav {
+    width: 750rpx;
+    height: 320rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.elevenNav>view, .twelveNav>view {
+    width: 160rpx;
+    height: 140rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.elevenNav>view>view:nth-child(1), .twelveNav>view>view:nth-child(1) {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+.elevenNav>view>view:nth-child(1) {
+    overflow: hidden;
+    box-shadow: 0rpx 25rpx 55rpx -15rpx #eb69a3;
+    position:relative;
+}
+.elevenNav>view>view:nth-child(1)>image {
+    width: 96rpx;
+    height: 94rpx;
+    border-radius: 50%;
+    margin-left: -7rpx;
+    margin-top: -5rpx;
+    position:absolute;
+    z-index:1000;
+}
+.twelveNav>view>view:nth-child(1) {
+    box-shadow: 0rpx 15rpx 90rpx -15rpx #203bc1;
+}
+.twelveNav>view>view:nth-child(1)>image {
+    width: 95rpx;
+    height: 94rpx;
+    border-radius: 50%;
+    margin-left: -5rpx;
+    margin-top: -5rpx;
 }
 
 
-.empty1{
-    width:750rpx;
-    height:20rpx;
-    background:transparent;
+.elevenNav>view>view:nth-child(2), .twelveNav>view>view:nth-child(2) {
+    width: 160rpx;
+    line-height: 40rpx;
+    color: #7b7b7b;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
+}
+
+.elevenTitle, .twelveTitle {
+    width: 700rpx;
+    height: 70rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 15rpx auto 0rpx;
+}
+
+.elevenTitle>image, .twelveTitle>image {
+    width: 280rpx;
+    height: 66rpx;
+}
+
+.elevenContent, .twelveContent {
+    width: 700rpx;
+    min-height: 220rpx;
+    border-bottom: 1rpx solid #efefef;
+    margin: 0rpx auto 10rpx;
+    background: #fff;
+}
+
+/* 第十三个模板 */
+
+.thirteenNav {
+    width: 750rpx;
+    height: 320rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.thirteenNav>view {
+    width: 160rpx;
+    height: 140rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.thirteenNav>view>view:nth-child(1) {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    /* box-shadow: 0rpx 10rpx 20rpx -1rpx #FFD100; */
+    overflow: hidden;
+    position:relative;
+}
+
+.thirteenNav>view>view:nth-child(1)>image {
+    width: 92rpx;
+    height: 89rpx;
+    border-radius: 50%;
+    margin-left: -5rpx;
+    margin-top: 0rpx;
+    position:absolute;
+    z-index:1000;
+}
+
+.thirteenNav>view>view:nth-child(2) {
+    width: 160rpx;
+    line-height: 40rpx;
+    color: #7b7b7b;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
+}
+
+/* 第十四个模板 */
+.fourteenWrap{
+    width: 750rpx;
+    min-height: 10rpx;
+    background: transparent;
+    position:relative;
+}
+.fourteenWrap::before{
+    content:'';
+    width:770rpx;
+    height:60rpx;
+    background:#fff;
+    border-radius:100% 100% 0rpx 0rpx;
+    position:absolute;
+    top:-29rpx;
+    left:-10rpx;
+    z-index:10;
+}
+.fourteenNav{
+    width: 750rpx;
+    height: 320rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.fourteenNav>view {
+    width: 160rpx;
+    height: 140rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.fourteenNav>view>view:nth-child(1) {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    box-shadow: 0rpx 20rpx 60rpx -10rpx #fcc1d0;
+    position:relative;
+}
+
+.fourteenNav>view>view:nth-child(1)>image {
+    width: 80rpx;
+    height: 80rpx;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
+}
+
+.fourteenNav>view>view:nth-child(2) {
+    width: 160rpx;
+    line-height: 40rpx;
+    color: #7b7b7b;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
+}
+
+.fourteenTitle {
+    width: 700rpx;
+    height: 130rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 15rpx auto 0rpx;
+}
+
+.fourteenTitle>image {
+    width: 674rpx;
+    height: 130rpx;
+}
+
+/* 十五个模板 */
+.twelveWrap{
+    width: 750rpx;
+    min-height: 10rpx;
+    background: transparent;
+    position:relative;
+}
+.twelveWrap::before{
+    content:'';
+    width:770rpx;
+    height:60rpx;
+    background:#fff;
+    border-radius:100% 100% 0rpx 0rpx;
+    position:absolute;
+    top:-29rpx;
+    left:-10rpx;
+    z-index:10;
+}
+.fiveteenNav {
+    width: 750rpx;
+    height: 320rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.fiveteenNav>view {
+    width: 160rpx;
+    height: 140rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.fiveteenNav>view>view:nth-child(1) {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    box-shadow: 0rpx 20rpx 70rpx -10rpx #ef5965;
+    position:relative;
+}
+
+.fiveteenNav>view>view:nth-child(1)>image {
+    width: 80rpx;
+    height: 80rpx;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
+}
+
+.fiveteenNav>view>view:nth-child(2) {
+    width: 160rpx;
+    line-height: 40rpx;
+    color: #7b7b7b;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
+}
+
+/* 十六个模板 */
+
+.sixteenNav {
+    width: 750rpx;
+    height: 460rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.sixteenNavWrap {
+    width: 330rpx;
+    height: 85rpx;
+    background: #edc4a6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 1px 15px 5px rgba(237, 196, 166, 0.5),
+                0px 0px 0px 0px rgba(192, 192, 192, 0.3);
+}
+
+.sixteenNavWrapTop {
+    height: 85rpx;
+    line-height: 85rpx;
+    width: 160rpx;
+    background: linear-gradient(to right, #f0961b, #f48929, #f67937);
+    position: relative;
+    color: #fff;
+    text-align: right;
+    font-size: 26rpx;
+}
+
+.sixteenNavWrapTop:after {
+    content: "";
+    position: absolute;
+    width: 0rpx;
+    border-bottom: 42rpx solid transparent;
+    border-top: 42rpx solid transparent;
+    border-left: 50rpx solid #f67937;
+    right: -50rpx;
+    top: 0rpx;
+}
+
+.sixteenNavWrapBottom {
+    width: 70rpx;
+    height: 70rpx;
+    margin-right: 15rpx;
+}
+
+.sixteenNavWrapBottom>image {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.sixteenTitle {
+    width: 750rpx;
+    height: 60rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    margin-top: 20rpx;
+}
+
+.sixteenTitle>image {
+    width: 198rpx;
+    height: 50rpx;
 }

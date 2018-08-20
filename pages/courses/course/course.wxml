@@ -1,33 +1,30 @@
-<view class='courseWrap'>
-    <view class='empty'></view>
-    <swiper indicator-dots='true' indicator-active-color='#FFCE0B'>
-        <swiper-item wx:for='{{courseData.hot_lesson}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
-            <view class='courseTop'>
-                <view class='courseTopImg'>
-                    <image src='{{item.cover.url}}' mode='aspectFill' />
-                    <view class='courseTopSup'>热门课程</view>
-                </view>
-                <!-- <text class='courseTopTitle'>热门课程</text>
-                <text class='courseTopText'>小程序案例</text> -->
+<view class='empty'></view>
+<swiper indicator-dots='true' indicator-active-color='#FFCE0B'>
+    <swiper-item wx:for='{{courseData.hot_lesson}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{index}}'>
+        <view class='courseTop'>
+            <view class='courseTopImg'>
+                <image src='{{item.cover.url}}' mode='aspectFill' />
+                <view class='courseTopSup'>热门课程</view>
             </view>
-        </swiper-item>
-    </swiper>
-    <view class='courseSelect' bindtap='toCourseClass'>{{lessonClassName}}></view>
-    <view class='courseInfo' wx:for='{{lessonData}}' data-id='{{item.id}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}' data-id='{{item.id}}'>
-        <view class='courseInfoImg'>
-            <image src='{{item.cover.url}}' mode='aspectFit'></image>
+            <view class='courseBottom'><text>{{item.lesson_summary}}</text></view>
         </view>
-        <view class='courseInfoText'>
-            <text>{{item.name}}</text>
-            <text>{{item.title}}</text>
-            <text>1</text>
-        </view>
+    </swiper-item>
+</swiper>
+<view class='courseSelect' bindtap='toCourseClass'>{{lessonClassName}}></view>
+<view class='courseInfo' wx:for='{{lessonData}}' data-id='{{item.id}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}' data-id='{{item.id}}'>
+    <view class='courseInfoImg'>
+        <image src='{{item.cover.url}}' mode='aspectFit'></image>
+    </view>
+    <view class='courseInfoText'>
+        <text>{{item.name}}</text>
+        <text>{{item.title}}</text>
+        <view>￥{{item.now_price}}<text>￥{{item.original_price}}</text></view>
     </view>
 </view>
+<!-- 课程分类 -->
 <view class='courseClassWrap' hidden='{{isShow}}'>
     <view class='empty'></view>
     <view class='courseClassContent'>
-        <!-- <view>全部</view> -->
         <view wx:for='{{lessonClassData}}' style='color:{{classId==index?"#f00":"#000"}}' data-id='{{item.id}}' bindtap='toCourseNav' data-index='{{index}}' data-name='{{item.name}}'>{{item.name}}</view>
     </view>
     <view class='courseClassBtn'>

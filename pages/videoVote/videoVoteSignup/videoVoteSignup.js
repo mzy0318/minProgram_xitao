@@ -166,6 +166,13 @@ Page({
     // onShareAppMessage: function () {
 
     // },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
+    },
     // 报名
     addActive:function(e){
         let that = this;

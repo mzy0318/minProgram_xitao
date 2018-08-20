@@ -8,19 +8,30 @@ Page({
         lessonInfo: '',
         isShow: true,
         pageData:'',
+        actId:'',
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that = this
-        // this.setData({
-        //     lessonInfo: wx.getStorageSync('lessonInfo')
-        // })
+        let that = this;
+
+        if (options.scene != undefined) {
+            let scene = decodeURIComponent(options.scene);
+            let n = scene.indexOf('=');
+            that.setData({
+                actId: scene.slice(n + 1),
+            })
+        } else if (options.scene == undefined) {
+            that.setData({
+                actId: options.id,
+            })
+        }
+
         getApp().request({
             url: 'visitor_sale_lesson',
             data: {
-                id: options.id
+                id: that.data.actId,
             },
             method: 'post',
             success: function (res) {
@@ -76,6 +87,19 @@ Page({
     /**
      * 用户点击右上角分享
      */
+    onShareAppMessage: function () {
+        let that = this;
+        return {
+            path: 'pages/index/index?pageId=20&actId=' + that.data.actId
+        }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
+    },
     handleShow: function () {
         this.setData({
             isShow: false
@@ -122,14 +146,6 @@ Page({
     map: function (e) {
         console.log(e.currentTarget.dataset)
         app.map(e.currentTarget.dataset.latitude,e.currentTarget.dataset.longitude,e.currentTarget.dataset.name,e.currentTarget.dataset.address,)
-    },
-    onShareAppMessage: function (res) {
-        if (res.from === 'button') {
-        }
-        return {
-            title: '智慧招生小程序',
-            path: '/page/courseInfo/courseInfo'
-        }
     },
     toOrderInfo: function (e) {
         let that = this;

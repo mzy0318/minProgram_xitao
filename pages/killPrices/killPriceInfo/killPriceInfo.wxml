@@ -10,11 +10,11 @@
         </view>
         <!-- coverImage -->
         <view class='killPriceInfoImg'>
-            <image src='{{activeImage[0].url}}' mode='widthFix' />
+            <image src='{{pageData.cover.url}}' mode='widthFix' />
         </view>
         <view class='killPriceInfoRange'>
             <view class='rangeWrap'>
-                <view class='rangeChild' style='width:50%'></view>
+                <view class='rangeChild' ></view>
             </view>
             <view class='rangePrice'>
                 <view class='rangePriceLeft'>
@@ -48,13 +48,13 @@
             </view>
             <view class='infoTwoImg'>
                 <view class='infoTwoImgTitle'><text>{{pageData.org_intro}}</text></view>
-                <view class='infoTwoImgImage' wx:for='{{activeImage}}'>
+                <view class='infoTwoImgImage' wx:for='{{activeImage}}' bindtap='previewImages' data-url='{{item.url}}' wx:key='{{item.id}}'>
                     <image src='{{item.url}}' mode='widthFix' />
                 </view>
                 <button bindtap='toIndex'>了解机构></button>
             </view>
         </view>
-        <view class='empty'></view>
+        <!-- <view class='empty'></view> -->
         <view class='killPriceInfoTwoBottom'>
             <view></view>
             <view></view>
@@ -103,11 +103,11 @@
             <!-- <text class='{{isOption?iconOpen:iconClose}}'></text> -->
         </view>
         <view class='otherOptionsChild' hidden='{{isOption}}'>
-            <view bindtap='switchModel' data-url='org/banner_list' style='background-image:url({{btnBgImage}})'>更换模版</view>
+            <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
             <!-- <view bindtap='upDataImg' data-type='banner'>更换大图</view> -->
-            <view bindtap='upDataImg' data-type='background' style='background-image:url({{btnBgImage}})'>更换背景</view>
-            <view bindtap='switchModel' data-url='org/music_list' style='background-image:url({{btnBgImage}})'>背景音乐</view>
-            <view bindtap='toEditPage' data-id='{{pageData.id}}' style='background-image:url({{btnBgImage}})'>编辑</view>
+            <view bindtap='upDataImg' data-type='background'>更换背景</view>
+            <view bindtap='switchModel' data-url='org/music_list'>背景音乐</view>
+            <view bindtap='toEditPage' data-id='{{pageData.id}}'>编辑</view>
         </view>
     </view>
     <!-- 其他功能部分 -->

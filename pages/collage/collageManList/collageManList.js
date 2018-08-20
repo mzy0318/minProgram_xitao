@@ -103,6 +103,7 @@ Page({
     // 拼团详情页面
     toKillPirce: function(e) {
         let pageType = wx.getStorageSync('pageType')
+        wx.setStorageSync('actTag', e.currentTarget.dataset.acttag)
         wx.navigateTo({
             url: '../../collage/collageInfo/collageInfo?actId=' + e.currentTarget.dataset.id + '&actTag=' + e.currentTarget.dataset.acttag,
         })

@@ -83,8 +83,8 @@
         <view class='oneImage'>
             <view class='empty'></view>
             <view class='threeImageText'><text>{{pageData.description}}</text></view>
-            <view class='oneImageContent' wx:for='{{pageData.act_image}}'>
-                <image src='{{item.url}}' mode='scaleToFill' />
+            <view class='threeImageContent' wx:for='{{pageData.act_image}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'>
+                <image src='{{item.url}}' mode='widthFix' />
             </view>
             <view class='empty'></view>
         </view>
@@ -95,5 +95,17 @@
             <view class='oneTitleChild'><text>活动规则</text></view>
         </view>
         <view class='fourContent'><text>{{pageData.rule}}</text></view>
+    </view>
+</view>
+<!-- 砍价成功弹窗 -->
+<view class='alertDiv' hidden='{{isAlert}}'>
+    <view class='alertContent'>
+        <view class='alertTitle'>恭喜你拼团成功!!!</view>
+        <view class='alertM'>成团价<text>{{pageData.pay_price}}</text>元</view>
+        <view class='alertText'>赶快去支付吧</view>
+        <view class='alertBtn'>
+            <view bindtap='alertBtn' data-id='0' data-acttag='{{pageData.act_tag}}'>取消</view>
+            <view bindtap='alertBtn' data-id='1' data-acttag='{{pageData.act_tag}}'>确定</view>
+        </view>
     </view>
 </view>

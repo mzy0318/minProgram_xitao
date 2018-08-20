@@ -14,8 +14,6 @@
     background:#fff;
     padding-bottom:130rpx;
     padding-top:30rpx;
-    background-size:100% 100%;
-    background-repeat: no-repeact;
 }
 .laudActImage,.laudActInfo,.actInfoConnect,.actInfoRange,.actInfoIntruc{
     width:690rpx;
@@ -251,12 +249,16 @@
     margin:0rpx auto;
 }
 .rangeTitle view,.rangeContent view{
-    width:33.33%;
+    width:25%;
     height:80rpx;
     line-height:80rpx;
     float:left;
-    font-size:30rpx;
+    font-size:26rpx;
     text-align:center;
+    color:#7b7b7b;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .rangeContent{
     border-bottom:.5rpx solid #efefef;
@@ -302,7 +304,7 @@
 }
 .joinerContent{
     width:670rpx;
-    height:575rpx;
+    min-height:500rpx;
     background:#fff;
     border-radius:5px;
     position:absolute;
@@ -310,6 +312,7 @@
     top:50%;
     margin-left:-335rpx;
     margin-top:-345rpx;
+    padding-bottom:30rpx;
 }
 .joinerContent view{
     width:520rpx;

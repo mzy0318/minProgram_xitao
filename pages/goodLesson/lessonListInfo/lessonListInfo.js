@@ -33,7 +33,7 @@ Page({
         }
 
 
-
+        // 获取页面信息
         getApp().request({
             url: 'lesson_one_act',
             data: {
@@ -62,10 +62,10 @@ Page({
                     return one
                 })
 
-                res.data.data.act_image = utils.map(res.data.data.act_image, function(one) {
-                    one.url = utils.rect(one.url, 200, 200)
-                    return one
-                })
+                // res.data.data.act_image = utils.map(res.data.data.act_image, function(one) {
+                //     one.url = utils.rect(one.url, 200, 200)
+                //     return one
+                // })
 
                 that.setData({
                     pageData: res.data.data,
@@ -127,11 +127,16 @@ Page({
      */
     onShareAppMessage: function(res) {
         let that = this;
-        if (res.from == 'menu') {
-        }
         return {
             path: 'pages/index/index?pageId=4&actId=' + that.data.courseid,
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     tellPhone: e => {
         getApp().tellPhone(e)

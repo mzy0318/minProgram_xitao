@@ -124,17 +124,14 @@ page{
 }
 .listInfoDataActimg{
     width:100%;
-    min-height:450rpx;
+    min-height:10rpx;
 }
 .listInfoDataActimgChild{
     width:670rpx;
-    height:450rpx;
-    margin:0 auto;
-    overflow:hidden;
+    margin:0 auto 10rpx;
 }
 .listInfoDataActimgChild image{
     width:670rpx;
-    height:450rpx;
 }
 .listInfoBottom{
     width:100%;

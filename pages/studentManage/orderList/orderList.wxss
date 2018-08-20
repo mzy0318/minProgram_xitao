@@ -12,6 +12,9 @@ page{
     width:750rpx;
     height:80rpx;
     background:#fff;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .orderListTop>view{
     font-size:30rpx;

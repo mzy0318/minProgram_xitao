@@ -91,7 +91,7 @@
                 <view>
                     <text>在线支付:</text>
                     <switch color='#47BAFD' name='pay_status' />
-                    <text>若退款,请您线下给客户,默认:否</text>
+                    <text>若退款,请您线下给客户,默认:是</text>
                 </view>
                 <view>
                     <text>是否显示:</text>

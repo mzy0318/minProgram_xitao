@@ -147,6 +147,7 @@ swiper{
     height:410rpx;
     background:#fff;
     position:relative;
+    padding-bottom:15rpx;
 }
 .activeInfoInfoTitle{
     width:170rpx;
@@ -183,6 +184,16 @@ swiper{
 }
 .activeInfoInfoTime view:nth-child(2){
     text-align:center;
+    color:#7b7b7b;
+    font-size:26rpx;
+}
+.activeInfoInfoTime>view:nth-child(2)>text{
+    width:620rpx;
+    line-height:30rpx;
+    margin-left:60rpx;
+    margin-top:20rpx;
+    display:block;
+    text-align:left !important;
 }
 .empty{
     width:100%;
@@ -224,11 +235,12 @@ swiper{
     background:#fff;
     margin-top:20rpx;
     position:relative;
+    padding-bottom:15rpx;
 }
 .activeInfoImagesText{
     width:680rpx;
-    min-height:60rpx;
-    line-height:60rpx;
+    min-height:35rpx;
+    line-height:35rpx;
     font-size:28rpx;
     margin:0rpx auto;
 }

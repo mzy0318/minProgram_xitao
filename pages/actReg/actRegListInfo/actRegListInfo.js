@@ -46,6 +46,7 @@ Page({
      */
     onShow: function() {
         let that = this
+        // 获取数据
         getApp().request({
             url: 'normal_act',
             method: 'post',
@@ -72,9 +73,10 @@ Page({
                         statusClass: 'waitClass'
                     })
                 }
-                for (let i = 0; i < res.data.data.act_image.length; i++) {
-                    res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 355, 200)
-                }
+                // 处理图片
+                // for (let i = 0; i < res.data.data.act_image.length; i++) {
+                //     res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 355, 200)
+                // }
                 res.data.data.cover_image.url = utils.rect(res.data.data.cover_image.url,375,175)
                 that.setData({
                     pageData: res.data.data,
@@ -154,11 +156,17 @@ Page({
      */
     onShareAppMessage: function() {
         let that = this;
-        if(res.from == 'menu'){
-            return {
-                path: 'pages/index/index?pageId=10&actId=' + that.data.actId
-            }
+
+        return {
+            path: 'pages/index/index?pageId=10&actId=' + that.data.actId
         }
+    },
+    // 查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     makePhone: function(e) {
         getApp().tellPhone(e)

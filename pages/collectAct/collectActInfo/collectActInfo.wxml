@@ -7,7 +7,7 @@
         <view class='laudActImageTitle'><text>{{pageData.title}}</text></view>
         <view class='collectText'>
             <view hidden='{{isText}}'>亲,你还未参加活动!</view>
-            <view hidden='{{isText}}'>优惠数量有限,点击<text>'我要参加'</text>报名吧</view>
+            <view hidden='{{isText}}'>优惠数量有限,点击<text>'我要报名'</text>报名吧</view>
             <view hidden='{{!isText}}'>亲,你已经参加活动!</view>
             <view hidden='{{!isText}}'>点击<text>'我的主页'</text>,查看获得的水果</view>
             <view>活动真实有效,欢迎到店咨询</view>
@@ -44,7 +44,7 @@
             <view class='laudActInfoText'>
                 <text>{{item.text}}</text>
             </view>
-            <view class='laudActInfoImage' wx:for='{{item.images}}'>
+            <view class='laudActInfoImage' wx:for='{{item.images}}' wx:key='{{index}}' bindtap='previewImages' data-url='{{item}}'>
                 <image src='{{item}}' mode='widthFix'></image>
             </view>
         </view>
@@ -72,11 +72,11 @@
         <view class='laudActInfoTitle'>
             <view>机构介绍</view>
         </view>
-        <view class='laudActInfoWrap' wx:for='{{pageData.org_intro}}' wx:key='{{index}}'>
+        <view class='laudActInfoWrap' wx:for='{{pageData.org_intro}}' wx:key='{{index}}'  >
             <view class='laudActInfoText'>
                 <text>{{item.text}}</text>
             </view>
-            <view class='laudActInfoImage' wx:for='{{item.images}}'>
+            <view class='laudActInfoImage' wx:for='{{item.images}}' wx:key='{{index}}'  bindtap='previewImages' data-url='{{item}}'>
                 <image src='{{item}}' mode='widthFix'></image>
             </view>
         </view>
@@ -94,11 +94,13 @@
             <view>排名</view>
             <view>姓名</view>
             <view>糖果数量</view>
+            <view>兑换优惠</view>
         </view>
         <view class='rangeContent' wx:for='{{rangeData}}' wx:key='{{index}}' data-userid='{{item.id}}'>
             <view>{{index+1}}</view>
             <view>{{item.nickname}}</view>
             <view>{{item.zan_amount}}</view>
+            <view>{{item.exchange_prize == ''?'未兑换':item.exchange_prize}}</view>
         </view>
     </view>
 </view>

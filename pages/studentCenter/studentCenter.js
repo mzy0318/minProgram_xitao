@@ -124,6 +124,8 @@ Page({
                 funcOpt[i].show = 'none'
             } else if (funcOpt[i].tag == "video_card") {
                 funcOpt[i].show = 'none'
+            } else if (funcOpt[i].tag == "sugar"){
+                funcOpt[i].show = 'none'
             }
         }
         that.setData({
@@ -143,20 +145,43 @@ Page({
         that.setData({
             versionData: version.version + versionText,
         });
+        //获取用户信息
+        wx.getUserInfo({
+            success: res => {
+                // 可以将 res 发送给后台解码出 unionId
+                getApp().globalData.userInfo = res.userInfo;
+                let sendData = {};
+                sendData['nickname'] = res.userInfo.nickName
+                sendData['avatar_url'] = res.userInfo.avatarUrl
+                sendData['province'] = res.userInfo.province
+                sendData['city'] = res.userInfo.city
+                sendData['country'] = res.userInfo.country
+                sendData['language'] = res.userInfo.language
+                sendData['gender'] = res.userInfo.gender
+                getApp().request({
+                    url: 'set_user_info',
+                    data: sendData,
+                    method: 'post',
+                    success: function (res) {
+                        that.setData({
+                            isUserInfo: true,
+                        })
+                    }
+                })
+                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                // 所以此处加入 callback 以防止这种情况
+                if (getApp().userInfoReadyCallback) {
+                    getApp().userInfoReadyCallback(res)
+                }
+            }
+        })
         // 是否获取用户信息
         if (getApp().globalData.userInfo){
             that.setData({
                 userInfo: getApp().globalData.userInfo,
                 isUserInfo: true,
             })
-        }else{
-            // that.setData({
-            //     userInfo: {
-            //         nickName: '访客',
-            //         avatarUrl: 'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png',
-            //     },
-            //     isUserInfo: true,
-            // })       
+        }else{   
         }
     },
 
@@ -232,6 +257,8 @@ Page({
     // 获取用户信息
     getUserInfo:function(e){
         let that = this;
+        console.log('e',e)
+        console.log('e.detail.userInfo', e.detail.userInfo)
         if (e.detail.userInfo == undefined){
             that.setData({
                 userInfo: {

@@ -18,6 +18,9 @@ Page({
         rangPage:1,
         peopleDataList:'',
         isPay:true,
+        isAlert:true,
+        widthV:0,
+        widthP:0,
     },
 
     /**
@@ -41,7 +44,6 @@ Page({
                 joinId: options.joinId,
             })
         }
-        
         this.setData({
             joinInfo: options,
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
@@ -134,7 +136,16 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return {
+            path: 'pages/index/index?pageId=21&actId=' + that.data.actId + '&joinId=' + that.data.joinId
+        }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     // 支付页面
     toPayPage:function(e){
@@ -143,6 +154,29 @@ Page({
             url: '../../courses/orderInfo/orderInfo?joinId=' + that.data.joinId + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + that.data.actId,
         })
        
+    },
+    // 砍价成功后的弹窗
+    alertBtn:function(e){
+        let that = this;
+        if (e.currentTarget.dataset.id == 0){
+            that.setData({
+                isAlert:true,
+            })
+        } else if (e.currentTarget.dataset.id == 1){
+            wx.navigateTo({
+                url: '../../courses/orderInfo/orderInfo?joinId=' + that.data.joinId + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + that.data.actId,
+            })
+            that.setData({
+                isAlert: true,
+            })
+        }
+    },
+    // 查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     tellPhone: function (e) {
         getApp().tellPhone(e)
@@ -225,6 +259,7 @@ Page({
             },
             method: 'post',
             success: res => {
+                let widthV = '',widthP = '';
                 wx.stopPullDownRefresh()
                 //能否可能支付
 
@@ -232,17 +267,37 @@ Page({
                     if (res.data.data.could_pay){
                         that.setData({
                             isPay: false,
+                            isAlert: false,
                         })
                     }else{
                         that.setData({
                             isPay: true,
+                            isAlert: true,
                         })
+                    }
+                }
+                // 进度条
+                if (res.data.data.current_price == res.data.data.original_price){
+                    widthV = '0%'
+                    widthP = '0%'
+                } else if ((res.data.data.original_price - res.data.data.current_price) == res.data.data.now_price){
+                    widthV = '100%'
+                    widthP = '72%'
+                }else{
+                    let value = (res.data.data.original_price - res.data.data.current_price) / (res.data.data.original_price - res.data.data.now_price) * 100;
+                    if(value >= 100){
+                        widthV = '100%'
+                        widthP = '72%'
+                    }else{
+                        widthV = Math.floor(value) + '%'
+                        widthP = Math.floor(Math.floor(value) * 0.72) + '%'
                     }
                 }
                 that.setData({
                     pageData: res.data.data,
-                    backgroundImage: res.data.data.act_image[0].url,
                     endTime: util.formatTime(new Date(res.data.data.end_time * 1000)),
+                    widthV: widthV,
+                    widthP: widthP,
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.title,

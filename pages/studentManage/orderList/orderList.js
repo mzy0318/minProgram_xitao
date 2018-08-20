@@ -34,7 +34,8 @@ Page({
                         showTitle: true
                     })
                     for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
+                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
+                        res.data.data[i].cover.url = utils.rect(res.data.data[i].cover.url,120,60)
                     }
                     that.setData({
                         pageData: res.data.data

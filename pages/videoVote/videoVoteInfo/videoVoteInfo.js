@@ -43,10 +43,6 @@ Page({
     onLoad: function(options) {
         let that = this;
         let url = 'pages/videoVote/videoVoteInfo/videoVoteInfo';
-        let scene = 'actId=' + options.actId;
-        that.setData({
-            enCodeImage: getApp().getEncodeImage(url, scene),
-        })
 
 
         if (options.scene != undefined) {
@@ -60,6 +56,11 @@ Page({
                 actId: options.actId,
             })
         }
+
+        let scene = 'actId=' + that.data.actId;
+        that.setData({
+            enCodeImage: getApp().getEncodeImage(url, scene),
+        })
     },
 
     /**
@@ -76,6 +77,10 @@ Page({
         let that = this;
         that.setData({
             contentIndex: 0,
+            isActive: false,
+            isTop: true,
+            isRank: true,
+            isJoin: true,
         })
         that.getPageData()
     },
@@ -147,8 +152,15 @@ Page({
     onShareAppMessage: function() {
         let that = this;
         return {
-            path: 'page/index/index?pageId=14&actId=' + that.data.actId,
+            path: 'pages/index/index?pageId=14&actId=' + that.data.actId,
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     showContent: function(e) {
         let that = this;

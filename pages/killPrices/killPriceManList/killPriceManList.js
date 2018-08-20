@@ -109,6 +109,7 @@ Page({
     // 砍价详情页
     toKillPirce:function(e){
         let that = this;
+        wx.setStorageSync('actTag', e.currentTarget.dataset.acttag)
         wx.navigateTo({
             url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id + '&actTag=' + e.currentTarget.dataset.acttag,
         })

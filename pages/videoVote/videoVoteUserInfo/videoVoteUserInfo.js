@@ -21,10 +21,7 @@ Page({
         let that = this;
         let url = 'pages/videoVote/videoVoteUserInfo/videoVoteUserInfo';
         let scene = 'joinId=' + options.joinId
-        that.setData({
-            encodeImage: getApp().getEncodeImage(url, scene),
-            myCoverImage: 'https://www.zhihuizhaosheng.com/' + getApp().getExtConfig().version + '/ideo_vote_my_cover?id=' + options.joinId
-        })
+        console.log('options', options)
 
         if (options.scene != undefined) {
             let scene = decodeURIComponent(options.scene);
@@ -37,6 +34,11 @@ Page({
                 joinId: options.joinId,
             })
         }
+
+        that.setData({
+            encodeImage: getApp().getEncodeImage(url, scene),
+            myCoverImage: 'https://www.zhihuizhaosheng.com/' + getApp().getExtConfig().version + '/video_vote_my_cover?id=' + options.joinId
+        })
     },
 
     /**
@@ -129,6 +131,13 @@ Page({
                 urls: [that.data.myCoverImage],
             })
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     toIndex:function(){
         getApp().toIndex({})

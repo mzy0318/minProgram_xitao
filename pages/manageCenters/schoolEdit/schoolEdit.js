@@ -330,7 +330,7 @@ Page({
 
         // res.detail.value['environment'] = that.data.envImageId;
         // res.detail.value['honor'] = that.data.honorImageId;
-        res.detail.value['brand'] = that.data.schoolVideoId
+        res.detail.value['brand'] = that.data.schoolVideoId ? that.data.schoolVideoId : ''
 
         for (let i = 0; i < that.data.honorImageId.length; i++) {
             res.detail.value['honor[' + i + ']'] = that.data.honorImageId[i];

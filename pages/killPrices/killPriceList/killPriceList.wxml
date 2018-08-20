@@ -17,14 +17,13 @@
     <view class='collagePersonListTop'>
         <view class='childView'>真实姓名:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
         <view class='childView'>手机号码:<text decode >&nbsp;&nbsp;{{personInfo.phone}}</text></view>
-        <view class='childView'>学校名称:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
-        <view class='childView'>招生顾问:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <!-- <view class='childView'>学校名称:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
+        <view class='childView'>招生顾问:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view> -->
     </view>
     <view class='collagePersonListMiddle'>
         <view class='childView'>当前状态:<text decode >&nbsp;&nbsp;{{personInfo.can_join}}</text></view>
         <view class='childView'>成团身份:<text decode >&nbsp;&nbsp;{{personInfo.is_leader}}</text></view>
         <view class='childView'>满足人数:<text decode >&nbsp;&nbsp;{{personInfo.target_person}}</text></view>
-        <view class='childView'>成团价格:<text decode >&nbsp;&nbsp;{{personInfo.nickname}}</text></view>
         <view class='childView'>参团时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
         <view class='childView'>过期时间:<text decode >&nbsp;&nbsp;{{personInfo.create_time}}</text></view>
     </view>

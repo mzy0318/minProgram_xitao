@@ -47,7 +47,7 @@
             <view class='personInfoText'>
                 <view><text style='color:#FC76A3'>{{pageData.joiner.nickname}}</text> {{pageData.joiner.phone}}</view>
                 <view>已抢到<text style='color:#FC76A3'> {{pageData.joiner.zan_amount}} </text>个糖果,当前排名<text style='color:#FC76A3'> {{pageData.joiner.rank}} </text>位</view>
-                <view>分享小程序,让朋友帮你集糖果</view>
+                <view>分享小程序,让朋友帮你集糖果 <button open-type='share' hidden='{{isShare}}'>分享</button></view>
             </view>
         </view>
         <view class='collectActText'>
@@ -75,6 +75,7 @@
         <view class='rewardInfoWrap' wx:for='{{pageData.act_set}}' wx:key='{{index}}'>
             <view>收集<text>{{item.amount}}</text>个糖果,获得</view>
             <view>{{item.prize}}</view>
+            <view class='joinAct' bindtap='showAlertDiv' data-num='{{item.amount}}' data-id='1'>兑换奖励</view>
         </view>
     </view>
     <view class='viewMiddle'>
@@ -90,7 +91,7 @@
             <view class='laudActInfoText'>
                 <text>{{item.text}}</text>
             </view>
-            <view class='laudActInfoImage' wx:for='{{item.images}}'>
+            <view class='laudActInfoImage' wx:for='{{item.images}}' wx:key='{{index}}'  bindtap='previewImages' data-url='{{item}}'>
                 <image src='{{item}}' mode='widthFix'></image>
             </view>
         </view>
@@ -122,7 +123,7 @@
             <view class='laudActInfoText'>
                 <text>{{item.text}}</text>
             </view>
-            <view class='laudActInfoImage' wx:for='{{item.images}}'>
+            <view class='laudActInfoImage' wx:for='{{item.images}}' wx:key='{{index}}'  bindtap='previewImages' data-url='{{item}}'>
                 <image src='{{item}}' mode='widthFix'></image>
             </view>
         </view>
@@ -140,20 +141,22 @@
             <view>排名</view>
             <view>姓名</view>
             <view>糖果数量</view>
+            <view>兑换优惠</view>
         </view>
         <view class='rangeContent' wx:for='{{rangeData}}' wx:key='{{index}}'>
             <view>{{index+1}}</view>
             <view>{{item.nickname}}</view>
             <view>{{item.zan_amount}}</view>
+            <view>{{item.exchange_prize == ''?'未兑换':item.exchange_prize}}</view>
         </view>
     </view>
 </view>
 <!-- 活动倒计时 -->
 <view class='countDown'>活动倒计时: {{countDown.day}}天 {{countDown.hour}}时 {{countDown.minute}}分 {{countDown.socend}}秒</view>
 <!-- 兑换奖励 -->
-<view class='joinAct' bindtap='showAlertDiv' data-id='1'>兑换奖励</view>
+<!-- <view class='joinAct' bindtap='showAlertDiv' data-id='1'>兑换奖励</view> -->
 <!-- 兑换糖果 -->
-<view class='exchangeWrap' hidden='{{isExchange}}'>
+<!-- <view class='exchangeWrap' hidden='{{isExchange}}'>
     <view class='exchangeContent'>
         <form bindsubmit='exchangeReward'>
             <view>兑换奖励</view>
@@ -161,5 +164,15 @@
             <button form-type='submit'>兑换</button>
             <view class='closeDiv' bindtap='showAlertDiv' data-id='0'>×</view>
         </form>
+    </view>
+</view> -->
+<!-- 收集到的糖果 -->
+<view class='getSugarWrap' hidden='{{isSugars}}'>
+    <view class='getSugarContent'>
+        <view class='getSugarTitle'>你帮你的好友收集到<text> {{sugarNum}} </text>个糖果</view>
+        <view class='getSugars'>
+            <view wx:for='{{pageData.sugar_array}}' wx:key='{{index}}'><image src='{{item}}' mode='scaleToFill'></image></view>
+        </view>
+        <view class='getSugarBtn' bindtap='closeSugars'>确认</view>
     </view>
 </view>

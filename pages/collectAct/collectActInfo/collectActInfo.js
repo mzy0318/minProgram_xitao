@@ -40,10 +40,6 @@ Page({
                 actId: options.actId,
             })
         }
-        // 请求页面数据
-        that.getPapeData();
-        //获取活动排行榜
-        that.getRange()
     },
 
     /**
@@ -57,7 +53,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        let that = this;
+        // 请求页面数据
+        that.getPapeData();
+        //获取活动排行榜
+        that.getRange()
     },
 
     /**
@@ -125,8 +125,15 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    // onShareAppMessage: function() {
 
+    // },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     // 显示/关闭报名页面
     showJoiner: function(e) {
@@ -139,7 +146,7 @@ Page({
                 })
             }else{
                 wx.navigateTo({
-                    url: '../collectActUserInfo/collectActUserInfo?userId=' + that.data.userId + '&actId=' + that.data.actId,
+                    url: '../collectActUserInfo/collectActUserInfo?userId=' + that.data.userId + '&actId=' + that.data.actId +'&isShare=0',
                 })
             }
         } else if (e.currentTarget.dataset.id == 0) {
@@ -155,35 +162,38 @@ Page({
         let countDown = that.data.countDown;
         let timer;
         let countDownValue = '';
-        if (endTime > new Date().valueOf()) {
+        let index = '';
+        if (endTime - new Date().valueOf() > 0) {
+
             timer = setInterval(function() {
-                countDownValue = new Date(endTime - new Date().valueOf());
-                if (endTime - new Date().valueOf() <= 86400000) {
-                    countDown.day = 0
-                } else {
-                    countDown.day = countDownValue.getDate()
+
+                countDownValue = endTime - new Date().valueOf()
+                //日
+                countDown.day = Math.floor(countDownValue / (24 * 60 * 60 *1000));
+                //时
+                countDown.hour = Math.floor(countDownValue / (1 * 60 * 60 * 1000)) - countDown.day * 24;
+                //分
+                countDown.minute = Math.floor(countDownValue / (60 * 1000)) - (countDown.day * 24 * 60) - (countDown.hour*60);
+                //秒
+                countDown.socend = Math.floor(countDownValue / 1000) - (countDown.day * 24 * 60 * 60) - (countDown.hour * 60 * 60) - (countDown.minute * 60);
+                if (countDown.day <= 0) countDown.day = 0;
+                if (countDown.hour <= 0) countDown.hour = 0;
+                if (countDown.minute <= 0) countDown.minute = 0;
+                if (countDown.socend <= 0) countDown.socend = 0;
+
+                if (countDownValue <= 0){
+                    clearInterval(timer)
                 }
-                if (endTime - new Date().valueOf() <= 3600000) {
-                    countDown.hour = 0
-                } else {
-                    countDown.hour = countDownValue.getHours()
-                }
-                if (endTime - new Date().valueOf() <= 60000) {
-                    countDown.minute = 0
-                } else {
-                    countDown.minute = countDownValue.getMinutes()
-                }
-                if (endTime - new Date().valueOf() <= 1000) {
-                    countDown.socend = 0
-                } else {
-                    countDown.socend = countDownValue.getSeconds()
-                }
+
                 that.setData({
                     countDown: countDown,
-                    timer: timer,
                 })
             }, 1000)
 
+            that.setData({
+                timer:timer,
+                countDown: countDown,
+            })
         } else {
             that.setData({
                 countDown: countDown,
@@ -239,7 +249,7 @@ Page({
     toUserInfo: function(e) {
         let that = this;
         wx.navigateTo({
-            url: '../collectActUserInfo/collectActUserInfo?userId=' + e.currentTarget.dataset.userid + '&actId=' + that.data.actId,
+            url: '../collectActUserInfo/collectActUserInfo?userId=' + e.currentTarget.dataset.userid + '&actId=' + that.data.actId +'&isShare=0',
         })
     },
     //获取活动排行榜

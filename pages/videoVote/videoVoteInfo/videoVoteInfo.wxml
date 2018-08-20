@@ -41,6 +41,10 @@
             <view>投票时间:</view>
             <view>{{pageData.vote_start_time}} 至 {{pageData.vote_end_time}}</view>
         </view>
+        <view class='activeInfoInfoTime'>
+            <view>活动介绍</view>
+            <view><text>{{pageData.description}}</text></view>
+        </view>
         <button bindtap='toIndex'>了解机构 ></button>
     </view>
     <!-- 活动分享 -->
@@ -53,20 +57,20 @@
     <view class='activeInfoImages' hidden='{{isTitleOne}}'>
         <view class='activeInfoInfoTitle'>{{pageData.title1}}</view>
         <view class='emptyImage'></view>
-        <view class='activeInfoImage' wx:for='{{pageData.act_image1}}'><image src='{{item.url}}' mode='widthFix'></image></view>
-        <view class='activeInfoImagesText'>{{pageData.content1}}</view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image1}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'><text>{{pageData.content1}}</text></view>
     </view>
     <view class='activeInfoImages' hidden='{{isTitleTwo}}'>
         <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
         <view class='emptyImage'></view>
-        <view class='activeInfoImage' wx:for='{{pageData.act_image2}}'><image src='{{item.url}}' mode='widthFix'></image></view>
-        <view class='activeInfoImagesText'>{{pageData.content2}}</view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image2}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'><text>{{pageData.content2}}</text></view>
     </view>
     <view class='activeInfoImages' hidden='{{isTitleThree}}'>
-        <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+        <view class='activeInfoInfoTitle'>{{pageData.title3}}</view>
         <view class='emptyImage'></view>
-        <view class='activeInfoImage' wx:for='{{pageData.act_image3}}'><image src='{{item.url}}' mode='widthFix'></image></view>
-        <view class='activeInfoImagesText'>{{pageData.content3}}</view>
+        <view class='activeInfoImage' wx:for='{{pageData.act_image3}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+        <view class='activeInfoImagesText'><text>{{pageData.content3}}</text></view>
     </view>
 </view>
 <!-- 前十名 -->
@@ -136,6 +140,10 @@
             <view>投票时间:</view>
             <view>{{pageData.vote_start_time}} 至 {{pageData.vote_end_time}}</view>
         </view>
+        <view class='activeInfoInfoTime'>
+            <view>活动介绍:</view>
+            <view><text>{{pageData.description}}</text></view>
+        </view>
         <button bindtap='toIndex'>了解机构 ></button>
         </view>
         <!-- 活动分享 -->
@@ -148,20 +156,20 @@
         <view class='activeInfoImages' hidden='{{isTitleOne}}'>
             <view class='activeInfoInfoTitle'>{{pageData.title1}}</view>
             <view class='emptyImage'></view>
-            <view class='activeInfoImage' wx:for='{{pageData.act_image1}}'><image src='{{item.url}}' mode='widthFix'></image></view>
-            <view class='activeInfoImagesText'>{{pageData.content1}}</view>
+            <view class='activeInfoImage' wx:for='{{pageData.act_image1}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+            <view class='activeInfoImagesText'><text>{{pageData.content1}}</text></view>
         </view>
         <view class='activeInfoImages' hidden='{{isTitleTwo}}'>
             <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
             <view class='emptyImage'></view>
-            <view class='activeInfoImage' wx:for='{{pageData.act_image2}}'><image src='{{item.url}}' mode='widthFix'></image></view>
-            <view class='activeInfoImagesText'>{{pageData.content2}}</view>
+            <view class='activeInfoImage' wx:for='{{pageData.act_image2}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+            <view class='activeInfoImagesText'><text>{{pageData.content2}}</text></view>
         </view>
         <view class='activeInfoImages' hidden='{{isTitleThree}}'>
-            <view class='activeInfoInfoTitle'>{{pageData.title2}}</view>
+            <view class='activeInfoInfoTitle'>{{pageData.title3}}</view>
             <view class='emptyImage'></view>
-            <view class='activeInfoImage' wx:for='{{pageData.act_image3}}'><image src='{{item.url}}' mode='widthFix'></image></view>
-            <view class='activeInfoImagesText'>{{pageData.content3}}</view>
+            <view class='activeInfoImage' wx:for='{{pageData.act_image3}}' wx:key='{{item.id}}' bindtap='previewImages' data-url='{{item.url}}'><image src='{{item.url}}' mode='widthFix'></image></view>
+            <view class='activeInfoImagesText'><text>{{pageData.content3}}</text></view>
         </view>
     </view>
 </view>

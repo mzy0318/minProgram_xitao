@@ -3,7 +3,7 @@
     <view class='editTitle'>主题模板</view>
     <view class='editTitleImage'>
         <view>
-            <image src='{{bannerImage}}'></image>
+            <image src='{{bannerImage + "?x-oss-process=image/resize,m_fill,w_160,h_75,limit_0/auto-orient,1/quality,q_100"}}'></image>
         </view>
         <view>发布后可重新选择模板和音乐</view>
     </view>
@@ -84,9 +84,9 @@
             <view class='jianForm' data-index='{{index}}' bindtap='jianForm'>
                 <view class='jianFormChild' data-index='{{index}}'></view>
             </view>
-            <text>{{item}}</text>
+            <text>{{item.name}}</text>
             <view class='isEdit'>
-                <switch bindchange='isMustEdit' data-index='{{index}}' />必填</view>
+                <switch bindchange='isMustEdit' data-index='{{index}}' checked='{{item.id == 1?true:false}}' />必填</view>
         </view>
         <view class='joinInfoAdd' bindtap='addForm' data-is='0'>+新增报名项</view>
     </view>

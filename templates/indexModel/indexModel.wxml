@@ -1,10 +1,9 @@
 <!-- 瑜伽  课外快乐  驾考 -->
 <template name='one'>
-    <view class='indexBackground' style='min-height:{{contentHeight}}+"px";'>
-        <view class='empty'></view>
+    <view class='indexBackground'>
         <!-- 导航 -->
         <view class='indexOptons'>
-            <view class='indexOptonsChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
+            <view class='indexOptonsChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
                 <view class='indexOptionsTop'>
                     <image src='{{item.icon}}' mode='scaleToFill'></image>
                 </view>
@@ -14,9 +13,9 @@
         <!-- 课程推荐 -->
         <view class='indexCourses'>
             <view class='indexCoursesTitle'>课程推荐</view>
-            <view class='indexCoursesContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
+            <view class='indexCoursesContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
                 <view class='leftImage'>
-                    <image src='{{item.cover.url}}' mode='aspectFill'></image>
+                    <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
                 </view>
                 <view class='rightText'>
                     <view class='rightTextTitle'>{{item.title}}</view>
@@ -31,10 +30,9 @@
 </template>
 <!-- 幼儿园 -->
 <template name='two'>
-    <view class='twoWrap' style='min-height:{{contentHeight}}+"px";'>
-        <view class='empty'></view>
+    <view class='twoWrap'>
         <view class='twoNav' >
-            <view class='twoNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
+            <view class='twoNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
                 <view class='twoNavChildTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
                 <view class='twoNavChildBottom'>{{item.name}}</view>
             </view>
@@ -50,92 +48,324 @@
                 </swiper-item>
             </swiper>
         </view>
-        <!-- <view class='twoTitle'>学校环境</view>
-        <view class='twoInfo'>
-            <view class='twoInfoSwiper'>
-                <swiper>
-                    <swiper-item>
-                        <view class='twoInfoImage'><image mode='scaleToFill'></image></view>
-                    </swiper-item>
-                </swiper>
-            </view>
-            <view class='twoInfoContent'>
-                伟大的渺小
-            </view>
-        </view> -->
     </view>
 </template>
 <!-- 美术 -->
 <template name='three'>
-    <view class='threeWrap' style='min-height:{{contentHeight}}+"px";'>
-        <view class='threeChild' wx:for='{{home}}' style='background:{{item.backgroundColor}};width:{{item.width}}' data-url='{{item.url}}' bindtap='nav'>
-            <view class='threeChildTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
-            <view class='threeChildBottom'>{{item.name}}</view>
+    <view class='threeData' style='background-image:url("https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/ballet.png");'>
+        <view class='threeBanner'>
+            <swiper indicator-dots circular autoplay>
+                <swiper-item wx:for='{{banner}}' wx:key='{{index}}'>
+                    <image src='{{item.url +"?x-oss-process=image/resize,m_fill,w_325,h_150,limit_0/auto-orient,1/quality,q_100"}}' mode='widthFix'></image>
+                </swiper-item>
+            </swiper>
+        </view>
+        <view class='threeWrap'>
+            <view class='threeChild' wx:for='{{home}}' style='background:{{item.backgroundColor}};width:{{item.width}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view class='threeChildTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view class='threeChildBottom'>{{item.name}}</view>
+            </view>
         </view>
     </view>
 </template>
-<!-- 课外活动/初高中 -->
+<!-- 第四个模板 -->
 <template name='four'>
-    <view class='fourWrap' style='min-height:{{contentHeight}}+"px";'>
-        <view class='empty'></view>
-        <view class='twoNav'>
-            <view class='twoNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
-                <view class='twoNavChildTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
-                <view class='twoNavChildBottom'>{{item.name}}</view>
+    <view class='fourWrap'>
+        <view class='fourNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
             </view>
         </view>
-        <view class='twoTitle'>热门课程</view>
-        <view class='fourLesson'>
-             <view class='fourLessonContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
-                <view class='fourLessonContentTop'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
-                <view class='fourLessonContentBottom'>{{item.title}}</view>
-             </view>
+        <view class='fourTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/taiquandao_title.png' mode='aspectFit'></image></view>
+        <view class='elevenContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
+                </view>
+            </view>
         </view>
+        <!-- <view class='fourEmpty'></view> -->
     </view>
 </template>
 <!-- 课外活动/初高中 -->
 <template name='five'>
-    <view class='fiveWrap' style='min-height:{{contentHeight}}+"px";'>
-        <view class='empty'></view>
+    <view class='fiveWrap'>
         <view class='fiveNav' >
-            <view class='fiveNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
+            <view class='fiveNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}' style='background:{{item.fiveBgColor}};box-shadow:0rpx 15rpx 50rpx -5rpx {{item.fiveBgColor}}'>
                 <view class='fiveNavTop'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
                 <view class='fiveNavbottom'>{{item.name}}</view>
             </view>
         </view>
-        <view class='twoTitle'>课程推荐</view>
-        <view class='fiveLessonContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
-            <view class='fiveLessonContentImage'><image src='{{item.cover.url}}' mode='aspectFill'></image></view>
-            <view class='fiveLessonContentTitle'>
-                <view class='lessonContentTitleText'>{{item.title}}</view>
-                <view class='lessonContent'></view>
+        <view class='fiveTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/fiveTitle.png' mode='aspectFit'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
             </view>
-            <view class='fiveLessonContentIcon'></view>
         </view>
     </view>
 </template>
 <!-- 外语/色彩斑斓 -->
 <template name='six'>
-    <view class='sixWrap' style='min-height:{{contentHeight}}+"px";'>
-        <view class='empty1'></view>
+    <view class='sixWrap'>
         <view class='sixNav'>
-            <view class='sixNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav'>
+            <view class='sixNavChild' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
                 <view class='sixNavChildLeft'>{{item.name}}</view>
                 <view class='sixNavChildRight'><image src='{{item.icon}}' mode='scaleToFill'></image></view>
             </view>
         </view>
-        <view class='sixTitle'>课程推荐</view>
-        <view class='fourLesson'>
-             <view class='fourLessonContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}'>
-                <view class='fourLessonContentTop'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>
-                <view class='fourLessonContentBottom'>{{item.title}}</view>
-             </view>
+        <view class='sixTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/sixTitle.png' mode='aspectFit'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
+            </view>
         </view>
     </view>
 </template>
 <!-- 多彩/通用 -->
 <template name='seven'>
-    <view class='sevenWrap' style='min-height:{{contentHeight}}+"px";'>
-        <view class='sevenNav'></view>
+    <view class='sevenWrap'>
+        <view class='sevenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' style='background:{{item.sevenBgColor}}'>
+                <view>{{item.name}}</view>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+            </view>
+        </view>
+        <view class='sevenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/sevenTitle.png' mode='aspectFit'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
+            </view>
+        </view>
     </view>
 </template>
+<!-- 第八个模板 -->
+<template name='eight'>
+    <view class='eightWrap'>
+        <view class='eightNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view>{{item.name}}</view>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+            </view>
+        </view>
+        <view class='eightTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/eightTitle.png' mode='aspectFit'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第九个模板 -->
+<template name='nine'>
+    <view class='nineWrap'>
+        <view class='nineNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='nineTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/nineTitle.png' mode='aspectFit'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第十个模板 -->
+<template name='ten'>
+    <view class='tenWrap'>
+        <view class='tenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}' style='background-image:url("https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/tooth_shadow.png");background-size:100% 100%;background-repeat:no-repeat;'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='nineTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/tenTitle.png' mode='aspectFit'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第十一个模板 -->
+<template name='eleven'>
+    <view class='elevenWrap'>
+        <view class='elevenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='elevenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/elevenTitle.png' mode='aspectFit'></image></view>
+        <view class='elevenContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第十二个模板 -->
+<template name='twelve'>
+    <view class='twelveWrap'>
+        <view class='twelveNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='twelveTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/twelveTitle.png' mode='aspectFit'></image></view>
+        <view class='twelveContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第十三个模板 -->
+<template name='thirteen'>
+    <view class='twelveWrap'>
+        <view class='thirteenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='twelveTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/thirteenTitle.png' mode='aspectFit'></image></view>
+        <view class='twelveContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第十四个模板 -->
+<template name='fourteen'>
+    <view class='fourteenWrap'>
+        <view class='fourteenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='fourteenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/fourteenTitle.png' mode='aspectFit'></image></view>
+        <view class='twelveContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 第十五个模板 -->
+<template name='fiveteen'>
+    <view class='twelveWrap'>
+        <view class='fiveteenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+            <!-- <view class='fiveteenEmpty'></view> -->
+        </view>
+        <view class='fourteenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/fiveteenTitle.png' mode='aspectFit'></image></view>
+        <view class='twelveContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 十六 -->
+<template name='sixteen'>
+    <view class='sixteenWrap'>
+        <view class='sixteenNav'>
+            <view class='sixteenNavWrap' wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view class='sixteenNavWrapTop'>{{item.name}}</view>
+                <view class='sixteenNavWrapBottom'><image image src='{{item.icon}}' mode='scaleToFill'></image></view>
+            </view>
+        </view>
+        <view class='sixteenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/sixteenTitle.png'></image></view>
+        <view class='sixLesson'>
+            <view class='sixLessonChild' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+                <view class='sixLessonTop'><image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_183,h_80,limit_0/auto-orient,1/quality,q_100" }}' mode='scaleToFill'></image></view>
+                <view class='sixLessonMiddle'>{{item.title}}</view>
+                <view class='sixLessonBottom'>
+                    <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
+                    <view>... </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+

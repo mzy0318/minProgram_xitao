@@ -14,8 +14,6 @@
     background:#fff;
     padding-bottom:130rpx;
     padding-top:30rpx;
-    background-size:100% 100%;
-    background-repeat: no-repeact;
 }
 .laudActImage,.laudActInfo,.actInfoConnect,.actInfoRange,.actInfoIntruc{
     width:690rpx;
@@ -57,7 +55,7 @@
 }
 .laudActImagesContent>view>image{
     width:128rpx;
-    height:140rpx;
+    height:128rpx;
 }
 .laudActImagesContent>view>text{
     display:block;
@@ -82,13 +80,14 @@
     height:130rpx;
 }
 .personInfoText{
-    width:410rpx;
+    width:490rpx;
     height:130rpx;
     float:left;
     margin-left:20rpx;
     margin-top:20rpx;
 }
 .personInfoText>view{
+    width:480rpx;
     font-size:26rpx;
     line-height:45rpx;
     overflow: hidden;
@@ -97,6 +96,17 @@
 }
 .personInfoText>view:nth-child(1)>text{
     font-size:35rpx;
+}
+.personInfoText>view:nth-child(3){
+    background:#fff;
+}
+.personInfoText>view:nth-child(3)>button{
+    width:115rpx;
+    height:40rpx;
+    font-size:26rpx;
+    line-height:40rpx;
+    float:right;
+    margin-top:2.5rpx;
 }
 /* 优惠 */
 .collectActText{
@@ -197,7 +207,7 @@
     margin:20rpx auto 0rpx;
     border:1rpx solid #efefef;
     border-radius:6px;
-    padding:5rpx 0rpx;
+    padding:5rpx 15rpx;
 }
 .rewardInfoWrap>view{
     width:620rpx;
@@ -258,12 +268,16 @@
     margin:0rpx auto;
 }
 .rangeTitle view,.rangeContent view{
-    width:33.33%;
+    width:25%;
     height:80rpx;
     line-height:80rpx;
     float:left;
-    font-size:30rpx;
+    font-size:26rpx;
     text-align:center;
+    color:#7b7b7b;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .rangeContent{
     border-bottom:.5rpx solid #efefef;
@@ -290,18 +304,16 @@
 }
 /* 我要报名 */
 .joinAct{
-    width:250rpx;
-    line-height:60rpx;
+    width:250rpx !important;
+    height:60rpx !important;
+    line-height:60rpx !important;
     background:#FF77A5;
     color:#fff;
     border:3px solid #FBCBA9;
     text-align:center;
     font-size:30rpx;
     border-radius:10px;
-    position:fixed;
-    bottom:50rpx;
-    left:50%;
-    margin-left:-125rpx;
+    margin:10rpx auto;
 }
 /* 报名页面 */
 .joinerWrap{
@@ -430,4 +442,60 @@
     background:#efefef;
     right:-25rpx !important;
     top:-25rpx !important;
+}
+/* 收集到的糖果 */
+.getSugarWrap{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0rpx;
+    top:0rpx;
+    background:rgba(0,0,0,0.3);
+}
+.getSugarContent{
+    width:500rpx;
+    min-height:300rpx;
+    background:#fff;
+    border-radius:10px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-250rpx;
+    margin-top:-260rpx;
+    transition:all 2s linear;
+}
+.getSugarTitle{
+    width:500rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:32rpx;
+    text-align:center;
+    margin-top:30rpx;
+}
+.getSugarTitle>text{
+    font-size:38rpx;
+    color:#FF77A5;
+}
+.getSugars{
+    width:420rpx;
+    min-height:60rpx;
+    margin:20rpx auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-content:center;
+}
+.getSugars>view>image{
+    width:60rpx;
+    height:60rpx;
+}
+.getSugarBtn{
+    width:300rpx;
+    height:60rpx;
+    line-height:60rpx;
+    font-size:28rpx;
+    margin:30rpx auto 20rpx;
+    border-radius:10px;
+    text-align:center;
+    border:4px solid #FF77A5;
 }

@@ -17,8 +17,8 @@
         "pages/manageCenters/schoolEdit/schoolEdit",
         "pages/courses/orderInfo/orderInfo",
         "pages/courses/course/course",
-        "pages/courses/courseInfo/courseInfo",
         "pages/courses/courseUserList/courseUserList",
+        "pages/courses/courseInfo/courseInfo",
         "pages/courses/courseUserListInfo/courseUserListInfo",
         "pages/courses/stuCourseList/stuCourseList",
         "pages/courses/orderInfoPay/orderInfoPay",
@@ -92,11 +92,11 @@
         "pages/videoClass/videoClassEdit/videoClassEdit",
         "pages/videoClass/videoClassStuList/videoClassStuList",
         "pages/collectAct/collectActUserList/collectActUserList",
+        "pages/collectAct/collectActUserInfo/collectActUserInfo",
         "pages/collectAct/collectActStuList/collectActStuList",
         "pages/collectAct/collectActInfo/collectActInfo",
         "pages/collectAct/collectActEdit/collectActEdit",
         "pages/collectAct/collectActManList/collectActManList",
-        "pages/collectAct/collectActUserInfo/collectActUserInfo",
         "pages/collectAct/collectActJoinerList/collectActJoinerList"
     ],
     "window": {

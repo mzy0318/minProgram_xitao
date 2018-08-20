@@ -41,10 +41,10 @@ page{
     margin-top:10rpx;
 }
 .stuCenterTopRight>button{
-    width:180rpx;
+    width:160rpx;
     height:55rpx;
     line-height:55rpx;
-    font-size:26rpx;
+    font-size:24rpx;
     color:#7b7b7b;
     padding:0rpx 0rpx;
     box-sizing: content-box;

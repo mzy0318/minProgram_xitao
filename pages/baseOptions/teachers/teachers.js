@@ -1,4 +1,4 @@
-// pages/teachers/teachers.js
+let utils = require('../../../utils/util.js')
 Page({
 
     /**
@@ -18,6 +18,11 @@ Page({
             data: {},
             success: res => {
                 if(res.data.code == 1){
+                    if(res.data.data.length > 0){
+                        for (let i = 0; i < res.data.data.length;i++){
+                            res.data.data[i].avatar_url.url = utils.square(res.data.data[i].avatar_url.url,100)
+                        }
+                    }
                     this.setData({
                         teacherData: res.data.data,
                         bgColor: res.data.data[0].bg_color

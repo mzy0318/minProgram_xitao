@@ -104,10 +104,11 @@ view.widthInput{
     height:410rpx;
     background:#fff;
     position:relative;
+    padding-bottom:15rpx;
 }
 .activeInfoInfoTitle{
     width:170rpx;
-    height:60rpx;
+    min-height:60rpx;
     background:#0577AB;
     color:#fff;
     border-radius:0px 0px 5px 5px;
@@ -132,14 +133,24 @@ view.widthInput{
     height:100rpx;
     margin:0rpx auto 30rpx;
 }
-.activeInfoInfoTime view{
+.activeInfoInfoTime>view{
     width:680rpx;
     height:50rpx;
     line-height:80rpx;
     font-size:30rpx;
 }
-.activeInfoInfoTime view:nth-child(2){
+.activeInfoInfoTime>view:nth-child(2){
     text-align:center;
+    color:#7b7b7b;
+    font-size:26rpx;
+}
+.activeInfoInfoTime>view:nth-child(2)>text{
+    width:620rpx;
+    line-height:30rpx;
+    margin-left:60rpx;
+    margin-top:20rpx;
+    display:block;
+    text-align:left !important;
 }
 .empty{
     width:100%;
@@ -181,11 +192,12 @@ view.widthInput{
     background:#fff;
     margin-top:20rpx;
     position:relative;
+    padding-bottom:15rpx;
 }
 .activeInfoImagesText{
     width:680rpx;
-    min-height:50rpx;
-    line-height:50rpx;
+    min-height:35rpx;
+    line-height:35rpx;
     font-size:28rpx;
     margin:0rpx auto;
 }

@@ -47,6 +47,7 @@ Page({
         isStopMusic: true,
         isPay:true,
         rangePage:1,
+        isAlert: true,
     },
 
     /**
@@ -54,10 +55,6 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        // 获取活动actTag
-        that.setData({
-            actTag: options.actTag
-        })
         if (wx.getStorageSync('loginCode') == 1) {
             this.setData({
                 actionOptions: false
@@ -67,7 +64,7 @@ Page({
                 data: {},
                 method: 'post',
                 success: res => {
-                    this.setData({
+                    that.setData({
                         musicClass: res.data.data,
                         musicData: res.data.data[0].list
                     })
@@ -81,19 +78,21 @@ Page({
 
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
-            let n = scene.indexOf('=');
+            let sceneArr = scene.split(':')
             that.setData({
-                actId: scene.slice(n + 1),
+                actId: sceneArr[1],
+                actTag: sceneArr[3],
             })
         } else if (options.scene == undefined){
             that.setData({
                 actId: options.actId,
+                actTag: options.actTag,
             })
         }
         
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = encodeURI('actid=' + options.actId);
+        let mzy = 'actid:' + options.actId + ':actTag:' + options.actTag;
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })
@@ -167,11 +166,16 @@ Page({
      */
     onShareAppMessage: function () {
         let that = this;
-        if(res.from == 'menu'){
-            return {
-                path: 'pages/index/index?actId=' + that.data.actId + '&pageId=2'
-            }
+        return {
+            path: 'pages/index/index?actId=' + that.data.actId + '&pageId=2'
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     // 去支付
     toPayPage:function(e){
@@ -179,6 +183,24 @@ Page({
         wx.navigateTo({
             url: '../../courses/orderInfo/orderInfo?joinId=' + e.currentTarget.dataset.joinid + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + e.currentTarget.dataset.actid,
         })
+        innerAudioContext.stop()
+    },
+    // 砍价成功后的弹窗
+    alertBtn: function (e) {
+        let that = this;
+        if (e.currentTarget.dataset.id == 0) {
+            that.setData({
+                isAlert: true,
+            })
+        } else if (e.currentTarget.dataset.id == 1) {
+            wx.navigateTo({
+                url: '../../courses/orderInfo/orderInfo?joinId=' + that.data.joinId + '&actTag=' + e.currentTarget.dataset.acttag + '&actId=' + that.data.actId,
+            })
+            innerAudioContext.stop()
+            that.setData({
+                isAlert: true,
+            })
+        }
     },
     toSignUp: function () {
         wx.navigateTo({
@@ -281,45 +303,45 @@ Page({
     comfireSubmit: function (e) {
         let that = this;
         if (e.currentTarget.dataset.type == 'Banner') {
-            // 更换背景音乐
+            //更换模板
             getApp().request({
-                url: 'org/edit_music',
+                url: 'org/edit_banner',
                 data: {
                     act_id: e.currentTarget.dataset.id,
-                    music_id: that.data.musicId,
+                    banner_image_url: that.data.bannerImage,
                     tag: that.data.actTag,
                 },
                 method: 'post',
                 success: function (res) {
                     if (Number(res.data.code) == 1) {
+                        wx.showToast({
+                            title: '更换成功',
+                            icon: 'none',
+                        })
+                        // 更换背景音乐
                         getApp().request({
-                            url: 'org/edit_banner',
+                            url: 'org/edit_music',
                             data: {
                                 act_id: e.currentTarget.dataset.id,
-                                banner_image_url: that.data.bannerImage,
+                                music_id: that.data.musicId,
                                 tag: that.data.actTag,
                             },
                             method: 'post',
                             success: function (res) {
                                 if (Number(res.data.code) == 1) {
-                                    wx.showToast({
-                                        title: '更换成功',
-                                        icon: 'none',
-                                    })
-                                    that.setData({
-                                        isCommon: true,
-                                        bottomOption: true,
-                                    })
-                                } else if (Number(res.data.code) == 0) {
-                                    console.log(res.data.msg)
                                 }
-
                             }
+                        });
+                        that.setData({
+                            isCommon: true,
+                            bottomOption: true,
                         })
+                    } else if (Number(res.data.code) == 0) {
+                        console.log(res.data.msg)
                     }
+
                 }
-            });
-            //更换banner图
+            })
         } else if (e.currentTarget.dataset.type == 'bgImage') {
             // 更换背景图
             let imagePath = that.data.backgroundImage
@@ -339,7 +361,6 @@ Page({
                         that.setData({
                             coverImageID: r.data.imageId,
                         });
-                        console.log('r.data.res', r.data.res)
                         getApp().request({
                             url: 'org/edit_background',
                             data: {
@@ -581,19 +602,22 @@ Page({
                         if (res.data.data.could_pay) {
                             that.setData({
                                 isPay: false,
+                                isAlert: false,
                             })
                         } else {
                             that.setData({
                                 isPay: true,
+                                isAlert: true,
                             })
                         }
                     }
+                    // 处理图片问题
                     res.data.data.cover.url = utils.rect(res.data.data.cover.url, 325, 155);
-                    if (res.data.data.act_image.length > 0) {
-                        for (let i = 0; i < res.data.data.act_image.length; i++) {
-                            res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 325, 155)
-                        }
-                    }
+                    // if (res.data.data.act_image.length > 0) {
+                    //     for (let i = 0; i < res.data.data.act_image.length; i++) {
+                    //         res.data.data.act_image[i].url = utils.rect(res.data.data.act_image[i].url, 325, 155)
+                    //     }
+                    // }
 
                     that.setData({
                         pageData: res.data.data,
@@ -608,6 +632,7 @@ Page({
                         backgroundImage: res.data.data.bg_image_url ? res.data.data.bg_image_url : '',
                         backgroundMusic: res.data.data.music,
                         musicId: res.data.data.music_id,
+                        actTag: res.data.data.act_tag,
                     });
                 } else if (Number(res.data.code) == 0) {
                     wx.showToast({

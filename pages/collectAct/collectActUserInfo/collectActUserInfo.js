@@ -40,6 +40,9 @@ Page({
         ],
         isExchange:true,
         value:'',
+        isSugars:true,
+        sugarNum:0,
+        isShare:true,
     },
 
     /**
@@ -51,12 +54,15 @@ Page({
             actId: options.actId,
             userId: options.userId
         })
-        // 获取用户信息
-        that.getUserInfo();
-        // 帮助集糖果者
-        that.getHelperData();
-        //获取活动排行榜
-        that.getRange()
+        if(options.isShare == 0){
+            that.setData({
+                isShare: false,
+            })
+        } else if (options.isShare == 1){
+            that.setData({
+                isShare: true,
+            })
+        }
     },
 
     /**
@@ -72,6 +78,12 @@ Page({
     onShow: function() {
         let that = this;
         let helperData = [];
+        // 获取用户信息
+        that.getUserInfo();
+        // 帮助集糖果者
+        that.getHelperData();
+        //获取活动排行榜
+        that.getRange()
         while (that.data.helperData.length >= that.data.helperPage * 10){
             helperData.push(...that.data.helperData);
             that.setData({
@@ -179,9 +191,17 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
+        let that = this;
         return {
             path:'pages/index/index?pageId=19&userId=' + that.data.userId + '&actId=' + that.data.actId,
         }
+    },
+    //查看图片
+    previewImages: function (e) {
+        let that = this;
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.url],
+        })
     },
     // 倒计时
     countDownFun: function (endTime) {
@@ -189,35 +209,39 @@ Page({
         let countDown = that.data.countDown;
         let timer;
         let countDownValue = '';
-        if (endTime > new Date().valueOf()) {
+        let index = '';
+        if (endTime - new Date().valueOf() > 0) {
+
             timer = setInterval(function () {
-                countDownValue = new Date(endTime - new Date().valueOf());
-                if (endTime - new Date().valueOf() <= 86400000) {
-                    countDown.day = 0
-                } else {
-                    countDown.day = countDownValue.getDate()
+
+                countDownValue = endTime - new Date().valueOf()
+                //日
+                countDown.day = Math.floor(countDownValue / (24 * 60 * 60 * 1000));
+                //时
+                countDown.hour = Math.floor(countDownValue / (1 * 60 * 60 * 1000)) - countDown.day * 24;
+                //分
+                countDown.minute = Math.floor(countDownValue / (60 * 1000)) - (countDown.day * 24 * 60) - (countDown.hour * 60);
+                //秒
+                countDown.socend = Math.floor(countDownValue / 1000) - (countDown.day * 24 * 60 * 60) - (countDown.hour * 60 * 60) - (countDown.minute * 60);
+                if (countDown.day <= 0) countDown.day = 0;
+                if (countDown.hour <= 0) countDown.hour = 0;
+                if (countDown.minute <= 0) countDown.minute = 0;
+                if (countDown.socend <= 0) countDown.socend = 0;
+
+                if (countDownValue <= 0) {
+                    clearInterval(timer)
                 }
-                if (endTime - new Date().valueOf() <= 3600000) {
-                    countDown.hour = 0
-                } else {
-                    countDown.hour = countDownValue.getHours()
-                }
-                if (endTime - new Date().valueOf() <= 60000) {
-                    countDown.minute = 0
-                } else {
-                    countDown.minute = countDownValue.getMinutes()
-                }
-                if (endTime - new Date().valueOf() <= 1000) {
-                    countDown.socend = 0
-                } else {
-                    countDown.socend = countDownValue.getSeconds()
-                }
+
                 that.setData({
                     countDown: countDown,
-                    timer: timer,
                 })
+
             }, 1000)
 
+            that.setData({
+                timer: timer,
+                countDown: countDown,
+            })
         } else {
             that.setData({
                 countDown: countDown,
@@ -228,47 +252,36 @@ Page({
     // 显示兑换糖果页面
     showAlertDiv:function(e){
         let that = this;
-        if (e.currentTarget.dataset.id == 0){
-            that.setData({
-                isExchange: true,
-            })
-        } else if (e.currentTarget.dataset.id == 1){
-            that.setData({
-                isExchange: false,
-            })
-        }
+        getApp().request({
+            url: 'sugar/exchange',
+            data: {
+                act_id: that.data.actId,
+                amount: e.currentTarget.dataset.num,
+            },
+            method: 'post',
+            success: function (res) {
+                if (res.data.code == 1) {
+                    wx.showToast({
+                        title: res.data.data,
+                        icon: 'success',
+                    })
+                } else if (res.data.code == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
     },
     // 兑换奖励
     exchangeReward:function(e){
         let that = this;
-        getApp().request({
-            url:'sugar/exchange',
-            data:{
-                act_id: that.data.actId,
-                amount: e.detail.value.amount,
-            },
-            method:'post',
-            success:function(res){
-                if(res.data.code == 1){
-                    wx.showToast({
-                        title: res.data.data,
-                        icon:'success',
-                    })
-                    that.setData({
-                        isExchange: true,
-                        value:'',
-                    })
-                }else if(res.data.code == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
-                    that.setData({
-                        isExchange: true,
-                        value:'',
-                    })
-                }
-            }
+    },
+    closeSugars:function(e){
+        let that = this;
+        that.setData({
+            isSugars:true,
         })
     },
     // 帮助集糖果者
@@ -329,8 +342,28 @@ Page({
                     res.data.data.joiner.avatar_url = formate.rect(res.data.data.joiner.avatar_url,65,65);
                     res.data.data.start_time = formate.formatDate(new Date(res.data.data.start_time * 1000));
                     res.data.data.end_time = formate.formatDate(new Date(res.data.data.end_time * 1000));
+                    // 收集糖果数据
+                    if (res.data.data.sugar_array == undefined){
+                        that.setData({
+                            isSugars: true,
+                        })
+                    }else{
+                        for (let i = 0; i < res.data.data.sugar_array.length;i++){
+
+                            for (let j = 0; j < that.data.sugarList.length;j++){
+
+                                if (res.data.data.sugar_array[i] == that.data.sugarList[j].name){
+                                    res.data.data.sugar_array[i] = that.data.sugarList[j].url;
+                                }
+                            }
+                        }
+                        that.setData({
+                            isSugars: false,
+                            sugarNum: res.data.data.sugar_array.length,
+                        })
+                    }
                     that.setData({
-                        pageData:res.data.data
+                        pageData:res.data.data,
                     })
                 }else{
                     wx.showToast({

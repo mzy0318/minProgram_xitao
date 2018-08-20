@@ -1,10 +1,10 @@
 <import src='../../templates/indexModel/indexModel' />
 <view class='indexBanner'>
-    <swiper indicator-dots circular autoplay>
-        <swiper-item wx:for='{{pageData.banner}}' wx:key='{{index}}'>
+    <swiper  circular autoplay>
+        <swiper-item wx:for='{{pageData.banner}}' wx:key='{{index}}' >
             <image src='{{item.url}}' mode='widthFix'></image>
         </swiper-item>
     </swiper>
 </view>
-<template is='{{modeCode}}' data='{{item:paintData,home:pageData.home_icon,lessons:pageData.course,contentHeight:contentHeight}}'></template>
+<template is='{{modeCode}}' data='{{item:paintData,home:pageData.home_icon,lessons:pageData.course,contentHeight:contentHeight,banner:pageData.banner}}'></template>
 

@@ -7,7 +7,7 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         orgId: 0,
-        modeCode: 'one',
+        modeCode: 'eight',
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         contentHeight: 0,
         optionsUrl: [{
@@ -78,30 +78,68 @@ Page({
         pageData: '',
         isGetUser: false,
         paintData: [{
-            backgroundColor: '#FEB33C',
-            width: '250rpx',
+            backgroundColor: 'rgba(72,182,231,0.8)',
+            width: '210rpx',
         }, {
-            backgroundColor: '#50D0AD',
-            width: '250rpx',
+            backgroundColor: 'rgba(46,181,166,0.8)',
+            width: '210rpx',
         }, {
-            backgroundColor: '#FC407A',
-            width: '250rpx',
+            backgroundColor: 'rgba(238,168,47,0.8)',
+            width: '210rpx',
         }, {
-            backgroundColor: '#FF633D',
-            width: '250rpx',
+            backgroundColor: 'rgba(240,118,41,0.8)',
+            width: '210rpx',
         }, {
-            backgroundColor: '#3EA6FD',
-            width: '500rpx',
+            backgroundColor: 'rgba(242,231,77,0.8)',
+            width: '430rpx',
         }, {
-            backgroundColor: '#C55EF5',
-            width: '250rpx',
+            backgroundColor: 'rgba(243,108,149,0.8)',
+            width: '210rpx',
         }, {
-            backgroundColor: '#F8964D',
-            width: '250rpx',
+            backgroundColor: 'rgba(117,202,72,0.8)',
+            width: '210rpx',
         }, {
-            backgroundColor: '#7F3CD9',
-            width: '250rpx',
+            backgroundColor: 'rgba(145,88,221,0.8)',
+            width: '210rpx',
         }],
+        fiveBgColor:[
+            {
+                backgroundColor: '#FF81C1'
+            },{
+                backgroundColor: '#FE6568'
+            }, {
+                backgroundColor: '#FD9D22'
+            }, {
+                backgroundColor: '#4CC6ED'
+            }, {
+                backgroundColor: '#FE6668'
+            }, {
+                backgroundColor: '#4CC6ED'
+            }, {
+                backgroundColor: '#00D3BD'
+            }, {
+                backgroundColor: '#FF81C1'
+            }
+        ],
+        sevenBgColor: [
+            {
+                backgroundColor: '#FF65AE'
+            }, {
+                backgroundColor: '#AF48E1'
+            }, {
+                backgroundColor: '#FF6668'
+            }, {
+                backgroundColor: '#4CC6ED'
+            }, {
+                backgroundColor: '#FF597F'
+            }, {
+                backgroundColor: '#00D3BD'
+            }, {
+                backgroundColor: '#EE51C4'
+            }, {
+                backgroundColor: '#FAC963'
+            }
+        ],
     },
     //事件处理函数
     onLoad: function (options) {
@@ -190,7 +228,17 @@ Page({
         } else if (Number(options.pageId) == 19) {
             // 集糖果个人页面
             wx.navigateTo({
-                url: '../collectAct/collectActUserInfo/collectActUserInfo?actId=' + options.actId + '&userId=' + options.userId,
+                url: '../collectAct/collectActUserInfo/collectActUserInfo?actId=' + options.actId + '&userId=' + options.userId +'isShare=1',
+            })
+        } else if (Number(options.pageId) == 20) {
+            //课程销售
+            wx.navigateTo({
+                url: '../courses/courseInfo/courseInfo?id=' + options.actId,
+            })
+        } else if (Number(options.pageId) == 21) {
+            //砍价个人页面
+            wx.navigateTo({
+                url: '../killPrices/killPricePerson/killPricePerson?actId=' + options.actId + '&joinId=' + options.joinId,
             })
         }
         wx.showLoading({
@@ -212,23 +260,47 @@ Page({
         // 选择模板
         if (Number(wx.getStorageSync('schoolModel')) == 2) {
             that.setData({
-                modeCode: 'six'
+                modeCode: 'eight'
             })
         } else if (Number(wx.getStorageSync('schoolModel')) == 6) {
             that.setData({
-                modeCode: 'two'
+                modeCode: 'fourteen'
             })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 22 || Number(wx.getStorageSync('schoolModel')) == 18 || Number(wx.getStorageSync('schoolModel')) == 21) {
+        } else if ( Number(wx.getStorageSync('schoolModel')) == 18 ) {
             that.setData({
-                modeCode: 'one'
+                modeCode: 'thirteen'
             })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 3 || Number(wx.getStorageSync('schoolModel')) == 12) {
+        } else if (Number(wx.getStorageSync('schoolModel')) == 3 ) {
             that.setData({
-                modeCode: 'four'
+                modeCode: 'ten'
             })
         } else if (Number(wx.getStorageSync('schoolModel')) == 17) {
             that.setData({
+                modeCode: 'six'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 23) {
+            that.setData({
+                modeCode: 'twelve'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 24) {
+            that.setData({
+                modeCode: 'three'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 22) {
+            that.setData({
+                modeCode: 'eleven'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 12) {
+            that.setData({
+                modeCode: 'fiveteen'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 21) {
+            that.setData({
                 modeCode: 'five'
+            })
+        } else if (Number(wx.getStorageSync('schoolModel')) == 25) {
+            that.setData({
+                modeCode: 'four'
             })
         }
     },
@@ -272,8 +344,10 @@ Page({
             data: {},
             success: res => {
                 wx.hideLoading()
-                for (let i = 0; i < res.data.data.home_icon.length; i++) {
-                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;
+                for (let i = 0; i < res.data.data.home_icon.length; i++) {  
+                    res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;  
+                    res.data.data.home_icon[i].fiveBgColor = that.data.fiveBgColor[i].backgroundColor; 
+                    res.data.data.home_icon[i].sevenBgColor = that.data.sevenBgColor[i].backgroundColor; 
                     res.data.data.home_icon[i].width = that.data.paintData[i].width;
                     for (let j = 0; j < that.data.optionsUrl.length; j++) {
                         if (res.data.data.home_icon[i].tag == that.data.optionsUrl[j].tag) {

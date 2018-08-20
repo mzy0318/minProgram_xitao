@@ -2,6 +2,7 @@
     <view class='killPriceBanner'>
         <image src='{{pageData.banner_image_url}}' mode='scaleToFill' />
     </view>
+    <!-- 主题 -->
     <view class='pricePersonOne'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
@@ -9,10 +10,10 @@
         </view>
         <view class='pricePersonOneRange'>
             <view class='pricePersonOneShow'>
-                <view class='pricePersonOneShowChild'>现价:￥{{pageData.current_price}}</view>
+                <view class='pricePersonOneShowChild' style='left:{{widthP}};'>现价:￥{{pageData.current_price}}</view>
             </view> 
             <view class='rangeWrap'>
-                <view class='rangeChild'></view>
+                <view class='rangeChild' style='width:{{widthV}}'></view>
             </view>
             <view class='rangePrice'>
                 <view class='rangePriceLeft'>
@@ -31,11 +32,8 @@
             <view>已经砍到<text>{{pageData.pay_price}}</text>元!!!</view>
             <button data-actid='{{pageData.id}}' data-acttag='{{pageData.act_tag}}' bindtap='toPayPage'>去支付</button>
         </view>
-        <view class='bottomLine'>
-            <view></view>
-            <view></view>
-        </view>
     </view>
+    <!-- 砍价二维码 -->
     <view class='pricePersonTwo'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
@@ -49,11 +47,8 @@
             <!-- <button bindtap='setUrl'>复制网址发朋友圈</button> -->
             <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
         </view>
-        <view class='bottomLine'>
-            <view></view>
-            <view></view>
-        </view>
     </view>
+    <!-- 活动介绍 -->
     <view class='pricePersonThree'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
@@ -67,15 +62,14 @@
         </view>
         <view class='pricePersonThreeImg'>
             <view class='pricePersonThreeImgTitle'><text>{{pageData.org_intro}}</text></view>
-            <view class='pricePersonThreeImgImage'><image src='{{backgroundImage}}' mode='widthFix' /></view>
-            <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
-            <button bindtap='toIndex'>了解机构></button>
-        </view>
-        <view class='bottomLine'>
-            <view></view>
-            <view></view>
+            <view class='pricePersonThreeImgImage' wx:for='{{pageData.act_image}}' bindtap='previewImages' data-url='{{item.url}}' wx:key='{{item.id}}'><image src='{{item.url}}' mode='widthFix' /></view>
+            <view class='pricePersonThreeImgBtn'>
+                <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
+                <button bindtap='toIndex'>了解机构></button>
+            </view>
         </view>
     </view>
+    <!-- 风云榜 -->
     <view class='pricePersonFour'>
         <view class='pricePersonONeTitle'>
             <view class='empty0'></view>
@@ -88,6 +82,18 @@
                 <view><image mode='scaleToFill' src='{{item.avatar_url}}' /></view>
                 <view><text>{{item.nickname == ''?"访客":item.nickname}}</text><text>已砍掉￥{{item.reduce}}元</text></view>
             </view>
+        </view>
+    </view>
+</view>
+<!-- 砍价成功弹窗 -->
+<view class='alertDiv' hidden='{{isAlert}}'>
+    <view class='alertContent'>
+        <view class='alertTitle'>恭喜你砍价成功!!!</view>
+        <view class='alertM'><text>{{pageData.pay_price}}</text>元</view>
+        <view class='alertText'>赶快去支付吧</view>
+        <view class='alertBtn'>
+            <view bindtap='alertBtn' data-id='0' data-acttag='{{pageData.act_tag}}'>取消</view>
+            <view bindtap='alertBtn' data-id='1' data-acttag='{{pageData.act_tag}}'>确定</view>
         </view>
     </view>
 </view>
