@@ -60,6 +60,7 @@
             <view></view>
         </view>
     </view>
+    <!-- 排行榜 -->
     <view class='killPriceInfoThree'>
         <view class='infoThreeTitle'>
             <view bindtap='priceRankOne' class='{{isShow?"borderStyle":""}}'>砍价排行</view>
@@ -68,12 +69,16 @@
         <view class='infoThreeContent'  >
             <!-- 砍价排行 -->
             <view class='infoThreeContentOne' hidden='{{isHidden}}'>
-                <view class='contentOne'>已有<text>{{killPricePeople.total_joiner}}</text>人报名</view>
-                <view class='contentTwo'>他们总计被砍了<text>{{killPricePeople.total_bargain_times}}</text>次,总计￥<text>{{killPricePeople.total_reduce}}</text>元</view>
-                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople.list}}' data-nickname='{{item.nickname}}' wx:key='{{index}}' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}'>
+                <view class='contentOne'>已有<text>{{killPriceData.total_joiner}}</text>人报名</view>
+                <view class='contentTwo'>他们总计被砍了<text>{{killPriceData.total_bargain_times}}</text>次,总计￥<text>{{killPriceData.total_reduce}}</text>元</view>
+                <view class='contentThree' bindtap='toPricePerson' wx:for='{{killPricePeople}}' data-nickname='{{item.nickname}}' wx:key='{{index}}' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}'>
                     <view><image src='{{item.avatar_url}}' mode='scaleToFill' /></view>
-                    <view><text>{{item.nickname}}</text><text >已被砍掉￥{{item.reduce_price}}元></text></view>
+                    <view>
+                        <text>{{item.nickname}}</text>
+                        <text >已被砍掉￥{{item.reduce_price}}元></text>
+                    </view>
                 </view>
+                <view class='moreData' hidden='{{isMore}}' bindtap='moreData'>更多...</view>
             </view>
             <!-- 玩法介绍 -->
             <view class='infoThreeContentTwo' hidden='{{isShow}}'>

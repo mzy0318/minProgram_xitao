@@ -35,6 +35,9 @@ Page({
                 actId: options.actId,
             })
         }
+        // 获取评论列表
+        that.getComment();
+        // 获取页面数据
         getApp().request({
             url:'visitor_video_class',
             data:{
@@ -76,7 +79,6 @@ Page({
      */
     onShow: function() {
         let that = this;
-        that.getComment();
     },
 
     /**
@@ -107,7 +109,7 @@ Page({
         let that = this;
         let commentData = [];
         commentData.push(...that.data.commentData)
-        if (that.data.commentData.lenght >= that.data.commentPage*10){
+        if (that.data.commentData.length >= that.data.commentPage*10){
             that.setData({
                 commentPage: that.data.commentPage + 1,
             })
@@ -128,6 +130,7 @@ Page({
                         that.setData({
                             commentData: commentData
                         })
+                        console.log('that.data.commentData', that.data.commentData)
                     } else if (Number(res.data.code) == 0) {
                         wx.showToast({
                             title: '列表请求失败',

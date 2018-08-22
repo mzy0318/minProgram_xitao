@@ -1,4 +1,4 @@
-// pages/videoClass/videoClassStuList/videoClassStuList.js
+let rect = require('../../../utils/util.js')
 Page({
 
     /**
@@ -50,6 +50,9 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getPageData();
     },
 
@@ -57,7 +60,40 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageData = [];
+        pageData.push(...that.data.pageData)
+        if(that.data.pageData.length >= that.data.pageNum*10){
+            that.setData({
+                pageNum:that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'my_video_class_list',
+                data: {
+                    page:that.data.pageNum
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        if (res.data.data.length > 0) {
+                            for (let i = 0; i < res.data.data.length; i++) {
+                                res.data.data[i].cover.url = rect.rect(res.data.data[i].cover.url, 172, 100)
+                            }
+                        }
+                        pageData.push(...res.data.data)
+                        that.setData({
+                            pageData: pageData,
+                        })
+                        wx.stopPullDownRefresh()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none'
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -75,10 +111,17 @@ Page({
         let that = this;
         getApp().request({
             url: 'my_video_class_list',
-            data: {},
+            data: {
+                page: that.data.pageNum
+            },
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
+                    if(res.data.data.length > 0){
+                        for(let i = 0;i<res.data.data.length;i++){
+                            res.data.data[i].cover.url = rect.rect(res.data.data[i].cover.url,172,100)
+                        }
+                    }
                     that.setData({
                         pageData: res.data.data
                     })

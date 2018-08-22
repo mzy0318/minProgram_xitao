@@ -6,7 +6,7 @@ Page({
      */
     data: {
         pageData: '',
-        pageNum: '',
+        pageNum: 1,
     },
 
     /**

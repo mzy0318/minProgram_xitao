@@ -42,7 +42,7 @@
                 </view>
             </view>
         </view> 
-         <view class='laudActPersonInfo'>
+        <view class='laudActPersonInfo'>
             <view class='personInfoImage'><image src='{{pageData.joiner.avatar_url}}'></image></view>
             <view class='personInfoText'>
                 <view><text style='color:#FC76A3'>{{pageData.joiner.nickname}}</text> {{pageData.joiner.phone}}</view>
@@ -62,6 +62,7 @@
             <view class='collectActRangeGetted'>抢到</view>
             <view class='collectActRangeIcon' wx:for='{{item.sugar}}' wx:key='{{index}}'><image src='{{item}}' mode='scaleToFill'></image></view>
         </view>
+        <view class='collectActMore' hidden='{{isMore}}' bindtap='getMoreHelperData'>更多...</view>
     </view>
     <view class='viewMiddle'>
         <view></view>

@@ -1,5 +1,6 @@
 page{
     background:#F4F4F4;
+    padding-bottom:20rpx;
 }
 .voteUserWrap{
     width:710rpx;
@@ -83,4 +84,15 @@ view.voteUserWrap:nth-child(1){
     text-align:center;
     line-height:60rpx;
     background:transparent;
+}
+/* 更多 */
+.activeInfoRankMore{
+    width:750rpx;
+    height:50rpx;
+    line-height:50rpx;
+    text-align:center;
+    color:#7b7b7b;
+    font-size:28rpx;
+    clear: both;
+    margin-top:20rpx;
 }

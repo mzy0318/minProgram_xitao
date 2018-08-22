@@ -8,6 +8,7 @@ Page({
         pageData: '',
         statusText: '活动进行中',
         statusColor: 'green',
+        pageNum:1
     },
 
     /**
@@ -51,6 +52,9 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getPageData()
     },
 
@@ -58,7 +62,41 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageData = [];
+        pageData.push(...that.data.pageData)
+        if(that.data.pageData.length >= that.data.pageNum*10){
+            that.setData({
+                pageNum:that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'sugar/list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: (res) => {
+                    if (res.data.code == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            if (res.data.data.list[i].end_time * 1000 > new Date().valueOf()) {
+                                res.data.data.list[i].statusText = '活动进行中';
+                                res.data.data.list[i].statusColor = 'green';
+                            } else if (res.data.data.list[i].end_time * 1000 <= new Date().valueOf()) {
+                                res.data.data.list[i].statusText = '活动已结束';
+                                res.data.data.list[i].statusColor = 'red';
+                            }
+                            res.data.data.list[i].start_time = format.formatTime(new Date(res.data.data.list[i].start_time * 1000));
+                            res.data.data.list[i].end_time = format.formatTime(new Date(res.data.data.list[i].end_time * 1000));
+                            res.data.data.list[i].banner_image_url = format.rect(res.data.data.list[i].banner_image_url, 200, 100)
+                        }
+                        pageData.push(...res.data.data.list)
+                        that.setData({
+                            pageData: pageData,
+                        })
+                    }
+                }
+            })
+        }
     },
     // 活动详情页面
     toInfoPage:function(e){
@@ -72,7 +110,9 @@ Page({
         let that = this;
         getApp().request({
             url:'sugar/list',
-            data:{},
+            data:{
+                page:that.data.pageNum,
+            },
             method:'get',
             success:(res) => {
                 if(res.data.code == 1){

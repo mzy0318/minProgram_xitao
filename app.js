@@ -55,6 +55,12 @@ App({
         lessonClassData: null,
     },
     dev: false,
+    // 视频投票  我的海报
+    getImageHost:function(){
+        let online = "https://www.zhihuizhaosheng.com/" ;
+        let dev = "http://192.168.1.112:8123/";
+        return online;
+    },
     getHost: () => {
         var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
         var dev = "http://192.168.1.112:8123/" + getApp().getExtConfig().version + "/";
@@ -127,8 +133,6 @@ App({
                         })
                         return
                     } else {
-                        // console.log("code:", res.code);
-                        // othis.visitorId = res.code.
                     }
                     wx.request({
                         'url': host + "login",
@@ -148,7 +152,9 @@ App({
                                 // 获取小程序版本
                                 getApp().funcOpt = r.data.data;
                                 wx.setStorageSync('funcOpt', r.data.data)
-                                wx.setStorageSync('visitorId', r.data.data.visitor_id)
+                                wx.setStorageSync('visitorId', r.data.data.visitor_id);
+                                wx.setStorageSync('avarImage', r.data.data.avatar_url);
+                                wx.setStorageSync('nickname', r.data.data.nickname);
                                 if (r.header["Set-Cookie"]) {
                                     wx.setStorageSync('cookie', r.header["Set-Cookie"]);
                                 }

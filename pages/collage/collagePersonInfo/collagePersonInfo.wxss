@@ -266,6 +266,14 @@
     overflow-y: scroll;
     margin:30rpx auto 0rpx;
 }
+.divBoxMore{
+    width:550rpx;
+    height:40rpx;
+    font-size:26rpx;
+    line-height:26rpx;
+    text-align:center;
+    color:#7b7b7b;
+}
 .divBoxChild{
     width:510rpx;
     height:100rpx;
@@ -303,6 +311,9 @@
     float:left;
     margin-left:20rpx;
     margin-top:20rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }
 .myTeam button{
     width:300rpx;

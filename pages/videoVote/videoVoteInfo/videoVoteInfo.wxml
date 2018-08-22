@@ -92,40 +92,42 @@
 <view class='activeInfoRank' hidden='{{isRank}}'>
     <view class='activeInfoRankLeft' >
         <view class='activeInfoRankContent' wx:for='{{rangeList}}' wx:key='{{index}}'>
-            <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}' ><image src='{{item.cover.url}}'  mode='widthFix'></image></view>
-            <view class='contentBottom' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
+            <view class='contentTop' data-id='{{item.id}}' data-actid='{{pageData.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}' ><image src='{{item.cover.url}}'  mode='widthFix'></image></view>
+            <view class='contentBottom' data-id='{{item.id}}' data-actid='{{pageData.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
             <view class='contentNum' wx:if='{{index%2 == 0}}'>{{item.number}}</view>
             <view class='contentVoteNum' wx:if='{{index%2 == 0}}'>{{item.vote_amount}}</view>
         </view>
     </view>
     <view class='activeInfoRankRight'>
         <view class='activeInfoRankContent' wx:for='{{rangeList}}'>
-            <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
-            <view class='contentBottom' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
+            <view class='contentTop' data-id='{{item.id}}' data-actid='{{pageData.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+            <view class='contentBottom' data-id='{{item.id}}' data-actid='{{pageData.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
             <view class='contentNum' wx:if='{{index%2 == 1}}'>{{item.number}}</view>
             <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
         </view> 
     </view>
+    <view class='activeInfoRankMore' bindtap='getRangeData' hidden='{{isMoreR}}'>更多...</view>
 </view>
 <!-- 最新参赛 -->
 <view class='activeInfoJoin' hidden='{{isJoin}}'>
     <view class='activeInfoRank'>
         <view class='activeInfoRankLeft'>
-            <view class='activeInfoRankContent'  wx:for='{{newList}}'>
-                <view class='contentTop' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
-                <view class='contentBottom' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
+            <view class='activeInfoRankContent'  wx:for='{{newList}}' wx:key='index'>
+                <view class='contentTop' data-actid='{{pageData.id}}' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+                <view class='contentBottom' data-actid='{{pageData.id}}' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'>{{item.nickname}}</view>
                 <view class='contentNum' wx:if='{{index%2 == 0}}'>{{item.number}}</view>
                 <view class='contentVoteNum' wx:if='{{index%2 == 0}}'>{{item.vote_amount}}</view>
             </view>
         </view>
         <view class='activeInfoRankRight'>
-            <view class='activeInfoRankContent'  wx:for='{{newList}}'>
-                <view class='contentTop' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
-                <view class='contentBottom' data-id='{{item.video_vote_joiner_id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
+            <view class='activeInfoRankContent'  wx:for='{{newList}}' wx:key='index'>
+                <view class='contentTop' data-id='{{item.video_vote_joiner_id}}' data-actid='{{pageData.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>
+                <view class='contentBottom' data-id='{{item.video_vote_joiner_id}}' data-actid='{{pageData.id}}' bindtap='toInfo' wx:if='{{index%2 == 1}}'>{{item.nickname}}</view>
                 <view class='contentNum' wx:if='{{index%2 == 1}}'>{{item.number}}</view>
                 <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
             </view> 
         </view>
+        <view class='activeInfoRankMore' bindtap='getMoreData' hidden='{{isMore}}'>更多...</view>
     </view>
     <view class='activeInfoWrap'>
         <!-- 活动说明 -->

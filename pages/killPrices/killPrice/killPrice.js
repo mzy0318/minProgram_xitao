@@ -8,6 +8,7 @@ Page({
     data: {
         pageData: '',
         pageNum: 1,
+        isMore:true,
     },
 
     /**
@@ -27,6 +28,15 @@ Page({
                         one.banner_image_url = utils.square(one.banner_image_url, 100)
                         return one
                     })
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data.list
                     })
@@ -84,6 +94,10 @@ Page({
             method: 'post',
             success: res => {
                 if (Number(res.data.code) == 1) {
+                    res.data.data.list = utils.map(res.data.data.list, function (one) {
+                        one.banner_image_url = utils.square(one.banner_image_url, 100)
+                        return one
+                    })
                     that.setData({
                         pageData: res.data.data.list
                     })
@@ -102,39 +116,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData);
-        if (that.data.pageData.length >= that.data.pageNum * 10) {
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'visitor_bargain_list',
-                data: {
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: res => {
-                    if (Number(res.data.code) == 1) {
-                        that.setData({
-                            pageData: res.data.data.list
-                        })
-                        wx.stopPullDownRefresh()
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        } else {
-            wx.showToast({
-                title: '到底啦',
-                icon: 'none'
-            })
-        }
     },
 
     /**
@@ -147,5 +128,51 @@ Page({
         wx.navigateTo({
             url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,
         })
-    }
+    },
+    moreData:function(){
+        let that = this;
+        let pageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        pageData.push(...that.data.pageData)
+        that.setData({
+            pageNum:that.data.pageNum + 1
+        })
+        getApp().request({
+            url: 'visitor_bargain_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    res.data.data.list = utils.map(res.data.data.list, function (one) {
+                        one.banner_image_url = utils.square(one.banner_image_url, 100)
+                        return one
+                    })
+                    pageData.push(...res.data.data.list)
+                    if (pageData.length >= that.data.pageNum*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData,
+                    })
+                    wx.hideLoading()
+                } else {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
 })

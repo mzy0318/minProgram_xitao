@@ -46,6 +46,7 @@ Page({
         actTag:'',
         isStopMusic:true,
         widthV: 0,
+        isMore:true,
     },
 
     /**
@@ -182,7 +183,7 @@ Page({
                 },
                 method: 'post',
                 success: data => {
-                    pageDataArr.push(...data.data.data)
+                    pageDataArr.push(...data.data.data.list)
                     this.setData({
                         killPricePeople: pageDataArr,
                     })
@@ -220,7 +221,8 @@ Page({
         })
     },
     isClose: function (e) {
-        this.setData({
+        let that = this;
+        that.setData({
             isClosed: e.currentTarget.dataset.display,
         })
     },
@@ -530,6 +532,55 @@ Page({
             animationClass: 'musicControl'
         })
     },
+    // 更多排行数据
+    moreData:function(){
+        let that = this;
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        let killPricePeople = [];
+        killPricePeople.push(...that.data.killPricePeople);
+        that.setData({
+            rangPage: that.data.rangPage + 1
+        })
+        getApp().request({
+            url: 'bargain_range',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: '0',
+                page: that.data.rangPage,
+            },
+            method: 'post',
+            success: data => {
+                if (data.data.code == 1) {
+                    killPricePeople.push(...data.data.data.list)
+                    if (killPricePeople.length >= that.data.rangPage*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                        wx.showToast({
+                            title: '没有更多数据',
+                            icon:'none',
+                        })
+                    }
+                    this.setData({
+                        killPricePeople: killPricePeople,
+                    })
+                    wx.hideLoading()
+                }else{
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none'
+                    })
+                }
+            }
+        })
+    },
     // 获取砍价排行傍
     getRangeData:function(){
         let that = this;
@@ -544,8 +595,18 @@ Page({
             success: data => {
                 if (data.data.code == 1) {
                     wx.stopPullDownRefresh()
+                    if(data.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
+                    }
                     this.setData({
-                        killPricePeople: data.data.data,
+                        killPriceData:data.data.data,
+                        killPricePeople: data.data.data.list,
                     })
                 }
             }

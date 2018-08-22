@@ -1,0 +1,16 @@
+<view class='listInfoWrap'>
+    <view class='listInfoTop'>
+        <view class='listInfoTopContent'><text>真实姓名:</text><text>{{personInfo.nickname}}</text></view>
+        <view class='listInfoTopContent'><text>手机号码:</text><text>{{personInfo.phone}}</text></view>
+        <view class='listInfoTopContent'><text>报名时间:</text><text>{{startTime}}</text></view>
+    </view>
+    <view class='empty'></view>
+    <view class='listInfoBottom'>
+        <view class='listInfoBottomContent'><text>活动原价:</text><text>{{personInfo.original_price}}</text><text>元</text></view>
+        <view class='listInfoBottomContent'><text>活动低价:</text><text>{{personInfo.now_price}}</text><text>元</text></view>
+        <view class='listInfoBottomContent'><text>砍价数量:</text><text>{{personInfo.bargain_times}}次</text></view>
+        <view class='listInfoBottomContent'><text>砍价总额:</text><text>{{personInfo.reduce_price}}元</text></view>
+        <view class='listInfoBottomContent'><text>剩余金额:</text><text>{{personInfo.rest_price}}元</text></view>
+    </view>
+    <button bindtap='backPage'>返回</button>
+</view>

@@ -1,5 +1,5 @@
 <view class='empty'></view>
-<view class='collageListContent' bindtap='toCollageInfo' wx:for='{{pageData}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>
+<view class='collageListContent' bindtap='toCollageInfo' wx:for='{{pageData}}' wx:key='{{item.id}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>
     <view class='collageListTop'>
         <image src='{{item.banner_image_url}}' mode='scaleToFill' />
         <view class='collageListTopDate'>{{item.start_time}} 至 {{item.end_time}}</view>
@@ -7,3 +7,5 @@
     </view>
     <view class='collageListBottom'>{{item.title}}</view>
 </view>
+<!-- 更多数据 -->
+<view class='moreData' bindtap='moreData' hidden='{{isMore}}'>更多...</view>

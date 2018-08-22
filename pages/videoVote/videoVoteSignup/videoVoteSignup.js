@@ -23,6 +23,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        console.log('options', options)
         that.setData({
             actId:options.actId,
             isEdit: options.isEdit,

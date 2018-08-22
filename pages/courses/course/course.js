@@ -12,6 +12,8 @@ Page({
         lessonClassName: '',
         lessonData: wx.getStorageSync('lessonData'),
         isShow:true,
+        pageNum:1,
+        isHot:true,
     },
 
     /**
@@ -19,35 +21,27 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-
-
-        this.setData({
+        that.setData({
             lessonClassName: app.globalData.lessonClassName
         })
-        if (app.globalData.lessonClassName != '全部'){
-            that.setData({
-                lessonData: wx.getStorageSync('lessonAllData')
-            })
-        }else {
-            getApp().request({
-                url: 'recruit/sale_lesson/sale_lesson_list',
-                data: {},
-                success: res => {
-                    this.setData({
-                        courseData: res.data.data,
-                        lessonData: res.data.data.lesson
-                    })
-                    wx.setStorageSync('lessonAllData', res.data.data.lesson)
-                }
-            })
-        }
         getApp().request({
             url: 'recruit/sale_lesson/sale_lesson_list',
-            data: {},
+            data: {
+                page: that.data.pageNum,
+            },
             success: res => {
-                this.setData({
+                if (res.data.data.host_lesson.length <= 0){
+                    that.setData({
+                        isHot:true,
+                    })
+                }else{
+                    that.setData({
+                        isHot: false,
+                    })
+                }
+                that.setData({
                     courseData: res.data.data,
-                    lessonData: res.data.data.lesson
+                    lessonData: res.data.data.lesson,
                 })
                 wx.setStorageSync('lessonAllData', res.data.data.lesson);
                 let lessonClassData = res.data.data.catalog;
@@ -58,7 +52,6 @@ Page({
 
             }
         })
-        // let lessonClassData = wx.getStorageSync('lessonClassData');
         that.setData({
             classId: wx.getStorageSync('classId')
         })
@@ -104,7 +97,28 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        let that = this;
+        let lessonData = [];
+        lessonData.push(...that.data.lessonData);
+        if (that.data.lessonData.length >= that.data.pageNum*10){
+            that.setData({
+                pageNum: that.setData.pageNum + 1
+            })
+            getApp().request({
+                url: 'recruit/sale_lesson/sale_lesson_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                success: res => {
+                    lessonData.push(...res.data.data.lesson)
+                    this.setData({
+                        lessonData: lessonData,
+                    })
+                    wx.setStorageSync('lessonAllData', res.data.data.lesson);
 
+                }
+            })
+        }
     },
 
     /**
@@ -125,71 +139,101 @@ Page({
             url: '../courseInfo/courseInfo?id=' + e.currentTarget.dataset.id,
         })
     },
+    //筛选课程
     toCourseNav: function (e) {
         let that = this;
         that.setData({
             classId: e.currentTarget.dataset.index,
+            pageNum:1
         })
+
         wx.setStorageSync('classId', e.currentTarget.dataset.index)
-        // let index = e.currentTarget.dataset.index
-        let arr = [];
+        if (e.currentTarget.dataset.index == 0){
+            getApp().request({
+                url: 'recruit/sale_lesson/sale_lesson_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                success: res => {
+                    this.setData({
+                        courseData: res.data.data,
+                        lessonData: res.data.data.lesson,
+                    })
+                    wx.setStorageSync('lessonAllData', res.data.data.lesson);
+                    let lessonClassData = res.data.data.catalog;
+                    lessonClassData.unshift({ 'id': 0, 'name': '全部' });
+                    that.setData({
+                        lessonClassData: lessonClassData,
+                    })
 
-        let lessonAllData = wx.getStorageSync('lessonAllData');
-
-        for (let i = 0; i < lessonAllData.length; i++) {
-
-            if (lessonAllData[i].lesson_catalog_id == e.currentTarget.dataset.id) {
-
-                arr.push(lessonAllData[i]);
-            }
+                }
+            })
+        }else{
+            getApp().request({
+                url: 'recruit/sale_lesson/sale_lesson_list',
+                data: {
+                    page: that.data.pageNum,
+                    catalog_id: e.currentTarget.dataset.index
+                },
+                success: res => {
+                    this.setData({
+                        lessonData: res.data.data.lesson,
+                    })
+                    wx.setStorageSync('lessonAllData', res.data.data.lesson);
+                }
+            })
         }
-        wx.setStorageSync('lessonData', arr);
+
 
         if (e.currentTarget.dataset.name == '全部') {
             that.setData({
                 lessonClassName:'课程筛选'
             })
-            // app.globalData.lessonClassName = '课程筛选'
         } else {
             that.setData({
                 lessonClassName: e.currentTarget.dataset.name
             })
-            // app.globalData.lessonClassName = e.currentTarget.dataset.name
         }
         that.setData({
             isShow:true
         })
     },
+    // 返回
     toCourse: function () {
         let that = this;
-        // wx.setStorageSync('classId', 0)
-        // 
         that.setData({
             isShow: true
         })
     },
+    //清空
     toClearCourse: function () {
         let that = this;
         wx.removeStorageSync('lessonData');
-        // app.globalData.lessonClassName = '课程筛选';
         that.setData({
             lessonClassName: '课程筛选',
             classId:0,
         })
         wx.setStorageSync('classId', 0);
-        // wx.navigateTo({
-        //     url: '../course/course',
-        // })
-        // wx.navigateBack({})
         getApp().request({
             url: 'recruit/sale_lesson/sale_lesson_list',
-            data: {},
+            data: {
+                page:1
+            },
             success: res => {
+                if (res.data.data.host_lesson.length <= 0) {
+                    that.setData({
+                        isHot: true,
+                    })
+                } else {
+                    that.setData({
+                        isHot: false,
+                    })
+                }
                 that.setData({
                     courseData: res.data.data,
                     lessonData: res.data.data.lesson
                 })
-                wx.setStorageSync('lessonAllData', res.data.data.lesson)
+                wx.setStorageSync('lessonAllData', res.data.data.lesson);
             }
         })
         that.setData({

@@ -31,7 +31,8 @@ Page({
                 url: "org/bargain_joiner_list",
                 method: "post",
                 data: {
-                    id: options.id
+                    id: options.id,
+                    page:1,
                 },
                 success: res => {
                     if (res.data.data.list.length == 0){
@@ -44,7 +45,7 @@ Page({
                             showTitle: true
                         })
                         that.setData({
-                            userList: res.data.data.list
+                            userList: res.data.data
                         })
                     }
                 }
@@ -342,7 +343,7 @@ Page({
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
         if (Number(pageTypeStu) == 6) {
             wx.navigateTo({
-                url: '../killPriceListInfo/killPriceListInfo?actId=' + e.currentTarget.dataset.actid,
+                url: '../killPriceListInfo/killPriceListInfo?actId=' + e.currentTarget.dataset.actid + '&joinId=' + e.currentTarget.dataset.joinid,
             })
         } else if (Number(pageTypeStu) == 3) {
             let userData = this.data.userList;

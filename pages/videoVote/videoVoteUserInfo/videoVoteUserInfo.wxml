@@ -13,12 +13,13 @@
     </view>
     <view class='userInfoContent'><video src='{{pageData.video.url}}' poster='{{pageData.cover.url}}'></video></view>
     <view class='userInfoText'>宣言:{{pageData.declaration}}</view>
+
     <view class='userInfoBtn'>
-        <button data-id='0' bindtap='btnOptions'>我要投票</button>
-        <button data-id='1' bindtap='btnOptions' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='0'>我要报名</button>
-        <button open-type='share'>分享拉票</button>
-        <button data-id='3' bindtap='btnOptions'>我的封面</button>
-        <button bindtap='btnOptions' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='1' hidden='{{!pageData.is_self}}'>修改</button>
+        <button data-btnid='0' bindtap='btnOptions'>我要投票</button>
+        <button data-btnid='1' bindtap='btnOptions' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='0'>我要报名</button>
+        <button open-type='share' data-btnid='2'>分享拉票</button>
+        <button data-btnid='3' bindtap='btnOptions'>我的封面</button>
+        <button bindtap='btnOptions' data-btnId='4' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='1' hidden='{{!pageData.is_self}}'>修改</button>
     </view>
     <view class='userInfoEncode'>
         <view class='userInfoEncodeImage' bindtap='viewImage'><image  src='{{encodeImage}}' mode='scaleToFill'></image></view>

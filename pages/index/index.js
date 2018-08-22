@@ -257,52 +257,6 @@ Page({
     onShow: function () {
         let that = this;
         that.getData()
-        // 选择模板
-        if (Number(wx.getStorageSync('schoolModel')) == 2) {
-            that.setData({
-                modeCode: 'eight'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 6) {
-            that.setData({
-                modeCode: 'fourteen'
-            })
-        } else if ( Number(wx.getStorageSync('schoolModel')) == 18 ) {
-            that.setData({
-                modeCode: 'thirteen'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 3 ) {
-            that.setData({
-                modeCode: 'ten'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 17) {
-            that.setData({
-                modeCode: 'six'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 23) {
-            that.setData({
-                modeCode: 'twelve'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 24) {
-            that.setData({
-                modeCode: 'three'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 22) {
-            that.setData({
-                modeCode: 'eleven'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 12) {
-            that.setData({
-                modeCode: 'fiveteen'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 21) {
-            that.setData({
-                modeCode: 'five'
-            })
-        } else if (Number(wx.getStorageSync('schoolModel')) == 25) {
-            that.setData({
-                modeCode: 'four'
-            })
-        }
     },
     redirectPage: function (res) {
         wx.navigateTo({
@@ -343,6 +297,53 @@ Page({
             method: "post",
             data: {},
             success: res => {
+                wx.setStorageSync('schoolModel', res.data.data.template_id);
+                // 选择模板
+                if (Number(wx.getStorageSync('schoolModel')) == 2) {
+                    that.setData({
+                        modeCode: 'eight'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 6) {
+                    that.setData({
+                        modeCode: 'fourteen'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 18) {
+                    that.setData({
+                        modeCode: 'thirteen'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 3) {
+                    that.setData({
+                        modeCode: 'ten'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 17) {
+                    that.setData({
+                        modeCode: 'six'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 23) {
+                    that.setData({
+                        modeCode: 'twelve'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 24) {
+                    that.setData({
+                        modeCode: 'three'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 22) {
+                    that.setData({
+                        modeCode: 'eleven'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 12) {
+                    that.setData({
+                        modeCode: 'fiveteen'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 21) {
+                    that.setData({
+                        modeCode: 'five'
+                    })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 25) {
+                    that.setData({
+                        modeCode: 'four'
+                    })
+                }
                 wx.hideLoading()
                 for (let i = 0; i < res.data.data.home_icon.length; i++) {  
                     res.data.data.home_icon[i].backgroundColor = that.data.paintData[i].backgroundColor;  

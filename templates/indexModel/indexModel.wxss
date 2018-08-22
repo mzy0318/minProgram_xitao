@@ -336,12 +336,12 @@ view.threeChild:nth-child(6) {
 .fourWrap::before{
     content: "";
     width:760rpx;
-    height:26rpx;
+    height:50rpx;
     background:red;
     position:absolute;
     top:-26rpx;
     left:-5rpx;
-    border-radius:90% 90% 0rpx 0rpx;
+    border-radius:100% 100% 0rpx 0rpx;
     background:#fff;
     z-index:0;
 }
@@ -375,10 +375,15 @@ view.threeChild:nth-child(6) {
     width:80rpx;
     height:80rpx;
     border-radius:50%;
+    position:relative;
 }
 .fourNav>view>view:nth-child(1)>image{
     width:80rpx;
     height:80rpx;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
 }
 .fourNav>view>view:nth-child(2){
     width:160rpx;

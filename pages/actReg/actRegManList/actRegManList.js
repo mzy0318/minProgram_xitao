@@ -61,7 +61,7 @@ Page({
     onReachBottom: function () {
         let that = this;
         let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData)
+        pageDataArr.push(...that.data.pageData);
         if (that.data.pageData.length >= that.data.pageNum * 10){
             that.setData({
                 pageNum: that.data.pageNum + 1,
@@ -76,6 +76,10 @@ Page({
                     for (let i = 0; i < res.data.data.length; i++) {
                         res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time*1000))
                     }
+                    res.data.data = utils.map(res.data.data, function (one) {
+                        one.cover.url = utils.rect(one.cover.url, 200, 100)
+                        return one
+                    })
                     pageDataArr.push(...res.data.data)
                     that.setData({
                         pageData: pageDataArr

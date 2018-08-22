@@ -18,7 +18,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
     },
 
     /**
@@ -33,7 +32,10 @@ Page({
      */
     onShow: function () {
         let that = this;
-        that.getData(that.data.pageNum)
+        that.setData({
+            pageNum: 1
+        })
+        that.getData()
     },
 
     /**
@@ -64,7 +66,7 @@ Page({
         that.setData({
             pageNum: 1
         })
-        that.getData(that.data.pageNum)
+        that.getData()
     },
 
     /**
@@ -74,13 +76,41 @@ Page({
         let that = this;
         let pageData = [];
         pageData.push(...that.data.pageData);
+        console.log('that.data.pageData', that.data.pageData)
         if (that.data.pageData.length >= that.data.pageNum * 10) {
             that.setData({
                 pageNum: that.data.pageNum + 1,
             })
-            that.getData(that.data.pageNum)
+            getApp().request({
+                url: 'visitor_video_class_list',
+                data: {
+                    tag: '',
+                    catalog: '',
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
+                            res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url, 115, 75)
+                        }
+                        pageData.push(...res.data.data.list)
+                        that.setData({
+                            pageData: pageData,
+                        })
+                    } else if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
         } else {
-            return false
+            wx.showToast({
+                title: '到底啦',
+            })
         }
     },
 
@@ -174,19 +204,18 @@ Page({
         }
     },
     //请求数据
-    getData: function (num) {
+    getData: function () {
         let that = this;
         getApp().request({
             url: 'visitor_video_class_list',
             data: {
                 tag: '',
                 catalog: '',
-                page: num,
+                page: that.data.pageNum,
             },
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
                         res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url,115,75)

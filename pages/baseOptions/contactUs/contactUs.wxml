@@ -4,16 +4,23 @@
     <view class='contactMap' bindtap='map'>
         <text class="iconfont icon-address iconSize"></text>
         <text decode>&nbsp;{{pageInfo.address}}</text>
+        <text>〉</text>
     </view>
     <view class='contactMap' data-phonenum='{{pageInfo.telephone}}' bindtap='tellPhone'>
         <text class="iconfont icon-dianhuatianchong iconSize"></text>
         <text decode>&nbsp;{{pageInfo.telephone}}</text>
+        <text>〉</text>
+    </view>
+    <view class='contactMap' bindtap='toSchoolNav'>
+        <text class="iconfont icon-daohang iconSize"></text>
+        <text decode>&nbsp;校区导航</text>
+        <text>〉</text>
     </view>
     <text class="iconfont icon-map"></text>
 </view>
-<view class='contackUsBottom'>{{pageInfo.other_info}}</view>
+<view class='contackUsBottom'><text>{{pageInfo.other_info}}</text></view>
 <button bindtap='tellPhone' data-phonenum='{{pageInfo.telephone}}' class='contactUsBtn'>我要咨询</button>
-<view class='schoolNav' bindtap='toSchoolNav'>
+<!-- <view class='schoolNav' bindtap='toSchoolNav'>
     <view>校区</view>
     <view>导航</view>
-</view>
+</view> -->

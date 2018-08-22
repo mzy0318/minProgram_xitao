@@ -35,7 +35,7 @@
             <view class='oneTitleChild'><text>我的团员</text></view>
         </view>
         <view class='divBoxChildWrap'>
-            <view class='divBoxChild' wx:for='{{personInfo}}'>
+            <view class='divBoxChild' wx:for='{{personInfo}}' wx:key='{{index}}'>
                 <view class='divBoxChildLeft'>
                     <image src='{{item.avatar_url}}' mode='scaleToFill' />
                 </view>
@@ -43,6 +43,7 @@
                 <view class='divBoxChildRight'>{{item.create_time}}</view>
             </view>
             <view class='noData' hidden='{{isData}}'>没有团员</view>
+            <view class='divBoxMore' bindtap='getMoreRangeData' hidden='{{isMore}}'>更多...</view>
         </view>
         <button open-type='share'>推荐好友</button>
     </view>

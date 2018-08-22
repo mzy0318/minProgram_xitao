@@ -45,7 +45,7 @@
             </view>
             <view class='pricePersonTwoImgBottom'>点击二维码保存,分享到朋友圈</view>
             <!-- <button bindtap='setUrl'>复制网址发朋友圈</button> -->
-            <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
+            <button bindtap='isClose' data-display='block' data-id='{{pageData.id}}'>我也要参加</button>
         </view>
     </view>
     <!-- 活动介绍 -->
@@ -64,7 +64,7 @@
             <view class='pricePersonThreeImgTitle'><text>{{pageData.org_intro}}</text></view>
             <view class='pricePersonThreeImgImage' wx:for='{{pageData.act_image}}' bindtap='previewImages' data-url='{{item.url}}' wx:key='{{item.id}}'><image src='{{item.url}}' mode='widthFix' /></view>
             <view class='pricePersonThreeImgBtn'>
-                <button bindtap='toBack' data-id='{{pageData.id}}'>我也要参加</button>
+                <button bindtap='isClose' data-display='block' data-id='{{pageData.id}}'>我也要参加</button>
                 <button bindtap='toIndex'>了解机构></button>
             </view>
         </view>
@@ -82,6 +82,7 @@
                 <view><image mode='scaleToFill' src='{{item.avatar_url}}' /></view>
                 <view><text>{{item.nickname == ''?"访客":item.nickname}}</text><text>已砍掉￥{{item.reduce}}元</text></view>
             </view>
+            <view class='moreData' hidden='{{isMore}}' bindtap='moreData'>更多...</view>
         </view>
     </view>
 </view>
@@ -95,5 +96,19 @@
             <view bindtap='alertBtn' data-id='0' data-acttag='{{pageData.act_tag}}'>取消</view>
             <view bindtap='alertBtn' data-id='1' data-acttag='{{pageData.act_tag}}'>确定</view>
         </view>
+    </view>
+</view>
+<!-- 报名弹框 -->
+<view class='writeInfoWrap' style='display:{{isClosed}};' >
+    <view class='writeInfo'>
+        <view>填写报名信息</view>
+        <form bindsubmit='joinActive'>
+            <view class='inputStyle'><input type='text' placeholder='请输入姓名' bindblur='getNickName' name='nickname' /></view>
+            <view class='inputStyle'><input type='number' maxlength='11' placeholder='请输入联系电话' name='phone' /></view>
+            <view class='inputStyle' wx:for='{{nameInfo}}'><input type='text' placeholder='{{item}}' name='{{index}}' /></view>
+            <button form-type='submit' >确认</button>
+        </form>
+        <view class='line'></view>
+        <view class='close'  bindtap='isClose' data-display='none'>x</view>
     </view>
 </view>

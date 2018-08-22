@@ -48,6 +48,9 @@ Page({
         isPay:true,
         rangePage:1,
         isAlert: true,
+        isMore:true,
+        memberPage:1,
+        isMoreM:true,
     },
 
     /**
@@ -148,6 +151,9 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
+        that.setData({
+            rangePage:1
+        })
         // 拼团列表
         that.getRangeData()
         // 页面数据
@@ -207,22 +213,93 @@ Page({
             url: '../collageSignup/collageSignup',
         })
     },
-    isDivBox: function (e) {
+    // 获取更多团员数据
+    getMemberData:function(){
         let that = this;
-        this.setData({
-            isDivShow: Boolean(Number(e.currentTarget.dataset.is)),
+        let myPerson = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        myPerson.push(...that.data.myPerson)
+        that.setData({
+            memberPage: that.data.memberPage + 1
         })
         getApp().request({
             url: 'personal_group_member',
             data: {
                 joiner_id: e.currentTarget.dataset.joinid,
-                act_id: this.data.actId
+                act_id: that.data.actId,
+                page: that.data.memberPage,
             },
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    myPerson.push(...res.data.data.list)
+                    // 更多数据
+                    if (myPerson.length >= that.data.memberPage*10) {
+                        that.setData({
+                            isMoreM: false
+                        })
+                    } else {
+                        that.setData({
+                            isMoreM: true,
+                        })
+                    }
+                    that.setData({
+                        myPerson: myPerson,
+                    })
+                    wx.hideLoading()
+                    if (res.data.data.list.length > 0) {
+                        that.setData({
+                            isData: true
+                        })
+                    } else {
+                        that.setData({
+                            isData: false
+                        })
+                    }
+                } else {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
+            }
+        })
+    },
+    // 获取团员数据
+    isDivBox: function (e) {
+        let that = this;
+        that.setData({
+            isDivShow: Boolean(Number(e.currentTarget.dataset.is)),
+            memberPage:1
+        })
+        getApp().request({
+            url: 'personal_group_member',
+            data: {
+                joiner_id: e.currentTarget.dataset.joinid,
+                act_id: that.data.actId,
+                page: that.data.memberPage,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    // 更多数据
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            isMoreM:false
+                        })
+                    }else{
+                        that.setData({
+                            isMoreM: true,
+                        })
                     }
                     that.setData({
                         myPerson: res.data.data.list
@@ -518,6 +595,50 @@ Page({
         let that = this;
         innerAudioContext.stop()
     },
+    //更多拼团列表
+    getMoreRangeData:function(){
+        let that = this;
+        let collageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        collageData.push(...that.data.collageData)
+        that.setData({
+            rangePage: that.data.rangePage + 1
+        })
+        getApp().request({
+            url: 'personal_group_range',
+            data: {
+                act_id: that.data.actId,
+                page: that.data.rangePage,
+            },
+            method: 'post',
+            success: function(res){
+                if(res.data.code == 1){
+                    collageData.push(...res.data.data.list);
+                    if (collageData.length >= that.data.rangePage * 10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        collageData: collageData,
+                    })
+                    wx.hideLoading()
+                }else{
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
+            }
+        });
+    },
     // 获取拼团列表
     getRangeData:function(){
         let that = this;
@@ -530,32 +651,20 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.data.list >= 10){
+                    that.setData({
+                        isMore:false
+                    })
+                }else{
+                    that.setData({
+                        isMore: true
+                    })
+                }
                 that.setData({
                     collageData: res.data.data.list
                 })
             }
         });
-        while (that.data.collageData.length >= that.data.rangePage*10){
-            collageData.push(...that.data.collageData)
-            that.setData({
-                rangePage: that.data.rangePage + 1,
-            })
-            getApp().request({
-                url: 'personal_group_range',
-                data: {
-                    act_id: that.data.actId,
-                    page: that.data.rangePage,
-                },
-                method: 'post',
-                success: res => {
-                    collageData.push(...res.data.data.list)
-                    that.setData({
-                        collageData:collageData,
-                    })
-                }
-            });
-        }
-
     },
     // 获取页面数据 
     getpageData:function(e){

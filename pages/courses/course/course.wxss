@@ -73,7 +73,7 @@ swiper {
     width: 700rpx;
     line-height: 100rpx;
     background: #fef9db;
-    margin: 40rpx auto 0rpx;
+    margin: 20rpx auto 0rpx;
     text-indent: 10rpx;
     border: 2px solid #fff;
     font-weight: bold;
@@ -138,8 +138,8 @@ swiper {
 
 
 .courseClassWrap {
-    width: 750rpx;
-    height: 1207rpx;
+    width: 100%;
+    height: 100%;
     background: #f0efed;
     position: fixed;
     top: 0rpx;
@@ -173,7 +173,7 @@ swiper {
     text-overflow: ellipsis;
 }
 
-.courseClassContent view:nth-child(1) {
+.courseClassContent view:nth-child(1),.courseClassContent view:nth-child(4),.courseClassContent view:nth-child(7),.courseClassContent view:nth-child(10),.courseClassContent view:nth-child(13) {
     border-left: 1px solid #7b7b7b;
 }
 

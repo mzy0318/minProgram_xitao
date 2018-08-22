@@ -1,0 +1,50 @@
+page{
+    background:#fff;
+}
+
+.listInfoTop{
+    width:650rpx;
+    height:183rpx;
+    margin:0 auto;
+}
+
+.listInfoTop .listInfoTopContent,.listInfoBottom .listInfoBottomContent{
+    width:100%;
+    height:60rpx;
+    border-bottom:1rpx solid #efefef;
+}
+.listInfoTopContent text,.listInfoBottomContent text{
+    display:block;
+    float:left;
+    font-size:30rpx;
+    line-height:60rpx;
+    text-indent:20rpx;
+}
+.listInfoTopContent text:nth-child(1),.listInfoBottomContent text:nth-child(1){
+    color:#7b7b7b;
+}
+.empty{
+    width:650rpx;
+    height:20rpx;
+    background:#efefef;
+    margin:0 auto;
+}
+
+.listInfoBottom{
+    width:650rpx;
+    height:305rpx;
+    background:#fff;
+    margin:0 auto;
+}
+
+.listInfoBottom view:nth-child(1) text:nth-child(2){
+    color:#7b7b7b;
+}
+.listInfoBottom view:nth-child(2) text:nth-child(2){
+    color:#C53C21;
+}
+
+.listInfoWrap button{
+    margin:80rpx auto;
+    width:650rpx;
+}

@@ -18,27 +18,28 @@ page{
 }
 .contackUsMiddle{
   width:710rpx;
-  height:360rpx;
+  min-height:360rpx;
   margin:0 auto;
   box-shadow: 2px 2px 2px 2px rgba(192,192,192,0.3),-2px -2px 2px 2px rgba(192,192,192,0.3);
   position:absolute;
   top:260rpx;
   left:20rpx; 
   background:#fff;
+  padding-bottom:30rpx;
 }
 .contackUsBottom{
   width:710rpx;
   line-height:80rpx;
   color:#717171;
   text-indent:20px;
-  margin-top:240rpx;
+  margin-top:250rpx;
   margin-left:20rpx;
   font-size:30rpx;
 }
 
 .contactTitle{
   font-weight:bold;
-  margin-top:70rpx;
+  margin-top:60rpx;
   display:block;
   text-indent:5px;
 }
@@ -46,14 +47,31 @@ page{
     width:690rpx;
     height:40rpx;
     margin-left:20rpx;
-    margin-top:50rpx;
+    margin-top:45rpx;
 }
-.contactMap text{
+.contactMap>text{
     font-size:32rpx;
     color:#7b7b7b;
 }
 .iconSize{
     font-size:40rpx !important;
+}
+.contactMap>text:nth-child(2),.contactMap>text:nth-child(1){
+    float:left;
+    height:40rpx;
+}
+.contactMap>text:nth-child(2){
+    width:580rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+.contactMap>text:nth-child(3){
+    float:right;
+    margin-right:25rpx;
+    height:40rpx;
+    line-height:40rpx;
+    font-weight:bold;
 }
 /* 校区导航 */
 .schoolNav{

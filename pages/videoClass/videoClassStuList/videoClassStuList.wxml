@@ -1,5 +1,5 @@
 <view class='videoClassList'>
-    <view class='videoClassContent' bindtap='toInfo' wx:key='{{item.id}}' wx:for='{{pageData}}' data-actid='{{item.id}}'>
+    <view class='videoClassContent' bindtap='toInfo' wx:key='{{item.id}}' wx:for='{{pageData}}' data-actid='{{item.id}}' wx:key='{{index}}'>
         <view class='classContentImg'>
             <image src='{{item.cover.url}}' mode='scaleToFill'></image>
         </view>

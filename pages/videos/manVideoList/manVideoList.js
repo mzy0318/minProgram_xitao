@@ -28,6 +28,9 @@ Page({
      */
     onShow: function () {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getPageData()
     },
 

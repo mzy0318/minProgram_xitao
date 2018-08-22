@@ -1,12 +1,12 @@
 <view class='killPriceListWrap'>
-    <view class='killPriceListContet' wx:for='{{userList}}'>
+    <view class='killPriceListContet' wx:for='{{userList}}' wx:key='{{index}}'>
         <view class='killPriceListTop' bindtap='toPricePerson'  data-id='{{item.act_nice_id}}' data-actid='{{item.act_id}}' data-joinerid='{{item.joiner_id}}' data-acttag='{{item.act_tag}}'>
             <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.is_leader}}{{item.nickname}}</text>
             <text>{{item.create_time}}</text>
         </view>
         <view class='killPriceListBottom'>
             <text class='iconfont icon-phone iconColor' decode='true' bindtap='tellPhone' data-phonenum='{{item.phone}}'>&nbsp;&nbsp;{{item.phone}}</text>
-            <text decode='true' bindtap='toPriceListInfo' data-index='{{index}}' data-actid='{{item.act_id}}'>.&nbsp;.&nbsp;.</text>
+            <text decode='true' bindtap='toPriceListInfo' data-index='{{index}}' data-actid='{{item.act_id}}' data-joinid='{{item.joiner_id}}'>.&nbsp;.&nbsp;.</text>
         </view>
     </view>
     <view class='noData' hidden='{{showTitle}}'>无记录</view> 

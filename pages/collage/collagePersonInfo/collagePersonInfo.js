@@ -14,6 +14,8 @@ Page({
         priceId: 0,
         isPay: true,
         isAlert: true,
+        isMore:true,
+        rangePage:1
     },
 
     /**
@@ -186,11 +188,6 @@ Page({
                     res.data.data.start_time = getTime.formatDate(new Date(res.data.data.start_time * 1000))
                     res.data.data.end_time = getTime.formatDate(new Date(res.data.data.end_time * 1000));
                     res.data.data.cover.url = getTime.rect(res.data.data.cover.url, 325, 155);
-                    // if (res.data.data.act_image.length > 0) {
-                    //     for (let i = 0; i < res.data.data.act_image.length; i++) {
-                    //         res.data.data.act_image[i].url = getTime.rect(res.data.data.act_image[i].url, 325, 155)
-                    //     }
-                    // }
                     // 是否去支付
                     if (res.data.data.could_pay != undefined) {
                         if (res.data.data.could_pay) {
@@ -217,6 +214,66 @@ Page({
             }
         })
     },
+    //获取更多团队成员
+    getMoreRangeData:function(){
+        let that = this;
+        let personInfo = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        personInfo.push(...that.data.personInfo)
+        that.setData({
+            rangePage: that.data.rangePage + 1
+        })
+        getApp().request({
+            url: 'personal_group_member',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
+                page: that.data.rangePage
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    personInfo.push(...res.data.data.list)
+                    // 更多数据
+                    if (personInfo.length >= that.data.rangePage*10) {
+                        that.setData({
+                            isMore: false,
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
+
+                    that.setData({
+                        personInfo: personInfo
+                    })
+                    // 无记录
+                    if (personInfo.length > 0) {
+                        that.setData({
+                            isData: true
+                        })
+                    } else {
+                        that.setData({
+                            isData: false
+                        })
+                    }
+                    wx.hideLoading()
+                } else {
+                    wx.hideLoading()
+                    that.setData({
+                        isData: true
+                    })
+                }
+
+            }
+        })
+    },
     //获取团队成员
     getRangeData:function(e){
         let that = this;
@@ -225,6 +282,7 @@ Page({
             data: {
                 act_id: that.data.actId,
                 joiner_id: that.data.joinId,
+                page:that.data.rangePage
             },
             method: 'post',
             success: function (res) {
@@ -232,6 +290,15 @@ Page({
                     wx.stopPullDownRefresh()
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    if(res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false,
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
                     }
                     that.setData({
                         personInfo: res.data.data.list

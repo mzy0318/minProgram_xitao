@@ -8,6 +8,8 @@ Page({
         pageData: '',
         statusText:'活动进行中',
         statusColor:'green',
+        pageNum:1,
+        isMore:true,
     },
 
     /**
@@ -29,6 +31,9 @@ Page({
      */
     onShow: function() {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getPageData();
     },
 
@@ -51,15 +56,17 @@ Page({
      */
     onPullDownRefresh: function() {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getPageData();
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function() {
-
-    },
+    // onReachBottom: function() {
+    // },
     // 查看报名列表
     toJoinList:function(e){
         let that = this;
@@ -131,12 +138,71 @@ Page({
             })
         }
     },
+    // 更多页面数据
+    moreData:function(){
+        let that = this;
+        let pageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        pageData.push(...that.data.pageData);
+        that.setData({
+            pageNum: that.data.pageNum + 1
+        })
+        getApp().request({
+            url: 'org/sugar/list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'get',
+            success: function (res) {
+                if (res.data.code == 1) {
+                    wx.stopPullDownRefresh()
+
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        if (res.data.data.list[i].end_time * 1000 > new Date().valueOf()) {
+                            res.data.data.list[i].statusText = '活动进行中';
+                            res.data.data.list[i].statusColor = 'green';
+                        } else if (res.data.data.list[i].end_time * 1000 <= new Date().valueOf()) {
+                            res.data.data.list[i].statusText = '活动已结束';
+                            res.data.data.list[i].statusColor = 'red';
+                        }
+                        res.data.data.list[i].start_time = format.formatTime(new Date(res.data.data.list[i].start_time * 1000));
+                        res.data.data.list[i].end_time = format.formatTime(new Date(res.data.data.list[i].end_time * 1000));
+                        res.data.data.list[i].banner_image_url = format.rect(res.data.data.list[i].banner_image_url, 200, 100)
+                    }
+                    pageData.push(...res.data.data.list);
+                    if (pageData.length >= that.data.pageNum*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData
+                    })
+                    wx.hideLoading()
+                }else{
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon:'none',
+                    })
+                }
+            }
+        })
+    },
     // 获取页面数据
     getPageData: function(e) {
         let that = this;
         getApp().request({
             url: 'org/sugar/list',
-            data: {},
+            data: {
+                page: that.data.pageNum,
+            },
             method: 'get',
             success: function(res) {
                 if (res.data.code == 1) {
@@ -154,8 +220,22 @@ Page({
                         res.data.data.list[i].end_time = format.formatTime(new Date(res.data.data.list[i].end_time*1000));
                         res.data.data.list[i].banner_image_url = format.rect(res.data.data.list[i].banner_image_url,200,100)
                     }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data.list
+                    })
+                }else{
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
                     })
                 }
             }

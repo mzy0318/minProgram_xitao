@@ -1,4 +1,4 @@
-<view class='killPriceWrap' bindtap='toPriceInfo' wx:for='{{pageData}}' data-id='{{item.id}}'>
+<view class='killPriceWrap' bindtap='toPriceInfo' wx:for='{{pageData}}' data-id='{{item.id}}' wx:key='{{item.id}}'>
     <view class='killPriceImg'>
         <image src='{{item.banner_image_url}}' mode='aspectFill' />
     </view>
@@ -11,3 +11,4 @@
         </view>
     </view>
 </view>
+<view class='moreData' hidden='{{isMore}}' bindtap='moreData'>更多...</view>

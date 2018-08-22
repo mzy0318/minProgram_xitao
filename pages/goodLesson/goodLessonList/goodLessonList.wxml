@@ -1,7 +1,7 @@
 <view class='lessonBanner'>
     <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/lesson_one_banner.png' mode='scaleToFill' />
 </view>
-<view class='contentList' bindtap='toListInfo' data-actid='{{item.act_nice_id}}' wx:for='{{pageData}}'>
+<view class='contentList' bindtap='toListInfo' data-actid='{{item.act_nice_id}}' wx:for='{{pageData}}' wx:key='{{item.act_nice_id}}'>
     <view class='contentListLeft'>
         <image src='{{item.cover.url}}' mode='widthFix' ></image>
     </view>

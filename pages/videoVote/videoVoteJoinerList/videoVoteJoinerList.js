@@ -8,6 +8,7 @@ Page({
         pageData:'',
         pageNum:1,
         actId:'',
+        isMore:true,
     },
 
     /**
@@ -66,36 +67,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData)
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/video_vote/joiners',
-                data: {
-                    id: that.data.actId,
-                    page: that.data.pageNum,
-                },
-                method: 'get',
-                success: function (res) {
-                    if (res.data.code == 1) {
-                        wx.stopPullDownRefresh()
-                        pageDataArr.push(...res.data.data.list)
-                        that.setData({
-                            pageData: pageDataArr
-                        })
-                    } else {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        }
     },
 
     // /**
@@ -125,6 +96,51 @@ Page({
             url: '../videoVoteUserInfo/videoVoteUserInfo?joinId=' + e.currentTarget.dataset.id + '&actId=' + that.data.actId,
         })
     },
+    // 获取页面更多数据
+    getMoreData:function(){
+        let that = this;
+        let pageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        pageData.push(...that.data.pageData)
+        that.setData({
+            pageNum:that.data.pageNum + 1
+        })
+        getApp().request({
+            url: 'org/video_vote/joiners',
+            data: {
+                id: that.data.actId,
+                page: that.data.pageNum,
+            },
+            method: 'get',
+            success: function (res) {
+                if (res.data.code == 1) {
+                    wx.stopPullDownRefresh()
+                    pageData.push(...res.data.data.list)
+                    if (pageData.length >= that.data.pageNum*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData,
+                    })
+                    wx.hideLoading()
+                } else {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
     // 获取页面数据
     getPageData: function () {
         let that = this;
@@ -138,6 +154,15 @@ Page({
             success: function (res) {
                 if (res.data.code == 1) {
                     wx.stopPullDownRefresh()
+                    if(res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data.list
                     })

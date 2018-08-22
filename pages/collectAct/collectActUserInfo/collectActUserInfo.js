@@ -20,6 +20,7 @@ Page({
         },
         timer: '',
         heplerList:'',
+        isMore:true,
         sugarList:[
             {
                 name:'rainbow',
@@ -84,46 +85,6 @@ Page({
         that.getHelperData();
         //获取活动排行榜
         that.getRange()
-        while (that.data.helperData.length >= that.data.helperPage * 10){
-            helperData.push(...that.data.helperData);
-            that.setData({
-                helperPage: that.data.helperPage + 1
-            })
-            getApp().request({
-                url: 'sugar/helpers',
-                data: {
-                    joiner_id: that.data.userId,
-                    page: that.data.helperPage,
-                },
-                method: 'get',
-                success: function (res) {
-                    if (res.data.code == 1) {
-                        wx.stopPullDownRefresh()
-                        if (res.data.data.list.length > 0) {
-                            for (let i = 0; i < res.data.data.list.length; i++) {
-                                res.data.data.list[i].create_time = formate.yearMonth(new Date(res.data.data.list[i].create_time * 1000));
-                                for (let j = 0; j < res.data.data.list[i].sugar.length; j++) {
-                                    for (let n = 0; n < that.data.sugarList.length; n++) {
-                                        if (res.data.data.list[i].sugar[j] == that.data.sugarList[n].name) {
-                                            res.data.data.list[i].sugar[j] = that.data.sugarList[n].url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        helperPage.push(...res.data.data.list)
-                        that.setData({
-                            helperData: helperPage,
-                        })
-                    } else {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        }
     },
 
     /**
@@ -147,6 +108,10 @@ Page({
      */
     onPullDownRefresh: function() {
         let that = this;
+        that.setData({
+            rangePage:1,
+            helperPage:1,
+        })
         clearInterval(that.data.timer)
         // 获取用户信息
         that.getUserInfo();
@@ -165,7 +130,7 @@ Page({
         pageDataArr.push(...that.data.rangeData)
         if (that.data.rangeData.length >= that.data.rangePage * 10){
             that.setData({
-                rangePage: that.data.rangePage+ 1,
+                rangePage: that.data.rangePage + 1,
             })
             getApp().request({
                 url: 'sugar/rank',
@@ -284,6 +249,58 @@ Page({
             isSugars:true,
         })
     },
+    //更多帮助集糖果者
+    getMoreHelperData:function(){
+        let that = this;
+        let helperData = [];
+        helperData.push(...that.data.helperData);
+        that.setData({
+            helperPage: that.data.helperPage + 1
+        })
+        getApp().request({
+            url: 'sugar/helpers',
+            data: {
+                joiner_id: that.data.userId,
+                page: that.data.helperPage,
+            },
+            method: 'get',
+            success: function (res) {
+                if (res.data.code == 1) {
+                    wx.stopPullDownRefresh()
+                    if (res.data.data.list.length > 0) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formate.yearMonth(new Date(res.data.data.list[i].create_time * 1000));
+                            for (let j = 0; j < res.data.data.list[i].sugar.length; j++) {
+                                for (let n = 0; n < that.data.sugarList.length; n++) {
+                                    if (res.data.data.list[i].sugar[j] == that.data.sugarList[n].name) {
+                                        res.data.data.list[i].sugar[j] = that.data.sugarList[n].url
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    helperData.push(...res.data.data.list)
+                    if (helperData.length >= that.data.helperPage*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
+                    that.setData({
+                        helperData: helperData
+                    })
+                } else {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
     // 帮助集糖果者
     getHelperData:function(){
         let that = this;
@@ -308,6 +325,15 @@ Page({
                                 }
                             }
                         }
+                    }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
                     }
                     that.setData({
                         helperData:res.data.data.list

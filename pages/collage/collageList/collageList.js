@@ -10,6 +10,7 @@ Page({
         startTime:'',
         endTime:'',
         pageNum: 1,
+        isMore:true,
     },
 
     /**
@@ -17,33 +18,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this
-        getApp().request({
-            url:'visitor_personal_group_list',
-            method:'post',
-            success:function(res){
-                if (Number(res.data.code) == 1) {
-                    let data = res.data.data.list
-
-                    data = utils.map(data,function(one){
-                      one.banner_image_url = utils.rect(one.banner_image_url,500,250)
-                      one.start_time = utils.liteDate(one.start_time)
-                      one.end_time = utils.liteDate(one.end_time)
-                      return one
-                    })
-                    
-                    that.setData({
-                        pageData: data,
-                    })
-                    console.log('that.data.pageData', that.data.pageData)
-                    wx.stopPullDownRefresh()
-                } else if (Nmuber(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -82,36 +57,13 @@ Page({
         that.setData({
             pageNum: 1
         })
-        getApp().request({
-            url: 'visitor_personal_group_list',
-            method: 'post',
-            success: function (res) {
-                if(Number(res.data.code)==1){
-                    wx.stopPullDownRefresh()
-                    let data = res.data.data.list
-                    for (let i = 0; i < data.length; i++) {
-                        data[i].start_time = utils.liteDate(new Date(data[i].start_time * 1000))
-                        data[i].end_time = utils.liteDate(new Date(data[i].end_time * 1000))
-                    }
-                    that.setData({
-                        pageData: data,
-                    })
-                } else if (Nmuber(res.data.code) == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-                
-            }
-        })
+        that.getPageData();
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
     },
 
     /**
@@ -123,6 +75,98 @@ Page({
     toCollageInfo:function(e){
         wx.navigateTo({
             url: '../collageInfo/collageInfo?actId=' + e.currentTarget.dataset.actid + '&acttag=' + e.currentTarget.dataset.acttag,
+        })
+    },
+    // 获取页面更多数据
+    moreData:function(){
+        let that = this;
+        let pageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        pageData.push(...that.data.pageData)
+        that.setData({
+            pageNum:that.data.pageNum + 1
+        })
+        getApp().request({
+            url: 'visitor_personal_group_list',
+            method: 'post',
+            data: {
+                page: that.data.pageNum
+            },
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    let data = res.data.data.list
+
+                    data = utils.map(data, function (one) {
+                        one.banner_image_url = utils.rect(one.banner_image_url, 500, 250)
+                        one.start_time = utils.liteDate(one.start_time)
+                        one.end_time = utils.liteDate(one.end_time)
+                        return one
+                    })
+                    pageData.push(...data)
+                    if (pageData.length >= that.data.pageNum*10){
+                        that.setData({
+                            isMore: false,
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData,
+                    })
+                    wx.hideLoading()
+                } else if (Nmuber(res.data.code) == 0) {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'visitor_personal_group_list',
+            method: 'post',
+            data:{
+                page:that.data.pageNum
+            },
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    let data = res.data.data.list
+
+                    data = utils.map(data, function (one) {
+                        one.banner_image_url = utils.rect(one.banner_image_url, 500, 250)
+                        one.start_time = utils.liteDate(one.start_time)
+                        one.end_time = utils.liteDate(one.end_time)
+                        return one
+                    })
+                    if(data.length >= 10){
+                        that.setData({
+                            isMore:false,
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
+                    that.setData({
+                        pageData: data,
+                    })
+                    wx.stopPullDownRefresh()
+                } else if (Nmuber(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
         })
     }
 })

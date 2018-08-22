@@ -8,3 +8,4 @@
     <view class='voteUserTitle'>{{item.title}}</view>
 </view>
 <view class='noData' hidden='{{showTitle}}'>无记录</view>
+<view class='activeInfoRankMore' bindtap='getMoreData' hidden='{{isMore}}'>更多...</view>

@@ -7,6 +7,7 @@ Page({
     data: {
         pageNum:1,
         pageData:'',
+        isMore:true,
     },
 
     /**
@@ -28,6 +29,9 @@ Page({
      */
     onShow: function() {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getData()
     },
 
@@ -50,6 +54,9 @@ Page({
      */
     onPullDownRefresh: function() {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         that.getData();
     },
 
@@ -57,46 +64,13 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData);
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/bargain_list',
-                data: {
-                    page: that.data.pageNum
-                },
-                method: 'post',
-                success: function (res) {
-                    if (res.data.code == 1) {
-                        wx.stopPullDownRefresh();
-
-                        for (let i = 0; i < res.data.data.list.length; i++) {
-                            res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].banner_image_url, 200, 100)
-                        }
-                        pageDataArr.push(...res.data.data.list)
-                        that.setData({
-                            pageData: pageDataArr,
-                        })
-                    } else if (res.data.code == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        }
     },
     // 报名列表
     toPersonList:function(e){
         let that = this;
         wx.setStorageSync('pageTypeStu', 6);
         wx.navigateTo({
-            url: '../killPriceList/killPriceList?id=' + e.currentTarget.dataset.id,
+            url: '../killUserInfo/killUserInfo?id=' + e.currentTarget.dataset.id,
         })
     },
     // 共享页面
@@ -159,6 +133,54 @@ Page({
     toback: function () {
         wx.navigateBack({})
     },
+    // 获取更多页面数据
+    moreData:function(){
+        let that = this;
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        let pageData = [];
+        pageData.push(...that.data.pageData);
+        that.setData({
+            pageNum: that.data.pageNum + 1
+        })
+        getApp().request({
+            url: 'org/bargain_list',
+            data: {
+                page: that.data.pageNum
+            },
+            method: 'post',
+            success: function (res) {
+                if (res.data.code == 1) {
+                    wx.stopPullDownRefresh();
+                    //处理图片
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].banner_image_url, 200, 100)
+                    }
+                    pageData.push(...res.data.data.list)
+                    if (pageData.length >= that.data.pageNum*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData
+                    })
+                    wx.hideLoading()
+                } else if (res.data.code == 0) {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
     // 获取页面数据
     getData:function(e){
         let that = this;
@@ -171,11 +193,19 @@ Page({
             success:function(res){
                 if(res.data.code == 1){
                     wx.stopPullDownRefresh();
-
+                    //处理图片
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].banner_image_url, 200, 100)
                     }
-
+                    if(res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore: false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
+                    }
                     that.setData({
                         pageData:res.data.data.list
                     })

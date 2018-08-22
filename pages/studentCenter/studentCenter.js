@@ -106,6 +106,8 @@ Page({
         userInfo: '',
         funcOpt: '',
         isUserInfo:false,
+        avarImage:'',
+        nickname:'',
     },
 
     /**
@@ -144,11 +146,19 @@ Page({
         }
         that.setData({
             versionData: version.version + versionText,
+            avarImage: wx.getStorageSync('avarImage'),
+            nickname: wx.getStorageSync('nickname'),
         });
+
         //获取用户信息
         wx.getUserInfo({
             success: res => {
                 // 可以将 res 发送给后台解码出 unionId
+                that.setData({
+                    userInfo: res.userInfo,
+                    isUserInfo: true,
+                    avarImage: res.userInfo.avatarUrl,
+                })
                 getApp().globalData.userInfo = res.userInfo;
                 let sendData = {};
                 sendData['nickname'] = res.userInfo.nickName
@@ -163,9 +173,6 @@ Page({
                     data: sendData,
                     method: 'post',
                     success: function (res) {
-                        that.setData({
-                            isUserInfo: true,
-                        })
                     }
                 })
                 // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -257,8 +264,6 @@ Page({
     // 获取用户信息
     getUserInfo:function(e){
         let that = this;
-        console.log('e',e)
-        console.log('e.detail.userInfo', e.detail.userInfo)
         if (e.detail.userInfo == undefined){
             that.setData({
                 userInfo: {
@@ -272,6 +277,7 @@ Page({
             that.setData({
                 userInfo: e.detail.userInfo,
                 isUserInfo: true,
+                avarImage: e.detail.userInfo.avatarUrl,
             })
             let sendData = {};
             sendData['nickname'] = e.detail.userInfo.nickName

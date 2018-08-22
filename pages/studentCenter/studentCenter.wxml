@@ -1,12 +1,12 @@
 <view class='stuCenterTop'>
     <view class='stuCenterTopInfo'>
         <view class='stuCenterTopLeft'>
-            <image src='{{userInfo.avatarUrl}}' mode='scaleToFill' />
+            <image src='{{avarImage}}' mode='scaleToFill' />
         </view>
         <view class='stuCenterTopRight'>
             <view wx:if='{{isUserInfo}}'>{{userInfo.nickName}}</view>
             <button wx:else hover-class='none' open-type='getUserInfo' bindgetuserinfo="getUserInfo">点击获得头像</button>
-            <view>欢迎您!!!</view>
+            <view>{{nickname}} 欢迎您</view>
         </view>
     </view>
 </view>

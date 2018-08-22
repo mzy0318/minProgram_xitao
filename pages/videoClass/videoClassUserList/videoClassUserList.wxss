@@ -117,7 +117,7 @@ view.videoClassContent:nth-child(even){
     position:fixed;
     bottom:30rpx;
     left:50%;
-    margin-left:-40rpx;
+    margin-left:210rpx;
     background:#4993FE;
     color:#fff;
     border-radius:50%;
@@ -139,4 +139,13 @@ view.videoClassContent:nth-child(even){
     display:inline-block;
     line-height:50rpx;
     padding:0rpx 8rpx;
+}
+/* 更多数据 */
+.moreData{
+    width:710rpx;
+    font-size:28rpx;
+    color:#7b7b7b;
+    line-height:50rpx;
+    text-align:center;
+    margin-top:20rpx;
 }

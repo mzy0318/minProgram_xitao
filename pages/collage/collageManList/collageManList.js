@@ -7,6 +7,7 @@ Page({
     data: {
         pageNum: 1,
         pageData: '',
+        isMore:true,
     },
 
     /**
@@ -28,6 +29,9 @@ Page({
     onShow: function() {
         let that = this;
         // 获取页面数据
+        that.setData({
+            pageNum: 1,
+        })
         that.getPageData();
     },
 
@@ -50,55 +54,17 @@ Page({
      */
     onPullDownRefresh: function() {
         let that = this;
-        that.getPageData()
+        // 获取页面数据
+        that.setData({
+            pageNum: 1,
+        })
+        that.getPageData();
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData);
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/personal_group_list',
-                data: {
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: res => {
-                    if (res.data.data.list.length <= 0) {
-                        that.setData({
-                            isData: false
-                        })
-                    } else {
-                        that.setData({
-                            isData: true
-                        })
-                    }
-                    // 改变图片大小
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].cover.url, 200, 100);
-                        res.data.data.list[i].start_time = utils.seconds(new Date(res.data.data.list[i].start_time * 1000))
-                        res.data.data.list[i].end_time = utils.seconds(new Date(res.data.data.list[i].end_time * 1000))
-                    }
-                    pageDataArr.push(...res.data.data.list);
-                    this.setData({
-                        pageData: pageDataArr
-                    })
-                    if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        }
     },
     // 拼团详情页面
     toKillPirce: function(e) {
@@ -160,9 +126,8 @@ Page({
     // 拼团参与人员
     toPersonList: function (e) {
        let that = this;
-        wx.setStorageSync('pageTypeStu', 3)
         wx.navigateTo({
-            url: '../../killPrices/killPriceList/killPriceList?id=' + e.currentTarget.dataset.id,
+            url: '../collageUserList/collageUserList?id=' + e.currentTarget.dataset.id,
         })
     },
     // 新建活动
@@ -174,6 +139,65 @@ Page({
     // 返回
     toback: function() {
         wx.navigateBack({})
+    },
+    // 获取更多页面数据
+    moreData:function(){
+        let that = this;
+        let pageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        pageData.push(...that.data.pageData)
+        that.setData({
+            pageNum:that.data.pageNum + 1
+        })
+        getApp().request({
+            url: 'org/personal_group_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: res => {
+                wx.stopPullDownRefresh()
+                if (res.data.data.list.length <= 0) {
+                    that.setData({
+                        isData: false
+                    })
+                } else {
+                    that.setData({
+                        isData: true
+                    })
+                    // 改变图片大小
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].cover.url, 200, 100);
+                        res.data.data.list[i].start_time = utils.seconds(new Date(res.data.data.list[i].start_time * 1000))
+                        res.data.data.list[i].end_time = utils.seconds(new Date(res.data.data.list[i].end_time * 1000))
+                    }
+                }
+                pageData.push(...res.data.data.list)
+                // 更多数据
+                if (pageData.length >= that.data.pageNum*10) {
+                    that.setData({
+                        isMore: false,
+                    })
+                } else {
+                    that.setData({
+                        isMore: true,
+                    })
+                }
+                this.setData({
+                    pageData: pageData
+                })
+                wx.hideLoading()
+                if (Number(res.data.code) == 0) {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
     },
     // 获取页面数据
     getPageData: function(e) {
@@ -194,12 +218,22 @@ Page({
                     that.setData({
                         isData: true
                     })
+                    // 改变图片大小
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].cover.url, 200, 100);
+                        res.data.data.list[i].start_time = utils.seconds(new Date(res.data.data.list[i].start_time * 1000))
+                        res.data.data.list[i].end_time = utils.seconds(new Date(res.data.data.list[i].end_time * 1000))
+                    }
                 }
-                // 改变图片大小
-                for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].coverImage = utils.rect(res.data.data.list[i].cover.url, 200, 100);
-                    res.data.data.list[i].start_time = utils.seconds(new Date(res.data.data.list[i].start_time * 1000))
-                    res.data.data.list[i].end_time = utils.seconds(new Date(res.data.data.list[i].end_time*1000))
+                // 更多数据
+                if(res.data.data.list.length >= 10){
+                    that.setData({
+                        isMore:false,
+                    })
+                }else{
+                    that.setData({
+                        isMore:true,
+                    })
                 }
                 this.setData({
                     pageData: res.data.data.list

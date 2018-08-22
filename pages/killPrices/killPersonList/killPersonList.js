@@ -10,6 +10,9 @@ Page({
         isPersonInfo:true,
         personInfo:'',
         showTitle: true,
+        killPage:1,
+        collagePage:1,
+        isMore:true,
     },
 
     /**
@@ -22,29 +25,36 @@ Page({
             getApp().request({
                 url: "my_bargain_list",
                 method: "post",
-                data: {},
+                data: {
+                    page: that.data.killPage
+                },
                 success: res => {
                     let data = res.data.data;
                     wx.setNavigationBarTitle({
                         title: '砍价报名列表',
                     })
-                    if (data.list.length==0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        //     icon:'none',
-                        // })
+                    if (data.list.length <= 0){
                         that.setData({
                             showTitle:false
                         })
-                    } else if (data.list.length != 0){
+                    } else if (data.list.length > 0){
                         that.setData({
                             showTitle: true
                         })
                         for (let i = 0; i < data.list.length; i++) {
                             data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
+                        if (data.list.length >= 10){
+                            that.setData({
+                                isMore:false
+                            })
+                        }else{
+                            that.setData({
+                                isMore: true
+                            })
+                        }
                         this.setData({
-                            userList: data
+                            userList: data.list
                         })
                     }
                 }
@@ -53,29 +63,36 @@ Page({
             getApp().request({
                 url: "my_personal_group_list",
                 method: "post",
-                data: {},
+                data: {
+                    page:that.data.collagePage,
+                },
                 success: res => {
                     let data = res.data.data;
                     wx.setNavigationBarTitle({
                         title: '我的私人拼团',
                     })
-                    if (data.list.length==0){
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        //     icon:'none',
-                        // })
+                    if (data.list.length <= 0){
                         that.setData({
                             showTitle: false
                         })
-                    } else if (data.list.length != 0){
+                    } else if (data.list.length > 0){
                         that.setData({
                             showTitle: true
                         })
                         for (let i = 0; i < data.list.length; i++) {
                             data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
+                        if (data.list.length >= 10) {
+                            that.setData({
+                                isMore: false
+                            })
+                        } else {
+                            that.setData({
+                                isMore: true
+                            })
+                        }
                         this.setData({
-                            userList: data
+                            userList: data.list
                         })
                     }
                 }
@@ -118,20 +135,21 @@ Page({
         let that = this;
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
         if (pageTypeStu == 6) {
+            that.setData({
+                killPage:1
+            })
             getApp().request({
                 url: "my_bargain_list",
                 method: "post",
-                data: {},
+                data: {
+                    page: that.data.killPage,
+                },
                 success: res => {
                     let data = res.data.data;
                     wx.setNavigationBarTitle({
                         title: '砍价报名列表',
                     })
                     if (data.list.length == 0) {
-                        // wx.showToast({
-                        //     title: '您没有参加该活动',
-                        //     icon: 'none',
-                        // })
                         that.setData({
                             
                                 showTitle: false
@@ -145,17 +163,22 @@ Page({
                             data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
                         this.setData({
-                            userList: data
+                            userList: data.list
                         })
                         wx.stopPullDownRefresh()
                     }
                 }
             })
         } else if (pageTypeStu == 3) {
+            that.setData({
+                collagePage:1
+            })
             getApp().request({
                 url: "my_personal_group_list",
                 method: "post",
-                data: {},
+                data: {
+                    page: that.data.collagePage,
+                },
                 success: res => {
                     let data = res.data.data;
                     wx.setNavigationBarTitle({
@@ -173,7 +196,7 @@ Page({
                             data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
                         }
                         this.setData({
-                            userList: data
+                            userList: data.list
                         })
                         wx.stopPullDownRefresh()
                     }
@@ -185,16 +208,15 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    // onReachBottom: function () {
-
-    // },
+    onReachBottom: function () {
+    },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     toKillPriceInfo:function(e){
         let that = this;
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
@@ -209,13 +231,15 @@ Page({
         }
     },
     toListInfo:function(e){
+        let that = this;
         let pageTypeStu = wx.getStorageSync('pageTypeStu')
         if (pageTypeStu == 6){
             wx.navigateTo({
-                url: '../killPriceListInfo/killPriceListInfo?actId=' + e.currentTarget.dataset.actid,
+                url: '../killPriceStuListInfo/killPriceStuListInfo?actId=' + e.currentTarget.dataset.actid + '&joinId=' + e.currentTarget.dataset.joinerid,
             })
         } else if (pageTypeStu == 3){
-            let userInfo = this.data.userList.list[e.currentTarget.dataset.index];
+            //拼团
+            let userInfo = that.data.userList[e.currentTarget.dataset.index];
             if (typeof userInfo.start_time == 'string'){
 
             } else if (typeof userInfo.start_time == 'number'){
@@ -223,7 +247,7 @@ Page({
                 userInfo.end_time = util.formatTime(new Date(userInfo.end_time * 1000));
             }
             userInfo.is_leader = userInfo.is_leader?'团长':'团员';
-            this.setData({
+            that.setData({
                 isPersonInfo:false,
                 personInfo: userInfo
             })
@@ -233,5 +257,110 @@ Page({
         this.setData({
             isPersonInfo: true,
         })
-    }
+    },
+    //获取更多数据
+    moreData:function(){
+        let that = this;
+        let pageTypeStu = wx.getStorageSync('pageTypeStu');
+        let userList = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        userList.push(...that.data.userList);
+        if (pageTypeStu == 6){
+            // 砍价
+            that.setData({
+                killPage: that.data.killPage + 1
+            })
+            getApp().request({
+                url: "my_bargain_list",
+                method: "post",
+                data: {
+                    page: that.data.killPage
+                },
+                success: function(res) {
+                    let data = res.data.data;
+                    wx.setNavigationBarTitle({
+                        title: '砍价报名列表',
+                    })
+                    if (data.list.length <= 0) {
+                        that.setData({
+                            showTitle: false
+                        })
+                    } else if (data.list.length > 0) {
+                        that.setData({
+                            showTitle: true
+                        })
+                        for (let i = 0; i < data.list.length; i++) {
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                        }
+                        userList.push(...data.list)
+                        if (userList.length >= that.data.killPage*10) {
+                            that.setData({
+                                isMore: false
+                            })
+                        } else {
+                            that.setData({
+                                isMore: true
+                            })
+                        }
+                        that.setData({
+                            userList: userList
+                        })
+                        wx.hideLoading()
+                    }
+                    if(res.data.code == 0){
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon:'none'
+                        })
+                    }
+                }
+            })
+        } else if (pageTypeStu == 3){
+            // 拼团
+            that.setData({
+                collagePage: that.data.collagePage + 1
+            })
+            getApp().request({
+                url: "my_personal_group_list",
+                method: "post",
+                data: {
+                    page: that.data.collagePage,
+                },
+                success: res => {
+                    let data = res.data.data;
+                    wx.setNavigationBarTitle({
+                        title: '我的私人拼团',
+                    })
+                    if (data.list.length <= 0) {
+                        that.setData({
+                            showTitle: false
+                        })
+                    } else if (data.list.length > 0) {
+                        that.setData({
+                            showTitle: true
+                        })
+                        for (let i = 0; i < data.list.length; i++) {
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                        }
+                        userList.push(...data.list)
+                        if (userList.length >= that.data.collagePage*10) {
+                            that.setData({
+                                isMore: false
+                            })
+                        } else {
+                            that.setData({
+                                isMore: true
+                            })
+                        }
+                        that.setData({
+                            userList: userList
+                        })
+                    }
+                }
+            })
+        }
+    },
 })

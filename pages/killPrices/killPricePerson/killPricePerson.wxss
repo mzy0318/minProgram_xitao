@@ -83,7 +83,7 @@
     left:0rpx;
     top:30rpx;
     border-radius:5px;
-    font-size:24rpx;
+    font-size:22rpx;
     text-align:center;
     color:#fff;
 }
@@ -294,6 +294,7 @@
     width:670rpx;
     min-height:500rpx;
     background:#fff;
+    padding-bottom:15rpx;
     margin:20rpx auto 0rpx;
 }
 .pricePersonFourContent{
@@ -313,39 +314,47 @@
     color:#CC2200;
     font-size:35rpx;
 }
-.pricePersonFourContent .contentThree{
+.pricePersonFourContent>.contentThree{
     width:100%;
     height:100rpx;
-    margin-top:30rpx;
+    margin-top:0rpx;
 }
 
-.pricePersonFourContent .contentThree view:nth-child(1){
-    width:100rpx;
-    height:100rpx;
+.pricePersonFourContent>.contentThree>view:nth-child(1){
+    width:80rpx;
+    height:80rpx;
     float:left;
+    margin-top:10rpx;
     border-radius:50%;
     overflow: hidden;
 }
 
-.pricePersonFourContent .contentThree view:nth-child(1) image{
-    width:100rpx;
-    height:100rpx;
+.pricePersonFourContent>.contentThree>view:nth-child(1)>image{
+    width:80rpx;
+    height:80rpx;
 }
-.pricePersonFourContent .contentThree view:nth-child(2){
+.pricePersonFourContent>.contentThree>view:nth-child(2){
     width:480rpx;
     height:100rpx;
 }
-.pricePersonFourContent .contentThree view:nth-child(2) text{
+.pricePersonFourContent>.contentThree>view:nth-child(2)>text{
     display:block;
     line-height:100rpx;
     float:left;
     font-size:30rpx;
     margin-left:20rpx;
 }
-.pricePersonFourContent .contentThree view:nth-child(2) text:nth-child(2){
+.pricePersonFourContent>.contentThree>view:nth-child(2)>text:nth-child(1){
+    width:120rpx;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+.pricePersonFourContent>.contentThree>view:nth-child(2)>text:nth-child(2){
+    width:240rpx;
     text-align:right;
     float:right;
-    margin-right:-80rpx;
+    margin-right:-100rpx;
     color:#CC2200;
 }
 /* 砍价成功弹窗 */
@@ -418,5 +427,95 @@
 }
 .alertBtn>view:nth-child(2){
     color:#118408;
+}
+/*弹窗  */
+
+.writeInfoWrap {
+    width: 750rpx;
+    height: 1400rpx;
+    position: fixed;
+    top: 0rpx;
+    left: 0rpx;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.writeInfo {
+    width: 660rpx;
+    min-height: 400rpx;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -330rpx;
+    margin-top: -300rpx;
+    border-radius: 5px;
+    padding-bottom: 20rpx;
+}
+
+.writeInfo>view:nth-child(1) {
+    width: 690rpx;
+    line-height: 40rpx;
+    font-size: 30rpx;
+    text-align: center;
+    margin-top: 30rpx;
+}
+
+.writeInfo .inputStyle {
+    width: 480rpx;
+    height: 65rpx;
+    line-height: 65rpx;
+    background: #f2f2f2;
+    margin: 40rpx auto 0rpx;
+    border-radius: 5px;
+}
+
+.writeInfo .inputStyle input {
+    width: 460rpx;
+    height: 65rpx;
+    line-height: 65rpx;
+    background: #f2f2f2;
+    font-size: 30rpx;
+    border-radius: 5px;
+    margin-left: 20rpx;
+}
+
+.writeInfo button {
+    width: 480rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    color: #fff;
+    background: #47bafd;
+    margin-top: 30rpx;
+}
+
+.line {
+    width: 0rpx;
+    height: 80rpx;
+    border: 1rpx solid #fff;
+    position: absolute;
+    top: -80rpx;
+    right: 60rpx;
+}
+
+.close {
+    width: 50rpx;
+    line-height: 50rpx;
+    position: absolute;
+    top: -130rpx;
+    right: 35rpx;
+    background: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 40rpx;
+    color: #cacaca;
+}
+/* 更多数据 */
+.moreData{
+    width:600rpx;
+    height:50rpx;
+    line-height:50rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
 }
 

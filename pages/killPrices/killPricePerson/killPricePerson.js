@@ -21,6 +21,9 @@ Page({
         isAlert:true,
         widthV:0,
         widthP:0,
+        isClosed: 'none',
+        nameInfo: '',
+        isMore:true,
     },
 
     /**
@@ -99,37 +102,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.peopleDataList);
-        if (that.data.peopleDataList.length >= that.data.rangPage * 10) {
-            that.setData({
-                rangPage: rangPage + 1,
-            })
-            getApp().request({
-                url: 'bargain_range',
-                data: {
-                    act_id: that.data.actId,
-                    joiner_id: that.data.joinId,
-                    page: that.data.rangPage
-                },
-                method: 'post',
-                success: res => {
-                    if (Number(res.data.code) == 1) {
-                        pageDataArr.push(...res.data.data.list)
-                        this.setData({
-                            peopleData: res.data.data,
-                            peopleDataList: pageDataArr,
-                        })
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            });
-        } 
     },
 
     /**
@@ -293,15 +265,66 @@ Page({
                         widthP = Math.floor(Math.floor(value) * 0.72) + '%'
                     }
                 }
+                let nameInfo = []
+                for (let i = 0; i < res.data.data.join_info.length; i++) {
+                    nameInfo.push(res.data.data.join_info[i].text)
+                }
                 that.setData({
                     pageData: res.data.data,
                     endTime: util.formatTime(new Date(res.data.data.end_time * 1000)),
                     widthV: widthV,
                     widthP: widthP,
+                    nameInfo: nameInfo,
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.title,
                 })
+            }
+        });
+    },
+    // 更多排行数据
+    moreData:function(){
+        let that = this;
+        let peopleDataList = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        peopleDataList.push(...that.data.peopleDataList)
+        that.setData({
+            rangPage: that.data.rangPage + 1
+        })
+        getApp().request({
+            url: 'bargain_range',
+            data: {
+                act_id: that.data.actId,
+                joiner_id: that.data.joinId,
+                page: that.data.rangPage
+            },
+            method: 'post',
+            success: res => {
+                if (Number(res.data.code) == 1) {
+                    wx.stopPullDownRefresh()
+                    peopleDataList.push(...res.data.data.list)
+                    if (peopleDataList.length >= that.data.rangPage*10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        peopleDataList: peopleDataList,
+                    })
+                    wx.hideLoading()
+                } else if (Number(res.data.code) == 0) {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
             }
         });
     },
@@ -318,7 +341,16 @@ Page({
             method: 'post',
             success: res => {
                 if (Number(res.data.code) == 1) {
-                    wx.stopPullDownRefresh()
+                    wx.stopPullDownRefresh();
+                    if (res.data.data.list.length >= 10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                    }
                     that.setData({
                         peopleDataList: res.data.data.list,
                         peopleData: res.data.data,
@@ -331,5 +363,61 @@ Page({
                 }
             }
         });
-    }
+    },
+    isClose: function (e) {
+        let that = this;
+        that.setData({
+            isClosed: e.currentTarget.dataset.display,
+        })
+    },
+    // 参加活动
+    joinActive: function (e) {
+        let that = this;
+        let sendData = e.detail.value;
+        for (let i = 0; i < that.data.nameInfo.length; i++) {
+            sendData['info[' + i + ']'] = sendData[i]
+            delete sendData[i]
+        }
+        sendData['act_id'] = that.data.actId;
+        getApp().request({
+            url: 'join_bargain',
+            data: sendData,
+            method: 'post',
+            success: res => {
+                let pageInfo = JSON.stringify(res.data.data);
+                let respons = res;
+                if (Number(res.data.code) == 1) {
+                    wx.showLoading({
+                        title: '正在报名',
+                        mask: true,
+                    })
+                    setTimeout(closeLogin, 2000)
+                    function closeLogin() {
+
+                        wx.hideLoading();
+
+                        wx.showToast({
+                            title: '报名成功',
+                            success: function () {
+                                that.setData({
+                                    isClosed: 'none',
+                                })
+                                that.getPageData();
+                                // 获取砍价排行榜
+                                that.getRangeData();
+                                wx.navigateTo({
+                                    url: '../killPricePerson/killPricePerson?actId=' + respons.data.data.act_id + '&joinId=' + respons.data.data.joiner_id,
+                                })
+                            }
+                        });
+                    }
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
+                    })
+                }
+            }
+        })
+    },
 })

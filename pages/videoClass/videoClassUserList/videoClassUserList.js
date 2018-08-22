@@ -130,7 +130,7 @@ Page({
         let that = this;
         let pageDataArr = [];
         pageDataArr.push(...that.data.listData);
-        if (that.data.pageData.length >= that.data.pageNum * 10){
+        if (that.data.listData.length >= that.data.pageNum * 10){
             that.setData({
                 pageNum: that.data.pageNum + 1,
             })
@@ -139,21 +139,21 @@ Page({
                 data: {
                     tag: that.data.tag,
                     catalog: that.data.catalog,
-                    page: 1,
+                    page: that.data.pageNum,
                 },
                 method: 'post',
                 success: function (res) {
                     if (Number(res.data.code) == 1) {
                         wx.hideLoading()
-                        res.data.data.catalog.unshift('全部')
-                        res.data.data.tag.unshift('全部');
+                        // res.data.data.catalog.unshift('全部')
+                        // res.data.data.tag.unshift('全部');
                         pageDataArr.push(...res.data.data.list);
                         for (let i = 0; i < pageDataArr.length; i++) {
                             pageDataArr[i].cover.url = utils.rect(pageDataArr[i].cover.url, 172, 100)
                         }
                         that.setData({
-                            catalogList: res.data.data.catalog,
-                            tagList: res.data.data.tag,
+                            // catalogList: res.data.data.catalog,
+                            // tagList: res.data.data.tag,
                             listData: pageDataArr
                         })
                         wx.stopPullDownRefresh()
@@ -212,6 +212,9 @@ Page({
     // 分类/标签  切换效果  请求数据
     switchTag:function(e){
         let that = this;
+        that.setData({
+            pageNum:1
+        })
         if (Number(e.currentTarget.dataset.id) == 0) {
             that.setData({
                 catalogNum: e.currentTarget.dataset.index,

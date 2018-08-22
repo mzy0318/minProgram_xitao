@@ -1,14 +1,14 @@
 /* pages/studentStyle/studentStyle.wxss */
 .wrapView{
   width:720rpx;
-  margin:20rpx auto 20rpx;
+  margin:0rpx auto 10rpx;
 }
 .wrapView>image{
   width:720rpx;
 }
 .studentInfo{
     width:680rpx;
-    min-height:40rpx;
+    min-height:0rpx;
     line-height:40rpx;
     margin:0 auto;
     text-align:center; 

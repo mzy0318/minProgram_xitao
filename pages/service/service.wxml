@@ -1,0 +1,9 @@
+<view class='serviceWrap'>
+    <view class='serviceContent' hidden='{{isShow}}'>
+        <view class='serviceTitle'>亲,客服人员邀请您通话</view>
+        <view class='serviceBtn'>
+            <button bindtap='toIndex'>稍后</button>
+            <button open-type='contact'>沟通</button>
+        </view>
+    </view>
+</view>

@@ -183,6 +183,15 @@
     width:55rpx;
     height:55rpx;
 }
+/* 更多 */
+.collectActMore{
+    width:690rpx;
+    height:40rpx;
+    font-size:26rpx;
+    color:#7b7b7b;
+    text-align:center;
+    line-height:40rpx;
+}
 /* 连接点 */
 .viewMiddle{
     width:640rpx;

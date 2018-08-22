@@ -2,3 +2,4 @@
     <image src='{{item.url}}' mode='widthFix'></image>
     <view class='studentInfo'>{{item.intro}}</view>
 </view>
+<!-- {{item.intro}} -->

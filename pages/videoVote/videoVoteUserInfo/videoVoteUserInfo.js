@@ -6,6 +6,7 @@ Page({
      */
     data: {
         joinId:'',
+        actId:'',
         pageData:'',
         isTitleOne: true,
         isTitleTwo: true,
@@ -20,25 +21,28 @@ Page({
     onLoad: function(options) {
         let that = this;
         let url = 'pages/videoVote/videoVoteUserInfo/videoVoteUserInfo';
-        let scene = 'joinId=' + options.joinId
-        console.log('options', options)
+        let scene = 'joinId:' + options.joinId + ':actId:' + options.actId
 
         if (options.scene != undefined) {
             let scene = decodeURIComponent(options.scene);
-            let n = scene.indexOf('=');
+            console.log('scene', scene)
+            let sceneArr = scene.split(':')
             that.setData({
-                joinId: scene.slice(n + 1),
+                joinId: sceneArr[1],
+                actId: sceneArr[3],
             })
         } else if (options.scene == undefined) {
             that.setData({
                 joinId: options.joinId,
+                actId:options.actId,
             })
         }
-
+        // https://www.zhihuizhaosheng.com/video_vote_my_cover?id=1&org_id=1   getApp().getImageHost()
         that.setData({
             encodeImage: getApp().getEncodeImage(url, scene),
-            myCoverImage: 'https://www.zhihuizhaosheng.com/' + getApp().getExtConfig().version + '/video_vote_my_cover?id=' + options.joinId
+            myCoverImage: getApp().getImageHost() + 'video_vote_my_cover?id=' + that.data.actId + '&org_id=' + getApp().getExtConfig().orgId
         })
+        console.log('that.data.myCoverImage', that.data.myCoverImage)
     },
 
     /**
@@ -96,7 +100,7 @@ Page({
     },
     btnOptions:function(e){
         let that = this;
-        if (Number(e.currentTarget.dataset.id) == 0){
+        if (Number(e.currentTarget.dataset.btnid) == 0){
             // 我要投票
             getApp().request({
                 url:'vote_video_vote',
@@ -118,17 +122,21 @@ Page({
                     }
                 }
             })
-        } else if (Number(e.currentTarget.dataset.id) == 1){
+        } else if (Number(e.currentTarget.dataset.btnid) == 1){
             //我要报名
             wx.navigateTo({
                 url: '../videoVoteSignup/videoVoteSignup?actId=' + e.currentTarget.dataset.id + '&isEdit=' + e.currentTarget.dataset.is + '&joinId=' + e.currentTarget.dataset.joinid,
             })
-        } else if (Number(e.currentTarget.dataset.id) == 2){
+        } else if (Number(e.currentTarget.dataset.btnid) == 2){
             //分享拉票
-        } else if (Number(e.currentTarget.dataset.id) == 3){
+        } else if (Number(e.currentTarget.dataset.btnid) == 3){
             //我的封面
             wx.previewImage({
                 urls: [that.data.myCoverImage],
+            })
+        } else if (Number(e.currentTarget.dataset.btnid) == 4){
+            wx.navigateTo({
+                url: '../videoVoteSignup/videoVoteSignup?isEdit=1&joinId=' + e.currentTarget.dataset.joinid + '&actId=' + e.currentTarget.dataset.id,
             })
         }
     },

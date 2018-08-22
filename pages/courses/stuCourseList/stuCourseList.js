@@ -8,6 +8,7 @@ Page({
     data: {
         pageData:'',
         showTitle: true,
+        pageNum:1,
     },
 
     /**
@@ -15,32 +16,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        getApp().request({
-            url:'visitor_sale_lesson_appoint_list',
-            data:{},
-            method:'post',
-            success:function(res){
-                if (res.data.data.length == 0) {
-                    // wx.showToast({
-                    //     title: '您没有参加该活动',
-                    //     icon: 'none'
-                    // })
-                    that.setData({
-                        showTitle: false
-                    })
-                } else if (res.data.data.length != 0) {
-                    that.setData({
-                        showTitle: true
-                    })
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time*1000))
-                    }
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -76,40 +52,50 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
-        getApp().request({
-            url: 'visitor_sale_lesson_appoint_list',
-            data: {},
-            method: 'post',
-            success: function (res) {
-                if (res.data.data.length == 0) {
-                    // wx.showToast({
-                    //     title: '您没有参加该活动',
-                    //     icon: 'none'
-                    // })
-                    that.setData({
-                        showTitle: false
-                    })
-                } else if (res.data.data.length != 0) {
-                    that.setData({
-                        showTitle: true
-                    })
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time*1000))
-                    }
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                    wx.stopPullDownRefresh()
-                }
-            }
+        that.setData({
+            pageNum:1
         })
+        that.getPageData()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageData = [];
+        pageData.push(...that.data.pageData)
+        if(that.data.pageData.length >= that.data.pageNum*10){
+            that.setData({
+                pageNum:that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'visitor_sale_lesson_appoint_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (res.data.data.length == 0) {
+                        that.setData({
+                            showTitle: false
+                        })
+                    } else if (res.data.data.length != 0) {
+                        that.setData({
+                            showTitle: true
+                        })
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time * 1000))
+                        }
+                        pageData.push(...res.data.data)
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.stopPullDownRefresh()
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -123,5 +109,33 @@ Page({
     },
     toIndex:function(){
         getApp().toIndex()
+    },
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'visitor_sale_lesson_appoint_list',
+            data: {
+                page:that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                if (res.data.data.length == 0) {
+                    that.setData({
+                        showTitle: false
+                    })
+                } else if (res.data.data.length != 0) {
+                    that.setData({
+                        showTitle: true
+                    })
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time * 1000))
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                    wx.stopPullDownRefresh()
+                }
+            }
+        })
     }
 })

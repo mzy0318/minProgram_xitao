@@ -1,6 +1,6 @@
 <view class='empty'></view>
-<swiper indicator-dots='true' indicator-active-color='#FFCE0B'>
-    <swiper-item wx:for='{{courseData.hot_lesson}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{index}}'>
+<swiper indicator-dots='true' indicator-active-color='#FFCE0B' hidden='{{isHot}}'>
+    <swiper-item wx:for='{{courseData.host_lesson}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{index}}'>
         <view class='courseTop'>
             <view class='courseTopImg'>
                 <image src='{{item.cover.url}}' mode='aspectFill' />
@@ -11,7 +11,7 @@
     </swiper-item>
 </swiper>
 <view class='courseSelect' bindtap='toCourseClass'>{{lessonClassName}}></view>
-<view class='courseInfo' wx:for='{{lessonData}}' data-id='{{item.id}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}' data-id='{{item.id}}'>
+<view class='courseInfo' wx:for='{{lessonData}}' data-id='{{item.id}}' bindtap='toCourseInfo' data-lessonInfo='{{item}}' data-id='{{item.id}}' wx:key='{{item.id}}'>
     <view class='courseInfoImg'>
         <image src='{{item.cover.url}}' mode='aspectFit'></image>
     </view>

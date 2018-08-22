@@ -40,11 +40,13 @@
 </view>
 <!-- 课程 -->
 <view class='videoClassList'>
-    <view class='videoClassContent' bindtap='toInfo' data-id='{{item.id}}' wx:for='{{listData}}'>
+    <view class='videoClassContent' bindtap='toInfo' data-id='{{item.id}}' wx:for='{{listData}}' wx:key='{{item.id}}'>
         <view class='classContentImg'>
             <image src='{{item.cover.url}}' mode='widthFix'></image>
         </view>
         <view class='classContentTitle'>{{item.title}}</view>
     </view>
+    <!-- 更多数据 -->
+    <view class='moreData' bindtap='moreData' hidden='{{isMore}}'>更多...</view>
 </view>
 <view class='addressList' bindtap='goManList'>＋</view>

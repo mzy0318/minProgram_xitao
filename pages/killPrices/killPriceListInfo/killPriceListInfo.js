@@ -9,6 +9,7 @@ Page({
         personInfo:'',
         startTime:'',
         actId:'',
+        joinId:'',
     },
 
     /**
@@ -17,13 +18,15 @@ Page({
     onLoad: function (options) {
         let that = this;
         that.setData({
-            actId: options.actId
+            actId: options.actId,
+            joinId: options.joinId
         })
         getApp().request({
-            url: "bargain_detail",
-            method: "post",
+            url: "org/bargain_info",
+            method: "get",
             data: {
                 act_id: that.data.actId,
+                joiner_id: that.data.joinId,
             },
             success: res => {
                 this.setData({
@@ -79,17 +82,15 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-        let that = this;
-        if(res.from == 'menu'){
-            return {
-                path:'pages/index/index?ageId=5&actId='+that.data.actId
-            }
-        }
-    },
+    // onShareAppMessage: function () {
+    //     let that = this;
+    //     if(res.from == 'menu'){
+    //         return {
+    //             path:'pages/index/index?ageId=5&actId='+that.data.actId
+    //         }
+    //     }
+    // },
     backPage: function () {
-        wx.navigateBack({
-
-        })
+        wx.navigateBack({})
     }
 })

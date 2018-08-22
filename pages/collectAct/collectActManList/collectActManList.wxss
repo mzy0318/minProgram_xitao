@@ -1,7 +1,7 @@
 @import '../../../utils/iconFont.wxss';
 page{
     background:#F2F2F2;
-    padding-bottom:110rpx;
+    padding-bottom:120rpx;
 }
 /* 页面功能 */
 .manListOpt{
@@ -124,4 +124,13 @@ page{
 }
 .contentBottom>view:nth-child(2){
     color:#329ED3;
+}
+/* 更多数据 */
+.moreData{
+    width:750rpx;
+    font-size:28rpx;
+    color:#7b7b7b;
+    line-height:50rpx;
+    text-align:center;
+    margin-top:20rpx;
 }

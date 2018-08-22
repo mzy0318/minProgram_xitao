@@ -11,6 +11,7 @@ Page({
         personInfo:'',
         isPersonInfo:true,
         showTitle:true,
+        pageNum:1
     }, 
 
     /**
@@ -21,37 +22,8 @@ Page({
         that.setData({
             actId: options.id,
         });
-        getApp().request({
-            url:'org/lesson_one_joiner_list',
-            data:{
-                act_nice_id: that.data.actId
-            },
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
-                    if (res.data.data.length>0){
-                        that.setData({
-                            showTitle:true,
-                        })
-                    } else if (res.data.data.length <= 0){
-                        that.setData({
-                            showTitle: false,
-                        })
-                    }
-                    for(let i =0;i<res.data.data.length;i++){
-                        res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time*1000))
-                    }
-                    that.setData({
-                        pageData:res.data.data
-                    })
-                } else if (Number(res.data.code) == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none'
-                    })
-                }
-            }
-        })
+        that.getPageData()
+        
     },
 
     /**
@@ -86,14 +58,59 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-
+        let that = this;
+        that.setData({
+            pageNum:1
+        })
+        that.getPageData()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        let that = this;
+        let pageData = [];
+        pageData.push(...that.data.pageData)
+        if(that.data.pageData.length >= that.data.pageNum*10){
+            that.setData({
+                pageNum:that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/lesson_one_joiner_list',
+                data: {
+                    act_nice_id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        if (res.data.data.length > 0) {
+                            that.setData({
+                                showTitle: true,
+                            })
+                        } else if (res.data.data.length <= 0) {
+                            that.setData({
+                                showTitle: false,
+                            })
+                        }
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time * 1000))
+                        }
+                        pageData.push(...res.data.data)
+                        that.setData({
+                            pageData: pageData,
+                        })
+                        wx.stopPullDownRefresh()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none'
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
@@ -122,6 +139,42 @@ Page({
     toPricePerson:function(e){
         wx.navigateTo({
             url: '../lessonListInfo/lessonListInfo?actId=' + e.currentTarget.dataset.id,
+        })
+    },
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'org/lesson_one_joiner_list',
+            data: {
+                act_nice_id: that.data.actId,
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    if (res.data.data.length > 0) {
+                        that.setData({
+                            showTitle: true,
+                        })
+                    } else if (res.data.data.length <= 0) {
+                        that.setData({
+                            showTitle: false,
+                        })
+                    }
+                    for (let i = 0; i < res.data.data.length; i++) {
+                        res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time * 1000))
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                    wx.stopPullDownRefresh()
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none'
+                    })
+                }
+            }
         })
     },
 })

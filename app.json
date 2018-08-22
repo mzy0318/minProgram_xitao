@@ -3,6 +3,7 @@
         "pages/index/index",
         "pages/studentCenter/studentCenter",
         "pages/morePage/morePage",
+        "pages/service/service",
         "pages/goodLesson/lessonListInfo/lessonListInfo",
         "pages/goodLesson/goodLessonList/goodLessonList",
         "pages/goodLesson/manLessonList/manLessonList",
@@ -29,8 +30,8 @@
         "pages/baseOptions/studentStyle/studentStyle",
         "pages/baseOptions/sharePage/sharePage",
         "pages/baseOptions/schoolModel/schoolModel",
-        "pages/baseOptions/contactUs/contactUs",
         "pages/baseOptions/schoolModelInfo/schoolModelInfo",
+        "pages/baseOptions/contactUs/contactUs",
         "pages/killPrices/killPrice/killPrice",
         "pages/killPrices/killPriceInfo/killPriceInfo",
         "pages/killPrices/killPriceListInfo/killPriceListInfo",
@@ -38,6 +39,8 @@
         "pages/killPrices/killPriceList/killPriceList",
         "pages/killPrices/killPriceManList/killPriceManList",
         "pages/killPrices/killPricePerson/killPricePerson",
+        "pages/killPrices/killPriceStuListInfo/killPriceStuListInfo",
+        "pages/killPrices/killUserInfo/killUserInfo",
         "pages/collage/collageSignup/collageSignup",
         "pages/collage/collageList/collageList",
         "pages/collage/collagePersonInfo/collagePersonInfo",
@@ -97,7 +100,8 @@
         "pages/collectAct/collectActInfo/collectActInfo",
         "pages/collectAct/collectActEdit/collectActEdit",
         "pages/collectAct/collectActManList/collectActManList",
-        "pages/collectAct/collectActJoinerList/collectActJoinerList"
+        "pages/collectAct/collectActJoinerList/collectActJoinerList",
+        "pages/collage/collageUserList/collageUserList"
     ],
     "window": {
         "backgroundTextStyle": "dark",

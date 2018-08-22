@@ -36,17 +36,20 @@
             <view class='oneTitleChild'><text>已开团</text></view>
         </view>
         <view class='infoFive'>活动时间:{{startTime}} 至 {{endTime}}({{status}})</view>
+        <!-- 团长列表 -->
         <view class='collageInfoContent' wx:for='{{collageData}}'>
             <view class='collageInfoContentLeft'>
                 <image src='{{item.avatar_url}}' mode='scaleToFill' />
             </view>
             <button bindtap='toCollageSign' data-btnid='1' data-is='{{item.can_join}}' data-actid='{{pageData.id}}' data-forminfo='{{pageData.join_info}}' data-joinerid='{{item.joiner_id}}' class='{{item.can_join?"":"btnStyle"}}'>{{item.can_join?'参团':'已满'}}</button>
             <view class='collageInfoContentRight' data-is='0' bindtap='isDivBox' data-joinid='{{item.joiner_id}}'>
-                <view class='collageInfoContentRightTitle'>
-                    <text>{{item.nickname}}</text>邀请你参加,点击参团</view>
+                <view class='collageInfoContentRightTitle'><text>{{item.nickname}}</text>邀请你参加,点击参团</view>
                 <view class='collageInfoContentRightState'>差{{item.target_person-item.member_number}}人成{{item.target_person}}人团</view>
             </view>
         </view>
+        <!-- 更多 -->
+        <view class='collageInfoMore' hidden='{{isMore}}' bindtap='getMoreRangeData'>更多...</view>
+        <!-- 按钮 -->
         <view class='collageInfoBtn'>
             <button open-type='share'>推荐好友</button>
             <button bindtap='toPersonInfo' hidden='{{isButton}}'>我的拼团</button>
@@ -96,13 +99,15 @@
         </view>
         <button bindtap='shareFriends'>分享到朋友圈</button>
     </view>
-    <view class='divBoxWrap' data-is='1' bindtap='isDivBox' hidden='{{isDivShow}}'>
+    <!-- 我的团员 -->
+    <view class='divBoxWrap'  hidden='{{isDivShow}}' >
+        <view class='closeDiv' data-is='1' bindtap='isDivBox'></view>
         <view class='divBoxContent'>
             <view class='divBoxTitle'>
                 <view class='divBoxTitleChild'>我的团员</view>
             </view>
             <view class='divBoxChildWrap'>
-                <view class='divBoxChild' wx:for='{{myPerson}}'>
+                <view class='divBoxChild' wx:for='{{myPerson}}' wx:key='{{index}}'>
                     <view class='divBoxChildLeft'>
                         <image mode='scaleToFill' src='{{item.avatar_url}}' />
                     </view>
@@ -110,6 +115,7 @@
                     <view class='divBoxChildRight'>{{item.create_time}}</view>
                 </view>
                 <view class='noData' hidden='{{isData}}'>没有团员</view>
+                <view class='memberMore' hidden='{{isMoreM}}' bindtap='getMemberData'>更多...</view>
             </view>
         </view>
     </view>

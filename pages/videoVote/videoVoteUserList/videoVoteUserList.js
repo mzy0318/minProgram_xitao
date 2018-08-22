@@ -7,6 +7,8 @@ Page({
      */
     data: {
         pageData:'',
+        pageNum:1,
+        isMore:true,
     },
 
     /**
@@ -14,28 +16,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-        getApp().request({
-            url:'visitor_video_vote_list',
-            data:{},
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
-                    for(let i = 0;i<res.data.data.list.length;i++){
-                        res.data.data.list[i].vote_start_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_start_time * 1000))
-                        res.data.data.list[i].vote_end_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_end_time*1000));
-                        res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url,365,165)
-                    }
-                    that.setData({
-                        pageData:res.data.data.list
-                    })
-                } else if (Number(res.data.code) == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -71,15 +52,101 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
+        that.setData({
+            pageNum:1
+        })
+        that.getPageData()
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    // onShareAppMessage: function () {
+
+    // },
+    toInfo:function(e){
+        wx.navigateTo({
+            url: '../videoVoteInfo/videoVoteInfo?actId=' + e.currentTarget.dataset.actid,
+        })
+    },
+    // 获取页面更多的数据
+    moreData:function(){
+        let that = this;
+        let pageData = [];
+        wx.showLoading({
+            title: '正在加载...',
+        })
+        pageData.push(...that.data.pageData);
+        that.setData({
+            pageNum: that.data.pageNum + 1
+        })
         getApp().request({
             url: 'visitor_video_vote_list',
-            data: {},
+            data: {
+                page: that.data.pageNum,
+            },
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].vote_start_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_start_time * 1000))
-                        res.data.data.list[i].vote_end_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_end_time * 1000))
+                        res.data.data.list[i].vote_end_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_end_time * 1000));
+                        res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url, 365, 165)
+                    }
+                    pageData.push(...res.data.data.list)
+                    if (pageData.length >= that.data.pageNum*10) {
+                        that.setData({
+                            isMore: false
+                        })
+                    } else {
+                        that.setData({
+                            isMore: true
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData,
+                    })
+                    wx.hideLoading()
+                } else if (Number(res.data.code) == 0) {
+                    wx.hideLoading()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'visitor_video_vote_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].vote_start_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_start_time * 1000))
+                        res.data.data.list[i].vote_end_time = formatTime.formatTime(new Date(res.data.data.list[i].vote_end_time * 1000));
+                        res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url, 365, 165)
+                    }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            isMore:false
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true
+                        })
                     }
                     that.setData({
                         pageData: res.data.data.list
@@ -94,23 +161,4 @@ Page({
             }
         })
     },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-    toInfo:function(e){
-        wx.navigateTo({
-            url: '../videoVoteInfo/videoVoteInfo?actId=' + e.currentTarget.dataset.actid,
-        })
-    }
 })

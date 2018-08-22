@@ -61,7 +61,41 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        let that = this;
+        let pageData = [];
+        pageData.push(...that.data.pageData)
+        if(that.data.pageData.length >= that.data.pageNum*10){
+            that.setData({
+                pageNum:that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'punch_course/list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        let list = res.data.data.list
+                        if (list.length > 0) {
+                            for (let i = 0; i < list.length; i++) {
+                                if (list[i].end_time * 1000 > new Date().valueOf()) {
+                                    list[i].status = '进行中';
+                                    list[i].bgColor = '#336799'
+                                } else {
+                                    list[i].status = '已结束';
+                                    list[i].bgColor = '#7b7b7b'
+                                }
+                            }
+                        }
+                        pageData.push(...list)
+                        that.setData({
+                            pageData: pageData,
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**
