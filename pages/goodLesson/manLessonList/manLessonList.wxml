@@ -19,3 +19,5 @@
     <view class='manListBottomLeft' bindtap='taBack'>返回</view>
     <view class='manListBottomRight' bindtap='toLessonEdit'>发布新活动</view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

@@ -1,11 +1,6 @@
 page{
   background:#f2f2f2;
-}
-.userVideoListWrap{
-    width:750rpx;
-    min-height:1207rpx;
-    background:#f2f2f2;
-    padding-bottom:10rpx;
+  padding-bottom:20rpx;
 }
 .videoListContent{
     width:710rpx;
@@ -52,4 +47,23 @@ page{
 .empty{
     width:750rpx;
     height:20rpx;
+}
+/* 更多 */
+.moreData{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+    margin-top:20rpx;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
+     margin-top:20rpx;
 }

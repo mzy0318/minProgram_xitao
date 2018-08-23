@@ -9,6 +9,8 @@ Page({
         pageData: '',
         pageNum: 1,
         isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -28,13 +30,15 @@ Page({
                         one.banner_image_url = utils.square(one.banner_image_url, 100)
                         return one
                     })
-                    if (res.data.data.list.length >= 10){
+                    if (res.data.data.list.length >= 10) {
                         that.setData({
-                            isMore:false
+                            className: 'moreData',
+                            btnText: '更多'
                         })
-                    }else{
+                    } else {
                         that.setData({
-                            isMore: true
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({
@@ -129,50 +133,58 @@ Page({
             url: '../killPriceInfo/killPriceInfo?id=' + e.currentTarget.dataset.id,
         })
     },
-    moreData:function(){
+    // 更多数据
+    moreData:function(e){
         let that = this;
         let pageData = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        pageData.push(...that.data.pageData)
-        that.setData({
-            pageNum:that.data.pageNum + 1
-        })
-        getApp().request({
-            url: 'visitor_bargain_list',
-            data: {
-                page: that.data.pageNum,
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    res.data.data.list = utils.map(res.data.data.list, function (one) {
-                        one.banner_image_url = utils.square(one.banner_image_url, 100)
-                        return one
-                    })
-                    pageData.push(...res.data.data.list)
-                    if (pageData.length >= that.data.pageNum*10) {
-                        that.setData({
-                            isMore: false
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'visitor_bargain_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        res.data.data.list = utils.map(res.data.data.list, function (one) {
+                            one.banner_image_url = utils.square(one.banner_image_url, 100)
+                            return one
                         })
-                    } else {
+                        pageData.push(...res.data.data.list)
+                        
+                        if (pageData.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: true
+                            pageData: pageData,
+                        })
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        pageData: pageData,
-                    })
-                    wx.hideLoading()
-                } else {
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
                 }
-            }
-        })
+            })
+        }
     },
 })

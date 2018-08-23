@@ -62,7 +62,8 @@
             <view class='collectActRangeGetted'>抢到</view>
             <view class='collectActRangeIcon' wx:for='{{item.sugar}}' wx:key='{{index}}'><image src='{{item}}' mode='scaleToFill'></image></view>
         </view>
-        <view class='collectActMore' hidden='{{isMore}}' bindtap='getMoreHelperData'>更多...</view>
+        <!-- 更多 -->
+        <button class='{{classNameR}}' bindtap='moreDataR' data-text='{{btnTextR}}'>{{btnTextR}}</button>
     </view>
     <view class='viewMiddle'>
         <view></view>
@@ -150,6 +151,8 @@
             <view>{{item.zan_amount}}</view>
             <view>{{item.exchange_prize == ''?'未兑换':item.exchange_prize}}</view>
         </view>
+        <!-- 更多 -->
+        <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
     </view>
 </view>
 <!-- 活动倒计时 -->

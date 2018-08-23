@@ -44,6 +44,10 @@ Page({
         isSugars:true,
         sugarNum:0,
         isShare:true,
+        className: 'moreData',
+        btnText: '更多',
+        classNameR: 'moreData',
+        btnTextR: '更多'
     },
 
     /**
@@ -79,6 +83,10 @@ Page({
     onShow: function() {
         let that = this;
         let helperData = [];
+        that.setData({
+            helperPage: 1,
+            rangePage: 1,
+        })
         // 获取用户信息
         that.getUserInfo();
         // 帮助集糖果者
@@ -125,31 +133,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.rangeData)
-        if (that.data.rangeData.length >= that.data.rangePage * 10){
-            that.setData({
-                rangePage: that.data.rangePage + 1,
-            })
-            getApp().request({
-                url: 'sugar/rank',
-                data: {
-                    act_id: that.data.actId,
-                    page: that.data.rangePage,
-                },
-                method: 'get',
-                success: function (res) {
-                    if (res.data.code == 1) {
-                        wx.stopPullDownRefresh()
-                        pageDataArr.push(...res.data.data.list)
-                        that.setData({
-                            rangeData:pageDataArr,
-                        })
-                    }
-                }
-            })
-        }
     },
 
     /**
@@ -250,56 +233,67 @@ Page({
         })
     },
     //更多帮助集糖果者
-    getMoreHelperData:function(){
+    moreDataR:function(e){
         let that = this;
         let helperData = [];
-        helperData.push(...that.data.helperData);
-        that.setData({
-            helperPage: that.data.helperPage + 1
-        })
-        getApp().request({
-            url: 'sugar/helpers',
-            data: {
-                joiner_id: that.data.userId,
-                page: that.data.helperPage,
-            },
-            method: 'get',
-            success: function (res) {
-                if (res.data.code == 1) {
-                    wx.stopPullDownRefresh()
-                    if (res.data.data.list.length > 0) {
-                        for (let i = 0; i < res.data.data.list.length; i++) {
-                            res.data.data.list[i].create_time = formate.yearMonth(new Date(res.data.data.list[i].create_time * 1000));
-                            for (let j = 0; j < res.data.data.list[i].sugar.length; j++) {
-                                for (let n = 0; n < that.data.sugarList.length; n++) {
-                                    if (res.data.data.list[i].sugar[j] == that.data.sugarList[n].name) {
-                                        res.data.data.list[i].sugar[j] = that.data.sugarList[n].url
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            helperData.push(...that.data.helperData);
+            that.setData({
+                helperPage: that.data.helperPage + 1
+            })
+            getApp().request({
+                url: 'sugar/helpers',
+                data: {
+                    joiner_id: that.data.userId,
+                    page: that.data.helperPage,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        wx.stopPullDownRefresh()
+                        if (res.data.data.list.length > 0) {
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].create_time = formate.yearMonth(new Date(res.data.data.list[i].create_time * 1000));
+                                for (let j = 0; j < res.data.data.list[i].sugar.length; j++) {
+                                    for (let n = 0; n < that.data.sugarList.length; n++) {
+                                        if (res.data.data.list[i].sugar[j] == that.data.sugarList[n].name) {
+                                            res.data.data.list[i].sugar[j] = that.data.sugarList[n].url
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    helperData.push(...res.data.data.list)
-                    if (helperData.length >= that.data.helperPage*10) {
+                        helperData.push(...res.data.data.list)
+                        if (helperData.length >= that.data.helperPage * 10) {
+                            that.setData({
+                                classNameR: 'moreDataR',
+                                btnTextR: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                classNameR: 'moreDataRed',
+                                btnTextR: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: false
+                            helperData: helperData
                         })
+                        wx.hideLoading()
                     } else {
-                        that.setData({
-                            isMore: true,
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        helperData: helperData
-                    })
-                } else {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
                 }
-            }
-        })
+            })
+        }
     },
     // 帮助集糖果者
     getHelperData:function(){
@@ -313,7 +307,6 @@ Page({
             method:'get',
             success:function(res){
                 if(res.data.code == 1){
-                    wx.stopPullDownRefresh()
                     if(res.data.data.list.length>0){
                         for (let i = 0; i < res.data.data.list.length;i++){
                             res.data.data.list[i].create_time = formate.yearMonth(new Date(res.data.data.list[i].create_time*1000));
@@ -328,17 +321,21 @@ Page({
                     }
                     if (res.data.data.list.length >= 10){
                         that.setData({
-                            isMore:false
+                            classNameR: 'moreDataR',
+                            btnTextR: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true,
+                            classNameR: 'moreDataRed',
+                            btnTextR: '没有了'
                         })
                     }
                     that.setData({
                         helperData:res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
                 } else {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',
@@ -359,7 +356,6 @@ Page({
             method:'get',
             success:function(res){
                 if(res.data.code == 1){
-                    wx.stopPullDownRefresh()
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,
                     })
@@ -391,7 +387,9 @@ Page({
                     that.setData({
                         pageData:res.data.data,
                     })
+                    wx.stopPullDownRefresh()
                 }else{
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon:'none',
@@ -399,6 +397,52 @@ Page({
                 }
             }
         })
+    },
+    // 获取更多数据
+    moreData:function(e){
+        let that = this;
+        let rangeData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            rangeData.push(...that.data.rangeData)
+            that.setData({
+                rangePage: that.data.rangePage + 1
+            })
+            getApp().request({
+                url: 'sugar/rank',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        rangeData.push(...res.data.data.list)
+                        if (rangeData.length >= that.data.rangePage*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            rangeData: rangeData
+                        })
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                    }
+                }
+            })
+        }
     },
     //获取活动排行榜
     getRange: function () {
@@ -412,10 +456,23 @@ Page({
             method: 'get',
             success: function (res) {
                 if (res.data.code == 1) {
-                    wx.stopPullDownRefresh()
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
                     that.setData({
                         rangeData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
+                }else{
+                    wx.stopPullDownRefresh()
                 }
             }
         })

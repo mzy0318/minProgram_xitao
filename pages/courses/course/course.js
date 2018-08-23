@@ -14,6 +14,8 @@ Page({
         isShow:true,
         pageNum:1,
         isHot:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -37,6 +39,17 @@ Page({
                 }else{
                     that.setData({
                         isHot: false,
+                    })
+                }
+                if (res.data.data.lesson.length >= 10){
+                    that.setData({
+                        className: 'moreData',
+                        btnText: '更多'
+                    })
+                }else{
+                    that.setData({
+                        className: 'moreDataed',
+                        btnText: '没有了'
                     })
                 }
                 that.setData({
@@ -97,28 +110,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let lessonData = [];
-        lessonData.push(...that.data.lessonData);
-        if (that.data.lessonData.length >= that.data.pageNum*10){
-            that.setData({
-                pageNum: that.setData.pageNum + 1
-            })
-            getApp().request({
-                url: 'recruit/sale_lesson/sale_lesson_list',
-                data: {
-                    page: that.data.pageNum,
-                },
-                success: res => {
-                    lessonData.push(...res.data.data.lesson)
-                    this.setData({
-                        lessonData: lessonData,
-                    })
-                    wx.setStorageSync('lessonAllData', res.data.data.lesson);
-
-                }
-            })
-        }
     },
 
     /**
@@ -155,6 +146,17 @@ Page({
                     page: that.data.pageNum,
                 },
                 success: res => {
+                    if (res.data.data.lesson.length >= 10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
                     this.setData({
                         courseData: res.data.data,
                         lessonData: res.data.data.lesson,
@@ -176,7 +178,18 @@ Page({
                     catalog_id: e.currentTarget.dataset.index
                 },
                 success: res => {
-                    this.setData({
+                    if (res.data.data.lesson.length >= 10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    that.setData({
                         lessonData: res.data.data.lesson,
                     })
                     wx.setStorageSync('lessonAllData', res.data.data.lesson);
@@ -229,6 +242,17 @@ Page({
                         isHot: false,
                     })
                 }
+                if (res.data.data.lesson.length >= 10) {
+                    that.setData({
+                        className: 'moreData',
+                        btnText: '更多'
+                    })
+                } else {
+                    that.setData({
+                        className: 'moreDataed',
+                        btnText: '没有了'
+                    })
+                }
                 that.setData({
                     courseData: res.data.data,
                     lessonData: res.data.data.lesson
@@ -239,5 +263,78 @@ Page({
         that.setData({
             isShow: true
         })
-    }
+    },
+    //更多数据
+    moreData:function(e){
+        let that = this;
+        let lessonData = [];
+        let index = wx.getStorageSync('classId');
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            lessonData.push(...that.data.lessonData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            if (index == 0){
+                getApp().request({
+                    url: 'recruit/sale_lesson/sale_lesson_list',
+                    data: {
+                        page: that.data.pageNum,
+                    },
+                    success: res => {
+                        lessonData.push(...res.data.data.lesson)
+                        if (lessonData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        this.setData({
+                            courseData: res.data.data,
+                            lessonData: lessonData,
+                        })
+                        wx.setStorageSync('lessonAllData', res.data.data.lesson);
+                        let lessonClassData = res.data.data.catalog;
+                        lessonClassData.unshift({ 'id': 0, 'name': '全部' });
+                        that.setData({
+                            lessonClassData: lessonClassData,
+                        })
+                    }
+                })
+            }else{
+                getApp().request({
+                    url: 'recruit/sale_lesson/sale_lesson_list',
+                    data: {
+                        page: that.data.pageNum,
+                        catalog_id: index,
+                    },
+                    success: res => {
+
+                        lessonData.push(...res.data.data.lesson)
+                        if (lessonData.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            lessonData: lessonData,
+                        })
+                        wx.setStorageSync('lessonAllData', res.data.data.lesson);
+                    }
+                })
+            }
+        }
+    },
 })

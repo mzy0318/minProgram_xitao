@@ -1,5 +1,5 @@
-<view class='actRegUserWrap' hidden='{{!isShow}}' wx:for='{{pageData}}' >
-    <view class='actRegTop' bindtap='toAction' >
+<view class='actRegUserWrap' hidden='{{!isShow}}' wx:for='{{pageData}}' wx:key='index'>
+    <view class='actRegTop'>
         <view class='actRegTopLeft'>
             <text class='iconfont icon-ionc--' style='color:#47BAFD;'></text>
             {{item.nickname}}
@@ -18,6 +18,8 @@
         </view>
     </view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
 <view class='actRegUserInfoWrap' hidden='{{isShow}}'>
     <view class='empty'></view>
     <view class='userInfoContet'>

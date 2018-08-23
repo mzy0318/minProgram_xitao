@@ -122,13 +122,22 @@ page{
     line-height: 60rpx;
     background: transparent;
 }
-/* 更多数据 */
+/* 更多 */
 .moreData{
-    width:100%;
-    height:50rpx;
-    line-height:50rpx;
-    color:#7b7b7b;
+    width:200rpx;
+    height:60rpx;
     font-size:28rpx;
-    text-align:center;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+    margin-top:20rpx;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
     margin-top:20rpx;
 }

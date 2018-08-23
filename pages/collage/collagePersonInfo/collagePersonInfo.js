@@ -15,7 +15,9 @@ Page({
         isPay: true,
         isAlert: true,
         isMore:true,
-        rangePage:1
+        rangePage:1,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -82,6 +84,10 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+        let that = this
+        that.setData({
+            rangePage:1
+        })
         //获取页面数据
         that.getPageData();
         // 获取我的团员
@@ -215,64 +221,72 @@ Page({
         })
     },
     //获取更多团队成员
-    getMoreRangeData:function(){
+    moreData:function(e){
         let that = this;
         let personInfo = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        personInfo.push(...that.data.personInfo)
-        that.setData({
-            rangePage: that.data.rangePage + 1
-        })
-        getApp().request({
-            url: 'personal_group_member',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: that.data.joinId,
-                page: that.data.rangePage
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
-                    }
-                    personInfo.push(...res.data.data.list)
-                    // 更多数据
-                    if (personInfo.length >= that.data.rangePage*10) {
-                        that.setData({
-                            isMore: false,
-                        })
-                    } else {
-                        that.setData({
-                            isMore: true,
-                        })
-                    }
+        if (e.currentTarget.dataset.text == '没有了') {
 
-                    that.setData({
-                        personInfo: personInfo
-                    })
-                    // 无记录
-                    if (personInfo.length > 0) {
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            personInfo.push(...that.data.personInfo)
+            that.setData({
+                rangePage: that.data.rangePage + 1
+            })
+            getApp().request({
+                url: 'personal_group_member',
+                data: {
+                    act_id: that.data.actId,
+                    joiner_id: that.data.joinId,
+                    page: that.data.rangePage
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
+                        personInfo.push(...res.data.data.list)
+                        // 更多数据
+                        if (personInfo.length >= that.data.rangePage * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+
+                        that.setData({
+                            personInfo: personInfo
+                        })
+                        // 无记录
+                        if (personInfo.length > 0) {
+                            that.setData({
+                                isData: true
+                            })
+                        } else {
+                            that.setData({
+                                isData: false
+                            })
+                        }
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
                         that.setData({
                             isData: true
                         })
-                    } else {
-                        that.setData({
-                            isData: false
-                        })
                     }
-                    wx.hideLoading()
-                } else {
-                    wx.hideLoading()
-                    that.setData({
-                        isData: true
-                    })
-                }
 
-            }
-        })
+                }
+            })
+        }
+        
+        
     },
     //获取团队成员
     getRangeData:function(e){
@@ -293,11 +307,13 @@ Page({
                     }
                     if(res.data.data.list.length >= 10){
                         that.setData({
-                            isMore:false,
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true,
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({

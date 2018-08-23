@@ -1,6 +1,6 @@
 page{
     background:#F1F2F4;
-    padding-bottom:10rpx;
+    padding-bottom:20rpx;
 }
 .taskUserContent{
     width:710rpx;
@@ -72,4 +72,23 @@ page{
     width:750rpx;
     height:20rpx;
     background:transparent;
+}
+/* 更多 */
+.moreData{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+    margin-top:20rpx;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
+    margin-top:20rpx;
 }

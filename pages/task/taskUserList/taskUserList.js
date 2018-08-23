@@ -8,6 +8,8 @@ Page({
     data: {
         pageNum:1,
         pageData:'',
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -61,41 +63,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageData = [];
-        pageData.push(...that.data.pageData)
-        if(that.data.pageData.length >= that.data.pageNum*10){
-            that.setData({
-                pageNum:that.data.pageNum + 1
-            })
-            getApp().request({
-                url: 'punch_course/list',
-                data: {
-                    page: that.data.pageNum,
-                },
-                method: 'get',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        let list = res.data.data.list
-                        if (list.length > 0) {
-                            for (let i = 0; i < list.length; i++) {
-                                if (list[i].end_time * 1000 > new Date().valueOf()) {
-                                    list[i].status = '进行中';
-                                    list[i].bgColor = '#336799'
-                                } else {
-                                    list[i].status = '已结束';
-                                    list[i].bgColor = '#7b7b7b'
-                                }
-                            }
-                        }
-                        pageData.push(...list)
-                        that.setData({
-                            pageData: pageData,
-                        })
-                    }
-                }
-            })
-        }
     },
 
     /**
@@ -128,6 +95,65 @@ Page({
             url: '../taskUserListInfo/taskUserListInfo?courseId=' + e.currentTarget.dataset.courseid + '&isDate=0&pwd=' + e.currentTarget.dataset.pwd + '&endTime=' + e.currentTarget.dataset.endtime + '&startTime=' + e.currentTarget.dataset.starttime + '&title=' + e.currentTarget.dataset.title,
         })
     },
+    // 获取页面更多数据
+    moreData: function (e) {
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'punch_course/list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        wx.stopPullDownRefresh()
+                        let list = res.data.data.list
+                        if (list.length > 0) {
+                            for (let i = 0; i < list.length; i++) {
+                                if (list[i].end_time * 1000 > new Date().valueOf()) {
+                                    list[i].status = '进行中';
+                                    list[i].bgColor = '#336799'
+                                } else {
+                                    list[i].status = '已结束';
+                                    list[i].bgColor = '#7b7b7b'
+                                }
+                            }
+                        }
+                        pageData.push(...list)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        wx.hideLoading()
+                        that.setData({
+                            pageData: pageData,
+                        })
+                    }else{
+                        wx.hideLoading()
+                    }
+                }
+            })
+        }
+    },
+    // 获取页面数据
     getDataList:function(){
         let that = this;
         getApp().request({
@@ -150,6 +176,17 @@ Page({
                                 list[i].bgColor = '#7b7b7b'
                             }
                         }
+                    }
+                    if (list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         pageData: list,

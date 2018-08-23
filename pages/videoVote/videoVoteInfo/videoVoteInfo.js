@@ -35,8 +35,10 @@ Page({
         contentIndex:'',
         rangePage:1,
         joinerPage:1,
-        isMore:true,
-        isMoreR:true,
+        classNameR: 'moreData',
+        btnTextR: '更多',
+        classNameH: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -132,93 +134,105 @@ Page({
         })
     },
     // 更多最新参赛数据
-    getMoreData:function(){
+    getMoreData:function(e){
         let that = this;
         let newList = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        newList.push(...that.data.newList)
-        that.setData({
-            joinerPage: that.data.joinerPage + 1
-        })
-        getApp().request({
-            url: 'video_vote_latest_joiner',
-            data: {
-                act_video_vote_id: that.data.actId,
-                page: that.data.joinerPage,
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    newList.push(...res.data.data.list)
-                    if (newList.length >= that.data.joinerPage*10) {
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            newList.push(...that.data.newList)
+            that.setData({
+                joinerPage: that.data.joinerPage + 1
+            })
+            getApp().request({
+                url: 'video_vote_latest_joiner',
+                data: {
+                    act_video_vote_id: that.data.actId,
+                    page: that.data.joinerPage,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        newList.push(...res.data.data.list)
+                        if (newList.length >= that.data.joinerPage * 10) {
+                            that.setData({
+                                classNameH: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                classNameH: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: false,
+                            newList: newList
                         })
-                    } else {
-                        that.setData({
-                            isMore: true,
+                        wx.hideLoading();
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading();
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none'
                         })
                     }
-                    that.setData({
-                        newList: newList
-                    })
-                    wx.hideLoading();
-                } else if (Number(res.data.code) == 0) {
-                    wx.hideLoading();
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none'
-                    })
                 }
-            }
-        })
+            })
+        }
     },
     // 更多投票排行数据
-    getRangeData:function(){
+    getRangeData:function(e){
         let that = this;
         let rangeList = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        rangeList.push(...that.data.rangeList)
-        that.setData({
-            rangePage: that.data.rangePage + 1
-        })
-        getApp().request({
-            url: 'video_vote_range_joiner',
-            data: {
-                act_video_vote_id: that.data.actId,
-                page: that.data.rangePage,
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    rangeList.push(...res.data.data.list)
-                    if (rangeList.length >= that.data.rangePage*10) {
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            rangeList.push(...that.data.rangeList)
+            that.setData({
+                rangePage: that.data.rangePage + 1
+            })
+            getApp().request({
+                url: 'video_vote_range_joiner',
+                data: {
+                    act_video_vote_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        rangeList.push(...res.data.data.list)
+                        if (rangeList.length >= that.data.rangePage * 10) {
+                            that.setData({
+                                classNameR: 'moreData',
+                                btnTextR: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                classNameR: 'moreDataed',
+                                btnTextR: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMoreR: false
+                            rangeList: rangeList,
                         })
-                    } else {
-                        that.setData({
-                            isMoreR: true
+                        wx.hideLoading();
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading();
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        rangeList: rangeList,
-                    })
-                    wx.hideLoading();
-                } else if (Number(res.data.code) == 0) {
-                    wx.hideLoading();
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
 
-            }
-        })
+                }
+            })
+        }
     },
     showContent: function(e) {
         let that = this;
@@ -259,11 +273,13 @@ Page({
                     if (Number(res.data.code) == 1) {
                         if (res.data.data.list.length >= 10){
                             that.setData({
-                                isMore:false,
+                                classNameH: 'moreData',
+                                btnText: '更多'
                             })
                         }else{
                             that.setData({
-                                isMore: true,
+                                classNameH: 'moreDataed',
+                                btnText: '没有了'
                             })
                         }
                         that.setData({
@@ -303,11 +319,13 @@ Page({
                     if (Number(res.data.code) == 1) {
                         if (res.data.data.list.length >= 10){
                             that.setData({
-                                isMoreR:false
+                                classNameR: 'moreData',
+                                btnTextR: '更多'
                             })
                         }else{
                             that.setData({
-                                isMoreR: true
+                                classNameR: 'moreDataed',
+                                btnTextR: '没有了'
                             })
                         }
                         that.setData({

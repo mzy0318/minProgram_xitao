@@ -106,7 +106,10 @@
             <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
         </view> 
     </view>
-    <view class='activeInfoRankMore' bindtap='getRangeData' hidden='{{isMoreR}}'>更多...</view>
+    <view class='btnWrap'>
+        <button class='{{classNameR}}' bindtap='getRangeData' data-text='{{btnTextR}}'>{{btnTextR}}</button>
+    </view>
+    
 </view>
 <!-- 最新参赛 -->
 <view class='activeInfoJoin' hidden='{{isJoin}}'>
@@ -127,7 +130,10 @@
                 <view class='contentVoteNum' wx:if='{{index%2 == 1}}'>{{item.vote_amount}}</view>
             </view> 
         </view>
-        <view class='activeInfoRankMore' bindtap='getMoreData' hidden='{{isMore}}'>更多...</view>
+        <!-- 更多 -->
+        <view class='btnWrap'>
+            <button class='{{classNameH}}' bindtap='getMoreData' data-text='{{btnText}}'>{{btnText}}</button>
+        </view>
     </view>
     <view class='activeInfoWrap'>
         <!-- 活动说明 -->

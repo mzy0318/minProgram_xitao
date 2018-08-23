@@ -15,6 +15,18 @@ page{
     background:#fff;
     border-radius:10px;
     box-shadow:2rpx 2rpx 2rpx 2rpx #fff;
+    position:relative;
+}
+.bgImage{
+    width:350rpx;
+    height:160rpx;
+    position:absolute;
+    top:-85rpx;
+    left:125rpx;
+}
+.bgImage>image{
+    width:350rpx;
+    height:160rpx;
 }
 .serviceTitle{
     width:100%;

@@ -50,14 +50,20 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+        let that = this;
+        that.setData({
+            index: 0
+        })
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+        let that = this;
+        that.setData({
+            index: 0
+        })
     },
 
     /**

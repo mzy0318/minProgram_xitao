@@ -754,12 +754,36 @@ view.viewRotate{
 .alertBtn>view:nth-child(2){
     color:#118408;
 }
-/* 更多团员 */
-.memberMore{
-    width:550rpx;
-    height:50rpx;
-    line-height:50rpx;
-    text-align:center;
+/* 更多 */
+.moreData{
+    width:200rpx;
+    height:60rpx;
     font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
     color:#7b7b7b;
+    background:#efefef;
+}
+.moreDataR{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataRed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
 }

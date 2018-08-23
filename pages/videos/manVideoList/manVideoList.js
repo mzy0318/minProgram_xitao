@@ -8,6 +8,8 @@ Page({
     data: {
         pageData:'',
         pageNum:1,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -63,35 +65,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData)
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/video_card_list',
-                method: 'post',
-                data: {
-                    page: that.data.pageNum,
-                },
-                success: function (res) {
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
-                    }
-                    pageDataArr.push(...res.data.data.list)
-                    that.setData({
-                        pageData: pageDataArr
-                    })
-                }
-            })
-        }else{
-            wx.showToast({
-                title: '到底啦',
-                icon: 'none'
-            })
-        }
     },
 
     /**
@@ -149,12 +122,65 @@ Page({
     taBack:function(){
         wx.navigateBack({})
     },
+    // 分享
     toSharePage: function (e) {
         let that = this;
         let url = encodeURIComponent(e.currentTarget.dataset.url)
         wx.navigateTo({
             url: '../videoSharePage/videoSharePage?actid=' + e.currentTarget.dataset.actid + '&url=' + url + '&title=' + e.currentTarget.dataset.title,
         })
+    },
+    // 获取更多数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/video_card_list',
+                method: 'post',
+                data: {
+                    page: that.data.pageNum,
+                },
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
+                        pageData.push(...res.data.data.list)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.hideLoading()
+                    } else if (res.data.code == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
     },
     // 获取页面数据
     getPageData:function(){
@@ -167,14 +193,26 @@ Page({
             },
             success: function (res) {
                 if(res.data.code == 1){
-                    wx.stopPullDownRefresh()
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         pageData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
                 } else if (res.data.code == 0){
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon:'none',

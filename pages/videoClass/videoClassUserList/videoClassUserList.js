@@ -16,6 +16,8 @@ Page({
         catalog:'',
         tag:'',
         pageNum:1,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -23,35 +25,7 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
-
-        getApp().request({
-            url: 'visitor_video_class_list',
-            data: {
-                tag: '',
-                catalog: '',
-                page: that.data.pageNum,
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    res.data.data.catalog.unshift('全部')
-                    res.data.data.tag.unshift('全部')
-                    for(let i = 0;i<res.data.data.list.length;i++){
-                        res.data.data.list[i].cover.url = utils.rect(res.data.data.list[i].cover.url,172,100)
-                    }
-                    that.setData({
-                        catalogList: res.data.data.catalog,
-                        tagList: res.data.data.tag,
-                        listData: res.data.data.list
-                    })
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-            }
-        })
+        that.getPageData();
     },
 
     /**
@@ -90,47 +64,15 @@ Page({
         that.setData({
             pageNum: 1,
         })
-        getApp().request({
-            url: 'visitor_video_class_list',
-            data: {
-                tag: '',
-                catalog: '',
-                page:that.data.pageNum,
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    wx.hideLoading()
-                    res.data.data.catalog.unshift('全部')
-                    res.data.data.tag.unshift('全部')
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].cover.url = utils.rect(res.data.data.list[i].cover.url, 172, 100)
-                    }
-                    that.setData({
-                        catalogList: res.data.data.catalog,
-                        tagList: res.data.data.tag,
-                        listData: res.data.data.list
-                    })
-                    wx.stopPullDownRefresh()
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
-    
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
+    moreData:function(e){
         let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.listData);
-        if (that.data.listData.length >= that.data.pageNum * 10){
+        let listData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            listData.push(...that.data.listData)
             that.setData({
                 pageNum: that.data.pageNum + 1,
             })
@@ -145,16 +87,24 @@ Page({
                 success: function (res) {
                     if (Number(res.data.code) == 1) {
                         wx.hideLoading()
-                        // res.data.data.catalog.unshift('全部')
-                        // res.data.data.tag.unshift('全部');
-                        pageDataArr.push(...res.data.data.list);
-                        for (let i = 0; i < pageDataArr.length; i++) {
-                            pageDataArr[i].cover.url = utils.rect(pageDataArr[i].cover.url, 172, 100)
+                        
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].cover.url = utils.rect(res.data.data.list[i].cover.url, 172, 100)
+                        }
+                        listData.push(...res.data.data.list);
+                        if (listData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
                         }
                         that.setData({
-                            // catalogList: res.data.data.catalog,
-                            // tagList: res.data.data.tag,
-                            listData: pageDataArr
+                            listData: listData
                         })
                         wx.stopPullDownRefresh()
                     } else if (Number(res.data.code) == 0) {
@@ -165,9 +115,13 @@ Page({
                     }
                 }
             })
-        }else{
-            return 
         }
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
     },
 
     /**
@@ -244,13 +198,69 @@ Page({
                 if (Number(res.data.code) == 1) {
                     wx.hideLoading()
                     res.data.data.catalog.unshift('全部')
-                    res.data.data.tag.unshift('全部')
+                    res.data.data.tag.unshift('全部');
+                    if (res.data.data.list.length >= 10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
                     that.setData({
                         catalogList: res.data.data.catalog,
                         tagList: res.data.data.tag,
                         listData: res.data.data.list
                     })
                 } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'visitor_video_class_list',
+            data: {
+                tag: '',
+                catalog: '',
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    res.data.data.catalog.unshift('全部')
+                    res.data.data.tag.unshift('全部')
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].cover.url = utils.rect(res.data.data.list[i].cover.url, 172, 100)
+                    }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    that.setData({
+                        catalogList: res.data.data.catalog,
+                        tagList: res.data.data.tag,
+                        listData: res.data.data.list
+                    })
+                    wx.stopPullDownRefresh()
+                } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',

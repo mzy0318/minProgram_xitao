@@ -1,9 +1,10 @@
 <view class='serviceWrap'>
     <view class='serviceContent' hidden='{{isShow}}'>
-        <view class='serviceTitle'>亲,客服人员邀请您通话</view>
+        <view class='serviceTitle'>亲,咨询客服?</view>
         <view class='serviceBtn'>
-            <button bindtap='toIndex'>稍后</button>
-            <button open-type='contact'>沟通</button>
+            <button bindtap='toIndex'>关闭</button>
+            <button open-type='contact'>咨询</button>
         </view>
+        <view class='bgImage'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/serverImg.png' mode='scaleToFill'></image></view>
     </view>
 </view>

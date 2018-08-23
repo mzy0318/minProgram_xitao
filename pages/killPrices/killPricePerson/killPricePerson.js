@@ -23,7 +23,8 @@ Page({
         widthP:0,
         isClosed: 'none',
         nameInfo: '',
-        isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -283,50 +284,55 @@ Page({
         });
     },
     // 更多排行数据
-    moreData:function(){
+    moreData:function(e){
         let that = this;
         let peopleDataList = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        peopleDataList.push(...that.data.peopleDataList)
-        that.setData({
-            rangPage: that.data.rangPage + 1
-        })
-        getApp().request({
-            url: 'bargain_range',
-            data: {
-                act_id: that.data.actId,
-                joiner_id: that.data.joinId,
-                page: that.data.rangPage
-            },
-            method: 'post',
-            success: res => {
-                if (Number(res.data.code) == 1) {
-                    wx.stopPullDownRefresh()
-                    peopleDataList.push(...res.data.data.list)
-                    if (peopleDataList.length >= that.data.rangPage*10){
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            peopleDataList.push(...that.data.peopleDataList)
+            that.setData({
+                rangPage: that.data.rangPage + 1
+            })
+            getApp().request({
+                url: 'bargain_range',
+                data: {
+                    act_id: that.data.actId,
+                    joiner_id: that.data.joinId,
+                    page: that.data.rangPage
+                },
+                method: 'post',
+                success: res => {
+                    if (Number(res.data.code) == 1) {
+                        peopleDataList.push(...res.data.data.list)
+                        if (peopleDataList.length >= that.data.rangPage * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore:false
+                            peopleDataList: peopleDataList,
                         })
-                    }else{
-                        that.setData({
-                            isMore: true
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        peopleDataList: peopleDataList,
-                    })
-                    wx.hideLoading()
-                } else if (Number(res.data.code) == 0) {
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
                 }
-            }
-        });
+            });
+        }
     },
     // 获取排行数据
     getRangeDate:function(e){
@@ -344,11 +350,13 @@ Page({
                     wx.stopPullDownRefresh();
                     if (res.data.data.list.length >= 10) {
                         that.setData({
-                            isMore: false
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     } else {
                         that.setData({
-                            isMore: true
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({

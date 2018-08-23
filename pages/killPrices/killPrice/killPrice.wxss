@@ -83,12 +83,20 @@ page{
     color:#fff;
     font-size:26rpx;
 }
-/* 更多数据 */
+/* 更多 */
 .moreData{
-    width:750rpx;
+    width:200rpx;
+    height:60rpx;
     font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
     color:#7b7b7b;
-    line-height:50rpx;
-    text-align:center;
-    margin-top:20rpx;
+    background:#efefef;
 }

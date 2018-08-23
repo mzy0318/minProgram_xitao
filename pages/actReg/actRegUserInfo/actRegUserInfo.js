@@ -11,6 +11,8 @@ Page({
         pageNum:1,
         actId:'',
         actTag:'',
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -25,23 +27,7 @@ Page({
             actId: options.actId,
             actTag: options.actTag,
         })
-        getApp().request({
-            url:'org/normal_joiner_list',
-            data:{
-                act_id: options.actId,
-                act_tag: options.actTag,
-                page:that.data.pageNum,
-            },
-            method:'post',
-            success:function(res){
-                for(let i = 0;i<res.data.data.list.length;i++){
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time*1000))
-                }
-                that.setData({
-                    pageData:res.data.data.list,
-                })
-            } 
-        })
+        that.getPageData()
     },
 
     /**
@@ -77,69 +63,24 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
-        getApp().request({
-            url: 'org/normal_joiner_list',
-            data: {
-                act_id: that.data.actId,
-                act_tag: that.data.actTag,
-                page: that.data.pageNum,
-            },
-            method: 'post',
-            success: function (res) {
-                for (let i = 0; i < res.data.data.list.length; i++) {
-                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
-                }
-                that.setData({
-                    pageData: res.data.data.list,
-                })
-                wx.stopPullDownRefresh()
-            }
+        that.setData({
+            pageNum:1
         })
+        that.getPageData()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData);
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/normal_joiner_list',
-                data: {
-                    act_id: that.data.actId,
-                    act_tag: that.data.actTag,
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: function (res) {
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time))
-                    }
-                    pageDataArr.push(...res.data.data.list)
-                    that.setData({
-                        pageData: pageDataArr,
-                    })
-                }
-            })
-        }else{
-            wx.showToast({
-                title: '到底啦',
-                icon: 'none'
-            })
-        }
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     makePhone:function(e){
         getApp().tellPhone(e)
     },
@@ -154,10 +95,91 @@ Page({
                 isShow: false,
                 userInfo: e.currentTarget.dataset.userdata,
             })
-            console.log(that.data.userInfo)
         }
     },
-    toAction:function(e){
+    // 获取页面更多数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
 
-    }
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/normal_joiner_list',
+                data: {
+                    act_id: that.data.actId,
+                    act_tag: that.data.actTag,
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    pageData.push(...res.data.data.list)
+                    if (pageData.length >= that.data.pageNum*10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    that.setData({
+                        pageData: pageData,
+                    })
+                    wx.hideLoading()
+                    if (res.data.code == 0) {
+                        wx.hideLoading()
+                    }
+                }
+            })
+        }
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'org/normal_joiner_list',
+            data: {
+                act_id: that.data.actId,
+                act_tag: that.data.actTag,
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                for (let i = 0; i < res.data.data.list.length; i++) {
+                    res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                }
+                if (res.data.data.list.length >= 10){
+                    that.setData({
+                        className: 'moreData',
+                        btnText: '更多'
+                    })
+                }else{
+                    that.setData({
+                        className: 'moreDataed',
+                        btnText: '没有了'
+                    })
+                }
+                that.setData({
+                    pageData: res.data.data.list,
+                })
+                wx.stopPullDownRefresh()
+                if(res.data.code == 0){
+                    wx.stopPullDownRefresh()
+                }
+            }
+        })
+    },
 })

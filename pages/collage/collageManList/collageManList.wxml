@@ -25,5 +25,5 @@
         <view bindtap='toSharePage' data-actid='{{item.id}}' data-title='{{item.title}}' data-acttag='{{item.act_tag}}'><text class='iconfont icon-share'></text> 分享</view>
     </view>
 </view>
-<!-- 更多数据 -->
-<view class='moreData' bindtap='moreData' hidden='{{isMore}}'>更多...</view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

@@ -8,7 +8,8 @@ Page({
         pageData:'',
         showTitle: true,
         pageNum:1,
-        isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -75,62 +76,63 @@ Page({
         })
     },
     // 获取页面更多数据
-    getMoreData:function(){
+    moreData:function(e){
         let that = this;
         let pageData = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        pageData.push(...that.data.pageData)
-        that.setData({
-            pageNum:that.data.pageNum + 1
-        })
-        getApp().request({
-            url: 'my_video_vote_list',
-            data: {
-                page: that.data.pageNum
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    // 无记录
-                    if (res.data.data.list <= 0) {
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'my_video_vote_list',
+                data: {
+                    page: that.data.pageNum
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        // 时间格始化
+                        if (res.data.data.list.length > 0){
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].create_time = formatTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                            }
+                        }
+                        
+                        pageData.push(...res.data.data.list)
+                        // 更多数据
+                        if (pageData.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            showTitle: false,
+                            pageData: pageData,
                         })
-                    } else {
-                        that.setData({
-                            showTitle: true,
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    // 时间格始化
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = formatTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
-                    }
-                    pageData.push(...res.data.data.list)
-                    // 更多数据
-                    if (pageData.length >= that.data.pageNum*10) {
-                        that.setData({
-                            isMore: false
-                        })
-                    } else {
-                        that.setData({
-                            isMore: true,
-                        })
-                    }
-                    that.setData({
-                        pageData: pageData,
-                    })
-                    wx.hideLoading()
-                } else if (Number(res.data.code) == 0) {
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
                 }
-            }
-        })
+            })
+        }
+       
+        
     },
     // 获取页面数据
     getPageData:function(){
@@ -143,26 +145,22 @@ Page({
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    if (res.data.data.list <= 0) {
-                        that.setData({
-                            showTitle: false,
-                        })
-                    } else {
-                        that.setData({
-                            showTitle: true,
-                        })
-                    }
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = formatTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
-                    }
+                    if (res.data.data.list > 0) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formatTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
+                    } 
+                    
                     // 更多数据
                     if(res.data.data.list.length >= 10){
                         that.setData({
-                            isMore:false
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true,
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({

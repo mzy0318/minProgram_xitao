@@ -43,7 +43,8 @@
                 <view class='divBoxChildRight'>{{item.create_time}}</view>
             </view>
             <view class='noData' hidden='{{isData}}'>没有团员</view>
-            <view class='divBoxMore' bindtap='getMoreRangeData' hidden='{{isMore}}'>更多...</view>
+            <!-- 更多 -->
+            <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}' hidden='{{!isData}}'>{{btnText}}</button>
         </view>
         <button open-type='share'>推荐好友</button>
     </view>

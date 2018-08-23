@@ -16,5 +16,6 @@
         <view class='contentEdit' wx:if='{{index%2 == 1}}' data-joinid='{{item.id}}' bindtap='toEditPage'><text class='iconfont icon-edit iconStyle'></text></view>
     </view>
 </view>
-<view class='activeInfoRankMore' bindtap='getMoreData' hidden='{{isMore}}'>更多...</view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
 <view class='addJoin' bindtap='addJoiner'>添加选手</view>

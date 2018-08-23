@@ -17,3 +17,5 @@
         </view>
     </view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

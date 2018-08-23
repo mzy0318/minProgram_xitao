@@ -131,6 +131,11 @@
                 "text": "学生中心",
                 "iconPath": "./icon/student.png",
                 "selectedIconPath": "/icon/studentSele.png"
+            },{
+                "pagePath": "pages/service/service",
+                "text": "联系客服",
+                "iconPath": "./icon/service.png",
+                "selectedIconPath": "/icon/serviceSele.png"
             }
         ]
     }

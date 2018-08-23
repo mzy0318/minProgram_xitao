@@ -8,8 +8,8 @@
         </view>
         <view class='personListDate'>时间: {{item.create_time}}</view>
     </view>
-    <view class='noData' hidden='{{showTitle}}'>无记录</view>
-    <view class='moreData' hidden='{{isMore}}' bindtap='moreData'>更多...</view>
+    <!-- 更多 -->
+    <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
 </view>
 <view class='collagePersonList' hidden='{{isPersonInfo}}'>
     <view class='empty'></view>

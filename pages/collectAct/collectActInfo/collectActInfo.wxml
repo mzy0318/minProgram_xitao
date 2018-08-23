@@ -102,6 +102,8 @@
             <view>{{item.zan_amount}}</view>
             <view>{{item.exchange_prize == ''?'未兑换':item.exchange_prize}}</view>
         </view>
+        <!-- 更多 -->
+        <button class='{{className}}' bindtap='moreData' data-text='{{btnTextR}}'>{{btnTextR}}</button>
     </view>
 </view>
 <!-- 活动倒计时 -->

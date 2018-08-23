@@ -8,7 +8,9 @@ Page({
         pageData: '',
         statusText: '活动进行中',
         statusColor: 'green',
-        pageNum:1
+        pageNum:1,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -62,12 +64,27 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+    },
+    // 活动详情页面
+    toInfoPage:function(e){
+        let that = this;
+        wx.navigateTo({
+            url: '../collectActInfo/collectActInfo?actId=' + e.currentTarget.dataset.actid,
+        })
+    },
+    // 获取页面更多数据
+    moreData:function(e){
         let that = this;
         let pageData = [];
-        pageData.push(...that.data.pageData)
-        if(that.data.pageData.length >= that.data.pageNum*10){
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
             that.setData({
-                pageNum:that.data.pageNum + 1
+                pageNum: that.data.pageNum + 1
             })
             getApp().request({
                 url: 'sugar/list',
@@ -77,6 +94,7 @@ Page({
                 method: 'get',
                 success: (res) => {
                     if (res.data.code == 1) {
+                        wx.stopPullDownRefresh();
                         for (let i = 0; i < res.data.data.list.length; i++) {
                             if (res.data.data.list[i].end_time * 1000 > new Date().valueOf()) {
                                 res.data.data.list[i].statusText = '活动进行中';
@@ -90,20 +108,27 @@ Page({
                             res.data.data.list[i].banner_image_url = format.rect(res.data.data.list[i].banner_image_url, 200, 100)
                         }
                         pageData.push(...res.data.data.list)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        wx.hideLoading()
                         that.setData({
-                            pageData: pageData,
+                            pageData: pageData
                         })
+                    }else{
+                        wx.hideLoading()
                     }
                 }
             })
         }
-    },
-    // 活动详情页面
-    toInfoPage:function(e){
-        let that = this;
-        wx.navigateTo({
-            url: '../collectActInfo/collectActInfo?actId=' + e.currentTarget.dataset.actid,
-        })
     },
     // 获取页面数据
     getPageData:function(e){
@@ -128,6 +153,17 @@ Page({
                         res.data.data.list[i].start_time = format.formatTime(new Date(res.data.data.list[i].start_time * 1000));
                         res.data.data.list[i].end_time = format.formatTime(new Date(res.data.data.list[i].end_time * 1000));
                         res.data.data.list[i].banner_image_url = format.rect(res.data.data.list[i].banner_image_url, 200, 100)
+                    }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         pageData: res.data.data.list

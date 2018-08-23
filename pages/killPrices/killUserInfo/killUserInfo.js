@@ -11,7 +11,8 @@ Page({
         pageData:'',
         actReg:true,
         personInfo:'',
-        isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -101,54 +102,63 @@ Page({
         })
     },
     //获取页面更多数据
-    moreData:function(){
+    moreData:function(e){
         let that = this;
         let pageData = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        pageData.push(...that.data.pageData);
-        getApp().request({
-            url: "org/bargain_joiner_list",
-            method: "post",
-            data: {
-                id: that.data.actId,
-                page: that.data.pageNum,
-            },
-            success: function(res) {
-                if (res.data.data.list.length <= 0) {
+        if (e.currentTarget.dataset.text == '没有了') {
 
-                    that.setData({
-                        showTitle: false
-                    })
-                } else if (res.data.data.list.length > 0) {
-                    that.setData({
-                        showTitle: true
-                    })
-                    pageData.push(...res.data.data.list)
-                    if (pageData.length >= that.data.pageNum*10) {
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData);
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: "org/bargain_joiner_list",
+                method: "post",
+                data: {
+                    id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                success: function (res) {
+                    if (res.data.data.list.length <= 0) {
+
                         that.setData({
-                            isMore: false
+                            showTitle: false
                         })
-                    } else {
+                    } else if (res.data.data.list.length > 0) {
                         that.setData({
-                            isMore: true
+                            showTitle: true
+                        })
+                        pageData.push(...res.data.data.list)
+                        if (pageData.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.hideLoading()
+                    }
+                    if (res.data.code == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none'
                         })
                     }
-                    that.setData({
-                        pageData: pageData
-                    })
-                    wx.hideLoading()
                 }
-                if(res.data.code == 0){
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none'
-                    })
-                }
-            }
-        })
+            })
+        }
     },
     // 获取页面数据
     getPageData:function(){
@@ -172,11 +182,13 @@ Page({
                     })
                     if(res.data.data.list.length >= 10){
                         that.setData({
-                            isMore:false
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({
@@ -184,6 +196,9 @@ Page({
                     })
                 }
                 wx.stopPullDownRefresh()
+                if(res.data.code == 0){
+                    wx.stopPullDownRefresh()
+                }
             }
         })
     },

@@ -7,7 +7,7 @@
     </view>
     <view class='voteUserTitle'>{{item.title}}</view>
 </view>
-<!-- 更多数据 -->
-<view class='moreData' bindtap='moreData' hidden='{{isMore}}'>更多...</view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
 
 

@@ -10,7 +10,8 @@ Page({
         isPersonInfo:true,
         userList:'',
         oriData:'',
-        isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -88,18 +89,18 @@ Page({
     // 用户信息页面
     toPriceListInfo:function(e){
         let that = this;
-        let userData = this.data.userList;
+        let userData = that.data.userList;
         for (let i = 0; i < userData.length; i++) {
-            if (this.data.oriData[i].can_join) {
-                this.data.oriData[i].can_join = '正在进行'
+            if (that.data.oriData[i].can_join) {
+                that.data.oriData[i].can_join = '正在进行'
             } else {
-                this.data.oriData[i].can_join = '已经结束'
+                that.data.oriData[i].can_join = '已经结束'
             }
 
         }
-        this.setData({
+        that.setData({
             isPersonInfo: false,
-            personInfo: this.data.oriData[e.currentTarget.dataset.index]
+            personInfo: that.data.oriData[e.currentTarget.dataset.index]
         })
     },
     hiddenInfo: function () {
@@ -109,66 +110,74 @@ Page({
         })
     },
     // 获取更多页面数据
-    moreData:function(){
+    moreData:function(e){
         let that = this;
         let userList = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        userList.push(...that.data.userList)
-        that.setData({
-            pageNum: that.data.pageNum + 1
-        })
-        getApp().request({
-            url: "personal_group_range",
-            method: "post",
-            data: {
-                act_id: that.data.actId,
-                page: that.data.pageNum,
-            },
-            success: res => {
-                let userData = res.data.data.list;
-                if (userData.length <= 0) {
-                    that.setData({
-                        showTitle: false
-                    })
-                } else if (userData.length > 0) {
-                    that.setData({
-                        showTitle: true
-                    })
-                    for (let i = 0; i < userData.length; i++) {
-                        if (userData[i].is_leader == 1) {
-                            userData[i].is_leader = '【团长】'
-                        } else if (userData[i].is_leader == 0) {
-                            userData[i].is_leader = '【团员】'
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            userList.push(...that.data.userList)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: "personal_group_range",
+                method: "post",
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                success: res => {
+                    let userData = res.data.data.list;
+                    if (userData.length <= 0) {
+                        that.setData({
+                            showTitle: false
+                        })
+                    } else if (userData.length > 0) {
+                        that.setData({
+                            showTitle: true
+                        })
+                        for (let i = 0; i < userData.length; i++) {
+                            if (userData[i].is_leader == 1) {
+                                userData[i].is_leader = '【团长】'
+                            } else if (userData[i].is_leader == 0) {
+                                userData[i].is_leader = '【团员】'
+                            }
+                            userData[i].create_time = utils.formatTime(new Date(userData[i].create_time * 1000))
                         }
-                        userData[i].create_time = utils.formatTime(new Date(userData[i].create_time * 1000))
-                    }
-                    userList.push(...userData);
-                    if (userList.length >= that.data.pageNum*10) {
+                        userList.push(...userData);
+                        if (userList.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: false
+                            userList: userList,
+                            oriData: userList,
                         })
-                    } else {
-                        that.setData({
-                            isMore: true
+                        wx.hideLoading()
+                    }
+                    if (res.data.code == 0) {
+                        wx.hideLoading()
+                        wx.showLoading({
+                            title: res.data.msg,
+                            icon: 'none'
                         })
                     }
-                    that.setData({
-                        userList: userList,
-                        oriData: res.data.data.list
-                    })
-                    wx.hideLoading()
                 }
-                if(res.data.code == 0){
-                    wx.hideLoading()
-                    wx.showLoading({
-                        title: res.data.msg,
-                        icon:'none'
-                    })
-                }
-            }
-        })
+            })
+        }
+        
+        
     },
     // 获取页面数据
     getPageData:function(){
@@ -200,11 +209,13 @@ Page({
                     }
                     if(res.data.data.list.length >= 10){
                         that.setData({
-                            isMore:false
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({

@@ -444,3 +444,20 @@ view.viewTyle{
 .alertBtn>view:nth-child(2){
     color:#118408;
 }
+/* 更多 */
+.moreData{
+    width:200rpx !important;
+    height:60rpx !important;
+    font-size:28rpx !important;
+    line-height:60rpx !important;
+    color:#fff !important;
+    background:#4993FE !important;
+}
+.moreDataed{
+    width:200rpx !important;
+    height:60rpx !important;
+    font-size:28rpx !important;
+    line-height:60rpx !important;
+    color:#7b7b7b !important;
+    background:#efefef !important;
+}

@@ -18,25 +18,6 @@ App({
             }
         })
         // 获取用户授权信息
-        wx.getSetting({
-            success: res => {
-                console.log('结果',res)
-                if (res.authSetting['scope.userInfo']) {
-                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                    wx.getUserInfo({
-                        success: res => {
-                            // 可以将 res 发送给后台解码出 unionId
-                            this.globalData.userInfo = res.userInfo
-                            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                            // 所以此处加入 callback 以防止这种情况
-                            if (this.userInfoReadyCallback) {
-                                this.userInfoReadyCallback(res)
-                            }
-                        }
-                    })
-                }
-            }
-        })
     },
     // 小程序版本及功能选项
     funcOpt:'',
@@ -132,7 +113,7 @@ App({
                             content: res.errMsg,
                         })
                         return
-                    } else {
+                        } else {
                     }
                     wx.request({
                         'url': host + "login",
@@ -155,6 +136,34 @@ App({
                                 wx.setStorageSync('visitorId', r.data.data.visitor_id);
                                 wx.setStorageSync('avarImage', r.data.data.avatar_url);
                                 wx.setStorageSync('nickname', r.data.data.nickname);
+                                if (r.data.data.is_default_avatar_url){
+                                    wx.getUserInfo({
+                                        success: res => {
+                                            // 可以将 res 发送给后台解码出 unionId
+                                            getApp().globalData.userInfo = res.userInfo;
+                                            let sendData = {};
+                                            sendData['nickname'] = res.userInfo.nickName
+                                            sendData['avatar_url'] = res.userInfo.avatarUrl
+                                            sendData['province'] = res.userInfo.province
+                                            sendData['city'] = res.userInfo.city
+                                            sendData['country'] = res.userInfo.country
+                                            sendData['language'] = res.userInfo.language
+                                            sendData['gender'] = res.userInfo.gender
+                                            getApp().request({
+                                                url: 'set_user_info',
+                                                data: sendData,
+                                                method: 'post',
+                                                success: function (res) {
+                                                }
+                                            })
+                                            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                                            // 所以此处加入 callback 以防止这种情况
+                                            if (getApp().userInfoReadyCallback) {
+                                                getApp().userInfoReadyCallback(res)
+                                            }
+                                        }
+                                    })
+                                }
                                 if (r.header["Set-Cookie"]) {
                                     wx.setStorageSync('cookie', r.header["Set-Cookie"]);
                                 }

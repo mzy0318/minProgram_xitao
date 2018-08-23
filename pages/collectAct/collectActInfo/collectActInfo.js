@@ -21,6 +21,8 @@ Page({
         userId:'',
         btnText:'我要报名',
         isText:false,
+        className: 'moreData',
+        btnTextR: '更多'
     },
 
     /**
@@ -54,6 +56,9 @@ Page({
      */
     onShow: function() {
         let that = this;
+        that.setData({
+            rangePage:1
+        })
         // 请求页面数据
         that.getPapeData();
         //获取活动排行榜
@@ -83,6 +88,7 @@ Page({
         let that = this;
         that.setData({
             nameInfo: [],
+            rangePage:1
         })
         clearInterval(that.data.timer)
         // 请求页面数据
@@ -95,31 +101,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.rangeData)
-        if (that.data.rangeData.length >= that.data.rangePage * 10) {
-            that.setData({
-                rangePage: that.data.rangePage + 1,
-            })
-            getApp().request({
-                url: 'sugar/rank',
-                data: {
-                    act_id: that.data.actId,
-                    page: that.data.rangePage,
-                },
-                method: 'get',
-                success: function (res) {
-                    if (res.data.code == 1) {
-                        wx.stopPullDownRefresh()
-                        pageDataArr.push(...res.data.data.list)
-                        that.setData({
-                            rangeData: pageDataArr,
-                        })
-                    }
-                }
-            })
-        }
     },
 
     /**
@@ -252,6 +233,52 @@ Page({
             url: '../collectActUserInfo/collectActUserInfo?userId=' + e.currentTarget.dataset.userid + '&actId=' + that.data.actId +'&isShare=0',
         })
     },
+    // 获取更多数据
+    moreData:function(e){
+        let that = this;
+        let rangeData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            rangeData.push(...that.data.rangeData)
+            that.setData({
+                rangePage: that.data.rangePage + 1
+            })
+            getApp().request({
+                url: 'sugar/rank',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        rangeData.push(...res.data.data.list)
+                        if (rangeData.length >= that.data.rangePage*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnTextR: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnTextR: '没有了'
+                            })
+                        }
+                        that.setData({
+                            rangeData: rangeData
+                        })
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                    }
+                }
+            })
+        }
+    },
     //获取活动排行榜
     getRange: function() {
         let that = this;
@@ -264,10 +291,23 @@ Page({
             method: 'get',
             success: function(res) {
                 if (res.data.code == 1) {
-                    wx.stopPullDownRefresh()
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnTextR: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnTextR: '没有了'
+                        })
+                    }
                     that.setData({
                         rangeData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
+                }else{
+                    wx.stopPullDownRefresh()
                 }
             }
         })

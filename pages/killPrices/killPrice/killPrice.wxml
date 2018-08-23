@@ -11,4 +11,5 @@
         </view>
     </view>
 </view>
-<view class='moreData' hidden='{{isMore}}' bindtap='moreData'>更多...</view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

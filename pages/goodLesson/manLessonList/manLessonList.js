@@ -8,6 +8,8 @@ Page({
     data: {
         pageData:'',
         pageNum:1,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -21,35 +23,6 @@ Page({
      */
     onReady: function () {
 
-    },
-    // 获取页面数据
-    loadData: function () {
-        let that = this
-        getApp().request({
-            url: 'org/lesson_one_list',
-            data: {
-                page: that.data.pageNum,
-            },
-            method: 'post',
-            success: function (res) {
-                wx.stopPullDownRefresh()
-
-                if (Number(res.data.code) == 1) {
-                    res.data.data = utils.map(res.data.data, function (one) {
-                        one.cover.url = utils.rect(one.cover.url, 200, 100)
-                        return one
-                    })
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-            }
-        })
     },
     /**
      * 生命周期函数--监听页面显示
@@ -90,38 +63,8 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData);
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/lesson_one_list',
-                data: {
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: function (res) {
-                    res.data.data = utils.map(res.data.data, function (one) {
-                        one.cover.url = utils.rect(one.cover.url, 200, 100)
-                        return one
-                    })
-                    pageDataArr.push(...res.data.data);
-                    that.setData({
-                        pageData: pageDataArr
-                    })
-                }
-            })
-        }else{
-            wx.showToast({
-                title: '到底啦',
-                icon: 'none'
-            })
-        }
-    },
+    onReachBottom: function () {},
+    // 删除活动
     delActive:function(e){
         let that = this;
         getApp().request({
@@ -171,5 +114,95 @@ Page({
         wx.navigateTo({
             url: '../../baseOptions/sharePage/sharePage?actId=' + e.currentTarget.dataset.actid + '&title=' + e.currentTarget.dataset.title + '&page=pages/goodLesson/lessonListInfo/lessonListInfo&actTag=' + e.currentTarget.dataset.acttag,
         })
-    }
+    },
+    // 获取更多的数据
+    moreData:function(){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            pageData.push(...that.data.push)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/lesson_one_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        res.data.data = utils.map(res.data.data, function (one) {
+                            one.cover.url = utils.rect(one.cover.url, 200, 100)
+                            return one
+                        })
+                        pageData.push(...res.data.data)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: res.data.data
+                        })
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
+    },
+    // 获取页面数据
+    loadData: function () {
+        let that = this
+        getApp().request({
+            url: 'org/lesson_one_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    res.data.data = utils.map(res.data.data, function (one) {
+                        one.cover.url = utils.rect(one.cover.url, 200, 100)
+                        return one
+                    })
+                    if(res.data.data.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                    wx.stopPullDownRefresh()
+                } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
 })

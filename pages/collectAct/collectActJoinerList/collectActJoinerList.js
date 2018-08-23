@@ -10,7 +10,9 @@ Page({
         actId:'',
         isNoData:true,
         isPersonInfo:true,
-        personInfo:''
+        personInfo:'',
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -69,40 +71,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData);
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'org/sugar/joiners',
-                data: {
-                    act_id: that.data.actId,
-                    page: that.data.pageNum,
-                },
-                method: 'get',
-                success: function (res) {
-                    if (res.data.code == 1) {
-                        wx.stopPullDownRefresh();
-                        if (res.data.data.list.length > 0) {
-                            for (let i = 0; i < res.data.data.list.length; i++) {
-                                res.data.data.list[i].create_time = formate.formatDate(new Date(res.data.data.list[i].create_time * 1000))
-                            }
-                        } else {
-                            that.setData({
-                                isNoData: false
-                            })
-                        }
-                        pageDataArr.push(...res.data.data.list)
-                        that.setData({
-                            pageData: pageDataArr,
-                        })
-                    }
-                }
-            })
-        }
     },
     // 电话
     tellPhone:function(e){
@@ -121,7 +89,6 @@ Page({
                 personInfo: that.data.pageData[e.currentTarget.dataset.index],
                 isPersonInfo: false,
             })
-            console.log('personInfo', that.data.personInfo)
         }
     },
     // 活动详情页面
@@ -130,6 +97,61 @@ Page({
         wx.navigateTo({
             url: '../collectActUserInfo/collectActUserInfo?actId=' + that.data.actId + '&userId=' + e.currentTarget.dataset.userid,
         })
+    },
+    // 请求更多数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/sugar/joiners',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        if (res.data.data.list.length > 0) {
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].create_time = formate.formatDate(new Date(res.data.data.list[i].create_time * 1000))
+                            }
+                        } else {
+                            that.setData({
+                                isNoData: false
+                            })
+                        }
+                        pageData.push(...res.data.data.list)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData,
+                        })
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                    }
+                }
+            })
+        }
     },
     // 请求活动报名列表
     getJoinerList:function(e){
@@ -143,7 +165,6 @@ Page({
             method:'get',
             success:function(res){
                 if(res.data.code == 1){
-                    wx.stopPullDownRefresh();
                     if(res.data.data.list.length>0){
                         for(let i = 0;i<res.data.data.list.length;i++){
                             res.data.data.list[i].create_time = formate.formatDate(new Date(res.data.data.list[i].create_time*1000))
@@ -153,9 +174,23 @@ Page({
                             isNoData:false
                         })
                     }
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
                     that.setData({
                         pageData:res.data.data.list,
                     })
+                    wx.stopPullDownRefresh();
+                }else{
+                    wx.stopPullDownRefresh();
                 }
             }
         })

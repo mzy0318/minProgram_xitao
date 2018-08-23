@@ -188,7 +188,7 @@ Page({
                 userInfo: getApp().globalData.userInfo,
                 isUserInfo: true,
             })
-        }else{   
+        }else{
         }
     },
 

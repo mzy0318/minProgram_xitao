@@ -80,6 +80,7 @@ button.optionsContent::after{
     width:710rpx;
     min-height:200rpx;
     margin:-10rpx auto 0rpx;
+    padding-bottom:20rpx;
 }
 .videoClassContent{
     width:345rpx;
@@ -140,12 +141,22 @@ view.videoClassContent:nth-child(even){
     line-height:50rpx;
     padding:0rpx 8rpx;
 }
-/* 更多数据 */
+/* 更多 */
 .moreData{
-    width:710rpx;
+    width:200rpx;
+    height:60rpx;
     font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+    margin-top:20rpx;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
     color:#7b7b7b;
-    line-height:50rpx;
-    text-align:center;
+    background:#efefef;
     margin-top:20rpx;
 }

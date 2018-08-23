@@ -50,7 +50,8 @@ Page({
         isAlert: true,
         isMore:true,
         memberPage:1,
-        isMoreM:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -214,62 +215,70 @@ Page({
         })
     },
     // 获取更多团员数据
-    getMemberData:function(){
+    getMemberData:function(e){
         let that = this;
         let myPerson = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        myPerson.push(...that.data.myPerson)
-        that.setData({
-            memberPage: that.data.memberPage + 1
-        })
-        getApp().request({
-            url: 'personal_group_member',
-            data: {
-                joiner_id: e.currentTarget.dataset.joinid,
-                act_id: that.data.actId,
-                page: that.data.memberPage,
-            },
-            method: 'post',
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
-                    }
-                    myPerson.push(...res.data.data.list)
-                    // 更多数据
-                    if (myPerson.length >= that.data.memberPage*10) {
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            myPerson.push(...that.data.myPerson)
+            that.setData({
+                memberPage: that.data.memberPage + 1
+            })
+            getApp().request({
+                url: 'personal_group_member',
+                data: {
+                    joiner_id: e.currentTarget.dataset.joinid,
+                    act_id: that.data.actId,
+                    page: that.data.memberPage,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
+                        myPerson.push(...res.data.data.list)
+                        // 更多数据
+                        if (myPerson.length >= that.data.memberPage * 10) {
+                            that.setData({
+                                isMoreM: false
+                            })
+                        } else {
+                            that.setData({
+                                isMoreM: true,
+                            })
+                        }
                         that.setData({
-                            isMoreM: false
+                            myPerson: myPerson,
                         })
+                        wx.hideLoading()
+                        if (res.data.data.list.length > 0) {
+                            that.setData({
+                                classNameR: 'moreDataR',
+                                btnTextR: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                classNameR: 'moreDataRed',
+                                btnTextR: '没有了'
+                            })
+                        }
                     } else {
-                        that.setData({
-                            isMoreM: true,
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        myPerson: myPerson,
-                    })
-                    wx.hideLoading()
-                    if (res.data.data.list.length > 0) {
-                        that.setData({
-                            isData: true
-                        })
-                    } else {
-                        that.setData({
-                            isData: false
-                        })
-                    }
-                } else {
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
                 }
-            }
-        })
+            })
+        }
+        
+        
     },
     // 获取团员数据
     isDivBox: function (e) {
@@ -294,11 +303,13 @@ Page({
                     // 更多数据
                     if (res.data.data.list.length >= 10){
                         that.setData({
-                            isMoreM:false
+                            classNameR: 'moreDataR',
+                            btnTextR: '更多'
                         })
                     }else{
                         that.setData({
-                            isMoreM: true,
+                            classNameR: 'moreDataRed',
+                            btnTextR: '没有了'
                         })
                     }
                     that.setData({
@@ -596,48 +607,54 @@ Page({
         innerAudioContext.stop()
     },
     //更多拼团列表
-    getMoreRangeData:function(){
+    getMoreRangeData:function(e){
         let that = this;
         let collageData = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        collageData.push(...that.data.collageData)
-        that.setData({
-            rangePage: that.data.rangePage + 1
-        })
-        getApp().request({
-            url: 'personal_group_range',
-            data: {
-                act_id: that.data.actId,
-                page: that.data.rangePage,
-            },
-            method: 'post',
-            success: function(res){
-                if(res.data.code == 1){
-                    collageData.push(...res.data.data.list);
-                    if (collageData.length >= that.data.rangePage * 10) {
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            collageData.push(...that.data.collageData)
+            that.setData({
+                rangePage: that.data.rangePage + 1
+            })
+            getApp().request({
+                url: 'personal_group_range',
+                data: {
+                    act_id: that.data.actId,
+                    page: that.data.rangePage,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        collageData.push(...res.data.data.list);
+                        if (collageData.length >= that.data.rangePage * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: false
+                            collageData: collageData,
                         })
+                        wx.hideLoading()
                     } else {
-                        that.setData({
-                            isMore: true
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        collageData: collageData,
-                    })
-                    wx.hideLoading()
-                }else{
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
                 }
-            }
-        });
+            });
+        }
     },
     // 获取拼团列表
     getRangeData:function(){
@@ -653,11 +670,13 @@ Page({
             success: res => {
                 if (res.data.data.list >= 10){
                     that.setData({
-                        isMore:false
+                        className: 'moreData',
+                        btnText: '更多'
                     })
                 }else{
                     that.setData({
-                        isMore: true
+                        className: 'moreDataed',
+                        btnText: '没有了'
                     })
                 }
                 that.setData({

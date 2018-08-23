@@ -1,5 +1,5 @@
 <view class='empty'></view>
-<view class='manListContent' wx:for='{{pageData}}'>
+<view class='manListContent' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='manListContentTop' bindtap='toListInfo' data-actid='{{item.id}}'>{{item.title}}</view>
     <view class='manListContentMiddel'>
         <view class='ListContentMiddelLeft' bindtap='toListInfo' data-actid='{{item.id}}'>
@@ -20,3 +20,5 @@
     <view class='manListBottomLeft' bindtap='taBack'>返回</view>
     <view class='manListBottomRight' bindtap='chooseModel'>发布新祝福</view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

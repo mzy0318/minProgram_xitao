@@ -13,6 +13,8 @@ Page({
         killPage:1,
         collagePage:1,
         isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -41,21 +43,28 @@ Page({
                         that.setData({
                             showTitle: true
                         })
-                        for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
+                        if (data.list.length > 0) {
+                            for (let i = 0; i < data.list.length; i++) {
+                                data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                            }
                         }
                         if (data.list.length >= 10){
                             that.setData({
-                                isMore:false
+                                className: 'moreData',
+                                btnText: '更多'
                             })
                         }else{
                             that.setData({
-                                isMore: true
+                                className: 'moreDataed',
+                                btnText: '没有了'
                             })
                         }
                         this.setData({
                             userList: data.list
                         })
+                    }
+                    if (res.data.code == 0) {
+                        wx.stopPullDownRefresh()
                     }
                 }
             })
@@ -71,29 +80,28 @@ Page({
                     wx.setNavigationBarTitle({
                         title: '我的私人拼团',
                     })
-                    if (data.list.length <= 0){
-                        that.setData({
-                            showTitle: false
-                        })
-                    } else if (data.list.length > 0){
-                        that.setData({
-                            showTitle: true
-                        })
+                   
+                    if (data.list.length > 0) {
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
                         }
-                        if (data.list.length >= 10) {
-                            that.setData({
-                                isMore: false
-                            })
-                        } else {
-                            that.setData({
-                                isMore: true
-                            })
-                        }
-                        this.setData({
-                            userList: data.list
+                    }
+                    if (data.list.length >= 10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
                         })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    this.setData({
+                        userList: data.list
+                    })
+                    if (res.data.code == 0) {
+                        wx.stopPullDownRefresh()
                     }
                 }
             })
@@ -149,22 +157,27 @@ Page({
                     wx.setNavigationBarTitle({
                         title: '砍价报名列表',
                     })
-                    if (data.list.length == 0) {
-                        that.setData({
-                            
-                                showTitle: false
-                            
-                        })
-                    } else if (data.list.length != 0) {
-                        that.setData({
-                            showTitle: true
-                        })
+                    if (data.list.length > 0){
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
                         }
-                        this.setData({
-                            userList: data.list
+                    }
+                    if (data.list.length >= 10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
                         })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    that.setData({
+                        userList: data.list
+                    })
+                    wx.stopPullDownRefresh()
+                    if (res.data.code == 0) {
                         wx.stopPullDownRefresh()
                     }
                 }
@@ -184,20 +197,30 @@ Page({
                     wx.setNavigationBarTitle({
                         title: '我的私人拼团',
                     })
-                    if (data.list.length == 0) {
-                        that.setData({
-                            showTitle: false
-                        })
-                    } else if (data.list.length != 0) {
-                        that.setData({
-                            showTitle: true
-                        })
+                    that.setData({
+                        showTitle: true
+                    })
+                    if (data.list.length > 0) {
                         for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time*1000))
+                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
                         }
-                        this.setData({
-                            userList: data.list
+                    }
+                    if (data.list.length >= 10) {
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
                         })
+                    } else {
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    this.setData({
+                        userList: data.list
+                    })
+                    wx.stopPullDownRefresh()
+                    if(res.data.code == 0){
                         wx.stopPullDownRefresh()
                     }
                 }
@@ -259,108 +282,121 @@ Page({
         })
     },
     //获取更多数据
-    moreData:function(){
+    moreData:function(e){
         let that = this;
         let pageTypeStu = wx.getStorageSync('pageTypeStu');
         let userList = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        userList.push(...that.data.userList);
         if (pageTypeStu == 6){
             // 砍价
-            that.setData({
-                killPage: that.data.killPage + 1
-            })
-            getApp().request({
-                url: "my_bargain_list",
-                method: "post",
-                data: {
-                    page: that.data.killPage
-                },
-                success: function(res) {
-                    let data = res.data.data;
-                    wx.setNavigationBarTitle({
-                        title: '砍价报名列表',
-                    })
-                    if (data.list.length <= 0) {
-                        that.setData({
-                            showTitle: false
+            if (e.currentTarget.dataset.text == '没有了') {
+
+            } else if (e.currentTarget.dataset.text == '更多') {
+                wx.showLoading({
+                    title: '正在加载...',
+                })
+                userList.push(...that.data.userList);
+                that.setData({
+                    killPage: that.data.killPage + 1
+                })
+                getApp().request({
+                    url: "my_bargain_list",
+                    method: "post",
+                    data: {
+                        page: that.data.killPage
+                    },
+                    success: function (res) {
+                        let data = res.data.data;
+                        wx.setNavigationBarTitle({
+                            title: '砍价报名列表',
                         })
-                    } else if (data.list.length > 0) {
-                        that.setData({
-                            showTitle: true
-                        })
-                        for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                        if(data.list.length > 0){
+                            for (let i = 0; i < data.list.length; i++) {
+                                data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                            }
                         }
                         userList.push(...data.list)
-                        if (userList.length >= that.data.killPage*10) {
+                        if (userList.length >= that.data.killPage * 10) {
                             that.setData({
-                                isMore: false
+                                className: 'moreData',
+                                btnText: '更多'
                             })
                         } else {
                             that.setData({
-                                isMore: true
+                                className: 'moreDataed',
+                                btnText: '没有了'
                             })
                         }
                         that.setData({
                             userList: userList
                         })
                         wx.hideLoading()
+                        
+                        if (res.data.code == 0) {
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none'
+                            })
+                        }
                     }
-                    if(res.data.code == 0){
-                        wx.hideLoading()
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon:'none'
-                        })
-                    }
-                }
-            })
+                })
+            }
+            
         } else if (pageTypeStu == 3){
             // 拼团
-            that.setData({
-                collagePage: that.data.collagePage + 1
-            })
-            getApp().request({
-                url: "my_personal_group_list",
-                method: "post",
-                data: {
-                    page: that.data.collagePage,
-                },
-                success: res => {
-                    let data = res.data.data;
-                    wx.setNavigationBarTitle({
-                        title: '我的私人拼团',
-                    })
-                    if (data.list.length <= 0) {
-                        that.setData({
-                            showTitle: false
+            if (e.currentTarget.dataset.text == '没有了') {
+
+            } else if (e.currentTarget.dataset.text == '更多') {
+                wx.showLoading({
+                    title: '正在加载...',
+                })
+                userList.push(...that.data.userList);
+                that.setData({
+                    collagePage: that.data.collagePage + 1
+                })
+                getApp().request({
+                    url: "my_personal_group_list",
+                    method: "post",
+                    data: {
+                        page: that.data.collagePage,
+                    },
+                    success: res => {
+                        let data = res.data.data;
+                        wx.setNavigationBarTitle({
+                            title: '我的私人拼团',
                         })
-                    } else if (data.list.length > 0) {
                         that.setData({
                             showTitle: true
                         })
-                        for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                        if (data.list.length > 0){
+                            for (let i = 0; i < data.list.length; i++) {
+                                data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                            }
                         }
                         userList.push(...data.list)
-                        if (userList.length >= that.data.collagePage*10) {
+                        if (userList.length >= that.data.collagePage * 10) {
                             that.setData({
-                                isMore: false
+                                className: 'moreData',
+                                btnText: '更多'
                             })
                         } else {
                             that.setData({
-                                isMore: true
+                                className: 'moreDataed',
+                                btnText: '没有了'
                             })
                         }
                         that.setData({
                             userList: userList
                         })
+                        wx.hideLoading()
+                        
+                        if(res.data.code == 0){
+                            wx.hideLoading()
+                        }
                     }
-                }
-            })
+                })
+            }
+            
         }
     },
 })

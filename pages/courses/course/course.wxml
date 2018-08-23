@@ -21,6 +21,8 @@
         <view>￥{{item.now_price}}<text>￥{{item.original_price}}</text></view>
     </view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
 <!-- 课程分类 -->
 <view class='courseClassWrap' hidden='{{isShow}}'>
     <view class='empty'></view>

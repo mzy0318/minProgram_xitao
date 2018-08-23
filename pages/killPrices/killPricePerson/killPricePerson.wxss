@@ -315,7 +315,7 @@
     font-size:35rpx;
 }
 .pricePersonFourContent>.contentThree{
-    width:100%;
+    width:600rpx;
     height:100rpx;
     margin-top:0rpx;
 }
@@ -334,15 +334,16 @@
     height:80rpx;
 }
 .pricePersonFourContent>.contentThree>view:nth-child(2){
-    width:480rpx;
+    width:520rpx;
     height:100rpx;
+    float:left;
 }
 .pricePersonFourContent>.contentThree>view:nth-child(2)>text{
     display:block;
     line-height:100rpx;
     float:left;
-    font-size:30rpx;
-    margin-left:20rpx;
+    font-size:28rpx;
+    margin-left:15rpx;
 }
 .pricePersonFourContent>.contentThree>view:nth-child(2)>text:nth-child(1){
     width:120rpx;
@@ -351,11 +352,9 @@
     text-overflow:ellipsis;
 }
 .pricePersonFourContent>.contentThree>view:nth-child(2)>text:nth-child(2){
-    width:240rpx;
-    text-align:right;
-    float:right;
-    margin-right:-100rpx;
-    color:#CC2200;
+   width:370rpx;
+    text-align:center;
+    color: #c20;
 }
 /* 砍价成功弹窗 */
 .alertDiv{
@@ -509,13 +508,21 @@
     font-size: 40rpx;
     color: #cacaca;
 }
-/* 更多数据 */
+/* 更多 */
 .moreData{
-    width:600rpx;
-    height:50rpx;
-    line-height:50rpx;
-    font-size:26rpx;
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
     color:#7b7b7b;
-    text-align:center;
+    background:#efefef;
 }
 

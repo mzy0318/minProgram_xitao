@@ -8,7 +8,8 @@ Page({
         pageData:'',
         pageNum:1,
         actId:'',
-        isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -97,49 +98,55 @@ Page({
         })
     },
     // 获取页面更多数据
-    getMoreData:function(){
+    moreData:function(e){
         let that = this;
         let pageData = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        pageData.push(...that.data.pageData)
-        that.setData({
-            pageNum:that.data.pageNum + 1
-        })
-        getApp().request({
-            url: 'org/video_vote/joiners',
-            data: {
-                id: that.data.actId,
-                page: that.data.pageNum,
-            },
-            method: 'get',
-            success: function (res) {
-                if (res.data.code == 1) {
-                    wx.stopPullDownRefresh()
-                    pageData.push(...res.data.data.list)
-                    if (pageData.length >= that.data.pageNum*10) {
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/video_vote/joiners',
+                data: {
+                    id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        wx.stopPullDownRefresh()
+                        pageData.push(...res.data.data.list)
+                        if (pageData.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: false
+                            pageData: pageData,
                         })
-                    }else{
-                        that.setData({
-                            isMore: true
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        pageData: pageData,
-                    })
-                    wx.hideLoading()
-                } else {
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
                 }
-            }
-        })
+            })
+        }
     },
     // 获取页面数据
     getPageData: function () {
@@ -153,20 +160,23 @@ Page({
             method: 'get',
             success: function (res) {
                 if (res.data.code == 1) {
-                    wx.stopPullDownRefresh()
                     if(res.data.data.list.length >= 10){
                         that.setData({
-                            isMore:false
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true,
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({
                         pageData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
                 }else{
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon:'none',

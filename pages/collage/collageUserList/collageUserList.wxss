@@ -103,10 +103,18 @@
 }
 /* 更多 */
 .moreData{
-    width:100%;
-    height:50rpx;
-    line-height:50rpx;
-    text-align:center;
-    color:#7b7b7b;
+    width:200rpx;
+    height:60rpx;
     font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
 }

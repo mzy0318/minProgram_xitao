@@ -317,7 +317,7 @@
     line-height: 40rpx;
     font-size: 30rpx;
     text-align: center;
-    margin-top: 50rpx;
+    margin-top: 20rpx;
 }
 
 .infoThreeContentOne .contentOne text, .infoThreeContentOne .contentTwo text {
@@ -325,13 +325,13 @@
     font-size: 35rpx;
 }
 
-.infoThreeContentOne .contentThree {
-    width: 100%;
+.infoThreeContentOne>.contentThree {
+    width: 600rpx;
     height: 100rpx;
     margin-top: 0rpx;
 }
 
-.contentThree>view:nth-child(1) {
+.contentThree>view:nth-child(1){
     width: 80rpx;
     height: 80rpx;
     float: left;
@@ -341,22 +341,23 @@
     overflow: hidden;
 }
 
-.contentThree>view:nth-child(1)>image {
+.contentThree>view:nth-child(1)>image{
     width: 80rpx;
     height: 80rpx;
 }
 
-.contentThree>view:nth-child(2) {
-    width: 480rpx;
+.contentThree>view:nth-child(2){
+    width: 520rpx;
     height: 100rpx;
+    float:left;
 }
 
 .contentThree>view:nth-child(2)>text{
     display: block;
     line-height: 100rpx;
     float: left;
-    font-size: 30rpx;
-    margin-left: 20rpx;
+    font-size: 28rpx;
+    margin-left: 15rpx;
 }
 .contentThree>view:nth-child(2)>text:nth-child(1){
     width:120rpx;
@@ -365,10 +366,8 @@
     text-overflow:ellipsis;
 }
 .contentThree>view:nth-child(2)>text:nth-child(2) {
-    width:240rpx;
-    text-align: right;
-    float: right;
-    margin-right:-100rpx;
+    width:370rpx;
+    text-align:center;
     color: #c20;
 }
 
@@ -696,12 +695,20 @@ view.viewRotate {
     animation: headRotate 5s linear;
     animation-iteration-count: infinite;
 }
-/* 更多数据 */
+/* 更多 */
 .moreData{
-    width:600rpx;
-    height:50rpx;
-    line-height:50rpx;
-    font-size:26rpx;
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
     color:#7b7b7b;
-    text-align:center;
+    background:#efefef;
 }

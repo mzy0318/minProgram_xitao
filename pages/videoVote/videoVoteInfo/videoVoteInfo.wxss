@@ -328,15 +328,7 @@ view.widthInput{
     margin:0rpx auto;
     background:transparent;
 }
-.activeInfoRankMore{
-    width:720rpx;
-    height:50rpx;
-    line-height:50rpx;
-    text-align:center;
-    color:#7b7b7b;
-    font-size:28rpx;
-    clear: both;
-}
+
 .contentVoteNum{
     height:40rpx;
     font-size:24rpx;
@@ -347,4 +339,28 @@ view.widthInput{
     right:0rpx;
     top:0rpx;
     background:rgba(0,0,0,0.6);
+}
+/* 更多 */
+.moreData{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
+}
+.btnWrap{
+    width:100%;
+    height:60rpx;
+    padding-top:20rpx;
+    padding-bottom:20rpx;
+    clear:both;
 }

@@ -11,6 +11,8 @@ Page({
         endTime:'',
         pageNum: 1,
         isMore:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -78,55 +80,61 @@ Page({
         })
     },
     // 获取页面更多数据
-    moreData:function(){
+    moreData:function(e){
         let that = this;
         let pageData = [];
-        wx.showLoading({
-            title: '正在加载...',
-        })
-        pageData.push(...that.data.pageData)
-        that.setData({
-            pageNum:that.data.pageNum + 1
-        })
-        getApp().request({
-            url: 'visitor_personal_group_list',
-            method: 'post',
-            data: {
-                page: that.data.pageNum
-            },
-            success: function (res) {
-                if (Number(res.data.code) == 1) {
-                    let data = res.data.data.list
+        if (e.currentTarget.dataset.text == '没有了') {
 
-                    data = utils.map(data, function (one) {
-                        one.banner_image_url = utils.rect(one.banner_image_url, 500, 250)
-                        one.start_time = utils.liteDate(one.start_time)
-                        one.end_time = utils.liteDate(one.end_time)
-                        return one
-                    })
-                    pageData.push(...data)
-                    if (pageData.length >= that.data.pageNum*10){
-                        that.setData({
-                            isMore: false,
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'visitor_personal_group_list',
+                method: 'post',
+                data: {
+                    page: that.data.pageNum
+                },
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        let data = res.data.data.list
+
+                        data = utils.map(data, function (one) {
+                            one.banner_image_url = utils.rect(one.banner_image_url, 500, 250)
+                            one.start_time = utils.liteDate(one.start_time)
+                            one.end_time = utils.liteDate(one.end_time)
+                            return one
                         })
-                    }else{
+                        pageData.push(...data)
+                        if (pageData.length >= that.data.pageNum * 10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
                         that.setData({
-                            isMore: true,
+                            pageData: pageData,
+                        })
+                        wx.hideLoading()
+                    } else if (Nmuber(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
                         })
                     }
-                    that.setData({
-                        pageData: pageData,
-                    })
-                    wx.hideLoading()
-                } else if (Nmuber(res.data.code) == 0) {
-                    wx.hideLoading()
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
                 }
-            }
-        })
+            })
+        }
     },
     // 获取页面数据
     getPageData:function(){
@@ -149,11 +157,13 @@ Page({
                     })
                     if(data.length >= 10){
                         that.setData({
-                            isMore:false,
+                            className: 'moreData',
+                            btnText: '更多'
                         })
                     }else{
                         that.setData({
-                            isMore: true,
+                            className: 'moreDataed',
+                            btnText: '没有了'
                         })
                     }
                     that.setData({
