@@ -116,7 +116,7 @@ Page({
         })
     },
     // 获取更多的数据
-    moreData:function(){
+    moreData:function(e){
         let that = this;
         let pageData = [];
         if (e.currentTarget.dataset.text == '没有了') {

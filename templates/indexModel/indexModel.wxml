@@ -329,7 +329,6 @@
                 <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
                 <view>{{item.name}}</view>
             </view>
-            <!-- <view class='fiveteenEmpty'></view> -->
         </view>
         <view class='fourteenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/fiveteenTitle.png' mode='aspectFit'></image></view>
         <view class='twelveContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
@@ -363,6 +362,30 @@
                 <view class='sixLessonBottom'>
                     <view><text>￥{{item.now_price}}</text><text>￥{{item.original_price}}</text></view>
                     <view>... </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 十七个模板--武术 -->
+<template name='seventeen'>
+    <view class='seventeenWrap'>
+        <view class='seventeenNav'>
+            <view wx:for='{{home}}' data-url='{{item.url}}' bindtap='nav' wx:key='{{index}}'>
+                <view><image src='{{item.icon}}' mode='scaleToFill'></image></view>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <view class='seventeenTitle'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/title/wushu-kid-title.png' mode='aspectFit'></image></view>
+        <view class='twelveContent' wx:for='{{lessons}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{item.id}}'>
+            <view class='leftImage'>
+                <image src='{{item.cover.url + "?x-oss-process=image/resize,m_fill,w_140,h_90,limit_0/auto-orient,1/quality,q_100"}}' mode='aspectFill'></image>
+            </view>
+            <view class='rightText'>
+                <view class='rightTextTitle'>{{item.title}}</view>
+                <view class='rightTextPrice'>
+                    <text decode>￥{{item.now_price}}&nbsp;</text>
+                    <text decode>￥{{item.original_price}}</text>
                 </view>
             </view>
         </view>

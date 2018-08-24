@@ -49,4 +49,4 @@
     <!-- 更多 -->
     <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
 </view>
-<view class='addressList' bindtap='goManList'>＋</view>
+<view class='addressList' bindtap='goManList' hidden='{{isAdd}}'>＋</view>

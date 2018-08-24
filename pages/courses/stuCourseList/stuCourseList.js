@@ -7,8 +7,9 @@ Page({
      */
     data: {
         pageData:'',
-        showTitle: true,
         pageNum:1,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -62,40 +63,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageData = [];
-        pageData.push(...that.data.pageData)
-        if(that.data.pageData.length >= that.data.pageNum*10){
-            that.setData({
-                pageNum:that.data.pageNum + 1
-            })
-            getApp().request({
-                url: 'visitor_sale_lesson_appoint_list',
-                data: {
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: function (res) {
-                    if (res.data.data.length == 0) {
-                        that.setData({
-                            showTitle: false
-                        })
-                    } else if (res.data.data.length != 0) {
-                        that.setData({
-                            showTitle: true
-                        })
-                        for (let i = 0; i < res.data.data.length; i++) {
-                            res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time * 1000))
-                        }
-                        pageData.push(...res.data.data)
-                        that.setData({
-                            pageData: pageData
-                        })
-                        wx.stopPullDownRefresh()
-                    }
-                }
-            })
-        }
     },
 
     /**
@@ -110,6 +77,59 @@ Page({
     toIndex:function(){
         getApp().toIndex()
     },
+    // 获取更多页面数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'visitor_sale_lesson_appoint_list',
+                data: {
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        if (res.data.data.length > 0) {
+                            for (let i = 0; i < res.data.data.length; i++) {
+                                res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time * 1000))
+                            }
+                        }
+                        pageData.push(...res.data.data)
+                        // 更多
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                    }
+
+                }
+            })
+        }
+    },
+    // 获取页面数据
     getPageData:function(){
         let that = this;
         getApp().request({
@@ -119,22 +139,32 @@ Page({
             },
             method: 'post',
             success: function (res) {
-                if (res.data.data.length == 0) {
-                    that.setData({
-                        showTitle: false
-                    })
-                } else if (res.data.data.length != 0) {
-                    that.setData({
-                        showTitle: true
-                    })
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time * 1000))
+                if(res.data.code == 1){
+                    if(res.data.data.length > 0){
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            res.data.data[i].create_time = utils.formatDate(new Date(res.data.data[i].create_time * 1000))
+                        }
+                    }
+                    // 更多
+                    if(res.data.data.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         pageData: res.data.data
                     })
                     wx.stopPullDownRefresh()
+                }else{
+                    wx.stopPullDownRefresh()
                 }
+                
             }
         })
     }

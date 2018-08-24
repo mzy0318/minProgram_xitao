@@ -1,6 +1,8 @@
+@import '../../../templates/moreData/moreData.wxss';
 page{
     background:#F5F5F5;
     position:relative;
+    padding-bottom:20rpx;
 }
 .manListSearch{
     width:100%;

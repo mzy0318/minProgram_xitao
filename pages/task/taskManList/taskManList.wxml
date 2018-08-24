@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='manListSearch'>
     <input placeholder='请输入课程标题'  type='text' confirm-type='search' bindconfirm='inputkey'></input>
 </view>
@@ -17,3 +18,5 @@
         <view data-id='3' bindtap='optionsBtn' data-actid='{{item.id}}' ><text style='color:#C13624'>删除课程</text></view>
     </view>
 </view>
+<!-- 更多 -->
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

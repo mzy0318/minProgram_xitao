@@ -86,12 +86,20 @@ page{
     width:750rpx;
     height:20rpx;
 }
-.noData{
-    width:100%;
+/* 更多 */
+.moreData{
+    width:200rpx;
     height:60rpx;
-    font-size:26rpx;
-    color:#7b7b7b;
-    text-align:center;
+    font-size:28rpx;
     line-height:60rpx;
-    background:transparent;
+    color:#fff;
+    background:#4993FE;
+}
+.moreDataed{
+    width:200rpx;
+    height:60rpx;
+    font-size:28rpx;
+    line-height:60rpx;
+    color:#7b7b7b;
+    background:#efefef;
 }

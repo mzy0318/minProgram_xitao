@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='homeWork' hidden='{{isWork}}'>
     <view class='homeWorkContent'>
         <view class='empty'></view>
@@ -32,7 +33,7 @@
             <text class='iconfont icon-love'></text>
             <text> {{zanList}}</text>
         </view>
-<!-- 评论列表 -->
+        <!-- 评论列表 -->
         <view class='commentList' wx:for='{{commentList}}' wx:key='{{index}}'>
             <view class='emtpy'></view>
             <view class='commentContent'>
@@ -53,6 +54,9 @@
                 </view>
             </view>
         </view>
+        <view class='homeEmpty'></view>
+        <!-- 更多 -->
+        <template  is="moreDataBtn" data='{{btnText:btnText}}' />
     </view>
 </view>
 <video style='display:none' bindended='stopVideo' id='myVideo' src='{{otherVideo}}' autoplay></video>

@@ -7,4 +7,4 @@
     </swiper>
 </view>
 <template is='{{modeCode}}' data='{{item:paintData,home:pageData.home_icon,lessons:pageData.course,contentHeight:contentHeight,banner:pageData.banner}}'></template>
-
+<!--  -->

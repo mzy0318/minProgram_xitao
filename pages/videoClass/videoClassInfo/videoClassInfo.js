@@ -10,12 +10,14 @@ Page({
         videoId:0,
         videoData:'',
         actTag:'',
-        commentData:'',
         content:'',
         isRely:'',
         isAuto:false,
         lock:false,
         commentPage:1,
+        commentData: '',
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -38,32 +40,7 @@ Page({
         // 获取评论列表
         that.getComment();
         // 获取页面数据
-        getApp().request({
-            url:'visitor_video_class',
-            data:{
-                id:that.data.actId,
-            },
-            method:'post',
-            success:function(res){
-                if(Number(res.data.code) == 1){
-                    wx.setNavigationBarTitle({
-                        title: res.data.data.title,
-                    })
-                    res.data.data.create_time = formatTime.dayMonth(new Date(res.data.data.create_time * 1000))
-                   
-                    that.setData({
-                        pageData:res.data.data,
-                        videoData: res.data.data.video[0].url,
-                        actTag:res.data.data.act_tag
-                    })
-                } else if (Number(res.data.code) == 0){
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
-                }
-            }
-        })
+        that.getPageData();
     },
 
     /**
@@ -99,47 +76,20 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-
+        let that = this;
+        that.setData({
+            commentPage:1
+        })
+        // 获取评论列表
+        that.getComment();
+        // 获取页面数据
+        that.getPageData();
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let commentData = [];
-        commentData.push(...that.data.commentData)
-        if (that.data.commentData.length >= that.data.commentPage*10){
-            that.setData({
-                commentPage: that.data.commentPage + 1,
-            })
-            getApp().request({
-                url: 'comment_list',
-                data: {
-                    page: that.data.commentPage,
-                    act_id: that.data.actId,
-                    act_tag: 'video_class',
-                },
-                method: 'post',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        for (let i = 0; i < res.data.data.list.length; i++) {
-                            res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time * 1000))
-                        }
-                        commentData.push(...res.data.data.list)
-                        that.setData({
-                            commentData: commentData
-                        })
-                        console.log('that.data.commentData', that.data.commentData)
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: '列表请求失败',
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        }
     },
 
     /**
@@ -248,6 +198,64 @@ Page({
             }
         })
     },
+    // 获取更多评论数据
+    moreData:function(e){
+        let that = this;
+        let commentData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            commentData.push(...that.data.commentData)
+            that.setData({
+                commentPage: that.data.commentPage + 1
+            })
+            getApp().request({
+                url: 'comment_list',
+                data: {
+                    page: that.data.commentPage,
+                    act_id: that.data.actId,
+                    act_tag: 'video_class',
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        if (res.data.data.list.length) {
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time * 1000))
+                            }
+                        }
+                        commentData.push(...res.data.data.list)
+                        // 更多
+                        if (commentData.length >= that.data.commentPage*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            commentData: commentData
+                        })
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: '列表请求失败',
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
+    },
+    // 获取评论列表
     getComment:function(){
         let that = this;
         getApp().request({
@@ -260,13 +268,29 @@ Page({
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time * 1000))
+                    if(res.data.data.list.length){
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formatTime.dateTime(new Date(res.data.data.list[i].create_time * 1000))
+                        }
+                    }
+                    // 更多
+                    if (res.data.data.list.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         commentData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
                 } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: '列表请求失败',
                         icon: 'none',
@@ -274,5 +298,35 @@ Page({
                 }
             }
         })
-    }
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'visitor_video_class',
+            data: {
+                id: that.data.actId,
+            },
+            method: 'post',
+            success: function (res) {
+                if (Number(res.data.code) == 1) {
+                    wx.setNavigationBarTitle({
+                        title: res.data.data.title,
+                    })
+                    res.data.data.create_time = formatTime.dayMonth(new Date(res.data.data.create_time * 1000))
+
+                    that.setData({
+                        pageData: res.data.data,
+                        videoData: res.data.data.video[0].url,
+                        actTag: res.data.data.act_tag
+                    })
+                } else if (Number(res.data.code) == 0) {
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    },
 })

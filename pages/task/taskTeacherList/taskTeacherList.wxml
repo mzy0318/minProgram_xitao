@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='manListSearch'>
     <input placeholder='请输入姓名,电话' type='text' confirm-type='search' bindconfirm='bindKeyInput'></input>
 </view>
@@ -11,3 +12,5 @@
         <view class='contentFloat'>〉</view>
     </view>
 </view>
+<!-- 更多 -->
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

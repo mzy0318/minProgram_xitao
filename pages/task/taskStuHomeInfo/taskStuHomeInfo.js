@@ -17,6 +17,7 @@ Page({
         commentList:'',
         isZanList:true,
         audioUrl:'',
+        btnText: 0,
     },
 
     /**
@@ -46,6 +47,9 @@ Page({
      */
     onShow: function () {
         let that = this;
+        that.setData({
+            pageNum: 1,
+        })
         that.getPageData();
     },
 
@@ -81,15 +85,17 @@ Page({
         })
         that.getPageData();
     },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
+    // 更多评论列表
+    moreData:function(e){
         let that = this;
-        let comments = [];
-        comments.push(...that.data.commentList)
-        if (that.data.commentList.length >= that.data.pageNum*10){
+        if (e.currentTarget.dataset.text == 0) {
+
+        } else if (e.currentTarget.dataset.text == 1) {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            let pageData = [];
+            pageData.push(...that.data.commentList);
             that.setData({
                 pageNum: that.data.pageNum + 1,
             })
@@ -105,13 +111,24 @@ Page({
                 success: function (res) {
                     if (Number(res.data.code) == 1) {
                         let zanList = res.data.data.thumb_person.split(',');
-                        comments.push(...res.data.data.comments)
+                        pageData.push(...res.data.data.comments);
+                        if (pageData.length >= that.data.pageNum*10){
+                            that.setData({
+                                btnText: 1
+                            })
+                        }else{
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
                         that.setData({
                             pageData: res.data.data,
                             zanList: zanList,
-                            commentList: comments,
+                            commentList: pageData,
                         })
+                        wx.hideLoading()
                     } else {
+                        wx.hideLoading()
                         wx.showToast({
                             title: res.data.msg,
                             icon: 'none'
@@ -120,6 +137,11 @@ Page({
                 }
             })
         }
+    },
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
     },
 
     /**
@@ -221,7 +243,6 @@ Page({
             method: 'get',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    wx.stopPullDownRefresh()
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,
                     })
@@ -253,12 +274,24 @@ Page({
                     }
                     // 格式化时间
                     res.data.data.homework.create_time = formate.formatTime(new Date(res.data.data.homework.create_time*1000))
+                    //更多
+                    if (res.data.data.comments.length > 10){
+                        that.setData({
+                            btnText: 1
+                        })
+                    }else{
+                        that.setData({
+                            btnText: 0
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data,
                         zanList: res.data.data.thumb_person,
                         commentList: res.data.data.comments
                     })
+                    wx.stopPullDownRefresh()
                 } else {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none'

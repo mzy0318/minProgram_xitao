@@ -1,16 +1,16 @@
-<view class='killPriceListWrap'>
-    <view class='killPriceListContet' wx:for='{{pageData}}'>
-        <view class='killPriceListTop' bindtap='toPricePerson'  data-id='{{item.act_nice_id}}'  data-acttag='{{item.act_tag}}'>
-            <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.nickname}}</text>
-            <text>{{item.create_time}}</text>
-        </view>
-        <view class='killPriceListBottom'>
-            <text class='iconfont icon-phone iconColor' decode='true' bindtap='tellPhone' data-phonenum='{{item.phone}}'>&nbsp;&nbsp;{{item.phone}}</text>
-            <text decode='true' bindtap='toPriceListInfo' data-index='{{index}}' data-actid='{{item.act_id}}'>.&nbsp;.&nbsp;.</text>
-        </view>
+<view class='killPriceListContet' wx:for='{{pageData}}' wx:key='{{index}}'>
+    <view class='killPriceListTop' bindtap='toPricePerson'  data-id='{{item.act_nice_id}}'  data-acttag='{{item.act_tag}}'>
+        <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.nickname}}</text>
+        <text>{{item.create_time}}</text>
     </view>
-    <view class='noData' hidden='{{showTitle}}'>无记录</view> 
+    <view class='killPriceListBottom'>
+        <text class='iconfont icon-phone iconColor' decode='true' bindtap='tellPhone' data-phonenum='{{item.phone}}'>&nbsp;&nbsp;{{item.phone}}</text>
+        <text decode='true' bindtap='toPriceListInfo' data-index='{{index}}' data-actid='{{item.act_id}}'>.&nbsp;.&nbsp;.</text>
+    </view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+
 <view class='collageListWrap' hidden='{{isPersonInfo}}'>
     <view class='empty'></view>
     <view class='empty'></view>

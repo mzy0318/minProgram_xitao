@@ -7,8 +7,8 @@ Page({
     data: {
         pageData: '',
         pageNum: 1,
-        className: 'moreData',
-        btnText: '更多'
+        className: 'moreDataed',
+        btnText: '没有了'
     },
 
     /**

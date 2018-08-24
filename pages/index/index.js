@@ -343,6 +343,10 @@ Page({
                     that.setData({
                         modeCode: 'four'
                     })
+                } else if (Number(wx.getStorageSync('schoolModel')) == 26) {
+                    that.setData({
+                        modeCode: 'seventeen'
+                    })
                 }
                 wx.hideLoading()
                 for (let i = 0; i < res.data.data.home_icon.length; i++) {  

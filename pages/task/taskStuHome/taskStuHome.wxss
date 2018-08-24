@@ -1,6 +1,8 @@
 @import '../../../utils/iconFont.wxss';
+@import '../../../templates/moreData/moreData.wxss';
 page{
     background:#F2F2F2;
+    padding-bottom:20rpx;
 }
 .homeImage{
     width:150rpx;
@@ -80,6 +82,10 @@ page{
     height:110rpx;
     background:#fff;
     margin-top:20rpx;
+}
+.scoreEmpty{
+    width:100%;
+    height:20rpx;
 }
 .homeScoreListLeft{
     width:45%;

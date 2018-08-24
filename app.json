@@ -57,7 +57,6 @@
         "pages/actReg/actRegSignUp/actRegSignUp",
         "pages/actReg/actRegUserInfo/actRegUserInfo",
         "pages/studentManage/orderList/orderList",
-        "components/otherOpt/otherOpt",
         "pages/task/taskFractionEdit/taskFractionEdit",
         "pages/task/taskCourseEdit/taskCourseEdit",
         "pages/task/taskManList/taskManList",
@@ -131,7 +130,8 @@
                 "text": "学生中心",
                 "iconPath": "./icon/student.png",
                 "selectedIconPath": "/icon/studentSele.png"
-            },{
+            },
+            {
                 "pagePath": "pages/service/service",
                 "text": "联系客服",
                 "iconPath": "./icon/service.png",

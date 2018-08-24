@@ -16,8 +16,9 @@ Page({
         catalog:'',
         tag:'',
         pageNum:1,
-        className: 'moreData',
-        btnText: '更多'
+        className: 'moreDataed',
+        btnText: '没有了',
+        isAdd:true,
     },
 
     /**
@@ -26,6 +27,16 @@ Page({
     onLoad: function (options) {
         let that = this;
         that.getPageData();
+        let loginCode = wx.getStorageSync('loginCode');
+        if (loginCode == 1){
+            that.setData({
+                isAdd: false,
+            })
+        }else{
+            that.setData({
+                isAdd: true,
+            })
+        }
     },
 
     /**

@@ -1,4 +1,4 @@
-<view class='courseList' wx:for='{{pageData}}'>
+<view class='courseList' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='courseListLeft' bindtap='toIndex'><image src='{{item.cover.url}}' mode='aspectFill'></image></view>
     <view class='courseListRight'>
         <view class='courseListRightTop'>{{item.title}}</view>
@@ -8,4 +8,5 @@
         </view>
     </view>
 </view>
-<view class='noData' hidden='{{showTitle}}'>无记录</view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

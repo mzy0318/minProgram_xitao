@@ -12,6 +12,8 @@ Page({
         actId: '',
         actTag: '',
         title: '',
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -73,45 +75,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageData = [];
-        pageData.push(...that.data.pageData);
-        console.log('that.data.pageData', that.data.pageData)
-        if (that.data.pageData.length >= that.data.pageNum * 10) {
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'visitor_video_class_list',
-                data: {
-                    tag: '',
-                    catalog: '',
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        for (let i = 0; i < res.data.data.list.length; i++) {
-                            res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
-                            res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url, 115, 75)
-                        }
-                        pageData.push(...res.data.data.list)
-                        that.setData({
-                            pageData: pageData,
-                        })
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        } else {
-            wx.showToast({
-                title: '到底啦',
-            })
-        }
     },
 
     /**
@@ -203,6 +166,64 @@ Page({
             })
         }
     },
+    // 请求更多数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'visitor_video_class_list',
+                data: {
+                    tag: '',
+                    catalog: '',
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        if (res.data.data.list.length > 0) {
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
+                                res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url, 115, 75)
+                            }
+                        }
+                        // 更多
+                        pageData.push(...res.data.data.list)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData,
+                        })
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
+    },
     //请求数据
     getData: function () {
         let that = this;
@@ -216,15 +237,30 @@ Page({
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    for (let i = 0; i < res.data.data.list.length; i++) {
-                        res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
-                        res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url,115,75)
+                    if(res.data.data.list.length > 0){
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formatTime.formatDate(new Date(res.data.data.list[i].create_time * 1000));
+                            res.data.data.list[i].cover.url = formatTime.rect(res.data.data.list[i].cover.url, 115, 75)
+                        }
+                    }
+                    // 更多
+                    if(res.data.data.list.length>= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         pageData: res.data.data.list
                     })
                     wx.stopPullDownRefresh()
                 } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',

@@ -13,4 +13,5 @@
         <view class='listBottomRight'>{{item.status}}</view>
     </view>
 </view>
-<view class='noData' hidden='{{showTitle}}'>无记录</view> 
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>

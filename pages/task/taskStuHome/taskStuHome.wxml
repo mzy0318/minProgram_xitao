@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='homeImage'><image src='{{baseInfo.avatar_url}}' mode='scaleToFill'></image></view>
 <view class='homeName'>{{baseInfo.realname}}</view>
 <view class='homeOptions'>
@@ -20,6 +21,9 @@
         </view>
         <view class='homeScoreListRight' style='color:{{item.score>0?"#C43B1E":"#0D920D"}}'>{{item.score>0?'+'+item.score:item.score}} </view>
     </view>
+    <view class='scoreEmpty'></view>
+    <!-- 更多积分列表 -->
+    <template  is="moreDataBtn" data='{{btnText:btnText}}' />
 </view>
 <!-- 点赞列表 -->
 <view class='homeZan' hidden='{{isZan}}'>
@@ -27,6 +31,9 @@
         <view>{{item.name}}</view>
         <view>{{item.create_time}}</view>
     </view>
+    <view class='scoreEmpty'></view>
+    <!-- 更多积分列表 -->
+    <template  is="moreDataBtn" data='{{btnText:btnText}}' />
 </view>
 <!-- 作业 -->
 <view class='homeWork' hidden='{{isWork}}'>
@@ -68,5 +75,8 @@
             <text wx:for='{{item.thumb_person}}' wx:key='{{index}}'> {{item}}</text>
         </view>
     </view>
+    <view class='scoreEmpty'></view>
+    <!-- 更多积分列表 -->
+    <template  is="moreDataBtn" data='{{btnText:btnText}}' />
 </view>
 <video style='display:none' bindended='stopVideo' id='myVideo' src='{{otherVideo}}' autoplay></video>

@@ -7,6 +7,8 @@ Page({
         pageData:'',
         pageNum:1,
         bgColor:'',
+        btnText: 0,
+        key:'',
     },
 
     /**
@@ -28,6 +30,9 @@ Page({
      */
     onShow: function() {
         let that = this;
+        that.setData({
+            pageNum: 1
+        });
         that.getCourseList();
     },
 
@@ -42,7 +47,6 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
     },
 
     /**
@@ -60,48 +64,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData)
-        if (that.data.pageData.length >= that.data.pageNum * 10){
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            });
-            getApp().request({
-                url: 'org/punch_course/list',
-                data: {
-                    page: that.data.pageNum
-                },
-                method: 'get',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        for (let i = 0; i < res.data.data.list.length; i++) {
-                            if ((res.data.data.list[i].end_time*1000) > new Date().valueOf()) {
-                                res.data.data.list[i].status = '进行中';
-                                res.data.data.list[i].bgColor = '#336799';
-                            } else {
-                                res.data.data.list[i].status = '已结束'
-                                res.data.data.list[i].bgColor = '#7b7b7b';
-                            }
-                        }
-                        pageDataArr.push(...res.data.data.list)
-                        that.setData({
-                            pageData: pageDataArr,
-                        })
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none',
-                        })
-                    }
-                }
-            })
-        }else{
-            wx.showToast({
-                title: '到底啦',
-                icon: 'none'
-            })
-        }
     },
 
     /**
@@ -161,9 +123,68 @@ Page({
     inputkey:function(e){
         let that = this;
         that.setData({
-            pageNum:1
+            pageNum:1,
+            key: e.detail.value,
         })
         that.getCourseList(e.detail.value)
+    },
+    // 获取更多课程
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == 0) {
+
+        } else if (e.currentTarget.dataset.text == 1) {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/punch_course/list',
+                data: {
+                    page: that.data.pageNum,
+                    title: that.data.key,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            if ((res.data.data.list[i].end_time * 1000) > new Date().valueOf()) {
+                                res.data.data.list[i].status = '进行中';
+                                res.data.data.list[i].bgColor = '#336799';
+                            } else {
+                                res.data.data.list[i].status = '已结束';
+                                res.data.data.list[i].bgColor = '#7b7b7b';
+                            }
+                        }
+                        pageData.push(...res.data.data.list)
+                        // 更多
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                btnText: 1
+                            })
+                        } else {
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
     },
     // 获取课程列表
     getCourseList:function(title){
@@ -177,7 +198,6 @@ Page({
             method: 'get',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    wx.stopPullDownRefresh()
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         if ((res.data.data.list[i].end_time*1000) > new Date().valueOf()) {
                             res.data.data.list[i].status = '进行中';
@@ -187,10 +207,22 @@ Page({
                             res.data.data.list[i].bgColor = '#7b7b7b';
                         }
                     }
+                    // 更多
+                    if(res.data.data.list.length >= 10){
+                        that.setData({
+                            btnText: 1
+                        })
+                    }else{
+                        that.setData({
+                            btnText: 0
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
                 } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',

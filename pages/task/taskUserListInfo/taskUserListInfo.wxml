@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='listInfoWrap'>
     <view class='listInfoOpt'>
         <view>{{title}}</view>
@@ -147,6 +148,8 @@
         <text> {{item.thumb_person}}</text>
     </view>
 </view>
+<!-- 更多 -->
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />
 <!-- 打卡日历 -->
 <view class='dateWrapO' hidden='{{isDates}}'>
     <view class='dateWrap'>

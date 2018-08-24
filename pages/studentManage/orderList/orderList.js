@@ -9,6 +9,8 @@ Page({
         pageData: '',
         pageNum: 1,
         showTitle:true,
+        className: 'moreData',
+        btnText: '更多'
     },
 
     /**
@@ -16,33 +18,7 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        getApp().request({
-            url: 'order_list',
-            method: 'post',
-            data: {
-                page: that.data.pageNum,
-            },
-            success: function(res) {
-
-                if (res.data.data.length == 0) {
-
-                    that.setData({
-                        showTitle:false
-                    })
-                } else if (res.data.data.length != 0){
-                    that.setData({
-                        showTitle: true
-                    })
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000));
-                        res.data.data[i].cover.url = utils.rect(res.data.data[i].cover.url,120,60)
-                    }
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -81,66 +57,13 @@ Page({
         that.setData({
             pageNum: 1
         })
-        getApp().request({
-            url: 'order_list',
-            method: 'post',
-            data: {
-                page: that.data.pageNum,
-            },
-            success: function(res) {
-                if (res.data.data.length == 0) {
-                    that.setData({
-                        showTitle: false
-                    })
-                } else if (res.data.data.length != 0) {
-                    that.setData({
-                        showTitle: true
-                    })
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
-                    }
-                    that.setData({
-                        pageData: res.data.data
-                    })
-                    wx.stopPullDownRefresh()
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.pageData)
-        if (that.data.pageData.length >= that.data.pageNum * 10) {
-            that.setData({
-                pageNum: that.data.pageNum + 1,
-            })
-            getApp().request({
-                url: 'order_list',
-                method: 'post',
-                data: {
-                    page: that.data.pageNum,
-                },
-                success: function(res) {
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time*1000))
-                    }
-                    pageDataArr.push(...res.data.data)
-                    that.setData({
-                        pageData: pageDataArr,
-                    })
-                }
-            })
-        } else {
-            wx.showToast({
-                title: '到底啦',
-                icon: 'none'
-            })
-        }
     },
 
     /**
@@ -154,5 +77,96 @@ Page({
         wx.navigateTo({
             url: '../../courses/orderInfoPay/orderInfoPay?payInfo=' + payInfo + '&isInfo=1',
         })
-    }
+    },
+    // 获取页面更多数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'order_list',
+                method: 'post',
+                data: {
+                    page: that.data.pageNum,
+                },
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        if (res.data.data.length > 0) {
+                            for (let i = 0; i < res.data.data.length; i++) {
+                                res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time * 1000));
+                                res.data.data[i].cover.url = utils.rect(res.data.data[i].cover.url, 120, 60)
+                            }
+                        }
+                        pageData.push(...res.data.data)
+                        // 更多 
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.hideLoading()
+                    } else {
+                        wx.hideLoading()
+                    }
+                }
+            })
+        }
+    },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'order_list',
+            method: 'post',
+            data: {
+                page: that.data.pageNum,
+            },
+            success: function (res) {
+                if(res.data.code == 1){
+                    if (res.data.data.length > 0) {
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time * 1000));
+                            res.data.data[i].cover.url = utils.rect(res.data.data[i].cover.url, 120, 60)
+                        }
+                    }
+                    // 更多 
+                    if(res.data.data.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
+                    }
+                    that.setData({
+                        pageData: res.data.data
+                    })
+                    wx.stopPullDownRefresh()
+                }else{
+                    wx.stopPullDownRefresh()
+                }
+            }
+        })
+    },
 })

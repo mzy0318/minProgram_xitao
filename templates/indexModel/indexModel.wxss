@@ -1252,3 +1252,77 @@ view.fiveNavChild:nth-child(7), view.fiveNavChild:nth-child(8) {
     width: 198rpx;
     height: 50rpx;
 }
+/* 十七个模板--武术 */
+.seventeenWrap{
+    width: 750rpx;
+    min-height: 10rpx;
+    background: transparent;
+    position:relative;
+}
+.seventeenWrap::before{
+    content:'';
+    width:770rpx;
+    height:60rpx;
+    background:#fff;
+    border-radius:100% 100% 0rpx 0rpx;
+    position:absolute;
+    top:-29rpx;
+    left:-10rpx;
+    z-index:10;
+}
+.seventeenNav{
+    width: 750rpx;
+    height: 320rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+.seventeenNav>view {
+    width: 160rpx;
+    height: 140rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.seventeenNav>view>view:nth-child(1) {
+    width: 80rpx;
+    height: 80rpx;
+    position:relative;
+}
+
+.seventeenNav>view>view:nth-child(1)>image {
+    width: 80rpx;
+    height: 80rpx;
+    position:absolute;
+    top:0rpx;
+    left:0rpx;
+    z-index:1000;
+}
+
+.seventeenNav>view>view:nth-child(2) {
+    width: 160rpx;
+    line-height: 40rpx;
+    color: #7b7b7b;
+    font-size: 26rpx;
+    text-align: center;
+    margin-top: 10rpx;
+}
+.seventeenTitle {
+    width: 700rpx;
+    height: 80rpx;
+    background: #fff;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 15rpx auto 0rpx;
+}
+
+.seventeenTitle>image {
+    width: 630rpx;
+    height: 80rpx;
+}

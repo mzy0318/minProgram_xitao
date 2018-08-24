@@ -4,7 +4,7 @@ page{
 .serviceWrap{
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.3);
+    background:#fff;
     display:flex;
     justify-content: center;
     align-items:center;
@@ -12,9 +12,9 @@ page{
 .serviceContent{
     width:600rpx;
     height:300rpx;
-    background:#fff;
+    background:#FBE8CD;
     border-radius:10px;
-    box-shadow:2rpx 2rpx 2rpx 2rpx #fff;
+    box-shadow:2rpx 2rpx 2rpx 2rpx #FBE8CD;
     position:relative;
 }
 .bgImage{

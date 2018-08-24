@@ -11,6 +11,8 @@ Page({
         pageData:'',
         pageNum:1,
         url:'',
+        btnText: 0,
+        key:'',
     },
 
     /**
@@ -52,6 +54,9 @@ Page({
      */
     onShow: function () {
         let that = this;
+        that.setData({
+            pageNum:1,
+        })
         that.getTeacherList();
     },
 
@@ -74,7 +79,10 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this;
-
+        that.setData({
+            pageNum: 1,
+        })
+        that.getTeacherList();
     },
 
     /**
@@ -106,11 +114,65 @@ Page({
     bindKeyInput:function(e){
         let that = this;
         that.setData({
-            pageNum:1
+            pageNum:1,
+            key: e.detail.value,
         })
         that.getTeacherList(e.detail.value)
     },
-    //获取教师列表
+    // 获取更多教师/学员列表
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == 0) {
+
+        } else if (e.currentTarget.dataset.text == 1) {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: that.data.url,
+                data: {
+                    page: that.data.pageNum,
+                    key: that.data.key,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        if (res.data.data.list.length > 0) {
+                            for (let i = 0; i < res.data.data.list.length; i++) {
+                                res.data.data.list[i].avatar_url = format.rect(res.data.data.list[i].avatar_url, 30, 30)
+                            }
+                        }
+                        pageData.push(...res.data.data.list);
+                        if (pageData.length >= that.data.pageNum*10){
+                            that.setData({
+                                btnText: 1
+                            })
+                        }else{
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData
+                        })
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
+    },
+    //获取教师/学员列表
     getTeacherList:function(key){
         let that = this;
         getApp().request({
@@ -127,10 +189,21 @@ Page({
                             res.data.data.list[i].avatar_url = format.rect(res.data.data.list[i].avatar_url,30,30)
                         }
                     }
+                    if (res.data.data.list.length >= 10) {
+                        that.setData({
+                            btnText: 1
+                        })
+                    } else {
+                        that.setData({
+                            btnText: 0
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
                 } else if (Number(res.data.code) == 0){
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon:'none',

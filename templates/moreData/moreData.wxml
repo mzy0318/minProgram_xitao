@@ -1,0 +1,5 @@
+<template name='moreDataBtn'>
+    <view clas='moreDataWrap'>
+        <button class='{{btnText==1?"moreData":"moreDataed"}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText==1?"更多":"没有了"}}</button>
+    </view>
+</template>

@@ -50,6 +50,7 @@ Page({
         title:'',
         audioUrl:'',
         myId:'',
+        btnText: 0
     },
 
     /**
@@ -175,6 +176,66 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
+    // 更多作业
+    moreData:function(e){
+        let that = this;
+        if (e.currentTarget.dataset.text == 0) {
+
+        } else if (e.currentTarget.dataset.text == 1) {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            let pageDataArr = [];
+            pageDataArr.push(...that.data.allHomework);
+            that.setData({
+                pageNum: that.data.pageNum + 1,
+            })
+            getApp().request({
+                url: 'punch_course',
+                data: {
+                    punch_course_id: that.data.courseId,
+                    date: that.data.dateString,
+                    page: that.data.pageNum,
+                },
+                method: 'get',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        
+                        // 所有作业
+                        if (res.data.data.allHomework.length > 0) {
+                            let allHome = res.data.data.allHomework
+                            for (let i = 0; i < allHome.length; i++) {
+                                allHome[i].create_time = formart.formatTime(new Date(allHome[i].create_time * 1000));
+                            }
+                            pageDataArr.push(...allHome)
+                            if (pageDataArr.length >= that.data.pageNum*10){
+                                that.setData({
+                                    btnText: 1
+                                })
+                            }else{
+                                that.setData({
+                                    btnText: 0
+                                })
+                            }
+                            that.setData({
+                                isAllHomework: false,
+                                allHomework: pageDataArr,
+                            })
+                            wx.hideLoading();
+                        } else if (res.data.data.allHomework.length <= 0) {
+                            that.setData({
+                                isAllHomework: true,
+                            })
+                            wx.hideLoading();
+                        }
+                    }else{
+                        wx.hideLoading();
+                    }
+                }
+            })
+        }
+        
+    },
     onReachBottom: function () {
         let that = this;
         let pageDataArr = [];
@@ -592,6 +653,15 @@ Page({
                                     allHome[i].image[j].url = formart.rect(allHome[i].image[j].url, 100, 100)
                                 }
                             }
+                        }
+                        if (allHome.length >= 10){
+                            that.setData({ 
+                                btnText: 1
+                            })
+                        }else{
+                            that.setData({
+                                btnText: 0
+                            })
                         }
                         that.setData({
                             isAllHomework: false,

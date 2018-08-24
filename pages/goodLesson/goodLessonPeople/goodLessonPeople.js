@@ -11,7 +11,9 @@ Page({
         personInfo:'',
         isPersonInfo:true,
         showTitle:true,
-        pageNum:1
+        pageNum:1,
+        className: 'moreData',
+        btnText: '更多'
     }, 
 
     /**
@@ -69,56 +71,14 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        let pageData = [];
-        pageData.push(...that.data.pageData)
-        if(that.data.pageData.length >= that.data.pageNum*10){
-            that.setData({
-                pageNum:that.data.pageNum + 1
-            })
-            getApp().request({
-                url: 'org/lesson_one_joiner_list',
-                data: {
-                    act_nice_id: that.data.actId,
-                    page: that.data.pageNum,
-                },
-                method: 'post',
-                success: function (res) {
-                    if (Number(res.data.code) == 1) {
-                        if (res.data.data.length > 0) {
-                            that.setData({
-                                showTitle: true,
-                            })
-                        } else if (res.data.data.length <= 0) {
-                            that.setData({
-                                showTitle: false,
-                            })
-                        }
-                        for (let i = 0; i < res.data.data.length; i++) {
-                            res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time * 1000))
-                        }
-                        pageData.push(...res.data.data)
-                        that.setData({
-                            pageData: pageData,
-                        })
-                        wx.stopPullDownRefresh()
-                    } else if (Number(res.data.code) == 0) {
-                        wx.showToast({
-                            title: res.data.msg,
-                            icon: 'none'
-                        })
-                    }
-                }
-            })
-        }
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    // onShareAppMessage: function() {
 
-    },
+    // },
     tellPhone:function(e){
         getApp().tellPhone(e)
     },
@@ -141,6 +101,63 @@ Page({
             url: '../lessonListInfo/lessonListInfo?actId=' + e.currentTarget.dataset.id,
         })
     },
+    // 获取更多数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == '没有了') {
+
+        } else if (e.currentTarget.dataset.text == '更多') {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            getApp().request({
+                url: 'org/lesson_one_joiner_list',
+                data: {
+                    act_nice_id: that.data.actId,
+                    page: that.data.pageNum,
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        if (res.data.data.length > 0) {
+                            for (let i = 0; i < res.data.data.length; i++) {
+                                res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time * 1000))
+                            }
+                        }
+                        pageData.push(...that.data.pageData)
+                        // 更多
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                className: 'moreData',
+                                btnText: '更多'
+                            })
+                        } else {
+                            that.setData({
+                                className: 'moreDataed',
+                                btnText: '没有了'
+                            })
+                        }
+                        that.setData({
+                            pageData: res.data.data
+                        })
+                        wx.hideLoading()
+                    } else if (Number(res.data.code) == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none'
+                        })
+                    }
+                }
+            })
+        }
+    },
+    // 获取页面数据
     getPageData:function(){
         let that = this;
         getApp().request({
@@ -152,23 +169,29 @@ Page({
             method: 'post',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    if (res.data.data.length > 0) {
-                        that.setData({
-                            showTitle: true,
-                        })
-                    } else if (res.data.data.length <= 0) {
-                        that.setData({
-                            showTitle: false,
-                        })
+                    if(res.data.data.length > 0){
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time * 1000))
+                        }
                     }
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        res.data.data[i].create_time = getTime.formatTime(new Date(res.data.data[i].create_time * 1000))
+                    // 更多
+                    if(res.data.data.length >= 10){
+                        that.setData({
+                            className: 'moreData',
+                            btnText: '更多'
+                        })
+                    }else{
+                        that.setData({
+                            className: 'moreDataed',
+                            btnText: '没有了'
+                        })
                     }
                     that.setData({
                         pageData: res.data.data
                     })
                     wx.stopPullDownRefresh()
                 } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none'

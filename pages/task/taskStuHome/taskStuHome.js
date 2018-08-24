@@ -29,6 +29,7 @@ Page({
         homeNum: -1,
         otherVideo:'',
         audioUrl:'',
+        btnText: 0,
     },
 
     /**
@@ -81,122 +82,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        let that = this;
-        if (that.data.bottomModel == 2){
-            // 积分
-            let pageDataArr = [];
-            pageDataArr.push(...that.data.scoreList);
-            if (that.data.scoreList.length >= that.data.scorePage * 10) {
-                that.setData({
-                    scorePage: that.data.scorePage + 1,
-                })
-                getApp().request({
-                    url: 'punch_course/student_score',
-                    data: {
-                        student_id: that.data.userId,
-                        page: that.data.scorePage,
-                    },
-                    method: 'get',
-                    success: function (res) {
-                        if (Number(res.data.code) == 1) {
-                            wx.hideLoading()
-                            if (res.data.data.data.length > 0) {
-                                for (let i = 0; i < res.data.data.data.length; i++) {
-                                    res.data.data.data[i].create_time = formate.formatTime(new Date(res.data.data.data[i].create_time * 1000));
-                                }
-                            }
-                            pageDataArr.push(...res.data.data.data)
-                            that.setData({
-                                scoreList: pageDataArr,
-                            })
-                        } else {
-                            wx.showToast({
-                                title: res.data.msg,
-                                icon: 'none',
-                            })
-                        }
-                    }
-                })
-            }
-        } else if (that.data.bottomModel == 0){
-            // 作业
-            let pageDataArr = [];
-            pageDataArr.push(...that.data.homeList);
-            if (that.data.homeList.length >= that.data.homePage * 10){
-                that.setData({
-                    homePage: that.data.homePage + 1,
-                })
-                getApp().request({
-                    url: 'punch_course/student_homework',
-                    data: {
-                        student_id: that.data.userId,
-                        page: that.data.homePage,
-                    },
-                    method: 'get',
-                    success: function (res) {
-                        if (Number(res.data.code) == 1) {
-                            res.data.data.avatar_url = formate.rect(res.data.data.avatar_url, 40, 40)
-                            if (res.data.data.homework.length > 0) {
-                                for (let i = 0; i < res.data.data.homework.length; i++) {
-                                    res.data.data.homework[i].create_time = formate.formatTime(new Date(res.data.data.homework[i].create_time * 1000));
-                                    res.data.data.homework[i].thumb_person = res.data.data.homework[i].thumb_person.split(',');
-                                    for (let j = 0; j < res.data.data.homework[i].image.length; j++) {
-                                        res.data.data.homework[i].image[j].url = formate.rect(res.data.data.homework[i].image[j].url, 100, 100)
-                                    }
-                                }
-                            }
-                            pageDataArr.push(...res.data.data.homework);
-                            that.setData({
-                                homeWorkData: res.data.data,
-                                homeList: pageDataArr
-                            })
-                        } else {
-                            wx.showToast({
-                                title: res.data.msg,
-                                icon: 'none',
-                            })
-                        }
-                    }
-                })
-            }
-        } else if (that.data.bottomModel == 1){
-            let pageDataArr = [];
-            pageDataArr.push(...that.data.zanList);
-            if (that.data.zanList.length >= that.data.zanPage * 10){
-                that.setData({
-                    zanPage: that.data.zanPage + 1,
-                })
-                getApp().request({
-                    url: 'punch_course/student_thumb',
-                    data: {
-                        student_id: that.data.userId,
-                        page: that.data.zanPage,
-                    },
-                    method: 'get',
-                    success: function (res) {
-                        wx.hideLoading()
-                        if (Number(res.data.code) == 1) {
-                            let list = [];
-                            list.push(...res.data.data.list);
-                            if (list.length > 0) {
-                                for (let i = 0; i < list.length; i++) {
-                                    list[i].create_time = formate.formatTime(new Date(list[i].create_time * 1000));
-                                }
-                            }
-                            pageDataArr.push(...list)
-                            that.setData({
-                                zanList: pageDataArr,
-                            })
-                        } else {
-                            wx.showToast({
-                                title: res.data.msg,
-                                icon: 'none',
-                            })
-                        }
-                    }
-                })
-            }
-        }
     },
 
     /**
@@ -341,6 +226,180 @@ Page({
             })
         })
     },
+    // 更多列表数据
+    moreData:function(e){
+        let that = this;
+        if (that.data.bottomModel == 2){
+            // 积分列表
+            if (e.currentTarget.dataset.text == 0) {
+
+            } else if (e.currentTarget.dataset.text == 1) {
+                wx.showLoading({
+                    title: '正在加载...',
+                })
+                let pageData = [];
+                pageData.push(...that.data.scoreList);
+                that.setData({
+                    scorePage: that.data.scorePage + 1
+                })
+                getApp().request({
+                    url: 'punch_course/student_score',
+                    data: {
+                        student_id: that.data.userId,
+                        page: that.data.scorePage,
+                    },
+                    method: 'get',
+                    success: function (res) {
+                        if (Number(res.data.code) == 1) {
+                            if (res.data.data.data.length > 0) {
+                                for (let i = 0; i < res.data.data.data.length; i++) {
+                                    res.data.data.data[i].create_time = formate.formatTime(new Date(res.data.data.data[i].create_time * 1000));
+                                }
+                            }
+                            pageData.push(...res.data.data.data)
+                            // 更多
+                            if (pageData.length >= that.data.scorePage*10) {
+                                that.setData({
+                                    btnText: 1,
+                                })
+                            } else {
+                                that.setData({
+                                    btnText: 0,
+                                })
+                            }
+                            that.setData({
+                                scoreList: pageData,
+                            })
+                            wx.hideLoading()
+                        } else {
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none',
+                            })
+                        }
+                    }
+                })
+            }
+        } else if (that.data.bottomModel == 1){
+            // 点赞列表
+            if (e.currentTarget.dataset.text == 0) {
+
+            } else if (e.currentTarget.dataset.text == 1) {
+                wx.showLoading({
+                    title: '正在加载...',
+                })
+                let pageData = [];
+                pageData.push(...that.data.zanList)
+                that.setData({
+                    zanPage: that.data.zanPage + 1,
+                })
+                getApp().request({
+                    url: 'punch_course/student_thumb',
+                    data: {
+                        student_id: that.data.userId,
+                        page: that.data.zanPage,
+                    },
+                    method: 'get',
+                    success: function (res) {
+                        if (Number(res.data.code) == 1) {
+
+                            if (res.data.data.list.length > 0) {
+                                for (let i = 0; i < res.data.data.list.length; i++) {
+                                    res.data.data.list[i].create_time = formate.formatTime(new Date(res.data.data.list[i].create_time * 1000));
+                                }
+                            }
+                            pageData.push(...res.data.data.list)
+                            //更多
+                            if (pageData.length >= that.data.zanPage*10) {
+                                that.setData({
+                                    btnText: 1,
+                                })
+                            } else {
+                                that.setData({
+                                    btnText: 0,
+                                })
+                            }
+                            that.setData({
+                                zanList: pageData
+                            })
+                            wx.hideLoading()
+                        } else {
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none',
+                            })
+                        }
+                    }
+                })
+            }
+        } else if (that.data.bottomModel == 0){
+            // 作业列表
+            if (e.currentTarget.dataset.text == 0) {
+
+            } else if (e.currentTarget.dataset.text == 1) {
+                wx.showLoading({
+                    title: '正在加载...',
+                })
+                let pageData = [];
+                pageData.push(...that.data.homeList)
+                that.setData({
+                    homePage: that.data.homePage + 1
+                })
+                getApp().request({
+                    url: 'punch_course/student_homework',
+                    data: {
+                        student_id: that.data.userId,
+                        page: that.data.homePage,
+                    },
+                    method: 'get',
+                    success: function (res) {
+                        if (Number(res.data.code) == 1) {
+                            res.data.data.avatar_url = formate.rect(res.data.data.avatar_url, 40, 40)
+                            if (res.data.data.homework.length > 0) {
+                                for (let i = 0; i < res.data.data.homework.length; i++) {
+                                    if (res.data.data.homework[i].thumb_person == '') {
+
+                                        res.data.data.homework[i].isZanList = true;
+                                    } else {
+                                        res.data.data.homework[i].isZanList = false;
+                                    }
+                                    res.data.data.homework[i].create_time = formate.formatTime(new Date(res.data.data.homework[i].create_time * 1000));
+                                    res.data.data.homework[i].thumb_person = res.data.data.homework[i].thumb_person.split(',');
+                                    for (let j = 0; j < res.data.data.homework[i].image.length; j++) {
+                                        res.data.data.homework[i].image[j].url = formate.rect(res.data.data.homework[i].image[j].url, 100, 100)
+                                    }
+                                }
+                            }
+                            pageData.push(...res.data.data.homework)
+                            // 更多
+                            if (pageData.length >= that.data.homePage*10) {
+                                that.setData({
+                                    btnText: 1,
+                                })
+                            } else {
+                                that.setData({
+                                    btnText: 0,
+                                })
+                            }
+                            that.setData({
+                                homeWorkData: res.data.data,
+                                homeList: pageData,
+                            })
+                            wx.hideLoading()
+                        } else {
+                            wx.hideLoading()
+                            wx.showToast({
+                                title: res.data.msg,
+                                icon: 'none',
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    },
     // 获取学员积分列表
     getStuScore:function(){
         let that = this;
@@ -353,18 +412,29 @@ Page({
             method: 'get',
             success: function (res) {
                 if (Number(res.data.code) == 1) {
-                    wx.hideLoading()
                     if (res.data.data.data.length > 0) {
                         for (let i = 0; i < res.data.data.data.length; i++) {
                             res.data.data.data[i].create_time = formate.formatTime(new Date(res.data.data.data[i].create_time * 1000));
                         }
+                    }
+                    // 更多
+                    if(res.data.data.data.length >= 10){
+                        that.setData({
+                            btnText: 1,
+                        })
+                    }else{
+                        that.setData({
+                            btnText: 0,
+                        })
                     }
                     that.setData({
                         scoreList: res.data.data.data,
                         scoreRule: res.data.data.score_rule,
                         score: res.data.data.score,
                     })
+                    wx.hideLoading()
                 } else {
+                    wx.hideLoading()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',
@@ -401,6 +471,16 @@ Page({
                             }
                         }
                     }
+                    // 更多
+                    if(res.data.data.homework.length >= 10){
+                        that.setData({
+                            btnText: 1,
+                        })
+                    }else{
+                        that.setData({
+                            btnText: 0,
+                        })
+                    }
                     that.setData({
                         homeWorkData: res.data.data,
                         homeList: res.data.data.homework,
@@ -425,19 +505,29 @@ Page({
             },
             method: 'get',
             success: function (res) {
-                wx.hideLoading()
                 if (Number(res.data.code) == 1) {
-                    let list = [];
-                    list.push(...res.data.data.list);
-                    if (list.length > 0) {
-                        for (let i = 0; i < list.length; i++) {
-                            list[i].create_time = formate.formatTime(new Date(list[i].create_time * 1000));
+
+                    if (res.data.data.list.length > 0) {
+                        for (let i = 0; i < res.data.data.list.length; i++) {
+                            res.data.data.list[i].create_time = formate.formatTime(new Date(res.data.data.list[i].create_time * 1000));
                         }
                     }
+                    //更多
+                    if(res.data.data.list.length >= 10){
+                        that.setData({
+                            btnText: 1,
+                        })
+                    }else{
+                        that.setData({
+                            btnText: 0,
+                        })
+                    }
                     that.setData({
-                        zanList: list
+                        zanList: res.data.data.list
                     })
+                    wx.hideLoading()
                 } else {
+                    wx.hideLoading()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',

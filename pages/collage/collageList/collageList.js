@@ -11,8 +11,8 @@ Page({
         endTime:'',
         pageNum: 1,
         isMore:true,
-        className: 'moreData',
-        btnText: '更多'
+        className: 'moreDataed',
+        btnText: '没有了'
     },
 
     /**

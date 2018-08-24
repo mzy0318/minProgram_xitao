@@ -1,3 +1,4 @@
+@import '../../../templates/moreData/moreData.wxss';
 page{
     background:#F5F5F5;
 }
@@ -30,7 +31,7 @@ page{
     width:710rpx;
     line-height:100rpx;
     background:#fff;
-    margin:120rpx auto 0rpx;
+    margin:120rpx auto 20rpx;
 }
 .teacherListContent{
     width:710rpx;

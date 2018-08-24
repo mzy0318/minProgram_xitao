@@ -24,3 +24,5 @@
         <view style='color:#000' data-id='1' bindtap='showOpt'>取消</view>
     </view>
 </view>
+<!-- 更多 -->
+<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
