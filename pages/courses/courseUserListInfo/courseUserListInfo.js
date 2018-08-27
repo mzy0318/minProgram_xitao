@@ -74,6 +74,9 @@ Page({
         isXinOptions:true,
         xinId:'',
         xinData:'',
+        connectPage:1,
+        btnText: 0,
+        contentText:'',
     },
 
     /**
@@ -103,22 +106,8 @@ Page({
             xinId: JSON.parse(options.pageData).intention,
             xinData: that.data.xinArr[JSON.parse(options.pageData).intention]
         })
-        getApp().request({
-            url:'org/sale_lesson_appoint_communication_list',
-            method:'get',
-            data:{
-                appointer_id: JSON.parse(options.pageData).id
-            },
-            success:function(res){
-                for (let i = 0; i < res.data.data.list.length;i++){
-                    res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time*1000))
-                    res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time*1000))
-                }
-                that.setData({
-                    connectList:res.data.data.list
-                })
-            }
-        })
+        // 获取评论内容
+        that.getPageData()
     },
 
     /**
@@ -166,9 +155,9 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    // onShareAppMessage: function () {
 
-    },
+    // },
     changeOption:function(e){
         let that = this;
         if (e.currentTarget.dataset.options == 'status') {
@@ -286,28 +275,17 @@ Page({
                 content: e.detail.value.textareaData,
             },
             success:function(res){
+                if(res.data.code==1){
+                    that.setData({
+                        connectPage:1
+                    })
+                    that.getPageData()
+                }
                 that.setData({
                     isShowInput: true,
-                    addInfo: '＋'
+                    addInfo: '＋',
+                    contentText:''
                 })
-                if(res.data.code==1){
-                    getApp().request({
-                        url: 'org/sale_lesson_appoint_communication_list',
-                        method: 'get',
-                        data:{
-                            appointer_id: that.data.userId,
-                        },
-                        success:function(res){
-                            for (let i = 0; i < res.data.data.list.length; i++) {
-                                res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time*1000))
-                                res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time*1000))
-                            }
-                            that.setData({
-                                connectList: res.data.data.list
-                            })
-                        }
-                    })
-                }
             }
         })
     },
@@ -385,5 +363,80 @@ Page({
         that.setData({
             isXinOptions:true,
         })
-    }
+    },
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == 0) {
+
+        } else if (e.currentTarget.dataset.text == 1) {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.connectList)
+            that.setData({
+                connectPage: that.data.connectPage + 1
+            })
+            getApp().request({
+                url: 'org/sale_lesson_appoint_communication_list',
+                method: 'get',
+                data: {
+                    appointer_id: that.data.userId,
+                    page: that.data.connectPage
+                },
+                success: function (res) {
+                    for (let i = 0; i < res.data.data.list.length; i++) {
+                        res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time * 1000))
+                        res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time * 1000))
+                    }
+                    pageData.push(...res.data.data.list)
+                    //更多
+                    if (pageData.length >= that.data.connectPage*10) {
+                        that.setData({
+                            btnText: 1
+                        })
+                    } else {
+                        that.setData({
+                            btnText: 0
+                        })
+                    }
+                    that.setData({
+                        connectList: pageData
+                    })
+                    wx.hideLoading()
+                }
+            })
+        }
+    },
+    // 获取评论列表
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'org/sale_lesson_appoint_communication_list',
+            method: 'get',
+            data: {
+                appointer_id: that.data.userId,
+                page:that.data.connectPage
+            },
+            success: function (res) {
+                for (let i = 0; i < res.data.data.list.length; i++) {
+                    res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time * 1000))
+                    res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time * 1000))
+                }
+                //更多
+                if (res.data.data.list.length >= 10){
+                    that.setData({
+                        btnText: 1
+                    })
+                }else{
+                    that.setData({
+                        btnText: 0
+                    })
+                }
+                that.setData({
+                    connectList: res.data.data.list
+                })
+            }
+        })
+    },
 })

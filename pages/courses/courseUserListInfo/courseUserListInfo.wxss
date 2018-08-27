@@ -1,5 +1,6 @@
 @import '../../../utils/iconFont.wxss';
 @import '../../../utils/iconFontO.wxss';
+@import '../../../templates/moreData/moreData.wxss';
 
 .listInfoWrap{
     width:750rpx;
@@ -128,6 +129,11 @@
     background:transparent;
     overflow-y:scroll;
     position:relative;
+    padding-bottom:20rpx;
+}
+.connectEmpty{
+    width:100%;
+    height:20rpx;
 }
 .connectChild{
     width:710rpx;
@@ -272,7 +278,7 @@
     position:fixed;
     bottom:50rpx;
     left:50%;
-    margin-left:-40rpx;
+    margin-left:160rpx;
     z-index:1000;
     text-indent:3rpx;
 }
@@ -285,6 +291,7 @@
     top:370rpx;
     left:0rpx;
     box-shadow: 2px 1px 2px 2px rgba(0,0,0,0.5);
+    z-index:1000;
 }
 .connectInputTop{
     width:690rpx;

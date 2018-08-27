@@ -48,7 +48,7 @@
             </view>
         </view>
         <!-- 更多 -->
-        <button class='{{className}}' bindtap='getMoreRangeData' data-text='{{btnText}}'>{{btnText}}</button>
+        <button class='{{className}}' bindtap='getMoreRangeData' data-text='{{btnText}}' hidden='{{isMoreData}}'>{{btnText}}</button>
         <!-- 按钮 -->
         <view class='collageInfoBtn'>
             <button open-type='share'>推荐好友</button>
@@ -114,9 +114,8 @@
                     <view class='divBoxChildMiddle'>{{item.nickname}}</view>
                     <view class='divBoxChildRight'>{{item.create_time}}</view>
                 </view>
-                <view class='noData' hidden='{{isData}}'>没有团员</view>
                 <!-- 更多 -->
-                <button class='{{classNameR}}' bindtap='getMemberData' hidden='{{!isData}}' data-text='{{btnTextR}}'>{{btnTextR}}</button>
+                <button class='{{classNameR}}' bindtap='getMemberData' hidden='{{isData}}' data-text='{{btnTextR}}'>{{btnTextR}}</button>
             </view>
         </view>
     </view>

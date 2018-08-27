@@ -1,5 +1,5 @@
 @import '../../../utils/iconFont.wxss';
-
+@import '../../../templates/moreData/moreData.wxss';
 .courseList{
     width:750rpx;
     height:180rpx;

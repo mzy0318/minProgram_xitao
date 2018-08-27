@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='listInfoWrap'>
     <view class='listInfoUser'>
         <view class='listInfoUserTop'>
@@ -18,8 +19,9 @@
         <view data-is='0' bindtap='isShowChild' style='border-color:{{isConnect?"#fff":"#4E9BF4"}}'>沟通记录</view>
         <view data-is='1' bindtap='isShowChild' style='border-color:{{isBase?"#fff":"#4E9BF4"}}'>基本信息</view>
     </view>
+    <!-- 评论内容 -->
     <view class='listInfoConnect' hidden='{{isConnect}}'>
-        <view class='connectChild' wx:for='{{connectList}}'>
+        <view class='connectChild' wx:for='{{connectList}}' wx:key='{{index}}'>
             <view class='connectChildTop'>
                 <view>{{item.Date}}</view>
                 <view>{{item.Time}}</view>
@@ -31,12 +33,15 @@
         <view class='connectInput' hidden='{{isShowInput}}'>
             <form bindsubmit='submitTextarea'>
                 <view class='connectInputTop'>
-                    <textarea name='textareaData'></textarea>
+                    <textarea name='textareaData' value='{{contentText}}'></textarea>
                 </view>
                 <button formType='submit'>提交</button>
             </form>
         </view>
+        <view class='connectEmpty'></view>
         <view class='addConnect' bindtap='showInput'>{{addInfo}}</view>
+        <!-- 更多 -->
+        <template  is="moreDataBtn" data='{{btnText:btnText}}' />
     </view>
     <view class='listInfoBase' hidden='{{isBase}}'>
         <form bindsubmit="submitUserInfo">

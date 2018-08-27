@@ -1,5 +1,5 @@
 @import '../../../utils/iconFont.wxss'; 
-
+@import '../../../templates/moreData/moreData.wxss';
 page{
     height:100%;
     background:#fff;
@@ -101,22 +101,4 @@ page{
 }
 .price{
     color:#C41A16;
-}
-
-/* 更多 */
-.moreData{
-    width:200rpx;
-    height:60rpx;
-    font-size:28rpx;
-    line-height:60rpx;
-    color:#fff;
-    background:#4993FE;
-}
-.moreDataed{
-    width:200rpx;
-    height:60rpx;
-    font-size:28rpx;
-    line-height:60rpx;
-    color:#7b7b7b;
-    background:#efefef;
 }

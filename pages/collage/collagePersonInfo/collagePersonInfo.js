@@ -249,6 +249,16 @@ Page({
                         }
                         personInfo.push(...res.data.data.list)
                         // 更多数据
+                        // 无记录
+                        if (personInfo.length > 0) {
+                            that.setData({
+                                isData: true
+                            })
+                        } else {
+                            that.setData({
+                                isData: false
+                            })
+                        }
                         if (personInfo.length >= that.data.rangePage * 10) {
                             that.setData({
                                 className: 'moreData',
@@ -264,16 +274,6 @@ Page({
                         that.setData({
                             personInfo: personInfo
                         })
-                        // 无记录
-                        if (personInfo.length > 0) {
-                            that.setData({
-                                isData: true
-                            })
-                        } else {
-                            that.setData({
-                                isData: false
-                            })
-                        }
                         wx.hideLoading()
                     } else {
                         wx.hideLoading()
@@ -305,6 +305,15 @@ Page({
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
                     }
+                    if (res.data.data.list.length > 0) {
+                        that.setData({
+                            isData: true
+                        })
+                    } else {
+                        that.setData({
+                            isData: false
+                        })
+                    }
                     if(res.data.data.list.length >= 10){
                         that.setData({
                             className: 'moreData',
@@ -319,15 +328,6 @@ Page({
                     that.setData({
                         personInfo: res.data.data.list
                     })
-                    if (res.data.data.list.length > 0) {
-                        that.setData({
-                            isData: true
-                        })
-                    } else {
-                        that.setData({
-                            isData: false
-                        })
-                    }
                 } else {
                     that.setData({
                         isData: true

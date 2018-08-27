@@ -125,10 +125,6 @@ Page({
                             for (let i = 0; i < res.data.data.list.length; i++) {
                                 res.data.data.list[i].create_time = formate.formatDate(new Date(res.data.data.list[i].create_time * 1000))
                             }
-                        } else {
-                            that.setData({
-                                isNoData: false
-                            })
                         }
                         pageData.push(...res.data.data.list)
                         if (pageData.length >= that.data.pageNum*10) {
@@ -169,10 +165,6 @@ Page({
                         for(let i = 0;i<res.data.data.list.length;i++){
                             res.data.data.list[i].create_time = formate.formatDate(new Date(res.data.data.list[i].create_time*1000))
                         }
-                    }else{
-                        that.setData({
-                            isNoData:false
-                        })
                     }
                     if (res.data.data.list.length >= 10){
                         that.setData({

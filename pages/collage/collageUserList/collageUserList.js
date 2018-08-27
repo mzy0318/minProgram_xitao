@@ -10,8 +10,8 @@ Page({
         isPersonInfo:true,
         userList:'',
         oriData:'',
-        className: 'moreData',
-        btnText: '更多'
+        className: 'moreDataed',
+        btnText: '没有了'
     },
 
     /**
@@ -222,6 +222,10 @@ Page({
                         userList: userData,
                         oriData:res.data.data.list
                     })
+                    wx.stopPullDownRefresh()
+                }
+                if(res.data.code == 0){
+                    wx.stopPullDownRefresh()
                 }
             }
         })

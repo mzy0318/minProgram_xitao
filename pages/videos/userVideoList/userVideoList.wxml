@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='empty'></view>
 <view class='videoListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-actid='{{item.id}}' wx:key='{{item.id}}'>
     <view class='contentLeft'><image src='{{item.banner_image_url}}' mode='scaleToFill'></image></view>
@@ -8,4 +9,4 @@
     </view>
 </view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

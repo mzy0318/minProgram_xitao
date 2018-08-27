@@ -24,7 +24,8 @@ Page({
         isClosed: 'none',
         nameInfo: '',
         className: 'moreData',
-        btnText: '更多'
+        btnText: '更多',
+        isMore:true,
     },
 
     /**
@@ -311,12 +312,14 @@ Page({
                         if (peopleDataList.length >= that.data.rangPage * 10) {
                             that.setData({
                                 className: 'moreData',
-                                btnText: '更多'
+                                btnText: '更多',
+                                isMore: false,
                             })
                         } else {
                             that.setData({
                                 className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: '没有了',
+                                isMore: false,
                             })
                         }
                         that.setData({
@@ -348,6 +351,15 @@ Page({
             success: res => {
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh();
+                    if(res.data.data.list.length > 0){
+                        that.setData({
+                            isMore: false,
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
                     if (res.data.data.list.length >= 10) {
                         that.setData({
                             className: 'moreData',

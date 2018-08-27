@@ -10,7 +10,6 @@
 </view>
 <!-- 更多 -->
 <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
-<view class='noData' hidden='{{isNoData}}'>无记录</view>
 <view class='collageListWrap' hidden='{{isPersonInfo}}'>
     <view class='empty'></view>
     <view class='empty'></view>

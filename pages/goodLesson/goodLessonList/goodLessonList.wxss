@@ -1,3 +1,4 @@
+@import '../../../templates/moreData/moreData.wxss';
 page{
       background:#F2F2F2;
       padding-bottom:20rpx;
@@ -73,23 +74,4 @@ page{
     background:#66ADFF;
     text-align:center;
     border-radius:5px;
-}
-/* 更多 */
-.moreData{
-    width:200rpx;
-    height:60rpx;
-    font-size:28rpx;
-    line-height:60rpx;
-    color:#fff;
-    background:#4993FE;
-    margin-top:20rpx;
-}
-.moreDataed{
-    width:200rpx;
-    height:60rpx;
-    font-size:28rpx;
-    line-height:60rpx;
-    color:#7b7b7b;
-    background:#efefef;
-    margin-top:20rpx;
 }

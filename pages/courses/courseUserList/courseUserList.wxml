@@ -1,5 +1,6 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='userListWrap'>
-    <view class='userListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-pagedata='{{item}}'>
+    <view class='userListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-pagedata='{{item}}' wx:key='{{index}}'>
         <view class='contentLeft'>
             <view class='iconData'><image src='{{xinArr[item.intention].name}}' mode='scaleToFill'></image></view>
             <view class='nickName'>{{item.nickname}}</view>
@@ -10,7 +11,11 @@
         </view>
     </view>
     <view class='addUser' bindtap='showUserFrom'>{{cancelData}}</view>
+    <view class='userEmpty'></view>
+    <!-- 更多 -->
+    <template  is="moreDataBtn" data='{{btnText:btnText}}' />
 </view>
+
 <view class='userInfo' hidden='{{isShow}}'>
     <form bindsubmit='submitUserInfo'>
         <view class='userInfoContent'>

@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='killPriceWrap' bindtap='toPriceInfo' wx:for='{{pageData}}' data-id='{{item.id}}' wx:key='{{item.id}}'>
     <view class='killPriceImg'>
         <image src='{{item.banner_image_url}}' mode='aspectFill' />
@@ -12,4 +13,4 @@
     </view>
 </view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

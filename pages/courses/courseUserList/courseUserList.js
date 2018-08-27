@@ -11,6 +11,7 @@ Page({
     data: {
         startTime: '',
         pageData: '',
+        pageNum:1,
         status: [
             {
                 name: '待跟进',
@@ -47,6 +48,7 @@ Page({
             }
         ],
         xinData:'',
+        btnText: 0,
     },
 
     /**
@@ -67,6 +69,9 @@ Page({
      */
     onShow: function () {
         let that = this
+        that.setData({
+            pageNum: 1
+        })
         that.getPageData()
     },
 
@@ -89,6 +94,9 @@ Page({
      */
     onPullDownRefresh: function () {
         let that = this
+        that.setData({
+            pageNum:1
+        })
         that.getPageData()
     },
 
@@ -153,12 +161,67 @@ Page({
             })
         }
     },
+    // 获取更多页面数据
+    moreData:function(e){
+        let that = this;
+        let pageData = [];
+        if (e.currentTarget.dataset.text == 0) {
+
+        } else if (e.currentTarget.dataset.text == 1) {
+            wx.showLoading({
+                title: '正在加载...',
+            })
+            pageData.push(...that.data.pageData)
+            that.setData({
+                pageNum: that.data.pageNum + 1
+            })
+            App.request({
+                url: 'org/sale_lesson_appoint_list',
+                data: {
+                    page: that.data.pageNum
+                },
+                method: 'post',
+                success: function (res) {
+                    if (res.data.code == 1) {
+                        for (let i = 0; i < res.data.data.length; i++) {
+                            res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time * 1000));
+                            res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
+                            res.data.data[i].status = that.data.status[res.data.data[i].status].name;
+                        }
+                        pageData.push(...res.data.data)
+                        if (pageData.length >= that.data.pageNum*10) {
+                            that.setData({
+                                btnText: 1
+                            })
+                        } else {
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
+                        that.setData({
+                            pageData: pageData,
+
+                        });
+                        wx.hideLoading()
+                    } else if (res.data.code == 0) {
+                        wx.hideLoading()
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
+    },
     // 获取页面数据
     getPageData:function(){
         let that = this;
         App.request({
             url: 'org/sale_lesson_appoint_list',
-            data: {},
+            data: {
+                page:that.data.pageNum
+            },
             method: 'post',
             success: function (res) {
                 if (res.data.code == 1) {
@@ -168,11 +231,21 @@ Page({
                         res.data.data[i].backgroundColor = that.data.status[res.data.data[i].status].color
                         res.data.data[i].status = that.data.status[res.data.data[i].status].name;
                     }
+                    if(res.data.data.length >= 10){
+                        that.setData({
+                            btnText: 1
+                        })
+                    }else{
+                        that.setData({
+                            btnText: 0
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data,
 
                     });
                 } else if (res.data.code == 0) {
+                    wx.stopPullDownRefresh()
                     wx.showToast({
                         title: res.data.msg,
                         icon: 'none',

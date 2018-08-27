@@ -80,7 +80,7 @@
                     </view>
                 </view>
                 <!-- 更多 -->
-                <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+                <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}' hidden='{{isMore}}'>{{btnText}}</button>
             </view>
             <!-- 玩法介绍 -->
             <view class='infoThreeContentTwo' hidden='{{isShow}}'>

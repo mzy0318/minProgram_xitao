@@ -51,7 +51,8 @@ Page({
         isMore:true,
         memberPage:1,
         className: 'moreData',
-        btnText: '更多'
+        btnText: '更多',
+        isMoreData:true,
     },
 
     /**
@@ -245,28 +246,21 @@ Page({
                         // 更多数据
                         if (myPerson.length >= that.data.memberPage * 10) {
                             that.setData({
-                                isMoreM: false
+                                classNameR: 'moreDataR',
+                                btnTextR: '更多',
+                                isData: false
                             })
                         } else {
                             that.setData({
-                                isMoreM: true,
+                                classNameR: 'moreDataRed',
+                                btnTextR: '没有了',
+                                isData: false
                             })
                         }
                         that.setData({
                             myPerson: myPerson,
                         })
                         wx.hideLoading()
-                        if (res.data.data.list.length > 0) {
-                            that.setData({
-                                classNameR: 'moreDataR',
-                                btnTextR: '更多'
-                            })
-                        } else {
-                            that.setData({
-                                classNameR: 'moreDataRed',
-                                btnTextR: '没有了'
-                            })
-                        }
                     } else {
                         wx.hideLoading()
                         wx.showToast({
@@ -300,6 +294,15 @@ Page({
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
                     }
+                    if (res.data.data.list.length > 0) {
+                        that.setData({
+                            isData: false
+                        })
+                    } else {
+                        that.setData({
+                            isData: true
+                        })
+                    }
                     // 更多数据
                     if (res.data.data.list.length >= 10){
                         that.setData({
@@ -315,15 +318,6 @@ Page({
                     that.setData({
                         myPerson: res.data.data.list
                     })
-                    if (res.data.data.list.length > 0) {
-                        that.setData({
-                            isData: true
-                        })
-                    } else {
-                        that.setData({
-                            isData: false
-                        })
-                    }
                 } else {
 
                 }
@@ -633,12 +627,14 @@ Page({
                         if (collageData.length >= that.data.rangePage * 10) {
                             that.setData({
                                 className: 'moreData',
-                                btnText: '更多'
+                                btnText: '更多',
+                                isMoreData:false,
                             })
                         } else {
                             that.setData({
                                 className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: '没有了',
+                                isMoreData: false,
                             })
                         }
                         that.setData({
@@ -668,7 +664,16 @@ Page({
             },
             method: 'post',
             success: res => {
-                if (res.data.data.list >= 10){
+                if (res.data.data.list.length > 0){
+                    that.setData({
+                        isMoreData:false
+                    })
+                }else{
+                    that.setData({
+                        isMoreData: true
+                    })
+                }
+                if (res.data.data.list.length >= 10){
                     that.setData({
                         className: 'moreData',
                         btnText: '更多'

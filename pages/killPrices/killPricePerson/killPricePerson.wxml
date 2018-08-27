@@ -83,7 +83,7 @@
                 <view><text>{{item.nickname == ''?"访客":item.nickname}}</text><text>已砍{{item.reduce}}元</text></view>
             </view>
             <!-- 更多 -->
-            <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+            <button class='{{className}}' bindtap='moreData' data-text='{{btnText}}' hidden='{{isMore}}'>{{btnText}}</button>
         </view>
     </view>
 </view>

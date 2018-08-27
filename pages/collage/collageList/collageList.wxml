@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='empty'></view>
 <view class='collageListContent' bindtap='toCollageInfo' wx:for='{{pageData}}' wx:key='{{item.id}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>
     <view class='collageListTop'>
@@ -7,5 +8,6 @@
     </view>
     <view class='collageListBottom'>{{item.title}}</view>
 </view>
+<view class='empty'></view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='voteUserWrap' wx:for='{{pageData}}' wx:key='{{item.id}}' bindtap='toInfoPage' data-actid='{{item.id}}'>
     <view class='voteUserContent'>
         <image  src='{{item.banner_image_url}}' mode='widthFix'></image>
@@ -7,5 +8,6 @@
     </view>
     <view class='voteUserTitle'>{{item.title}}</view>
 </view>
+<view class='empty'></view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

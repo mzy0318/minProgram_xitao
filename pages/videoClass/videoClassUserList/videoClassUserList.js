@@ -16,8 +16,7 @@ Page({
         catalog:'',
         tag:'',
         pageNum:1,
-        className: 'moreDataed',
-        btnText: '没有了',
+        btnText: 0,
         isAdd:true,
     },
 
@@ -77,12 +76,13 @@ Page({
         })
         that.getPageData()
     },
+    // 获取更多页面数据
     moreData:function(e){
         let that = this;
         let listData = [];
-        if (e.currentTarget.dataset.text == '没有了') {
+        if (e.currentTarget.dataset.text == 0) {
 
-        } else if (e.currentTarget.dataset.text == '更多') {
+        } else if (e.currentTarget.dataset.text == 1) {
             listData.push(...that.data.listData)
             that.setData({
                 pageNum: that.data.pageNum + 1,
@@ -105,13 +105,11 @@ Page({
                         listData.push(...res.data.data.list);
                         if (listData.length >= that.data.pageNum*10) {
                             that.setData({
-                                className: 'moreData',
-                                btnText: '更多'
+                                btnText: 1
                             })
                         } else {
                             that.setData({
-                                className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: 0
                             })
                         }
                         that.setData({
@@ -212,13 +210,11 @@ Page({
                     res.data.data.tag.unshift('全部');
                     if (res.data.data.list.length >= 10) {
                         that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
+                            btnText: 1
                         })
                     } else {
                         that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
+                            btnText: 0
                         })
                     }
                     that.setData({
@@ -255,13 +251,11 @@ Page({
                     }
                     if (res.data.data.list.length >= 10){
                         that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
+                            btnText: 1
                         })
                     }else{
                         that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
+                            btnText: 0
                         })
                     }
                     that.setData({

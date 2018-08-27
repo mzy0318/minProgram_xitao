@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='empty'></view>
 <view class='orderListContent' wx:for='{{pageData}}' bindtap='toPayInfo' data-payinfo='{{item}}'>
     <view class='orderListTop'>
@@ -14,4 +15,4 @@
     </view>
 </view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

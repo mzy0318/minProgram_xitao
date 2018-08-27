@@ -39,12 +39,12 @@ App({
     // 视频投票  我的海报
     getImageHost:function(){
         let online = "https://www.zhihuizhaosheng.com/" ;
-        let dev = "http://192.168.1.112:8123/";
+        let dev = "http://192.168.2.199:8123/";
         return online;
     },
     getHost: () => {
         var online = "https://www.zhihuizhaosheng.com/" + getApp().getExtConfig().version + "/";
-        var dev = "http://192.168.1.112:8123/" + getApp().getExtConfig().version + "/";
+        var dev = "http://192.168.2.199:8123/" + getApp().getExtConfig().version + "/";
         return dev;
     },
     hasLogin: wx.getStorageSync('hasLogin'), //默认app是未登录状态

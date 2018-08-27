@@ -12,9 +12,7 @@ Page({
         showTitle: true,
         killPage:1,
         collagePage:1,
-        isMore:true,
-        className: 'moreData',
-        btnText: '更多'
+        btnText: 0
     },
 
     /**
@@ -31,40 +29,31 @@ Page({
                     page: that.data.killPage
                 },
                 success: res => {
-                    let data = res.data.data;
-                    wx.setNavigationBarTitle({
-                        title: '砍价报名列表',
-                    })
-                    if (data.list.length <= 0){
-                        that.setData({
-                            showTitle:false
+                    if (res.data.code == 0) {
+                        wx.stopPullDownRefresh()
+                    }else{
+                        let data = res.data.data;
+                        wx.setNavigationBarTitle({
+                            title: '砍价报名列表',
                         })
-                    } else if (data.list.length > 0){
-                        that.setData({
-                            showTitle: true
-                        })
+
                         if (data.list.length > 0) {
                             for (let i = 0; i < data.list.length; i++) {
                                 data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
                             }
                         }
-                        if (data.list.length >= 10){
+                        if (data.list.length >= 10) {
                             that.setData({
-                                className: 'moreData',
-                                btnText: '更多'
+                                btnText: 1
                             })
-                        }else{
+                        } else {
                             that.setData({
-                                className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: 0
                             })
                         }
-                        this.setData({
+                        that.setData({
                             userList: data.list
                         })
-                    }
-                    if (res.data.code == 0) {
-                        wx.stopPullDownRefresh()
                     }
                 }
             })
@@ -76,32 +65,31 @@ Page({
                     page:that.data.collagePage,
                 },
                 success: res => {
-                    let data = res.data.data;
-                    wx.setNavigationBarTitle({
-                        title: '我的私人拼团',
-                    })
-                   
-                    if (data.list.length > 0) {
-                        for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
-                        }
-                    }
-                    if (data.list.length >= 10) {
-                        that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
-                        })
-                    } else {
-                        that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
-                        })
-                    }
-                    this.setData({
-                        userList: data.list
-                    })
                     if (res.data.code == 0) {
                         wx.stopPullDownRefresh()
+                    }else{
+                        let data = res.data.data;
+                        wx.setNavigationBarTitle({
+                            title: '我的私人拼团',
+                        })
+
+                        if (data.list.length > 0) {
+                            for (let i = 0; i < data.list.length; i++) {
+                                data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                            }
+                        }
+                        if (data.list.length >= 10) {
+                            that.setData({
+                                btnText: 1
+                            })
+                        } else {
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
+                        that.setData({
+                            userList: data.list
+                        })
                     }
                 }
             })
@@ -153,31 +141,30 @@ Page({
                     page: that.data.killPage,
                 },
                 success: res => {
-                    let data = res.data.data;
-                    wx.setNavigationBarTitle({
-                        title: '砍价报名列表',
-                    })
-                    if (data.list.length > 0){
-                        for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
-                        }
-                    }
-                    if (data.list.length >= 10) {
-                        that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
-                        })
-                    } else {
-                        that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
-                        })
-                    }
-                    that.setData({
-                        userList: data.list
-                    })
-                    wx.stopPullDownRefresh()
                     if (res.data.code == 0) {
+                        wx.stopPullDownRefresh()
+                    }else{
+                        let data = res.data.data;
+                        wx.setNavigationBarTitle({
+                            title: '砍价报名列表',
+                        })
+                        if (data.list.length > 0) {
+                            for (let i = 0; i < data.list.length; i++) {
+                                data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                            }
+                        }
+                        if (data.list.length >= 10) {
+                            that.setData({
+                                btnText: 1
+                            })
+                        } else {
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
+                        that.setData({
+                            userList: data.list
+                        })
                         wx.stopPullDownRefresh()
                     }
                 }
@@ -193,34 +180,33 @@ Page({
                     page: that.data.collagePage,
                 },
                 success: res => {
-                    let data = res.data.data;
-                    wx.setNavigationBarTitle({
-                        title: '我的私人拼团',
-                    })
-                    that.setData({
-                        showTitle: true
-                    })
-                    if (data.list.length > 0) {
-                        for (let i = 0; i < data.list.length; i++) {
-                            data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
-                        }
-                    }
-                    if (data.list.length >= 10) {
-                        that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
-                        })
-                    } else {
-                        that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
-                        })
-                    }
-                    this.setData({
-                        userList: data.list
-                    })
-                    wx.stopPullDownRefresh()
                     if(res.data.code == 0){
+                        wx.stopPullDownRefresh()
+                    }else{
+                        let data = res.data.data;
+                        wx.setNavigationBarTitle({
+                            title: '我的私人拼团',
+                        })
+                        that.setData({
+                            showTitle: true
+                        })
+                        if (data.list.length > 0) {
+                            for (let i = 0; i < data.list.length; i++) {
+                                data.list[i].create_time = util.formatTime(new Date(data.list[i].create_time * 1000))
+                            }
+                        }
+                        if (data.list.length >= 10) {
+                            that.setData({
+                                btnText: 1
+                            })
+                        } else {
+                            that.setData({
+                                btnText: 0
+                            })
+                        }
+                        this.setData({
+                            userList: data.list
+                        })
                         wx.stopPullDownRefresh()
                     }
                 }
@@ -288,9 +274,9 @@ Page({
         let userList = [];
         if (pageTypeStu == 6){
             // 砍价
-            if (e.currentTarget.dataset.text == '没有了') {
+            if (e.currentTarget.dataset.text == 0) {
 
-            } else if (e.currentTarget.dataset.text == '更多') {
+            } else if (e.currentTarget.dataset.text == 1) {
                 wx.showLoading({
                     title: '正在加载...',
                 })
@@ -317,13 +303,11 @@ Page({
                         userList.push(...data.list)
                         if (userList.length >= that.data.killPage * 10) {
                             that.setData({
-                                className: 'moreData',
-                                btnText: '更多'
+                                btnText: 1
                             })
                         } else {
                             that.setData({
-                                className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: 0
                             })
                         }
                         that.setData({
@@ -344,9 +328,9 @@ Page({
             
         } else if (pageTypeStu == 3){
             // 拼团
-            if (e.currentTarget.dataset.text == '没有了') {
+            if (e.currentTarget.dataset.text == 0) {
 
-            } else if (e.currentTarget.dataset.text == '更多') {
+            } else if (e.currentTarget.dataset.text == 1) {
                 wx.showLoading({
                     title: '正在加载...',
                 })
@@ -376,13 +360,11 @@ Page({
                         userList.push(...data.list)
                         if (userList.length >= that.data.collagePage * 10) {
                             that.setData({
-                                className: 'moreData',
-                                btnText: '更多'
+                                btnText: 1
                             })
                         } else {
                             that.setData({
-                                className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: 0
                             })
                         }
                         that.setData({

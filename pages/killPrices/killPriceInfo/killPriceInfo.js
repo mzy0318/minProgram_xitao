@@ -47,7 +47,8 @@ Page({
         isStopMusic:true,
         widthV: 0,
         className: 'moreData',
-        btnText: '更多'
+        btnText: '更多',
+        isMore:true,
     },
 
     /**
@@ -168,29 +169,6 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        let that = this;
-        let pageDataArr = [];
-        pageDataArr.push(...that.data.killPricePeople);
-        if (that.data.killPricePeople.length >= that.data.rangPage * 10){
-            that.setData({
-                rangPage: rangPage+1,
-            })
-            getApp().request({
-                url: 'bargain_range',
-                data: {
-                    act_id: that.data.actId,
-                    joiner_id: '0',
-                    page: that.data.rangPage
-                },
-                method: 'post',
-                success: data => {
-                    pageDataArr.push(...data.data.data.list)
-                    this.setData({
-                        killPricePeople: pageDataArr,
-                    })
-                }
-            })
-        } 
     },
 
     /**
@@ -561,12 +539,14 @@ Page({
                         if (killPricePeople.length >= that.data.rangPage * 10) {
                             that.setData({
                                 className: 'moreData',
-                                btnText: '更多'
+                                btnText: '更多',
+                                isMore:false
                             })
                         } else {
                             that.setData({
                                 className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: '没有了',
+                                isMore:false
                             })
                         }
                         this.setData({
@@ -598,6 +578,15 @@ Page({
             success: data => {
                 if (data.data.code == 1) {
                     wx.stopPullDownRefresh()
+                    if(data.data.data.list.length > 0){
+                        that.setData({
+                            isMore:false,
+                        })
+                    }else{
+                        that.setData({
+                            isMore: true,
+                        })
+                    }
                     if(data.data.data.list.length >= 10){
                         that.setData({
                             className: 'moreData',

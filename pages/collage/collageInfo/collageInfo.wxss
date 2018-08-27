@@ -264,7 +264,7 @@ view.viewTyle{
 /*第五部分  */
 .collageInfoFive{
     width:710rpx;
-    min-height:500rpx;
+    min-height:50rpx;
     background:#fff;
     border-radius:5px;
     margin:20rpx auto;

@@ -9,8 +9,7 @@ Page({
         pageData: '',
         pageNum: 1,
         isMore:true,
-        className: 'moreDataed',
-        btnText: '没有了'
+        btnText: 0
     },
 
     /**
@@ -18,40 +17,7 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        getApp().request({
-            url: 'visitor_bargain_list',
-            data: {
-                page: that.data.pageNum,
-            },
-            method: 'post',
-            success: function(res) {
-                if(Number(res.data.code) == 1){
-                    res.data.data.list = utils.map(res.data.data.list, function (one) {
-                        one.banner_image_url = utils.square(one.banner_image_url, 100)
-                        return one
-                    })
-                    if (res.data.data.list.length >= 10) {
-                        that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
-                        })
-                    } else {
-                        that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
-                        })
-                    }
-                    that.setData({
-                        pageData: res.data.data.list
-                    })
-                }else {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon:'none',
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -90,30 +56,7 @@ Page({
         that.setData({
             pageNum: 1
         })
-        getApp().request({
-            url: 'visitor_bargain_list',
-            data: {
-                page: that.data.pageNum,
-            },
-            method: 'post',
-            success: res => {
-                if (Number(res.data.code) == 1) {
-                    res.data.data.list = utils.map(res.data.data.list, function (one) {
-                        one.banner_image_url = utils.square(one.banner_image_url, 100)
-                        return one
-                    })
-                    that.setData({
-                        pageData: res.data.data.list
-                    })
-                    wx.stopPullDownRefresh()
-                } else if (Number(res.data.code) == 0) {
-                    wx.showToast({
-                        title: res.data.msg,
-                        icon: 'none',
-                    })
-                }
-            }
-        })
+        that.getPageData()
     },
 
     /**
@@ -137,9 +80,9 @@ Page({
     moreData:function(e){
         let that = this;
         let pageData = [];
-        if (e.currentTarget.dataset.text == '没有了') {
+        if (e.currentTarget.dataset.text == 0) {
 
-        } else if (e.currentTarget.dataset.text == '更多') {
+        } else if (e.currentTarget.dataset.text == 1) {
             wx.showLoading({
                 title: '正在加载...',
             })
@@ -163,13 +106,11 @@ Page({
                         
                         if (pageData.length >= that.data.pageNum * 10) {
                             that.setData({
-                                className: 'moreData',
-                                btnText: '更多'
+                                btnText: 1
                             })
                         } else {
                             that.setData({
-                                className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: 0
                             })
                         }
                         that.setData({
@@ -187,4 +128,42 @@ Page({
             })
         }
     },
+    // 获取页面数据
+    getPageData:function(){
+        let that = this;
+        getApp().request({
+            url: 'visitor_bargain_list',
+            data: {
+                page: that.data.pageNum,
+            },
+            method: 'post',
+            success: res => {
+                if (Number(res.data.code) == 1) {
+                    res.data.data.list = utils.map(res.data.data.list, function (one) {
+                        one.banner_image_url = utils.square(one.banner_image_url, 100)
+                        return one
+                    })
+                    if (res.data.data.list.length >= 10) {
+                        that.setData({
+                            btnText: 1
+                        })
+                    } else {
+                        that.setData({
+                            btnText: 0
+                        })
+                    }
+                    that.setData({
+                        pageData: res.data.data.list
+                    })
+                    wx.stopPullDownRefresh()
+                } else if (Number(res.data.code) == 0) {
+                    wx.stopPullDownRefresh()
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                    })
+                }
+            }
+        })
+    }
 })
