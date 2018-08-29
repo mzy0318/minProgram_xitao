@@ -1,6 +1,6 @@
 <view  style='display:{{isContent}}'>
     <view class='managWarpTop'>
-        <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/org_banner.png'></image>
+        <image src='http://cdn.zhihuizhaosheng.com/app-static/org_banner.png'></image>
         <!-- <view bindtap='exitApp'><image src='../../../icon/exit.png' mode='scaleToFill'></image> <text>注销</text></view> -->
     </view>
     <view class='addEmpty'></view>

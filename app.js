@@ -3,16 +3,13 @@ let uuid = require('./utils/uuid.js')
 let formart = require('./utils/util.js')
 
 App({
-
     visitorId: '',
     onLaunch: function(options) {
         // 课程分类
         wx.setStorageSync('classId', 0)
-
-
         // 登录
         wx.login({
-            success: res => {
+            success: function(res){
                 // console.log('res',res)
                 this.userCode = res.code;
             }
@@ -20,7 +17,7 @@ App({
         // 获取用户授权信息
     },
     // 小程序版本及功能选项
-    funcOpt:'',
+    funcOpt: '',
     config: null,
     //获取ext.json文件内容
     getExtConfig: function() {
@@ -37,8 +34,8 @@ App({
     },
     dev: false,
     // 视频投票  我的海报
-    getImageHost:function(){
-        let online = "https://www.zhihuizhaosheng.com/" ;
+    getImageHost: function() {
+        let online = "https://www.zhihuizhaosheng.com/";
         let dev = "http://192.168.2.199:8123/";
         return online;
     },
@@ -49,6 +46,92 @@ App({
     },
     hasLogin: wx.getStorageSync('hasLogin'), //默认app是未登录状态
     isLogin: true,
+    doLogin: function(callFunc) {
+        wx.login({
+            success: res => {
+                if (res.errMsg != "login:ok") {
+                    wx.showModal({
+                        title: '错误提示',
+                        content: res.errMsg,
+                    })
+                    return
+                }
+
+                var host = getApp().getHost();
+                var header = {}
+                header["Content-Type"] = "application/x-www-form-urlencoded";
+
+                wx.request({
+                    'url': host + "login",
+                    'data': {
+                        "code": res.code,
+                        "org_id": getApp().getExtConfig().orgId
+                    },
+                    'method': "POST",
+                    'header': header,
+                    'success': r => {
+                        if (r.data.code == 0) {
+                            wx.showModal({
+                                title: '提示',
+                                content: r.data.msg,
+                            })
+                        } else {
+                            // 获取小程序版本
+                            getApp().funcOpt = r.data.data;
+                            var fetchUserInfo = false
+
+                            wx.setStorageSync('funcOpt', r.data.data)
+                            wx.setStorageSync('visitorId', r.data.data.visitor_id);
+                            wx.setStorageSync('avarImage', r.data.data.avatar_url);
+                            wx.setStorageSync('nickname', r.data.data.nickname);
+
+                            if (r.data.data.is_default_avatar_url) {
+                                wx.getUserInfo({
+                                    success: res => {
+                                        // 可以将 res 发送给后台解码出 unionId
+                                        getApp().globalData.userInfo = res.userInfo;
+                                        let sendData = {};
+
+                                        sendData['nickname'] = res.userInfo.nickName
+                                        sendData['avatar_url'] = res.userInfo.avatarUrl
+                                        sendData['province'] = res.userInfo.province
+                                        sendData['city'] = res.userInfo.city
+                                        sendData['country'] = res.userInfo.country
+                                        sendData['language'] = res.userInfo.language
+                                        sendData['gender'] = res.userInfo.gender
+
+                                        fetchUserInfo = true
+
+                                        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                                        // 所以此处加入 callback 以防止这种情况
+                                        // if (getApp().userInfoReadyCallback) {
+                                        // getApp().userInfoReadyCallback(res)
+                                        // }
+                                    }
+                                })
+                            }
+
+                            if (r.header["Set-Cookie"]) {
+                                wx.setStorageSync('cookie', r.header["Set-Cookie"]);
+                            }
+
+                            if (callFunc != null && typeof callFunc == "function") {
+                                callFunc()
+                            }
+                            if (fetchUserInfo) {
+                                getApp().request({
+                                    url: 'set_user_info',
+                                    data: sendData,
+                                    method: 'post',
+                                    success: function(res) {}
+                                })
+                            }
+                        }
+                    },
+                })
+            }
+        })
+    },
     // 请求数据方法
     request: param => {
         var host = getApp().getHost();
@@ -69,116 +152,31 @@ App({
             header["Content-Type"] = "application/x-www-form-urlencoded";
         }
 
-        if (param.url == "login") {
-            return
-        }
-        var othis = this;
-        if (getApp().hasLogin == '1') {
-            console.log('url', url)
-            console.log('data', data)
-            //直接执行请求
-            wx.request({
-                url: url,
-                data: data,
-                method: method,
-                header: header,
-                'success': r => {
-                    if (r.header["Set-Cookie"]) {
-                        wx.setStorageSync('cookie', r.header["Set-Cookie"]);
-                    }
-
-                    /**
-                     * 放开此初始，同时注释掉110行，可以：
-                     * 1 统一处理错误信息，每个请求都会少些处理错误代码
-                     * 2 避免不优雅的res.data.data写法，对象嵌套过深，容易犯错
-                     */
-                    // if(r.data.code == 0){
-                    //   wx.showModal({
-                    //     title: '错误提示',
-                    //     content: r.data.msg,
-                    //   })
-                    // }else{
-                    //   success(r.data)
-                    // }
-
-                    success(r);
-                }
-            });
-        } else {
-            wx.login({
-                success: res => {
-                    if (res.errMsg != "login:ok") {
-                        wx.showModal({
-                            title: '错误提示',
-                            content: res.errMsg,
+        wx.request({
+            url: url,
+            data: data,
+            method: method,
+            header: header,
+            'success': r => {
+                if (r.statusCode == 401) {
+                    if (r.data.is_org) {
+                        //跳转到登录页面
+                        console.log('r',r)
+                        wx.setStorageSync('loginCode', 0);
+                        wx.switchTab({
+                            url: '/pages/manageCenters/manageCenter/manageCenter',
                         })
-                        return
-                        } else {
+                    } else {
+                        getApp().doLogin(function() {
+                            getApp().request(param)
+                        })
                     }
-                    wx.request({
-                        'url': host + "login",
-                        'data': {
-                            "code": res.code,
-                            "org_id": getApp().getExtConfig().orgId
-                        },
-                        'method': "POST",
-                        'header': header,
-                        'success': r => {
-                            if (r.data.code == 0) {
-                                wx.showModal({
-                                    title: '提示',
-                                    content: r.data.msg,
-                                })
-                            } else {
-                                // 获取小程序版本
-                                getApp().funcOpt = r.data.data;
-                                wx.setStorageSync('funcOpt', r.data.data)
-                                wx.setStorageSync('visitorId', r.data.data.visitor_id);
-                                wx.setStorageSync('avarImage', r.data.data.avatar_url);
-                                wx.setStorageSync('nickname', r.data.data.nickname);
-                                if (r.data.data.is_default_avatar_url){
-                                    wx.getUserInfo({
-                                        success: res => {
-                                            // 可以将 res 发送给后台解码出 unionId
-                                            getApp().globalData.userInfo = res.userInfo;
-                                            let sendData = {};
-                                            sendData['nickname'] = res.userInfo.nickName
-                                            sendData['avatar_url'] = res.userInfo.avatarUrl
-                                            sendData['province'] = res.userInfo.province
-                                            sendData['city'] = res.userInfo.city
-                                            sendData['country'] = res.userInfo.country
-                                            sendData['language'] = res.userInfo.language
-                                            sendData['gender'] = res.userInfo.gender
-                                            getApp().request({
-                                                url: 'set_user_info',
-                                                data: sendData,
-                                                method: 'post',
-                                                success: function (res) {
-                                                }
-                                            })
-                                            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                                            // 所以此处加入 callback 以防止这种情况
-                                            if (getApp().userInfoReadyCallback) {
-                                                getApp().userInfoReadyCallback(res)
-                                            }
-                                        }
-                                    })
-                                }
-                                if (r.header["Set-Cookie"]) {
-                                    wx.setStorageSync('cookie', r.header["Set-Cookie"]);
-                                }
-                                wx.setStorageSync('hasLogin', '1');
-                                getApp().hasLogin = wx.getStorageSync('hasLogin'),
-                                getApp().isLogin = true,
-
-                                    //然后执行请求
-                                    getApp().request(param)
-                            }
-                        },
-                    })
+                } else {
+                    success(r)
                 }
-            })
-        }
+            }
+        });
+        //end
     },
     //地图 
     map: function(latitude, longitude, name, address) {

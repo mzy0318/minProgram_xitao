@@ -5,6 +5,6 @@
             <button bindtap='toIndex'>关闭</button>
             <button open-type='contact'>咨询</button>
         </view>
-        <view class='bgImage'><image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/serverImg.png' mode='scaleToFill'></image></view>
+        <view class='bgImage'><image src='http://cdn.zhihuizhaosheng.com/app-static/serverImg.png' mode='scaleToFill'></image></view>
     </view>
 </view>

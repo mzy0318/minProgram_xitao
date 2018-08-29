@@ -34,7 +34,7 @@
                 <view class='lessonEditOneTitle'>封面图片</view>
                 <view class='addActImageContent'>
                     <view class='empty'></view>
-                    <view class='AddActImage' bindtap='addActimg'><image mode='scaleToFill'></image></view>
+                    <view class='AddActImage' bindtap='addActimg'>+</view>
                     <view class='AddActImage' hidden='{{isCover}}'><image src='{{coverImage}}' mode='scaleToFill'></image></view>
                 </view>
             </view>

@@ -155,21 +155,7 @@ Page({
         that.setData({
             versionData: version.version + versionText,
         });
-        // 是否已经登录
-        if (wx.getStorageSync('loginCode') == 1) {
-            this.setData({
-                islogin: 'none',
-                isContent: 'block',
-            })
-        } else {
-            wx.setNavigationBarTitle({
-                title: '招生小程序登录',
-            })
-            this.setData({
-                islogin: 'block',
-                isContent: 'none'
-            })
-        }
+       
         // 重新登录
         // wx.setStorageSync('loginCode', 3);
 
@@ -214,6 +200,21 @@ Page({
      */
     onShow: function() {
         let that = this;
+        // 是否已经登录
+        if (wx.getStorageSync('loginCode') == 1) {
+            that.setData({
+                islogin: 'none',
+                isContent: 'block',
+            })
+        } else {
+            wx.setNavigationBarTitle({
+                title: '招生小程序登录',
+            })
+            that.setData({
+                islogin: 'block',
+                isContent: 'none'
+            })
+        }
         let pageData = that.data.pageStuData;
         let funcOpt = that.data.funcOpt;
         for (let i = 0; i < funcOpt.length;i++){

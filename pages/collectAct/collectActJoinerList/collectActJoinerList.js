@@ -11,8 +11,7 @@ Page({
         isNoData:true,
         isPersonInfo:true,
         personInfo:'',
-        className: 'moreData',
-        btnText: '更多'
+        btnText: 0
     },
 
     /**
@@ -102,9 +101,9 @@ Page({
     moreData:function(e){
         let that = this;
         let pageData = [];
-        if (e.currentTarget.dataset.text == '没有了') {
+        if (e.currentTarget.dataset.text == 0) {
 
-        } else if (e.currentTarget.dataset.text == '更多') {
+        } else if (e.currentTarget.dataset.text == 1) {
             wx.showLoading({
                 title: '正在加载...',
             })
@@ -129,13 +128,11 @@ Page({
                         pageData.push(...res.data.data.list)
                         if (pageData.length >= that.data.pageNum*10) {
                             that.setData({
-                                className: 'moreData',
-                                btnText: '更多'
+                                btnText: 1
                             })
                         } else {
                             that.setData({
-                                className: 'moreDataed',
-                                btnText: '没有了'
+                                btnText: 0
                             })
                         }
                         that.setData({
@@ -168,13 +165,11 @@ Page({
                     }
                     if (res.data.data.list.length >= 10){
                         that.setData({
-                            className: 'moreData',
-                            btnText: '更多'
+                            btnText: 1
                         })
                     }else{
                         that.setData({
-                            className: 'moreDataed',
-                            btnText: '没有了'
+                            btnText: 0
                         })
                     }
                     that.setData({

@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='killPriceListContet' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='killPriceListTop' bindtap='toPricePerson'  data-id='{{item.act_nice_id}}'  data-acttag='{{item.act_tag}}'>
         <text class='iconfont icon-ionc-- iconColor' decode='true'>&nbsp;&nbsp;{{item.nickname}}</text>
@@ -9,7 +10,7 @@
     </view>
 </view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />
 
 <view class='collageListWrap' hidden='{{isPersonInfo}}'>
     <view class='empty'></view>

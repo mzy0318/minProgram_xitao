@@ -1,4 +1,5 @@
 @import '../../../utils/iconFont.wxss'; 
+@import '../../../templates/moreData/moreData.wxss';
 page{
     padding-bottom:20rpx;
 }

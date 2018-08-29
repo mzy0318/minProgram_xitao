@@ -143,10 +143,11 @@
     margin-left:20rpx;
     line-height:150rpx;
     text-align:center;
-    font-size:100rpx;
-    color:#efefef;
+    font-size:60rpx;
+    color:#7b7b7b;
     font-weight:bold;
     position:relative;
+    vertical-align: top;
 }
 
 .lessonEditThreeContent .actImage image{

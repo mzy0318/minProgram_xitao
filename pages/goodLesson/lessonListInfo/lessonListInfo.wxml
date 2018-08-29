@@ -1,6 +1,6 @@
 <view class='listInfoWrap'>
     <view class='listInfoBanner'>
-        <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/lesson_one_big_banner.png' mode='scaleToFill'></image>
+        <image src='http://cdn.zhihuizhaosheng.com/app-static/lesson_one_big_banner.png' mode='scaleToFill'></image>
     </view>
     <view class='listInfoImage'>
         <view class='empty'></view>

@@ -80,7 +80,7 @@
          <view class='lessonEditThree'>
             <view class='lessonEditOneTitle'>活动图片</view>
             <view class='lessonEditThreeContent'>
-                <view class='chooseImage' bindtap='choosePic'></view>
+                <view class='chooseImage' bindtap='choosePic'>+</view>
                 <view class='actImage' wx:for='{{actImage}}'>
                     <image src='{{item}}' mode='scaleToFill'></image>
                     <view class='delImage' bindtap='delImage' data-index='{{index}}'>×</view>
@@ -90,7 +90,7 @@
          <view class='lessonEditThree'>
             <view class='lessonEditOneTitle'>封面图片</view>
             <view class='lessonEditThreeContent'>
-                <view class='chooseImage' bindtap='chooseCoverPic'></view>
+                <view class='chooseImage' bindtap='chooseCoverPic'>+</view>
                 <view class='actImage' style='display:{{isCover}}' ><image src='{{coverImage}}'  mode='scaleToFill'></image></view>
             </view>
         </view>

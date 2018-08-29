@@ -1,7 +1,7 @@
 <!--pages/opinions/opinions.wxml-->
 <view class='opinionWrap'>
     <view class='opinionImg'>
-        <image src='https://wise.oss-cn-hangzhou.aliyuncs.com/app-static/feedback_banner.png?x-oss-process=image/resize,m_lfit,w_400,limit_0/auto-orient,1/quality,q_100'></image>
+        <image src='http://cdn.zhihuizhaosheng.com/app-static/feedback_banner.png?x-oss-process=image/resize,m_lfit,w_400,limit_0/auto-orient,1/quality,q_100'></image>
     </view>
     <view class='empty'></view>
     <form bindsubmit='subPinions'>

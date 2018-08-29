@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <view class='empty'></view>
 <view class='manListContent' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='manListContentTop' bindtap='toLessonInfo' data-id='{{item.act_nice_id}}' >{{item.title}}</view>
@@ -20,4 +21,4 @@
     <view class='manListBottomRight' bindtap='toLessonEdit'>发布新活动</view>
 </view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

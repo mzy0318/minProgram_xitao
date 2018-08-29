@@ -4,7 +4,7 @@
         <view class='schoolEditOne'>
             <view class='schoolEditOneTitle'>学校环境</view>
             <view class='schoolEditOneContent'>
-                <view class='schoolEditOneImage' bindtap='envPic'></view>
+                <view class='schoolEditOneImage' bindtap='envPic'>+</view>
                 <view class='schoolEditOneImage' wx:for='{{envImage}}'>
                     <image src='{{item}}' mode='aspectFit'></image>
                     <view class='delImage' bindtap='delImage' data-id='0' data-index='{{index}}'>×</view>
@@ -15,7 +15,7 @@
         <view class='schoolEditOne'>
             <view class='schoolEditOneTitle'>资质荣誉</view>
             <view class='schoolEditOneContent'>
-                <view class='schoolEditOneImage' bindtap='honorPic'></view>
+                <view class='schoolEditOneImage' bindtap='honorPic'>+</view>
                 <view class='schoolEditOneImage' wx:for='{{honorImage}}'>
                     <image src='{{item}}' mode='aspectFit'></image>
                     <view class='delImage' bindtap='delImage' data-id='1' data-index='{{index}}'>×</view>

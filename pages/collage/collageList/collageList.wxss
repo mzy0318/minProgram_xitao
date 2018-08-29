@@ -53,4 +53,7 @@ page{
     font-size:35rpx;
     text-align:center;
     font-weight:bold;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow:ellipsis;
 }

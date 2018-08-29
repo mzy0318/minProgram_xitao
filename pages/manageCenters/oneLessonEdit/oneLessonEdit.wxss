@@ -154,7 +154,7 @@
     border-radius: 5px;
 }
 
-.lessonEditThreeContent .chooseImage {
+.lessonEditThreeContent .chooseImage{
     width: 200rpx;
     height: 150rpx;
     border: 1rpx solid #efefef;
@@ -164,9 +164,10 @@
     margin-left: 20rpx;
     line-height: 150rpx;
     text-align: center;
-    font-size: 100rpx;
-    color: #efefef;
+    font-size: 60rpx;
+    color: #7b7b7b;
     font-weight: bold;
+    vertical-align:top;
 }
 
 .lessonEditThreeContent .chooseImage image {

@@ -268,7 +268,7 @@ Page({
             that.setData({
                 userInfo: {
                     nickName:'访客',
-                    avatarUrl: 'https://wise.oss-cn-hangzhou.aliyuncs.com/icon/default_avatar.png',
+                    avatarUrl: 'http://cdn.zhihuizhaosheng.com/icon/default_avatar.png',
                 },
                 isUserInfo: true,
             })

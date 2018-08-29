@@ -1,3 +1,4 @@
+<import src='../../../templates/moreData/moreData' />
 <!-- 页面功能 -->
 <view class='manListOpt'>
     <view bindtap='pageOpt' data-id='0'>返回</view>
@@ -26,4 +27,4 @@
     </view>
 </view>
 <!-- 更多 -->
-<button class='{{className}}' bindtap='moreData' data-text='{{btnText}}'>{{btnText}}</button>
+<template  is="moreDataBtn" data='{{btnText:btnText}}' />

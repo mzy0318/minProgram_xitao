@@ -1,6 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
 <view class='empty'></view>
-<view class='manListContent' wx:for='{{pageData}}'>
+<view class='manListContent' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='manListContentTop' bindtap='toLessonInfo' data-id='{{item.id}}' >{{item.title}}</view>
     <view class='manListContentMiddel'>
         <view class='ListContentMiddelLeft' bindtap='toLessonInfo' data-id='{{item.id}}'>

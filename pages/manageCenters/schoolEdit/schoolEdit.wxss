@@ -26,10 +26,16 @@
     display:inline-block;
     width:160rpx;
     height:160rpx;
+    line-height:160rpx;
+    font-size:60rpx;
+    font-weight:bold;
+    color:#7b7b7b;
+    text-align: center;
     border:1rpx solid #efefef;
     margin-top:20rpx;
     margin-left:10rpx;
     position:relative;
+    vertical-align: top;
 }
 .schoolEditOneImage>image{  
     height:160rpx;
