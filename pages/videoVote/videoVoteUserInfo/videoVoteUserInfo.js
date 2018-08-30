@@ -21,11 +21,9 @@ Page({
     onLoad: function(options) {
         let that = this;
         let url = 'pages/videoVote/videoVoteUserInfo/videoVoteUserInfo';
-        let scene = 'joinId:' + options.joinId + ':actId:' + options.actId
 
         if (options.scene != undefined) {
             let scene = decodeURIComponent(options.scene);
-            console.log('scene', scene)
             let sceneArr = scene.split(':')
             that.setData({
                 joinId: sceneArr[1],
@@ -37,12 +35,12 @@ Page({
                 actId:options.actId,
             })
         }
+        let scene = 'joinId:' + that.data.joinId + ':actId:' + that.data.actId
         // https://www.zhihuizhaosheng.com/video_vote_my_cover?id=1&org_id=1   getApp().getImageHost()
         that.setData({
             encodeImage: getApp().getEncodeImage(url, scene),
-            myCoverImage: getApp().getImageHost() + 'video_vote_my_cover?id=' + that.data.actId + '&org_id=' + getApp().getExtConfig().orgId
+            myCoverImage: getApp().getImageHost() + 'video_vote_my_cover?id=' + that.data.joinId + '&org_id=' + getApp().getExtConfig().orgId
         })
-        console.log('that.data.myCoverImage', that.data.myCoverImage)
     },
 
     /**

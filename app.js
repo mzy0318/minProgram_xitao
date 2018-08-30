@@ -90,7 +90,7 @@ App({
                                     success: res => {
                                         // 可以将 res 发送给后台解码出 unionId
                                         getApp().globalData.userInfo = res.userInfo;
-                                        let sendData = {};
+                                        var sendData = {};
 
                                         sendData['nickname'] = res.userInfo.nickName
                                         sendData['avatar_url'] = res.userInfo.avatarUrl

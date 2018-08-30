@@ -59,8 +59,8 @@ swiper{
 }
 .userInfoText{
     width:640rpx;
-    height:60rpx;
-    line-height:60rpx;
+    min-height:60rpx;
+    line-height:40rpx;
     font-size:28rpx;
     margin:10rpx auto;
 }

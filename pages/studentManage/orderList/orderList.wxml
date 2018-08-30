@@ -1,6 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
 <view class='empty'></view>
-<view class='orderListContent' wx:for='{{pageData}}' bindtap='toPayInfo' data-payinfo='{{item}}'>
+<view class='orderListContent' wx:for='{{pageData}}' bindtap='toPayInfo' data-payinfo='{{item}}' wx:key='{{index}}'>
     <view class='orderListTop'>
         <view>{{item.title}}</view>
         <view>{{item.create_time}}</view>

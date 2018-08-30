@@ -13,7 +13,6 @@
     </view>
     <view class='userInfoContent'><video src='{{pageData.video.url}}' poster='{{pageData.cover.url}}'></video></view>
     <view class='userInfoText'>宣言:{{pageData.declaration}}</view>
-
     <view class='userInfoBtn'>
         <button data-btnid='0' bindtap='btnOptions'>我要投票</button>
         <button data-btnid='1' bindtap='btnOptions' data-id='{{pageData.act_video_vote_id}}' data-joinid='{{pageData.id}}' data-is='0'>我要报名</button>

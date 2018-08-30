@@ -33,12 +33,13 @@ Page({
      */
     onLoad: function (options) {
         let that = this;
+        console.log('options', options)
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = 'actid:' + options.actId + ':joinid:' + options.joinId;
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
             let sceneArr = scene.split(':');
+            console.log('sceneArr', sceneArr)
             that.setData({
                 actId: sceneArr[1],
                 joinId: sceneArr[3],
@@ -49,6 +50,7 @@ Page({
                 joinId: options.joinId,
             })
         }
+        let mzy = 'actid:' + that.data.actId + ':joinid:' + that.data.joinId;
         this.setData({
             joinInfo: options,
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy

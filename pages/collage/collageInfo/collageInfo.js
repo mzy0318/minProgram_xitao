@@ -97,7 +97,7 @@ Page({
         
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = 'actid:' + options.actId + ':actTag:' + options.actTag;
+        let mzy = 'actid:' + that.data.actId + ':actTag:' + that.data.actTag;
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })

@@ -9,7 +9,7 @@ Page({
         pageData: '',
         pageNum: 1,
         showTitle:true,
-        btnText: 0
+        btnText:0,
     },
 
     /**
@@ -72,9 +72,12 @@ Page({
 
     // },
     toPayInfo: function(e) {
+        let url = e.currentTarget.dataset.payinfo.cover.url;
+        wx.setStorageSync('urlImage', url)
+        delete e.currentTarget.dataset.payinfo.cover.url
         let payInfo = JSON.stringify(e.currentTarget.dataset.payinfo)
         wx.navigateTo({
-            url: '../../courses/orderInfoPay/orderInfoPay?payInfo=' + payInfo + '&isInfo=1',
+            url: '../../courses/orderInfoPay/orderInfoPay?isInfo=1&payInfo=' + payInfo,
         })
     },
     // 获取页面更多数据

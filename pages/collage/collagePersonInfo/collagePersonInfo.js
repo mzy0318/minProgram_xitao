@@ -28,7 +28,6 @@ Page({
         let pages = getCurrentPages()
 
         let url = pages[pages.length - 1].route
-        let mzy = 'actid:' + options.actId + ':joinid:' + options.joinId;
 
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
@@ -43,6 +42,7 @@ Page({
                 joinId: options.joinId,
             })
         }
+        let mzy = 'actid:' + that.data.actId + ':joinid:' + that.data.joinId;
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })

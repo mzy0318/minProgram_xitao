@@ -1,4 +1,4 @@
-<view class='inviTeacher'><image src='../../../icon/requestTeacher.png' mode='scaleToFill'></image></view>
+<view class='inviTeacher'><image src='http://cdn.zhihuizhaosheng.com/app-static/invite-card.png' mode='scaleToFill'></image></view>
 <view class='inviTeacherTitle'>欢迎加入</view>
 <view class='inviTeacherBtn'>
     <button open-type='share'>邀请老师</button>

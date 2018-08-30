@@ -18,10 +18,11 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
+        console.log('options', options)
         that.setData({
             isInfo: Number(options.isInfo),
         })
-        if(Number(options.isInfo) == 0){
+        if (that.data.isInfo == 0){
             let sendData = {};
             sendData['act_id'] = options.actId;
             sendData['act_tag'] = options.actTag;
@@ -50,10 +51,12 @@ Page({
                     }
                 }
             })
-        } else if (Number(options.isInfo) == 1){
-            JSON.parse(options.payInfo).cover.url = utils.rect(JSON.parse(options.payInfo).cover.url, 120, 60)
+        } else if (that.data.isInfo == 1){
+            let data = JSON.parse(options.payInfo);
+            let image = wx.getStorageSync('urlImage')
+            data['cover'] = { url: image}
             that.setData({
-                pageData: JSON.parse(options.payInfo),
+                pageData: data,
                 createTime: JSON.parse(options.payInfo).create_time
             })
         }
@@ -90,9 +93,9 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    // onPullDownRefresh: function() {
 
-    },
+    // },
 
     /**
      * 页面上拉触底事件的处理函数

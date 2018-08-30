@@ -24,19 +24,19 @@ Page({
         sugarList:[
             {
                 name:'rainbow',
-                url:'../../../icon/01.png'
+                url:'http://cdn.zhihuizhaosheng.com/app-static/sugar/01.png'
             },{
                 name: 'strawberry',
-                url: '../../../icon/02.png'
+                url: 'http://cdn.zhihuizhaosheng.com/app-static/sugar/02.png'
             },{
                 name: 'mango',
-                url: '../../../icon/03.png'
+                url: 'http://cdn.zhihuizhaosheng.com/app-static/sugar/03.png'
             },{
                 name: 'watermelon',
-                url: '../../../icon/04.png'
+                url: 'http://cdn.zhihuizhaosheng.com/app-static/sugar/04.png'
             },{
                 name: 'blueberry',
-                url: '../../../icon/05.png'
+                url: '.http://cdn.zhihuizhaosheng.com/app-static/sugar/05.png'
             },
         ],
         isExchange:true,
