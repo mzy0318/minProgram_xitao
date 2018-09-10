@@ -228,7 +228,7 @@ Page({
         } else if (Number(options.pageId) == 19) {
             // 集糖果个人页面
             wx.navigateTo({
-                url: '../collectAct/collectActUserInfo/collectActUserInfo?actId=' + options.actId + '&userId=' + options.userId +'isShare=1',
+                url: '../collectAct/collectActUserInfo/collectActUserInfo?actId=' + options.actId + '&userId=' + options.userId +'&isShare=1',
             })
         } else if (Number(options.pageId) == 20) {
             //课程销售

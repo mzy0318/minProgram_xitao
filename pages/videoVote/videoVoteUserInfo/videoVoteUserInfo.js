@@ -21,10 +21,11 @@ Page({
     onLoad: function(options) {
         let that = this;
         let url = 'pages/videoVote/videoVoteUserInfo/videoVoteUserInfo';
-
+        // let scene = 'joinId:' + options.joinId + ':actId:' + options.actId
         if (options.scene != undefined) {
             let scene = decodeURIComponent(options.scene);
             let sceneArr = scene.split(':')
+            console.log('sceneArr', sceneArr)
             that.setData({
                 joinId: sceneArr[1],
                 actId: sceneArr[3],
