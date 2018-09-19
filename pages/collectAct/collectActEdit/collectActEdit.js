@@ -118,24 +118,6 @@ Page({
     onUnload: function() {
 
     },
-    // 添加优惠设置
-    // addActset:function(e){
-    //     let that = this;
-    //     if (e.target.dataset.id == '1'){
-    //         let actSet = that.data.actSet;
-    //         actSet.push({display:false});
-    //         that.setData({
-    //             actSet: actSet,
-    //         })
-    //     } else if (e.target.dataset.id == '0'){
-    //         let actSet = that.data.actSet;
-    //         actSet[e.target.dataset.index].display = true
-    //         that.setData({
-    //             actSet: actSet,
-    //         })
-    //     }
-    //     console.log('actSet', that.data.actSet)
-    // },
     // 获取日期
     getDate: function(e) {
         let that = this;
@@ -308,6 +290,11 @@ Page({
                             }
                         })
                     }
+                }else if(res.data.code == 0){
+                    wx.showToast({
+                        title: res.msg,
+                        icon:'none'
+                    })
                 }
             }
         })

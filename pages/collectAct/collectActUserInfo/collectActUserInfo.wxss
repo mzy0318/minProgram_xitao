@@ -545,3 +545,21 @@
     background:#efefef;
     margin-top:20rpx;
 }
+/* 返回主页面 */
+.toIndex{
+    width:80rpx;
+    height:80rpx;
+    border-radius:50%;
+    background:#D81E07;
+    position:fixed;
+    right:20rpx;
+    bottom:120rpx;
+}
+.toIndex>view{
+    width:80rpx;
+    height:36rpx;
+    line-height:40rpx;
+    color:#fff;
+    font-size:28rpx;
+    text-align:center;
+}

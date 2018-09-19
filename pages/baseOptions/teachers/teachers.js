@@ -20,7 +20,7 @@ Page({
                 if(res.data.code == 1){
                     if(res.data.data.length > 0){
                         for (let i = 0; i < res.data.data.length;i++){
-                            res.data.data[i].avatar_url.url = utils.square(res.data.data[i].avatar_url.url,100)
+                            res.data.data[i].avatar_url.url = utils.square(res.data.data[i].avatar_url.url,200)
                         }
                     }
                     this.setData({

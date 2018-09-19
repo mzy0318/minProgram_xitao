@@ -73,7 +73,10 @@ Page({
         {
             tag: 'video_vote',
             url: '../videoVote/videoVoteUserList/videoVoteUserList', //视频投票
-        },
+        },{
+            tag:'sugar',
+            url:'../collectAct/collectActUserList/collectActUserList',//集糖果
+        }
         ],
         pageData: '',
         isGetUser: false,
@@ -239,6 +242,11 @@ Page({
             //砍价个人页面
             wx.navigateTo({
                 url: '../killPrices/killPricePerson/killPricePerson?actId=' + options.actId + '&joinId=' + options.joinId,
+            })
+        } else if (Number(options.pageId) == 22){
+            //集糖果详情页面
+            wx.navigateTo({
+                url: '../collectAct/collectActInfo/collectActInfo?actId=' + options.actId,
             })
         }
         wx.showLoading({

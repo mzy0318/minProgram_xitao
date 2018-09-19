@@ -1,4 +1,5 @@
 let formate = require('../../../utils/util.js')
+let innerAudioContext = wx.createInnerAudioContext()
 Page({
 
     /**
@@ -6,6 +7,7 @@ Page({
      */
     data: {
         actId: '',
+        actTag:'',
         pageData: '',
         rangeData: '',
         rangePage: 1,
@@ -22,7 +24,23 @@ Page({
         btnText:'我要报名',
         isText:false,
         className: 'moreData',
-        btnTextR: '更多'
+        btnTextR: '更多',
+        bottomOption: true, //底部功能
+        actionOptions: true,
+        isOption: true,
+        isCommon: true,
+        musicClass: '',//音乐分类
+        musicData: '',
+        musicClassIndex: 0,
+        isMusicClass: true,
+        backgroundMusic: '',
+        musicNum: '',
+        isModel: true,
+        animationClass: 'musicControl',
+        showMusic: true,
+        isStopMusic: true,
+        bannerImage: '',
+        backgroundImage: '',
     },
 
     /**
@@ -30,7 +48,9 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-
+        that.setData({
+            rangePage: 1
+        })
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
             let n = scene.indexOf('=');
@@ -42,6 +62,31 @@ Page({
                 actId: options.actId,
             })
         }
+        // 显示其他功能按钮
+        if (wx.getStorageSync('loginCode') == 1) {
+            this.setData({
+                actionOptions: false
+            })
+            getApp().request({
+                url: 'org/music_list',
+                data: {},
+                method: 'post',
+                success: res => {
+                    that.setData({
+                        musicClass: res.data.data,
+                        musicData: res.data.data[0].list
+                    })
+                }
+            })
+        } else {
+            this.setData({
+                actionOptions: true
+            })
+        }
+        // 请求页面数据
+        that.getPapeData();
+        //获取活动排行榜
+        that.getRange()
     },
 
     /**
@@ -56,13 +101,6 @@ Page({
      */
     onShow: function() {
         let that = this;
-        that.setData({
-            rangePage:1
-        })
-        // 请求页面数据
-        that.getPapeData();
-        //获取活动排行榜
-        that.getRange()
     },
 
     /**
@@ -70,7 +108,9 @@ Page({
      */
     onHide: function() {
         let that = this;
-        clearInterval(that.data.timer)
+        // console.log('hidden')
+        // clearInterval(that.data.timer)
+        // innerAudioContext.stop()
     },
 
     /**
@@ -79,6 +119,7 @@ Page({
     onUnload: function() {
         let that = this;
         clearInterval(that.data.timer)
+        innerAudioContext.stop()
     },
 
     /**
@@ -106,9 +147,12 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    // onShareAppMessage: function() {
-
-    // },
+    onShareAppMessage: function() {
+        let that = this;
+        return {
+            path: 'pages/index/index?pageId=22&actId=' + that.data.actId
+        }
+    },
     //查看图片
     previewImages: function (e) {
         let that = this;
@@ -165,7 +209,7 @@ Page({
                 if (countDownValue <= 0){
                     clearInterval(timer)
                 }
-
+                console.log('执行中...')
                 that.setData({
                     countDown: countDown,
                 })
@@ -341,10 +385,31 @@ Page({
                             })
                         }
                     }
+                    // 背景音乐
+                    innerAudioContext.src = res.data.data.music,
+                        innerAudioContext.play();
+                    innerAudioContext.onPlay(() => {
+                        that.setData({
+                            showMusic: false,
+                            animationClass: 'musicControl viewRotate'
+                        })
+                    })
+                    innerAudioContext.onStop(() => {
+                        that.setData({
+                            animationClass: 'musicControl'
+                        })
+                    })
+                    innerAudioContext.onEnded(()=>{
+                        that.setData({
+                            animationClass: 'musicControl'
+                        })
+                    })
                     that.setData({
                         pageData: res.data.data,
                         nameInfo: nameInfo,
                         userId: res.data.data.self_joiner_id,
+                        bannerImage: res.data.data.banner_image_url,
+                        backgroundImage: res.data.data.bg_image_url,
                     })
                     if (res.data.data.self_joiner_id != 0){
                         that.setData({
@@ -365,5 +430,238 @@ Page({
                 }
             }
         })
-    }
+    },
+    isOptions: function () {
+        this.setData({
+            isOption: !this.data.isOption
+        })
+    },
+    switchModel: function (e) {
+        if (e.currentTarget.dataset.url == 'org/music_list') {
+            this.setData({
+                isMusicClass: false,
+                isModel: true,
+                isCommon: false
+            })
+        } else if (e.currentTarget.dataset.url == 'org/banner_list') {
+            this.setData({
+                isMusicClass: true,
+                isModel: false,
+                isCommon: false
+            })
+        }
+
+        getApp().request({
+            url: e.currentTarget.dataset.url,
+            data: {},
+            method: 'post',
+            success: res => {
+                this.setData({
+                    musicClass: res.data.data,
+                    musicData: res.data.data[0].list
+                })
+            }
+        })
+    },
+    // 选择背景图片
+    upDataImg: function (e) {
+        let that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: function (res) {
+                that.setData({
+                    backgroundImage: res.tempFilePaths[0],
+                    bottomOption: false,
+                    isCommon: true,
+                })
+            }
+        })
+    },
+    // 编辑功能
+    toEditPage: function (e) {
+        let that = this;
+        wx.navigateTo({
+            url: '../collectActEdit/collectActEdit?isEdit=1&actId=' + e.currentTarget.dataset.id,
+        })
+    },
+    // 取消功能
+    cancelImage: function (e) {
+        let that = this;
+        if (e.currentTarget.dataset.type == 'bgImage') {
+            that.setData({
+                backgroundImage: this.data.pageData.bg_image_url,
+                bottomOption: true,
+            })
+        } else if (e.currentTarget.dataset.type == 'Banner') {
+            this.setData({
+                bannerImage: this.data.pageData.banner_image_url,
+                backgroundImage: this.data.pageData.bg_image_url,
+                backgroundMusic: this.data.pageData.music,
+                isCommon: true,
+                bottomOption: true,
+            })
+            innerAudioContext.src = that.data.backgroundMusic;
+            innerAudioContext.play()
+        }
+    },
+    // 确认功能
+    comfireSubmit: function (e) {
+        let that = this;
+        if (e.currentTarget.dataset.type == 'Banner') {
+            //更换模板
+            getApp().request({
+                url: 'org/edit_banner',
+                data: {
+                    act_id: that.data.actId,
+                    banner_image_url: that.data.bannerImage,
+                    tag: 'sugar',
+                },
+                method: 'post',
+                success: function (res) {
+                    if (Number(res.data.code) == 1) {
+                        wx.showToast({
+                            title: '更换成功',
+                            icon: 'none',
+                        })
+                        // 更换背景音乐
+                        getApp().request({
+                            url: 'org/edit_music',
+                            data: {
+                                act_id: that.data.actId,
+                                music_id: that.data.musicId,
+                                tag: 'sugar',
+                            },
+                            method: 'post',
+                            success: function (res) {
+                                if (Number(res.data.code) == 1) {
+                                }
+                            }
+                        });
+                        that.setData({
+                            isCommon: true,
+                            bottomOption: true,
+                        })
+                    } else if (Number(res.data.code) == 0) {
+                        console.log(res.data.msg)
+                    }
+
+                }
+            })
+        } else if (e.currentTarget.dataset.type == 'bgImage') {
+            // 更换背景图
+            let imagePath = that.data.backgroundImage
+
+            var header = {};
+            header.Cookie = wx.getStorageSync('cookie');
+            header['Content-Type'] = 'multipart/form-data';
+
+            wx.uploadFile({
+                url: getApp().getHost() + 'upload',
+                filePath: imagePath,
+                name: 'file',
+                header: header,
+                success: function (res) {
+                    let r = JSON.parse(res.data)
+                    if (Number(r.code) == 1) {
+                        that.setData({
+                            coverImageID: r.data.imageId,
+                        });
+                        getApp().request({
+                            url: 'org/edit_background',
+                            data: {
+                                act_id: that.data.actId,
+                                tag: 'sugar',
+                                bg_image_url: r.data.res,
+                            },
+                            method: 'post',
+                            success: function (res) {
+                                if (Number(res.data.code) == 1) {
+                                    wx.showToast({
+                                        title: '更换成功',
+                                        icon: 'success',
+                                        success: function () {
+                                            that.setData({
+                                                isCommon: true,
+                                                bottomOption: true,
+                                            })
+                                        }
+                                    })
+                                }
+                            }
+                        })
+
+                    } else {
+                        wx.showToast({
+                            title: r.msg,
+                            icon: 'none',
+                        })
+                    }
+                }
+            })
+        }
+    },
+    switchTabs: function (e) {
+        let that = this;
+        for (let i = 0; i < this.data.musicClass.length; i++) {
+            if (e.currentTarget.dataset.name == this.data.musicClass[i].name) {
+                this.setData({
+                    musicData: this.data.musicClass[i].list,
+                    musicClassIndex: i
+                })
+            }
+        }
+    },
+    // 选择音乐
+    changeMusic: function (e) {
+        let that = this;
+        this.setData({
+            backgroundMusic: e.currentTarget.dataset.music,
+            musicId: e.currentTarget.dataset.musicid,
+            musicNum: e.currentTarget.dataset.index,
+        })
+        innerAudioContext.src = that.data.backgroundMusic;
+        innerAudioContext.play()
+
+    },
+    // 切换模板
+    changeModel: function (e) {
+        let that = this;
+        if (that.data.scrollWidth > 0) {
+            wx.pageScrollTo({
+                scrollTop: 0,
+            })
+        }
+        this.setData({
+            bannerImage: e.currentTarget.dataset.image,
+            backgroundImage: e.currentTarget.dataset.bimage,
+            modelNum: e.currentTarget.dataset.index
+        })
+    },
+    //停止播放音乐
+    stopMusic: function () {
+        let that = this;
+        innerAudioContext.stop()
+    },
+    // 获取滚动高度
+    onPageScroll: function (e) {
+        let that = this;
+        that.setData({
+            scrollWidth: e.scrollTop,
+        })
+    },
+    //停止/播放音乐
+    isStopMusic: function () {
+        let that = this;
+        that.setData({
+            isStopMusic: !that.data.isStopMusic,
+        })
+        if (that.data.isStopMusic) {
+            innerAudioContext.src = that.data.backgroundMusic;
+            innerAudioContext.play()
+        } else {
+            innerAudioContext.stop()
+        }
+    },
 })

@@ -180,3 +180,8 @@
         <view class='getSugarBtn' bindtap='closeSugars'>确认</view>
     </view>
 </view>
+<!-- 返回主页面 -->
+<view class='toIndex' bindtap='toIndex' hidden='{{isIndex}}'>
+    <view>返回</view>
+    <view>首页</view>
+</view>

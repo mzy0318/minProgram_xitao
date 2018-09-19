@@ -36,7 +36,7 @@ Page({
                 url: 'http://cdn.zhihuizhaosheng.com/app-static/sugar/04.png'
             },{
                 name: 'blueberry',
-                url: '.http://cdn.zhihuizhaosheng.com/app-static/sugar/05.png'
+                url: 'http://cdn.zhihuizhaosheng.com/app-static/sugar/05.png'
             },
         ],
         isExchange:true,
@@ -47,7 +47,8 @@ Page({
         className: 'moreData',
         btnText: '更多',
         classNameR: 'moreData',
-        btnTextR: '更多'
+        btnTextR: '更多',
+        isIndex:true,
     },
 
     /**
@@ -62,10 +63,12 @@ Page({
         if(options.isShare == 0){
             that.setData({
                 isShare: false,
+                isIndex:true,
             })
         } else if (options.isShare == 1){
             that.setData({
                 isShare: true,
+                isIndex: false
             })
         }
     },
@@ -149,6 +152,12 @@ Page({
         let that = this;
         wx.previewImage({
             urls: [e.currentTarget.dataset.url],
+        })
+    },
+    // 返回首页
+    toIndex:function(){
+        wx.switchTab({
+            url: '../../index/index',
         })
     },
     // 倒计时
@@ -375,6 +384,7 @@ Page({
                             for (let j = 0; j < that.data.sugarList.length;j++){
 
                                 if (res.data.data.sugar_array[i] == that.data.sugarList[j].name){
+
                                     res.data.data.sugar_array[i] = that.data.sugarList[j].url;
                                 }
                             }

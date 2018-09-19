@@ -1,7 +1,7 @@
 <view class='infoBannerImage'>
-    <image src='{{pageData.banner_image_url}}' mode='scaleToFill'></image>
+    <image src='{{bannerImage}}' mode='scaleToFill'></image>
 </view>
-<view class='infoBackImage' style='background-image:url({{pageData.bg_image_url}})'>
+<view class='infoBackImage' style='background-image:url({{backgroundImage}})'>
     <!-- 活动图片 -->
     <view class='laudActImage'>
         <view class='laudActImageTitle'><text>{{pageData.title}}</text></view>
@@ -129,3 +129,49 @@
         <view class='closeDiv' bindtap='showJoiner' data-id='0'>×</view>
     </view>
 </view>
+<!-- 其他功能按钮 -->
+<view class='otherOptionWrap' hidden='{{actionOptions}}'>
+    <view bindtap='isOptions' class='otherOptions'>
+        <image src='{{isOption?"../../../icon/menu.png":"../../../icon/close.png"}}' mode='scaleToFill'></image>
+    </view>
+    <view class='otherOptionsChild' hidden='{{isOption}}'>
+        <view bindtap='switchModel' data-url='org/banner_list'>更换模版</view>
+        <view bindtap='upDataImg' data-type='background'>更换背景</view>
+        <view bindtap='switchModel' data-url='org/music_list' >背景音乐</view>
+        <view bindtap='toEditPage' data-id='{{pageData.id}}'>编辑</view>
+    </view>
+</view>
+<!-- 其他功能模板 -->
+<view class='switchBackgroundImage' hidden='{{bottomOption}}'>
+    <view bindtap='cancelImage' data-type='bgImage'>取消</view>
+    <view data-id='{{pageData.id}}' bindtap='comfireSubmit' data-type='bgImage' data-acttag='{{}}'>确认</view>
+</view>
+<!-- 模板 -->
+<view class='switchMusic' hidden='{{isCommon}}'>
+    <view class='switchMusicTitle'>
+        <block wx:for='{{musicClass}}' >
+            <view data-name='{{item.name}}' class='{{musicClassIndex==index?"switchMusicBorder":""}}' bindtap='switchTabs' >{{item.name}}</view>
+        </block>
+    </view>
+    <!--音乐列表  -->
+    <view class='switchMusicContent' hidden='{{isMusicClass}}'  >
+        <view wx:for='{{musicData}}' data-music='{{item.url}}' style='color:{{musicNum==index?"#3983FE":"#000"}}' data-index='{{index}}' data-musicid='{{item.id}}' bindtap='changeMusic'>{{item.name}}</view>
+    </view>
+    <!--模板列表  -->
+    <view class='switchModelContent' hidden='{{isModel}}' scroll-x >
+        <scroll-view class='switchModelContentChild' scroll-x style='width:{{musicData.length*226}}rpx;'>
+            <view class='modelContentChildContent' wx:key='{{index}}' wx:for='{{musicData}}' wx:key='{{index}}' style='border-color:{{index==modelNum?"#3A87FE":"#fff"}}' data-image='{{item.image}}' data-index='{{index}}' data-bimage='{{item.bg}}' bindtap='changeModel'>
+                <view>{{item.name}}</view>
+                <view>
+                    <image src='{{item.image}}' mode='scaleToFill' />
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class='switchMusicOptions'>
+        <view bindtap='cancelImage' data-type='Banner'>取消</view>
+        <view bindtap='comfireSubmit' data-id='{{pageData.id}}' data-type='Banner'>确认</view>
+        <view hidden='{{isMusicClass}}' bindtap='stopMusic'>不播放音乐</view>
+    </view>
+</view>
+<view class='{{animationClass}}' animation='{{animationData}}' hidden='{{showMusic}}' bindtap='isStopMusic'><text class='iconfont icon-music fontStyleT'></text></view>
