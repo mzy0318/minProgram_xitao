@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='rankImage'>
     <image src='../../../icon/rankList.png' mode='scaleToFill'></image>
 </view>

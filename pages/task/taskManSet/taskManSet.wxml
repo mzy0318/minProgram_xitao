@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='manSetWrap' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='manSetTop'><text>◆ </text><text>{{item.title}}</text></view>
     <view class='manSetBottom'>

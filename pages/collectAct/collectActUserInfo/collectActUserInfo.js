@@ -49,6 +49,7 @@ Page({
         classNameR: 'moreData',
         btnTextR: '更多',
         isIndex:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -217,6 +218,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     wx.showToast({
                         title: res.data.data,
@@ -263,6 +273,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         wx.stopPullDownRefresh()
                         if (res.data.data.list.length > 0) {
@@ -315,6 +334,15 @@ Page({
             },
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     if(res.data.data.list.length>0){
                         for (let i = 0; i < res.data.data.list.length;i++){
@@ -364,6 +392,15 @@ Page({
             },
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,
@@ -430,6 +467,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         rangeData.push(...res.data.data.list)
                         if (rangeData.length >= that.data.rangePage*10) {
@@ -465,6 +511,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     if (res.data.data.list.length >= 10){
                         that.setData({

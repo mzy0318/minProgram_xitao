@@ -9,7 +9,8 @@ Page({
         statusText: '活动进行中',
         statusColor: 'green',
         pageNum:1,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -92,6 +93,15 @@ Page({
                 },
                 method: 'get',
                 success: (res) => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         wx.stopPullDownRefresh();
                         for (let i = 0; i < res.data.data.list.length; i++) {
@@ -137,6 +147,15 @@ Page({
             },
             method:'get',
             success:(res) => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     
                     for (let i = 0; i < res.data.data.list.length; i++) {

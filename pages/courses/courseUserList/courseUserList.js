@@ -49,6 +49,7 @@ Page({
         ],
         xinData:'',
         btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -126,6 +127,15 @@ Page({
             data: e.detail.value,
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.showToast({
                         title: '添加成功',
@@ -182,6 +192,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         for (let i = 0; i < res.data.data.length; i++) {
                             res.data.data[i].create_time = utils.formatTime(new Date(res.data.data[i].create_time * 1000));
@@ -224,6 +243,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     wx.stopPullDownRefresh()
                     for (let i = 0; i < res.data.data.length; i++) {

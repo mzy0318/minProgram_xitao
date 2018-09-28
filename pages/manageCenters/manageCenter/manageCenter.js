@@ -134,6 +134,7 @@ Page({
         ],
         phone: '',
         pwd: '',
+        isFrozen: 'empty',
     },
 
     /**
@@ -275,6 +276,15 @@ Page({
                 data: senddata,
                 method: 'post',
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     wx.setStorageSync('loginCode', res.data.code)
                     if (Number(res.data.code) == 1) {
                         wx.setNavigationBarTitle({
@@ -366,6 +376,15 @@ Page({
             data: {},
             method: 'post',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.setStorageSync('loginCode', 3);
                     wx.setNavigationBarTitle({

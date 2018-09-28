@@ -22,6 +22,7 @@ Page({
         nameInfoId: [],
         bannerImage:'',
         actId:'',
+        isFrozen: 'empty',
     },
 
     /**

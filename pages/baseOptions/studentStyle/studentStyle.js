@@ -6,6 +6,7 @@ Page({
      */
     data: {
         imgData:null,
+        isFrozen: 'empty',
     },
 
     /**
@@ -16,7 +17,15 @@ Page({
             url: 'school/student',
             data: {},
             success: res => {
-                console.log(res)
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 this.setData({
                     imgData:res.data.data
                 })

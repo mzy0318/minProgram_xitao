@@ -1,3 +1,5 @@
+<import src='../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='stuCenterTop'>
     <view class='stuCenterTopInfo'>
         <view class='stuCenterTopLeft'>

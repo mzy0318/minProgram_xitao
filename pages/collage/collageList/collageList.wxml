@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <view class='collageListContent' bindtap='toCollageInfo' wx:for='{{pageData}}' wx:key='{{item.id}}' data-actid='{{item.id}}' data-acttag='{{item.act_tag}}'>
     <view class='collageListTop'>

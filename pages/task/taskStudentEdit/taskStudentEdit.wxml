@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <!-- 头像 -->
 <view class='teacherEditImage'><image bindtap='chooseImage' src='{{coverImage}}' mode='scaleToFill'></image></view>
 <!-- 表单 -->

@@ -18,6 +18,7 @@ Page({
         isZanList:true,
         audioUrl:'',
         btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -109,6 +110,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         let zanList = res.data.data.thumb_person.split(',');
                         pageData.push(...res.data.data.comments);
@@ -242,6 +252,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,

@@ -1,5 +1,6 @@
 @import '../../../utils/iconFont.wxss';
 @import '../../../templates/moreData/moreData.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 page{
     padding-bottom:20rpx;
 }

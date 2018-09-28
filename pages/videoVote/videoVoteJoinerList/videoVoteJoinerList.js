@@ -9,7 +9,8 @@ Page({
         pageNum:1,
         actId:'',
         className: 'moreData',
-        btnText: '更多'
+        btnText: '更多',
+        isFrozen: 'empty',
     },
 
     /**
@@ -119,6 +120,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         wx.stopPullDownRefresh()
                         pageData.push(...res.data.data.list)
@@ -159,6 +169,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     if(res.data.data.list.length >= 10){
                         that.setData({

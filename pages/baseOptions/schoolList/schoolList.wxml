@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='schListInfo'>
     <view class='schListContent' wx:for='{{pageData}}' wx:key='{{index}}'>
         <view class='schListInfoImage'><image src='{{item.cover.url}}' mode='scaleToFill'></image></view>

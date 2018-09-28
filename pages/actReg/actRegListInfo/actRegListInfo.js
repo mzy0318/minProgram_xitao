@@ -12,6 +12,7 @@ Page({
         btnClass:'',
         statusClass:'',
         actId:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -54,6 +55,15 @@ Page({
                 id: that.data.actId,
             },
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Date.parse(res.data.data.end_time) > new Date().valueOf()) {
                     that.setData({
                         btnText: '我要报名',
@@ -80,7 +90,7 @@ Page({
                 res.data.data.cover_image.url = utils.rect(res.data.data.cover_image.url,375,175)
                 that.setData({
                     pageData: res.data.data,
-                    status: res.data.data.time_status
+                    status: res.data.data.time_status,
                 })
             }
         })

@@ -16,6 +16,7 @@ Page({
         isEdit:'',
         id:'',
         isSave:0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -35,6 +36,15 @@ Page({
                     id: Number(options.id)
                 },
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     that.setData({
                         pageData: res.data.data,
                         videoUrlO: res.data.data.video.url ? res.data.data.video.url:'',

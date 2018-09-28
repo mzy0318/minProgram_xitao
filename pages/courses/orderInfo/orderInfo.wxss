@@ -1,4 +1,5 @@
 /* pages/orderInfo/orderInfo.wxss */
+@import '../../../templates/frozen/frozen.wxss';
 .orderInfoWrap{
   width:750rpx;
   height:1207rpx;

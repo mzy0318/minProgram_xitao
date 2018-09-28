@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='homeImage'><image src='{{baseInfo.avatar_url}}' mode='scaleToFill'></image></view>
 <view class='homeName'>{{baseInfo.realname}}</view>
 <view class='homeOptions'>

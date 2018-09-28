@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='manListSearch'>
     <input placeholder='请输入课程标题'  type='text' confirm-type='search' bindconfirm='inputkey'></input>
 </view>

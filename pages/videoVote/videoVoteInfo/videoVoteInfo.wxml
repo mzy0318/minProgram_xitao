@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <swiper indicator-dots autoplay>
     <swiper-item wx:for='{{pageData.ad}}' wx:key='{{item.id}}'>
         <view class='voteInfoImage'><image src='{{item.url}}' mode='aspectFill'></image></view>

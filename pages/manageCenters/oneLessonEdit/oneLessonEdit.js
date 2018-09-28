@@ -21,6 +21,7 @@ Page({
         nameInfo: [],
         nameInfoId: [],
         isCover: 'none',
+        isFrozen: 'empty',
     },
 
     /**
@@ -70,6 +71,15 @@ Page({
                     id: that.data.actNiceId
                 },
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     let joinInfo = [];
                     let joinInfoId = [];
                     let actImage = [];
@@ -195,6 +205,15 @@ Page({
                 data: sendData,
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         wx.navigateTo({
                             url: '../lessonCourseEdit/lessonCourseEdit?actNiceId=' + res.data.data.act_nice_id + '&courseId=undefined',
@@ -247,6 +266,15 @@ Page({
                     data: sendData,
                     method: 'post',
                     success: function(res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
                             wx.showToast({
                                 title: '编辑成功',

@@ -18,6 +18,7 @@ Page({
         actId: '',
         isForm: true,
         isCover:'none',
+        isFrozen: 'empty',
     },
 
     /**
@@ -44,6 +45,15 @@ Page({
                 },
                 method: 'get',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     let actImg = [];
                     let actId = [];
                     let joinInfo = [];
@@ -280,6 +290,15 @@ Page({
             method: 'post',
             data: sendData,
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     // wx.navigateTo({
                     //     url: '../../actReg/actRegManList/actRegManList',

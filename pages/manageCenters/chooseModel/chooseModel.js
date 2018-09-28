@@ -9,6 +9,7 @@ Page({
         pageData:'',
         pageTheme:'',
         classId:0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -21,6 +22,15 @@ Page({
             data:{},
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 res.data.data.catalog.unshift({
                     name:'全部',
                     list:res.data.data.theme

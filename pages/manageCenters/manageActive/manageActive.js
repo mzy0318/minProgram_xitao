@@ -13,6 +13,7 @@ Page({
         coverImage:'',
         del:1,
         isData:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -56,6 +57,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(pageType) == 1) {
                     if (res.data.data.list.length <= 0){
                         that.setData({
@@ -127,6 +137,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(pageType) == 1) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].coverImage = res.data.data.list[i].cover.url
@@ -172,7 +191,15 @@ Page({
                 },
                 method: 'post',
                 success: res => {
-
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     // this.setData({
                     //     pageData: res.data.data.list
                     // })
@@ -243,6 +270,15 @@ Page({
                 },
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(Number(res.data.code)==1){
                         wx.showToast({
                             title: '删除成功',
@@ -270,6 +306,15 @@ Page({
                 },
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         wx.showToast({
                             title: '删除成功',

@@ -1,4 +1,5 @@
-@import '../../../utils/iconFont.wxss'; 
+@import '../../../utils/iconFont.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 .killPriceListContet{
     padding-top:20rpx;
     width:710rpx;

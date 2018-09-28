@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='userListWrap'>
     <view class='userListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-pagedata='{{item}}' wx:key='{{index}}'>
         <view class='contentLeft'>

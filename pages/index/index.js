@@ -143,12 +143,14 @@ Page({
                 backgroundColor: '#FAC963'
             }
         ],
+        isFrozen:'',
     },
     //事件处理函数
     onLoad: function (options) {
         let that = this;
         // 是否为教师
-        wx.setStorageSync('isTeacher', 0)
+        wx.setStorageSync('isTeacher', 0);
+        
         //获取设备高度
         wx.setStorageSync('devHeight', wx.getSystemInfoSync().windowHeight);
         that.setData({
@@ -305,6 +307,15 @@ Page({
             method: "post",
             data: {},
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 wx.setStorageSync('schoolModel', res.data.data.template_id);
                 // 选择模板
                 if (Number(wx.getStorageSync('schoolModel')) == 2) {
@@ -369,7 +380,7 @@ Page({
                     }
                 }
                 that.setData({
-                    pageData: res.data.data
+                    pageData: res.data.data,
                 })
                 wx.setNavigationBarTitle({
                     title: res.data.data.app_name,
@@ -378,6 +389,8 @@ Page({
                     frontColor: res.data.data.navi_font_color,
                     backgroundColor: res.data.data.navi_background_color,
                 })
+                console.log(res)
+                
                 wx.stopPullDownRefresh()
             }
         })

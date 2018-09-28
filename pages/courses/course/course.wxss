@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 page{
     background: linear-gradient(to bottom, #fff3b9, #d7f5fd);
     padding-bottom: 20rpx;

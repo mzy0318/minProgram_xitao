@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='pricePersonWrap' style='background-image:url({{pageData.bg_image_url}})'>
     <view class='killPriceBanner'>
         <image src='{{pageData.banner_image_url}}' mode='scaleToFill' />

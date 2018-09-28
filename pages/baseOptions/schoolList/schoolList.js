@@ -6,6 +6,7 @@ Page({
      */
     data: {
         pageData:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -18,6 +19,15 @@ Page({
             data:{},
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 that.setData({
                     pageData:res.data.data,
                 })
@@ -63,6 +73,15 @@ Page({
             data: {},
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 that.setData({
                     pageData: res.data.data,
                 })

@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='listInfoWrap'>
     <view class='listInfoUser'>
         <view class='listInfoUserTop'>

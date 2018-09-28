@@ -9,7 +9,8 @@ Page({
         pageData: '',
         pageNum: 1,
         isMore:true,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -97,6 +98,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         res.data.data.list = utils.map(res.data.data.list, function (one) {
                             one.banner_image_url = utils.square(one.banner_image_url, 100)
@@ -138,6 +148,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     res.data.data.list = utils.map(res.data.data.list, function (one) {
                         one.banner_image_url = utils.square(one.banner_image_url, 100)

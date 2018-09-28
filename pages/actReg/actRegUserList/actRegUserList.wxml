@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <view class='actRegContent' wx:for='{{pageData}}' bindtap='toInfoPage' data-actid='{{item.id}}' wx:key='{{item.id}}'>
     <view class='actRegImage'><image src='{{item.cover.url}}' mode='aspectFill'></image></view>

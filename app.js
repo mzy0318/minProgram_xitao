@@ -161,7 +161,6 @@ App({
                 if (r.statusCode == 401) {
                     if (r.data.is_org) {
                         //跳转到登录页面
-                        // console.log('r',r)
                         wx.setStorageSync('loginCode', 0);
                         wx.switchTab({
                             url: '/pages/manageCenters/manageCenter/manageCenter',
@@ -172,7 +171,13 @@ App({
                         })
                     }
                 } else {
-                    success(r)
+                    if (r.data.code == 1 || r.data.code == 0){
+                        r.data['frozen'] = 0
+                        success(r)
+                    }else if(r.data.code == 2){
+                        r.data['frozen'] = 1
+                        success(r)
+                    }
                 }
             }
         });

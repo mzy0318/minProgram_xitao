@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='lessonEditWrap'>
     <form bindsubmit="formSubmit">
         <view class='empty'></view>

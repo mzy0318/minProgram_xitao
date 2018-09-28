@@ -1,4 +1,5 @@
 /* pages/studentStyle/studentStyle.wxss */
+@import '../../../templates/frozen/frozen.wxss';
 .wrapView{
   width:720rpx;
   margin:0rpx auto 10rpx;

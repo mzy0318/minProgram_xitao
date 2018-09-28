@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='enCodeImage' bindtap='priveImage'>
     <image src='{{videoImage}}' mode='widthFix'></image>
 </view>

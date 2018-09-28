@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='collageEditWrap'>
     <form bindsubmit="formSubmit">
         <view class='collageEditOne'>

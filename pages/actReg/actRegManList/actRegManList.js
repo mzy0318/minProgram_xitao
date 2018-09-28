@@ -8,7 +8,8 @@ Page({
     data: {
         pageData: '',
         pageNum: 1,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -90,6 +91,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.showToast({
                         title: '删除成功',
@@ -144,6 +154,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         for (let i = 0; i < res.data.data.length; i++) {
                             res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
@@ -187,6 +206,16 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
+                console.log('isFrozen',that.data.isFrozen)
                 if(res.data.code == 1){
                     for (let i = 0; i < res.data.data.length; i++) {
                         res.data.data[i].end_time = utils.formatTime(new Date(res.data.data[i].end_time * 1000))
@@ -205,7 +234,7 @@ Page({
                         })
                     }
                     that.setData({
-                        pageData: res.data.data
+                        pageData: res.data.data,
                     })
                     wx.stopPullDownRefresh();
                 } else if (res.data.code == 0){
@@ -214,7 +243,7 @@ Page({
                         title: res.code.msg,
                         icon:'none',
                     })
-                }
+                } 
             }
         })
     }

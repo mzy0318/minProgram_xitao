@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='signUpWrap' hidden='{{isShow}}'>
     <form bindsubmit='submitInfo' >
         <view class='signUpName'>

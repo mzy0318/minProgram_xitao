@@ -12,7 +12,8 @@ Page({
         actReg:true,
         personInfo:'',
         className: 'moreDataed',
-        btnText: '没有了'
+        btnText: '没有了',
+        isFrozen: 'empty',
     },
 
     /**
@@ -123,6 +124,15 @@ Page({
                     page: that.data.pageNum,
                 },
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(res.data.code == 1){
                         pageData.push(...res.data.data.list)
                         if (pageData.length >= that.data.pageNum * 10) {
@@ -162,6 +172,15 @@ Page({
                 page: that.data.pageNum,
             },
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     if (res.data.data.list.length >= 10) {
                         that.setData({

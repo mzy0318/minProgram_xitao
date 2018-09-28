@@ -1,6 +1,7 @@
 @import '../../../utils/iconFont.wxss';
 @import '../../../utils/iconFontO.wxss';
 @import '../../../templates/moreData/moreData.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 
 .listInfoWrap{
     width:750rpx;

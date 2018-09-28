@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='signUpWrap' hidden='{{isShow}}'>
     <view class='signUpName'>
         <view class='signUpNameTitle'>活动名称:</view>

@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 page{
     background:#F5F5F5;
     position:relative;

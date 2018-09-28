@@ -1,4 +1,6 @@
 <!-- 页面功能 -->
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='manListOpt' bindtap='toback'>返回</view>
 <!-- 内容 -->
 <view class='manListContent'  wx:for='{{pageData}}' wx:key='id' data-actid='{{item.id}}'>

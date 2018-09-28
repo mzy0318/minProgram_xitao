@@ -8,7 +8,8 @@ Page({
     data: {
         pageData:'',
         pageNum:1,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -97,6 +98,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         if (res.data.data.length > 0) {
                             for (let i = 0; i < res.data.data.length; i++) {
@@ -136,6 +146,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     if(res.data.data.length > 0){
                         for (let i = 0; i < res.data.data.length; i++) {

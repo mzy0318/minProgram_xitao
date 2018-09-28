@@ -1,4 +1,5 @@
 @import '../../../utils/iconFont.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 page{
     background:#fff;
     padding-bottom:120rpx;

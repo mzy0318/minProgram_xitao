@@ -1,5 +1,6 @@
 // pages/killPrices/killPersonList/killPersonList.js
 let util = require('../../../utils/util.js')
+
 Page({
 
     /**
@@ -12,7 +13,8 @@ Page({
         showTitle: true,
         killPage:1,
         collagePage:1,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -29,6 +31,15 @@ Page({
                     page: that.data.killPage
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 0) {
                         wx.stopPullDownRefresh()
                     }else{
@@ -65,6 +76,15 @@ Page({
                     page:that.data.collagePage,
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 0) {
                         wx.stopPullDownRefresh()
                     }else{
@@ -141,6 +161,15 @@ Page({
                     page: that.data.killPage,
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 0) {
                         wx.stopPullDownRefresh()
                     }else{
@@ -180,6 +209,15 @@ Page({
                     page: that.data.collagePage,
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(res.data.code == 0){
                         wx.stopPullDownRefresh()
                     }else{
@@ -291,6 +329,15 @@ Page({
                         page: that.data.killPage
                     },
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         let data = res.data.data;
                         wx.setNavigationBarTitle({
                             title: '砍价报名列表',
@@ -345,6 +392,15 @@ Page({
                         page: that.data.collagePage,
                     },
                     success: res => {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         let data = res.data.data;
                         wx.setNavigationBarTitle({
                             title: '我的私人拼团',

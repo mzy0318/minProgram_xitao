@@ -53,6 +53,7 @@ Page({
         className: 'moreData',
         btnText: '更多',
         isMoreData:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -69,6 +70,15 @@ Page({
                 data: {},
                 method: 'post',
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     that.setData({
                         musicClass: res.data.data,
                         musicData: res.data.data[0].list
@@ -83,10 +93,9 @@ Page({
 
         if (options.scene != undefined){
             let scene = decodeURIComponent(options.scene);
-            let sceneArr = scene.split(':')
+            let n = scene.indexOf('=');
             that.setData({
-                actId: sceneArr[1],
-                actTag: sceneArr[3],
+                actId: scene.slice(n + 1),
             })
         } else if (options.scene == undefined){
             that.setData({
@@ -97,7 +106,7 @@ Page({
         
         let pages = getCurrentPages()
         let url = pages[pages.length - 1].route
-        let mzy = 'actid:' + that.data.actId + ':actTag:' + that.data.actTag;
+        let mzy = 'actid=' + that.data.actId;
         that.setData({
             encodeID: 'https://www.zhihuizhaosheng.com/scene_code?org_id=' + getApp().getExtConfig().orgId + '&page=' + url + '&scene=' + mzy
         })
@@ -239,6 +248,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         for (let i = 0; i < res.data.data.list.length; i++) {
                             res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
@@ -291,6 +309,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].create_time = utils.formatTime(new Date(res.data.data.list[i].create_time * 1000))
@@ -623,6 +650,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         collageData.push(...res.data.data.list);
                         if (collageData.length >= that.data.rangePage * 10) {
@@ -665,6 +701,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.data.list.length > 0){
                     that.setData({
                         isMoreData:false
@@ -702,6 +747,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh()
                     // 背景音乐

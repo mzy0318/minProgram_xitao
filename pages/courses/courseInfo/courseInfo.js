@@ -9,6 +9,7 @@ Page({
         isShow: true,
         pageData:'',
         actId:'',
+        isFrozen: 'empty',
     },
     /**
      * 生命周期函数--监听页面加载
@@ -35,6 +36,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 that.setData({
                     pageData:res.data.data
                 })
@@ -114,6 +124,15 @@ Page({
                 data: e.detail.value,
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         wx.showToast({
                             title: '预约成功',

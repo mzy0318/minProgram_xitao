@@ -10,6 +10,7 @@ Page({
         startTime:'',
         actId:'',
         joinId:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -29,6 +30,15 @@ Page({
                 joiner_id: that.data.joinId,
             },
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 this.setData({
                     personInfo:res.data.data,
                     startTime: util.formatTime(new Date(res.data.data.create_time*1000))

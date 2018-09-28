@@ -8,7 +8,8 @@ Page({
     data: {
         pageData: '',
         pageNum:1,
-        btnText:0
+        btnText:0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -97,6 +98,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     for (let i = 0; i < res.data.data.length; i++) {
                         res.data.data[i].end_time = utils.formatDateO(new Date(res.data.data[i].end_time * 1000));
                         res.data.data[i].cover.url = utils.rect(res.data.data[i].cover.url, 360, 165)
@@ -136,6 +146,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 for (let i = 0; i < res.data.data.length; i++) {
                     res.data.data[i].end_time = utils.formatDateO(new Date(res.data.data[i].end_time * 1000));
                     res.data.data[i].cover.url = utils.rect(res.data.data[i].cover.url, 360, 165)

@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='chooseModeWrap'>
     <view class='chooseModeClass'>
         <!-- <view class='chooseModeTitle borderColor' bindtap='switchTheme' data-name='全部'>全部</view> -->

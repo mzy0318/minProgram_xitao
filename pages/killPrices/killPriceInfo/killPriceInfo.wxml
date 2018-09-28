@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='killPriceInfoWrap' style='background-image:url({{backgroundImage}})'>
     <view class='killPriceBanner'>
         <image src='{{bannerImage}}' mode='scaleToFill' />

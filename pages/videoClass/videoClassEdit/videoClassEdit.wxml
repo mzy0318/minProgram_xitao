@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <form bindsubmit='submitData'>
     <view class='editTitle'>封面</view>
     <view class='editImage'>

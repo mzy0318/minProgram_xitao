@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 .listInfoBanner{
     width:750rpx;
     height:460rpx;

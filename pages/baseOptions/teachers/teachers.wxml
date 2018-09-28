@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='teacherWrap' style='background: linear-gradient(to top, {{bgColor}}, #fff);'>
     <swiper indicator-dots='{{true}}' circular='{{true}}' bindchange='switchBgcolor'>
         <swiper-item wx:for='{{teacherData}}' wx:key='{{index}}'  data-index='{{index}}'>

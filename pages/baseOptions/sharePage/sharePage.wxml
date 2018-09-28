@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='sharePageWrap'>
     <view class='sharePageInfo' bindtap='shareFriends' data-id='0'><image src='{{urlAddress}}'></image></view>
     <view class='sharePageAction'>点击预览大图,长按大图保存图片,分享朋友圈</view>

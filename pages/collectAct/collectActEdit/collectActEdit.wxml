@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <form bindsubmit='submitData' hidden='{{!isContent}}'>
     <!-- 主题模板 -->
     <view class='editTitle'>主题模板</view>

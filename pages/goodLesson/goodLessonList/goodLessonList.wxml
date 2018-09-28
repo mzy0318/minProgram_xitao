@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='lessonBanner'>
     <image src='http://cdn.zhihuizhaosheng.com/app-static/lesson_one_banner.png' mode='scaleToFill' />
 </view>

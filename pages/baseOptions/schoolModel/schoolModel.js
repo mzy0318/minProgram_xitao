@@ -6,6 +6,7 @@ Page({
      */
     data: {
         pageData:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -18,6 +19,15 @@ Page({
             method:'post',
             data:{},
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 that.setData({
                     pageData:res.data.data
                 })
@@ -74,7 +84,6 @@ Page({
 
     // },
     toModeInfo:function(e){
-        console.log('e.currentTarget.dataset', e.currentTarget.dataset)
         wx.navigateTo({
             url: '../schoolModelInfo/schoolModelInfo?name=' + e.currentTarget.dataset.name + '&id=' + e.currentTarget.dataset.id + '&url=' + e.currentTarget.dataset.url,
         })

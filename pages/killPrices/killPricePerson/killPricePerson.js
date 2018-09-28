@@ -26,6 +26,7 @@ Page({
         className: 'moreData',
         btnText: '更多',
         isMore:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -167,6 +168,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code)==1) {
                     wx.showToast({
                         title: '帮TA砍了' + res.data.data.reduce+'元',
@@ -235,6 +245,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 let widthV = '',widthP = '';
                 wx.stopPullDownRefresh()
                 //能否可能支付
@@ -309,6 +328,15 @@ Page({
                 },
                 method: 'post',
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         peopleDataList.push(...res.data.data.list)
                         if (peopleDataList.length >= that.data.rangPage * 10) {
@@ -351,6 +379,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh();
                     if(res.data.data.list.length > 0){
@@ -406,6 +443,15 @@ Page({
             data: sendData,
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 let pageInfo = JSON.stringify(res.data.data);
                 let respons = res;
                 if (Number(res.data.code) == 1) {

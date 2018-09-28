@@ -1,4 +1,6 @@
 <!--pages/orderInfo/orderInfo.wxml-->
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='orderInfoWrap'>
     <view class='orderInfoTitle'>
         [课程]{{pageData.title}}

@@ -15,7 +15,8 @@ Page({
         pageNum:1,
         isHot:true,
         className: 'moreDataed',
-        btnText: '没有了'
+        btnText: '没有了',
+        isFrozen: 'empty',
     },
 
     /**
@@ -32,6 +33,15 @@ Page({
                 page: that.data.pageNum,
             },
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.data.host_lesson.length <= 0){
                     that.setData({
                         isHot:true,
@@ -146,6 +156,15 @@ Page({
                     page: that.data.pageNum,
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.data.lesson.length >= 10) {
                         that.setData({
                             className: 'moreData',
@@ -178,6 +197,15 @@ Page({
                     catalog_id: e.currentTarget.dataset.index
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.data.lesson.length >= 10) {
                         that.setData({
                             className: 'moreData',
@@ -283,6 +311,15 @@ Page({
                         page: that.data.pageNum,
                     },
                     success: res => {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         lessonData.push(...res.data.data.lesson)
                         if (lessonData.length >= that.data.pageNum*10) {
                             that.setData({
@@ -315,7 +352,15 @@ Page({
                         catalog_id: index,
                     },
                     success: res => {
-
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         lessonData.push(...res.data.data.lesson)
                         if (lessonData.length >= that.data.pageNum * 10) {
                             that.setData({

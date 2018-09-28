@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <form bindsubmit='addCourse'>
     <!--课程设置-->
     <view class='courseEdit'>

@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='courseList' wx:for='{{pageData}}' wx:key='{{index}}'>
     <view class='courseListLeft' bindtap='toIndex'><image src='{{item.cover.url}}' mode='aspectFill'></image></view>
     <view class='courseListRight'>

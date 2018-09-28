@@ -20,6 +20,7 @@ Page({
         teacher: [],
         teacherId: [],
         pageData: '',
+        isFrozen: 'empty',
     },
 
     /**
@@ -45,6 +46,15 @@ Page({
                 },
                 method: 'get',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         let teacher = that.data.teacher;
                         let teacherId = that.data.teacherId;
@@ -92,6 +102,15 @@ Page({
             data: '',
             method: 'get',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     that.setData({
                         teacherList: res.data.data.teachers
@@ -283,6 +302,15 @@ Page({
             data: sendData,
             method: 'post',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
                         title: title,

@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 .modelTitle{
     width:750rpx;
     line-height:80rpx;

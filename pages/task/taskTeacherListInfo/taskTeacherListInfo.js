@@ -18,6 +18,7 @@ Page({
         scoreNum: '',
         note: '',
         scoreData: '',
+        isFrozen: 'empty',
     },
 
     /**
@@ -180,6 +181,15 @@ Page({
             data: sendData,
             method: 'post',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
                         title: '正在修改',
@@ -233,6 +243,15 @@ Page({
             },
             method: 'get',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     res.data.data.create_time = formateTime.formatTime(new Date(res.data.data.create_time * 1000));
                     res.data.data.avatar_url = formateTime.rect(res.data.data.avatar_url,100,100)

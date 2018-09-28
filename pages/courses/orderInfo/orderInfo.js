@@ -13,6 +13,7 @@ Page({
         isActive: '', //是不可以添加
         addClassName: 'orderInfoNumAdd',
         isAllow: '',
+        isFrozen: 'empty',
     },
 
     /**
@@ -33,7 +34,15 @@ Page({
             },
             method: 'post',
             success: function(res) {
-                console.log('res',res)
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     that.setData({
                         pageData: res.data.data,

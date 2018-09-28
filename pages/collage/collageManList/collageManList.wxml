@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <!-- 页面功能 -->
 <view class='manListOpt'>
     <view bindtap='toback'>返回</view>

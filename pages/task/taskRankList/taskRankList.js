@@ -16,6 +16,7 @@ Page({
         scorePage:1,
         model:0,
         zanPage:1,
+        isFrozen: 'empty',
     },
 
     /**
@@ -86,6 +87,15 @@ Page({
                     },
                     method: 'get',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
                             wx.stopPullDownRefresh(),
                                 wx.hideLoading(),
@@ -112,6 +122,15 @@ Page({
                     },
                     method: 'get',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
                             wx.stopPullDownRefresh(),
                                 wx.hideLoading(),
@@ -138,6 +157,15 @@ Page({
                     },
                     method: 'get',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
                             wx.stopPullDownRefresh(),
                                 wx.hideLoading(),
@@ -218,6 +246,15 @@ Page({
             },
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(Number(res.data.code) == 1){
                     wx.stopPullDownRefresh()
                     wx.hideLoading()
@@ -239,6 +276,15 @@ Page({
             },
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh()
                     wx.hideLoading()
@@ -260,6 +306,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh()
                         wx.hideLoading()

@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='manListSearch'>
     <input placeholder='请输入姓名,电话' type='text' confirm-type='search' bindconfirm='bindKeyInput'></input>
 </view>

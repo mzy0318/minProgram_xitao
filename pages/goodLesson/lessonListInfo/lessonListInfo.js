@@ -10,6 +10,7 @@ Page({
         isSignUp: true,
         courseid: '',
         nameOf: '',
+        isFrozen: 'empty',
     },
 
     /**
@@ -41,6 +42,15 @@ Page({
             },
             method: 'post',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 0) {
                     wx.showToast({
                         title: res.data.msg,
@@ -164,6 +174,15 @@ Page({
             data: sendData,
             method: 'post',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 let respons = res;
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({

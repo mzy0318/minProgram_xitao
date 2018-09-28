@@ -30,6 +30,7 @@ Page({
         otherVideo:'',
         audioUrl:'',
         btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -186,6 +187,15 @@ Page({
                 },
                 method:'post',
                 success:function(res){
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(Number(res.data.code) == 1){
                         that.setData({
                             isInfo:true,
@@ -250,6 +260,15 @@ Page({
                     },
                     method: 'get',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
                             if (res.data.data.data.length > 0) {
                                 for (let i = 0; i < res.data.data.data.length; i++) {
@@ -302,6 +321,15 @@ Page({
                     },
                     method: 'get',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
 
                             if (res.data.data.list.length > 0) {
@@ -355,6 +383,15 @@ Page({
                     },
                     method: 'get',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 1) {
                             res.data.data.avatar_url = formate.rect(res.data.data.avatar_url, 40, 40)
                             if (res.data.data.homework.length > 0) {
@@ -411,6 +448,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     if (res.data.data.data.length > 0) {
                         for (let i = 0; i < res.data.data.data.length; i++) {
@@ -454,6 +500,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     res.data.data.avatar_url = formate.rect(res.data.data.avatar_url, 40, 40)
                     if (res.data.data.homework.length > 0) {
@@ -505,6 +560,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
 
                     if (res.data.data.list.length > 0) {
@@ -546,6 +610,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     res.data.data.avatar_url = formate.rect(res.data.data.avatar_url, 75, 75)
                     that.setData({

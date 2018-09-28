@@ -41,6 +41,7 @@ Page({
         isStopMusic: true,
         bannerImage: '',
         backgroundImage: '',
+        isFrozen: 'empty',
     },
 
     /**
@@ -72,6 +73,15 @@ Page({
                 data: {},
                 method: 'post',
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     that.setData({
                         musicClass: res.data.data,
                         musicData: res.data.data[0].list
@@ -299,6 +309,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         rangeData.push(...res.data.data.list)
                         if (rangeData.length >= that.data.rangePage*10) {
@@ -334,6 +353,15 @@ Page({
             },
             method: 'get',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     if (res.data.data.list.length >= 10){
                         that.setData({
@@ -367,6 +395,15 @@ Page({
             },
             method: 'get',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,

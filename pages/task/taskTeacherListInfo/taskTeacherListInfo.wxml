@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <view class='listInfoImage'>
     <image src='{{pageData.avatar_url}}' mode='scaleToFill'></image>

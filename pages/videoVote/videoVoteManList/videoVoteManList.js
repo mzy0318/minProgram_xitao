@@ -7,6 +7,7 @@ Page({
     data: {
         pageData:'',
         pageNum:1,
+        isFrozen: 'empty',
     },
 
     /**
@@ -102,6 +103,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         wx.stopPullDownRefresh()
                         if (res.data.data.list.length > 0) {
@@ -148,6 +158,15 @@ Page({
             },
             method:'get',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     wx.stopPullDownRefresh()
                     if(res.data.data.list.length > 0){

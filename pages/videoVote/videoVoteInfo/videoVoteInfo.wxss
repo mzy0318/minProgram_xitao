@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 page{
     background:#F6F1F0;
     padding-bottom:20rpx;

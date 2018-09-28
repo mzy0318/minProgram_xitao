@@ -1,5 +1,6 @@
 /* pages/courseInfo/courseInfo.wxss */
 @import '../../../utils/iconFont.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 page{
     background: #f0efed;
     padding-bottom:100rpx;

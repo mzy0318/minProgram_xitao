@@ -16,6 +16,7 @@ Page({
         isEdit:'',
         isShow:false,
         joinId:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -44,6 +45,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         res.data.data.enlist_end_time = formatTime.formatTime(new Date(res.data.data.enlist_end_time * 1000));
                         res.data.data.enlist_start_time = formatTime.formatTime(new Date(res.data.data.enlist_start_time * 1000));
@@ -97,6 +107,15 @@ Page({
                 },
                 method:'get',
                 success:function(res){
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(Number(res.data.code) == 1){
                         that.setData({
                             pageData:res.data.data,
@@ -201,6 +220,15 @@ Page({
             data: sendData,
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.showLoading({
                         title: showMessage,
@@ -231,7 +259,15 @@ Page({
         wx.chooseImage({
             count: 1,
             success: function (res) {
-
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 //图片大小判定
                 let imgArr = res.tempFiles;
                 let size = imgArr.every((item, index, arr) => {

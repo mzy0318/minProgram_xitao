@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='homeWork' hidden='{{isWork}}'>
     <view class='homeWorkContent'>
         <view class='empty'></view>

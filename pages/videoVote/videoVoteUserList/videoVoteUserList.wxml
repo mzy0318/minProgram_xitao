@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='voteUserWrap' wx:for='{{pageData}}' wx:key='{{item.id}}' data-actid='{{item.id}}' bindtap='toInfo'>
     <view class='voteUserContent'>
         <image  src='{{item.cover.url}}' mode='widthFix'></image>

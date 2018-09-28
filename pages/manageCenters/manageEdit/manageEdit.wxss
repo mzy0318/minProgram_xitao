@@ -1,4 +1,5 @@
-@import '../../../utils/iconFont.wxss'; 
+@import '../../../utils/iconFont.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 .manageEditWrap{
     width:750rpx;
     min-height:1207rpx;

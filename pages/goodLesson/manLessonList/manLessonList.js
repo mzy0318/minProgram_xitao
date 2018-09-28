@@ -8,7 +8,8 @@ Page({
     data: {
         pageData:'',
         pageNum:1,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -74,6 +75,15 @@ Page({
             },
             method:'post',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(Number(res.data.code) == 1){
                     wx.showToast({
                         title: '删除成功',
@@ -132,6 +142,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         res.data.data = utils.map(res.data.data, function (one) {
                             one.cover.url = utils.rect(one.cover.url, 200, 100)
@@ -172,6 +191,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     res.data.data = utils.map(res.data.data, function (one) {
                         one.cover.url = utils.rect(one.cover.url, 200, 100)

@@ -42,6 +42,7 @@ Page({
             }
         ],
         isTeacher:true,
+        isFrozen: 'empty',
     },
 
     /**

@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='taskUserContent' wx:for='{{pageData}}' wx:key='{{item.id}}'>
     <view class='taskUserStatus' style='background-color:{{item.bgColor}}'>{{item.status}}</view>
     <view class='taskUserTitle' bindtap='toInfo' data-courseid='{{item.id}}' data-pwd='{{item.password}}' data-starttime='{{item.start_time}}' data-endtime='{{item.end_time}}' data-title='{{item.title}}'>{{item.title}}</view>

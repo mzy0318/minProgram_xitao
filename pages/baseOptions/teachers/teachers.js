@@ -7,6 +7,7 @@ Page({
     data: {
         teacherData:null,
         bgColor:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -17,6 +18,15 @@ Page({
             url: 'school/teacher/list',
             data: {},
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(res.data.code == 1){
                     if(res.data.data.length > 0){
                         for (let i = 0; i < res.data.data.length;i++){

@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 .listInfoWrap{
     width:750rpx;
     height:1207rpx;

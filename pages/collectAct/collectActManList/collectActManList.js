@@ -10,7 +10,8 @@ Page({
         statusColor:'green',
         pageNum:1,
         isMore:true,
-        btnText: 0
+        btnText: 0,
+        isFrozen: 'empty',
     },
 
     /**
@@ -107,6 +108,15 @@ Page({
                 },
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         wx.showLoading({
                             title: '正在删除',
@@ -160,6 +170,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (res.data.code == 1) {
                         wx.stopPullDownRefresh()
 
@@ -211,6 +230,15 @@ Page({
             },
             method: 'get',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (res.data.code == 1) {
                     wx.stopPullDownRefresh()
 

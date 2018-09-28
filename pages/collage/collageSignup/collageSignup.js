@@ -11,13 +11,13 @@ Page({
         btnID:'',
         joinerId:'',
         isJoin:true,
+        isFrozen: 'empty',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log('options', options)
         let that = this
         this.setData({
             formInfo: JSON.parse(options.info),
@@ -111,6 +111,15 @@ Page({
                 data: sendData,
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 0) {
                         wx.showToast({
                             title: res.data.msg,
@@ -152,6 +161,15 @@ Page({
                     data: sendData,
                     method: 'post',
                     success: function (res) {
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if (Number(res.data.code) == 0) {
                             wx.showToast({
                                 title: res.data.msg,

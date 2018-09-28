@@ -49,6 +49,7 @@ Page({
         className: 'moreData',
         btnText: '更多',
         isMore:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -534,6 +535,15 @@ Page({
                 },
                 method: 'post',
                 success: data => {
+                    if (data.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (data.data.code == 1) {
                         killPricePeople.push(...data.data.data.list)
                         if (killPricePeople.length >= that.data.rangPage * 10) {
@@ -576,6 +586,15 @@ Page({
             },
             method: 'post',
             success: data => {
+                if (data.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (data.data.code == 1) {
                     wx.stopPullDownRefresh()
                     if(data.data.data.list.length > 0){
@@ -617,6 +636,15 @@ Page({
             },
             method: 'post',
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     let widthV = '';
                     wx.stopPullDownRefresh()

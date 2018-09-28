@@ -1,4 +1,5 @@
 /* pages/schoolnfo/schoolInfo.wxss */
+@import '../../../templates/frozen/frozen.wxss';
 swiper{
     width: 750rpx;
     height: 350rpx;

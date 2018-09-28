@@ -1,4 +1,6 @@
 <import src='../../templates/indexModel/indexModel' />
+<import src='../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='indexBanner'>
     <swiper  circular autoplay>
         <swiper-item wx:for='{{pageData.banner}}' wx:key='{{index}}' >
@@ -7,4 +9,3 @@
     </swiper>
 </view>
 <template is='{{modeCode}}' data='{{item:paintData,home:pageData.home_icon,lessons:pageData.course,contentHeight:contentHeight,banner:pageData.banner}}'></template>
-<!--  -->

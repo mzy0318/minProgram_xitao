@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view wx:for='{{imgData}}' class='wrapView'>
     <image src='{{item.url}}' mode='widthFix'></image>
     <view class='studentInfo'>{{item.intro}}</view>

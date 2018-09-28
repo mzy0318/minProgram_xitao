@@ -1,4 +1,5 @@
 // pages/videos/videoSharePage/videoSharePage.js
+
 Page({
 
     /**
@@ -6,6 +7,7 @@ Page({
      */
     data: {
         videoImage:'',
+        isFrozen: 'empty',
     },
 
     /**

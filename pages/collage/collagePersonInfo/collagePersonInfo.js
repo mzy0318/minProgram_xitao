@@ -17,7 +17,8 @@ Page({
         isMore:true,
         rangePage:1,
         className: 'moreData',
-        btnText: '更多'
+        btnText: '更多',
+        isFrozen: 'empty',
     },
 
     /**
@@ -186,6 +187,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh()
                     wx.setNavigationBarTitle({
@@ -243,6 +253,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         for (let i = 0; i < res.data.data.list.length; i++) {
                             res.data.data.list[i].create_time = getTime.formatTime(new Date(res.data.data.list[i].create_time * 1000))
@@ -300,6 +319,15 @@ Page({
             },
             method: 'post',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.stopPullDownRefresh()
                     for (let i = 0; i < res.data.data.list.length; i++) {

@@ -1,4 +1,5 @@
 @import '../../../utils/iconFont.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 .signUpWrap,.signUpSuccess{
     width:750rpx;
     height:1207rpx;

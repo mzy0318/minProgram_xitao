@@ -8,6 +8,7 @@ Page({
         status:0,
         pageData:'',
         isChecked:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -99,6 +100,15 @@ Page({
             data: sendData,
             method:'post',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(Number(res.data.code) == 1){
                     wx.showLoading({
                         title: '正在保存',

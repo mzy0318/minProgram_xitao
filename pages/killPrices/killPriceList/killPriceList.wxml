@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='killPriceListWrap'>
     <view class='killPriceListContet' wx:for='{{userList}}' wx:key='{{index}}'>
         <view class='killPriceListTop' bindtap='toPricePerson'  data-id='{{item.act_nice_id}}' data-actid='{{item.act_id}}' data-joinerid='{{item.joiner_id}}' data-acttag='{{item.act_tag}}'>

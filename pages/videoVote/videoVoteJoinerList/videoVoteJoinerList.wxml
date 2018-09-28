@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='activeInfoRankLeft'>
     <view class='activeInfoRankContent' wx:for='{{pageData}}'>
         <view class='contentTop' data-id='{{item.id}}' bindtap='toInfo' wx:if='{{index%2 == 0}}'><image src='{{item.cover.url}}' mode='widthFix'></image></view>

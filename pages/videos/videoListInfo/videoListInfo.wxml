@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='listInfoBanner'><image src='{{pageData.banner_image_url}}' mode='scaleToFill'></image></view>
 <view class='listInfoBackground' style='background-image:url({{pageData.bg_image_url}});'>
     <view class='listInfoVideo' bindtap='{{videoUrl.url==""?setVideo:""}}' ><video src='{{videoUrl}}' poster='{{videoImage}}' ></video></view>

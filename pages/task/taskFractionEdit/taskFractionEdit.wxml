@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <form bindsubmit='subScoreSet'>
     <view class='fractionContent'>
         <view class='fractionName'>是否开启</view>

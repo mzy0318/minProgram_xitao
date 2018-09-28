@@ -1,5 +1,6 @@
 // pages/videoVote/videoVoteInfo/videoVoteInfo.js
 let formatTime = require('../../../utils/util.js')
+
 Page({
 
     /**
@@ -38,7 +39,8 @@ Page({
         classNameR: 'moreData',
         btnTextR: '更多',
         classNameH: 'moreData',
-        btnText: '更多'
+        btnText: '更多',
+        isFrozen: 'empty',
     },
 
     /**
@@ -155,6 +157,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         newList.push(...res.data.data.list)
                         if (newList.length >= that.data.joinerPage * 10) {
@@ -205,6 +216,15 @@ Page({
                 },
                 method: 'post',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         rangeList.push(...res.data.data.list)
                         if (rangeList.length >= that.data.rangePage * 10) {
@@ -270,6 +290,15 @@ Page({
                 },
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         if (res.data.data.list.length >= 10){
                             that.setData({
@@ -316,6 +345,15 @@ Page({
                 },
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         if (res.data.data.list.length >= 10){
                             that.setData({
@@ -361,6 +399,15 @@ Page({
                 },
                 method: 'post',
                 success: function(res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         that.setData({
                             topList: res.data.data.list
@@ -401,6 +448,15 @@ Page({
                 },
                 method:'post',
                 success:function(res){
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(Number(res.data.code) == 1){
                         that.setData({
                             contentIndex:1,
@@ -452,6 +508,15 @@ Page({
             },
             method: 'post',
             success: function(res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     wx.setNavigationBarTitle({
                         title: res.data.data.title,

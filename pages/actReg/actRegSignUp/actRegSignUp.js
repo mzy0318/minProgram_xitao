@@ -8,6 +8,7 @@ Page({
         isShow: false,
         actId: '',
         formInfo:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -123,9 +124,6 @@ Page({
     toBackPage:function(){
         let that = this;
         wx.navigateBack({})
-        // wx.navigateTo({
-        //     url: '../../actReg/actRegListInfo/actRegListInfo?actId=' + that.data.actId,
-        // })
         that.setData({
             isShow: false
         })

@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <swiper indicator-dots='true' indicator-active-color='#FFCE0B' hidden='{{isHot}}'>
     <swiper-item wx:for='{{courseData.host_lesson}}' bindtap='toCourseInfo' data-id='{{item.id}}' wx:key='{{index}}'>

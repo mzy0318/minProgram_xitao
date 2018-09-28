@@ -11,7 +11,8 @@ Page({
         userList:'',
         oriData:'',
         className: 'moreDataed',
-        btnText: '没有了'
+        btnText: '没有了',
+        isFrozen: 'empty',
     },
 
     /**
@@ -131,6 +132,15 @@ Page({
                     page: that.data.pageNum,
                 },
                 success: res => {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     let userData = res.data.data.list;
                     if (userData.length <= 0) {
                         that.setData({
@@ -190,6 +200,15 @@ Page({
                 page: that.data.pageNum,
             },
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 let userData = res.data.data.list;
                 if (userData.length <= 0) {
                     that.setData({

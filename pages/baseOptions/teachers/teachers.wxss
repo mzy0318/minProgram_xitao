@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 .teacherWrap {
     position: fixed;
     width: 100%;

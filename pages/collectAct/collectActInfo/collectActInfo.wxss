@@ -1,4 +1,5 @@
 @import '../../../utils/iconFont.wxss';
+@import '../../../templates/frozen/frozen.wxss';
 .infoBannerImage{
     width:750rpx;
     height:410rpx;

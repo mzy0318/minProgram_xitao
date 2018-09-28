@@ -12,6 +12,7 @@ Page({
         indicatorActiveColor: "#000000",
         pageData:'',
         isVideo:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -25,6 +26,15 @@ Page({
                 orgid: getApp().getExtConfig().orgId
             },
             success: res => {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (JSON.stringify(res.data.data.brand) == '{}'){
                     that.setData({
                         isVideo:true,

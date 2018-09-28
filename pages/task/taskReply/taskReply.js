@@ -44,6 +44,7 @@ Page({
         dateString: [],
         dateStringIndex:[],
         audioUrl:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -188,6 +189,15 @@ Page({
                     },
                     method:'get',
                     success:function(res){
+                        if (res.data.frozen == 1) {
+                            that.setData({
+                                isFrozen: 'frozen',
+                            })
+                        } else {
+                            that.setData({
+                                isFrozen: 'empty',
+                            })
+                        }
                         if(Number(res.data.code) == 1){
                             that.setData({
                                 text: res.data.data.text
@@ -412,7 +422,15 @@ Page({
             data: sendData,
             method:'post',
             success:function(res){
-                console.log('res',res)
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if(Number(res.data.code) == 1){
                     wx.showLoading({
                         title: title,
@@ -512,6 +530,15 @@ Page({
                 data: sendData,
                 method:'post',
                 success:function(res){
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if(Number(res.data.code) == 1){
                         wx.showLoading({
                             title: '正在拷贝',
@@ -632,6 +659,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     for (let i = 0; i < res.data.data.date.length; i++) {
                         res.data.data.date[i].color = '#fff'
@@ -703,6 +739,15 @@ Page({
                             url: 'upload',
                             filePath: imageArr[i],
                             success: function (res) {
+                                if (res.data.frozen == 1) {
+                                    that.setData({
+                                        isFrozen: 'frozen',
+                                    })
+                                } else {
+                                    that.setData({
+                                        isFrozen: 'empty',
+                                    })
+                                }
                                 if (Number(res.code) == 1) {
                                     actImageId.push(res.data.imageId);
                                     that.setData({

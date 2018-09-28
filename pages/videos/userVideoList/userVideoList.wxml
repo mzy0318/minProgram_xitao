@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <view class='videoListContent' wx:for='{{pageData}}' bindtap='toListInfo' data-actid='{{item.id}}' wx:key='{{item.id}}'>
     <view class='contentLeft'><image src='{{item.banner_image_url}}' mode='scaleToFill'></image></view>

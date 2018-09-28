@@ -11,6 +11,7 @@ Page({
         actNiceId:'',
         pageData:'',
         isCover:true,
+        isFrozen: 'empty',
     },
 
     /**
@@ -33,7 +34,15 @@ Page({
                     act_nice_course_id: that.data.courseId
                 },
                 success:function(res){
-                    
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     that.setData({
                         isCover:false,
                         coverImage: res.data.data.cover.url,
@@ -112,6 +121,15 @@ Page({
             data: sendData,
             method:'post',
             success:function(res){
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 wx.showToast({
                     title: res.data.msg,
                     icon:'none',

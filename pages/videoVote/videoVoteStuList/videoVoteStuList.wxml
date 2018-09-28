@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <view class='voteUserWrap' wx:for='{{pageData}}' wx:key='{{item.id}}' data-joinid='{{item.id}}' bindtap='toInfo'>
     <view class='voteUserContent'>

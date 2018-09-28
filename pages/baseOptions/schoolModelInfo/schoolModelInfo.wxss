@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 .infoSwiper{
     width:450rpx;
     height:850rpx;

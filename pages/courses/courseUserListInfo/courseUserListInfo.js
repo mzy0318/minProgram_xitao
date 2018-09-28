@@ -77,6 +77,7 @@ Page({
         connectPage:1,
         btnText: 0,
         contentText:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -340,6 +341,15 @@ Page({
                         method:'post',
                         data:{},
                         success:function(res){
+                            if (res.data.frozen == 1) {
+                                that.setData({
+                                    isFrozen: 'frozen',
+                                })
+                            } else {
+                                that.setData({
+                                    isFrozen: 'empty',
+                                })
+                            }
                             for (let i = 0; i < res.data.data.length;i++){
                                 if (res.data.data[i].id == that.data.userId){
                                     that.setData({
@@ -385,6 +395,15 @@ Page({
                     page: that.data.connectPage
                 },
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     for (let i = 0; i < res.data.data.list.length; i++) {
                         res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time * 1000))
                         res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time * 1000))
@@ -419,6 +438,15 @@ Page({
                 page:that.data.connectPage
             },
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 for (let i = 0; i < res.data.data.list.length; i++) {
                     res.data.data.list[i].Date = utils.formatDate(new Date(res.data.data.list[i].create_time * 1000))
                     res.data.data.list[i].Time = utils.formatTimer(new Date(res.data.data.list[i].create_time * 1000))

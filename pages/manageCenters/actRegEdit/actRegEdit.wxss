@@ -1,3 +1,4 @@
+@import '../../../templates/frozen/frozen.wxss';
 .lessonEditWrap{
     width:750rpx;
     min-height:1207rpx;

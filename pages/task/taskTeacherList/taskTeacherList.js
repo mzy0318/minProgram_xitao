@@ -13,6 +13,7 @@ Page({
         url:'',
         btnText: 0,
         key:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -141,6 +142,15 @@ Page({
                 },
                 method: 'get',
                 success: function (res) {
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                     if (Number(res.data.code) == 1) {
                         if (res.data.data.list.length > 0) {
                             for (let i = 0; i < res.data.data.list.length; i++) {
@@ -183,6 +193,15 @@ Page({
             },
             method: 'get',
             success: function (res) {
+                if (res.data.frozen == 1) {
+                    that.setData({
+                        isFrozen: 'frozen',
+                    })
+                } else {
+                    that.setData({
+                        isFrozen: 'empty',
+                    })
+                }
                 if (Number(res.data.code) == 1) {
                     if (res.data.data.list.length > 0){
                         for (let i = 0; i < res.data.data.list.length;i++){

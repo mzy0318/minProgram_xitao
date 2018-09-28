@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='listInfoWrap'>
     <view class='listInfoBanner'>
         <image src='http://cdn.zhihuizhaosheng.com/app-static/lesson_one_big_banner.png' mode='scaleToFill'></image>

@@ -108,6 +108,7 @@ Page({
         isUserInfo:false,
         avarImage:'',
         nickname:'',
+        isFrozen: 'empty',
     },
 
     /**
@@ -292,6 +293,15 @@ Page({
                 data: sendData,
                 method:'post',
                 success:function(res){
+                    if (res.data.frozen == 1) {
+                        that.setData({
+                            isFrozen: 'frozen',
+                        })
+                    } else {
+                        that.setData({
+                            isFrozen: 'empty',
+                        })
+                    }
                 }
             })
         }

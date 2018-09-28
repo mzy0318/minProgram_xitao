@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='voteSignupInput'>
     <view class='signUpInputTitle'>报名处</view>
     <form bindsubmit='addActive'>

@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='videoClassList'>
     <view class='videoClassContent' bindtap='toInfo' wx:key='{{item.id}}' wx:for='{{pageData}}' data-actid='{{item.id}}' wx:key='{{index}}'>
         <view class='classContentImg'>

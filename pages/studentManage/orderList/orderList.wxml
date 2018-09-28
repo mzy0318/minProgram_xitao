@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='empty'></view>
 <view class='orderListContent' wx:for='{{pageData}}' bindtap='toPayInfo' data-payinfo='{{item}}' wx:key='{{index}}'>
     <view class='orderListTop'>

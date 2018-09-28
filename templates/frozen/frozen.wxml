@@ -1,0 +1,12 @@
+<template name='frozen'>
+    <view class='frozenWrap'>
+        <view class='frozenContent'>
+            <view class='frozenTitle'>注意</view>
+            <view class='frozenText'>你的账号已经被冻结</view>
+        </view>
+    </view>
+</template>
+<template name='empty'>
+    <view class='emptyZ'>
+    </view>
+</template>

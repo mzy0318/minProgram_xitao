@@ -1,5 +1,5 @@
 @import '../../../utils/iconFont.wxss';
-
+@import '../../../templates/frozen/frozen.wxss';
 .killPriceInfoWrap {
     width: 750rpx;
     min-height: 1207rpx;

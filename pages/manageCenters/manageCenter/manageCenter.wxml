@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view  style='display:{{isContent}}'>
     <view class='managWarpTop'>
         <image src='http://cdn.zhihuizhaosheng.com/app-static/org_banner.png'></image>

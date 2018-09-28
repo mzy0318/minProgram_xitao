@@ -1,3 +1,5 @@
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='schoolEdit'>
     <form bindsubmit="submitSchoolInfo" >
         <!--学校环境-->

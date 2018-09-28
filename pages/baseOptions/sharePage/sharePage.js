@@ -9,6 +9,7 @@ Page({
         urlAddress:'',
         urlBigAddress:'',
         enCodeImage:'',
+        isFrozen: 'empty',
     },
 
     /**

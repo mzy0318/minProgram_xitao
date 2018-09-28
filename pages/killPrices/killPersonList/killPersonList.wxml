@@ -1,4 +1,6 @@
 <import src='../../../templates/moreData/moreData' />
+<import src='../../../templates/frozen/frozen' />
+<template is='{{isFrozen}}' ></template>
 <view class='personListWrap'>
     <!-- <view class='personListInputName'></view> -->
     <view class='personListContent' wx:for='{{userList}}'>
